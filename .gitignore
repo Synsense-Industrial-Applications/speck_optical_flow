@@ -1,0 +1,6 @@
+# samna files
+samna.log
+imgui.ini
+
+# generated speck configs
+*.bin
