@@ -9,10 +9,11 @@ from sinabs.activation import MultiSpike
 from sinabs.activation.surrogate_gradient_fn import PeriodicExponential
 import sinabs.layers as backend
 from sinabs.backend.dynapcnn import DynapcnnNetwork
+import multiprocessing
+
 
 batchsize = 1
 
-tau = 1.45
 
 SNN = nn.Sequential(
  
@@ -162,7 +163,7 @@ for v in range(2):
         weights[v*2+1][v*8+22+i][0][0] = -3
 SNN[8].weight.data = weights
 
-size = [64, 64, 64, 32, 32]
+sizes = [64, 64, 64, 32, 32]
 
 dynapcnn = DynapcnnNetwork(snn=SNN, input_shape=(1, 128, 128), discretize=False, dvs_input=True)
 
@@ -193,72 +194,74 @@ devices = samna.device.get_unopened_devices()
 dk = samna.device.open_device(devices[0])
 # devkit_2 = samna.device.open_device(devices[1])
 
-c = samna.speck2f.configuration.SpeckConfiguration()
-c.dvs_layer.raw_monitor_enable = False
 
 jit_node = samna.graph.JitFunctionFilter('assembleDvsEvent', '''
-    template<class Event>
-    auto filterFunction(const Event& input)
-    {            
-        speck2f::event::Spike event;
-        std::visit(
-            [&event]<typename T>(const T& e){
-                if constexpr (std::is_same_v<T, speck2f::event::Spike>) {
-                    event.x = e.x;
-                    event.y = e.y;
-                    event.feature = e.feature % 2;
-                }
-            },
-            input
-        );    
-    
-        return speck2f::event::OutputEvent{event};
-    }
-''')
+        template<class Event>
+        auto filterFunction(const Event& input)
+        {            
+            camera::event::DvsEvent event;
+            std::visit(
+                [&event]<typename T>(const T& e){
+                    if constexpr (std::is_same_v<T, ui::DvsEvent>) {
+                        int x, y;
+                        event.y = e.row;
+                        event.x = e.col;
+                        event.polarity = e.channel%2;
+                    }
+                },
+                input
+            );    
+        
+            return camera::event::DvsEvent{event};
+        }
+    ''')
 
-def create_viz(layer: int):
-    gui_process = Process(target=samnagui.runVisualizer, args=(
-        0.15, 0.35, sn.get_receiver_endpoint(), sn.get_sender_endpoint(), 3 + layer))
+def build_samna_event_route(dk, graph, endpoint, layers):
+    # build a graph in samna to show dvs
+    _, layer_filter, _, _, _, streamer = graph.sequential(
+        [dk.get_model_source_node(), "Speck2fOutputMemberSelect", "Speck2fDvsToVizConverter", jit_node, "CameraToVizConverter", "VizEventStreamer"]
+    )
+    layer_filter.set_white_list(layers, "layer")
+
+    config_source, _ = graph.sequential([samna.BasicSourceNode_ui_event(), streamer])
+
+    streamer.set_streamer_endpoint(endpoint)
+    if streamer.wait_for_receiver_count() == 0:
+        raise Exception(f'connecting to visualizer on {endpoint} fails')
+
+    return config_source
+
+
+def open_visualizer(window_width, window_height, receiver_endpoint):
+    # start visualizer in a isolated process which is required on mac, intead of a sub process.
+    gui_process = multiprocessing.Process(
+        target=samnagui.run_visualizer,
+        args=(receiver_endpoint, window_width, window_height),
+    )
     gui_process.start()
-    time.sleep(1)
-    samna.open_remote_node(3 + layer, f"visualizer{layer}")
 
-    if layer != 13:
-        _, select, _, _, streamer = dvs_graph.sequential(
-            [dk.get_model_source_node(),"Speck2fOutputMemberSelect", jit_node, "Speck2fDvsToVizConverter", "VizEventStreamer"])
-        select.set_white_list([layer], "layer")
-    else:
-        _, select, _, streamer = dvs_graph.sequential(
-            [dk.get_model_source_node(),"Speck2fOutputEventTypeFilter", "Speck2fDvsToVizConverter", "VizEventStreamer"])
-        select.set_desired_type("speck2f::event::DvsEvent")
+    return gui_process
 
-    streamer.set_streamer_endpoint(f"tcp://0.0.0.0:4000{layer}")
-    visualizer = getattr(samna, f"visualizer{layer}")
-    visualizer.receiver.set_receiver_endpoint(f"tcp://0.0.0.0:4000{layer}")
-    visualizer.receiver.add_destination(
-        visualizer.splitter.get_input_channel())
-    
-    dimension = 128
+def visualize_layer(layer, size):
+    streamer_endpoint = f"tcp://0.0.0.0:4000{layer}"
+    gui_process = open_visualizer(0.27, 0.48, streamer_endpoint)
+    graph = samna.graph.EventFilterGraph()
+    config_source = build_samna_event_route(dk, graph, streamer_endpoint, [layer])
+    graph.start()
 
-    if layer != 13:
-        dimension = size[layer]
-        activity_plot_id = visualizer.plots.add_activity_plot(
-            dimension, dimension, f"chip 1 CNN Layer {layer}")
-    else:
-        activity_plot_id = visualizer.plots.add_activity_plot(
-            dimension, dimension, f"Chip 2 raw dvs")
-    visualizer.splitter.add_destination(
-        "passthrough", visualizer.plots.get_plot_input(activity_plot_id))
+    visualizer_config = samna.ui.VisualizerConfiguration(
+        plots=[samna.ui.ActivityPlotConfiguration(size, size, "DVS Layer" if layer==13 else f"CNN Layer {layer}", [0, 0, 1, 1])]
+    )
+    config_source.write([visualizer_config])
 
-
-dvs_graph = samna.graph.EventFilterGraph()
+    return  graph
 
                                                    
 
 # _, etf, _, _ = dvs_graph.sequential([devkit_2.get_model_source_node(), "Speck2fOutputEventTypeFilter", jit_node, dk.get_model_sink_node()])
 # etf.set_desired_type("speck2f::event::DvsEvent")
 # dvs original
-create_viz(13)
+# create_viz(13)
 
 
 # gui_process = Process(target=samnagui.runVisualizer, args=(
@@ -288,17 +291,17 @@ for i in range(5):
     config.cnn_layers[i].return_to_zero = True
     if i == 4:
         config.cnn_layers[i].monitor_enable = True
-        create_viz(i)
+        # create_viz(i)
 
 config.factory_config.fast_output = True
 with open("optical_flow_low_power.bin", "wb") as f:
     f.write(bytes(samna.speck2f.configuration_to_flash_binary(config)))
 dk.get_model().apply_configuration(config)
 # devkit_2.get_model().apply_configuration(c)
-dvs_graph.start()
+# dvs_graph.start()
 # graph.start()
 
-
+graphs = [visualize_layer(i, s) for i, s in zip([13, 0, 1, 2, 3, 4], [128] + sizes)]
 
 io = samna.graph.source_to(dk.get_model_sink_node())
 buf = samna.graph.sink_from(dk.get_model_source_node())
