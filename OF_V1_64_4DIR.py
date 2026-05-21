@@ -231,13 +231,10 @@ if c - w*2 +1 <= 0:
     print("Error: c - w*2 must be greater than 0 to avoid negative indexing.")
     exit(1)
 
-for out_c, col_range in [
-    (0, slice(c - w * 2, c - w)),  # down
-    (1, slice(c - w, c)),          # up
-]:
-    weights[out_c, 0, :, col_range] = 1
+weights[0, 0, :, c-w*2 : c-w] = 1      # down
+weights[1, 0, :, c-w:c] = 1      # up
 
-weights[:, 1:3, :, :] = -2          # reset
+weights[:, 1:3, : , :] = -2          # reset
 create_layer(
     layer_name="layer_2",layer=layer_2,
     padding=a,stride=1,kernel_size=K,
@@ -257,13 +254,10 @@ if c - w*2 +1 <= 0:
     print("Error: c - w*2 must be greater than 0 to avoid negative indexing.")
     exit(1)
 
-for out_c, row_range in [
-    (0, slice(c - w * 2, c - w)),  # left
-    (1, slice(c - w, c)),          # right
-]:
-    weights[out_c, 0, row_range, :] = 1
+weights[0, 0, c-w*2 : c-w, :] = 1          # left
+weights[1, 0, c-w   : c  , :] = 1      # right
 
-weights[:, 1:3, :, :] = -2          # reset
+weights[:, 1:3, : , :] = -2          # reset
 
 
 
@@ -285,14 +279,14 @@ create_layer(
 #layer_5_merge_layer 中转层
 weights = np.zeros((4, 4, 3, 3), dtype=np.int8)
 
-for out_c, excite_c, inhibit_c in [
-    (0, 0, 1),
-    (1, 1, 0),
-    (2, 2, 3),
-    (3, 3, 2),
-]:
-    weights[out_c, excite_c, :, :] = 1
-    weights[out_c, inhibit_c, :, :] = -1
+weights[0, 0, :, :] = 1      
+weights[0, 1, :, :] = -1
+weights[1, 1, :, :] = 1      
+weights[1, 0, :, :] = -1
+weights[2, 2, :, :] = 1      
+weights[2, 3, :, :] = -1
+weights[3, 3, :, :] = 1      
+weights[3, 2, :, :] = -1
 
 
 create_layer(
@@ -312,24 +306,29 @@ create_layer(
 #此处的卷积核大小直接影响了光流估计的分辨率
 SD_K = 1
 weights = np.zeros((4, 8, SD_K, SD_K), dtype=np.int8)
-center = SD_K // 2
-
-for out_c, channel_weights in [
-    (0, [(0, -1), (4, 1), (1, 2), (5, -2)]),  # up->down
-    (1, [(1, -1), (5, 1), (0, 2), (4, -2)]),  # down->up
-]:
-    for in_c, value in channel_weights:
-        weights[out_c, in_c, :, center] = value
-
-for out_c, channel_weights in [
-    (2, [(2, -1), (6, 1), (3, 2), (7, -2)]),  # left->right
-    (3, [(3, -1), (7, 1), (2, 2), (6, -2)]),  # right->left
-]:
-    for in_c, value in channel_weights:
-        weights[out_c, in_c, center, :] = value
+#up->down: 0
+weights[0, 0, :, SD_K//2] = -1          
+weights[0, 4, :, SD_K//2] =  1      
+weights[0, 1, :, SD_K//2] =  2      
+weights[0, 5, :, SD_K//2] = -2      
+#down->up: 1
+weights[1, 1, :, SD_K//2] = -1      
+weights[1, 5, :, SD_K//2] =  1      
+weights[1, 0, :, SD_K//2] =  2      
+weights[1, 4, :, SD_K//2] = -2      
+#left->right: 2
+weights[2, 2, SD_K//2, :] = -1          
+weights[2, 6, SD_K//2, :] =  1      
+weights[2, 3, SD_K//2, :] =  2      
+weights[2, 7, SD_K//2, :] = -2      
+#right->left: 3
+weights[3, 3, SD_K//2, :] = -1      
+weights[3, 7, SD_K//2, :] =  1      
+weights[3, 2, SD_K//2, :] =  2      
+weights[3, 6, SD_K//2, :] = -2
 #reset:
-weights[np.ix_([0, 1], [2, 3, 6, 7])] = -2
-weights[np.ix_([2, 3], [0, 1, 4, 5])] = -2
+weights[np.ix_([0,1], [2,3,6,7])]= -2
+weights[np.ix_([2,3], [0,1,4,5])]= -2
 
 
 create_layer(
