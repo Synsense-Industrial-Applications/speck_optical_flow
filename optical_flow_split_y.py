@@ -63,10 +63,6 @@ jit_node = samna.graph.JitFunctionFilter('assembleDvsEvent', '''
                             event.y = e.row;
                             event.x = e.col;
                             event.polarity = e.channel;
-                        } else if (e.layer==4) {
-                            event.y = e.row * 2 + ((e.channel / 4) % 2);
-                            event.x = e.col * 2 + (e.channel % 2);
-                            event.polarity = (e.channel / 2) % 2;
                         } else {
                             event.y = e.row * 2 + (e.channel % 2);
                             event.x = e.col * 2 + (e.channel / 2) % 2;
@@ -346,7 +342,9 @@ create_layer(
 
 weights = np.zeros((8, 8, 1, 1), dtype=np.int8)
 for i in range(8):
-    weights[i, i, 0, 0] = 1
+    for j in range(2):
+        for k in range(2):
+            weights[i*4+j*2+k, j*4+i*2+k, 0, 0] = 1
 create_layer(
     layer_name="layer_4_2",layer=layer_4_2,  
     padding=0,stride=1,kernel_size=1,
