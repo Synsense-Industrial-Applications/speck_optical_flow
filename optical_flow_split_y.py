@@ -323,7 +323,7 @@ create_layer(
     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
     weights=weights,
-    monitor_enable=True,
+    # monitor_enable=True,
     destinations_0=layer_4_2
 )
 
@@ -335,16 +335,16 @@ create_layer(
     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
     weights=weights,
-    monitor_enable=True,
+    # monitor_enable=True,
     destinations_0=layer_4_2,
     feature_shift_0=4
 )
 
 weights = np.zeros((8, 8, 1, 1), dtype=np.int8)
-for i in range(8):
+for i in range(2):
     for j in range(2):
         for k in range(2):
-            weights[i*4+j*2+k, j*4+i*2+k, 0, 0] = 1
+            weights[i*4+j*2+k, k*4+i*2+j, 0, 0] = 1
 create_layer(
     layer_name="layer_4_2",layer=layer_4_2,  
     padding=0,stride=1,kernel_size=1,
