@@ -212,15 +212,15 @@ def create_layer(layer_name,layer,padding,stride,kernel_size,
 # 在dvs_config函数调用前加载配置
 
 
-layer_1_0 = 3
-layer_1_1 = 4
-layer_2_0 = 0
-layer_2_1 = 1
+layer_1_0 = 7
+layer_1_1 = 8
+layer_2_0 = 3
+layer_2_1 = 4
 layer_3_0 = 5
 layer_3_1 = 6
-layer_4_0 = 7
-layer_4_1 = 8
-layer_4_2 = 2
+layer_4_0 = 1
+layer_4_1 = 2
+layer_4_2 = 0
 
 config = samna.speck2f.configuration.SpeckConfiguration()
 config.dvs_layer.destinations[0].layer = layer_1_0
@@ -277,9 +277,9 @@ create_layer(
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
-    destinations_0=layer_4_0,
-    destinations_1=layer_3_0,
-    feature_shift_0=4
+    destinations_1=layer_4_0,
+    destinations_0=layer_3_0,
+    feature_shift_1=4
 )
 
 weights = np.zeros((6, 4, w_1_to_2.shape[2], w_1_to_2.shape[3]),  dtype=np.int8)
@@ -310,7 +310,8 @@ create_layer(
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
-    destinations_0=layer_4_0
+    destinations_0=layer_4_0,
+    # destinations_1=layer_4_2
 )
 
 weights = np.concatenate([w_2_to_3[1::2, 1::2], w_0_to_3[1::2, 1::2]], axis=1).astype('int8')
@@ -322,7 +323,9 @@ create_layer(
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
-    destinations_0=layer_4_1
+    destinations_0=layer_4_1,
+    # destinations_1=layer_4_2,
+    # feature_shift_1=4
 )
 
 weights = np.concatenate([w_3_to_4[::2, ::2], w_2_to_4[::2, ::2], np.zeros_like(w_2_to_4[::2, :2])], axis=1).astype('int8')
@@ -373,7 +376,7 @@ config.dvs_layer.mirror.x = True
 dk = open_speck2f_dev_kit()
 print("show graph")
 # 路由事件到可视化窗口
-graphs = [visualize_layer(i) for i in [13,layer_4_2]]
+graphs = [visualize_layer(i) for i in [13, layer_4_2]]
 
 io = samna.graph.source_to(dk.get_model_sink_node())
 buf = samna.graph.sink_from(dk.get_model_source_node())
@@ -394,7 +397,7 @@ buf = samna.graph.sink_from(dk.get_model_source_node())
 
 # while True:
 #     for ev in buf.get_events():
-#         if ev.layer == layer_1:
+#         if ev.layer == layer_4_2:
 #             print(ev.x, ev.y, ev.feature)
 #     time.sleep(0.1)
 

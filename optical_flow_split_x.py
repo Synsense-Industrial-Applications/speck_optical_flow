@@ -212,15 +212,15 @@ def create_layer(layer_name,layer,padding,stride,kernel_size,
 # 在dvs_config函数调用前加载配置
 
 
-layer_1_0 = 3
-layer_1_1 = 4
-layer_2_0 = 0
-layer_2_1 = 1
+layer_1_0 = 7
+layer_1_1 = 8
+layer_2_0 = 3
+layer_2_1 = 4
 layer_3_0 = 5
 layer_3_1 = 6
-layer_4_0 = 7
-layer_4_1 = 8
-layer_4_2 = 2
+layer_4_0 = 1
+layer_4_1 = 2
+layer_4_2 = 0
 
 config = samna.speck2f.configuration.SpeckConfiguration()
 config.dvs_layer.destinations[0].layer = layer_1_0
@@ -277,9 +277,9 @@ create_layer(
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
-    destinations_0=layer_4_0,
-    destinations_1=layer_3_0,
-    feature_shift_0=4
+    destinations_1=layer_4_0,
+    destinations_0=layer_3_0,
+    feature_shift_1=4
 )
 
 weights = np.zeros((6, 4, w_1_to_2.shape[2], w_1_to_2.shape[3]),  dtype=np.int8)
