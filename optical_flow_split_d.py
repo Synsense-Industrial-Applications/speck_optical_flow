@@ -300,7 +300,7 @@ create_layer(
 )
 
 
-weights = np.concatenate([w_2_to_3[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], w_0_to_3_t[np.ix_([0, 3, 4, 7], [0, 3])]], axis=1).astype('int8')
+weights = np.concatenate([w_2_to_3[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], w_0_to_3[np.ix_([0, 3, 4, 7], [0, 3])]], axis=1).astype('int8')
 # print("layer3_0 weights shape", weights.shape)
 create_layer(
     layer_name="layer_3_0",layer=layer_3_0,  
@@ -325,7 +325,7 @@ create_layer(
     destinations_0=layer_4_1
 )
 
-weights = np.concatenate([w_3_to_4[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], w_2_to_4_t[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], np.zeros_like(w_2_to_4[::2, :2])], axis=1).astype('int8')
+weights = np.concatenate([w_3_to_4[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], w_2_to_4[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], np.zeros_like(w_2_to_4[::2, :2])], axis=1).astype('int8')
 create_layer(
     layer_name="layer_4_0",layer=layer_4_0,  
     padding=(w_3_to_4.shape[2] - 1)//2,stride=1,kernel_size=w_3_to_4.shape[2],
