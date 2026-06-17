@@ -247,7 +247,7 @@ create_layer(
 
 weights = np.zeros((8, 16, 1, 1), dtype=np.int8)
 for i in range(4):
-    weights[i, i, 0, 0] = 1
+    weights[i, i, 0, 0] = -1
     weights[i, i + 4, 0, 0] = 2
     weights[i, i + 8, 0, 0] = 1
     weights[i, i + 12, 0, 0] = -2
@@ -263,9 +263,9 @@ create_layer(
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
-    destinations_0=layer_1_2,
-    destinations_1=layer_3,
-    feature_shift_1=16
+    destinations_1=layer_1_2,
+    destinations_0=layer_3,
+    feature_shift_0=16
 )
 
 weights = np.zeros((4, 8, 1, 1), dtype=np.int8)
