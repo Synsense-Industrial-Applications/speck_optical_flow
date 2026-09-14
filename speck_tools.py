@@ -123,12 +123,27 @@ class ChannelHelper:
 
         return c, ret_x, ret_y
 
-    def get_kernel(self, kernel_matrix):
+    def get_kernel(self, kernel_matrix, size=None, drop=False):
+        """把 input_size 空间的内核映射到 output_size 空间。
+
+        返回 (out_channel**2, out_channel**2, shift_kernel_size, shift_kernel_size)。
+        索引 = center + 偏移，center = (shift_kernel_size - 1) // 2，
+        卷积层 padding 取同样的 center（脚本里就是 (shape[2] - 1) // 2）。
+
+        size=None（默认）：尺寸 = 2 * ceil(radius / out_channel) + 1，只取决于
+        kernel_size，所以同一层里各个子内核形状一致（脚本里 5x5 -> 3x3）。
+        size=S：强制用 S，要求所有非零 tap 都放得下（放不下直接报错，不会静默丢权重）。
+        drop=True 时改为“放不下就丢掉该 tap”，并打印丢掉的个数（用于最小尺寸的近似版本）。
+        128 空间 tap 在 dx = -1 时，偶目标落到 coarse -1、奇目标落到 0；dx = +1 时
+        分别是 0 和 +1。所以图案在 ±1 两侧都有 tap 时必须用 3 格；把图案整体平移到
+        dx >= 0 的单侧后只需要 {0,+1}，可以显式传 size=2 得到 4x4x2x2 的最小内核。
+        尺寸为偶数时 conv 输出比输入少 1，硬件要求
+        out = floor((in - kernel + 2 * padding) / stride) + 1 且 out <= 64。
+        """
         input_size = self.input_size
         output_size = self.output_size
         out_channel = input_size // output_size
         kernel_size = len(kernel_matrix)
-        print("kernel_size:", kernel_size)
         radius = kernel_size // 2
         caculate_size = out_channel + radius * 2
 
@@ -137,17 +152,36 @@ class ChannelHelper:
             for x in range(caculate_size)
         ]
 
-        shift_kernel_size = int(np.ceil(radius / out_channel) * 2 + 1)
+        if size is None:
+            center = -(-radius // out_channel)             # ceil(radius / out_channel)
+            shift_kernel_size = center * 2 + 1
+        else:
+            shift_kernel_size = int(size)
+            center = (shift_kernel_size - 1) // 2
         kernel_weight = np.zeros((out_channel**2, out_channel**2, shift_kernel_size, shift_kernel_size))
-        center = int(np.ceil(radius / out_channel))
+        dropped = 0
         for i in range(out_channel**2):
             for j in range(kernel_size):
                 for k in range(kernel_size):
+                    if kernel_matrix[j][k] == 0:
+                        continue
                     temp_x = radius + i // out_channel
                     temp_y = radius + i % out_channel
                     source = adjacency_matrix[temp_x - (radius - j)][temp_y - (radius - k)]
                     target = adjacency_matrix[temp_x][temp_y]
-                    kernel_weight[i, source.c, center + source.x - target.x, center + source.y - target.y] = kernel_matrix[j][k]
+                    weight_x = center + source.x - target.x
+                    weight_y = center + source.y - target.y
+                    if not (0 <= weight_x < shift_kernel_size and 0 <= weight_y < shift_kernel_size):
+                        if drop:
+                            dropped += 1
+                            continue
+                        raise AssertionError(
+                            f"kernel_size {kernel_size} 的 tap ({j},{k}) 需要 coarse 偏移 "
+                            f"({weight_x - center},{weight_y - center})，放不进 {shift_kernel_size}x"
+                            f"{shift_kernel_size}（size={size}）")
+                    kernel_weight[i, source.c, weight_x, weight_y] = kernel_matrix[j][k]
+        print(f"kernel_size: {kernel_size} -> {shift_kernel_size}, center {center}"
+              + (f", dropped {dropped} taps" if drop else ""))
         return kernel_weight
 
     def convert_matrix_to_128(self, matrix_64, out_channel):
