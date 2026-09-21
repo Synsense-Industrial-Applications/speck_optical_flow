@@ -10,3 +10,10 @@ speck_feature.txt
 
 # editor settings (machine-specific)
 .vscode/
+
+# python caches
+__pycache__/
+
+# experiment data (too large / not source; single dvs CSV alone is ~51 MB)
+algorithm_Demo/recordings/**/*.csv
+algorithm_Demo/recordings/**/*.png
