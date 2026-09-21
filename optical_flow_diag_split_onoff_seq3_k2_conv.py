@@ -1,3 +1,7 @@
+# optical_flow_diag_split_onoff_seq3_k2_conv.py
+# 方向: 斜向（对角线）
+# 变体: split + on/off + seq3 + k2 + conv —— 最小 2x2 内核 + layer_1 的 4x4 对角线卷积前端。
+
 from speck_tools import ChannelHelper
 import numpy as np
 import samna, samnagui
@@ -60,8 +64,8 @@ w_1_to_2_t = build_64(w_128, transpose=True)
 w_128 = np.zeros((2, 1, M, M))
 w_128[1, 0, range(M), range(M)] = [0, 0, 0, -2, 0]
 w_128[0, 0, range(M), range(M)] = [0, -2, 0, 0, 0]
-w_0_to_3 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(1)], axis=1) for i in range(2)], axis=0)
-w_0_to_3_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(1)], axis=1) for i in range(2)], axis=0)
+w_0_to_3 = build_64(w_128)
+w_0_to_3_t = build_64(w_128, transpose=True)
 print(w_0_to_3.shape)
 
 w_128 = np.zeros((2, 2, M, M))
@@ -69,27 +73,23 @@ w_128[1, 1, range(M), range(M)] = [0, 1, 2, 0, 0]
 w_128[1, 0, range(M), range(M)] = [0, 0, -1, 0, 0]
 w_128[0, 1, range(M), range(M)] = [0, 0, -1, 0, 0]
 w_128[0, 0, range(M), range(M)] = [0, 0, 2, 1, 0]
-w_2_to_3 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
-w_2_to_3_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+w_2_to_3 = build_64(w_128)
+w_2_to_3_t = build_64(w_128, transpose=True)
 
 print(w_2_to_3.shape)
 
-M = 5
-w_128 = np.zeros((2, 2, M, M))
-w_128[1, 1, range(M), range(M)] = [0] +[-1] * (M - 4) + [-2, 0, 0]
-w_128[0, 0, range(M), range(M)] = [0, 0, -2] + [-1] * (M - 4) + [0]
-w_2_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
-w_2_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+# M = 3
+# w_128 = np.zeros((2, 2, M - 2, M - 2))
+# w_128[1, 1, range(M - 2), range(M - 2)] = [-1] * (M - 4) + [-2, 0]
+# w_128[0, 0, range(M - 2), range(M - 2)] = [0, -2] + [-1] * (M - 4)
 # w_2_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
 # w_2_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
 
 # print(w_2_to_4.shape)
 
-w_128 = np.zeros((2, 2, M, M))
-w_128[1, 1, range(M), range(M)] = [0] + [1] * (M - 3) + [2, 0]
-w_128[0, 0, range(M), range(M)] = [0, 2] + [1] * (M - 3) + [0]
-w_3_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
-w_3_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+# w_128 = np.zeros((2, 2, M - 2, M - 2))
+# w_128[1, 1, range(M - 2), range(M - 2)] = [1] * (M - 3) + [2]
+# w_128[0, 0, range(M - 2), range(M - 2)] = [2] + [1] * (M - 3)
 # w_3_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
 # w_3_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
 # print(w_3_to_4.shape)
@@ -257,12 +257,12 @@ def create_layer(layer_name,layer,padding,stride,kernel_size,
 # 在dvs_config函数调用前加载配置
 
 layer_0_0 = 0
-# layer_0_1 = 1
+layer_0_1 = 1
 layer_1_0 = 7
 layer_1_1 = 8
 layer_2_0 = 3
 layer_2_1 = 4
-layer_2_2 = 1
+# layer_2_2 = 1
 layer_3_0 = 5
 layer_3_1 = 6
 layer_4 = 2
@@ -279,26 +279,47 @@ optimal_sram_config()
 # dvs_config()
 
 
-weights = np.zeros((16, 2, 2, 2), dtype=np.int8)
+weights = np.zeros((16, 2, 3, 3), dtype=np.int8)
 for i in range(2):
     for j in range(2):
-        # 采样保持和 3x3 版本一致（(i,i) / (i,1-i)）：相位共轭会把 realized filter 的
-        # (source-target) 符号翻过来，等于把方向镜像掉，所以不用它。
-        weights[j*2+i, j, i, i] = 1
-        weights[4+j*2+i, j, i, i] = 1
-        weights[8+j*2+i, j, i, 1-i] = 1
-        weights[12+j*2+i, j, i, 1-i] = 1
+        # weights[j*2+i, j, i, i] = 1
+        # weights[4+j*2+i, j, i, i] = 1
+        weights[j*2+i, j, i:i+2, i:i+2] = 1
+        weights[4+j*2+i, j, i:i+2, i:i+2] = 1      
+        # weights[8+j*2+i, j, i, 1-i] = 1
+        # weights[12+j*2+i, j, i, 1-i] = 1
+        weights[8+j*2+i, j, i:i+2, 1-i:3-i] = 1
+        weights[12+j*2+i, j, i:i+2, 1-i:3-i] = 1
 create_layer(
     layer_name="layer_0_0",layer=layer_0_0,  
-    padding=0,stride=2,kernel_size=2,
+    padding=1,stride=2,kernel_size=3,
     input_shape_feature=2,input_shape_size_x=128,input_shape_size_y=128,
-    output_shape_feature=16,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=1,threshold_low=-1,
-    weights=weights,
+    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=3,threshold_low=-1,
+    weights=weights[:8],
     # monitor_enable=True,
     destinations_0=layer_1_0,
-    destinations_1=layer_1_1,
+    # destinations_1=layer_1_1,
+    leak_enable=True,
+    bias=-2
     # feature_shift_1=4
+)
+
+create_layer(
+    layer_name="layer_0_1",layer=layer_0_1,  
+    padding=1,stride=2,kernel_size=3,
+    input_shape_feature=2,input_shape_size_x=128,input_shape_size_y=128,
+    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=3,threshold_low=-1,
+    weights=weights[8:],
+    # monitor_enable=True,
+    # destinations_0=layer_1_0,
+    destinations_1=layer_1_1,
+    # feature_shift_0=8,
+    # feature_shift_1=8,
+    leak_enable=True,
+    bias=-2
+    
 )
 
 # weights = np.zeros((8, 2, 2, 2), dtype=np.int8)
@@ -333,10 +354,10 @@ for i in range(2):
 create_layer(
     layer_name="layer_1_0",layer=layer_1_0,  
     padding=0,stride=1,kernel_size=1,
-    input_shape_feature=16,input_shape_size_x=64,input_shape_size_y=64,
+    input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
-    weights=np.concatenate([weights, np.zeros_like(weights)], axis=1),
+    weights=weights,
     # monitor_enable=True,
     destinations_0=layer_2_0,
     destinations_1=layer_2_0,
@@ -348,14 +369,14 @@ create_layer(
 create_layer(
     layer_name="layer_1_1",layer=layer_1_1,  
     padding=0,stride=1,kernel_size=1,
-    input_shape_feature=16,input_shape_size_x=64,input_shape_size_y=64,
+    input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
-    weights=np.concatenate([np.zeros_like(weights), weights], axis=1),
+    weights=weights,
     # monitor_enable=True,
     destinations_0=layer_2_1,
     destinations_1=layer_2_1,
-    feature_shift_0=4
+    feature_shift_1=4
     # destinations_0=layer_4,
     # feature_shift_0=4
 )
@@ -376,7 +397,7 @@ create_layer(
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
-    destinations_1=layer_2_2,
+    # destinations_1=layer_2_2,
     destinations_0=layer_3_0,
     # feature_shift_1=8
     # destinations_0=layer_4,
@@ -395,41 +416,33 @@ create_layer(
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
-    destinations_0=layer_2_2,
+    # destinations_0=layer_2_2,
     destinations_1=layer_3_1,
-    feature_shift_0=6
+    # feature_shift_0=6
     # destinations_0=layer_4,
     # feature_shift_0=6
 )
 
-# layer_2_2 是 relay 通道。3x3 版本是 1x1（纯 pointwise，tap 在 offset 0）。
-# 关键：这里保持 1x1 + offset 0（和 3x3 版本完全一样）。
-# 2x2 设计里探测级（layer_2_0/2_1）的图案整体 +1 fine pixel，于是：
-#   * relay 级如果也跟着平移，就会和 layer_3_x 的直连级差半个粗网格；
-#   * 而对比级（layer_4）比较的正是这两条支路，半步错位会直接破坏对比结果。
-# 所以只让“探测级”用 2x2，对比支路（layer_2_2、layer_3_x、layer_4）保持原图案：
-# 这样两条支路都带同样的 +1 fine pixel，对比时互相抵消，layer_4 仍然正确
-#（只有整体输出仍带那半步偏移，和已经 work 的 _3_k 一样）。
-weights = np.zeros((8, 12, 1, 1), dtype=np.int8)
-weights[0, 0, 0, 0] = 1
-weights[1, 1, 0, 0] = 1
-weights[2, 2, 0, 0] = 1
-weights[3, 3, 0, 0] = 1
-weights[4, 6, 0, 0] = 1
-weights[5, 7, 0, 0] = 1
-weights[6, 8, 0, 0] = 1
-weights[7, 9, 0, 0] = 1
-create_layer(
-    layer_name="layer_2_2",layer=layer_2_2,  
-    padding=0,stride=1,kernel_size=1,
-    input_shape_feature=12,input_shape_size_x=63,input_shape_size_y=63,
-    output_shape_feature=8,output_shape_size_x=63,output_shape_size_y=63,
-    threshold_high=1,threshold_low=-1,
-    weights=weights,
-    # monitor_enable=True,
-    destinations_0=layer_4,
-    feature_shift_0=8
-)
+# weights = np.zeros((8, 12, 1, 1), dtype=np.int8)
+# weights[0, 0, 0, 0] = 1
+# weights[1, 1, 0, 0] = 1
+# weights[2, 2, 0, 0] = 1
+# weights[3, 3, 0, 0] = 1
+# weights[4, 6, 0, 0] = 1
+# weights[5, 7, 0, 0] = 1
+# weights[6, 8, 0, 0] = 1
+# weights[7, 9, 0, 0] = 1
+# create_layer(
+#     layer_name="layer_2_2",layer=layer_2_2,  
+#     padding=0,stride=1,kernel_size=1,
+#     input_shape_feature=12,input_shape_size_x=63,input_shape_size_y=63,
+#     output_shape_feature=8,output_shape_size_x=63,output_shape_size_y=63,
+#     threshold_high=1,threshold_low=-1,
+#     weights=weights,
+#     # monitor_enable=True,
+#     # destinations_0=layer_4,
+#     # feature_shift_0=8
+# )
 
 
 weights = np.concatenate([w_2_to_3[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], w_0_to_3[np.ix_([0, 3, 4, 7], [0, 3])]], axis=1).astype('int8')
@@ -438,7 +451,7 @@ create_layer(
     layer_name="layer_3_0",layer=layer_3_0,  
     padding=(w_2_to_3.shape[2] - 1)//2,stride=1,kernel_size=w_2_to_3.shape[2],
     input_shape_feature=6,input_shape_size_x=63,input_shape_size_y=63,
-    output_shape_feature=4,output_shape_size_x=63,output_shape_size_y=63,
+    output_shape_feature=4,output_shape_size_x=62,output_shape_size_y=62,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
@@ -450,7 +463,7 @@ create_layer(
     layer_name="layer_3_1",layer=layer_3_1,  
     padding=(w_2_to_3.shape[2] - 1)//2,stride=1,kernel_size=w_2_to_3.shape[2],
     input_shape_feature=6,input_shape_size_x=63,input_shape_size_y=63,
-    output_shape_feature=4,output_shape_size_x=63,output_shape_size_y=63,
+    output_shape_feature=4,output_shape_size_x=62,output_shape_size_y=62,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
@@ -487,20 +500,23 @@ create_layer(
 #     feature_shift_0=4
 # )
 
-weights = np.zeros((8, 16, w_3_to_4.shape[2], w_3_to_4.shape[3]),  dtype=np.int8)
-weights[[0, 3, 4, 7]] = np.concatenate([w_3_to_4[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], np.zeros_like(w_3_to_4[:4, :4]),
-                          w_2_to_4[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], np.zeros_like(w_2_to_4[:4, :4])], axis=1)
-weights[[1, 2, 5, 6]] = np.concatenate([np.zeros_like(w_3_to_4[:4, :4]), w_3_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])],
-                          np.zeros_like(w_2_to_4[:4, :4]), w_2_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])]], axis=1)
+weights = np.zeros((8, 8, 1, 1), dtype=np.int8)
+weights[0, 0, 0, 0] = 1
+weights[3, 1, 0, 0] = 1
+weights[4, 2, 0, 0] = 1
+weights[7, 3, 0, 0] = 1
+weights[1, 4, 0, 0] = 1
+weights[2, 5, 0, 0] = 1
+weights[5, 6, 0, 0] = 1
+weights[6, 7, 0, 0] = 1
 create_layer(
     layer_name="layer_4",layer=layer_4,  
-    padding=(w_3_to_4.shape[2] - 1)//2,stride=1,kernel_size=w_3_to_4.shape[2],
-    input_shape_feature=16,input_shape_size_x=63,input_shape_size_y=63,
-    output_shape_feature=8,output_shape_size_x=63,output_shape_size_y=63,
-    threshold_high=2,threshold_low=-1,
+    padding=0,stride=1,kernel_size=1,
+    input_shape_feature=8,input_shape_size_x=62,input_shape_size_y=62,
+    output_shape_feature=8,output_shape_size_x=62,output_shape_size_y=62,
+    threshold_high=1,threshold_low=-1,
     weights=weights,
     monitor_enable=True,
-    # destinations_0=layer_4_2
 )
 
 config.dvs_layer.monitor_enable = True
@@ -523,6 +539,12 @@ input_graph.start()
 
 dk.get_model().apply_configuration(config)
 
+dk_io = dk.get_io_module()
+# dk_io.set_in_out_interface_clk_rate(500000)
+dk_io.set_slow_clk_rate(32)
+dk_io.set_slow_clk(True)
+
+
 # config.factory_config.fast_output = True
 # with open(f"optical_flow_{M}.bin", "wb") as f:
 #    f.write(bytes(samna.speck2f.configuration_to_flash_binary(config)))
@@ -535,6 +557,8 @@ buf = samna.graph.sink_from(dk.get_model_source_node())
 #         if ev.layer == layer_1:
 #             print(ev.x, ev.y, ev.feature)
 #     time.sleep(0.1)
+
+
 
 stopWatch = dk.get_stop_watch()
 stopWatch.reset()

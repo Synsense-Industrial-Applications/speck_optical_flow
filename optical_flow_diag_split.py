@@ -1,3 +1,7 @@
+# optical_flow_diag_split.py
+# 方向: 斜向（对角线）
+# 变体: split —— 斜向 + 相位分裂（bandwidth 翻倍）。斜向系列里第一个「可用的主版本」。
+
 from speck_tools import ChannelHelper
 import numpy as np
 import samna, samnagui
@@ -218,9 +222,9 @@ layer_2_0 = 3
 layer_2_1 = 4
 layer_3_0 = 5
 layer_3_1 = 6
-layer_4_0 = 0
-layer_4_1 = 1
-layer_4_2 = 2
+layer_4_0 = 1
+layer_4_1 = 2
+layer_4_2 = 0
 
 config = samna.speck2f.configuration.SpeckConfiguration()
 config.dvs_layer.destinations[0].layer = layer_1_0
@@ -330,13 +334,11 @@ create_layer(
     layer_name="layer_4_0",layer=layer_4_0,  
     padding=(w_3_to_4.shape[2] - 1)//2,stride=1,kernel_size=w_3_to_4.shape[2],
     input_shape_feature=10,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
-    weights=np.concatenate([weights, weights], axis=0),
+    weights=weights,
     # monitor_enable=True,
-    destinations_0=layer_4_2,
-    # destinations_1=layer_4_2,
-    # feature_shift_1=8
+    destinations_0=layer_4_2
 )
 
 weights = np.concatenate([w_3_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])], w_2_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])], np.zeros_like(w_2_to_4[::2, :2])], axis=1).astype('int8')
@@ -344,31 +346,29 @@ create_layer(
     layer_name="layer_4_1",layer=layer_4_1,  
     padding=(w_3_to_4.shape[2] - 1)//2,stride=1,kernel_size=w_3_to_4.shape[2],
     input_shape_feature=10,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
-    weights=np.concatenate([weights, weights], axis=0),
+    weights=weights,
     # monitor_enable=True,
     destinations_0=layer_4_2,
-    # destinations_1=layer_4_2,
-    feature_shift_0=8,
-    # feature_shift_1=4
+    feature_shift_0=4
 )
 
-weights = np.zeros((8, 16, 1, 1), dtype=np.int8)
-weights[[0, 3, 4, 7], [0, 1, 2, 3]] = -1
-weights[[0, 3, 4, 7], [2, 3, 0, 1]] = 2
-weights[[0, 3, 4, 7], [4, 5, 6, 7]] = 1
-weights[[0, 3, 4, 7], [6, 7, 4, 5]] = -2
-weights[[1, 2, 5, 6], [8, 9, 10, 11]] = -1
-weights[[1, 2, 5, 6], [10, 11, 8, 9]] = 2
-weights[[1, 2, 5, 6], [12, 13, 14, 15]] = 1
-weights[[1, 2, 5, 6], [14, 15, 12, 13]] = -2
+weights = np.zeros((8, 8, 1, 1), dtype=np.int8)
+weights[0, 0, 0, 0] = 1
+weights[3, 1, 0, 0] = 1
+weights[4, 2, 0, 0] = 1
+weights[7, 3, 0, 0] = 1
+weights[1, 4, 0, 0] = 1
+weights[2, 5, 0, 0] = 1
+weights[5, 6, 0, 0] = 1
+weights[6, 7, 0, 0] = 1
 create_layer(
     layer_name="layer_4_2",layer=layer_4_2,  
     padding=0,stride=1,kernel_size=1,
-    input_shape_feature=16,input_shape_size_x=64,input_shape_size_y=64,
+    input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
     output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=2,threshold_low=-1,
+    threshold_high=1,threshold_low=-1,
     weights=weights,
     monitor_enable=True,
 )

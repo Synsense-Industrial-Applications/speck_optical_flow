@@ -1,3 +1,7 @@
+# optical_flow_diag_split_onoff_seq3_k2.py
+# 方向: 斜向（对角线）
+# 变体: split + on/off + seq3 + k2 —— 最小内核版：把 coarse 3x3 无损裁成 2x2（详细推导见下方注释）。
+
 from speck_tools import ChannelHelper
 import numpy as np
 import samna, samnagui
@@ -6,48 +10,89 @@ import multiprocessing
 
 
 ch = ChannelHelper(input_channel=1, input_size=128, output_size=64)
-w_128 = np.zeros((2, 2, 5, 5))
-w_128[1, 1, range(5), range(5)] = [-1, -1, 1, -2, -1]
-w_128[1, 0, range(5), range(5)] = [0, 0, -1, 2, 0]
-w_128[0, 1, range(5), range(5)] = [-1, -2, 1, -1, -1]
-w_128[0, 0, range(5), range(5)] = [0, 2, -1, 0, 0]
-# print(ch.get_kernel(w_128[0,0]))
-w_1_to_2 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
-w_1_to_2_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
-# print(w_1_to_2)
+# 目标：64 空间用最小内核 4x4x2x2，且和 3x3 版本**完全等价**（只差一个整体平移）。
+#
+# 原理：128 侧 tap 在 dx=-1 时偶目标落到 coarse -1、奇目标落到 0；dx=+1 时分别是 0 和 +1。
+# 只要图案在 ±1 两侧都有 tap，同一层里就会同时需要 {-1,0} 和 {0,+1} 两种窗口，2 格放不下。
+# 把图案整体平移 +1（让支撑落在 dx>=0 的单侧）后，所有相位对被需要的 coarse 偏移都变成
+# {0,+1}（已逐相位块核对），于是 3x3 最外侧那一圈全 0，可以无损裁成 2x2 —— 既不丢 tap，
+# 也不会引入新 tap。
+#
+# 代价：整个计算被平移了 +1 个 fine pixel（两级 -> 共 +1 个 coarse pixel），
+# 也就是流场是 3x3 版本的结果整体平移 1 像素，数值（方向/大小）不变。
+# relay 通道要跟着平移（读相邻相位的特征），否则它和探测器参考点会差 1 个 fine pixel。
+SHIFT_OUT_SIZE = 2          # 目标：4x4x2x2
 
-w_128 = np.zeros((2, 1, 5, 5))
-w_128[1, 0, range(5), range(5)] = [-1, 0, 0, -2, -1]
-w_128[0, 0, range(5), range(5)] = [-1, -2, 0, 0, -1]
-w_0_to_3 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(1)], axis=1) for i in range(2)], axis=0)
-w_0_to_3_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(1)], axis=1) for i in range(2)], axis=0)
+
+def shift_pattern(w, sx=1, sy=1):
+    """把 (2, nb, M, M) 图案整体平移 (sx, sy)，移出边界的必须本来就是 0"""
+    out = np.zeros_like(w)
+    M = w.shape[-1]
+    for a in range(M):
+        for b in range(M):
+            na, nb = a + sx, b + sy
+            if 0 <= na < M and 0 <= nb < M:
+                out[:, :, na, nb] = w[:, :, a, b]
+            else:
+                assert not np.any(w[:, :, a, b]), "平移会丢掉非零 tap"
+    return out
+
+
+def map_kernel(k, size=SHIFT_OUT_SIZE):
+    """映射到 64 空间的最小尺寸（单侧图案时没有任何 tap 需要丢弃）"""
+    return ch.get_kernel(k, size=size)
+
+
+def build_64(w128, transpose=False):
+    """镜像（可选）后整体平移 +1，再映射成 2x2（不交换相位块）"""
+    if transpose:
+        w128 = w128[:, :, ::-1, :]                  # 反方向支路（与 3x3 版本同样的镜像）
+    w128 = shift_pattern(w128, 1, 1)                # 支撑 -> dx >= 0，单侧
+    return np.concatenate([np.concatenate([map_kernel(w128[i, j]) for j in range(w128.shape[1])],
+                                          axis=1) for i in range(w128.shape[0])], axis=0)
+
+
+M = 5
+w_128 = np.zeros((2, 2, M, M))
+w_128[1, 1, range(M), range(M)] = [0, -1, 1, -2, 0]
+w_128[1, 0, range(M), range(M)] = [0, 0, -1, 2, 0]
+w_128[0, 1, range(M), range(M)] = [0, -2, 1, -1, 0]
+w_128[0, 0, range(M), range(M)] = [0, 2, -1, 0, 0]
+w_1_to_2 = build_64(w_128)
+w_1_to_2_t = build_64(w_128, transpose=True)
+
+w_128 = np.zeros((2, 1, M, M))
+w_128[1, 0, range(M), range(M)] = [0, 0, 0, -2, 0]
+w_128[0, 0, range(M), range(M)] = [0, -2, 0, 0, 0]
+w_0_to_3 = build_64(w_128)
+w_0_to_3_t = build_64(w_128, transpose=True)
 print(w_0_to_3.shape)
 
-w_128 = np.zeros((2, 2, 5, 5))
-w_128[1, 1, range(5), range(5)] = [0, 1, 2, 0, 0]
-w_128[1, 0, range(5), range(5)] = [0, 0, -1, 0, 0]
-w_128[0, 1, range(5), range(5)] = [0, 0, -1, 0, 0]
-w_128[0, 0, range(5), range(5)] = [0, 0, 2, 1, 0]
-w_2_to_3 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
-w_2_to_3_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+w_128 = np.zeros((2, 2, M, M))
+w_128[1, 1, range(M), range(M)] = [0, 1, 2, 0, 0]
+w_128[1, 0, range(M), range(M)] = [0, 0, -1, 0, 0]
+w_128[0, 1, range(M), range(M)] = [0, 0, -1, 0, 0]
+w_128[0, 0, range(M), range(M)] = [0, 0, 2, 1, 0]
+w_2_to_3 = build_64(w_128)
+w_2_to_3_t = build_64(w_128, transpose=True)
 
 print(w_2_to_3.shape)
 
-M = 5
-w_128 = np.zeros((2, 2, M - 2, M - 2))
-w_128[1, 1, range(M - 2), range(M - 2)] = [-1] * (M - 4) + [-2, 0]
-w_128[0, 0, range(M - 2), range(M - 2)] = [0, -2] + [-1] * (M - 4)
-w_2_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
-w_2_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+# M = 3
+# w_128 = np.zeros((2, 2, M - 2, M - 2))
+# w_128[1, 1, range(M - 2), range(M - 2)] = [-1] * (M - 4) + [-2, 0]
+# w_128[0, 0, range(M - 2), range(M - 2)] = [0, -2] + [-1] * (M - 4)
+# w_2_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+# w_2_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
 
-print(w_2_to_4.shape)
+# print(w_2_to_4.shape)
 
-w_128 = np.zeros((2, 2, M - 2, M - 2))
-w_128[1, 1, range(M - 2), range(M - 2)] = [1] * (M - 3) + [2]
-w_128[0, 0, range(M - 2), range(M - 2)] = [2] + [1] * (M - 3)
-w_3_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
-w_3_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
-print(w_3_to_4.shape)
+# w_128 = np.zeros((2, 2, M - 2, M - 2))
+# w_128[1, 1, range(M - 2), range(M - 2)] = [1] * (M - 3) + [2]
+# w_128[0, 0, range(M - 2), range(M - 2)] = [2] + [1] * (M - 3)
+# w_3_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+# w_3_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(w_128[:, :, ::-1, :][i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+# print(w_3_to_4.shape)
 
 
 jit_node = samna.graph.JitFunctionFilter('assembleDvsEvent', '''
@@ -237,6 +282,8 @@ optimal_sram_config()
 weights = np.zeros((16, 2, 2, 2), dtype=np.int8)
 for i in range(2):
     for j in range(2):
+        # 采样保持和 3x3 版本一致（(i,i) / (i,1-i)）：相位共轭会把 realized filter 的
+        # (source-target) 符号翻过来，等于把方向镜像掉，所以不用它。
         weights[j*2+i, j, i, i] = 1
         weights[4+j*2+i, j, i, i] = 1
         weights[8+j*2+i, j, i, 1-i] = 1
@@ -315,6 +362,9 @@ create_layer(
 
 weights = np.zeros((6, 8, w_1_to_2.shape[2], w_1_to_2.shape[3]),  dtype=np.int8)
 weights[:4] = w_1_to_2[np.ix_([0, 3, 4, 7], [0, 3, 0, 3, 4, 7, 4, 7])]
+# relay 行保持原样（offset 0、原特征）：逐行核对显示探测器/对比行的 tap 正好是原版整体 +1 fine pixel，
+# 而 relay 想要的那 +1 fine 在粗网格上无法表示（换相位会差 1~2 个 fine pixel，更差），
+# 所以 relay 用原版是误差最小的选择（只差那半步）。
 weights[4, 4::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
 weights[5, 5::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
 print(weights.shape)
@@ -322,7 +372,7 @@ create_layer(
     layer_name="layer_2_0",layer=layer_2_0,  
     padding=(w_1_to_2.shape[2] - 1)//2,stride=1,kernel_size=w_1_to_2.shape[2],
     input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=6,output_shape_size_x=64,output_shape_size_y=64,
+    output_shape_feature=6,output_shape_size_x=63,output_shape_size_y=63,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
@@ -341,7 +391,7 @@ create_layer(
     layer_name="layer_2_1",layer=layer_2_1,  
     padding=(w_1_to_2.shape[2] - 1)//2,stride=1,kernel_size=w_1_to_2.shape[2],
     input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=6,output_shape_size_x=64,output_shape_size_y=64,
+    output_shape_feature=6,output_shape_size_x=63,output_shape_size_y=63,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
@@ -364,8 +414,8 @@ weights[7, 9, 0, 0] = 1
 create_layer(
     layer_name="layer_2_2",layer=layer_2_2,  
     padding=0,stride=1,kernel_size=1,
-    input_shape_feature=12,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    input_shape_feature=12,input_shape_size_x=63,input_shape_size_y=63,
+    output_shape_feature=8,output_shape_size_x=63,output_shape_size_y=63,
     threshold_high=1,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
@@ -379,8 +429,8 @@ weights = np.concatenate([w_2_to_3[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], w_0_to_3
 create_layer(
     layer_name="layer_3_0",layer=layer_3_0,  
     padding=(w_2_to_3.shape[2] - 1)//2,stride=1,kernel_size=w_2_to_3.shape[2],
-    input_shape_feature=6,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
+    input_shape_feature=6,input_shape_size_x=63,input_shape_size_y=63,
+    output_shape_feature=4,output_shape_size_x=62,output_shape_size_y=62,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
@@ -391,8 +441,8 @@ weights = np.concatenate([w_2_to_3_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])], w_0_to
 create_layer(
     layer_name="layer_3_1",layer=layer_3_1,  
     padding=(w_2_to_3.shape[2] - 1)//2,stride=1,kernel_size=w_2_to_3.shape[2],
-    input_shape_feature=6,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
+    input_shape_feature=6,input_shape_size_x=63,input_shape_size_y=63,
+    output_shape_feature=4,output_shape_size_x=62,output_shape_size_y=62,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
@@ -441,8 +491,8 @@ weights[6, 7, 0, 0] = 1
 create_layer(
     layer_name="layer_4",layer=layer_4,  
     padding=0,stride=1,kernel_size=1,
-    input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    input_shape_feature=8,input_shape_size_x=62,input_shape_size_y=62,
+    output_shape_feature=8,output_shape_size_x=62,output_shape_size_y=62,
     threshold_high=1,threshold_low=-1,
     weights=weights,
     monitor_enable=True,

@@ -1,10 +1,58 @@
-import samna, samnagui
+# optical_flow_axis_shift.py
+# 方向: 轴向（水平 x + 垂直 y）
+# 变体: shift —— 相对 general 把核图案收窄到 5x5 并整体平移，使 tap 落在单侧，
+#       减少需要检索的相位窗口，从而最大化带宽。
+
+from speck_tools import ChannelHelper
 import numpy as np
+import samna, samnagui
 import time
 import multiprocessing
 
-from speck_tools import RealtimeEventVisualizer, print_layer_feature_counts, reset_data_folder, store_events_to_csv
 
+ch = ChannelHelper(input_channel=1, input_size=128, output_size=64)
+w_128 = np.zeros((2, 2, 5, 5))
+w_128[1, 1, :, 2] = [-1, -1, 1, -2, -1]
+w_128[1, 0, :, 2] = [0, 0, -1, 2, 0]
+w_128[0, 1, :, 2] = [-1, -2, 1, -1, -1]
+w_128[0, 0, :, 2] = [0, 2, -1, 0, 0]
+# print(ch.get_kernel(w_128[0,0]))
+w_1_to_2 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+w_1_to_2_t = np.concatenate([np.concatenate([ch.get_kernel(np.transpose(w_128, (0, 1, 3, 2))[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+# print(w_1_to_2)
+
+w_128 = np.zeros((2, 1, 5, 5))
+w_128[1, 0, :, 2] = [-1, 0, 0, -2, -1]
+w_128[0, 0, :, 2] = [-1, -2, 0, 0, -1]
+w_0_to_3 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(1)], axis=1) for i in range(2)], axis=0)
+w_0_to_3_t = np.concatenate([np.concatenate([ch.get_kernel(np.transpose(w_128, (0, 1, 3, 2))[i,j]) for j in range(1)], axis=1) for i in range(2)], axis=0)
+print(w_0_to_3.shape)
+
+w_128 = np.zeros((2, 2, 5, 5))
+w_128[1, 1, :, 2] = [0, 1, 2, 0, 0]
+w_128[1, 0, :, 2] = [0, 0, -1, 0, 0]
+w_128[0, 1, :, 2] = [0, 0, -1, 0, 0]
+w_128[0, 0, :, 2] = [0, 0, 2, 1, 0]
+w_2_to_3 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+w_2_to_3_t = np.concatenate([np.concatenate([ch.get_kernel(np.transpose(w_128, (0, 1, 3, 2))[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+
+print(w_2_to_3.shape)
+
+M = 5
+w_128 = np.zeros((2, 2, M - 2, M - 2))
+w_128[1, 1, :, (M - 2)//2] = [-1] * (M - 4) + [-2, 0]
+w_128[0, 0, :, (M - 2)//2] = [0, -2] + [-1] * (M - 4)
+w_2_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+w_2_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(np.transpose(w_128, (0, 1, 3, 2))[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+
+print(w_2_to_4.shape)
+
+w_128 = np.zeros((2, 2, M - 2, M - 2))
+w_128[1, 1, :, (M - 2)//2] = [1] * (M - 3) + [2]
+w_128[0, 0, :, (M - 2)//2] = [2] + [1] * (M - 3)
+w_3_to_4 = np.concatenate([np.concatenate([ch.get_kernel(w_128[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+w_3_to_4_t = np.concatenate([np.concatenate([ch.get_kernel(np.transpose(w_128, (0, 1, 3, 2))[i,j]) for j in range(2)], axis=1) for i in range(2)], axis=0)
+print(w_3_to_4.shape)
 
 
 jit_node = samna.graph.JitFunctionFilter('assembleDvsEvent', '''
@@ -20,12 +68,7 @@ jit_node = samna.graph.JitFunctionFilter('assembleDvsEvent', '''
                             event.y = e.row;
                             event.x = e.col;
                             event.polarity = e.channel;
-                        } 
-                        //else if (e.layer==2) {
-                          //  event.y = e.row * 4 + (e.channel % 4);
-                          //  event.x = e.col * 4 + ((e.channel / 4) % 4);
-                        //} 
-                        else {
+                        } else {
                             event.y = e.row * 2 + (e.channel % 2);
                             event.x = e.col * 2 + ((e.channel / 2) % 2);
                             event.polarity = (e.channel / 4) % 2;
@@ -82,7 +125,7 @@ def open_visualizer(window_width, window_height, receiver_endpoint):
     return gui_process
 
 def visualize_layer(layer):
-    streamer_endpoint = f"tcp://0.0.0.0:{4000 + layer}"
+    streamer_endpoint = f"tcp://0.0.0.0:4000{layer}"
     gui_process = open_visualizer(0.27, 0.48, streamer_endpoint)
     graph = samna.graph.EventFilterGraph()
     config_source = build_samna_event_route(dk, graph, streamer_endpoint, [layer])
@@ -174,215 +217,161 @@ def create_layer(layer_name,layer,padding,stride,kernel_size,
 # 在dvs_config函数调用前加载配置
 
 
-layer_1 = 5
-# layer_1_1 = 5
-layer_2 = 3
-layer_3 = 2 #暂时没用
-layer_4 = 4
-layer_5_merge_layer = 6
-layer_6_SD = 1 #这是输出层
-layer_WTA = 0 #暂时没用
-# layer_7_output = 0
-DATA_FOLDER = './spike_data_dir4'
-# layer_7 = 5
-# layer_8 = 6
-# layer_9 = 2
+layer_1_0 = 5
+layer_1_1 = 6
+layer_1_2 = 7
+layer_1_3 = 8
+layer_2_0 = 3
+layer_2_1 = 4
+layer_3_0 = 1
+layer_3_1 = 2
+layer_4 = 0
+
 config = samna.speck2f.configuration.SpeckConfiguration()
-config.dvs_layer.destinations[0].layer = layer_1
+config.dvs_layer.destinations[0].layer = layer_1_0
 config.dvs_layer.destinations[0].enable = 1
+config.dvs_layer.destinations[1].layer = layer_1_1
+config.dvs_layer.destinations[1].enable = 1
+config.dvs_layer.merge = True
 optimal_sram_config()
 # dvs_config()
-input_channel = 2
-weights = np.ones((1, input_channel, 2, 2), dtype=np.int8)
 
+
+weights = np.zeros((4, 1, 2, 2), dtype=np.int8)
+for i in range(2):
+    for j in range(2):
+        weights[i*2+j, 0, i, j] = 1
 create_layer(
-    layer_name="layer_1",layer=layer_1,  
+    layer_name="layer_1_0",layer=layer_1_0,  
     padding=0,stride=2,kernel_size=2,
-    input_shape_feature=input_channel,input_shape_size_x=128,input_shape_size_y=128,
-    output_shape_feature=1,output_shape_size_x=64,output_shape_size_y=64,
+    input_shape_feature=1,input_shape_size_x=128,input_shape_size_y=128,
+    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=1,threshold_low=-1,
     weights=weights,
-    monitor_enable=True,
-    destinations_0=layer_2,
-    destinations_1=layer_4,
-    # destinations_1=0,
-    # feature_shift_0=None,
-    # feature_shift_1=8   
+    # monitor_enable=True,
+    destinations_0=layer_1_2,
+    destinations_1=layer_3_0,
+    feature_shift_1=8
 )
 
-# four-dir stage
-a = 3
-K = 2 * a + 1
-first_line_width = 1
-
-first_V_th = int(K*first_line_width*0.9*4)
-print("first_V_th:", K*first_line_width*0.9*4,"->",first_V_th)
-reset_len = 10
-
-c=a+1
-w = first_line_width
-order_V_th = 2
-
-
-
-#layer_2 上下移动检测
-weights = np.zeros((2, 3, K, K), dtype=np.int8)
-if c - w*2 +1 <= 0:
-    print("Error: c - w*2 must be greater than 0 to avoid negative indexing.")
-    exit(1)
-
-weights[0, 0, :, c-w*2 : c-w] = 1      # down
-weights[1, 0, :, c-w:c] = 1      # up
-
-weights[:, 1:3, : , :] = -2          # reset
 create_layer(
-    layer_name="layer_2",layer=layer_2,
-    padding=a,stride=1,kernel_size=K,
-    input_shape_feature=3,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=2,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=first_V_th,threshold_low=-1,
+    layer_name="layer_1_1",layer=layer_1_1,  
+    padding=0,stride=2,kernel_size=2,
+    input_shape_feature=1,input_shape_size_x=128,input_shape_size_y=128,
+    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=1,threshold_low=-1,
     weights=weights,
-    destinations_0=layer_4,
-    feature_shift_0=1,
-    destinations_1=layer_5_merge_layer,
-    monitor_enable=True,
+    # monitor_enable=True,
+    destinations_0=layer_1_3,
+    destinations_1=layer_3_1,
+    feature_shift_1=8
 )
 
-#layer_4 左右移动检测
-weights = np.zeros((2, 3, K, K), dtype=np.int8)
-if c - w*2 +1 <= 0:
-    print("Error: c - w*2 must be greater than 0 to avoid negative indexing.")
-    exit(1)
-
-weights[0, 0, c-w*2 : c-w, :] = 1          # left
-weights[1, 0, c-w   : c  , :] = 1      # right
-
-weights[:, 1:3, : , :] = -2          # reset
-
-
-
+weights = np.zeros((4, 4, 1, 1), dtype=np.int8)
+for i in range(4):
+    weights[i, i, 0, 0] = 1
 create_layer(
-    layer_name="layer_4",layer=layer_4,
-    padding=a,stride=1,kernel_size=K,
-    input_shape_feature=3,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=2,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=first_V_th,threshold_low=-1,
-    weights=weights,
-    destinations_0=layer_2,
-    feature_shift_0=1,
-    destinations_1=layer_5_merge_layer,
-    feature_shift_1=2,
-    monitor_enable=True,
-)
-
-
-#layer_5_merge_layer 中转层
-weights = np.zeros((4, 4, 3, 3), dtype=np.int8)
-
-weights[0, 0, :, :] = 1      
-weights[0, 1, :, :] = -1
-weights[1, 1, :, :] = 1      
-weights[1, 0, :, :] = -1
-weights[2, 2, :, :] = 1      
-weights[2, 3, :, :] = -1
-weights[3, 3, :, :] = 1      
-weights[3, 2, :, :] = -1
-
-
-create_layer(
-    layer_name="layer_5_merge_layer",layer=layer_5_merge_layer,
-    padding=1,stride=1,kernel_size=3,
+    layer_name="layer_1_2",layer=layer_1_2,  
+    padding=0,stride=1,kernel_size=1,
     input_shape_feature=4,input_shape_size_x=64,input_shape_size_y=64,
     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=8,threshold_low=-1,
+    threshold_high=1,threshold_low=-1,
     weights=weights,
-    destinations_0=layer_6_SD,
-    destinations_1=layer_6_SD,
-    feature_shift_1=4,
-    monitor_enable=True,
+    # monitor_enable=True,
+    destinations_0=layer_2_0,
+    destinations_1=layer_2_0,
+    feature_shift_1=4
 )
-
-#layer_6_SD 顺序检测
-#此处的卷积核大小直接影响了光流估计的分辨率
-SD_K = 1
-weights = np.zeros((4, 8, SD_K, SD_K), dtype=np.int8)
-#up->down: 0
-weights[0, 0, :, SD_K//2] = -1          
-weights[0, 4, :, SD_K//2] =  1      
-weights[0, 1, :, SD_K//2] =  2      
-weights[0, 5, :, SD_K//2] = -2      
-#down->up: 1
-weights[1, 1, :, SD_K//2] = -1      
-weights[1, 5, :, SD_K//2] =  1      
-weights[1, 0, :, SD_K//2] =  2      
-weights[1, 4, :, SD_K//2] = -2      
-#left->right: 2
-weights[2, 2, SD_K//2, :] = -1          
-weights[2, 6, SD_K//2, :] =  1      
-weights[2, 3, SD_K//2, :] =  2      
-weights[2, 7, SD_K//2, :] = -2      
-#right->left: 3
-weights[3, 3, SD_K//2, :] = -1      
-weights[3, 7, SD_K//2, :] =  1      
-weights[3, 2, SD_K//2, :] =  2      
-weights[3, 6, SD_K//2, :] = -2
-#reset:
-weights[np.ix_([0,1], [2,3,6,7])]= -2
-weights[np.ix_([2,3], [0,1,4,5])]= -2
-
 
 create_layer(
-    layer_name="layer_6_SD",layer=layer_6_SD,
-    padding=SD_K//2,stride=1,kernel_size=SD_K,
-    input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
+    layer_name="layer_1_3",layer=layer_1_3,  
+    padding=0,stride=1,kernel_size=1,
+    input_shape_feature=4,input_shape_size_x=64,input_shape_size_y=64,
     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=2,threshold_low=-1,
+    threshold_high=1,threshold_low=-1,
     weights=weights,
-    # destinations_0=layer_SD_inhibition,
-    monitor_enable=True,
+    # monitor_enable=True,
+    destinations_0=layer_2_1,
+    destinations_1=layer_2_1,
+    feature_shift_0=4
 )
 
-#back_to_SD_inhibition
-# weights = np.zeros((4, 4, SD_K, SD_K), dtype=np.int8)
-# for i in range(4):
-#     weights[i, i, SD_K//2, SD_K//2] = 1
-# create_layer(
-#     layer_name="layer_SD_inhibition",layer=layer_SD_inhibition,
-#     padding=SD_K//2,stride=1,kernel_size=SD_K,
-#     input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
-#     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
-#     threshold_high=2,threshold_low=-1,
-#     weights=weights,
-#     monitor_enable=True,
-# )
+create_layer(
+    layer_name="layer_2_0",layer=layer_2_0,  
+    padding=(w_1_to_2.shape[2] - 1)//2,stride=1,kernel_size=w_1_to_2.shape[2],
+    input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
+    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=2,threshold_low=-1,
+    weights=w_1_to_2.astype('int8'),
+    # monitor_enable=True,
+    destinations_0=layer_4,
+    destinations_1=layer_3_0,
+    feature_shift_0=16
+)
 
-# #WTA层
-# weights = np.zeros((4, 4, 5, 5), dtype=np.int8)
+create_layer(
+    layer_name="layer_2_1",layer=layer_2_1,  
+    padding=(w_1_to_2.shape[2] - 1)//2,stride=1,kernel_size=w_1_to_2.shape[2],
+    input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
+    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=2,threshold_low=-1,
+    weights=w_1_to_2_t.astype('int8'),
+    # monitor_enable=True,
+    destinations_0=layer_4,
+    destinations_1=layer_3_1,
+    feature_shift_0=24
+)
 
-# create_layer(
-#     layer_name="layer_WTA",layer=layer_WTA,
-#     padding=2,stride=1,kernel_size=5,
-#     input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
-#     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
-#     threshold_high=2,threshold_low=-1,
-#     weights=weights,
-#     monitor_enable=True,
-# )
+weights = np.concatenate([w_2_to_3, w_0_to_3], axis=1).astype('int8')
+create_layer(
+    layer_name="layer_3_0",layer=layer_3_0,  
+    padding=(w_2_to_3.shape[2] - 1)//2,stride=1,kernel_size=w_2_to_3.shape[2],
+    input_shape_feature=12,input_shape_size_x=64,input_shape_size_y=64,
+    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=2,threshold_low=-1,
+    weights=weights,
+    # monitor_enable=True,
+    destinations_0=layer_4
+)
 
-config.dvs_layer.monitor_enable = True
-config.dvs_layer.raw_monitor_enable = False
-config.dvs_layer.on_channel = False
-# config.dvs_layer.merge = True
+weights = np.concatenate([w_2_to_3_t, w_0_to_3_t], axis=1).astype('int8')
+create_layer(
+    layer_name="layer_3_0",layer=layer_3_1,  
+    padding=(w_2_to_3.shape[2] - 1)//2,stride=1,kernel_size=w_2_to_3.shape[2],
+    input_shape_feature=12,input_shape_size_x=64,input_shape_size_y=64,
+    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=2,threshold_low=-1,
+    weights=weights,
+    # monitor_enable=True,
+    destinations_0=layer_4,
+    feature_shift_0=8
+)
+
+w = np.concatenate([w_3_to_4, w_3_to_4, w_2_to_4, w_2_to_4], axis=1).astype('int8')
+weights = np.zeros(w.shape * np.array([2, 1, 1, 1]), dtype=np.int8)
+weights[:8, :8] = w_3_to_4
+weights[:8, 16:24] = w_2_to_4
+weights[8:, 8:16] = w_3_to_4_t
+weights[8:, 24:] = w_2_to_4_t
+create_layer(
+    layer_name="layer_4",layer=layer_4,  
+    padding=(w_3_to_4.shape[2] - 1)//2,stride=1,kernel_size=w_3_to_4.shape[2],
+    input_shape_feature=32,input_shape_size_x=64,input_shape_size_y=64,
+    output_shape_feature=16,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=2,threshold_low=-1,
+    weights=weights,
+    monitor_enable=True
+)
+
+# config.dvs_layer.monitor_enable = True
 config.dvs_layer.pass_sensor_events = True
 config.dvs_layer.mirror.x = True
-
-
 
 
 dk = open_speck2f_dev_kit()
 print("show graph")
 # 路由事件到可视化窗口
-graphs = [visualize_layer(i) for i in [13,layer_1,layer_2,layer_3,layer_4,layer_5_merge_layer,layer_6_SD]]
+graphs = [visualize_layer(i) for i in [13,layer_4]]
 
 io = samna.graph.source_to(dk.get_model_sink_node())
 buf = samna.graph.sink_from(dk.get_model_source_node())
@@ -394,38 +383,19 @@ input_graph.start()
 
 dk.get_model().apply_configuration(config)
 
-dk_io = dk.get_io_module() 
-dk_io.set_slow_clk_rate(1000)  # slow clock frequency
-dk_io.set_slow_clk(True)
+# config.factory_config.fast_output = True
+# with open(f"optical_flow_{M}.bin", "wb") as f:
+#    f.write(bytes(samna.speck2f.configuration_to_flash_binary(config)))
 
 io = samna.graph.source_to(dk.get_model_sink_node())
 buf = samna.graph.sink_from(dk.get_model_source_node())
 
+# while True:
+#     for ev in buf.get_events():
+#         if ev.layer == layer_1:
+#             print(ev.x, ev.y, ev.feature)
+#     time.sleep(0.1)
+
 stopWatch = dk.get_stop_watch()
 stopWatch.reset()
 stopWatch.start()
-
-
-WATCHED_LAYERS = [layer_3, layer_5_merge_layer, layer_6_SD]
-REALTIME_INTERVAL_S = 0.1
-REALTIME_VISUALIZE = True
-realtime_visualizer = RealtimeEventVisualizer(
-    layers=[layer_6_SD],
-    title="layer_6_SD optical flow",
-    size=(64, 64),
-    hold_ms=160,
-    fps=15,
-    point_size=8,
-    channel_names={0: "up", 1: "down", 2: "left", 3: "right"},
-    enabled=REALTIME_VISUALIZE,
-)
-
-reset_data_folder(DATA_FOLDER)
-
-while True:
-    time.sleep(REALTIME_INTERVAL_S)
-    evs = buf.get_events()
-    print(f"--- {time.strftime('%H:%M:%S')} ---")
-    print_layer_feature_counts(evs, WATCHED_LAYERS)
-    store_events_to_csv(evs, DATA_FOLDER)
-    realtime_visualizer.play_events(evs)

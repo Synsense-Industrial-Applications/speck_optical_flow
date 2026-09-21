@@ -1,3 +1,8 @@
+# optical_flow_diag_split_onoff.py
+# 方向: 斜向（对角线）
+# 变体: split + on/off —— 关键点：不再只看单个事件，而是要求「on 事件 + off 事件」
+#       按特定空间顺序成对出现才算一次运动，抑制孤立噪声事件。
+
 from speck_tools import ChannelHelper
 import numpy as np
 import samna, samnagui
@@ -212,65 +217,65 @@ def create_layer(layer_name,layer,padding,stride,kernel_size,
 # 在dvs_config函数调用前加载配置
 
 layer_0_0 = 0
-layer_0_1 = 5
+# layer_0_1 = 1
 layer_1_0 = 7
 layer_1_1 = 8
-layer_2_0 = 1
-layer_2_1 = 2
-# layer_2_2 = 1
-layer_3_0 = 3
-layer_3_1 = 4
-layer_4 = 6
+layer_2_0 = 3
+layer_2_1 = 4
+layer_2_2 = 1
+layer_3_0 = 5
+layer_3_1 = 6
+layer_4 = 2
 # layer_4_1 = 2
 # layer_4_2 = 0
 
 config = samna.speck2f.configuration.SpeckConfiguration()
 config.dvs_layer.destinations[0].layer = layer_0_0
 config.dvs_layer.destinations[0].enable = 1
-config.dvs_layer.destinations[1].layer = layer_0_1
-config.dvs_layer.destinations[1].enable = 1
+# config.dvs_layer.destinations[1].layer = layer_0_1
+# config.dvs_layer.destinations[1].enable = 1
 # config.dvs_layer.merge = True
 optimal_sram_config()
 # dvs_config()
 
 
-weights = np.zeros((8, 2, 2, 2), dtype=np.int8)
+weights = np.zeros((16, 2, 2, 2), dtype=np.int8)
 for i in range(2):
     for j in range(2):
         weights[j*2+i, j, i, i] = 1
         weights[4+j*2+i, j, i, i] = 1
-        # weights[8+j*2+i, j, i, 1-i] = 1
-        # weights[12+j*2+i, j, i, 1-i] = 1
+        weights[8+j*2+i, j, i, 1-i] = 1
+        weights[12+j*2+i, j, i, 1-i] = 1
 create_layer(
     layer_name="layer_0_0",layer=layer_0_0,  
     padding=0,stride=2,kernel_size=2,
     input_shape_feature=2,input_shape_size_x=128,input_shape_size_y=128,
-    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    output_shape_feature=16,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=1,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
     destinations_0=layer_1_0,
-    # destinations_1=layer_1_1,
+    destinations_1=layer_1_1,
     # feature_shift_1=4
 )
 
-weights = np.zeros((4, 2, 2, 2), dtype=np.int8)
-for i in range(2):
-    for j in range(2):
-        weights[j*2+i, j, i, 1-i] = 1
-        # weights[4+j*2+i, j, i, 1-i] = 1
-create_layer(
-    layer_name="layer_0_1",layer=layer_0_1,  
-    padding=0,stride=2,kernel_size=2,
-    input_shape_feature=2,input_shape_size_x=128,input_shape_size_y=128,
-    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=1,threshold_low=-1,
-    weights=weights,
-    # monitor_enable=True,
-    destinations_0=layer_1_1,
-    destinations_1=layer_1_1,
-    feature_shift_0=4
-)
+# weights = np.zeros((8, 2, 2, 2), dtype=np.int8)
+# for i in range(2):
+#     for j in range(2):
+#         weights[j*2+i, j, i, 1-i] = 1
+#         weights[4+j*2+i, j, i, 1-i] = 1
+# create_layer(
+#     layer_name="layer_0_1",layer=layer_0_1,  
+#     padding=0,stride=2,kernel_size=2,
+#     input_shape_feature=2,input_shape_size_x=128,input_shape_size_y=128,
+#     output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+#     threshold_high=1,threshold_low=-1,
+#     weights=weights,
+#     # monitor_enable=True,
+#     destinations_0=layer_1_1,
+#     # destinations_1=layer_1_1,
+#     # feature_shift_0=4
+# )
 
 weights = np.zeros((4, 8, 1, 1), dtype=np.int8)
 for i in range(2):
@@ -286,10 +291,10 @@ for i in range(2):
 create_layer(
     layer_name="layer_1_0",layer=layer_1_0,  
     padding=0,stride=1,kernel_size=1,
-    input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
+    input_shape_feature=16,input_shape_size_x=64,input_shape_size_y=64,
     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
-    weights=weights,
+    weights=np.concatenate([weights, np.zeros_like(weights)], axis=1),
     # monitor_enable=True,
     destinations_0=layer_2_0,
     destinations_1=layer_2_0,
@@ -301,10 +306,10 @@ create_layer(
 create_layer(
     layer_name="layer_1_1",layer=layer_1_1,  
     padding=0,stride=1,kernel_size=1,
-    input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
+    input_shape_feature=16,input_shape_size_x=64,input_shape_size_y=64,
     output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
-    weights=weights,
+    weights=np.concatenate([np.zeros_like(weights), weights], axis=1),
     # monitor_enable=True,
     destinations_0=layer_2_1,
     destinations_1=layer_2_1,
@@ -313,116 +318,108 @@ create_layer(
     # feature_shift_0=4
 )
 
-weights = np.zeros((10, 8, w_1_to_2.shape[2], w_1_to_2.shape[3]),  dtype=np.int8)
+weights = np.zeros((6, 8, w_1_to_2.shape[2], w_1_to_2.shape[3]),  dtype=np.int8)
 weights[:4] = w_1_to_2[np.ix_([0, 3, 4, 7], [0, 3, 0, 3, 4, 7, 4, 7])]
-weights[4:8] = w_1_to_2_t[np.ix_([0, 3, 4, 7], [0, 3, 0, 3, 4, 7, 4, 7])]
-weights[8, 4::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
-weights[9, 5::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
+weights[4, 4::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
+weights[5, 5::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
 print(weights.shape)
 create_layer(
     layer_name="layer_2_0",layer=layer_2_0,  
     padding=(w_1_to_2.shape[2] - 1)//2,stride=1,kernel_size=w_1_to_2.shape[2],
     input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=10,output_shape_size_x=64,output_shape_size_y=64,
+    output_shape_feature=6,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
-    # destinations_1=layer_2_2,
+    destinations_1=layer_2_2,
     destinations_0=layer_3_0,
     # feature_shift_1=8
     # destinations_0=layer_4,
     # feature_shift_0=0
 )
 
-weights = np.zeros((10, 8, w_1_to_2.shape[2], w_1_to_2.shape[3]),  dtype=np.int8)
-weights[:4] = w_1_to_2[np.ix_([1, 2, 5, 6], [1, 2, 1, 2, 5, 6, 5, 6])]
-weights[4:8] = w_1_to_2_t[np.ix_([1, 2, 5, 6], [1, 2, 1, 2, 5, 6, 5, 6])]
-weights[8, 4::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
-weights[9, 5::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
+weights = np.zeros((6, 8, w_1_to_2.shape[2], w_1_to_2.shape[3]),  dtype=np.int8)
+weights[:4] = w_1_to_2_t[np.ix_([1, 2, 5, 6], [1, 2, 1, 2, 5, 6, 5, 6])]
+weights[4, 4::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
+weights[5, 5::2, (w_1_to_2.shape[2] - 1)//2, (w_1_to_2.shape[2] - 1)//2] = 2
 create_layer(
     layer_name="layer_2_1",layer=layer_2_1,  
     padding=(w_1_to_2.shape[2] - 1)//2,stride=1,kernel_size=w_1_to_2.shape[2],
     input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=10,output_shape_size_x=64,output_shape_size_y=64,
+    output_shape_feature=6,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
-    # destinations_0=layer_2_2,
+    destinations_0=layer_2_2,
     destinations_1=layer_3_1,
     feature_shift_0=6
     # destinations_0=layer_4,
     # feature_shift_0=6
 )
 
-# weights = np.zeros((8, 12, 1, 1), dtype=np.int8)
-# weights[0, 0, 0, 0] = 1
-# weights[1, 1, 0, 0] = 1
-# weights[2, 2, 0, 0] = 1
-# weights[3, 3, 0, 0] = 1
-# weights[4, 6, 0, 0] = 1
-# weights[5, 7, 0, 0] = 1
-# weights[6, 8, 0, 0] = 1
-# weights[7, 9, 0, 0] = 1
-# create_layer(
-#     layer_name="layer_2_2",layer=layer_2_2,  
-#     padding=0,stride=1,kernel_size=1,
-#     input_shape_feature=12,input_shape_size_x=64,input_shape_size_y=64,
-#     output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
-#     threshold_high=1,threshold_low=-1,
-#     weights=weights,
-#     # monitor_enable=True,
-#     # destinations_0=layer_4,
-#     # feature_shift_0=8
-# )
+weights = np.zeros((8, 12, 1, 1), dtype=np.int8)
+weights[0, 0, 0, 0] = 1
+weights[1, 1, 0, 0] = 1
+weights[2, 2, 0, 0] = 1
+weights[3, 3, 0, 0] = 1
+weights[4, 6, 0, 0] = 1
+weights[5, 7, 0, 0] = 1
+weights[6, 8, 0, 0] = 1
+weights[7, 9, 0, 0] = 1
+create_layer(
+    layer_name="layer_2_2",layer=layer_2_2,  
+    padding=0,stride=1,kernel_size=1,
+    input_shape_feature=12,input_shape_size_x=64,input_shape_size_y=64,
+    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=1,threshold_low=-1,
+    weights=weights,
+    monitor_enable=True,
+    destinations_0=layer_4,
+    feature_shift_0=8
+)
 
-weights = np.zeros((8, 10, w_2_to_3.shape[2], w_2_to_3.shape[3]),  dtype=np.int8)
-weights[:4, :4] = w_2_to_3[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])]
-weights[:4, 8:10] = w_0_to_3[np.ix_([0, 3, 4, 7], [0, 3])]
-weights[4:8, 4:8] = w_2_to_3_t[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])]
-weights[4:8, 8:10] = w_0_to_3_t[np.ix_([0, 3, 4, 7], [0, 3])]
+
+weights = np.concatenate([w_2_to_3[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], w_0_to_3[np.ix_([0, 3, 4, 7], [0, 3])]], axis=1).astype('int8')
+# print("layer3_0 weights shape", weights.shape)
 create_layer(
     layer_name="layer_3_0",layer=layer_3_0,  
     padding=(w_2_to_3.shape[2] - 1)//2,stride=1,kernel_size=w_2_to_3.shape[2],
-    input_shape_feature=10,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    input_shape_feature=6,input_shape_size_x=64,input_shape_size_y=64,
+    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
     destinations_0=layer_4
 )
 
-weights = np.zeros((8, 10, w_2_to_3.shape[2], w_2_to_3.shape[3]),  dtype=np.int8)
-weights[:4, :4] = w_2_to_3[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])]
-weights[:4, 8:10] = w_0_to_3[np.ix_([1, 2, 5, 6], [1, 2])]
-weights[4:8, 4:8] = w_2_to_3_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])]
-weights[4:8, 8:10] = w_0_to_3_t[np.ix_([1, 2, 5, 6], [1, 2])]
+weights = np.concatenate([w_2_to_3_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])], w_0_to_3_t[np.ix_([1, 2, 5, 6], [1, 2])]], axis=1).astype('int8')
 create_layer(
     layer_name="layer_3_1",layer=layer_3_1,  
     padding=(w_2_to_3.shape[2] - 1)//2,stride=1,kernel_size=w_2_to_3.shape[2],
-    input_shape_feature=10,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    input_shape_feature=6,input_shape_size_x=64,input_shape_size_y=64,
+    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
     threshold_high=2,threshold_low=-1,
     weights=weights,
     # monitor_enable=True,
     destinations_0=layer_4,
-    feature_shift_0=8
+    feature_shift_0=4
 )
 
-# weights = np.zeros((8, 16, w_3_to_4.shape[2], w_3_to_4.shape[3]),  dtype=np.int8)
-# weights[[0, 3, 4, 7]] = np.concatenate([w_3_to_4[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], np.zeros_like(w_3_to_4[:4, :4]),
-#                           w_2_to_4[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], np.zeros_like(w_2_to_4[:4, :4])], axis=1)
-# weights[[1, 2, 5, 6]] = np.concatenate([np.zeros_like(w_3_to_4[:4, :4]), w_3_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])],
-#                           np.zeros_like(w_2_to_4[:4, :4]), w_2_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])]], axis=1)
-# create_layer(
-#     layer_name="layer_4",layer=layer_4,  
-#     padding=(w_3_to_4.shape[2] - 1)//2,stride=1,kernel_size=w_3_to_4.shape[2],
-#     input_shape_feature=16,input_shape_size_x=64,input_shape_size_y=64,
-#     output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
-#     threshold_high=2,threshold_low=-1,
-#     weights=weights,
-#     monitor_enable=True,
-#     # destinations_0=layer_4_2
-# )
+weights = np.zeros((8, 16, w_3_to_4.shape[2], w_3_to_4.shape[3]),  dtype=np.int8)
+weights[[0, 3, 4, 7]] = np.concatenate([w_3_to_4[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], np.zeros_like(w_3_to_4[:4, :4]),
+                          w_2_to_4[np.ix_([0, 3, 4, 7], [0, 3, 4, 7])], np.zeros_like(w_2_to_4[:4, :4])], axis=1)
+weights[[1, 2, 5, 6]] = np.concatenate([np.zeros_like(w_3_to_4[:4, :4]), w_3_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])],
+                          np.zeros_like(w_2_to_4[:4, :4]), w_2_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])]], axis=1)
+create_layer(
+    layer_name="layer_4",layer=layer_4,  
+    padding=(w_3_to_4.shape[2] - 1)//2,stride=1,kernel_size=w_3_to_4.shape[2],
+    input_shape_feature=16,input_shape_size_x=64,input_shape_size_y=64,
+    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=2,threshold_low=-1,
+    weights=weights,
+    monitor_enable=True,
+    # destinations_0=layer_4_2
+)
 
 # weights = np.concatenate([w_3_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])], w_2_to_4_t[np.ix_([1, 2, 5, 6], [1, 2, 5, 6])], np.zeros_like(w_2_to_4[::2, :2])], axis=1).astype('int8')
 # create_layer(
@@ -437,18 +434,24 @@ create_layer(
 #     feature_shift_0=4
 # )
 
-weights = np.zeros((4, 16, 1, 1), dtype=np.int8)
-weights[np.ix_([0, 3] * 4, range(8))] = 1
-weights[np.ix_([1, 2] * 4, range(8,16))] = 1
-create_layer(
-    layer_name="layer_4",layer=layer_4,  
-    padding=0,stride=1,kernel_size=1,
-    input_shape_feature=16,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=4,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=1,threshold_low=-1,
-    weights=weights,
-    monitor_enable=True,
-)
+# weights = np.zeros((8, 8, 1, 1), dtype=np.int8)
+# weights[0, 0, 0, 0] = 1
+# weights[3, 1, 0, 0] = 1
+# weights[4, 2, 0, 0] = 1
+# weights[7, 3, 0, 0] = 1
+# weights[1, 4, 0, 0] = 1
+# weights[2, 5, 0, 0] = 1
+# weights[5, 6, 0, 0] = 1
+# weights[6, 7, 0, 0] = 1
+# create_layer(
+#     layer_name="layer_4",layer=layer_4,  
+#     padding=0,stride=1,kernel_size=1,
+#     input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
+#     output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
+#     threshold_high=1,threshold_low=-1,
+#     weights=weights,
+#     monitor_enable=True,
+# )
 
 config.dvs_layer.monitor_enable = True
 config.dvs_layer.pass_sensor_events = True
