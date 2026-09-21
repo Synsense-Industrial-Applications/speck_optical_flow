@@ -1,7 +1,11 @@
-# optical_flow_diag_split_onoff.py
+# optical_flow_diag_split_onoff_seq5.py
 # 方向: 斜向（对角线）
-# 变体: split + on/off —— 关键点：不再只看单个事件，而是要求「on 事件 + off 事件」
-#       按特定空间顺序成对出现才算一次运动，抑制孤立噪声事件。
+# 变体: split + on/off + seq5 —— seq5 结构：共 5 套核（w_1_to_2 / w_0_to_3 / w_2_to_3 /
+#       w_2_to_4 / w_3_to_4），末级 layer_4 保留 16 输入深度对比（3x3，thr=2），
+#       relay 层 layer_2_2 接入末级。
+#       on/off 只负责噪点过滤，与 seq 是正交维度，不影响 seq 逻辑。
+#       不再只看单个事件，而是要求「on 事件 + off 事件」按特定空间顺序成对出现
+#       才算一次运动，抑制孤立噪声事件。
 
 from speck_tools import ChannelHelper
 import numpy as np

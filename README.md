@@ -33,7 +33,8 @@ optical_flow_<方向>_<变体>.py
 | `lr`                  | 水平、垂直两条链路各自独立成支路，末端用 8x8 层合并                                    |
 | `conv`                | layer_1 用 4x4`[1,2,1]`（padding=1, stride=2）卷积代替纯相位选择                       |
 | `onoff`               | 要求 on / off 事件按特定空间顺序成对出现才算一次运动，抑制孤立噪声                     |
-| `seq3` / `seq5`       | 把 on/off 检查扩展成长度 3 / 5 的事件序列                                              |
+| `seq3` / `seq5`       | 需要「连续 N 次事件」按正确顺序出现：seq3 = 链上 3 套核，seq5 = 5 套核（多 w_2_to_4 / w_3_to_4 两级深度对比） |
+| `seq3` / `seq5` 结构判别 | 末级 `layer_4` 是否为 16->8 的 3x3 深度对比（seq5）还是 8->8 的 1x1 重排（seq3）；seq5 的 relay 会接入末级 |
 | `k2`                  | 最小内核版：coarse 2x2（硬件 4x4x2x2），与 3x3 版结果等价、只整体平移 1 像素，带宽更高 |
 | `full`                | 两条前端相位支路全部启用，通道利用率最高                                               |
 | `turn`                | 末级比较前后相位，检测转向 / 掉头                                                      |
@@ -53,8 +54,8 @@ optical_flow_<方向>_<变体>.py
 | 2026-06-11         | `optical_flow_axis_split_x.py`                                                   | 按 x 相位分裂的对应版本                                                                               |
 | 2026-06-12         | 同上 +`optical_flow_axis_split_y_score.py`                                       | 重排层分配；加入 score 读出示例                                                                       |
 | 2026-06-17         | `optical_flow_diag_shift.py`、`optical_flow_diag_split.py`                       | **引入斜向**：核图案搬到对角线上                                                                      |
-| 2026-06-17         | `optical_flow_diag_split_onoff.py`                                               | 改为 on/off 成对事件判方向                                                                            |
-| 2026-06-18         | `optical_flow_diag_split_turn.py`、`..._onoff_seq3.py`、`..._onoff_seq3_full.py` | 转向检测；事件序列长度 3；两条前端支路全开                                                            |
+| 2026-06-17         | `optical_flow_diag_split_onoff_seq5.py`                                               | 改为 on/off 成对事件判方向                                                                            |
+| 2026-06-18         | `optical_flow_diag_split_turn_seq5.py`、`..._onoff_seq3.py`、`..._onoff_seq3_full.py` | 转向检测；事件序列长度 3；两条前端支路全开                                                            |
 | 2026-06-22         | `optical_flow_diag_split_conv.py`、`..._onoff_seq3_conv.py`                      | layer_1 引入 4x4 对角线卷积；配合慢时钟与带宽优化                                                     |
 | 2026-09-14         | `..._k2` 系列（seq3 / seq3_conv / seq5）                                         | 最小内核 4x4x2x2，等价 3x3 但带宽更高；另做 seq5 对比                                                 |
 
@@ -82,9 +83,9 @@ optical_flow_<方向>_<变体>.py
 | `optical_flow_diag_shift.py`                    | 斜向首版                                   |
 | `optical_flow_diag_split.py`                    | 斜向主版本（相位分裂），后续都在它上面迭代 |
 | `optical_flow_diag_split_conv.py`               | + layer_1 对角线卷积前端                   |
-| `optical_flow_diag_split_turn.py`               | + 转向 / 掉头检测                          |
-| `optical_flow_diag_split_onoff.py`              | + on/off 成对事件判向                      |
-| `optical_flow_diag_split_onoff_seq3.py`         | + 长度 3 的事件序列                        |
+| `optical_flow_diag_split_turn_seq5.py`          | seq5 + 转向 / 掉头检测                          |
+| `optical_flow_diag_split_onoff_seq5.py`         | seq5 + on/off 成对事件判向                      |
+| `optical_flow_diag_split_onoff_seq3.py`         | seq3（3 套核，末级 1x1 重排）+ on/off                        |
 | `optical_flow_diag_split_onoff_seq3_full.py`    | 同上，但两条前端相位支路全开               |
 | `optical_flow_diag_split_onoff_seq3_conv.py`    | seq3 + 卷积前端 + 慢时钟                   |
 | `optical_flow_diag_split_onoff_seq3_k2.py`      | seq3 + 最小 2x2 内核（当前最优带宽）       |
@@ -126,8 +127,8 @@ python optical_flow_diag_split_onoff_seq3_k2.py
 | `optical_flow_diag_shift.py`                    | `optical_flow_shift_d.py`                             |
 | `optical_flow_diag_split.py`                    | `optical_flow_split_d.py`                             |
 | `optical_flow_diag_split_conv.py`               | `optical_flow_split_d_conv.py`                        |
-| `optical_flow_diag_split_turn.py`               | `optical_flow_split_d_turn.py`                        |
-| `optical_flow_diag_split_onoff.py`              | `optical_flow_split_d_on_off.py`                      |
+| `optical_flow_diag_split_turn_seq5.py`          | `optical_flow_split_d_turn.py`                        |
+| `optical_flow_diag_split_onoff_seq5.py`         | `optical_flow_split_d_on_off.py`                      |
 | `optical_flow_diag_split_onoff_seq3.py`         | `optical_flow_split_d_on_off_3.py`                    |
 | `optical_flow_diag_split_onoff_seq3_full.py`    | `optical_flow_split_d_on_off_3_full.py`               |
 | `optical_flow_diag_split_onoff_seq3_conv.py`    | `optical_flow_split_d_on_off_3_conv.py`               |

@@ -1,7 +1,8 @@
 # optical_flow_diag_split_onoff_seq3.py
 # 方向: 斜向（对角线）
-# 变体: split + on/off + seq3 —— 把 on/off 对扩展成长度 3 的事件序列（seq of 3），
-#       要求连续三次事件按正确顺序落在核图案上，方向判决更稳、抗噪更强。
+# 变体: split + on/off + seq3 —— seq3 结构：只保留 3 套核（w_1_to_2 / w_0_to_3 /
+#       w_2_to_3），末级 layer_4 退化为 8->8 的 1x1 通道重排（无深度对比级），
+#       relay 层 layer_2_2 的输出被断开。
 
 from speck_tools import ChannelHelper
 import numpy as np

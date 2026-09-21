@@ -1,6 +1,8 @@
-# optical_flow_diag_split_turn.py
+# optical_flow_diag_split_turn_seq5.py
 # 方向: 斜向（对角线）
-# 变体: split + turn —— 末级把 4 通道各自复制成 8 通道（16 输入 -> 8 输出），
+# 变体: split + turn + seq5 —— seq5 结构：共 5 套核（w_1_to_2 / w_0_to_3 /
+#       w_2_to_3 / w_2_to_4 / w_3_to_4），relay 行由 layer_2 直连 layer_4_0/4_1，
+#       末级 layer_4_2 把 4 通道各自复制成 8 通道（16 输入 -> 8 输出），
 #       用 1x1 核比较前后两个相位，用于检测「转向/掉头」（方向反转）事件。
 
 from speck_tools import ChannelHelper
