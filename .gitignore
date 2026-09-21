@@ -14,6 +14,8 @@ speck_feature.txt
 # python caches
 __pycache__/
 
-# experiment data (too large / not source; single dvs CSV alone is ~51 MB)
-algorithm_Demo/recordings/**/*.csv
+# raw DVS event streams are too large for git (a single dvs CSV is ~49 MB)
+algorithm_Demo/recordings/**/dvs_*.csv
+
+# generated plots (regenerable from the recordings)
 algorithm_Demo/recordings/**/*.png
