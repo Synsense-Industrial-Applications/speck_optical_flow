@@ -56,8 +56,14 @@ else:
 # ---------------------------------------------------------------------------
 from network_registry import select_network
 
-NETWORK_NAME = None  # 例如 "optical_flow_diag_split_onoff_seq3_conv"
-
+AVAILABLE_NETWORKS = [
+    "optical_flow_diag_split_onoff_seq3_conv",
+    "optical_flow_diag_split_onoff_seq3_k2_conv",
+    "optical_flow_diag_split_onoff_seq5",
+    "optical_flow_diag_split_onoff_seq5_k2",
+    # 添加更多网络模块名...
+]
+NETWORK_NAME = AVAILABLE_NETWORKS[3]
 _network = select_network(NETWORK_NAME)
 
 config = _network.config
