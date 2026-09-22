@@ -380,23 +380,99 @@ create_layer(
 #     feature_shift_0=4
 # )
 
-weights = np.zeros((8, 8, 1, 1), dtype=np.int8)
-weights[0, 0, 0, 0] = 1
-weights[3, 1, 0, 0] = 1
-weights[4, 2, 0, 0] = 1
-weights[7, 3, 0, 0] = 1
-weights[1, 4, 0, 0] = 1
-weights[2, 5, 0, 0] = 1
-weights[5, 6, 0, 0] = 1
-weights[6, 7, 0, 0] = 1
+
+kernel_main = np.array([
+    [0, 0, 1],
+    [0, 1, 0],
+    [1, 0, 0],
+], dtype=np.int8)
+
+kernel_anti = np.array([
+    [1, 0, 0],
+    [0, 1, 0],
+    [0, 0, 1],
+], dtype=np.int8)
+weights = np.zeros((16, 8, 3, 3), dtype=np.int8)
+# 右下、左上：空间方向都是 /
+weights[0, 0] = kernel_main
+weights[3, 1] = kernel_main
+weights[4, 2] = kernel_main
+weights[7, 3] = kernel_main
+
+# 左下、右上：空间方向都是 \
+weights[1, 4] = kernel_anti
+weights[2, 5] = kernel_anti
+weights[5, 6] = kernel_anti
+weights[6, 7] = kernel_anti
+
+# 第二组交换空间斜率
+weights[8, 0] = kernel_anti
+weights[11, 1] = kernel_anti
+weights[12, 2] = kernel_anti
+weights[15, 3] = kernel_anti
+weights[9, 4] = kernel_main
+weights[10, 5] = kernel_main
+weights[13, 6] = kernel_main
+weights[14, 7] = kernel_main
+
+# kernel_main = np.array([
+#     [1, 0, 0, 0, 0],
+#     [0, 1, 0, 0, 0],
+#     [0, 0, 2, 0, 0],
+#     [0, 0, 0, 1, 0],
+#     [0, 0, 0, 0, 1],
+# ], dtype=np.int8)
+
+# kernel_anti = np.array([
+#     [0, 0, 0, 0, 1],
+#     [0, 0, 0, 1, 0],
+#     [0, 0, 2, 0, 0],
+#     [0, 1, 0, 0, 0],
+#     [1, 0, 0, 0, 0],
+# ], dtype=np.int8)
+
+# weights = np.zeros((16, 8, 5, 5), dtype=np.int8)
+
+# # 右下、左上：空间方向都是 \
+# weights[0, 0] = kernel_main
+# weights[3, 1] = kernel_main
+# weights[4, 2] = kernel_main
+# weights[7, 3] = kernel_main
+
+# # 左下、右上：空间方向都是 /
+# weights[1, 4] = kernel_anti
+# weights[2, 5] = kernel_anti
+# weights[5, 6] = kernel_anti
+# weights[6, 7] = kernel_anti
+
+# # 第二组保持光流方向不变，但交换空间斜率。
+# weights[8, 0] = kernel_anti
+# weights[11, 1] = kernel_anti
+# weights[12, 2] = kernel_anti
+# weights[15, 3] = kernel_anti
+# weights[9, 4] = kernel_main
+# weights[10, 5] = kernel_main
+# weights[13, 6] = kernel_main
+# weights[14, 7] = kernel_main
+
+# weights[0, 0, 0, 0] = 1
+# weights[3, 1, 0, 0] = 1
+# weights[4, 2, 0, 0] = 1
+# weights[7, 3, 0, 0] = 1
+# weights[1, 4, 0, 0] = 1
+# weights[2, 5, 0, 0] = 1
+# weights[5, 6, 0, 0] = 1
+# weights[6, 7, 0, 0] = 1
 create_layer(
     layer_name="layer_4",layer=layer_4,  
-    padding=0,stride=1,kernel_size=1,
+    padding=1,stride=1,kernel_size=3,
     input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
-    output_shape_feature=8,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=1,threshold_low=-1,
+    output_shape_feature=16,output_shape_size_x=64,output_shape_size_y=64,
+    threshold_high=2,threshold_low=-1,
     weights=weights,
     monitor_enable=True,
+    leak_enable=True,
+    bias=-2
 )
 
 config.dvs_layer.monitor_enable = True
