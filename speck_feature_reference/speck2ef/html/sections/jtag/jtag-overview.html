@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11.1. JTAG Interface &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="11.2. JTAG Command Reference" href="jtag-command-overview.html" />
+    <link rel="prev" title="11. JTAG Interface" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. JTAG Interface</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.1. JTAG Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#jtag-port">11.1.1. JTAG Port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jtag-tap-controller-operation">11.1.2. JTAG TAP Controller Operation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-to-reset-state">11.1.2.1. Getting to Reset State</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#high-level-commands-send-ir-and-send-dr">11.1.3. High level commands: <em>send_ir</em> and <em>send_dr</em></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ir-scan-timing">11.1.3.1. IR Scan Timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dr-scan-timing">11.1.3.2. DR Scan Timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tdi-tdo-timing">11.1.3.3. TDI/TDO Timing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#jtag-idcode">11.1.4. JTAG IDCode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#send-ir-idcode-8-bits">11.1.4.1. send_ir(IDCODE, 8 bits)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#send-dr-0x00000000-32-bits">11.1.4.2. send_dr(0x00000000, 32 bits)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-command-overview.html">11.2. JTAG Command Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-srams.html">11.3. JTAG SRAM Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-registers.html">11.4. JTAG Register Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-scan-chains.html">11.5. JTAG Scan Chain Access and Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-async.html">11.6. JTAG Asynchronous I/O Operation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">11. </span>JTAG Interface</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">11.1. </span>JTAG Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/jtag/jtag-overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jtag-interface">
+<span id="jtag-overview"></span><h1><span class="section-number">11.1. </span>JTAG Interface<a class="headerlink" href="#jtag-interface" title="Permalink to this heading"></a></h1>
+<p>Speck2e provides a JTAG interface that allows access to multiple internal chip resources:</p>
+<ul class="simple">
+<li><p>Internal SRAMs (R/W)</p></li>
+<li><p>Scan chains</p></li>
+<li><p>Asynchronous Input/Output buses</p></li>
+</ul>
+<p>The JTAG interface is generally slower than SPI for internal SRAM R/W operations, and is
+implemented to provide alternative access to the memories for debugging and testing purposes.</p>
+<section id="jtag-port">
+<span id="id1"></span><h2><span class="section-number">11.1.1. </span>JTAG Port<a class="headerlink" href="#jtag-port" title="Permalink to this heading"></a></h2>
+<p>The JTAG interface is accessible via the following pins:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Pin</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>IO5_TMS</p></td>
+<td><p>Mode Select pin</p></td>
+</tr>
+<tr class="row-odd"><td><p>IO3_TCK</p></td>
+<td><p>JTAG Clock</p></td>
+</tr>
+<tr class="row-even"><td><p>IO4_TDI</p></td>
+<td><p>JTAG Data In</p></td>
+</tr>
+<tr class="row-odd"><td><p>IO6_TDO</p></td>
+<td><p>JTAG Data Out</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="jtag-tap-controller-operation">
+<h2><span class="section-number">11.1.2. </span>JTAG TAP Controller Operation<a class="headerlink" href="#jtag-tap-controller-operation" title="Permalink to this heading"></a></h2>
+<p>The JTAG interface is represented by a state machine (TAP Controller) that is operated by
+the TMS and TCK signals as represented below:</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="../../_images/JTAG_TAP_Controller_State_Diagram.svg"><img alt="JTAG TAP Controller State Diagram" height="1322" src="../../_images/JTAG_TAP_Controller_State_Diagram.svg" width="1549" /></a>
+<figcaption>
+<p><span class="caption-text">JTAG TAP Controller State Diagram</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>In the state diagram, TMS selects the next state and a TCK pulse moves to one state to the selected one.</p>
+<p>When in the <em>SHIFT_IR</em> or <em>SHIFT_DR</em> states, the chip expects the user to
+clock in, respectively, an 8 bit instruction (see <a class="reference internal" href="jtag-command-overview.html#jtag-commands"><span class="std std-ref">JTAG Command Reference</span></a>) or
+a data stream of variable length, depending on the operation mode.</p>
+<p>To clock in the data, TCK and TDI pins are used, while the output data is
+read simultaneously on the TDO pin.</p>
+<section id="getting-to-reset-state">
+<h3><span class="section-number">11.1.2.1. </span>Getting to Reset State<a class="headerlink" href="#getting-to-reset-state" title="Permalink to this heading"></a></h3>
+<p>As shown in the TAP Controller State Machine diagram, the controller can be moved to
+the <em>TEST LOGIC RESET</em> state from any other state by:</p>
+<ul class="simple">
+<li><p>Set TMS pin to ‘1’</p></li>
+<li><p>Send 5 TCK pulses</p></li>
+</ul>
+<p>This guarantees that the current state is <em>TEST LOGIC RESET</em>.</p>
+<p>As illustrated in the diagram below, keeping TMS high for
+5 TCK cycle will force the state machine to go back to
+Test Logic Reset state no matter in  which state TAP
+controller is:</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "signal" : [
+      {},
+      { "name": "TCK",        "wave": "x0HlHlHlHlHlHl"},
+      { "name": "TMS",        "wave": "x1.........0.."},
+      { "name": "TDI",        "wave": "x............."},
+      { "name": "TDO",        "wave": "xz............"},
+      { "name": "state",      "wave": "2.2.2.2.2.2.2.", data: ['?', '?', '?','?','?', ['tspan', {class:'h6'}, 'Test Log. Rst'], ['tspan', {class:'h6'}, 'Run_Test/Idle']]},
+   ],
+   config: { hscale: 1 }
+}
+</script>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="high-level-commands-send-ir-and-send-dr">
+<h2><span class="section-number">11.1.3. </span>High level commands: <em>send_ir</em> and <em>send_dr</em><a class="headerlink" href="#high-level-commands-send-ir-and-send-dr" title="Permalink to this heading"></a></h2>
+<p>There are two main operations that the JTAG TAP state
+machine controls:</p>
+<ul class="simple">
+<li><p>Instruction Register Scan (IR Scan)</p></li>
+<li><p>Data Register Scan (DR Scan)</p></li>
+</ul>
+<p>These high-level commands are defined to simplify the further description
+of the different operating modes for the Speck2e JTAG interface.</p>
+<ul class="simple">
+<li><p><em>send_ir</em> (Send Instruction Register): corresponds to moving to the <em>SHIFT-IR</em> state, then clocking in the
+instruction via the TDI/TCK pins. The instruction is always 8 bits long.</p></li>
+<li><p><em>send_dr</em> (Send Data Register): corresponds to moving to the <em>SHIFT-DR</em> state, then clocking in a stream
+of bits of variable length via the TDI/TCK pins and, when required, recording the
+output data available on the TDO pin.</p></li>
+</ul>
+<section id="ir-scan-timing">
+<h3><span class="section-number">11.1.3.1. </span>IR Scan Timing<a class="headerlink" href="#ir-scan-timing" title="Permalink to this heading"></a></h3>
+<p>The following timing diagram shows the Instruction Register Scan operation:</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "signal" : [
+      {},
+      { "name": "TCK",        "wave": "lHlHlHlHlHlHlHlHlHlHlHlHlHlHlHl"},
+      { "name": "TMS",        "wave": "0.1...0.................1...0.."},
+      { "name": "TDI",        "wave": "x.........2.2.2.2.2.2.2.2.x....", data:['DI[0]','DI[1]', 'DI[2]', 'DI[3]', 'DI[4]', 'DI[5]', 'DI[6]', 'DI[7]']},
+      { "name": "TDO",        "wave": "z.........2.2.2.2.2.2.2.2.z....", data:['DO[0]','DO[1]', 'DO[2]', 'DO[3]', 'DO[4]', 'DO[5]', 'DO[6]', 'DO[7]']},
+      { "name": "state",      "wave": "2..2.2.2.2...............2.2.2.", data: [['tspan', {class:'h6'}, 'Run_Test/Idle'], 'DR-Scan', 'IR-Scan', 'Capture-IR','Shift-IR','Exit1-IR', 'Update-IR', ['tspan', {class:'h6'}, 'Run_Test/Idle']]},
+   ],
+   config: { hscale: 1 }
+}
+</script>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Some important information:</p>
+<ul class="simple">
+<li><p>Instruction data is transferred always LSB first in TDI bus</p></li>
+<li><p>The data received from TDO bus is also always LSB out first</p></li>
+<li><p>Instruction length is fixed and it is “8-bits”</p></li>
+<li><p>The captured instruction that is transferred to TDO bus is always “b0000_0101”</p></li>
+</ul>
+</section>
+<section id="dr-scan-timing">
+<h3><span class="section-number">11.1.3.2. </span>DR Scan Timing<a class="headerlink" href="#dr-scan-timing" title="Permalink to this heading"></a></h3>
+<p>The following timing diagram shows the Data Register Scan operation:</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "signal" : [
+      {},
+      { "name": "TCK",        "wave": "lHlHlHlHlHlHlHlHl|.HlHlHlHlHl"},
+      { "name": "TMS",        "wave": "0.1.0............|....1...0.."},
+      { "name": "TDI",        "wave": "x.......2.2.2.2.2|2.2.2.x....", data:['DI[0]','DI[1]', 'DI[2]', 'DI[3]', '', 'DI[n-3]', 'DI[n-2]', 'DI[n-1]']},
+      { "name": "TDO",        "wave": "z.......2.2.2.2.2|2.2.2.z....", data:['DO[0]','DO[1]', 'DO[2]', 'DO[3]', '', 'DO[n-3]', 'DO[n-2]', 'DO[n-1]']},
+      { "name": "state",      "wave": "2..2.2.2.........|.....2.2.2.", data: [['tspan', {class:'h6'}, 'Run_Test/Idle'], 'DR-Scan', 'Capture-DR','Shift-DR','Exit1-DR', 'Update-DR', ['tspan', {class:'h6'}, 'Run_Test/Idle']]},
+   ],
+   config: { hscale: 1 }
+}
+</script>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Some important information:</p>
+<ul class="simple">
+<li><p>The data is transferred always LSB first in TDI bus</p></li>
+<li><p>The data received from TDO bus is also always LSB out</p></li>
+<li><p>Data length varies depending on the operation (e.g., scan chain, register read, or memory read)</p></li>
+<li><p>The captured data that is transferred to TDO bus also varies with the operation in progress</p></li>
+</ul>
+</section>
+<section id="tdi-tdo-timing">
+<h3><span class="section-number">11.1.3.3. </span>TDI/TDO Timing<a class="headerlink" href="#tdi-tdo-timing" title="Permalink to this heading"></a></h3>
+<p>The timing for TDI/TDO is as follows:
+- TDI and TDO are sampled/valid on the <strong>rising</strong> edge of TCK</p>
+</section>
+</section>
+<section id="jtag-idcode">
+<h2><span class="section-number">11.1.4. </span>JTAG IDCode<a class="headerlink" href="#jtag-idcode" title="Permalink to this heading"></a></h2>
+<p>The JTAG ID Code is provided for testing the JTAG functionality.</p>
+<p>ID = 0x149511C3</p>
+<p>The ID Code can be read out using the following sequence of commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">send_ir</span><span class="p">(</span><span class="n">IDCODE</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>
+<span class="n">send_dr</span><span class="p">(</span><span class="mh">0x00000000</span><span class="p">,</span> <span class="mi">32</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Read ID code on TDO</span>
+</pre></div>
+</div>
+<section id="send-ir-idcode-8-bits">
+<h3><span class="section-number">11.1.4.1. </span>send_ir(IDCODE, 8 bits)<a class="headerlink" href="#send-ir-idcode-8-bits" title="Permalink to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "signal" : [
+      {},
+      { "name": "TCK",        "wave": "lPPPPPPPPPPPPPPPPP"},
+      { "name": "TMS",        "wave": "0.1.0........1.0...", phase:1},
+      { "name": "TDI",        "wave": "x.....10...........", phase:1},
+      { "name": "TDO",        "wave": "z.....x.......z....", phase:1},
+      { "name": "state",       "wave": "2.2222.......222..",data: ['Run_Test/Idle', 'DR-Scan', 'IR-Scan', 'Capture-IR','Shift-IR','Exit1-IR','Update-IR','Run_Test/Idle']},
+      {}
+   ],
+   config: { hscale: 2 },
+   head:{
+      text:'Register Read - Step 1 - Instruction for IDCODE (0x01)',
+      tick: -6
+   }
+}
+</script>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="send-dr-0x00000000-32-bits">
+<h3><span class="section-number">11.1.4.2. </span>send_dr(0x00000000, 32 bits)<a class="headerlink" href="#send-dr-0x00000000-32-bits" title="Permalink to this heading"></a></h3>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "signal" : [
+      {},
+      { "name": "TCK",        "wave": "lPPPPPPPPPPPPPPPPPPPP"},
+      { "name": "TMS",        "wave": "0.10.................", phase:1},
+      { "name": "TDI",        "wave": "x....0...............", phase:1},
+      { "name": "TDO",        "wave": "z....1.0...1..0..10..", phase:1},
+      { "name": "state",       "wave": "2.222................",data: ['Run_Test/Idle', 'DR-Scan', 'Capture-DR', 'Shift-DR']},
+      {}
+   ],
+   config: { hscale: 2 },
+   head:{
+      text:'IDCODE register holds hex149511C3 -- transfer of Least Significant 16-bits',
+      tick: -5
+   }
+}
+</script>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "signal" : [
+      {},
+      { "name": "TCK",        "wave": "PPPPPPPPPPPPPPPPPPPP"},
+      { "name": "TMS",        "wave": "0...............1.0.", phase:1},
+      { "name": "TDI",        "wave": "0................x..", phase:1},
+      { "name": "TDO",        "wave": "0101010.10.1010..z..", phase:1},
+      { "name": "state",       "wave": "2...............222.",data: ['Shift-DR', 'Exit1-DR', 'Update-DR', 'Run_Test/Idle']},
+      {}
+   ],
+   config: { hscale: 2 },
+   head:{
+      text:'IDCODE register holds hex149511C3 -- transfer of Most Significant 16-bits',
+      tick: 15
+   }
+}
+</script>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="11. JTAG Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="jtag-command-overview.html" class="btn btn-neutral float-right" title="11.2. JTAG Command Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

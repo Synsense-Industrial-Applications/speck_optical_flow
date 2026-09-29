@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.13. Readout Layer Register Description &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.14. Readout Layer Configuration Signal Description" href="readout-config.html" />
+    <link rel="prev" title="7.12. DVS Filter Configuration Signal Description" href="filter-config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.13. Readout Layer Register Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-register-description">7.13.1. Detailed Register Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout0">7.13.1.1. Register: READOUT0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout1">7.13.1.2. Register: READOUT1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout2">7.13.1.3. Register: READOUT2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout3">7.13.1.4. Register: READOUT3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout4">7.13.1.5. Register: READOUT4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout5">7.13.1.6. Register: READOUT5</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout6">7.13.1.7. Register: READOUT6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout7">7.13.1.8. Register: READOUT7</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout8">7.13.1.9. Register: READOUT8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout9">7.13.1.10. Register: READOUT9</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout10">7.13.1.11. Register: READOUT10</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout11">7.13.1.12. Register: READOUT11</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout12">7.13.1.13. Register: READOUT12</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout13">7.13.1.14. Register: READOUT13</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout14">7.13.1.15. Register: READOUT14</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout15">7.13.1.16. Register: READOUT15</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#read-only-register-description">7.13.2. Read-Only Register Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout16">7.13.2.1. Register: READOUT16</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout17">7.13.2.2. Register: READOUT17</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout18">7.13.2.3. Register: READOUT18</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout19">7.13.2.4. Register: READOUT19</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout20">7.13.2.5. Register: READOUT20</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout21">7.13.2.6. Register: READOUT21</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-readout22">7.13.2.7. Register: READOUT22</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.13. </span>Readout Layer Register Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/readout.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="readout-layer-register-description">
+<span id="readout-registers"></span><h1><span class="section-number">7.13. </span>Readout Layer Register Description<a class="headerlink" href="#readout-layer-register-description" title="Permalink to this heading"></a></h1>
+<section id="detailed-register-description">
+<h2><span class="section-number">7.13.1. </span>Detailed Register Description<a class="headerlink" href="#detailed-register-description" title="Permalink to this heading"></a></h2>
+<section id="register-readout0">
+<span id="reg-readout0"></span><h3><span class="section-number">7.13.1.1. </span>Register: READOUT0<a class="headerlink" href="#register-readout0" title="Permalink to this heading"></a></h3>
+<p>Address: 0x200</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk1</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk0</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk0</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>CB11</p></td>
+<td><p>CB10</p></td>
+<td><p>RB02</p></td>
+<td><p>RB01</p></td>
+<td><p>RB00</p></td>
+<td><p>CB02</p></td>
+<td><p>CB01</p></td>
+<td><p>CB00</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout1">
+<span id="reg-readout1"></span><h3><span class="section-number">7.13.1.2. </span>Register: READOUT1<a class="headerlink" href="#register-readout1" title="Permalink to this heading"></a></h3>
+<p>Address: 0x201</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk2</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk2</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk1</span></a></p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RB20</p></td>
+<td><p>CB22</p></td>
+<td><p>CB21</p></td>
+<td><p>CB20</p></td>
+<td><p>RB12</p></td>
+<td><p>RB11</p></td>
+<td><p>RB10</p></td>
+<td><p>CB12</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout2">
+<span id="reg-readout2"></span><h3><span class="section-number">7.13.1.3. </span>Register: READOUT2<a class="headerlink" href="#register-readout2" title="Permalink to this heading"></a></h3>
+<p>Address: 0x202</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk3</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk3</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk2</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RB32</p></td>
+<td><p>RB31</p></td>
+<td><p>RB30</p></td>
+<td><p>CB32</p></td>
+<td><p>CB31</p></td>
+<td><p>CB30</p></td>
+<td><p>RB22</p></td>
+<td><p>RB21</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout3">
+<span id="reg-readout3"></span><h3><span class="section-number">7.13.1.4. </span>Register: READOUT3<a class="headerlink" href="#register-readout3" title="Permalink to this heading"></a></h3>
+<p>Address: 0x203</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk5</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk4</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk4</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>CB51</p></td>
+<td><p>CB50</p></td>
+<td><p>RB42</p></td>
+<td><p>RB41</p></td>
+<td><p>RB40</p></td>
+<td><p>CB42</p></td>
+<td><p>CB41</p></td>
+<td><p>CB40</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout4">
+<span id="reg-readout4"></span><h3><span class="section-number">7.13.1.5. </span>Register: READOUT4<a class="headerlink" href="#register-readout4" title="Permalink to this heading"></a></h3>
+<p>Address: 0x204</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk6</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk6</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk5</span></a></p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk5</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RB60</p></td>
+<td><p>CB62</p></td>
+<td><p>CB61</p></td>
+<td><p>CB60</p></td>
+<td><p>RB52</p></td>
+<td><p>RB51</p></td>
+<td><p>RB50</p></td>
+<td><p>CB52</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout5">
+<span id="reg-readout5"></span><h3><span class="section-number">7.13.1.6. </span>Register: READOUT5<a class="headerlink" href="#register-readout5" title="Permalink to this heading"></a></h3>
+<p>Address: 0x205</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk7</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk7</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk6</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RB72</p></td>
+<td><p>RB71</p></td>
+<td><p>RB70</p></td>
+<td><p>CB72</p></td>
+<td><p>CB71</p></td>
+<td><p>CB70</p></td>
+<td><p>RB62</p></td>
+<td><p>RB61</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout6">
+<span id="reg-readout6"></span><h3><span class="section-number">7.13.1.7. </span>Register: READOUT6<a class="headerlink" href="#register-readout6" title="Permalink to this heading"></a></h3>
+<p>Address: 0x206</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk9</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk8</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk8</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>CB91</p></td>
+<td><p>CB90</p></td>
+<td><p>RB82</p></td>
+<td><p>RB81</p></td>
+<td><p>RB80</p></td>
+<td><p>CB82</p></td>
+<td><p>CB81</p></td>
+<td><p>CB80</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout7">
+<span id="reg-readout7"></span><h3><span class="section-number">7.13.1.8. </span>Register: READOUT7<a class="headerlink" href="#register-readout7" title="Permalink to this heading"></a></h3>
+<p>Address: 0x207</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk10</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk10</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk9</span></a></p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk9</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RBA0</p></td>
+<td><p>CBA2</p></td>
+<td><p>CBA1</p></td>
+<td><p>CBA0</p></td>
+<td><p>RB92</p></td>
+<td><p>RB91</p></td>
+<td><p>RB90</p></td>
+<td><p>CB92</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout8">
+<span id="reg-readout8"></span><h3><span class="section-number">7.13.1.9. </span>Register: READOUT8<a class="headerlink" href="#register-readout8" title="Permalink to this heading"></a></h3>
+<p>Address: 0x208</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk11</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk11</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk10</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RBB2</p></td>
+<td><p>RBB1</p></td>
+<td><p>RBB0</p></td>
+<td><p>CBB2</p></td>
+<td><p>CBB1</p></td>
+<td><p>CBB0</p></td>
+<td><p>RBA2</p></td>
+<td><p>RBA1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout9">
+<span id="reg-readout9"></span><h3><span class="section-number">7.13.1.10. </span>Register: READOUT9<a class="headerlink" href="#register-readout9" title="Permalink to this heading"></a></h3>
+<p>Address: 0x209</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk13</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk12</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk12</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>CBD1</p></td>
+<td><p>CBD0</p></td>
+<td><p>RBC2</p></td>
+<td><p>RBC1</p></td>
+<td><p>RBC0</p></td>
+<td><p>CBC2</p></td>
+<td><p>CBC1</p></td>
+<td><p>CBC0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout10">
+<span id="reg-readout10"></span><h3><span class="section-number">7.13.1.11. </span>Register: READOUT10<a class="headerlink" href="#register-readout10" title="Permalink to this heading"></a></h3>
+<p>Address: 0x20A</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk14</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk14</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk13</span></a></p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-cbn"><span class="std std-ref">clk_blk13</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RBE0</p></td>
+<td><p>CBE2</p></td>
+<td><p>CBE1</p></td>
+<td><p>CBE0</p></td>
+<td><p>RBD2</p></td>
+<td><p>RBD1</p></td>
+<td><p>RBD0</p></td>
+<td><p>CBD2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout11">
+<span id="reg-readout11"></span><h3><span class="section-number">7.13.1.12. </span>Register: READOUT11<a class="headerlink" href="#register-readout11" title="Permalink to this heading"></a></h3>
+<p>Address: 0x20B</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-omsel"><span class="std std-ref">output_mode_sel</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="readout-config.html#rbits-avgsel"><span class="std std-ref">average_sel</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-rbn"><span class="std std-ref">rst_blk14</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>OMSEL1</p></td>
+<td><p>OMSEL0</p></td>
+<td><p>AVGSEL3</p></td>
+<td><p>AVGSEL2</p></td>
+<td><p>AVGSEL1</p></td>
+<td><p>AVGSEL0</p></td>
+<td><p>RBE2</p></td>
+<td><p>RBE1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout12">
+<span id="reg-readout12"></span><h3><span class="section-number">7.13.1.13. </span>Register: READOUT12<a class="headerlink" href="#register-readout12" title="Permalink to this heading"></a></h3>
+<p>Address: 0x20C</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="readout-config.html#rbits-th"><span class="std std-ref">readout_threshold</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>TH7</p></td>
+<td><p>TH6</p></td>
+<td><p>TH5</p></td>
+<td><p>TH4</p></td>
+<td><p>TH3</p></td>
+<td><p>TH2</p></td>
+<td><p>TH1</p></td>
+<td><p>TH0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout13">
+<span id="reg-readout13"></span><h3><span class="section-number">7.13.1.14. </span>Register: READOUT13<a class="headerlink" href="#register-readout13" title="Permalink to this heading"></a></h3>
+<p>Address: 0x20D</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td colspan="2"><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="readout-config.html#rbits-th"><span class="std std-ref">readout_threshold</span></a></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>Bit Name</p></td>
+<td><p>TH15</p></td>
+<td><p>TH14</p></td>
+<td><p>TH13</p></td>
+<td><p>TH12</p></td>
+<td><p>TH11</p></td>
+<td><p>TH10</p></td>
+<td><p>TH9</p></td>
+<td><p>TH8</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout14">
+<span id="reg-readout14"></span><h3><span class="section-number">7.13.1.15. </span>Register: READOUT14<a class="headerlink" href="#register-readout14" title="Permalink to this heading"></a></h3>
+<p>Address: 0x20E</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-inen"><span class="std std-ref">reg_input_enable</span></a></p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-ovrth"><span class="std std-ref">override_threshold_max</span></a></p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-bypreg"><span class="std std-ref">bypass_reg</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="readout-config.html#rbits-rocs"><span class="std std-ref">readout_conf_sel</span></a></p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-ch1632"><span class="std std-ref">choose_16_32</span></a></p></td>
+<td><p><a class="reference internal" href="readout-config.html#rbits-ch1"><span class="std std-ref">choose_1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>INEN</p></td>
+<td><p>OVRTH</p></td>
+<td><p>BYPREG</p></td>
+<td><p>ROCS1</p></td>
+<td><p>ROCS0</p></td>
+<td><p>CH1632</p></td>
+<td><p>CH1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout15">
+<span id="reg-readout15"></span><h3><span class="section-number">7.13.1.16. </span>Register: READOUT15<a class="headerlink" href="#register-readout15" title="Permalink to this heading"></a></h3>
+<p>Address: 0x20F</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="readout-config.html#rbits-reqdly"><span class="std std-ref">io_interface_req_delay</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>REQDLY7</p></td>
+<td><p>REQDLY6</p></td>
+<td><p>REQDLY5</p></td>
+<td><p>REQDLY4</p></td>
+<td><p>REQDLY3</p></td>
+<td><p>REQDLY2</p></td>
+<td><p>REQDLY1</p></td>
+<td><p>REQDLY0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="read-only-register-description">
+<span id="readout-readonly-registers"></span><h2><span class="section-number">7.13.2. </span>Read-Only Register Description<a class="headerlink" href="#read-only-register-description" title="Permalink to this heading"></a></h2>
+<section id="register-readout16">
+<span id="reg-readout16"></span><h3><span class="section-number">7.13.2.1. </span>Register: READOUT16<a class="headerlink" href="#register-readout16" title="Permalink to this heading"></a></h3>
+<p>Address: 0x210</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="4"><p>Neuron index of max average</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>MIDX3</p></td>
+<td><p>MIDX2</p></td>
+<td><p>MIDX1</p></td>
+<td><p>MIDX0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout17">
+<span id="reg-readout17"></span><h3><span class="section-number">7.13.2.2. </span>Register: READOUT17<a class="headerlink" href="#register-readout17" title="Permalink to this heading"></a></h3>
+<p>Address: 0x211</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p>Average output of max spiking neuron [7:0]</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>MAVG7</p></td>
+<td><p>MAVG6</p></td>
+<td><p>MAVG5</p></td>
+<td><p>MAVG4</p></td>
+<td><p>MAVG3</p></td>
+<td><p>MAVG2</p></td>
+<td><p>MAVG1</p></td>
+<td><p>MAVG0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout18">
+<span id="reg-readout18"></span><h3><span class="section-number">7.13.2.3. </span>Register: READOUT18<a class="headerlink" href="#register-readout18" title="Permalink to this heading"></a></h3>
+<p>Address: 0x212</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p>Average output of max spiking neuron [15:8]</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>MAVG15</p></td>
+<td><p>MAVG14</p></td>
+<td><p>MAVG13</p></td>
+<td><p>MAVG12</p></td>
+<td><p>MAVG11</p></td>
+<td><p>MAVG10</p></td>
+<td><p>MAVG9</p></td>
+<td><p>MAVG8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout19">
+<span id="reg-readout19"></span><h3><span class="section-number">7.13.2.4. </span>Register: READOUT19<a class="headerlink" href="#register-readout19" title="Permalink to this heading"></a></h3>
+<p>Address: 0x213</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p>Average output of the <a class="reference internal" href="../architecture/readout-layer.html#readout-output-modes"><span class="std std-ref">selected</span></a> neuron [7:0]</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>AVG7</p></td>
+<td><p>AVG6</p></td>
+<td><p>AVG5</p></td>
+<td><p>AVG4</p></td>
+<td><p>AVG3</p></td>
+<td><p>AVG2</p></td>
+<td><p>AVG1</p></td>
+<td><p>AVG0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout20">
+<span id="reg-readout20"></span><h3><span class="section-number">7.13.2.5. </span>Register: READOUT20<a class="headerlink" href="#register-readout20" title="Permalink to this heading"></a></h3>
+<p>Address: 0x214</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p>Average output of the <a class="reference internal" href="../architecture/readout-layer.html#readout-output-modes"><span class="std std-ref">selected</span></a> neuron [15:8]</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>AVG15</p></td>
+<td><p>AVG14</p></td>
+<td><p>AVG13</p></td>
+<td><p>AVG12</p></td>
+<td><p>AVG11</p></td>
+<td><p>AVG10</p></td>
+<td><p>AVG9</p></td>
+<td><p>AVG8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout21">
+<span id="reg-readout21"></span><h3><span class="section-number">7.13.2.6. </span>Register: READOUT21<a class="headerlink" href="#register-readout21" title="Permalink to this heading"></a></h3>
+<p>Address: 0x215</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p>Threshold comparison output[7:0]</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>THCMP7</p></td>
+<td><p>THCMP6</p></td>
+<td><p>THCMP5</p></td>
+<td><p>THCMP4</p></td>
+<td><p>THCMP3</p></td>
+<td><p>THCMP2</p></td>
+<td><p>THCMP1</p></td>
+<td><p>THCMP0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-readout22">
+<span id="reg-readout22"></span><h3><span class="section-number">7.13.2.7. </span>Register: READOUT22<a class="headerlink" href="#register-readout22" title="Permalink to this heading"></a></h3>
+<p>Address: 0x216</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td colspan="7"><p>Threshold comparison output[14:8]</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>THCMP14</p></td>
+<td><p>THCMP13</p></td>
+<td><p>THCMP12</p></td>
+<td><p>THCMP11</p></td>
+<td><p>THCMP10</p></td>
+<td><p>THCMP9</p></td>
+<td><p>THCMP8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="filter-config.html" class="btn btn-neutral float-left" title="7.12. DVS Filter Configuration Signal Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="readout-config.html" class="btn btn-neutral float-right" title="7.14. Readout Layer Configuration Signal Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+#########
+samna.jit
+#########
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.jit
+   :members:
+   :show-inheritance:
+

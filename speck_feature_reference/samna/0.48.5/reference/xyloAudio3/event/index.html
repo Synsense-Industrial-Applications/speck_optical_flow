@@ -1,0 +1,843 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.xyloAudio3.event &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="samna.xyloCore2" href="../../xyloCore2/index.html" />
+    <link rel="prev" title="samna.xyloAudio3.configuration" href="../configuration/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">samna.xyloAudio3</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#module-samna.xyloAudio3">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">samna</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna.xyloAudio3</a></li>
+      <li class="breadcrumb-item active">samna.xyloAudio3.event</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/reference/xyloAudio3/event/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-xyloaudio3-event">
+<h1>samna.xyloAudio3.event<a class="headerlink" href="index.html#samna-xyloaudio3-event" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.xyloAudio3.event">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.xyloAudio3.event" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.AfeSample">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">AfeSample</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.AfeSample" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of AfeSample event.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.AfeSample.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.AfeSample.data" title="Link to this definition"></a></dt>
+<dd><p>The AfeSample event value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.AfeSample.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.AfeSample" title="samna.xyloAudio3.event.AfeSample"><span class="pre">samna.xyloAudio3.event.AfeSample</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.AfeSample.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.AfeSample.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.AfeSample" title="samna.xyloAudio3.event.AfeSample"><span class="pre">samna.xyloAudio3.event.AfeSample</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.AfeSample.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.DirectOutputValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">DirectOutputValue</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.DirectOutputValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of <cite>ReadDirectOutputValue</cite></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.DirectOutputValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.DirectOutputValue" title="samna.xyloAudio3.event.DirectOutputValue"><span class="pre">samna.xyloAudio3.event.DirectOutputValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.DirectOutputValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.DirectOutputValue.timestep">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestep</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.DirectOutputValue.timestep" title="Link to this definition"></a></dt>
+<dd><p>Timestep at which this event was generated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.DirectOutputValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.DirectOutputValue" title="samna.xyloAudio3.event.DirectOutputValue"><span class="pre">samna.xyloAudio3.event.DirectOutputValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.DirectOutputValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.DirectOutputValue.value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.DirectOutputValue.value" title="Link to this definition"></a></dt>
+<dd><p>State of direct output pins as 3-bits value.</p>
+<p>In Direct Output Mode the value informs which output neurons fire:
+0: default state (none of ON0 ~ ON6 fires)
+1: at least ON0 fired
+2: ON0 did not fire, at least ON1 fired
+3: ON0 ~ ON1 did not fire, at least ON2 fired
+4: ON0 ~ ON2 did not fire, at least ON3 fired
+5: ON0 ~ ON3 did not fire, at least ON4 fired
+6: ON0 ~ ON4 did not fire, at least ON5 fired
+7: ON0 ~ ON5 did not fire, at least ON6 fired</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSpikeCount">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">HiddenSpikeCount</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSpikeCount" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadHiddenSpike.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSpikeCount.count">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSpikeCount.count" title="Link to this definition"></a></dt>
+<dd><p>Generated / aliased spike count of this hidden neuron.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSpikeCount.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.HiddenSpikeCount" title="samna.xyloAudio3.event.HiddenSpikeCount"><span class="pre">samna.xyloAudio3.event.HiddenSpikeCount</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSpikeCount.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSpikeCount.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSpikeCount.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSpikeCount.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.HiddenSpikeCount" title="samna.xyloAudio3.event.HiddenSpikeCount"><span class="pre">samna.xyloAudio3.event.HiddenSpikeCount</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSpikeCount.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSynapticCurrent2">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">HiddenSynapticCurrent2</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSynapticCurrent2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadHiddenSynapticCurrent2.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSynapticCurrent2.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.HiddenSynapticCurrent2" title="samna.xyloAudio3.event.HiddenSynapticCurrent2"><span class="pre">samna.xyloAudio3.event.HiddenSynapticCurrent2</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSynapticCurrent2.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSynapticCurrent2.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSynapticCurrent2.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSynapticCurrent2.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.HiddenSynapticCurrent2" title="samna.xyloAudio3.event.HiddenSynapticCurrent2"><span class="pre">samna.xyloAudio3.event.HiddenSynapticCurrent2</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSynapticCurrent2.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.HiddenSynapticCurrent2.value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.HiddenSynapticCurrent2.value" title="Link to this definition"></a></dt>
+<dd><p>The second synaptic current of this neuron.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MembranePotential">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">MembranePotential</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MembranePotential" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadMembranePotential.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MembranePotential.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.MembranePotential" title="samna.xyloAudio3.event.MembranePotential"><span class="pre">samna.xyloAudio3.event.MembranePotential</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MembranePotential.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MembranePotential.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MembranePotential.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MembranePotential.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.MembranePotential" title="samna.xyloAudio3.event.MembranePotential"><span class="pre">samna.xyloAudio3.event.MembranePotential</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MembranePotential.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MembranePotential.value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MembranePotential.value" title="Link to this definition"></a></dt>
+<dd><p>The membrane potential of this neuron.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MemoryValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">MemoryValue</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MemoryValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadMemoryValue.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MemoryValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MemoryValue.address" title="Link to this definition"></a></dt>
+<dd><p>The reading memory address which equals to the address in corresponding ReadMemoryValue.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MemoryValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MemoryValue.data" title="Link to this definition"></a></dt>
+<dd><p>The memory value that we read.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MemoryValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.MemoryValue" title="samna.xyloAudio3.event.MemoryValue"><span class="pre">samna.xyloAudio3.event.MemoryValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MemoryValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.MemoryValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.MemoryValue" title="samna.xyloAudio3.event.MemoryValue"><span class="pre">samna.xyloAudio3.event.MemoryValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.MemoryValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadDirectOutputValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">ReadDirectOutputValue</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadDirectOutputValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read state of direct output pins OUT0-2.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadHiddenSpikeCount">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">ReadHiddenSpikeCount</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadHiddenSpikeCount" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read spike count of a hidden neuron.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadHiddenSpikeCount.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadHiddenSpikeCount" title="samna.xyloAudio3.event.ReadHiddenSpikeCount"><span class="pre">samna.xyloAudio3.event.ReadHiddenSpikeCount</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadHiddenSpikeCount.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadHiddenSpikeCount.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadHiddenSpikeCount.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadHiddenSpikeCount.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadHiddenSpikeCount" title="samna.xyloAudio3.event.ReadHiddenSpikeCount"><span class="pre">samna.xyloAudio3.event.ReadHiddenSpikeCount</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadHiddenSpikeCount.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadHiddenSynapticCurrent2">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">ReadHiddenSynapticCurrent2</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadHiddenSynapticCurrent2" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read second synaptic current of a hidden neuron neuron.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadHiddenSynapticCurrent2.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadHiddenSynapticCurrent2" title="samna.xyloAudio3.event.ReadHiddenSynapticCurrent2"><span class="pre">samna.xyloAudio3.event.ReadHiddenSynapticCurrent2</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadHiddenSynapticCurrent2.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadHiddenSynapticCurrent2.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadHiddenSynapticCurrent2.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadHiddenSynapticCurrent2.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadHiddenSynapticCurrent2" title="samna.xyloAudio3.event.ReadHiddenSynapticCurrent2"><span class="pre">samna.xyloAudio3.event.ReadHiddenSynapticCurrent2</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadHiddenSynapticCurrent2.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadMembranePotential">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">ReadMembranePotential</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadMembranePotential" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read membrane potential of a hidden neuron or output neuron</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadMembranePotential.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadMembranePotential" title="samna.xyloAudio3.event.ReadMembranePotential"><span class="pre">samna.xyloAudio3.event.ReadMembranePotential</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadMembranePotential.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadMembranePotential.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadMembranePotential.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0. Output neurons locate right after hidden neurons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadMembranePotential.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadMembranePotential" title="samna.xyloAudio3.event.ReadMembranePotential"><span class="pre">samna.xyloAudio3.event.ReadMembranePotential</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadMembranePotential.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadMemoryValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">ReadMemoryValue</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadMemoryValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read memory value from XyloAudio3.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadMemoryValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadMemoryValue.address" title="Link to this definition"></a></dt>
+<dd><p>The memory address to read from.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadMemoryValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadMemoryValue" title="samna.xyloAudio3.event.ReadMemoryValue"><span class="pre">samna.xyloAudio3.event.ReadMemoryValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadMemoryValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadMemoryValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadMemoryValue" title="samna.xyloAudio3.event.ReadMemoryValue"><span class="pre">samna.xyloAudio3.event.ReadMemoryValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadMemoryValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadRegisterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">ReadRegisterValue</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadRegisterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read register value of XyloAudio3.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadRegisterValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadRegisterValue.address" title="Link to this definition"></a></dt>
+<dd><p>The register address to read from.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadRegisterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadRegisterValue" title="samna.xyloAudio3.event.ReadRegisterValue"><span class="pre">samna.xyloAudio3.event.ReadRegisterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadRegisterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadRegisterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadRegisterValue" title="samna.xyloAudio3.event.ReadRegisterValue"><span class="pre">samna.xyloAudio3.event.ReadRegisterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadRegisterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadSynapticCurrent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">ReadSynapticCurrent</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadSynapticCurrent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read synaptic current of a hidden neuron or output neuron</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadSynapticCurrent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadSynapticCurrent" title="samna.xyloAudio3.event.ReadSynapticCurrent"><span class="pre">samna.xyloAudio3.event.ReadSynapticCurrent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadSynapticCurrent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadSynapticCurrent.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadSynapticCurrent.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0. Output neurons locate right after hidden neurons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadSynapticCurrent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.ReadSynapticCurrent" title="samna.xyloAudio3.event.ReadSynapticCurrent"><span class="pre">samna.xyloAudio3.event.ReadSynapticCurrent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadSynapticCurrent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.ReadVersion">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">ReadVersion</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.ReadVersion" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read the fixed version of Xylo-Audio3.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">Readout</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>State of all neurons in the network after processing a timestep.</p>
+<p>This event is automatically sent after processing a timestep in Real-Time and Accelerated-Time.
+It can also be requested explicitly with a <a class="reference internal" href="index.html#samna.xyloAudio3.event.TriggerReadout" title="samna.xyloAudio3.event.TriggerReadout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.TriggerReadout</span></code></a> event.
+The exact neurons which states are available in this event is influenced by the configuration.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.Readout" title="samna.xyloAudio3.event.Readout"><span class="pre">samna.xyloAudio3.event.Readout</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout.hidden_spikes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hidden_spikes</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout.hidden_spikes" title="Link to this definition"></a></dt>
+<dd><p>Spike count values of monitored hidden neurons,</p>
+<p>This is only available in Accelerated-Time mode and for neurons configured by
+<a class="reference internal" href="../configuration/index.html#samna.xyloAudio3.configuration.DebugConfig.monitor_neuron_spike" title="samna.xyloAudio3.configuration.DebugConfig.monitor_neuron_spike"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.DebugConfig.monitor_neuron_spike</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout.input_spikes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_spikes</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout.input_spikes" title="Link to this definition"></a></dt>
+<dd><p>Spike count for all input neurons.</p>
+<p>This is only available when <a class="reference internal" href="../configuration/index.html#samna.xyloAudio3.configuration.DebugConfig.monitor_input_neurons_enable" title="samna.xyloAudio3.configuration.DebugConfig.monitor_input_neurons_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.DebugConfig.monitor_input_neurons_enable</span></code></a> is enabled.
+Note: these are the spikes received in the current timestep, to be processed in the next.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout.neuron_i_syns">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_i_syns</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout.neuron_i_syns" title="Link to this definition"></a></dt>
+<dd><p>Synaptic current values of monitored hidden neurons and output neurons,</p>
+<p>This is only available in Accelerated-Time mode and for neurons configured by
+<a class="reference internal" href="../configuration/index.html#samna.xyloAudio3.configuration.DebugConfig.monitor_neuron_i_syn" title="samna.xyloAudio3.configuration.DebugConfig.monitor_neuron_i_syn"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.DebugConfig.monitor_neuron_i_syn</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout.neuron_v_mems">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_v_mems</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout.neuron_v_mems" title="Link to this definition"></a></dt>
+<dd><p>Membrane potential values of monitored hidden neurons and output neurons,</p>
+<p>This is only available in Accelerated-Time mode and for neurons configured by
+<a class="reference internal" href="../configuration/index.html#samna.xyloAudio3.configuration.DebugConfig.monitor_neuron_v_mem" title="samna.xyloAudio3.configuration.DebugConfig.monitor_neuron_v_mem"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.DebugConfig.monitor_neuron_v_mem</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout.output_spikes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_spikes</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout.output_spikes" title="Link to this definition"></a></dt>
+<dd><p>Spike count values of all output neurons.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout.output_v_mems">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_v_mems</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout.output_v_mems" title="Link to this definition"></a></dt>
+<dd><p>Membrane potential values of all output neurons.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout.timestep">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestep</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout.timestep" title="Link to this definition"></a></dt>
+<dd><p>Timestep that was last processed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Readout.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.Readout" title="samna.xyloAudio3.event.Readout"><span class="pre">samna.xyloAudio3.event.Readout</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Readout.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.RegisterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">RegisterValue</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.RegisterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadRegisterValue event.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.RegisterValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.RegisterValue.address" title="Link to this definition"></a></dt>
+<dd><p>The reading address, it equals to the address in corresponding ReadRegisterValue.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.RegisterValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.RegisterValue.data" title="Link to this definition"></a></dt>
+<dd><p>The register value that read.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.RegisterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.RegisterValue" title="samna.xyloAudio3.event.RegisterValue"><span class="pre">samna.xyloAudio3.event.RegisterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.RegisterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.RegisterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.RegisterValue" title="samna.xyloAudio3.event.RegisterValue"><span class="pre">samna.xyloAudio3.event.RegisterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.RegisterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Spike">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">Spike</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Spike" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Spikes are events that can be consumed and produced by Xylo-Audio3.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Spike.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.Spike" title="samna.xyloAudio3.event.Spike"><span class="pre">samna.xyloAudio3.event.Spike</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Spike.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Spike.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Spike.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>The target neuron id of the spike event.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Spike.timestep">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestep</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Spike.timestep" title="Link to this definition"></a></dt>
+<dd><p>When receiving a Spike event from a chip the timestamp will be
+populated with the time at which the event leave the chip in microseconds.</p>
+<p>When sending a Spike event to a chip the timestamp will be used to
+control which timestep the event will be applied to the chip.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Spike.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.Spike" title="samna.xyloAudio3.event.Spike"><span class="pre">samna.xyloAudio3.event.Spike</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Spike.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.SynapticCurrent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">SynapticCurrent</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.SynapticCurrent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadSynapticCurrent.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.SynapticCurrent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.SynapticCurrent" title="samna.xyloAudio3.event.SynapticCurrent"><span class="pre">samna.xyloAudio3.event.SynapticCurrent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.SynapticCurrent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.SynapticCurrent.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.SynapticCurrent.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.SynapticCurrent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.SynapticCurrent" title="samna.xyloAudio3.event.SynapticCurrent"><span class="pre">samna.xyloAudio3.event.SynapticCurrent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.SynapticCurrent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.SynapticCurrent.value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.SynapticCurrent.value" title="Link to this definition"></a></dt>
+<dd><p>The synaptic current of this neuron.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.TriggerProcessing">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">TriggerProcessing</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.TriggerProcessing" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Trigger specific times until target timestep reaches in accelerated mode or realtime mode,
+and trigger once in manual mode.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.TriggerProcessing.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.TriggerProcessing" title="samna.xyloAudio3.event.TriggerProcessing"><span class="pre">samna.xyloAudio3.event.TriggerProcessing</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.TriggerProcessing.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.TriggerProcessing.target_timestep">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target_timestep</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.TriggerProcessing.target_timestep" title="Link to this definition"></a></dt>
+<dd><p>Target timestep to reach after processing, only available in accelerated mode or realtime mode.</p>
+<p>The target timestep itself won’t be processed.
+e.g. If you set target timestep to 10, then after all processing complete,
+the result of <a class="reference internal" href="index.html#samna.xyloAudio3.event.TriggerReadout" title="samna.xyloAudio3.event.TriggerReadout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.TriggerReadout</span></code></a> event will give you <a class="reference internal" href="index.html#samna.xyloAudio3.event.Readout" title="samna.xyloAudio3.event.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.Readout</span></code></a> event with timestep=9.</p>
+<p>If a value smaller than current timestep is set for target timestep, nothing happens.</p>
+<p>Default no effect if this value is not set in accelerated mode,
+default triggering infinitely if this value is not set in realtime mode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.TriggerProcessing.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.TriggerProcessing" title="samna.xyloAudio3.event.TriggerProcessing"><span class="pre">samna.xyloAudio3.event.TriggerProcessing</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.TriggerProcessing.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.TriggerReadout">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">TriggerReadout</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.TriggerReadout" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Request the current network state as a <a class="reference internal" href="index.html#samna.xyloAudio3.event.Readout" title="samna.xyloAudio3.event.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.Readout</span></code></a> event.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Version">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">Version</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Version" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadVersion.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Version.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.Version" title="samna.xyloAudio3.event.Version"><span class="pre">samna.xyloAudio3.event.Version</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Version.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Version.major">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">major</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Version.major" title="Link to this definition"></a></dt>
+<dd><p>Major part of Xylo version which is fixed at 1.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Version.minor">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">minor</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Version.minor" title="Link to this definition"></a></dt>
+<dd><p>Minor part of Xylo version which is fixed at 1.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.Version.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.Version" title="samna.xyloAudio3.event.Version"><span class="pre">samna.xyloAudio3.event.Version</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.Version.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteMemoryValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">WriteMemoryValue</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteMemoryValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Write a memory value to XyloAudio3.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteMemoryValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteMemoryValue.address" title="Link to this definition"></a></dt>
+<dd><p>The memory address to write to.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteMemoryValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteMemoryValue.data" title="Link to this definition"></a></dt>
+<dd><p>The data writing to the address.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteMemoryValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.WriteMemoryValue" title="samna.xyloAudio3.event.WriteMemoryValue"><span class="pre">samna.xyloAudio3.event.WriteMemoryValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteMemoryValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteMemoryValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.WriteMemoryValue" title="samna.xyloAudio3.event.WriteMemoryValue"><span class="pre">samna.xyloAudio3.event.WriteMemoryValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteMemoryValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteRegisterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.event.</span></span><span class="sig-name descname"><span class="pre">WriteRegisterValue</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteRegisterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Write register value of XyloAudio3.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteRegisterValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteRegisterValue.address" title="Link to this definition"></a></dt>
+<dd><p>Target register address.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteRegisterValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteRegisterValue.data" title="Link to this definition"></a></dt>
+<dd><p>The new register value to write.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteRegisterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.WriteRegisterValue" title="samna.xyloAudio3.event.WriteRegisterValue"><span class="pre">samna.xyloAudio3.event.WriteRegisterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteRegisterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.event.WriteRegisterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.event.WriteRegisterValue" title="samna.xyloAudio3.event.WriteRegisterValue"><span class="pre">samna.xyloAudio3.event.WriteRegisterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.event.WriteRegisterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../configuration/index.html" class="btn btn-neutral float-left" title="samna.xyloAudio3.configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../xyloCore2/index.html" class="btn btn-neutral float-right" title="samna.xyloCore2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+######################
+samna.speck2eTestBoard
+######################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   encoder/index
+   fpgaTestSuite/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.speck2eTestBoard
+   :members:
+   :show-inheritance:
+

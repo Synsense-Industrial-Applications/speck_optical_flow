@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9.7. Direct Readout Interrupts &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10. SPI Interfaces" href="../spi/index.html" />
+    <link rel="prev" title="9.6. Output Serial Interface Encoding" href="output-serial-interface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. Encoding and Programming</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">9.1. I/O Interfaces Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-s2p.html">9.2. Input Serial Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-serial-interface.html">9.3. Input Serial Interface Bus Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor-bus.html">9.4. Monitor Bus Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-p2s.html">9.5. Output Serial Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-serial-interface.html">9.6. Output Serial Interface Encoding</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.7. Direct Readout Interrupts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pin-description">9.7.1. Pin Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#interrupt">9.7.1.1. INTERRUPT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#readout1-to-4">9.7.1.2. READOUT1 to 4</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-use-cases">9.7.2. Example use cases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-class-with-threshold">9.7.2.1. Single class with threshold</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">9. </span>Encoding and Programming</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9.7. </span>Direct Readout Interrupts</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/encoding/readout-interrupt.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="direct-readout-interrupts">
+<span id="readout-interrupt"></span><h1><span class="section-number">9.7. </span>Direct Readout Interrupts<a class="headerlink" href="#direct-readout-interrupts" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="../architecture/readout-layer.html#readout-layer"><span class="std std-ref">Readout Layer</span></a> of Speck2e can provide direct
+output data to 5 dedicated physical pins.</p>
+<p>These pins (INTERRUPT and READOUT1 to 4) are designed to provide a direct readout of the maximum spiking class (with or without
+activity threshold).</p>
+<p>The readout pins are updated when a <a class="reference internal" href="../architecture/readout-layer.html#readout-avg-clk"><span class="std std-ref">readout clock pulse</span></a> is issued.</p>
+<section id="pin-description">
+<h2><span class="section-number">9.7.1. </span>Pin Description<a class="headerlink" href="#pin-description" title="Permalink to this heading"></a></h2>
+<section id="interrupt">
+<h3><span class="section-number">9.7.1.1. </span>INTERRUPT<a class="headerlink" href="#interrupt" title="Permalink to this heading"></a></h3>
+<p>This pin outputs ‘0’ until the class of max activity exceeds the threshold defined by <a class="reference internal" href="../registers/readout-config.html#rbits-th"><span class="std std-ref">READOUT12,13:TH[15:0]</span></a>.</p>
+<p>Alternatively, the threshold comparison can be overridden by setting bit <a class="reference internal" href="../registers/readout-config.html#rbits-ovrth"><span class="std std-ref">READOUT14:OVRTH</span></a> to ‘1’. In this case,
+INTERRUPT becomes ‘1’.</p>
+<p>The INTERRUPT pin is updated whenever a <a class="reference internal" href="../architecture/readout-layer.html#readout-avg-clk"><span class="std std-ref">readout clock pulse</span></a> is issued. During the <em>readout clock</em> pulse,
+INTERRUPT becomes ‘0’. When the <em>readout clock</em> goes back to ‘0’, the INTERRUPT pin is raised again only if
+<a class="reference internal" href="../registers/readout-config.html#rbits-ovrth"><span class="std std-ref">READOUT14:OVRTH</span></a> = ‘1’ or the max class activity is again above the selected threshold.</p>
+</section>
+<section id="readout1-to-4">
+<h3><span class="section-number">9.7.1.2. </span>READOUT1 to 4<a class="headerlink" href="#readout1-to-4" title="Permalink to this heading"></a></h3>
+<p>READOUTx pins reflect the index of the class of max activity as described in <a class="reference internal" href="../architecture/readout-layer.html#readout-output-modes"><span class="std std-ref">Data Output Modes</span></a>.</p>
+<p>These pins are activated in two cases:</p>
+<ul class="simple">
+<li><p>A class has spiked more than the set threshold during the previous <em>readout clock</em> period (INTERRUPT is also raised when this condition is met).</p></li>
+<li><p>The register bit <a class="reference internal" href="../registers/readout-config.html#rbits-ovrth"><span class="std std-ref">READOUT14:OVRTH</span></a> is set to ‘1’ (override threshold).</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The 4 bits reflect the binary value of the most spiking class. As such, in an
+application requiring only 4 classes, the CNN can be configured such that the four
+output classes are encoded as class 1, 2, 4 and 8 when arriving at the readout layer.
+In this condition, the 4 output pins READOUTx will each directly reflect one of the
+classes of interest, and no decoder will be needed to interpret the chip output.</p>
+</div>
+</section>
+</section>
+<section id="example-use-cases">
+<h2><span class="section-number">9.7.2. </span>Example use cases<a class="headerlink" href="#example-use-cases" title="Permalink to this heading"></a></h2>
+<section id="single-class-with-threshold">
+<h3><span class="section-number">9.7.2.1. </span>Single class with threshold<a class="headerlink" href="#single-class-with-threshold" title="Permalink to this heading"></a></h3>
+<p>In an application where a single class output is required (e.g., recognizing a single gesture using the DVS sensor),
+the user can set <a class="reference internal" href="../registers/readout-config.html#rbits-ovrth"><span class="std std-ref">OVRTH</span></a> = ‘0’, and provide a continuous slow clock to the readout layer.</p>
+<p>Whenever Speck recognizes the gesture, the single output class activity will increase over the
+selected threshold value.</p>
+<p>At this point, the INTERRUPT pin will be raised by Speck, and READOUT1 pin will go to ‘1’. As such,
+a simple application may just directly utilize READOUT1 to trigger an external activity, such as
+activating a relay, actuator or similar.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="output-serial-interface.html" class="btn btn-neutral float-left" title="9.6. Output Serial Interface Encoding" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../spi/index.html" class="btn btn-neutral float-right" title="10. SPI Interfaces" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

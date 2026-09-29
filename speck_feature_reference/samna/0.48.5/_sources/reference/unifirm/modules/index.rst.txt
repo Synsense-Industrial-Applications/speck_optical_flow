@@ -1,0 +1,29 @@
+#####################
+samna.unifirm.modules
+#####################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   adc/index
+   atismodule/index
+   cluster/index
+   dac/index
+   edgeDetection/index
+   events/index
+   ioControl/index
+   mc3632/index
+   readout/index
+   uart/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm.modules
+   :members:
+   :show-inheritance:
+

@@ -1,0 +1,1190 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.afe2.configuration &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="samna.afe2.event" href="../event/index.html" />
+    <link rel="prev" title="samna.afe2" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">samna.afe2</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#module-samna.afe2">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">samna</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna.afe2</a></li>
+      <li class="breadcrumb-item active">samna.afe2.configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/reference/afe2/configuration/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-afe2-configuration">
+<h1>samna.afe2.configuration<a class="headerlink" href="index.html#samna-afe2-configuration" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.afe2.configuration">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.afe2.configuration" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.Aer2SaerConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">Aer2SaerConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.Aer2SaerConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The AER2SAER block converts AER events to SAER events.</p>
+<p>The following features are supported:</p>
+<blockquote>
+<div><p>16 independent channels</p>
+<p>10 bit counter with configurable threshold for each channel to fine tune the event rate</p>
+</div></blockquote>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.Aer2SaerConfig.calibration">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calibration</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.Aer2SaerConfig.calibration" title="Link to this definition"></a></dt>
+<dd><p>A module that calibrates leakage and gain, an instance of <a class="reference internal" href="index.html#samna.afe2.configuration.CalibrationConfig" title="samna.afe2.configuration.CalibrationConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CalibrationConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.Aer2SaerConfig.channel_thresholds">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channel_thresholds</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.Aer2SaerConfig.channel_thresholds" title="Link to this definition"></a></dt>
+<dd><p>Counter Threshold</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.Aer2SaerConfig.clock">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clock</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.Aer2SaerConfig.clock" title="Link to this definition"></a></dt>
+<dd><p>Divided clock related configuration, an instance of <a class="reference internal" href="index.html#samna.afe2.configuration.ClockConfig" title="samna.afe2.configuration.ClockConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClockConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.Aer2SaerConfig.dn">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dn</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.Aer2SaerConfig.dn" title="Link to this definition"></a></dt>
+<dd><p>A module that reduces noise, an instance of <a class="reference internal" href="index.html#samna.afe2.configuration.DnConfig" title="samna.afe2.configuration.DnConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DnConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.Aer2SaerConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.Aer2SaerConfig" title="samna.afe2.configuration.Aer2SaerConfig"><span class="pre">samna.afe2.configuration.Aer2SaerConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.Aer2SaerConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.Aer2SaerConfig.hibernation">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hibernation</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.Aer2SaerConfig.hibernation" title="Link to this definition"></a></dt>
+<dd><p>This block controls the output saer signal sent out from aer2saer module according to the spike number during detecting timing window, an instance of <a class="reference internal" href="index.html#samna.afe2.configuration.HibernationConfig" title="samna.afe2.configuration.HibernationConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">HibernationConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.Aer2SaerConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.Aer2SaerConfig" title="samna.afe2.configuration.Aer2SaerConfig"><span class="pre">samna.afe2.configuration.Aer2SaerConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.Aer2SaerConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AfeConfiguration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">AfeConfiguration</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AfeConfiguration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The overall configuration of AFE2.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AfeConfiguration.aer_2_saer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aer_2_saer</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AfeConfiguration.aer_2_saer" title="Link to this definition"></a></dt>
+<dd><p>The AER2SAER block converts AER event to SAER event, it’s an instance of <a class="reference internal" href="index.html#samna.afe2.configuration.Aer2SaerConfig" title="samna.afe2.configuration.Aer2SaerConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">Aer2SaerConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AfeConfiguration.analog_top">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">analog_top</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AfeConfiguration.analog_top" title="Link to this definition"></a></dt>
+<dd><p>The main control part of afe, an instance of <a class="reference internal" href="index.html#samna.afe2.configuration.AnalogTopConfig" title="samna.afe2.configuration.AnalogTopConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnalogTopConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AfeConfiguration.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.AfeConfiguration" title="samna.afe2.configuration.AfeConfiguration"><span class="pre">samna.afe2.configuration.AfeConfiguration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AfeConfiguration.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AfeConfiguration.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.AfeConfiguration" title="samna.afe2.configuration.AfeConfiguration"><span class="pre">samna.afe2.configuration.AfeConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AfeConfiguration.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">AnalogTopConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The main control part of AFE2.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.analog_top_control">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">analog_top_control</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.analog_top_control" title="Link to this definition"></a></dt>
+<dd><p>Analog top control:</p>
+<ul class="simple">
+<li><p>&lt;0&gt;: test enable for ch_out_ackB, ch_out_reqB, ch_out_data&lt;3:0&gt;</p></li>
+<li><p>&lt;2:1&gt;: FWR_CAS_CTL, FWR output current mirror cascode votage control</p></li>
+<li><p>&lt;3&gt;:enable of tst_sqd</p></li>
+<li><p>&lt;4&gt;:path_sel of tst_bufp</p></li>
+<li><p>&lt;5&gt;:enble of tst_bufp</p></li>
+<li><p>&lt;6&gt;:path_sel of tst_bufn</p></li>
+<li><p>&lt;7&gt;:enable of tst_bufn</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.bpf">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bpf</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.bpf" title="Link to this definition"></a></dt>
+<dd><p>Band Pass Filter Bank. An instance of <a class="reference internal" href="index.html#samna.afe2.configuration.BpfConfig" title="samna.afe2.configuration.BpfConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">BpfConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.channels">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channels</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.channels" title="Link to this definition"></a></dt>
+<dd><p>16 independent channels in AER2SAER converter, they are all enabled by default. Each of them is an instance of <a class="reference internal" href="index.html#samna.afe2.configuration.ChannelConfig" title="samna.afe2.configuration.ChannelConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.enable" title="Link to this definition"></a></dt>
+<dd><p>Enable analog top</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.external_bias_current">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">external_bias_current</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.external_bias_current" title="Link to this definition"></a></dt>
+<dd><p>Choose the bias current source:</p>
+<ul class="simple">
+<li><p>0: constant gm module</p></li>
+<li><p>1: off chip</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.AnalogTopConfig" title="samna.afe2.configuration.AnalogTopConfig"><span class="pre">samna.afe2.configuration.AnalogTopConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.fwr">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fwr</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.fwr" title="Link to this definition"></a></dt>
+<dd><p>Full Wave Rectifier. An instance of <a class="reference internal" href="index.html#samna.afe2.configuration.FwrConfig" title="samna.afe2.configuration.FwrConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">FwrConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.iaf">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iaf</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.iaf" title="Link to this definition"></a></dt>
+<dd><p>Integrate and Fire. An instance of <a class="reference internal" href="index.html#samna.afe2.configuration.IafConfig" title="samna.afe2.configuration.IafConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">IafConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.ldo">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ldo</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.ldo" title="Link to this definition"></a></dt>
+<dd><p>Ldo configuration. An instance of <a class="reference internal" href="index.html#samna.afe2.configuration.LdoConfig" title="samna.afe2.configuration.LdoConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">LdoConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.lna">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lna</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.lna" title="Link to this definition"></a></dt>
+<dd><p>Low Noice Amplifiler. An instance of <a class="reference internal" href="index.html#samna.afe2.configuration.LnaConfig" title="samna.afe2.configuration.LnaConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">LnaConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.mgm">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mgm</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.mgm" title="Link to this definition"></a></dt>
+<dd><p>Master gm configuration. An instance of <a class="reference internal" href="index.html#samna.afe2.configuration.MgmConfig" title="samna.afe2.configuration.MgmConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">MgmConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.sqdl">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sqdl</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.sqdl" title="Link to this definition"></a></dt>
+<dd><p>Squlech detector configuration. An instance of <a class="reference internal" href="index.html#samna.afe2.configuration.SqdlConfig" title="samna.afe2.configuration.SqdlConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SqdlConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.AnalogTopConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.AnalogTopConfig" title="samna.afe2.configuration.AnalogTopConfig"><span class="pre">samna.afe2.configuration.AnalogTopConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.AnalogTopConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">BpfConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The band pass filter bank consists of 16 band pass filters.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig.base_frequency">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">base_frequency</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig.base_frequency" title="Link to this definition"></a></dt>
+<dd><p>reserved</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig.bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bias</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig.bias" title="Link to this definition"></a></dt>
+<dd><p>master gm cell bias select:</p>
+<p>&lt;2&gt;:160n; &lt;1&gt;:80n; &lt;0&gt;:40n</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig.c1">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">c1</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig.c1" title="Link to this definition"></a></dt>
+<dd><p>bpf V2 C1 ctrl</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig.c3">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">c3</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig.c3" title="Link to this definition"></a></dt>
+<dd><p>bpf V2 C3 ctrl</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.BpfConfig" title="samna.afe2.configuration.BpfConfig"><span class="pre">samna.afe2.configuration.BpfConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig.q_value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">q_value</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig.q_value" title="Link to this definition"></a></dt>
+<dd><p>q value select:</p>
+<p>4*sqrt(C2/C1)</p>
+<p>4’b0000:q=4 f0=380Hz;  4b’0001:q=5.6 f0=275Hz;  4b’0010:q=5.6 f0=275Hz;  4b’0011: q=6.8 f0=223Hz;  4’b0100:q=5.6 f0=275Hz;  4b’0101:q=6.8 f0=223Hz;  b’0110:q=6.8 f0=223Hz;  4b’0111: q=8 f0=200Hz;  4’b1000:q=2.8 f0=269Hz;  4b’1001:q=4 f0=194Hz;  4b’1011:q=4.8 f0=162Hz;  4b’1100: q=4 f0=194Hz;  4’b1101:q=4 .8 f0=162Hz;  4b’1110:q=4.8 f0= 162Hz;  4b’1111:q=5.6 f0=141Hz</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig.scale">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scale</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig.scale" title="Link to this definition"></a></dt>
+<dd><p>k of space between channels:</p>
+<p>0: 1.35;  1: 1.5</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.BpfConfig" title="samna.afe2.configuration.BpfConfig"><span class="pre">samna.afe2.configuration.BpfConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.BpfConfig.vcm">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vcm</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.BpfConfig.vcm" title="Link to this definition"></a></dt>
+<dd><p>bpf vcm modification:</p>
+<p>2’b00 402mV;  2’b01 455mV;  2’b10 550mV;  2’b11 493mV</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">CalibrationConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Reduce input spike signals caused by leakage of each channel.</p>
+<p>Reduce the gain variation between each channel.</p>
+<p>This block auto-calibrates the DAC values of analog circuit, 4 working modes are supported and 2 trigger modes:</p>
+<p>Mode 0: no calibration</p>
+<p>Mode 1: leakage calibration</p>
+<p>Mode 2: gain calibration</p>
+<p>Mode 3: whole calibration</p>
+<p>Trig 1: restart the whole calibration</p>
+<p>Trig 2: restart the calibration based on latest results</p>
+<p>The calibration module is going to calibrate all 16 channels.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.afe_stable_time">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">afe_stable_time</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.afe_stable_time" title="Link to this definition"></a></dt>
+<dd><p>Stable time for AFE After Power On</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.CalibrationConfig" title="samna.afe2.configuration.CalibrationConfig"><span class="pre">samna.afe2.configuration.CalibrationConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.gain_ratio">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gain_ratio</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.gain_ratio" title="Link to this definition"></a></dt>
+<dd><p>multiple ratio for gain calibration</p>
+<p>ratio=gain_tw/leak_tw</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.gain_target_spike_number">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gain_target_spike_number</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.gain_target_spike_number" title="Link to this definition"></a></dt>
+<dd><p>Target Spike Number for Gain Calibration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.gain_td">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gain_td</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.gain_td" title="Link to this definition"></a></dt>
+<dd><p>Td For Gain Calibration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.gain_timing_window">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gain_timing_window</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.gain_timing_window" title="Link to this definition"></a></dt>
+<dd><p>Timing Window Setting for Gain Calibration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.leak_target_spike_number">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">leak_target_spike_number</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.leak_target_spike_number" title="Link to this definition"></a></dt>
+<dd><p>Target Spike Number for Leakage Calibration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.leak_td">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">leak_td</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.leak_td" title="Link to this definition"></a></dt>
+<dd><p>Td For Leakage Calibration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.leak_timing_window">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">leak_timing_window</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.leak_timing_window" title="Link to this definition"></a></dt>
+<dd><p>Timing Window Setting for Leakage Calibration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.mode" title="Link to this definition"></a></dt>
+<dd><p>Select For Calibration Mode:</p>
+<ul class="simple">
+<li><p>00:manual mode</p></li>
+<li><p>01:leak-only auto mode</p></li>
+<li><p>10:gain-only auto mode</p></li>
+<li><p>11:all auto mode</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.reset">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.reset" title="Link to this definition"></a></dt>
+<dd><p>reset signal for calibration mode</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.CalibrationConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.CalibrationConfig" title="samna.afe2.configuration.CalibrationConfig"><span class="pre">samna.afe2.configuration.CalibrationConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.CalibrationConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ChannelConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">ChannelConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ChannelConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The configuration for each channel.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ChannelConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.ChannelConfig" title="samna.afe2.configuration.ChannelConfig"><span class="pre">samna.afe2.configuration.ChannelConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ChannelConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ChannelConfig.iaf_comp_vref">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iaf_comp_vref</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ChannelConfig.iaf_comp_vref" title="Link to this definition"></a></dt>
+<dd><p>comparator threshold voltage control for this channel:</p>
+<ul class="simple">
+<li><p>0: 100 mV</p></li>
+<li><p>1: 200 mV</p></li>
+<li><p>2: 300 mV</p></li>
+<li><p>3: 400 mV</p></li>
+<li><p>4: 500 mV</p></li>
+<li><p>5: 600 mV</p></li>
+<li><p>6: 700 mV</p></li>
+<li><p>7: 800 mV</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ChannelConfig.iaf_leak_bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iaf_leak_bias</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ChannelConfig.iaf_leak_bias" title="Link to this definition"></a></dt>
+<dd><p>channel fwr leakage bias source:</p>
+<ul class="simple">
+<li><p>0:10n</p></li>
+<li><p>1: 20n</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ChannelConfig.iaf_leak_current">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iaf_leak_current</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ChannelConfig.iaf_leak_current" title="Link to this definition"></a></dt>
+<dd><p>leakage current control for this channel:</p>
+<ul class="simple">
+<li><p>0: 100 mV</p></li>
+<li><p>1: 200 mV</p></li>
+<li><p>2: 300 mV</p></li>
+<li><p>3: 400 mV</p></li>
+<li><p>4: 500 mV</p></li>
+<li><p>5: 600 mV</p></li>
+<li><p>6: 700 mV</p></li>
+<li><p>7: 800 mV</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ChannelConfig.ib">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ib</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ChannelConfig.ib" title="Link to this definition"></a></dt>
+<dd><p>bpf gm calibration current set(gm scale ) for this channel:</p>
+<ul class="simple">
+<li><p>I_BPF_SE&lt;0&gt;:0.25</p></li>
+<li><p>I_BPF_SE&lt;1&gt;:0.5</p></li>
+<li><p>I_BPF_SE&lt;2&gt;:1</p></li>
+<li><p>I_BPF_SE&lt;3&gt;:2</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ChannelConfig.leak">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">leak</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ChannelConfig.leak" title="Link to this definition"></a></dt>
+<dd><p>channel leak sel</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ChannelConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.ChannelConfig" title="samna.afe2.configuration.ChannelConfig"><span class="pre">samna.afe2.configuration.ChannelConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ChannelConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ClockConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">ClockConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ClockConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Divided clock related configuration.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ClockConfig.divide_times">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">divide_times</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ClockConfig.divide_times" title="Link to this definition"></a></dt>
+<dd><p>Div_times for divided clk</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ClockConfig.enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ClockConfig.enable" title="Link to this definition"></a></dt>
+<dd><p>Enable signal for divided clk</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ClockConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.ClockConfig" title="samna.afe2.configuration.ClockConfig"><span class="pre">samna.afe2.configuration.ClockConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ClockConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ClockConfig.reset">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ClockConfig.reset" title="Link to this definition"></a></dt>
+<dd><p>Reset signal for divided clk</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.ClockConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.ClockConfig" title="samna.afe2.configuration.ClockConfig"><span class="pre">samna.afe2.configuration.ClockConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.ClockConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">DnConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A module that reduces noise.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig.enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig.enable" title="Link to this definition"></a></dt>
+<dd><p>Enable signal for DN module</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig.feame_th">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feame_th</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig.feame_th" title="Link to this definition"></a></dt>
+<dd><p>Number of clock periods for each DN frame</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.DnConfig" title="samna.afe2.configuration.DnConfig"><span class="pre">samna.afe2.configuration.DnConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig.iaf_bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iaf_bias</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig.iaf_bias" title="Link to this definition"></a></dt>
+<dd><p>IAF_BIAS</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig.loc_div_times">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loc_div_times</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig.loc_div_times" title="Link to this definition"></a></dt>
+<dd><p>Div_times for dn_loc_clk</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig.p_param">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p_param</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig.p_param" title="Link to this definition"></a></dt>
+<dd><p>P parameter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig.s_param">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">s_param</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig.s_param" title="Link to this definition"></a></dt>
+<dd><p>S parameter</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig.sys_div_times">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sys_div_times</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig.sys_div_times" title="Link to this definition"></a></dt>
+<dd><p>Div_times for dn_sys_clk</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.DnConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.DnConfig" title="samna.afe2.configuration.DnConfig"><span class="pre">samna.afe2.configuration.DnConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.DnConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">FwrConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The full wave rectifier rectifies the output of band pass filter bank.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bias</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.bias" title="Link to this definition"></a></dt>
+<dd><p>master gm cell bias select:</p>
+<p>&lt;2&gt;:20n;  &lt;1&gt;:10n;  &lt;0&gt;:5n</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.bias_current">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bias_current</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.bias_current" title="Link to this definition"></a></dt>
+<dd><p>select bias current:</p>
+<p>0: 5 nA;  1: 3 nA;  2: 7 nA;  3: 10 nA</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.FwrConfig" title="samna.afe2.configuration.FwrConfig"><span class="pre">samna.afe2.configuration.FwrConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.ota_bias_current">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ota_bias_current</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.ota_bias_current" title="Link to this definition"></a></dt>
+<dd><p>select OTA bias current:</p>
+<p>0: 20 nA;  1: 12 nA;  2: 28 nA;  3: 40 nA</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.ota_gm">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ota_gm</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.ota_gm" title="Link to this definition"></a></dt>
+<dd><p>OTA OF FWR GM modification:</p>
+<p>&lt;2&gt;:resvered;  &lt;1:0&gt;2’b00:953ns;  2’b01:506ns;  2’b10:506ns;  2’b11:348ns</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.ota_vcm">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ota_vcm</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.ota_vcm" title="Link to this definition"></a></dt>
+<dd><p>select OTA VCM:</p>
+<p>2’b00 493mV;  2’b01 531mV;  2’b10 569mV;  2’b11 606mV</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.switch_resistance">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">switch_resistance</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.switch_resistance" title="Link to this definition"></a></dt>
+<dd><p>FWR SWITCH RES modification:</p>
+<p>FWR_RES_SEL&lt;3&gt;:reserved;  FWR_RES_SEL&lt;2&gt;:double res;  FWR_RES_SEL&lt;1&gt;:1/2 rectifier res;  FWR_RES_SEL&lt;0&gt;:1/4 rectifier res</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.FwrConfig" title="samna.afe2.configuration.FwrConfig"><span class="pre">samna.afe2.configuration.FwrConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.vcm">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vcm</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.vcm" title="Link to this definition"></a></dt>
+<dd><p>select FWR bias VCM:</p>
+<p>2’b00 493mV;  2’b01 531mV;  2’b10 569mV;  2’b11 606mV</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.vref_down">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vref_down</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.vref_down" title="Link to this definition"></a></dt>
+<dd><p>select FWR VREF DN bias:</p>
+<p>2’b00 113mV;  2’b01 227mV;  2’b10 341mV;  2’b11 455mV</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.FwrConfig.vref_up">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vref_up</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.FwrConfig.vref_up" title="Link to this definition"></a></dt>
+<dd><p>select FWR VREF UP bias:</p>
+<p>2’b00 986mV;  2’b01 872mV;  2’b10 758mV;  2’b11 644mV</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.HibernationConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">HibernationConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.HibernationConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>This block controls the output saer signal sent out from aer2saer module according to the spike number during detecting timing window.</p>
+<p>This block instances 16 cntr_ch blocks for 16 channels</p>
+<p>For getting more key information, signal in last de-active timing window will be saved and sent out at the begining of first active timing window.</p>
+<p>3 working modes are supported:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Mode 0: no calibration;</p></li>
+<li><p>Mode 1: status judged by analog circuit;</p></li>
+<li><p>Mode 2: status judged by digital circuit;</p></li>
+<li><p>Mode 3: not used</p></li>
+</ul>
+</div></blockquote>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.HibernationConfig.active_mode_spike_threshold">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_mode_spike_threshold</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.HibernationConfig.active_mode_spike_threshold" title="Link to this definition"></a></dt>
+<dd><p>Spike number threshold for active mode</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.HibernationConfig.active_status_detection_timing_window">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_status_detection_timing_window</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.HibernationConfig.active_status_detection_timing_window" title="Link to this definition"></a></dt>
+<dd><p>Timing window for active status detection</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.HibernationConfig.deactive_mode_spike_threshold">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deactive_mode_spike_threshold</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.HibernationConfig.deactive_mode_spike_threshold" title="Link to this definition"></a></dt>
+<dd><p>Spike number threshold for deactive mode</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.HibernationConfig.deactive_status_detection_timing_window">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deactive_status_detection_timing_window</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.HibernationConfig.deactive_status_detection_timing_window" title="Link to this definition"></a></dt>
+<dd><p>Timing window for deactive status detection</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.HibernationConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.HibernationConfig" title="samna.afe2.configuration.HibernationConfig"><span class="pre">samna.afe2.configuration.HibernationConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.HibernationConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.HibernationConfig.mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.HibernationConfig.mode" title="Link to this definition"></a></dt>
+<dd><p>Select for hibernation mode:</p>
+<ul class="simple">
+<li><p>00: Not used</p></li>
+<li><p>01: Analog mode</p></li>
+<li><p>10: Digital mode</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.HibernationConfig.reset">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.HibernationConfig.reset" title="Link to this definition"></a></dt>
+<dd><p>Reset signal for hibernation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.HibernationConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.HibernationConfig" title="samna.afe2.configuration.HibernationConfig"><span class="pre">samna.afe2.configuration.HibernationConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.HibernationConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.IafConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">IafConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.IafConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The IAF module converts output of FWR into spikes.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.IafConfig.bias_current">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bias_current</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.IafConfig.bias_current" title="Link to this definition"></a></dt>
+<dd><p>bias current control:</p>
+<p>0: 50 nA;  1: 30 nA;  2: 70 nA;  3: 100 nA</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.IafConfig.comparator_current">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">comparator_current</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.IafConfig.comparator_current" title="Link to this definition"></a></dt>
+<dd><p>comparator current control:</p>
+<p>0: 50 nA;  1: 75 nA;  2: 100 nA;  3: 125 nA;  4: 150 nA;  5: 175 nA;  6: 200 nA;  7: 225 nA</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.IafConfig.comparator_threshold">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">comparator_threshold</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.IafConfig.comparator_threshold" title="Link to this definition"></a></dt>
+<dd><p>comparator output trigger point control</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.IafConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.IafConfig" title="samna.afe2.configuration.IafConfig"><span class="pre">samna.afe2.configuration.IafConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.IafConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.IafConfig.ignore_signal_pulse_width">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ignore_signal_pulse_width</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.IafConfig.ignore_signal_pulse_width" title="Link to this definition"></a></dt>
+<dd><p>iaf vref2 s&lt;2&gt;increase:</p>
+<p>&lt;1:0&gt;decrease;  011:200mV;  100:278mV</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.IafConfig.reset_signal_pulse_delay">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset_signal_pulse_delay</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.IafConfig.reset_signal_pulse_delay" title="Link to this definition"></a></dt>
+<dd><p>select reset signal pulse delay path select</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.IafConfig.reset_signal_pulse_width">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reset_signal_pulse_width</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.IafConfig.reset_signal_pulse_width" title="Link to this definition"></a></dt>
+<dd><p>iaf verf1 select:</p>
+<p>&lt;2&gt;increase;  &lt;1:0&gt;decrease;  011:206mV;  100:333mV</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.IafConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.IafConfig" title="samna.afe2.configuration.IafConfig"><span class="pre">samna.afe2.configuration.IafConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.IafConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LdoConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">LdoConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LdoConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Ldo configuration.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LdoConfig.ana_vsel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ana_vsel</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LdoConfig.ana_vsel" title="Link to this definition"></a></dt>
+<dd><p>Output Voltage control for Analog LDO(V):</p>
+<p>000: 1.1 001: 1.05 010: 1.0 011: 0.95 100: 1.3 101: 1.25 110: 1.2 111: 1.15</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LdoConfig.dig_vsel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dig_vsel</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LdoConfig.dig_vsel" title="Link to this definition"></a></dt>
+<dd><p>Output Voltage control for Digital LDO(V):</p>
+<p>000: 1.1 001: 1.05 010: 1.0 011: 0.95 100: 1.3 101: 1.25 110: 1.2 111: 1.15</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LdoConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.LdoConfig" title="samna.afe2.configuration.LdoConfig"><span class="pre">samna.afe2.configuration.LdoConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LdoConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LdoConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.LdoConfig" title="samna.afe2.configuration.LdoConfig"><span class="pre">samna.afe2.configuration.LdoConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LdoConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">LnaConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The low noise amplifier amplifies the input with given gain.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.cf_tune">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cf_tune</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.cf_tune" title="Link to this definition"></a></dt>
+<dd><p>extra 1p cap witch low active config cap:</p>
+<p>LNA_CF_TUNE&lt;0&gt;:1p; LNA_CF_TUNE&lt;1&gt;:2p; LNA_CF_TUNE&lt;2&gt;:4p; LNA_CF_TUNE&lt;3&gt;:4P</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.ci_tune">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ci_tune</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.ci_tune" title="Link to this definition"></a></dt>
+<dd><p>Extra 0.25p cap witch low active config cap:</p>
+<p>LNA_CI_TUNE&lt;0&gt;:0.5p; LNA_CI_TUNE&lt;1&gt;:1p; LNA_CI_TUNE&lt;2&gt;:2p; LNA_CI_TUNE&lt;3&gt;:4P</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.feedback_cap_config_disable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feedback_cap_config_disable</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.feedback_cap_config_disable" title="Link to this definition"></a></dt>
+<dd><p>LNA Feedback cap config disable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.LnaConfig" title="samna.afe2.configuration.LnaConfig"><span class="pre">samna.afe2.configuration.LnaConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.front_cap_config_disable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">front_cap_config_disable</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.front_cap_config_disable" title="Link to this definition"></a></dt>
+<dd><p>LNA front cap config disable.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.select_current">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_current</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.select_current" title="Link to this definition"></a></dt>
+<dd><p>lna current select:</p>
+<p>60n+ &lt;2&gt;:80n; &lt;1&gt;:40n; &lt;0&gt;:20n</p>
+<p>for test path: &lt;3&gt;:120n; &lt;2&gt;:60n; &lt;1&gt;:140n</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.select_vref_lna_h">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_vref_lna_h</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.select_vref_lna_h" title="Link to this definition"></a></dt>
+<dd><p>lna vcm_h modification:</p>
+<p>2’b00 758mV; 2’b01 645mV; 2’b10 599mV; 2’b11 576mV</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.select_vref_lna_l">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_vref_lna_l</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.select_vref_lna_l" title="Link to this definition"></a></dt>
+<dd><p>lna vcm_l modification:</p>
+<p>2’b00 341mV; 2’b01 402mV; 2’b10 455mV; 2’b11 493mV</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.LnaConfig" title="samna.afe2.configuration.LnaConfig"><span class="pre">samna.afe2.configuration.LnaConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.LnaConfig.vcm">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vcm</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.LnaConfig.vcm" title="Link to this definition"></a></dt>
+<dd><p>select LNA VCM:</p>
+<p>2’b00 493mV; 2’b01 531mV; 2’b10 569mV; 2’b11 606mV</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.MgmConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">MgmConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.MgmConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Master gm configuration.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.MgmConfig.bias_select">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bias_select</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.MgmConfig.bias_select" title="Link to this definition"></a></dt>
+<dd><p>80n+</p>
+<p>master gm cell bias select:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>&lt;2&gt;:160n</p></li>
+<li><p>&lt;1&gt;:80n</p></li>
+<li><p>&lt;0&gt;:40n</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.MgmConfig.enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.MgmConfig.enable" title="Link to this definition"></a></dt>
+<dd><p>Enable master gm</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.MgmConfig.enable_bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_bias</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.MgmConfig.enable_bias" title="Link to this definition"></a></dt>
+<dd><p>Enable master gm cell bias for bandpass filter</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.MgmConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.MgmConfig" title="samna.afe2.configuration.MgmConfig"><span class="pre">samna.afe2.configuration.MgmConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.MgmConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.MgmConfig.ibpf_select">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ibpf_select</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.MgmConfig.ibpf_select" title="Link to this definition"></a></dt>
+<dd><p>bpf mgm mode Ibias ctrl:</p>
+<ul class="simple">
+<li><p>MGM_IBPF_SEL&lt;0&gt;:0.25</p></li>
+<li><p>MGM_IBPF_SEL&lt;1&gt;:0.5</p></li>
+<li><p>MGM_IBPF_SEL&lt;2&gt;:1</p></li>
+<li><p>MGM_IBPF_SEL&lt;3&gt;:2</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.MgmConfig.ifwr_select">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ifwr_select</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.MgmConfig.ifwr_select" title="Link to this definition"></a></dt>
+<dd><p>fwr mgm mode Ibias ctrl:</p>
+<ul class="simple">
+<li><p>MGM_IFWR_SEL&lt;0&gt;:0.25</p></li>
+<li><p>MGM_IFWR_SEL&lt;1&gt;:0.5</p></li>
+<li><p>MGM_IFWR_SEL&lt;2&gt;:1</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.MgmConfig.mgm_select">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mgm_select</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.MgmConfig.mgm_select" title="Link to this definition"></a></dt>
+<dd><p>maser gm set:</p>
+<ul class="simple">
+<li><p>2’b00=920nS</p></li>
+<li><p>2’b01=1.37uS</p></li>
+<li><p>2’b10=1.37uS</p></li>
+<li><p>2’b11=1.81uS</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.MgmConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.MgmConfig" title="samna.afe2.configuration.MgmConfig"><span class="pre">samna.afe2.configuration.MgmConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.MgmConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.afe2.configuration.SqdlConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.afe2.configuration.</span></span><span class="sig-name descname"><span class="pre">SqdlConfig</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.SqdlConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Squlech detector configuration.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.SqdlConfig.bias_select">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bias_select</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.SqdlConfig.bias_select" title="Link to this definition"></a></dt>
+<dd><p>source follwer verf bias select &lt;2-0&gt;  30n+</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>&lt;2&gt;:120n</p></li>
+<li><p>&lt;1&gt;:60n</p></li>
+<li><p>&lt;0&gt;:30n</p></li>
+</ul>
+</div></blockquote>
+<p>sd comparator bias select &lt;5-3&gt;  70n+</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>&lt;2&gt;:92n</p></li>
+<li><p>&lt;1&gt;:46n</p></li>
+<li><p>&lt;0&gt;:23n</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.SqdlConfig.enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.SqdlConfig.enable" title="Link to this definition"></a></dt>
+<dd><p>Enable squlech detector</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.SqdlConfig.enable_detector_bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_detector_bias</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.SqdlConfig.enable_detector_bias" title="Link to this definition"></a></dt>
+<dd><p>Enable squlech detector bias</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.SqdlConfig.enable_detector_counter">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_detector_counter</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.SqdlConfig.enable_detector_counter" title="Link to this definition"></a></dt>
+<dd><p>Enable squlech detector counter rst</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.SqdlConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.SqdlConfig" title="samna.afe2.configuration.SqdlConfig"><span class="pre">samna.afe2.configuration.SqdlConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.SqdlConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.SqdlConfig.response_time">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">response_time</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.SqdlConfig.response_time" title="Link to this definition"></a></dt>
+<dd><p>sd response time select</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.afe2.configuration.SqdlConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.afe2.configuration.SqdlConfig" title="samna.afe2.configuration.SqdlConfig"><span class="pre">samna.afe2.configuration.SqdlConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.afe2.configuration.SqdlConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.afe2.configuration.SqdlConfig.vth_signal">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vth_signal</span></span><a class="headerlink" href="index.html#samna.afe2.configuration.SqdlConfig.vth_signal" title="Link to this definition"></a></dt>
+<dd><p>Select signal for the Vth of SQD module</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="samna.afe2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../event/index.html" class="btn btn-neutral float-right" title="samna.afe2.event" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+#######
+Xylo V2
+#######
+
+Xylo is a full digital AI chip based on Spiking Neural Network (SNN) and Reservoir Computing technology. With appropriate network and proper training, it could support applications like key word spotting (KWS), Electrocardiograph (ECG) anomaly detection, vibration anomaly detection and ambient sound detection.
+
+It supports up to 16 input neurons (IN0 ~ IN15), 1000 configurable input expansion neurons (IEN0 ~ IEN999) and / or recurrent neurons (RN0 ~ RN999) and up to 8 output readout neurons (ON0 ~ ON7) for classification purpose.
+
+It consists of a SPI interface for register / RAM access, a dedicated serial AER interface for input spike and an interrupt indicating classification / detection result.
+
+**************
+Api Reference:
+**************
+
+* Model: :ref:`samna.xyloCore2`
+* Event: :ref:`samna.xyloCore2.event`
+* Configuration: :ref:`samna.xyloCore2.configuration` 

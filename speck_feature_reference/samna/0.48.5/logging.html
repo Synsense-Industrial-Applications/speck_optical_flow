@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logging &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Device Controller" href="deviceController.html" />
+    <link rel="prev" title="Quick Start" href="quickStart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickStart.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="logging.html#">Logging</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#default-log-level">Default Log Level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#dealing-with-asynchrony">Dealing with Asynchrony</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Logging</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/logging.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="logging">
+<h1>Logging<a class="headerlink" href="logging.html#logging" title="Link to this heading"></a></h1>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="logging.html#default-log-level" id="id1">Default Log Level</a></p></li>
+<li><p><a class="reference internal" href="logging.html#dealing-with-asynchrony" id="id2">Dealing with Asynchrony</a></p></li>
+<li><p><a class="reference internal" href="logging.html#example" id="id3">Example</a></p></li>
+</ul>
+</nav>
+<p>Samna hooks into Python’s native logging facility. This means one can use the full functionality
+of Python’s logger, handlers, formatters, etc. Look <a class="reference external" href="https://docs.python.org/3/library/logging.html#">here</a>
+for detailed documentation.</p>
+<p>The parent logger in samna is <code class="docutils literal notranslate"><span class="pre">samna</span></code>, and modules may define their own child loggers.
+For example, the <code class="docutils literal notranslate"><span class="pre">samna.device</span></code> module will use the <code class="docutils literal notranslate"><span class="pre">samna.device</span></code> logger. For a list of all
+loggers, one can call the <code class="docutils literal notranslate"><span class="pre">getChildren()</span></code> method on the <code class="docutils literal notranslate"><span class="pre">samna</span></code> logger with Python 3.12.</p>
+<section id="default-log-level">
+<h2><a class="toc-backref" href="logging.html#id1" role="doc-backlink">Default Log Level</a><a class="headerlink" href="logging.html#default-log-level" title="Link to this heading"></a></h2>
+<p>By default, samna only forwards log messages from the <strong>INFO</strong> level to Python’s logging system.
+This means that <strong>DEBUG</strong> and lower-level messages are ignored unless explicitly enabled.</p>
+<p>To receive <strong>DEBUG</strong> messages as well, you need to call:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">samna</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">samna</span><span class="o">.</span><span class="n">debugging</span><span class="o">.</span><span class="n">set_log_level</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, even after enabling <strong>DEBUG</strong> messages, whether they are actually logged or displayed still depends
+on the logging configuration. The handlers and formatters you set up must also allow <strong>DEBUG</strong> messages
+to be written to a file or displayed on the console.</p>
+</section>
+<section id="dealing-with-asynchrony">
+<h2><a class="toc-backref" href="logging.html#id2" role="doc-backlink">Dealing with Asynchrony</a><a class="headerlink" href="logging.html#dealing-with-asynchrony" title="Link to this heading"></a></h2>
+<p>Normally, the <code class="docutils literal notranslate"><span class="pre">created</span></code> <a class="reference external" href="https://docs.python.org/3/library/logging.html#logrecord-attributes">attribute</a>
+of the <code class="docutils literal notranslate"><span class="pre">LogRecord</span></code> contains the time when the message was created.
+However, samna’s interaction with Python’s logging facility is asynchronous, meaning the log messages may arrive
+out of order in Python. The <code class="docutils literal notranslate"><span class="pre">created</span></code> attribute is only the time when it arrived at the Python logger;
+the message may have been created earlier. Therefore, an attribute <code class="docutils literal notranslate"><span class="pre">logcreated</span></code> is added to the <code class="docutils literal notranslate"><span class="pre">LogRecord</span></code>
+with the actual log time. Just like the <code class="docutils literal notranslate"><span class="pre">created</span></code> attribute, it stores the nanoseconds passed since the epoch.</p>
+<p>This extra attribute can be accessed by formatters, or one could implement a filter that overrides
+the <code class="docutils literal notranslate"><span class="pre">created</span></code> attribute with the <code class="docutils literal notranslate"><span class="pre">logcreated</span></code> attribute.</p>
+</section>
+<section id="example">
+<h2><a class="toc-backref" href="logging.html#id3" role="doc-backlink">Example</a><a class="headerlink" href="logging.html#example" title="Link to this heading"></a></h2>
+<p>The example below shows how to set up a useful default where all messages with severity <strong>INFO</strong> or higher
+are logged to a file, but <strong>WARNING</strong> and <strong>ERROR</strong> messages also appear on the console. In addition,
+log messages in the file are formatted with the actual log creation time and their level.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">samna</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;samna&quot;</span><span class="p">)</span>
+
+<span class="c1"># Python&#39;s default is actually set to WARNING, so we have to lower it</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%(logcreated)f</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">file_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="s2">&quot;samna.log&quot;</span><span class="p">)</span>
+<span class="n">file_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">file_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+
+<span class="n">stream_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">stream_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">stream_handler</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quickStart.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="deviceController.html" class="btn btn-neutral float-right" title="Device Controller" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

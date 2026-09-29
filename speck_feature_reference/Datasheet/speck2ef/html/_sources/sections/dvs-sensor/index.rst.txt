@@ -1,0 +1,14 @@
+.. _dvs-sensor:
+
+Internal DVS Sensor
+===================
+
+Speck2e implements a 128x128 Dynamic Vision Sensor (DVS) pixel array.
+This sensor is capable of producing '1' (inactive->active) and '0' (active->inactive)
+events and send them in sequence on the internal DVS bus to the :ref:`event-pre-processing`.
+
+.. toctree::
+    :maxdepth: 1
+
+    sensor-overview
+    parameters

@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Start &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Logging" href="logging.html" />
+    <link rel="prev" title="Install" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="quickStart.html#">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickStart.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickStart.html#manipulate-devices">Manipulate Devices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quickStart.html#discover-devices">Discover Devices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickStart.html#open-devices">Open Devices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="quickStart.html#open-by-device-instance">Open by Device Instance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quickStart.html#open-by-device-name">Open by Device Name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quickStart.html#select-a-device-from-multiple-connected-devices">Select a Device from Multiple Connected Devices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quickStart.html#configuring-a-chip">Configuring a Chip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickStart.html#event-handling-with-filter-graphs">Event Handling with Filter Graphs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quickStart.html#create-a-graph">Create a Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickStart.html#receiving-events-from-a-chip-model">Receiving Events from a Chip model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="quickStart.html#with-a-filter-graph">With a Filter Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quickStart.html#without-a-filter-graph">Without a Filter Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="quickStart.html#sending-events-to-a-chip">Sending Events to a Chip</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="quickStart.html#id1">With a Filter Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quickStart.html#id2">Without a Filter Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="quickStart.html#add-filters">Add filters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quickStart.html#visualization">Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="quickStart.html#launching-the-visualizer">Launching the Visualizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quickStart.html#displaying-events-in-the-visualizer">Displaying Events in the Visualizer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Quick Start</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/quickStart.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quick-start">
+<h1>Quick Start<a class="headerlink" href="quickStart.html#quick-start" title="Link to this heading"></a></h1>
+<p>This guide provides step-by-step instructions for managing devices, configuring settings, and handling event streams using Samna.</p>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="quickStart.html#prerequisites" id="id3">Prerequisites</a></p></li>
+<li><p><a class="reference internal" href="quickStart.html#manipulate-devices" id="id4">Manipulate Devices</a></p>
+<ul>
+<li><p><a class="reference internal" href="quickStart.html#discover-devices" id="id5">Discover Devices</a></p></li>
+<li><p><a class="reference internal" href="quickStart.html#open-devices" id="id6">Open Devices</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="quickStart.html#configuring-a-chip" id="id7">Configuring a Chip</a></p></li>
+<li><p><a class="reference internal" href="quickStart.html#event-handling-with-filter-graphs" id="id8">Event Handling with Filter Graphs</a></p>
+<ul>
+<li><p><a class="reference internal" href="quickStart.html#create-a-graph" id="id9">Create a Graph</a></p></li>
+<li><p><a class="reference internal" href="quickStart.html#receiving-events-from-a-chip-model" id="id10">Receiving Events from a Chip model</a></p></li>
+<li><p><a class="reference internal" href="quickStart.html#sending-events-to-a-chip" id="id11">Sending Events to a Chip</a></p></li>
+<li><p><a class="reference internal" href="quickStart.html#add-filters" id="id12">Add filters</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="quickStart.html#visualization" id="id13">Visualization</a></p>
+<ul>
+<li><p><a class="reference internal" href="quickStart.html#launching-the-visualizer" id="id14">Launching the Visualizer</a></p></li>
+<li><p><a class="reference internal" href="quickStart.html#displaying-events-in-the-visualizer" id="id15">Displaying Events in the Visualizer</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="prerequisites">
+<h2><a class="toc-backref" href="quickStart.html#id3" role="doc-backlink">Prerequisites</a><a class="headerlink" href="quickStart.html#prerequisites" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Ensure devices are connected via <strong>USB 3.0-compatible USB-C cables</strong>.</p></li>
+</ul>
+</section>
+<section id="manipulate-devices">
+<h2><a class="toc-backref" href="quickStart.html#id4" role="doc-backlink">Manipulate Devices</a><a class="headerlink" href="quickStart.html#manipulate-devices" title="Link to this heading"></a></h2>
+<p>For detailed description please check <a class="reference internal" href="deviceController.html#device-controller"><span class="std std-ref">Device Controller</span></a>.</p>
+<section id="discover-devices">
+<h3><a class="toc-backref" href="quickStart.html#id5" role="doc-backlink">Discover Devices</a><a class="headerlink" href="quickStart.html#discover-devices" title="Link to this heading"></a></h3>
+<p>All SynSense devices can be discovered by the following methods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Get all supported devices that are currently connected to the machine.</span>
+<span class="linenos">2</span><span class="n">devices</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">get_all_devices</span><span class="p">()</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="c1"># Get all devices that have been opened in this process.</span>
+<span class="linenos">5</span><span class="n">devices</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">get_opened_devices</span><span class="p">()</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="c1"># Get all supported devices that are currently connected to the machine and are not in use by any process.</span>
+<span class="linenos">8</span><span class="n">devices</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">get_unopened_devices</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="open-devices">
+<h3><a class="toc-backref" href="quickStart.html#id6" role="doc-backlink">Open Devices</a><a class="headerlink" href="quickStart.html#open-devices" title="Link to this heading"></a></h3>
+<section id="open-by-device-instance">
+<h4>Open by Device Instance<a class="headerlink" href="quickStart.html#open-by-device-instance" title="Link to this heading"></a></h4>
+<p>Use this if you want to dynamically detect and open devices:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># List all connected unopened devices</span>
+<span class="linenos">2</span><span class="n">devices</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">get_unopened_devices</span><span class="p">()</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="c1"># Open the first detected device</span>
+<span class="linenos">5</span><span class="k">if</span> <span class="n">devices</span><span class="p">:</span>
+<span class="linenos">6</span>    <span class="n">my_device</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="n">devices</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="open-by-device-name">
+<h4>Open by Device Name<a class="headerlink" href="quickStart.html#open-by-device-name" title="Link to this heading"></a></h4>
+<p>Use this to explicitly open a specific device type (e.g., Speck2f Dev Kit):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Open the first Speck2f Dev Kit</span>
+<span class="linenos">2</span><span class="n">board</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;Speck2fDevKit:0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Device names follow the format <code class="docutils literal notranslate"><span class="pre">&quot;&lt;DeviceType&gt;:&lt;Index&gt;&quot;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;DvXplorer:0&quot;</span></code>).</p></li>
+<li><p>For a list of supported devices, refer to <a class="reference internal" href="install.html#supported-devices"><span class="std std-ref">Supported Devices</span></a>.</p></li>
+</ul>
+</div>
+</section>
+<section id="select-a-device-from-multiple-connected-devices">
+<h4>Select a Device from Multiple Connected Devices<a class="headerlink" href="quickStart.html#select-a-device-from-multiple-connected-devices" title="Link to this heading"></a></h4>
+<p>If multiple devices are connected, filter by type using their <code class="docutils literal notranslate"><span class="pre">device_type_name</span></code> attribute:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">devices</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">get_unopened_devices</span><span class="p">()</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">for</span> <span class="n">dev</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
+<span class="linenos">4</span>    <span class="k">if</span> <span class="n">dev</span><span class="o">.</span><span class="n">device_type_name</span> <span class="o">==</span> <span class="s2">&quot;DvXplorer&quot;</span><span class="p">:</span>
+<span class="linenos">5</span>        <span class="n">my_dvxplorer</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+<span class="linenos">6</span>    <span class="k">elif</span> <span class="n">dev</span><span class="o">.</span><span class="n">device_type_name</span> <span class="o">==</span> <span class="s2">&quot;Speck2fDevKit&quot;</span><span class="p">:</span>
+<span class="linenos">7</span>        <span class="n">my_dev_kit</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="configuring-a-chip">
+<h2><a class="toc-backref" href="quickStart.html#id7" role="doc-backlink">Configuring a Chip</a><a class="headerlink" href="quickStart.html#configuring-a-chip" title="Link to this heading"></a></h2>
+<p>To configure a chip:</p>
+<ol class="arabic simple">
+<li><p><strong>Create a configuration object</strong> with desired settings.</p></li>
+<li><p><strong>Apply the configuration</strong> to the chip’s model.</p></li>
+</ol>
+<p>In Samna, one chip only has one type of configuration object.
+For example, <code class="docutils literal notranslate"><span class="pre">Speck2fDevKit</span></code>, <code class="docutils literal notranslate"><span class="pre">Speck2fModuleDevKit</span></code>, <code class="docutils literal notranslate"><span class="pre">Speck2fLcc84LoulanBoard</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Speck2fCharacterizationBoard</span></code>, <code class="docutils literal notranslate"><span class="pre">Speck2fCharQiuciBoard</span></code> and <code class="docutils literal notranslate"><span class="pre">Speck2fModuleLoulanBoard</span></code> share
+one type of configuration object: <a class="reference internal" href="reference/speck2f/configuration/index.html#samna-speck2f-configuration"><span class="std std-ref">samna.speck2f.configuration.SpeckConfiguration</span></a>.</p>
+<p>Example for Speck2f series:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Create a default configuration</span>
+<span class="linenos">2</span><span class="n">config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">speck2f</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">SpeckConfiguration</span><span class="p">()</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="c1"># modify configuration</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="c1"># Apply to the chip model</span>
+<span class="linenos">7</span><span class="n">model</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span>  <span class="c1"># Assuming board is the opened chip</span>
+<span class="linenos">8</span><span class="n">model</span><span class="o">.</span><span class="n">apply_configuration</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To ensure the proper configuration of the chip,
+such as enabling any output from it,
+please refer to the dedicated page of the specific chip model for detailed instructions:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="models/speckSeries/speck2f.html#configure-speck-2f"><span class="std std-ref">How to configure Speck 2f chip</span></a></p></li>
+</ul>
+</section>
+<section id="event-handling-with-filter-graphs">
+<h2><a class="toc-backref" href="quickStart.html#id8" role="doc-backlink">Event Handling with Filter Graphs</a><a class="headerlink" href="quickStart.html#event-handling-with-filter-graphs" title="Link to this heading"></a></h2>
+<p>Samna uses <strong>event filter graphs</strong> to process and route events between devices, filters, and sinks.
+Each <a class="reference internal" href="reference/graph/index.html#samna.graph.EventFilterGraph" title="samna.graph.EventFilterGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.graph.EventFilterGraph</span></code></a> has it’s own processing thread.</p>
+<section id="create-a-graph">
+<h3><a class="toc-backref" href="quickStart.html#id9" role="doc-backlink">Create a Graph</a><a class="headerlink" href="quickStart.html#create-a-graph" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="receiving-events-from-a-chip-model">
+<h3><a class="toc-backref" href="quickStart.html#id10" role="doc-backlink">Receiving Events from a Chip model</a><a class="headerlink" href="quickStart.html#receiving-events-from-a-chip-model" title="Link to this heading"></a></h3>
+<p>Connect the chip model’s source node to a sink node to collect events.
+For the available methods of the sink node, please check <a class="reference internal" href="filters.html#sinks"><span class="std std-ref">Sinks</span></a>.</p>
+<section id="with-a-filter-graph">
+<h4>With a Filter Graph<a class="headerlink" href="quickStart.html#with-a-filter-graph" title="Link to this heading"></a></h4>
+<p>You have to manually create a sink node, then you have the ability to add filters
+between the model source and the sink to process the events. For all the available
+filters, please check <a class="reference internal" href="filters.html#filters"><span class="std std-ref">Filters</span></a>.</p>
+<p>Here we take Speck2f as an example.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">_</span><span class="p">,</span> <span class="n">sink</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">(),</span> <span class="n">samna</span><span class="o">.</span><span class="n">BasicSinkNode_speck2f_event_output_event</span><span class="p">()])</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="n">graph</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># Read events</span>
+<span class="linenos"> 8</span><span class="n">events</span> <span class="o">=</span> <span class="n">sink</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>  <span class="c1"># Returns a list of events</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">graph</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="without-a-filter-graph">
+<h4>Without a Filter Graph<a class="headerlink" href="quickStart.html#without-a-filter-graph" title="Link to this heading"></a></h4>
+<p>In this way there is no graph constructed, so you can’t add filters between the
+model source and the sink node to process the events.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># assumes &#39;board&#39; is an opened device</span>
+<span class="linenos">2</span><span class="n">sink</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">sink_from</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">())</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="c1"># Read events</span>
+<span class="linenos">5</span><span class="n">events</span> <span class="o">=</span> <span class="n">sink</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>  <span class="c1"># Returns a list of events</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sending-events-to-a-chip">
+<h3><a class="toc-backref" href="quickStart.html#id11" role="doc-backlink">Sending Events to a Chip</a><a class="headerlink" href="quickStart.html#sending-events-to-a-chip" title="Link to this heading"></a></h3>
+<p>Use a source node to send events to the chip’s sink node:</p>
+<section id="id1">
+<h4>With a Filter Graph<a class="headerlink" href="quickStart.html#id1" title="Link to this heading"></a></h4>
+<p>You have to manually create a source node, then you have the ability to add filters
+between the source and the model sink to process the events. For all the available
+filters, please check <a class="reference internal" href="filters.html#filters"><span class="std std-ref">Filters</span></a>.</p>
+<p>Here we take Speck2f as an example.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># manually create a sink node for Speck2f series</span>
+<span class="linenos">4</span><span class="n">source</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">BasicSourceNode_speck2f_event_input_event</span><span class="p">(),</span> <span class="n">board</span><span class="o">.</span><span class="n">get_model_sink_node</span><span class="p">()])</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="n">graph</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="c1"># Write events</span>
+<span class="linenos">9</span><span class="n">source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">event1</span><span class="p">,</span> <span class="n">event2</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4>Without a Filter Graph<a class="headerlink" href="quickStart.html#id2" title="Link to this heading"></a></h4>
+<p>In this way there is no graph constructed, so you can’t add filters between the
+source and the model sink node to process the events.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">source</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">source_to</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span><span class="o">.</span><span class="n">get_sink_node</span><span class="p">())</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># Write events</span>
+<span class="linenos">4</span><span class="n">source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">event1</span><span class="p">,</span> <span class="n">event2</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="add-filters">
+<h3><a class="toc-backref" href="quickStart.html#id12" role="doc-backlink">Add filters</a><a class="headerlink" href="quickStart.html#add-filters" title="Link to this heading"></a></h3>
+<p>Samna provides many built-in filters to process events on the fly,
+for all built-in filters, please check <a class="reference internal" href="filters.html#filters"><span class="std std-ref">Filters</span></a>. Different filters have different methods that users can set.
+Each chip has it’s own set of filters it can use, please make sure you are using the correct filter for the chip.</p>
+<p>If the built-in filters can’t meet your needs, you can even write your own filter in C++ with the JIT comes with Samna,
+please check <a class="reference internal" href="jitFilters.html#jit-filters"><span class="std std-ref">JIT Filters</span></a> for more details.</p>
+<p>To use a filter, you have to create a graph first.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">_</span><span class="p">,</span> <span class="n">event_type_filter</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">(),</span> <span class="s2">&quot;Speck2fOutputEventTypeFilter&quot;</span><span class="p">,</span> <span class="n">sink</span><span class="p">])</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="c1"># Here we use Speck2fOutputEventTypeFilter to let only speck2f::event::RegisterValue event can reach the sink.</span>
+<span class="linenos">6</span><span class="n">event_type_filter</span><span class="o">.</span><span class="n">set_desired_type</span><span class="p">(</span><span class="s2">&quot;speck2f::event::RegisterValue&quot;</span><span class="p">)</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="n">graph</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="visualization">
+<h2><a class="toc-backref" href="quickStart.html#id13" role="doc-backlink">Visualization</a><a class="headerlink" href="quickStart.html#visualization" title="Link to this heading"></a></h2>
+<section id="launching-the-visualizer">
+<h3><a class="toc-backref" href="quickStart.html#id14" role="doc-backlink">Launching the Visualizer</a><a class="headerlink" href="quickStart.html#launching-the-visualizer" title="Link to this heading"></a></h3>
+<p>Run the visualizer from the terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>samnagui<span class="w"> </span>-W<span class="w"> </span><span class="m">0</span>.75<span class="w"> </span>-H<span class="w"> </span><span class="m">0</span>.75<span class="w"> </span><span class="s2">&quot;tcp://0.0.0.0:40000&quot;</span>
+</pre></div>
+</div>
+<p>Or programmatically:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># samnagui must be imported after samna</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">samna</span><span class="o">,</span><span class="w"> </span><span class="nn">samnagui</span>
+
+<span class="n">samnagui</span><span class="o">.</span><span class="n">run_visualizer</span><span class="p">(</span>
+   <span class="s2">&quot;tcp://0.0.0.0:40000&quot;</span><span class="p">,</span>  <span class="c1"># Endpoint</span>
+   <span class="mf">0.75</span><span class="p">,</span>                    <span class="c1"># Window width scale</span>
+   <span class="mf">0.75</span>                     <span class="c1"># Window height scale</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="displaying-events-in-the-visualizer">
+<h3><a class="toc-backref" href="quickStart.html#id15" role="doc-backlink">Displaying Events in the Visualizer</a><a class="headerlink" href="quickStart.html#displaying-events-in-the-visualizer" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p><strong>Stream visualizer configure events</strong> to the visualizer via a <code class="docutils literal notranslate"><span class="pre">VizEventStreamer</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+<span class="n">config_source</span><span class="p">,</span> <span class="n">streamer</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">BasicSourceNode_ui_event</span><span class="p">(),</span> <span class="s2">&quot;VizEventStreamer&quot;</span><span class="p">])</span>
+<span class="n">streamer</span><span class="o">.</span><span class="n">set_streamer_endpoint</span><span class="p">(</span><span class="s2">&quot;tcp://0.0.0.0:40000&quot;</span><span class="p">)</span>  <span class="c1"># Match visualizer port</span>
+
+<span class="k">if</span> <span class="n">streamer</span><span class="o">.</span><span class="n">wait_for_receiver_count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;connecting to visualizer fails&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Create an activity plot</strong> for DVS events:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config_source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span>
+    <span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">VisualizerConfiguration</span><span class="p">(</span>
+        <span class="n">plots</span><span class="o">=</span><span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">ActivityPlotConfiguration</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">&quot;DVS Activity&quot;</span><span class="p">)]</span>
+    <span class="p">)</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<p>You can find all supported visualizer configurations in <a class="reference internal" href="reference/ui/index.html#samna-ui"><span class="std std-ref">this page</span></a>.</p>
+</li>
+<li><p><strong>Stream visualizable events</strong> to the visualizer via a <code class="docutils literal notranslate"><span class="pre">VizEventStreamer</span></code>:</p>
+<p>Convert chip-specific events to visualization events using a node like <code class="docutils literal notranslate"><span class="pre">Speck2fDvsToVizConverter</span></code>.
+You can find this converter filter for different chips in <a class="reference internal" href="filters.html#available-filters"><span class="std std-ref">Available Filters</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">board</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;Speck2fDevKit:0&quot;</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">streamer</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">(),</span> <span class="s2">&quot;Speck2fDvsToVizConverter&quot;</span><span class="p">,</span> <span class="s2">&quot;VizEventStreamer&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="Install" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="logging.html" class="btn btn-neutral float-right" title="Logging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

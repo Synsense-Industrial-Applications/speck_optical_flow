@@ -1,0 +1,127 @@
+.. _sensor-parameters:
+
+Internal DVS Sensor Parameters
+==============================
+
+In order for the internal DVS sensor to operate, a number of settings
+have to be configured, mainly through the DVS Register block and dedicated
+pixel field power supplies.
+
+In this section, we provide a description of all the settings and their
+base values.
+
+.. _sensor-main-bias-settings:
+
+Sensor Main Bias Settings
+*************************
+
+Main Bias Enable Settings
+----------------------------
+Only one of the main_bias1, main_bias2 or main_bias3 should be enabled with their respective enable signals (*sensor_en_bias1, sensor_en_bias2 or sensor_en_bias3*).
+
+Start-Up Settings
+------------------
+In order to activate the start-up, both *sensor_en_startupref* and one of the *sensor_en_startup1* or *sensor_en_startup2* should be enabled.
+
+.. _sensor-settings:
+
+Sensor Register Settings
+************************
+
+Current settings:
+-----------------
+
+- :ref:`rbits-SIO1`: sets the reference current for parameter 0. This sets the buffer bias current placed after the logamp.
+- :ref:`rbits-SIO2`; sets the reference current for parameter 1. This sets the logamp bias current.
+- :ref:`rbits-SIO3`: sets the reference current for parameters 2, 3, 4 and 5. This sets the differencing amplifier and comparator currents and sets the reset voltage level.
+- :ref:`rbits-SIO4`: sets the reference current for parameter 6 and 7. This sets the reset/ignore pulse width currents.
+
+For all *sensor_iout* register signals, the general rule applies:
+
+- 0: lowest current
+- 63: highest current
+
+For parameter 0 and parameter 1, there is an option to set the currents with finer steps via :ref:`rbits-SP0` and :ref:`rbits-SP1`, respectively. :ref:`rbits-SP0` and :ref:`rbits-SP1` are binary with the following rule:
+
+- 0: highest current
+- 14: lowest current
+
+.. note::
+    For parameter 1, the arrangement between consecutive :ref:`rbits-SP1` and :ref:`rbits-sio2` is such that :ref:`rbits-SP1` introduces 16 finer current steps between consecutive :ref:`rbits-sio2` configurations. Example: For a given :ref:`rbits-sio2`, if :ref:`rbits-SP1` is 0011, the set current is :ref:`rbits-sio2` x12/16.
+
+.. note::
+    For parameter 0, the arrangement between consecutive :ref:`rbits-SP0` and :ref:`rbits-sio1` is such that :ref:`rbits-SP0` introduces 64 finer current steps between :ref:`rbits-sio1` configurations. Example: For a given :ref:`rbits-sio1`, if :ref:`rbits-SP0` is 0011, the set current is :ref:`rbits-sio1` x12/64. Due to :ref:`rbits-SP0` being 4-bit signal, and the division is being 64, some current values are not reachable. 
+
+.. _pixel-thresholds:
+
+Pixel threshold settings
+------------------------
+
+- :ref:`rbits-SP3`: sets *ON* threshold voltage. Note: this voltage should be lower than the pixel *RESET* voltage. If the current setting is lower, the resulting *ON* threshold voltage increases.
+- :ref:`rbits-SP4`: sets the pixel *RESET* voltage. If the current setting is lower, the resulting *RESET* voltage increases.
+- :ref:`rbits-SP5`: sets *OFF* threshold voltage. Note: this voltage should be higher than the pixel *RESET* voltage. If the current setting is lower, the resulting *OFF* threshold voltage increases.
+- :ref:`rbits-SP6`: sets the *IGNORE* time of the events after receiving an event from a pixel. This setting is similar to *sensor_p7*, i.e., if the current is lower, the *IGNORE* time is longer.
+- :ref:`rbits-SP7`: sets the pixel *RESET* time. If the current is lower, the reset pulse width is longer--meaning that it keeps the *RESET* longer. This might help to lower the pixel event rate if too high.
+
+Setting configurations
+----------------------
+
+Each parameter *sensor_p3-7* internally selects a current multiplication factor. This multiplication is binary with the following rule:
+
+- 0: highest current
+- 31: lowest current
+
+
+How to adjust the settings:
+---------------------------
+
+Normally if you apply the same config parameter for p3, p4 and p5, this guarantees that:
+
+- The *ON* voltage is lower than the *RESET* voltage
+- The *OFF* voltage is higher than the *RESET* voltage
+
+If you would like to set the *ON* voltage lower than that value, and the *OFF* voltage higher than that value:
+
+- Set *ON* voltage to a higher current setting than RESET voltage
+- Set *OFF* voltage to a lower current setting than RESET voltage
+
+.. tip::
+    If sensor_p4 (*RESET* voltage) is set to '11001' (6*I), you normally need to set the other parameters to '11001'
+    However, if you would like to increase the *OFF* voltage, and decrease the *ON* voltage, you can set:
+
+    - sensor_p3 (*ON* voltage):  '00000' (32*I)
+    - sensor_p5 (*OFF* voltage): '11110' (1*I)
+
+Set of initial working settings (latest)
+****************************************
+
+Power supplies
+--------------
+
+- vdda_pixel=1.2V
+- vddd_pixel=1.2V
+- vdd_logic=1.2V
+
+Current settings (registers)
+----------------------------
+
+- :ref:`DVS8[7:0]<reg-DVS8>` = ``1110_1110`` (sensor_p1 and sensor_p0)
+- :ref:`DVS9[4:0]<reg-DVS9>` = ``1_1001`` (sensor_p3)
+- :ref:`DVS10[7:5]<reg-DVS10>` = ``101`` (sensor_en_startup1, sensor_en_startup2, and sensor_en_startupref)
+- :ref:`DVS10[4:0]<reg-DVS10>` = ``1_1001`` (sensor_p4)
+- :ref:`DVS11[7:5]<reg-DVS11>` = ``100`` (sensor_en_bias1, sensor_en_bias2, and sensor_en_bias3)
+- :ref:`DVS11[4:0]<reg-DVS11>` = ``1_1001`` (sensor_p5)
+- :ref:`DVS12[7:0]<reg-DVS12>` = ``1110_1110`` (sensor_p7 and sensor_p6)
+- :ref:`DVS13[5:0]<reg-DVS13>` = ``00_1110`` (sensor_iout1)
+- :ref:`DVS14[5:0]<reg-DVS14>` = ``10_0000`` (sensor_iout2)
+- :ref:`DVS15[5:0]<reg-DVS15>` = ``00_1010`` (sensor_iout3)
+- :ref:`DVS16[5:0]<reg-DVS16>` = ``11_1111`` (sensor_iout4)
+
+.. _vbias-vref:
+
+VBIAS and VREF Pad Explanation
+*******************************
+
+VBIAS pad in the :ref:`pinout diagram<pinout-diagram>` is used to bias the gate of the one of the pixel types in SYNS91104 (Speck2et) with an analog voltage. It is not connected to any internal connections in SYNS91103/SYNS91105 (Speck2e/Speck2f). You can left it open.
+
+VREF pad in the :ref:`pinout diagram<pinout-diagram>` is used to monitor the generated reference voltage in the main bias circuit. It outputs an analog voltage. To monitor it, you can connect the pad to a capacitance and use a multimeter or a similar device.

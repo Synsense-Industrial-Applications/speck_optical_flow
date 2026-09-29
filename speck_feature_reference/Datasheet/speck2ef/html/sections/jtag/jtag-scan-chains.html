@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11.5. JTAG Scan Chain Access and Operation &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="11.6. JTAG Asynchronous I/O Operation" href="jtag-async.html" />
+    <link rel="prev" title="11.4. JTAG Register Access" href="jtag-registers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. JTAG Interface</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="jtag-overview.html">11.1. JTAG Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-command-overview.html">11.2. JTAG Command Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-srams.html">11.3. JTAG SRAM Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-registers.html">11.4. JTAG Register Access</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.5. JTAG Scan Chain Access and Operation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scan-chain-domains">11.5.1. Scan Chain Domains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scan-chain-activation">11.5.2. Scan Chain Activation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-async.html">11.6. JTAG Asynchronous I/O Operation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">11. </span>JTAG Interface</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">11.5. </span>JTAG Scan Chain Access and Operation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/jtag/jtag-scan-chains.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jtag-scan-chain-access-and-operation">
+<span id="jtag-scan-chains"></span><h1><span class="section-number">11.5. </span>JTAG Scan Chain Access and Operation<a class="headerlink" href="#jtag-scan-chain-access-and-operation" title="Permalink to this heading"></a></h1>
+<p>The following describes the sequence of commands required to activate and set/read one
+of the internal Speck2e scan chains.</p>
+<p>For a detailed description of the Scan Chain system and timing diagrams, refer to section <a class="reference internal" href="../scanchain/overview.html#scanchain-overview"><span class="std std-ref">Scan Chain Overview</span></a>.</p>
+<section id="scan-chain-domains">
+<h2><span class="section-number">11.5.1. </span>Scan Chain Domains<a class="headerlink" href="#scan-chain-domains" title="Permalink to this heading"></a></h2>
+<p>The scan chains are internally divided into domains. This is to limit the scan chain length,
+and to allow individual debugging of the various internal blocks independently.</p>
+<p>The following table provides the list of internal scan chain domains.
+The corresponding <strong>5-bit</strong> index values must be provided through the JTAG interface
+after the <em>SCAN_BLK_SEL</em> command.</p>
+<p>The length in bits of each scan chain is also provided for reference.</p>
+<table class="table-small docutils align-default" id="id1">
+<caption><span class="caption-text">Speck2e/f scan chain domains</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Domain Name</p></td>
+<td><p>Sub-Domain</p></td>
+<td><p>SCAN_BLK_ID</p></td>
+<td><p>Speck2e/et Length [bits]</p></td>
+<td><p>Speck2f Length [bits]</p></td>
+</tr>
+<tr class="row-even"><td><p>Input Interface</p></td>
+<td><p>—</p></td>
+<td><p>0x0</p></td>
+<td><p>3525</p></td>
+<td><p>2811</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layer 0</p></td>
+<td><p>Convolution and Kernel Interface</p></td>
+<td><p>0x4</p></td>
+<td><p>10401</p></td>
+<td><p>10401</p></td>
+</tr>
+<tr class="row-even"><td><p>Layer 1</p></td>
+<td><p>Convolution and Kernel Interface</p></td>
+<td><p>0x5</p></td>
+<td><p>5367</p></td>
+<td><p>5367</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layer 2-8</p></td>
+<td><p>Convolution and Kernel Interface</p></td>
+<td><p>0x6:0xC</p></td>
+<td><p>5101</p></td>
+<td><p>5101</p></td>
+</tr>
+<tr class="row-even"><td><p>Layer 0-1</p></td>
+<td><p>Neuron Interface</p></td>
+<td><p>0xD:0xE</p></td>
+<td><p>10451</p></td>
+<td><p>10451</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layer 2</p></td>
+<td><p>Neuron Interface</p></td>
+<td><p>0xF</p></td>
+<td><p>3379</p></td>
+<td><p>3379</p></td>
+</tr>
+<tr class="row-even"><td><p>Layer 3-8</p></td>
+<td><p>Neuron Interface</p></td>
+<td><p>0x10:0x15</p></td>
+<td><p>2253</p></td>
+<td><p>2253</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layers 0-1</p></td>
+<td><p>Leak Generator</p></td>
+<td><p>0x16:17</p></td>
+<td><p>1956</p></td>
+<td><p>1956</p></td>
+</tr>
+<tr class="row-even"><td><p>Layers 2-8</p></td>
+<td><p>Leak Generator</p></td>
+<td><p>0x18:1E</p></td>
+<td><p>1825</p></td>
+<td><p>1825</p></td>
+</tr>
+<tr class="row-odd"><td><p>Readout Layer</p></td>
+<td><p>—</p></td>
+<td><p>0x1</p></td>
+<td><p>244</p></td>
+<td><p>244</p></td>
+</tr>
+<tr class="row-even"><td><p>DVS and DVS Pre-Processing Layer</p></td>
+<td><p>—</p></td>
+<td><p>0x2</p></td>
+<td><p>10758</p></td>
+<td><p>10758</p></td>
+</tr>
+<tr class="row-odd"><td><p>Router</p></td>
+<td><p>—</p></td>
+<td><p>0x3</p></td>
+<td><p>47996</p></td>
+<td><p>47996</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scan-chain-activation">
+<h2><span class="section-number">11.5.2. </span>Scan Chain Activation<a class="headerlink" href="#scan-chain-activation" title="Permalink to this heading"></a></h2>
+<p>The selected scan chain can be activated by issuing the following command
+sequence through JTAG:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate scan chain</span>
+<span class="n">send_ir</span><span class="p">(</span><span class="mh">0x09</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Command: SCAN_BLK_SEL</span>
+<span class="n">send_dr</span><span class="p">(</span><span class="n">block_id</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">0</span><span class="p">],</span> <span class="mi">5</span> <span class="n">bits</span><span class="p">)</span>
+<span class="n">send_ir</span><span class="p">(</span><span class="mh">0x0D</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Command: SCAN_DEN_ON</span>
+<span class="n">send_ir</span><span class="p">(</span><span class="mh">0x0B</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Command: SCAN_HSEN_ON</span>
+<span class="n">send_ir</span><span class="p">(</span><span class="mh">0x08</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Command: SCAN_SHIFT</span>
+
+<span class="c1"># Send (and read out) scan chain data bit stream</span>
+<span class="n">send_dr</span><span class="p">(</span><span class="o">*</span><span class="n">scan</span> <span class="n">chain</span> <span class="n">data</span><span class="o">*</span><span class="p">,</span> <span class="n">n</span> <span class="n">bits</span><span class="p">)</span>
+
+<span class="c1"># Deactivate scan chain</span>
+<span class="n">send_ir</span><span class="p">(</span><span class="mh">0x0C</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Command: SCAN_DEN_OFF</span>
+<span class="n">send_ir</span><span class="p">(</span><span class="mh">0x0A</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Command: SCAN_HSEN_OFF</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="jtag-registers.html" class="btn btn-neutral float-left" title="11.4. JTAG Register Access" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="jtag-async.html" class="btn btn-neutral float-right" title="11.6. JTAG Asynchronous I/O Operation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

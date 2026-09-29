@@ -1,0 +1,26 @@
+#########
+DYNAP-SE1
+#########
+
+**************
+API Reference:
+**************
+
+- :ref:`samna.dynapse1`.
+
+- related filter nodes:
+
+   - :class:`To filter spikes of selected neurons <Dynapse1NeuronSelect>`.
+   - :class:`To generate exponentially-decaying traces for STDP-like algorithms <Dynapse1NeuronTrace>`.
+
+- a utilities `library <https://gitlab.com/neuroinf/ctxctl_contrib/-/tree/samna-dynapse1>`_ for DYNAP-SE1 based on Samna.
+
+*********
+Contents:
+*********
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   contents/intro

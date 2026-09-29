@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. Pinout Overview &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Internal DVS Sensor" href="dvs-sensor/index.html" />
+    <link rel="prev" title="3.7. Internal Slow Clock" href="architecture/slow-clock.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Pinout Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pinout-diagram">4.1. Pinout diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pin-locations">4.2. Pin Locations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pin-description">4.3. Pin description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gpio-pin-configuration">4.4. GPIO Pin Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>Pinout Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/sections/pinout.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pinout-overview">
+<span id="pinout-main"></span><h1><span class="section-number">4. </span>Pinout Overview<a class="headerlink" href="#pinout-overview" title="Permalink to this heading"></a></h1>
+<section id="pinout-diagram">
+<span id="id1"></span><h2><span class="section-number">4.1. </span>Pinout diagram<a class="headerlink" href="#pinout-diagram" title="Permalink to this heading"></a></h2>
+<figure class="align-default" id="id3">
+<a class="img-limit-width reference internal image-reference" href="../_images/Speck2e_bonding_diagram.svg"><img alt="../_images/Speck2e_bonding_diagram.svg" class="img-limit-width" src="../_images/Speck2e_bonding_diagram.svg" /></a>
+<figcaption>
+<p><span class="caption-text">Speck2e Pad Ring and Bonding diagram</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="pin-locations">
+<span id="id2"></span><h2><span class="section-number">4.2. </span>Pin Locations<a class="headerlink" href="#pin-locations" title="Permalink to this heading"></a></h2>
+<table class="table-small docutils align-default" id="id5">
+<caption><span class="caption-text">Speck2e (SYNS91103) and v2e test (SYNS91104) Left Pin Locations</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 7%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Pin# 64pin</p></td>
+<td><p>Pin# 72pin</p></td>
+<td><p>Pad #</p></td>
+<td><p>Pad Name</p></td>
+<td><p>Pad Type</p></td>
+<td></td>
+<td><p>x (µm)</p></td>
+<td><p>y (µm)</p></td>
+<td><p>x (µm)</p></td>
+<td><p>y (µm)</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>SYNS91103</p></td>
+<td></td>
+<td><p>SYNS91104</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2POC</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>4975</p></td>
+<td><p>62.5</p></td>
+<td><p>4600</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>2</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>4845</p></td>
+<td><p>62.5</p></td>
+<td><p>4480</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>IO40_RGB_PCLK_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>62.5</p></td>
+<td><p>4715</p></td>
+<td><p>62.5</p></td>
+<td><p>4360</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>4</p></td>
+<td><p>IO20_READOUT1_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>62.5</p></td>
+<td><p>4585</p></td>
+<td><p>62.5</p></td>
+<td><p>4240</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>IO29_RGB_HREF_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>62.5</p></td>
+<td><p>4455</p></td>
+<td><p>62.5</p></td>
+<td><p>4120</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>4325</p></td>
+<td><p>62.5</p></td>
+<td><p>4000</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>7</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>4195</p></td>
+<td><p>62.5</p></td>
+<td><p>3880</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>8</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>4065</p></td>
+<td><p>62.5</p></td>
+<td><p>3760</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>9</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>3935</p></td>
+<td><p>62.5</p></td>
+<td><p>3640</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>6</p></td>
+<td><p>10</p></td>
+<td><p>vdd_ram</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>3805</p></td>
+<td><p>62.5</p></td>
+<td><p>3520</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>6</p></td>
+<td><p>11</p></td>
+<td><p>vdd_ram</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>3675</p></td>
+<td><p>62.5</p></td>
+<td><p>3400</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>12</p></td>
+<td><p>vss_ram</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>3545</p></td>
+<td><p>62.5</p></td>
+<td><p>3280</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>13</p></td>
+<td><p>vss_ram</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>3415</p></td>
+<td><p>62.5</p></td>
+<td><p>3160</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>7</p></td>
+<td><p>14</p></td>
+<td><p>IO21_READOUT2_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>62.5</p></td>
+<td><p>3285</p></td>
+<td><p>62.5</p></td>
+<td><p>3040</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>8</p></td>
+<td><p>15</p></td>
+<td><p>IO25_CLK_SLOW_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>62.5</p></td>
+<td><p>3155</p></td>
+<td><p>62.5</p></td>
+<td><p>2920</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>9</p></td>
+<td><p>16</p></td>
+<td><p>IO22_READOUT3_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>62.5</p></td>
+<td><p>3025</p></td>
+<td><p>62.5</p></td>
+<td><p>2800</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>10</p></td>
+<td><p>17</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>2895</p></td>
+<td><p>62.5</p></td>
+<td><p>2680</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>18</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>2765</p></td>
+<td><p>62.5</p></td>
+<td><p>2560</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>11</p></td>
+<td><p>19</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>2635</p></td>
+<td><p>62.5</p></td>
+<td><p>2440</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>11</p></td>
+<td><p>20</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>2505</p></td>
+<td><p>62.5</p></td>
+<td><p>2320</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>21</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>2375</p></td>
+<td><p>62.5</p></td>
+<td><p>2200</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>22</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>2245</p></td>
+<td><p>62.5</p></td>
+<td><p>2080</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>12</p></td>
+<td><p>23</p></td>
+<td><p>VBIAS</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>Analog bias input</p></td>
+<td><p>62.5</p></td>
+<td><p>2115</p></td>
+<td><p>62.5</p></td>
+<td><p>1960</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>13</p></td>
+<td><p>24</p></td>
+<td><p>IO28_RGB_VSYNC_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>62.5</p></td>
+<td><p>1985</p></td>
+<td><p>62.5</p></td>
+<td><p>1840</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>Down Bond</p></td>
+<td><p>25</p></td>
+<td><p>vssd_pixel</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>1855</p></td>
+<td><p>62.5</p></td>
+<td><p>1720</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>Down Bond</p></td>
+<td><p>26</p></td>
+<td><p>vssd_pixel</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>1725</p></td>
+<td><p>62.5</p></td>
+<td><p>1600</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>14</p></td>
+<td><p>27</p></td>
+<td><p>vddd_pixel</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>1595</p></td>
+<td><p>62.5</p></td>
+<td><p>1480</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>14</p></td>
+<td><p>28</p></td>
+<td><p>vddd_pixel</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>1465</p></td>
+<td><p>62.5</p></td>
+<td><p>1360</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>Down Bond</p></td>
+<td><p>29</p></td>
+<td><p>vssa_pixel</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>1335</p></td>
+<td><p>62.5</p></td>
+<td><p>1240</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>Down Bond</p></td>
+<td><p>30</p></td>
+<td><p>vssa_pixel</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>1205</p></td>
+<td><p>62.5</p></td>
+<td><p>1120</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>15</p></td>
+<td><p>31</p></td>
+<td><p>vdda_pixel</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>1075</p></td>
+<td><p>62.5</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>15</p></td>
+<td><p>32</p></td>
+<td><p>vdda_pixel</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>945</p></td>
+<td><p>62.5</p></td>
+<td><p>880</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>16</p></td>
+<td><p>33</p></td>
+<td><p>IO31_RGB_INT_CLK_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>62.5</p></td>
+<td><p>815</p></td>
+<td><p>62.5</p></td>
+<td><p>760</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>17</p></td>
+<td><p>34</p></td>
+<td><p>IO26_MODE_SEL_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>62.5</p></td>
+<td><p>685</p></td>
+<td><p>62.5</p></td>
+<td><p>640</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>18</p></td>
+<td><p>35</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>62.5</p></td>
+<td><p>555</p></td>
+<td><p>62.5</p></td>
+<td><p>520</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>36</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>62.5</p></td>
+<td><p>425</p></td>
+<td><p>62.5</p></td>
+<td><p>400</p></td>
+</tr>
+</tbody>
+</table>
+<table class="table-small docutils align-default" id="id6">
+<caption><span class="caption-text">Speck2e (SYNS91103) and v2e test (SYNS91104) Bottom Pin Locations</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 7%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Pin# 64pin</p></td>
+<td><p>Pin# 72pin</p></td>
+<td><p>Pad #</p></td>
+<td><p>Pad Name</p></td>
+<td><p>Pad Type</p></td>
+<td></td>
+<td><p>x (µm)</p></td>
+<td><p>y (µm)</p></td>
+<td><p>x (µm)</p></td>
+<td><p>y (µm)</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>SYNS91103</p></td>
+<td></td>
+<td><p>SYNS91104</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>17</p></td>
+<td><p>19</p></td>
+<td><p>37</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>325</p></td>
+<td><p>62.5</p></td>
+<td><p>325</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>38</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>485</p></td>
+<td><p>62.5</p></td>
+<td><p>485</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>20</p></td>
+<td><p>39</p></td>
+<td><p>IO32_RGB_D2_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>645</p></td>
+<td><p>62.5</p></td>
+<td><p>645</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>18</p></td>
+<td><p>21</p></td>
+<td><p>40</p></td>
+<td><p>IO23_READOUT4_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>805</p></td>
+<td><p>62.5</p></td>
+<td><p>805</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>22</p></td>
+<td><p>41</p></td>
+<td><p>vdda_pixel</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>965</p></td>
+<td><p>62.5</p></td>
+<td><p>965</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>22</p></td>
+<td><p>42</p></td>
+<td><p>vdda_pixel</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>1125</p></td>
+<td><p>62.5</p></td>
+<td><p>1125</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>Down Bond</p></td>
+<td><p>43</p></td>
+<td><p>vssa_pixel</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>1285</p></td>
+<td><p>62.5</p></td>
+<td><p>1285</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>Down Bond</p></td>
+<td><p>44</p></td>
+<td><p>vssa_pixel</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>1445</p></td>
+<td><p>62.5</p></td>
+<td><p>1445</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>21</p></td>
+<td><p>23</p></td>
+<td><p>45</p></td>
+<td><p>vddd_pixel</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>1605</p></td>
+<td><p>62.5</p></td>
+<td><p>1605</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>23</p></td>
+<td><p>46</p></td>
+<td><p>vddd_pixel</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>1765</p></td>
+<td><p>62.5</p></td>
+<td><p>1765</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>Down Bond</p></td>
+<td><p>47</p></td>
+<td><p>vssd_pixel</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>1925</p></td>
+<td><p>62.5</p></td>
+<td><p>1925</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>22</p></td>
+<td><p>Down Bond</p></td>
+<td><p>48</p></td>
+<td><p>vssd_pixel</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>2085</p></td>
+<td><p>62.5</p></td>
+<td><p>2085</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>24</p></td>
+<td><p>49</p></td>
+<td><p>IO33_RGB_D3_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>2245</p></td>
+<td><p>62.5</p></td>
+<td><p>2245</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>25</p></td>
+<td><p>50</p></td>
+<td><p>VREF</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>Analog output</p></td>
+<td><p>2405</p></td>
+<td><p>62.5</p></td>
+<td><p>2405</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>26</p></td>
+<td><p>51</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>2565</p></td>
+<td><p>62.5</p></td>
+<td><p>2565</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>26</p></td>
+<td><p>52</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>2725</p></td>
+<td><p>62.5</p></td>
+<td><p>2725</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>53</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>2885</p></td>
+<td><p>62.5</p></td>
+<td><p>2885</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>54</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>3045</p></td>
+<td><p>62.5</p></td>
+<td><p>3045</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>27</p></td>
+<td><p>55</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>3205</p></td>
+<td><p>62.5</p></td>
+<td><p>3205</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>28</p></td>
+<td><p>56</p></td>
+<td><p>IO24_INTERRUPT_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>3365</p></td>
+<td><p>62.5</p></td>
+<td><p>3365</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>29</p></td>
+<td><p>57</p></td>
+<td><p>IO34_RGB_D4_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>3525</p></td>
+<td><p>62.5</p></td>
+<td><p>3525</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>58</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>3685</p></td>
+<td><p>62.5</p></td>
+<td><p>3685</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>30</p></td>
+<td><p>59</p></td>
+<td><p>IO6_TDO_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>3845</p></td>
+<td><p>62.5</p></td>
+<td><p>3845</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
+<td><p>31</p></td>
+<td><p>60</p></td>
+<td><p>vdd_ram</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>4005</p></td>
+<td><p>62.5</p></td>
+<td><p>4005</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>31</p></td>
+<td><p>61</p></td>
+<td><p>vdd_ram</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>4165</p></td>
+<td><p>62.5</p></td>
+<td><p>4165</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>62</p></td>
+<td><p>vss_ram</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>4325</p></td>
+<td><p>62.5</p></td>
+<td><p>4325</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>63</p></td>
+<td><p>vss_ram</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>4485</p></td>
+<td><p>62.5</p></td>
+<td><p>4485</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>32</p></td>
+<td><p>64</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>4645</p></td>
+<td><p>62.5</p></td>
+<td><p>4645</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>29</p></td>
+<td><p>32</p></td>
+<td><p>65</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>4805</p></td>
+<td><p>62.5</p></td>
+<td><p>4805</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>66</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>4965</p></td>
+<td><p>62.5</p></td>
+<td><p>4965</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>67</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>5125</p></td>
+<td><p>62.5</p></td>
+<td><p>5125</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>30</p></td>
+<td><p>33</p></td>
+<td><p>68</p></td>
+<td><p>IO5_TMS_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>5285</p></td>
+<td><p>62.5</p></td>
+<td><p>5285</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>34</p></td>
+<td><p>69</p></td>
+<td><p>IO4_TDI_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>5445</p></td>
+<td><p>62.5</p></td>
+<td><p>5445</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>32</p></td>
+<td><p>35</p></td>
+<td><p>70</p></td>
+<td><p>IO3_TCK_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>5605</p></td>
+<td><p>62.5</p></td>
+<td><p>5605</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>71</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>5765</p></td>
+<td><p>62.5</p></td>
+<td><p>5765</p></td>
+<td><p>62.5</p></td>
+</tr>
+<tr class="row-even"><td><p>33</p></td>
+<td><p>36</p></td>
+<td><p>72</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>5925</p></td>
+<td><p>62.5</p></td>
+<td><p>5925</p></td>
+<td><p>62.5</p></td>
+</tr>
+</tbody>
+</table>
+<table class="table-small docutils align-default" id="id7">
+<caption><span class="caption-text">Speck2e (SYNS91103) and v2e test (SYNS91104) Right Pin Locations</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 7%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Pin# 64pin</p></td>
+<td><p>Pin# 72pin</p></td>
+<td><p>Pad #</p></td>
+<td><p>Pad Name</p></td>
+<td><p>Pad Type</p></td>
+<td></td>
+<td><p>x (µm)</p></td>
+<td><p>y (µm)</p></td>
+<td><p>x (µm)</p></td>
+<td><p>y (µm)</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>SYNS91103</p></td>
+<td></td>
+<td><p>SYNS91104</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>33</p></td>
+<td><p>36</p></td>
+<td><p>73</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>425</p></td>
+<td><p>6187.5</p></td>
+<td><p>400</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>74</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>555</p></td>
+<td><p>6187.5</p></td>
+<td><p>520</p></td>
+</tr>
+<tr class="row-odd"><td><p>34</p></td>
+<td><p>37</p></td>
+<td><p>75</p></td>
+<td><p>IO35_RGB_D5_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>6187.5</p></td>
+<td><p>685</p></td>
+<td><p>6187.5</p></td>
+<td><p>640</p></td>
+</tr>
+<tr class="row-even"><td><p>35</p></td>
+<td><p>38</p></td>
+<td><p>76</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>815</p></td>
+<td><p>6187.5</p></td>
+<td><p>760</p></td>
+</tr>
+<tr class="row-odd"><td><p>35</p></td>
+<td><p>38</p></td>
+<td><p>77</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>945</p></td>
+<td><p>6187.5</p></td>
+<td><p>880</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>78</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>1075</p></td>
+<td><p>6187.5</p></td>
+<td><p>1000</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>79</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>1205</p></td>
+<td><p>6187.5</p></td>
+<td><p>1120</p></td>
+</tr>
+<tr class="row-even"><td><p>36</p></td>
+<td><p>39</p></td>
+<td><p>80</p></td>
+<td><p>GPIO7_SPI_M_MISO_IO</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input / Output</p></td>
+<td><p>6187.5</p></td>
+<td><p>1335</p></td>
+<td><p>6187.5</p></td>
+<td><p>1240</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>40</p></td>
+<td><p>81</p></td>
+<td><p>IO36_RGB_D6_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>6187.5</p></td>
+<td><p>1465</p></td>
+<td><p>6187.5</p></td>
+<td><p>1360</p></td>
+</tr>
+<tr class="row-even"><td><p>37</p></td>
+<td><p>41</p></td>
+<td><p>82</p></td>
+<td><p>GPIO8_SPI_M_MOSI_IO</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input / Output</p></td>
+<td><p>6187.5</p></td>
+<td><p>1595</p></td>
+<td><p>6187.5</p></td>
+<td><p>1480</p></td>
+</tr>
+<tr class="row-odd"><td><p>38</p></td>
+<td><p>42</p></td>
+<td><p>83</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>1725</p></td>
+<td><p>6187.5</p></td>
+<td><p>1600</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>84</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>1855</p></td>
+<td><p>6187.5</p></td>
+<td><p>1720</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>43</p></td>
+<td><p>85</p></td>
+<td><p>IO37_RGB_D7_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>6187.5</p></td>
+<td><p>1985</p></td>
+<td><p>6187.5</p></td>
+<td><p>1840</p></td>
+</tr>
+<tr class="row-even"><td><p>39</p></td>
+<td><p>44</p></td>
+<td><p>86</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>2115</p></td>
+<td><p>6187.5</p></td>
+<td><p>1960</p></td>
+</tr>
+<tr class="row-odd"><td><p>39</p></td>
+<td><p>44</p></td>
+<td><p>87</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>2245</p></td>
+<td><p>6187.5</p></td>
+<td><p>2080</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>88</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>2375</p></td>
+<td><p>6187.5</p></td>
+<td><p>2200</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>89</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>2505</p></td>
+<td><p>6187.5</p></td>
+<td><p>2320</p></td>
+</tr>
+<tr class="row-even"><td><p>40</p></td>
+<td><p>45</p></td>
+<td><p>90</p></td>
+<td><p>vdd_ram</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>2635</p></td>
+<td><p>6187.5</p></td>
+<td><p>2440</p></td>
+</tr>
+<tr class="row-odd"><td><p>40</p></td>
+<td><p>45</p></td>
+<td><p>91</p></td>
+<td><p>vdd_ram</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>2765</p></td>
+<td><p>6187.5</p></td>
+<td><p>2560</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>92</p></td>
+<td><p>vss_ram</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>2895</p></td>
+<td><p>6187.5</p></td>
+<td><p>2680</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>93</p></td>
+<td><p>vss_ram</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>3025</p></td>
+<td><p>6187.5</p></td>
+<td><p>2800</p></td>
+</tr>
+<tr class="row-even"><td><p>41</p></td>
+<td><p>46</p></td>
+<td><p>94</p></td>
+<td><p>GPIO9_SPI_M_CLK_IO</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input / Output</p></td>
+<td><p>6187.5</p></td>
+<td><p>3155</p></td>
+<td><p>6187.5</p></td>
+<td><p>2920</p></td>
+</tr>
+<tr class="row-odd"><td><p>42</p></td>
+<td><p>47</p></td>
+<td><p>95</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>3285</p></td>
+<td><p>6187.5</p></td>
+<td><p>3040</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>96</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>3415</p></td>
+<td><p>6187.5</p></td>
+<td><p>3160</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>48</p></td>
+<td><p>97</p></td>
+<td><p>IO38_RGB_D8_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>6187.5</p></td>
+<td><p>3545</p></td>
+<td><p>6187.5</p></td>
+<td><p>3280</p></td>
+</tr>
+<tr class="row-even"><td><p>43</p></td>
+<td><p>49</p></td>
+<td><p>98</p></td>
+<td><p>GPIO10_SPI_M_SS_N_IO</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input / Output</p></td>
+<td><p>6187.5</p></td>
+<td><p>3675</p></td>
+<td><p>6187.5</p></td>
+<td><p>3400</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>50</p></td>
+<td><p>99</p></td>
+<td><p>IO39_RGB_D9_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Inpu</p></td>
+<td><p>6187.5</p></td>
+<td><p>3805</p></td>
+<td><p>6187.5</p></td>
+<td><p>3520</p></td>
+</tr>
+<tr class="row-even"><td><p>44</p></td>
+<td><p>51</p></td>
+<td><p>100</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>3935</p></td>
+<td><p>6187.5</p></td>
+<td><p>3640</p></td>
+</tr>
+<tr class="row-odd"><td><p>44</p></td>
+<td><p>51</p></td>
+<td><p>101</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>4065</p></td>
+<td><p>6187.5</p></td>
+<td><p>3760</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>102</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>4195</p></td>
+<td><p>6187.5</p></td>
+<td><p>3880</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>103</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>4325</p></td>
+<td><p>6187.5</p></td>
+<td><p>4000</p></td>
+</tr>
+<tr class="row-even"><td><p>45</p></td>
+<td><p>52</p></td>
+<td><p>104</p></td>
+<td><p>GPIO14_SPI_S_SS_N_IO</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input / Output</p></td>
+<td><p>6187.5</p></td>
+<td><p>4455</p></td>
+<td><p>6187.5</p></td>
+<td><p>4120</p></td>
+</tr>
+<tr class="row-odd"><td><p>46</p></td>
+<td><p>53</p></td>
+<td><p>105</p></td>
+<td><p>GPIO11_SPI_S_MISO_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>6187.5</p></td>
+<td><p>4585</p></td>
+<td><p>6187.5</p></td>
+<td><p>4240</p></td>
+</tr>
+<tr class="row-even"><td><p>47</p></td>
+<td><p>54</p></td>
+<td><p>106</p></td>
+<td><p>GPIO12_SPI_S_MOSI_IO</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input / Output</p></td>
+<td><p>6187.5</p></td>
+<td><p>4715</p></td>
+<td><p>6187.5</p></td>
+<td><p>4360</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>107</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>6187.5</p></td>
+<td><p>4845</p></td>
+<td><p>6187.5</p></td>
+<td><p>4480</p></td>
+</tr>
+<tr class="row-even"><td><p>48</p></td>
+<td><p>55</p></td>
+<td><p>108</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>6187.5</p></td>
+<td><p>4975</p></td>
+<td><p>6187.5</p></td>
+<td><p>4600</p></td>
+</tr>
+</tbody>
+</table>
+<table class="table-small docutils align-default" id="id8">
+<caption><span class="caption-text">Speck2e (SYNS91103) and v2e test (SYNS91104) Top Pin Locations</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 7%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Pin# 64pin</p></td>
+<td><p>Pin# 72pin</p></td>
+<td><p>Pad #</p></td>
+<td><p>Pad Name</p></td>
+<td><p>Pad Type</p></td>
+<td></td>
+<td><p>x (µm)</p></td>
+<td><p>y (µm)</p></td>
+<td><p>x (µm)</p></td>
+<td><p>y (µm)</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>SYNS91103</p></td>
+<td></td>
+<td><p>SYNS91104</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>48</p></td>
+<td><p>55</p></td>
+<td><p>109</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>5925</p></td>
+<td><p>5337.5</p></td>
+<td><p>5925</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>110</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>5765</p></td>
+<td><p>5337.5</p></td>
+<td><p>5765</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>49</p></td>
+<td><p>56</p></td>
+<td><p>111</p></td>
+<td><p>IO17_S2P_CREADY_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>5605</p></td>
+<td><p>5337.5</p></td>
+<td><p>5605</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>50</p></td>
+<td><p>57</p></td>
+<td><p>112</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>5445</p></td>
+<td><p>5337.5</p></td>
+<td><p>5445</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>50</p></td>
+<td><p>57</p></td>
+<td><p>113</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>5285</p></td>
+<td><p>5337.5</p></td>
+<td><p>5285</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>114</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>5125</p></td>
+<td><p>5337.5</p></td>
+<td><p>5125</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>115</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>4965</p></td>
+<td><p>5337.5</p></td>
+<td><p>4965</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>51</p></td>
+<td><p>58</p></td>
+<td><p>116</p></td>
+<td><p>GPIO13_SPI_S_CLK_IO</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input / Output</p></td>
+<td><p>4805</p></td>
+<td><p>5337.5</p></td>
+<td><p>4805</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>52</p></td>
+<td><p>59</p></td>
+<td><p>117</p></td>
+<td><p>IO15_S2P_DREADY_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>4645</p></td>
+<td><p>5337.5</p></td>
+<td><p>4645</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>53</p></td>
+<td><p>60</p></td>
+<td><p>118</p></td>
+<td><p>IO16_S2P_DATA_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>4485</p></td>
+<td><p>5337.5</p></td>
+<td><p>4485</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>54</p></td>
+<td><p>61</p></td>
+<td><p>119</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>4325</p></td>
+<td><p>5337.5</p></td>
+<td><p>4325</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>120</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>4165</p></td>
+<td><p>5337.5</p></td>
+<td><p>4165</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>55</p></td>
+<td><p>62</p></td>
+<td><p>121</p></td>
+<td><p>IO2_RB_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>4005</p></td>
+<td><p>5337.5</p></td>
+<td><p>4005</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>122</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>3845</p></td>
+<td><p>5337.5</p></td>
+<td><p>3845</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>56</p></td>
+<td><p>63</p></td>
+<td><p>123</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>3685</p></td>
+<td><p>5337.5</p></td>
+<td><p>3685</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>56</p></td>
+<td><p>63</p></td>
+<td><p>124</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>3525</p></td>
+<td><p>5337.5</p></td>
+<td><p>3525</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>125</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>3365</p></td>
+<td><p>5337.5</p></td>
+<td><p>3365</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>126</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>3205</p></td>
+<td><p>5337.5</p></td>
+<td><p>3205</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>57</p></td>
+<td><p>64</p></td>
+<td><p>127</p></td>
+<td><p>vdd_ram</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>3045</p></td>
+<td><p>5337.5</p></td>
+<td><p>3045</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>57</p></td>
+<td><p>64</p></td>
+<td><p>128</p></td>
+<td><p>vdd_ram</p></td>
+<td><p>PVDD1ANA</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>2885</p></td>
+<td><p>5337.5</p></td>
+<td><p>2885</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>129</p></td>
+<td><p>vss_ram</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>2725</p></td>
+<td><p>5337.5</p></td>
+<td><p>2725</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>130</p></td>
+<td><p>vss_ram</p></td>
+<td><p>PVSS1ANA</p></td>
+<td><p>Ground</p></td>
+<td><p>2565</p></td>
+<td><p>5337.5</p></td>
+<td><p>2565</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>58</p></td>
+<td><p>65</p></td>
+<td><p>131</p></td>
+<td><p>IO1_CLK_I</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Input</p></td>
+<td><p>2405</p></td>
+<td><p>5337.5</p></td>
+<td><p>2405</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>59</p></td>
+<td><p>66</p></td>
+<td><p>132</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>2245</p></td>
+<td><p>5337.5</p></td>
+<td><p>2245</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>60</p></td>
+<td><p>67</p></td>
+<td><p>133</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>2085</p></td>
+<td><p>5337.5</p></td>
+<td><p>2085</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>60</p></td>
+<td><p>67</p></td>
+<td><p>134</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>1925</p></td>
+<td><p>5337.5</p></td>
+<td><p>1925</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>61</p></td>
+<td><p>68</p></td>
+<td><p>135</p></td>
+<td><p>IO19_P2S_DREADY_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>1765</p></td>
+<td><p>5337.5</p></td>
+<td><p>1765</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>62</p></td>
+<td><p>69</p></td>
+<td><p>136</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>1605</p></td>
+<td><p>5337.5</p></td>
+<td><p>1605</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>62</p></td>
+<td><p>69</p></td>
+<td><p>137</p></td>
+<td><p>VP</p></td>
+<td><p>PVDD1CDG</p></td>
+<td><p>1.2V Power</p></td>
+<td><p>1445</p></td>
+<td><p>5337.5</p></td>
+<td><p>1445</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>138</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>1285</p></td>
+<td><p>5337.5</p></td>
+<td><p>1285</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>139</p></td>
+<td><p>VG</p></td>
+<td><p>PVSS1CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>1125</p></td>
+<td><p>5337.5</p></td>
+<td><p>1125</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>63</p></td>
+<td><p>70</p></td>
+<td><p>140</p></td>
+<td><p>IO18_P2S_OUT1_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>965</p></td>
+<td><p>5337.5</p></td>
+<td><p>965</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>64</p></td>
+<td><p>71</p></td>
+<td><p>141</p></td>
+<td><p>IO27_P2S_OUT2_O</p></td>
+<td><p>PDDW0204SCDG</p></td>
+<td><p>Output</p></td>
+<td><p>805</p></td>
+<td><p>5337.5</p></td>
+<td><p>805</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>142</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>645</p></td>
+<td><p>5337.5</p></td>
+<td><p>645</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Down Bond</p></td>
+<td><p>Down Bond</p></td>
+<td><p>143</p></td>
+<td><p>VSSIO</p></td>
+<td><p>PVSS2CDG</p></td>
+<td><p>Ground</p></td>
+<td><p>485</p></td>
+<td><p>5337.5</p></td>
+<td><p>485</p></td>
+<td><p>4937.5</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>72</p></td>
+<td><p>144</p></td>
+<td><p>VDDIO</p></td>
+<td><p>PVDD2CDG</p></td>
+<td><p>2.5V Power</p></td>
+<td><p>325</p></td>
+<td><p>5337.5</p></td>
+<td><p>325</p></td>
+<td><p>4937.5</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pin-description">
+<h2><span class="section-number">4.3. </span>Pin description<a class="headerlink" href="#pin-description" title="Permalink to this heading"></a></h2>
+<table class="table-small docutils align-default" id="id9">
+<caption><span class="caption-text">Speck2e Pin Description</span><a class="headerlink" href="#id9" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Pin Name</p></td>
+<td><p>Direction</p></td>
+<td><p>Description</p></td>
+<td><p>Comment</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="dvs-sensor/parameters.html#vbias-vref"><span class="std std-ref">VBIAS</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Analog bias input</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="dvs-sensor/parameters.html#vbias-vref"><span class="std std-ref">VREF</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Analog reference voltage monitor</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">VDDIO</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>I/O Supply</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">VSSIO</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>I/O Ground</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">vdd_ram</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>SRAM Supply</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">vss_ram</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>SRAM Ground</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">vdda_pixel</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Pixel Field Digital Supply</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">vssa_pixel</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Pixel Field Digital Ground</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">vddd_pixel</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Pixel Field Analog Supply</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">vssd_pixel</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Pixel Field Analog Ground</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">VP</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Digital Core Power Supply</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electrical-characteristics.html#electrical-ch"><span class="std std-ref">VG</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Digital Core Ground</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>IO1_CLK_I</p></td>
+<td><p>Input</p></td>
+<td><p>Serial data (fast) in/out clock, max 200 MHz</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="chip-startup.html#chip-startup"><span class="std std-ref">I02_RB_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Global Reset bar (‘0’ = Chip Reset)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="jtag/jtag-overview.html#jtag-port"><span class="std std-ref">IO3_TCK_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>JTAG Clock In</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="jtag/jtag-overview.html#jtag-port"><span class="std std-ref">IO4_TDI_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>JTAG Test Data In</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="jtag/jtag-overview.html#jtag-port"><span class="std std-ref">IO5_TMS_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>JTAG Mode Select</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="jtag/jtag-overview.html#jtag-port"><span class="std std-ref">IO6_TDO_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>JTAG Test Data Out</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="spi/spi-master.html#spi-master-port"><span class="std std-ref">GPIO7_SPI_M_MISO_IO</span></a></p></td>
+<td><p>InputOutput</p></td>
+<td><p>SPI Master Data In</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="spi/spi-master.html#spi-master-port"><span class="std std-ref">GPIO8_SPI_M_MOSI_IO</span></a></p></td>
+<td><p>InputOutput</p></td>
+<td><p>SPI Master Data Out</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="spi/spi-master.html#spi-master-port"><span class="std std-ref">GPIO9_SPI_M_CLK_IO</span></a></p></td>
+<td><p>InputOutput</p></td>
+<td><p>SPI Master Clock Out</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="spi/spi-master.html#spi-master-port"><span class="std std-ref">GPIO10_SPI_M_SS_N_IO</span></a></p></td>
+<td><p>InputOutput</p></td>
+<td><p>SPI Master Chip Select Out</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="spi/spi-slave.html#spi-slave-port"><span class="std std-ref">GPIO11_SPI_S_MISO_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>SPI Slave Data Out</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="spi/spi-slave.html#spi-slave-port"><span class="std std-ref">GPIO12_SPI_S_MOSI_IO</span></a></p></td>
+<td><p>InputOutput</p></td>
+<td><p>SPI Slave Data In</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="spi/spi-slave.html#spi-slave-port"><span class="std std-ref">GPIO13_SPI_S_CLK_IO</span></a></p></td>
+<td><p>InputOutput</p></td>
+<td><p>SPI Slave Clock</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="spi/spi-slave.html#spi-slave-port"><span class="std std-ref">GPIO14_SPI_S_SS_N_IO</span></a></p></td>
+<td><p>InputOutput</p></td>
+<td><p>SPI Slave Chip Select Bar</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="encoding/input-s2p.html#input-serial-interface-protocol"><span class="std std-ref">IO15_S2P_DREADY_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Input de-serializer data ready</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="encoding/input-s2p.html#input-serial-interface-protocol"><span class="std std-ref">IO16_S2P_DATA_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Input de-serializer data</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="encoding/input-s2p.html#input-serial-interface-protocol"><span class="std std-ref">IO17_S2P_CREADY_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Input de-serializer chip ready</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="encoding/output-p2s.html#output-serial-interface-protocol"><span class="std std-ref">IO18_P2S_OUT1_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Output serializer output channel 1</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="encoding/output-p2s.html#output-serial-interface-protocol"><span class="std std-ref">IO19_P2S_DREADY_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Output serializer data ready</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="encoding/readout-interrupt.html#readout-interrupt"><span class="std std-ref">IO20_READOUT1_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Readout Layer Direct Output Max Class [0]</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="encoding/readout-interrupt.html#readout-interrupt"><span class="std std-ref">IO21_READOUT2_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Readout Layer Direct Output Max Class [1]</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="encoding/readout-interrupt.html#readout-interrupt"><span class="std std-ref">IO22_READOUT3_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Readout Layer Direct Output Max Class [2]</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="encoding/readout-interrupt.html#readout-interrupt"><span class="std std-ref">IO23_READOUT4_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Readout Layer Direct Output Max Class [3]</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="encoding/readout-interrupt.html#readout-interrupt"><span class="std std-ref">IO24_INTERRUPT_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Readout Layer Direct Output Interrupt</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="architecture/slow-clock.html#slow-clock"><span class="std std-ref">IO25_CLK_SLOW_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>Slow Clock (for Leak, Filter, Readout operations)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>IO26_MODE_SEL_I</p></td>
+<td><p>Input</p></td>
+<td><p>Set IO ring mode</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="encoding/output-p2s.html#output-serial-interface-protocol"><span class="std std-ref">IO27_P2S_OUT2_O</span></a></p></td>
+<td><p>Output</p></td>
+<td><p>Output serializer output channel 2</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO28_RGB_VSYNC_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface VSync</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO29_RGB_HREF_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Clock</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO31_RGB_INT_CLK_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO32_RGB_D2_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Data[2]</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO33_RGB_D3_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Data[3]</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO34_RGB_D4_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Data[4]</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO35_RGB_D5_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Data[5]</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO36_RGB_D6_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Data[6]</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO37_RGB_D7_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Data[7]</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO38_RGB_D8_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Data[8]</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO39_RGB_D9_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Data[9]</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="rgb-interface/rgb-overview.html#rgb-overview"><span class="std std-ref">IO40_RGB_PCLK_I</span></a></p></td>
+<td><p>Input</p></td>
+<td><p>RGB Interface Clock from RGB Camera</p></td>
+<td><p>RGB IF Not implemented in Speck2f</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpio-pin-configuration">
+<span id="gpio-configuration"></span><h2><span class="section-number">4.4. </span>GPIO Pin Configuration<a class="headerlink" href="#gpio-pin-configuration" title="Permalink to this heading"></a></h2>
+<p>The GPIO Pins can be configured via register bits <a class="reference internal" href="registers/ii-config.html#rbits-iosel"><span class="std std-ref">IOSEL[6:3]</span></a> as summarized in the following tables:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p>IOSEL[6:5]=b00</p></td>
+<td><p>IOSEL[6:5]=b01</p></td>
+<td><p>IOSEL[6:5]=b10</p></td>
+<td><p>IOSEL[6:5]=b11</p></td>
+</tr>
+<tr class="row-even"><td><p>GPIO7</p></td>
+<td><p>SPI_M_MISO</p></td>
+<td><p>S2P_DATA</p></td>
+<td></td>
+<td><p>SPI_S_MISO</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPIO8</p></td>
+<td><p>SPI_M_MOSI</p></td>
+<td><p>S2P_CREADY</p></td>
+<td><p>P2S_OUT1</p></td>
+<td><p>SPI_S_MOSI</p></td>
+</tr>
+<tr class="row-even"><td><p>GPIO9</p></td>
+<td><p>SPI_M_CLK</p></td>
+<td><p>S2P_DREADY</p></td>
+<td><p>P2S_DREADY</p></td>
+<td><p>SPI_S_CLK</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPIO10</p></td>
+<td><p>SPI_M_SS_N</p></td>
+<td></td>
+<td></td>
+<td><p>SPI_S_SS_N</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p>IOSEL[4:3]=b00</p></td>
+<td><p>IOSEL[4:3]=b01</p></td>
+<td><p>IOSEL[4:3]=b10</p></td>
+<td><p>IOSEL[4:3]=b11</p></td>
+</tr>
+<tr class="row-even"><td><p>GPIO11</p></td>
+<td><p>SPI_S_MISO</p></td>
+<td><p>S2P_CREADY</p></td>
+<td><p>P2S_OUT1</p></td>
+<td><p>READOUT1</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPIO12</p></td>
+<td><p>SPI_S_MOSI</p></td>
+<td><p>S2P_DATA</p></td>
+<td><p>P2S_DREADY</p></td>
+<td><p>READOUT2</p></td>
+</tr>
+<tr class="row-even"><td><p>GPIO13</p></td>
+<td><p>SPI_S_CLK</p></td>
+<td><p>S2P_DREADY</p></td>
+<td></td>
+<td><p>READOUT3</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPIO14</p></td>
+<td><p>SPI_S_SS_N</p></td>
+<td></td>
+<td></td>
+<td><p>READOUT4</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>GPIO7 to GPIO10 pins are used for SPI Master pins always during the power-up. After download is finished, these pins are configured via the register setting in IOSEL[6:5] bits.</p></li>
+<li><p>GPIO11 to GPIO14 pins state during power-up is defined by ModeSel pin state. If it is connected to “high”, these pins are powered up as READOUT signals otherwise they can be used for SPI slave pins</p></li>
+<li><p>The states of GPIO11 to GPIO14 after download from external memory is complete is defined by IOSEL[4:3] register setting”</p></li>
+</ol>
+</div>
+<p>Moreover, some ports can be disabled using bits <a class="reference internal" href="registers/ii-config.html#rbits-iosel"><span class="std std-ref">IOSEL[2:0]</span></a> when not used (e.g. not bonded out in a module):</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Bit</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>IOSEL[0]</p></td>
+<td><p>Disables READOUT pins and sets them to high Z (IO20_READOUT1_O, IO21_READOUT2_O, IO22_READOUT3_O, IO23_READOUT4_O)</p></td>
+</tr>
+<tr class="row-odd"><td><p>IOSEL[1]</p></td>
+<td><p>Disables P2S pins and sets them to high Z (IO18_P2S_OUT1_O, IO19_P2S_DREADY_O)</p></td>
+</tr>
+<tr class="row-even"><td><p>IOSEL[2]</p></td>
+<td><p>Disables S2P pins and sets them to high Z (IO17_S2P_CREADY_O)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="architecture/slow-clock.html" class="btn btn-neutral float-left" title="3.7. Internal Slow Clock" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dvs-sensor/index.html" class="btn btn-neutral float-right" title="5. Internal DVS Sensor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

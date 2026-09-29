@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualizer &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3rd Party Cameras" href="../3rdpartyCamera.html" />
+    <link rel="prev" title="JIT Filters" href="../jitFilters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="index.html#">Visualizer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#samna.run_visualizer"><code class="docutils literal notranslate"><span class="pre">samna.run_visualizer()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#plots">Plots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#activity-plot">Activity Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#readout-plot">Readout Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#line-plot">Line Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#spike-count-plot">Spike Count Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#power-measurement-plot">Power Measurement Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#frame-plot">Frame Plot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#open-multiple-visualizers">Open Multiple Visualizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#api-reference">API Reference:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Visualizer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/gui/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="visualizer">
+<h1>Visualizer<a class="headerlink" href="index.html#visualizer" title="Link to this heading"></a></h1>
+<nav class="contents local" id="content">
+<p class="topic-title">Content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="index.html#plots" id="id1">Plots</a></p>
+<ul>
+<li><p><a class="reference internal" href="index.html#activity-plot" id="id2">Activity Plot</a></p></li>
+<li><p><a class="reference internal" href="index.html#readout-plot" id="id3">Readout Plot</a></p></li>
+<li><p><a class="reference internal" href="index.html#line-plot" id="id4">Line Plot</a></p></li>
+<li><p><a class="reference internal" href="index.html#spike-count-plot" id="id5">Spike Count Plot</a></p></li>
+<li><p><a class="reference internal" href="index.html#power-measurement-plot" id="id6">Power Measurement Plot</a></p></li>
+<li><p><a class="reference internal" href="index.html#frame-plot" id="id7">Frame Plot</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="index.html#open-multiple-visualizers" id="id8">Open Multiple Visualizers</a></p></li>
+<li><p><a class="reference internal" href="index.html#api-reference" id="id9">API Reference:</a></p></li>
+</ul>
+</nav>
+<p>The Samna visualizer can be started in a process separately from the Python process where you import Samna
+(Note: before import samnagui, we should import samna first).
+This can be done either via the provided <code class="code docutils literal notranslate"><span class="pre">samnagui</span></code> script by executing</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>samnagui
+</pre></div>
+</div>
+<p>From a terminal. Or by calling <code class="code docutils literal notranslate"><span class="pre">samna.run_visualizer</span></code> from Python.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.run_visualizer">
+<span class="sig-prename descclassname"><span class="pre">samna.</span></span><span class="sig-name descname"><span class="pre">run_visualizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">receiver_endpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width_proportion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_proportion</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="index.html#samna.run_visualizer" title="Link to this definition"></a></dt>
+<dd><p>Opens the visualizer window, set the window size relative to main monitor size, configures its receiving endpoint.</p>
+<p>Params:</p>
+<p><code class="code docutils literal notranslate"><span class="pre">receiver_endpoint</span></code> : the visualiser’s endpoint for receiving events (e.g. “<a class="reference external" href="tcp://0.0.0.0:33335">tcp://0.0.0.0:33335</a>”).</p>
+<p><code class="code docutils literal notranslate"><span class="pre">width_proportion</span></code> : the rate between window width and workarea width of main monitor, default 0.75,
+which means this window has a width which equals to 3/4 width of main monitor’s workarea.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">height_proportion</span></code> : the rate between window height and workarea height of main monitor, default 0.75,
+which means this window has a height which equals to 3/4 height of main monitor’s workarea.</p>
+</dd></dl>
+
+<p>Since the visualizer operates in a separate process, we must utilize the streaming capabilities of the event filter graph to
+transmit <a class="reference internal" href="../reference/ui/index.html#samna-ui"><span class="std std-ref">configurations</span></a> and events to the visualizer. The configurations that the visualizer can accept are
+listed in <a class="reference internal" href="index.html#plots"><span class="std std-ref">Plots</span></a>.</p>
+<p>An full illustration of how to link the streamer to the visualizer can be found in <a class="reference internal" href="../devkits/speckSeries/examples/display_speck2f_dvs.html#display-speck-2f-dvs-events"><span class="std std-ref">Display Speck 2f DVS Events</span></a>.</p>
+<section id="plots">
+<h2><a class="toc-backref" href="index.html#id1" role="doc-backlink">Plots</a><a class="headerlink" href="index.html#plots" title="Link to this heading"></a></h2>
+<p>There are several plots that can be displayed in the visualizer.
+To configure the plots, a graph with a <a class="reference internal" href="../reference/index.html#samna.BasicSourceNode_ui_event" title="samna.BasicSourceNode_ui_event"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.BasicSourceNode_ui_event</span></code></a> node is required.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span><span class="w"> </span><span class="nn">samna</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+<span class="linenos">4</span><span class="n">config_source</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">BasicSourceNode_ui_event</span><span class="p">(),</span> <span class="n">streamer</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>One visualizer can have several different type of plots, and there layout can be configured by the <code class="docutils literal notranslate"><span class="pre">layout</span></code> keyword argument
+of each plot, default takes the full space of the visualizer.</p>
+<section id="activity-plot">
+<h3><a class="toc-backref" href="index.html#id2" role="doc-backlink">Activity Plot</a><a class="headerlink" href="index.html#activity-plot" title="Link to this heading"></a></h3>
+<p>The <a class="reference internal" href="../reference/ui/index.html#samna.ui.ActivityPlotConfiguration" title="samna.ui.ActivityPlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">activity</span> <span class="pre">plot</span></code></a> is a 2D plot that shows the activity of the DVS events in a 2D grid.
+The grid size can be configured.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># create an activity plot with size 128*128 and titled &quot;DVS Layer&quot;</span>
+<span class="linenos">2</span><span class="n">visualizer_config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">VisualizerConfiguration</span><span class="p">(</span>
+<span class="linenos">3</span>   <span class="n">plots</span><span class="o">=</span><span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">ActivityPlotConfiguration</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">&quot;DVS Layer&quot;</span><span class="p">)]</span>
+<span class="linenos">4</span><span class="p">)</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="n">config_source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">visualizer_config</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="readout-plot">
+<h3><a class="toc-backref" href="index.html#id3" role="doc-backlink">Readout Plot</a><a class="headerlink" href="index.html#readout-plot" title="Link to this heading"></a></h3>
+<p>The <a class="reference internal" href="../reference/ui/index.html#samna.ui.ReadoutPlotConfiguration" title="samna.ui.ReadoutPlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">readout</span> <span class="pre">plot</span></code></a> is a plot that can display an image which could be used to display the readout of a neuron network.
+The displayed image is determined by the <a class="reference internal" href="../reference/ui/index.html#samna.ui.Readout" title="samna.ui.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Readout</span></code></a> event sent to the visualizer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;example1.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;example2.jpg&quot;</span><span class="p">]</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># create a readout plot titled &quot;Readout&quot; with two images</span>
+<span class="linenos">4</span><span class="n">visualizer_config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">VisualizerConfiguration</span><span class="p">(</span>
+<span class="linenos">5</span>   <span class="n">plots</span><span class="o">=</span><span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">ReadoutPlotConfiguration</span><span class="p">(</span><span class="s2">&quot;Readout&quot;</span><span class="p">,</span> <span class="n">images</span><span class="p">)]</span>
+<span class="linenos">6</span><span class="p">)</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="n">config_source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">visualizer_config</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="line-plot">
+<h3><a class="toc-backref" href="index.html#id4" role="doc-backlink">Line Plot</a><a class="headerlink" href="index.html#line-plot" title="Link to this heading"></a></h3>
+<p>The line plot is a type of plot capable of presenting a line graph,
+which is utilized to showcase the variations of certain values over time.
+However, you can’t use create this plot directly, but use <a class="reference internal" href="index.html#spike-count-plot"><span class="std std-ref">Spike Count Plot</span></a> and <a class="reference internal" href="index.html#power-measurement-plot"><span class="std std-ref">Power Measurement Plot</span></a> instead.</p>
+</section>
+<section id="spike-count-plot">
+<h3><a class="toc-backref" href="index.html#id5" role="doc-backlink">Spike Count Plot</a><a class="headerlink" href="index.html#spike-count-plot" title="Link to this heading"></a></h3>
+<p>This is an implementation of <a class="reference internal" href="index.html#line-plot"><span class="std std-ref">Line Plot</span></a> dedicated to display the spike count changes over time sent as <a class="reference internal" href="../reference/ui/index.html#samna.ui.SpikeCount" title="samna.ui.SpikeCount"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.SpikeCount</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Closed&quot;</span><span class="p">,</span> <span class="s2">&quot;Open&quot;</span><span class="p">]</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># create a line plot to display the Spike count changes over time.</span>
+<span class="linenos"> 4</span><span class="n">visualizer_config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">VisualizerConfiguration</span><span class="p">(</span>
+<span class="linenos"> 5</span>   <span class="n">plots</span><span class="o">=</span><span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">SpikeCountPlotConfiguration</span><span class="p">(</span>
+<span class="linenos"> 6</span>               <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Spike Count&quot;</span><span class="p">,</span>
+<span class="linenos"> 7</span>               <span class="n">channel_count</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">feature_names</span><span class="p">),</span>
+<span class="linenos"> 8</span>               <span class="n">line_names</span><span class="o">=</span> <span class="n">feature_names</span><span class="p">,</span>
+<span class="linenos"> 9</span>               <span class="n">layout</span><span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="linenos">10</span>               <span class="n">show_x_span</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+<span class="linenos">11</span>               <span class="n">label_interval</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+<span class="linenos">12</span>               <span class="n">max_y_rate</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+<span class="linenos">13</span>               <span class="n">show_point_circle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos">14</span>               <span class="n">default_y_max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="linenos">15</span>   <span class="p">)]</span>
+<span class="linenos">16</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">config_source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">visualizer_config</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Please check <a class="reference internal" href="../reference/ui/index.html#samna.ui.SpikeCountPlotConfiguration" title="samna.ui.SpikeCountPlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.SpikeCountPlotConfiguration</span></code></a> for more details.</p>
+</section>
+<section id="power-measurement-plot">
+<h3><a class="toc-backref" href="index.html#id6" role="doc-backlink">Power Measurement Plot</a><a class="headerlink" href="index.html#power-measurement-plot" title="Link to this heading"></a></h3>
+<p>This is an implementation of <a class="reference internal" href="index.html#line-plot"><span class="std std-ref">Line Plot</span></a> dedicated to display the power measurement changes over time sent as <a class="reference internal" href="../reference/ui/index.html#samna.ui.Measurement" title="samna.ui.Measurement"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Measurement</span></code></a>.
+It have the same interface as <a class="reference internal" href="index.html#spike-count-plot"><span class="std std-ref">Spike Count Plot</span></a>.`</p>
+<p>Please check <a class="reference internal" href="../reference/ui/index.html#samna.ui.PowerMeasurementPlotConfiguration" title="samna.ui.PowerMeasurementPlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.PowerMeasurementPlotConfiguration</span></code></a> for more details.</p>
+</section>
+<section id="frame-plot">
+<h3><a class="toc-backref" href="index.html#id7" role="doc-backlink">Frame Plot</a><a class="headerlink" href="index.html#frame-plot" title="Link to this heading"></a></h3>
+<p>The <a class="reference internal" href="../reference/ui/index.html#samna.ui.FramePlotConfiguration" title="samna.ui.FramePlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">frame</span> <span class="pre">plot</span></code></a> is a type of plot capable of presenting a frame sent through
+<a class="reference internal" href="../reference/events/index.html#samna.events.Frame" title="samna.events.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.events.Frame</span></code></a> event.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># create a frame plot titled &quot;Frame&quot;</span>
+<span class="linenos">2</span><span class="n">visualizer_config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">VisualizerConfiguration</span><span class="p">(</span>
+<span class="linenos">3</span>   <span class="n">plots</span><span class="o">=</span><span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">FramePlotConfiguration</span><span class="p">(</span><span class="s2">&quot;Frame&quot;</span><span class="p">)]</span>
+<span class="linenos">4</span><span class="p">)</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="n">config_source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">visualizer_config</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="open-multiple-visualizers">
+<h2><a class="toc-backref" href="index.html#id8" role="doc-backlink">Open Multiple Visualizers</a><a class="headerlink" href="index.html#open-multiple-visualizers" title="Link to this heading"></a></h2>
+<p>It is possible to open multiple visualizers, each with its own streamer endpoint.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="linenos"> 2</span><span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thread</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">def</span><span class="w"> </span><span class="nf">open_visualizer</span><span class="p">(</span><span class="n">width_proportion</span><span class="p">,</span> <span class="n">height_proportion</span><span class="p">,</span> <span class="n">receiver_endpoint</span><span class="p">):</span>
+<span class="linenos"> 5</span>     <span class="c1"># start visualizer in a isolated process which is required on mac, instead of a sub process.</span>
+<span class="linenos"> 6</span>     <span class="n">gui_cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;import samna, samnagui; samnagui.run_visualizer(&#39;</span><span class="si">{</span><span class="n">receiver_endpoint</span><span class="si">}</span><span class="s2">&#39;, </span><span class="si">{</span><span class="n">width_proportion</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">height_proportion</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="linenos"> 7</span>     <span class="n">os_cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s1"> -c &quot;</span><span class="si">{</span><span class="n">gui_cmd</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+<span class="linenos"> 8</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Visualizer start command: &quot;</span><span class="p">,</span> <span class="n">os_cmd</span><span class="p">)</span>
+<span class="linenos"> 9</span>     <span class="n">gui_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">os_cmd</span><span class="p">,))</span>
+<span class="linenos">10</span>     <span class="n">gui_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>     <span class="k">return</span> <span class="n">gui_thread</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="n">streamer_endpoint_1</span> <span class="o">=</span> <span class="s2">&quot;tcp://0.0.0.0:40001&quot;</span>
+<span class="linenos">15</span><span class="n">streamer_endpoint_2</span> <span class="o">=</span> <span class="s2">&quot;tcp://0.0.0.0:40002&quot;</span>
+<span class="linenos">16</span><span class="n">width_proportion</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="linenos">17</span><span class="n">height_proportion</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">viz_process_1</span> <span class="o">=</span> <span class="n">open_visualizer</span><span class="p">(</span><span class="n">width_proportion</span><span class="p">,</span> <span class="n">height_proportion</span><span class="p">,</span> <span class="n">streamer_endpoint_1</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">viz_process_2</span> <span class="o">=</span> <span class="n">open_visualizer</span><span class="p">(</span><span class="n">width_proportion</span><span class="p">,</span> <span class="n">height_proportion</span><span class="p">,</span> <span class="n">streamer_endpoint_2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To forward events to the visualizer, they need to be sent to the streamer endpoint of that visualizer.</p>
+</section>
+<section id="api-reference">
+<h2><a class="toc-backref" href="index.html#id9" role="doc-backlink">API Reference:</a><a class="headerlink" href="index.html#api-reference" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Visualizer ui configuration events <a class="reference internal" href="../reference/ui/index.html#module-samna.ui" title="samna.ui"><code class="xref py py-mod docutils literal notranslate"><span class="pre">samna.ui</span></code></a></p></li>
+<li><p>Related filters (SpikeCollectionNode, SpikeCountNode, CustomFilterNode, MeasurementToVizConverter): <a class="reference internal" href="../filters.html#filters"><span class="std std-ref">Filters</span></a></p></li>
+<li><p>Power monitor: <a class="reference internal" href="../reference/boards/common/power/index.html#samna.boards.common.power.PowerMonitor" title="samna.boards.common.power.PowerMonitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.boards.common.power.PowerMonitor</span></code></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../jitFilters.html" class="btn btn-neutral float-left" title="JIT Filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../3rdpartyCamera.html" class="btn btn-neutral float-right" title="3rd Party Cameras" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+###########################
+samna.speck2fBoards.encoder
+###########################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.speck2fBoards.encoder
+   :members:
+   :show-inheritance:
+

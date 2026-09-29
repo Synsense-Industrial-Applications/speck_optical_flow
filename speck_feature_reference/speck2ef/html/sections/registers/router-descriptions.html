@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register: ROUTER0 &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Register: ROUTER0</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/router-descriptions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="register-router0">
+<span id="reg-router0"></span><h1>Register: ROUTER0<a class="headerlink" href="#register-router0" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x300</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer0_dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer0_dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L0DST23</p></td>
+<td><p>L0DST22</p></td>
+<td><p>L0DST21</p></td>
+<td><p>L0DST20</p></td>
+<td><p>L0DST13</p></td>
+<td><p>L0DST12</p></td>
+<td><p>L0DST11</p></td>
+<td><p>L0DST10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router1">
+<span id="reg-router1"></span><h1>Register: ROUTER1<a class="headerlink" href="#register-router1" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x301</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer1_dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer1_dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L1DST23</p></td>
+<td><p>L1DST22</p></td>
+<td><p>L1DST21</p></td>
+<td><p>L1DST20</p></td>
+<td><p>L1DST13</p></td>
+<td><p>L1DST12</p></td>
+<td><p>L1DST11</p></td>
+<td><p>L1DST10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router2">
+<span id="reg-router2"></span><h1>Register: ROUTER2<a class="headerlink" href="#register-router2" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x302</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer2_dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer2_dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L2DST23</p></td>
+<td><p>L2DST22</p></td>
+<td><p>L2DST21</p></td>
+<td><p>L2DST20</p></td>
+<td><p>L2DST13</p></td>
+<td><p>L2DST12</p></td>
+<td><p>L2DST11</p></td>
+<td><p>L2DST10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router3">
+<span id="reg-router3"></span><h1>Register: ROUTER3<a class="headerlink" href="#register-router3" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x303</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer3_dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer3_dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L3DST23</p></td>
+<td><p>L3DST22</p></td>
+<td><p>L3DST21</p></td>
+<td><p>L3DST20</p></td>
+<td><p>L3DST13</p></td>
+<td><p>L3DST12</p></td>
+<td><p>L3DST11</p></td>
+<td><p>L3DST10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router4">
+<span id="reg-router4"></span><h1>Register: ROUTER4<a class="headerlink" href="#register-router4" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x304</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer4_dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer4_dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L4DST23</p></td>
+<td><p>L4DST22</p></td>
+<td><p>L4DST21</p></td>
+<td><p>L4DST20</p></td>
+<td><p>L4DST13</p></td>
+<td><p>L4DST12</p></td>
+<td><p>L4DST11</p></td>
+<td><p>L4DST10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router5">
+<span id="reg-router5"></span><h1>Register: ROUTER5<a class="headerlink" href="#register-router5" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x305</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer5_dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer5_dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L5DST23</p></td>
+<td><p>L5DST22</p></td>
+<td><p>L5DST21</p></td>
+<td><p>L5DST20</p></td>
+<td><p>L5DST13</p></td>
+<td><p>L5DST12</p></td>
+<td><p>L5DST11</p></td>
+<td><p>L5DST10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router6">
+<span id="reg-router6"></span><h1>Register: ROUTER6<a class="headerlink" href="#register-router6" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x306</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer6_dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer6_dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L6DST23</p></td>
+<td><p>L6DST22</p></td>
+<td><p>L6DST21</p></td>
+<td><p>L6DST20</p></td>
+<td><p>L6DST13</p></td>
+<td><p>L6DST12</p></td>
+<td><p>L6DST11</p></td>
+<td><p>L6DST10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router7">
+<span id="reg-router7"></span><h1>Register: ROUTER7<a class="headerlink" href="#register-router7" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x307</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer7_dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer7_dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L7DST23</p></td>
+<td><p>L7DST22</p></td>
+<td><p>L7DST21</p></td>
+<td><p>L7DST20</p></td>
+<td><p>L7DST13</p></td>
+<td><p>L7DST12</p></td>
+<td><p>L7DST11</p></td>
+<td><p>L7DST10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router8">
+<span id="reg-router8"></span><h1>Register: ROUTER8<a class="headerlink" href="#register-router8" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x308</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer8_dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxdsty"><span class="std std-ref">layer8_dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L8DST23</p></td>
+<td><p>L8DST22</p></td>
+<td><p>L8DST21</p></td>
+<td><p>L8DST20</p></td>
+<td><p>L8DST13</p></td>
+<td><p>L8DST12</p></td>
+<td><p>L8DST11</p></td>
+<td><p>L8DST10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router9">
+<span id="reg-router9"></span><h1>Register: ROUTER9<a class="headerlink" href="#register-router9" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x309</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l3_dst2_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l3_dst1_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l2_dst2_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l2_dst1_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l1_dst2_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l1_dst1_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l0_dst2_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l0_dst1_en</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L3D2EN</p></td>
+<td><p>L3D1EN</p></td>
+<td><p>L2D2EN</p></td>
+<td><p>L2D1EN</p></td>
+<td><p>L1D2EN</p></td>
+<td><p>L1D1EN</p></td>
+<td><p>L0D2EN</p></td>
+<td><p>L0D1EN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router10">
+<span id="reg-router10"></span><h1>Register: ROUTER10<a class="headerlink" href="#register-router10" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x30A</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l7_dst2_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l7_dst1_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l6_dst2_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l6_dst1_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l5_dst2_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l5_dst1_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l4_dst2_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l4_dst1_en</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L3D2EN</p></td>
+<td><p>L3D1EN</p></td>
+<td><p>L2D2EN</p></td>
+<td><p>L2D1EN</p></td>
+<td><p>L1D2EN</p></td>
+<td><p>L1D1EN</p></td>
+<td><p>L0D2EN</p></td>
+<td><p>L0D1EN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router11">
+<span id="reg-router11"></span><h1>Register: ROUTER11<a class="headerlink" href="#register-router11" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x30B</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l8_dst2_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxdyen"><span class="std std-ref">l8_dst1_en</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>L8D2EN</p></td>
+<td><p>L8D1EN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router12">
+<span id="reg-router12"></span><h1>Register: ROUTER12<a class="headerlink" href="#register-router12" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x30C</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l0_pooling1</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l0_pooling2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l0_fnum_offset1[9:6]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L0PL11</p></td>
+<td><p>L0PL10</p></td>
+<td><p>L0PL21</p></td>
+<td><p>L0PL20</p></td>
+<td><p>L0FNO19</p></td>
+<td><p>L0FNO18</p></td>
+<td><p>L0FNO17</p></td>
+<td><p>L0FNO16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router13">
+<span id="reg-router13"></span><h1>Register: ROUTER13<a class="headerlink" href="#register-router13" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x30D</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l0_fnum_offset1[5:0]</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l0_fnum_offset2[9:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L0FNO15</p></td>
+<td><p>L0FNO14</p></td>
+<td><p>L0FNO13</p></td>
+<td><p>L0FNO12</p></td>
+<td><p>L0FNO11</p></td>
+<td><p>L0FNO10</p></td>
+<td><p>L0FNO29</p></td>
+<td><p>L0FNO28</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router14">
+<span id="reg-router14"></span><h1>Register: ROUTER14<a class="headerlink" href="#register-router14" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x30E</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l0_fnum_offset2[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L0FNO27</p></td>
+<td><p>L0FNO26</p></td>
+<td><p>L0FNO25</p></td>
+<td><p>L0FNO24</p></td>
+<td><p>L0FNO23</p></td>
+<td><p>L0FNO22</p></td>
+<td><p>L0FNO21</p></td>
+<td><p>L0FNO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router15">
+<span id="reg-router15"></span><h1>Register: ROUTER15<a class="headerlink" href="#register-router15" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x30F</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l1_pooling1</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l1_pooling2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l1_fnum_offset1[9:6]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L1PL11</p></td>
+<td><p>L1PL10</p></td>
+<td><p>L1PL21</p></td>
+<td><p>L1PL20</p></td>
+<td><p>L1FNO19</p></td>
+<td><p>L1FNO18</p></td>
+<td><p>L1FNO17</p></td>
+<td><p>L1FNO16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router16">
+<span id="reg-router16"></span><h1>Register: ROUTER16<a class="headerlink" href="#register-router16" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x310</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l1_fnum_offset1[5:0]</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l1_fnum_offset2[9:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L1FNO15</p></td>
+<td><p>L1FNO14</p></td>
+<td><p>L1FNO13</p></td>
+<td><p>L1FNO12</p></td>
+<td><p>L1FNO11</p></td>
+<td><p>L1FNO10</p></td>
+<td><p>L1FNO29</p></td>
+<td><p>L1FNO28</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router17">
+<span id="reg-router17"></span><h1>Register: ROUTER17<a class="headerlink" href="#register-router17" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x311</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l1_fnum_offset2[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L1FNO27</p></td>
+<td><p>L1FNO26</p></td>
+<td><p>L1FNO25</p></td>
+<td><p>L1FNO24</p></td>
+<td><p>L1FNO23</p></td>
+<td><p>L1FNO22</p></td>
+<td><p>L1FNO21</p></td>
+<td><p>L1FNO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router18">
+<span id="reg-router18"></span><h1>Register: ROUTER18<a class="headerlink" href="#register-router18" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x312</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l2_pooling1</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l2_pooling2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l2_fnum_offset1[9:6]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L2PL11</p></td>
+<td><p>L2PL10</p></td>
+<td><p>L2PL21</p></td>
+<td><p>L2PL20</p></td>
+<td><p>L2FNO19</p></td>
+<td><p>L2FNO18</p></td>
+<td><p>L2FNO17</p></td>
+<td><p>L2FNO16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router19">
+<span id="reg-router19"></span><h1>Register: ROUTER19<a class="headerlink" href="#register-router19" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x313</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l2_fnum_offset1[5:0]</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l2_fnum_offset2[9:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L2FNO15</p></td>
+<td><p>L2FNO14</p></td>
+<td><p>L2FNO13</p></td>
+<td><p>L2FNO12</p></td>
+<td><p>L2FNO11</p></td>
+<td><p>L2FNO10</p></td>
+<td><p>L2FNO29</p></td>
+<td><p>L2FNO28</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router20">
+<span id="reg-router20"></span><h1>Register: ROUTER20<a class="headerlink" href="#register-router20" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x314</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l2_fnum_offset2[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L2FNO27</p></td>
+<td><p>L2FNO26</p></td>
+<td><p>L2FNO25</p></td>
+<td><p>L2FNO24</p></td>
+<td><p>L2FNO23</p></td>
+<td><p>L2FNO22</p></td>
+<td><p>L2FNO21</p></td>
+<td><p>L2FNO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router21">
+<span id="reg-router21"></span><h1>Register: ROUTER21<a class="headerlink" href="#register-router21" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x315</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l3_pooling1</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l3_pooling2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l3_fnum_offset1[9:6]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L3PL11</p></td>
+<td><p>L3PL10</p></td>
+<td><p>L3PL31</p></td>
+<td><p>L3PL30</p></td>
+<td><p>L3FNO19</p></td>
+<td><p>L3FNO18</p></td>
+<td><p>L3FNO17</p></td>
+<td><p>L3FNO16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router22">
+<span id="reg-router22"></span><h1>Register: ROUTER22<a class="headerlink" href="#register-router22" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x316</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l3_fnum_offset1[5:0]</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l3_fnum_offset2[9:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L3FNO15</p></td>
+<td><p>L3FNO14</p></td>
+<td><p>L3FNO13</p></td>
+<td><p>L3FNO12</p></td>
+<td><p>L3FNO11</p></td>
+<td><p>L3FNO10</p></td>
+<td><p>L3FNO29</p></td>
+<td><p>L3FNO28</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router23">
+<span id="reg-router23"></span><h1>Register: ROUTER23<a class="headerlink" href="#register-router23" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x317</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l3_fnum_offset2[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L3FNO27</p></td>
+<td><p>L3FNO26</p></td>
+<td><p>L3FNO25</p></td>
+<td><p>L3FNO24</p></td>
+<td><p>L3FNO23</p></td>
+<td><p>L3FNO22</p></td>
+<td><p>L3FNO21</p></td>
+<td><p>L3FNO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router24">
+<span id="reg-router24"></span><h1>Register: ROUTER24<a class="headerlink" href="#register-router24" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x318</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l4_pooling1</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l4_pooling2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l4_fnum_offset1[9:6]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L4PL11</p></td>
+<td><p>L4PL10</p></td>
+<td><p>L4PL41</p></td>
+<td><p>L4PL40</p></td>
+<td><p>L4FNO19</p></td>
+<td><p>L4FNO18</p></td>
+<td><p>L4FNO17</p></td>
+<td><p>L4FNO16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router25">
+<span id="reg-router25"></span><h1>Register: ROUTER25<a class="headerlink" href="#register-router25" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x319</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l4_fnum_offset1[5:0]</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l4_fnum_offset2[9:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L4FNO15</p></td>
+<td><p>L4FNO14</p></td>
+<td><p>L4FNO13</p></td>
+<td><p>L4FNO12</p></td>
+<td><p>L4FNO11</p></td>
+<td><p>L4FNO10</p></td>
+<td><p>L4FNO29</p></td>
+<td><p>L4FNO28</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router26">
+<span id="reg-router26"></span><h1>Register: ROUTER26<a class="headerlink" href="#register-router26" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x31A</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l4_fnum_offset2[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L4FNO27</p></td>
+<td><p>L4FNO26</p></td>
+<td><p>L4FNO25</p></td>
+<td><p>L4FNO24</p></td>
+<td><p>L4FNO23</p></td>
+<td><p>L4FNO22</p></td>
+<td><p>L4FNO21</p></td>
+<td><p>L4FNO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router27">
+<span id="reg-router27"></span><h1>Register: ROUTER27<a class="headerlink" href="#register-router27" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x31B</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l5_pooling1</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l5_pooling2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l5_fnum_offset1[9:6]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L5PL11</p></td>
+<td><p>L5PL10</p></td>
+<td><p>L5PL51</p></td>
+<td><p>L5PL50</p></td>
+<td><p>L5FNO19</p></td>
+<td><p>L5FNO18</p></td>
+<td><p>L5FNO17</p></td>
+<td><p>L5FNO16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router28">
+<span id="reg-router28"></span><h1>Register: ROUTER28<a class="headerlink" href="#register-router28" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x31C</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l5_fnum_offset1[5:0]</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l5_fnum_offset2[9:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L5FNO15</p></td>
+<td><p>L5FNO14</p></td>
+<td><p>L5FNO13</p></td>
+<td><p>L5FNO12</p></td>
+<td><p>L5FNO11</p></td>
+<td><p>L5FNO10</p></td>
+<td><p>L5FNO29</p></td>
+<td><p>L5FNO28</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router29">
+<span id="reg-router29"></span><h1>Register: ROUTER29<a class="headerlink" href="#register-router29" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x31D</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l5_fnum_offset2[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L5FNO27</p></td>
+<td><p>L5FNO26</p></td>
+<td><p>L5FNO25</p></td>
+<td><p>L5FNO24</p></td>
+<td><p>L5FNO23</p></td>
+<td><p>L5FNO22</p></td>
+<td><p>L5FNO21</p></td>
+<td><p>L5FNO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router30">
+<span id="reg-router30"></span><h1>Register: ROUTER30<a class="headerlink" href="#register-router30" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x31E</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l6_pooling1</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l6_pooling2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l6_fnum_offset1[9:6]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L6PL11</p></td>
+<td><p>L6PL10</p></td>
+<td><p>L6PL61</p></td>
+<td><p>L6PL60</p></td>
+<td><p>L6FNO19</p></td>
+<td><p>L6FNO18</p></td>
+<td><p>L6FNO17</p></td>
+<td><p>L6FNO16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router31">
+<span id="reg-router31"></span><h1>Register: ROUTER31<a class="headerlink" href="#register-router31" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x31F</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l6_fnum_offset1[5:0]</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l6_fnum_offset2[9:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L6FNO15</p></td>
+<td><p>L6FNO14</p></td>
+<td><p>L6FNO13</p></td>
+<td><p>L6FNO12</p></td>
+<td><p>L6FNO11</p></td>
+<td><p>L6FNO10</p></td>
+<td><p>L6FNO29</p></td>
+<td><p>L6FNO28</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router32">
+<span id="reg-router32"></span><h1>Register: ROUTER32<a class="headerlink" href="#register-router32" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x320</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l6_fnum_offset2[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L6FNO27</p></td>
+<td><p>L6FNO26</p></td>
+<td><p>L6FNO25</p></td>
+<td><p>L6FNO24</p></td>
+<td><p>L6FNO23</p></td>
+<td><p>L6FNO22</p></td>
+<td><p>L6FNO21</p></td>
+<td><p>L6FNO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router33">
+<span id="reg-router33"></span><h1>Register: ROUTER33<a class="headerlink" href="#register-router33" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x321</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l7_pooling1</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l7_pooling2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l7_fnum_offset1[9:6]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L7PL11</p></td>
+<td><p>L7PL10</p></td>
+<td><p>L7PL71</p></td>
+<td><p>L7PL70</p></td>
+<td><p>L7FNO19</p></td>
+<td><p>L7FNO18</p></td>
+<td><p>L7FNO17</p></td>
+<td><p>L7FNO16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router34">
+<span id="reg-router34"></span><h1>Register: ROUTER34<a class="headerlink" href="#register-router34" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x322</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l7_fnum_offset1[5:0]</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l7_fnum_offset2[9:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L7FNO15</p></td>
+<td><p>L7FNO14</p></td>
+<td><p>L7FNO13</p></td>
+<td><p>L7FNO12</p></td>
+<td><p>L7FNO11</p></td>
+<td><p>L7FNO10</p></td>
+<td><p>L7FNO29</p></td>
+<td><p>L7FNO28</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router35">
+<span id="reg-router35"></span><h1>Register: ROUTER35<a class="headerlink" href="#register-router35" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x323</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l7_fnum_offset2[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L7FNO27</p></td>
+<td><p>L7FNO26</p></td>
+<td><p>L7FNO25</p></td>
+<td><p>L7FNO24</p></td>
+<td><p>L7FNO23</p></td>
+<td><p>L7FNO22</p></td>
+<td><p>L7FNO21</p></td>
+<td><p>L7FNO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router36">
+<span id="reg-router36"></span><h1>Register: ROUTER36<a class="headerlink" href="#register-router36" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x324</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l8_pooling1</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxply"><span class="std std-ref">l8_pooling2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l8_fnum_offset1[9:6]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L8PL11</p></td>
+<td><p>L8PL10</p></td>
+<td><p>L8PL81</p></td>
+<td><p>L8PL80</p></td>
+<td><p>L8FNO19</p></td>
+<td><p>L8FNO18</p></td>
+<td><p>L8FNO17</p></td>
+<td><p>L8FNO16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router37">
+<span id="reg-router37"></span><h1>Register: ROUTER37<a class="headerlink" href="#register-router37" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x325</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l8_fnum_offset1[5:0]</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l8_fnum_offset2[9:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L8FNO15</p></td>
+<td><p>L8FNO14</p></td>
+<td><p>L8FNO13</p></td>
+<td><p>L8FNO12</p></td>
+<td><p>L8FNO11</p></td>
+<td><p>L8FNO10</p></td>
+<td><p>L8FNO29</p></td>
+<td><p>L8FNO28</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router38">
+<span id="reg-router38"></span><h1>Register: ROUTER38<a class="headerlink" href="#register-router38" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x326</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="router-config.html#rbits-lxfnoy"><span class="std std-ref">l8_fnum_offset2[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L8FNO27</p></td>
+<td><p>L8FNO26</p></td>
+<td><p>L8FNO25</p></td>
+<td><p>L8FNO24</p></td>
+<td><p>L8FNO23</p></td>
+<td><p>L8FNO22</p></td>
+<td><p>L8FNO21</p></td>
+<td><p>L8FNO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router39">
+<span id="reg-router39"></span><h1>Register: ROUTER39<a class="headerlink" href="#register-router39" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x327</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxmen"><span class="std std-ref">l7_mon_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxmen"><span class="std std-ref">l6_mon_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxmen"><span class="std std-ref">l5_mon_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxmen"><span class="std std-ref">l4_mon_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxmen"><span class="std std-ref">l3_mon_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxmen"><span class="std std-ref">l2_mon_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxmen"><span class="std std-ref">l1_mon_en</span></a></p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxmen"><span class="std std-ref">l0_mon_en</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L7MEN</p></td>
+<td><p>L6MEN</p></td>
+<td><p>L5MEN</p></td>
+<td><p>L4MEN</p></td>
+<td><p>L3MEN</p></td>
+<td><p>L2MEN</p></td>
+<td><p>L1MEN</p></td>
+<td><p>L0MEN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router40">
+<span id="reg-router40"></span><h1>Register: ROUTER40<a class="headerlink" href="#register-router40" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x328</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxmtag"><span class="std std-ref">l0_mon_tag</span></a></p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p><a class="reference internal" href="router-config.html#rbits-lxmen"><span class="std std-ref">l8_mon_en</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L0MTAG3</p></td>
+<td><p>L0MTAG2</p></td>
+<td><p>L0MTAG1</p></td>
+<td><p>L0MTAG0</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>L8MEN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router41">
+<span id="reg-router41"></span><h1>Register: ROUTER41<a class="headerlink" href="#register-router41" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x329</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxmtag"><span class="std std-ref">l2_mon_tag</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxmtag"><span class="std std-ref">l1_mon_tag</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L2MTAG3</p></td>
+<td><p>L2MTAG2</p></td>
+<td><p>L2MTAG1</p></td>
+<td><p>L2MTAG0</p></td>
+<td><p>L1MTAG3</p></td>
+<td><p>L1MTAG2</p></td>
+<td><p>L1MTAG1</p></td>
+<td><p>L1MTAG0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router42">
+<span id="reg-router42"></span><h1>Register: ROUTER42<a class="headerlink" href="#register-router42" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x32A</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxmtag"><span class="std std-ref">l4_mon_tag</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxmtag"><span class="std std-ref">l3_mon_tag</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L4MTAG3</p></td>
+<td><p>L4MTAG2</p></td>
+<td><p>L4MTAG1</p></td>
+<td><p>L4MTAG0</p></td>
+<td><p>L3MTAG3</p></td>
+<td><p>L3MTAG2</p></td>
+<td><p>L3MTAG1</p></td>
+<td><p>L3MTAG0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router43">
+<span id="reg-router43"></span><h1>Register: ROUTER43<a class="headerlink" href="#register-router43" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x32B</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxmtag"><span class="std std-ref">l6_mon_tag</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxmtag"><span class="std std-ref">l5_mon_tag</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L6MTAG3</p></td>
+<td><p>L6MTAG2</p></td>
+<td><p>L6MTAG1</p></td>
+<td><p>L6MTAG0</p></td>
+<td><p>L5MTAG3</p></td>
+<td><p>L5MTAG2</p></td>
+<td><p>L5MTAG1</p></td>
+<td><p>L5MTAG0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-router44">
+<span id="reg-router44"></span><h1>Register: ROUTER44<a class="headerlink" href="#register-router44" title="Permalink to this heading"></a></h1>
+<p>SPI Address: 0x32C</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxmtag"><span class="std std-ref">l8_mon_tag</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="router-config.html#rbits-lxmtag"><span class="std std-ref">l7_mon_tag</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>L8MTAG3</p></td>
+<td><p>L8MTAG2</p></td>
+<td><p>L8MTAG1</p></td>
+<td><p>L8MTAG0</p></td>
+<td><p>L7MTAG3</p></td>
+<td><p>L7MTAG2</p></td>
+<td><p>L7MTAG1</p></td>
+<td><p>L7MTAG0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

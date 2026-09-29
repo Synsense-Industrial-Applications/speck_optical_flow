@@ -1,0 +1,166 @@
+.. _memory-configuration:
+
+Memory configuration
+====================
+
+SRAM memory blocks are distributed across Speck2e in order to store Kernel/Leak/Neuron information
+of :ref:`convolutional layers<convolutional-layer>` as required for proper operation of the neuromorphic processor.
+
+In addition, an SRAM block is included in the :ref:`dvs-filter` to store Counter information.
+
+Memory Capacity and Internal Addressing
+***************************************
+
+The Speck2e processor is divided into 9 cores, each of which executes the function of a single CNN layer.
+The memory capacities of the cores are different, and restrict the implementation of larger layers
+to specific cores.
+
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| Layer Core | Kernel memory entries (addr bits) | Leak memory entries (addr bits) | Neuron memory entries (addr bits) |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| 0          | 16 Ki (14 bits)                   | 1 Ki (10 bits)                  | 64 Ki (16 bits)                   |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| 1          | 16 Ki (14 bits)                   | 1 Ki (10 bits)                  | 64 Ki (16 bits)                   |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| 2          | 16 Ki (14 bits)                   | 1 Ki (10 bits)                  | 64 Ki (16 bits)                   |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| 3          | 32 Ki (15 bits)                   | 1 Ki (10 bits)                  | 32 Ki (15 bits)                   |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| 4          | 32 Ki (15 bits)                   | 1 Ki (10 bits)                  | 32 Ki (15 bits)                   |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| 5          | 64 Ki (16 bits)                   | 1 Ki (10 bits)                  | 16 Ki (14 bits)                   |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| 6          | 64 Ki (16 bits)                   | 1 Ki (10 bits)                  | 16 Ki (14 bits)                   |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| 7          | 16 Ki (14 bits)                   | 1 Ki (10 bits)                  | 16 Ki (14 bits)                   |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+| 8          | 16 Ki (14 bits)                   | 1 Ki (10 bits)                  | 16 Ki (14 bits)                   |
++------------+-----------------------------------+---------------------------------+-----------------------------------+
+
++------------+---------------------+
+| SRAM       | entries (addr bits) |
++------------+---------------------+
+| DVS Filter | 16 ki (14 bits)     |
++------------+---------------------+
+
+Word lengths
+------------
+
++-------------+-------------+
+| Memory type | Word length |
++-------------+-------------+
+| Kernel      | 8 bits      |
++-------------+-------------+
+| Neuron      | 16 bits     |
++-------------+-------------+
+| Leak        | 16 bits     |
++-------------+-------------+
+| Filter      | 16 bits     |
++-------------+-------------+
+
+
+Memory Layout
+*************
+
+All memory access is done by layer. The internal address format is dynamic and depends
+on the feature sizes and kernel dimensions of the layer being accessed.
+
+All binary expressions have the most significant bit on the left side.
+
+Neuron Memory
+-------------
+
+There are 16 bits available for adressing neuron memory per layer.
+The address format is
+
++-----------+----------+----------+---------+
+| zero fill | neuron y | neuron x | feature |
++-----------+----------+----------+---------+
+
+The bit field size is computed as
+
+.. math::
+
+   [\text{neuron y}] &= \lceil \log_2\left(f_y\right) \rceil \\
+   [\text{neuron x}] &= \lceil \log_2\left(f_x\right) \rceil \\
+   [\text{feature}] &= \lceil \log_2\left(f\right) \rceil
+
+Example
+--------
+Let :math:`f_x=16,f_y=16,f=128`
+
+The neuron address of the neuron in feature map 63 with x address 3 and y address 11 is then
+
++--------------------+--------------------+--------------------+-----------------------+
+| zero fill (1 bit)  | neuron y (4 bits)  | neuron x (4 bits)  | feature (7 bits)      |
++--------------------+--------------------+--------------------+-----------------------+
+| .. centered:: 0    | .. centered:: 1011 | .. centered:: 0011 | .. centered:: 0111111 |
++--------------------+--------------------+--------------------+-----------------------+
+
+Kernel Memory
+-------------
+
+There are maximally 16 bits available for addressing neuron memory per layer.
+
+The address format is:
+
++-----------+--------------+----------------+---------------+
+| zero fill | kernel entry | output feature | input feature |
++-----------+--------------+----------------+---------------+
+
+.. note::
+
+   Kernel entries are not addressed by their x,y position. Instead they are numbered
+   using row major order. The kernel entry address of a kernel element with position :math:`(x,y)` becomes
+   :math:`k_yy+x`
+
+The bit field size is computed as
+
+.. math::
+
+   [\text{kernel entry}] &= \lceil \log_2\left(k_xk_y\right) \rceil \\
+   [\text{output feature}] &= \lceil \log_2\left(f\right) \rceil \\
+   [\text{input feature}] &= \lceil \log_2\left(c\right) \rceil
+
+Example
+--------
+Let :math:`k_x=k_y=3,f=128,c=64`
+
+The address for kernel element 6 in the kernel applied to input feature 28 to generate output feature 71
+is then
+
++-----------------------+-------------------------+------------------------+
+| kernel entry (4 bits) | output feature (7 bits) | input feature (6 bits) |
++-----------------------+-------------------------+------------------------+
+| .. centered:: 110     | .. centered:: 1000111   | .. centered:: 011100   |
++-----------------------+-------------------------+------------------------+
+
+Leak Memory
+-----------
+
+There are 10 bits available for addressing leak memory per layer.
+
+The address format is:
+
++---------+
+| feature |
++---------+
+
+Example
+-------
+
+If the layer has 5 output features (see :ref:`CONV5:OFN<rbits-OFN>`),
+the leak memory contains 5 entries, simply going from address 0x000 to 0x005.
+
+.. _filter-sram-rw:
+
+DVS Filter Memory
+-----------------
+
+There are 14 bits available for addressing the DVS Filter memory.
+
+The address format is:
+
++------------+------------+
+| Y (7 bits) | X (7 bits) |
++------------+------------+

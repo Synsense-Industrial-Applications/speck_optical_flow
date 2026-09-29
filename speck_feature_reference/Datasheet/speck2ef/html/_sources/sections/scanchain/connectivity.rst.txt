@@ -1,0 +1,80 @@
+.. _scan-chain-connectivity:
+
+Scan Chain Connectivity
+=======================
+
+As shown in the following block diagram, the scan chain is divided into a number of sub-domains.
+Each sub-domain can be individually accessed by sending the appropriate JTAG command sequence to
+activate the scan chain and select the desired sub-domain.
+
+The sub-domains are divided in order to be able to test smaller asynchronous networks
+independently due to the large size of the internal circuitry.
+
+The scan chain outputs of the various domains are then muxed together by an output mux.
+
+.. note::
+
+    Only a single scan chain sub-domain can be active at any time.
+
+
+.. only:: html
+
+    .. figure:: ../../figures/Speck2e_scan_chain.svg
+        :scale: 150%
+        :class: img-limit-width
+
+        Speck2e Scan Chain Connectivity
+
+.. only:: pdf
+
+    .. figure:: ../../figures/Speck2e_scan_chain.pdf
+        :scale: 150%
+
+        Speck2e Scan Chain Connectivity
+
+.. _scan-chain-domains:
+
+Scan Chain Domains
+******************
+
+As shown in the above block diagram, there are 13 main domains where the scan chain runs through.
+These cover all the asynchronous logic blocks included in Speck2e:
+
+- Input Interface
+- 9 Layer Cores (0 to 8)
+- DVS Post Processing Core
+- Event Router
+- Readout Core
+
+.. note::
+    Due to the different size of SRAM memories for Kernel and Neuron for the different layers, the SC
+    bitstream length changes between layers.
+
+Layer Core Sub-Domains
+^^^^^^^^^^^^^^^^^^^^^^
+
+Every layer core scan chain is further divided into 3 sub-domains.
+
+- Convolutional Loop, Kernel Interface and Kernel SRAM
+- Leak Generator and Leak SRAM
+- Neuron Interface and Neuron SRAM
+
+The following table summarizes SC lengths for the various sub-domains:
+
+.. csv-table:: Speck2e/f scan chain domains
+   :file: ../../tables/scan_chain_domains.csv
+..    :class: table-small
+
+Cell connectivity example
+=========================
+
+.. figure:: ../../figures/sc_cell_example_1.png
+
+    Speck2e Example async cell
+
+.. only:: html
+
+    .. graphviz:: ../../figures/sc_cell_example1_graph.dot
+
+
+*Speck2e Example async cell connectivity graph*

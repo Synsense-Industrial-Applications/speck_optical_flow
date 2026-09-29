@@ -1,0 +1,146 @@
+############################################################
+Connect Multiple Speck 2f Development Kits To One Visualizer
+############################################################
+
+.. contents:: Content
+   :local:
+   :depth: 2
+
+In certain use cases, it may be necessary to achieve a large field of view by combining the views of multiple Speck 2f development kits.
+In the following example, we will illustrate the process of connecting two Speck 2f dev kits to a single visualizer, 
+and creating a larger field of view by using a JIT filter to shift the pixels.
+
+Since one visualizer can only connect to one streamer, so these two Speck 2f dev kits have to use two streamers.
+
+It is easy to extend this example to support more Speck 2f development kits.
+
+**********************************
+Open Two Speck 2f Development Kits
+**********************************
+
+.. code-block:: python
+    :linenos:
+
+    import samna
+
+    def open_speck2f_dev_kit():
+        devices = [
+            device
+            for device in samna.device.get_unopened_devices()
+            if device.device_type_name.startswith("Speck2f")
+        ]
+        assert devices, "Speck2f board not found"
+
+        return samna.device.open_device(devices[0])
+
+    dk1 = open_speck2f_dev_kit()
+    dk2 = open_speck2f_dev_kit()
+
+The ``samna.device.open_device(devices[0])`` will open the first available device, 
+and in this example, since the first device is opened, the next call to it opens the only 
+available device, which is the second one.
+
+****************
+Setup Visualizer
+****************
+
+.. code-block:: python
+    :linenos:
+
+    import sys
+    import os
+    from threading import Thread
+
+    def open_visualizer(width_proportion, height_proportion, receiver_endpoint):
+        # start visualizer in a isolated process which is required on mac, instead of a sub process.
+        gui_cmd = f"import samna, samnagui; samnagui.run_visualizer('{receiver_endpoint}', {width_proportion}, {height_proportion})"
+        os_cmd = f'{sys.executable} -c "{gui_cmd}"'
+        print("Visualizer start command: ", os_cmd)
+        gui_thread = Thread(target=os.system, args=(os_cmd,))
+        gui_thread.start()
+
+        return gui_thread
+
+    streamer_endpoint = "tcp://0.0.0.0:40001"
+    width_proportion = 0.75
+    height_proportion = 0.75
+
+    gui_process = open_visualizer(width_proportion, height_proportion, streamer_endpoint)
+
+*****************
+Setup Event graph
+*****************
+
+Now it's time to set up the graph to shift the DVS events from the second Speck 2f development kit to the right side of the 
+plot with a simple :ref:`JIT filter <JIT Filters>`.
+
+.. code-block:: python
+    :linenos:
+
+    def setup_graph(graph, dk1, dk2):
+        _, _, streamer = graph.sequential(
+            [dk1.get_model_source_node(), "Speck2fDvsToVizConverter", "VizEventStreamer"]
+        )
+
+        # a jit filter to shift the DVS events of the second Speck 2f dev kit to the right side of the plot
+        shift_pixels = '''
+            template <typename Input>
+            auto filterFunction(const Input& input)
+            {
+                return std::visit([]<typename T>(const T& e) -> ui::Event  {
+                    if constexpr (std::is_same_v<T, ui::DvsEvent>) {
+                        ui::DvsEvent output = e;
+                        // shift left 128 pixels
+                        output.col += 128;
+                        return output;
+                    } else {
+                        return e;
+                    }
+                },
+                input);
+            }
+        '''
+
+        shift_pixels_node = samna.graph.JitFunctionFilter('ShiftPixels', shift_pixels)
+
+        _, _, _, _ = graph.sequential(
+            [dk2.get_model_source_node(), "Speck2fDvsToVizConverter", shift_pixels_node, streamer]
+        )
+
+        streamer.set_streamer_endpoint(streamer_endpoint)
+        if streamer.wait_for_receiver_count() == 0:
+            raise Exception(f'connecting to visualizer on {streamer_endpoint} fails')
+        
+        return streamer
+
+    def setup_plot(graph, streamer):
+        config_source, _ = graph.sequential([samna.BasicSourceNode_ui_event(), streamer])
+
+        # create a plot with size 256*128 so it can display the DVS events from two Speck 2f
+        # dev kits side by side
+        visualizer_config = samna.ui.VisualizerConfiguration(
+            plots=[samna.ui.ActivityPlotConfiguration(256, 128, "DVS Layer")]
+        )
+
+        config_source.write([visualizer_config])
+
+    graph = samna.graph.EventFilterGraph()
+    streamer = setup_graph(graph, dk1, dk2)
+    setup_plot(graph, streamer)
+
+    graph.start()
+
+*******************
+Apply Configuration
+*******************
+
+.. code-block:: python
+    :linenos:
+
+    config = samna.speck2f.configuration.SpeckConfiguration()
+    # enable dvs event monitoring
+    config.dvs_layer.monitor_enable = True
+    dk1.get_model().apply_configuration(config)
+    dk2.get_model().apply_configuration(config)
+
+Then you should see the visualizer showing the DVS events from two Speck 2f dev kits side by side.

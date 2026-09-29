@@ -1,0 +1,21 @@
+#############
+samna.speck2e
+#############
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   configuration/index
+   event/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.speck2e
+   :members:
+   :show-inheritance:
+

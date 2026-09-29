@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hands On Speck 2f Development Kit &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Display Speck 2f DVS Events" href="display_speck2f_dvs.html" />
+    <link rel="prev" title="Speck series" href="../summary.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Development Kits</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#connecting-to-a-device">Connecting to a Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#common-methods-of-development-kits">Common Methods of Development Kits</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supported-development-kits">Supported Development Kits</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../summary.html">Speck series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../summary.html#speck-2f">Speck 2f</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#speck-2e">Speck 2e</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapSeSeries/index.html">Dynap-SE series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloSeries/index.html">Xylo Series</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Development Kits</a></li>
+          <li class="breadcrumb-item"><a href="../summary.html">Speck series</a></li>
+      <li class="breadcrumb-item active">Hands On Speck 2f Development Kit</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/devkits/speckSeries/examples/hands_on_speck2f_dev_kit.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hands-on-speck-2f-development-kit">
+<h1>Hands On Speck 2f Development Kit<a class="headerlink" href="hands_on_speck2f_dev_kit.html#hands-on-speck-2f-development-kit" title="Link to this heading"></a></h1>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="hands_on_speck2f_dev_kit.html#open-a-development-kit" id="id1">Open a Development Kit</a></p></li>
+<li><p><a class="reference internal" href="hands_on_speck2f_dev_kit.html#read-write-from-to-the-speck-2f" id="id2">Read/Write From/To The Speck 2f</a></p>
+<ul>
+<li><p><a class="reference internal" href="hands_on_speck2f_dev_kit.html#instantiate-from-the-chip" id="id3">Instantiate From The Chip</a></p></li>
+<li><p><a class="reference internal" href="hands_on_speck2f_dev_kit.html#create-manually" id="id4">Create Manually</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="hands_on_speck2f_dev_kit.html#setup-the-visualizer" id="id5">Setup The Visualizer</a></p>
+<ul>
+<li><p><a class="reference internal" href="hands_on_speck2f_dev_kit.html#start-visualizer" id="id6">Start Visualizer</a></p></li>
+<li><p><a class="reference internal" href="hands_on_speck2f_dev_kit.html#direct-events-to-the-visualizer" id="id7">Direct Events To The Visualizer</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="hands_on_speck2f_dev_kit.html#config-speck-2f-chip" id="id8">Config Speck 2f chip</a></p></li>
+</ul>
+</nav>
+<p>This is a complete example that provides basic steps on how to “light up” the development kit,
+receive events from the chip, send events to the chip, and visualize the DVS events.</p>
+<p>A more concise example can be found in <a class="reference internal" href="display_speck2f_dvs.html#display-speck-2f-dvs-events"><span class="std std-ref">Display Speck 2f DVS Events</span></a>.</p>
+<p>Please ensure you followed the <a class="reference internal" href="../../../install.html#install"><span class="std std-ref">Install</span></a> instructions and connected the development
+kit to the USB 3 port with a USB 3.0 cable.</p>
+<section id="open-a-development-kit">
+<h2><a class="toc-backref" href="hands_on_speck2f_dev_kit.html#id1" role="doc-backlink">Open a Development Kit</a><a class="headerlink" href="hands_on_speck2f_dev_kit.html#open-a-development-kit" title="Link to this heading"></a></h2>
+<p>We can easily open a specific device by its <code class="docutils literal notranslate"><span class="pre">device_type_name</span></code>,
+for Speck 2f development kits, it can be <code class="docutils literal notranslate"><span class="pre">Speck2fDevKit</span></code> for Speck 2f development kit,
+or <code class="docutils literal notranslate"><span class="pre">Speck2fModuleDevKit</span></code> for Speck 2f module development kit.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span><span class="w"> </span><span class="nn">samna</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">try</span><span class="p">:</span>
+<span class="linenos">4</span>    <span class="n">board</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;Speck2fDevKit&quot;</span><span class="p">)</span>
+<span class="linenos">5</span><span class="k">except</span><span class="p">:</span>
+<span class="linenos">6</span>    <span class="n">board</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;Speck2fModuleDevKit&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more details, please check <a class="reference internal" href="../../../deviceController.html#device-controller"><span class="std std-ref">Device Controller</span></a>.</p>
+</section>
+<section id="read-write-from-to-the-speck-2f">
+<h2><a class="toc-backref" href="hands_on_speck2f_dev_kit.html#id2" role="doc-backlink">Read/Write From/To The Speck 2f</a><a class="headerlink" href="hands_on_speck2f_dev_kit.html#read-write-from-to-the-speck-2f" title="Link to this heading"></a></h2>
+<p>To read/write from/to the Speck 2f chip, it is necessary to create at least one
+<a class="reference internal" href="../../../reference/index.html#samna.BasicSinkNode_speck2f_event_output_event" title="samna.BasicSinkNode_speck2f_event_output_event"><code class="xref py py-class docutils literal notranslate"><span class="pre">sink_node</span></code></a> and one <a class="reference internal" href="../../../reference/index.html#samna.BasicSourceNode_speck2f_event_input_event" title="samna.BasicSourceNode_speck2f_event_input_event"><code class="xref py py-class docutils literal notranslate"><span class="pre">source_node</span></code></a>.
+There are two ways to create them,
+either directly instantiate them from the chip model, or create them manually and use a <a class="reference internal" href="../../../quickStart.html#event-handling-with-filter-graphs"><span class="std std-ref">graph</span></a>
+to connect to the model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The sink node buffers all the events it receives until you clear them or read the events.
+Otherwise, due to the accumulation of events, it could consume all the memory.</p>
+<p>Usually we can use filters to reject unwanted events reach the sink node, like the
+<code class="docutils literal notranslate"><span class="pre">Speck2fOutputEventTypeFilter</span></code> node used in <a class="reference internal" href="hands_on_speck2f_dev_kit.html#create-manually"><span class="std std-ref">Create Manually</span></a> section. But if instantiate
+it from the chip model, then it receives all events.</p>
+</div>
+<section id="instantiate-from-the-chip">
+<h3><a class="toc-backref" href="hands_on_speck2f_dev_kit.html#id3" role="doc-backlink">Instantiate From The Chip</a><a class="headerlink" href="hands_on_speck2f_dev_kit.html#instantiate-from-the-chip" title="Link to this heading"></a></h3>
+<p>This is the easiest way to create the <a class="reference internal" href="../../../reference/index.html#samna.BasicSinkNode_speck2f_event_output_event" title="samna.BasicSinkNode_speck2f_event_output_event"><code class="xref py py-class docutils literal notranslate"><span class="pre">sink_node</span></code></a> and
+<a class="reference internal" href="../../../reference/index.html#samna.BasicSourceNode_speck2f_event_input_event" title="samna.BasicSourceNode_speck2f_event_input_event"><code class="xref py py-class docutils literal notranslate"><span class="pre">source_node</span></code></a>, but in this way you can’t add filters between the
+nodes and the chip to process the events.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># create a sink node to receive events from the Speck 2f</span>
+<span class="linenos"> 2</span><span class="n">sink_node</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">sink_from</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">())</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># create a source node to send events to the Speck 2f</span>
+<span class="linenos"> 5</span><span class="n">source_node</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">source_to</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_sink_node</span><span class="p">())</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># Read the first register</span>
+<span class="linenos"> 8</span><span class="n">source_node</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">speck2f</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">ReadRegisterValue</span><span class="p">(</span><span class="mh">0x0</span><span class="p">)])</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># a blocking call to wait for 1 event</span>
+<span class="linenos">11</span><span class="nb">print</span><span class="p">(</span><span class="n">sink_node</span><span class="o">.</span><span class="n">get_n_events</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># [speck2f::event::RegisterValue(address=0, data=241)]</span>
+</pre></div>
+</div>
+</section>
+<section id="create-manually">
+<h3><a class="toc-backref" href="hands_on_speck2f_dev_kit.html#id4" role="doc-backlink">Create Manually</a><a class="headerlink" href="hands_on_speck2f_dev_kit.html#create-manually" title="Link to this heading"></a></h3>
+<p>With a <a class="reference internal" href="../../../quickStart.html#event-handling-with-filter-graphs"><span class="std std-ref">graph</span></a>, filters can be used to process events before
+reaching the final destination. All available filters are listed in <a class="reference internal" href="../../../filters.html#filters"><span class="std std-ref">Filters</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># add a event type filter to let only a specific type to pass</span>
+<span class="linenos"> 4</span><span class="n">_</span><span class="p">,</span> <span class="n">event_type_filter</span><span class="p">,</span> <span class="n">sink_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">(),</span>
+<span class="linenos"> 5</span>                                                    <span class="s2">&quot;Speck2fOutputEventTypeFilter&quot;</span><span class="p">,</span>
+<span class="linenos"> 6</span>                                                    <span class="n">samna</span><span class="o">.</span><span class="n">BasicSinkNode_speck2f_event_output_event</span><span class="p">()])</span>
+<span class="linenos"> 7</span><span class="c1"># only pass samna.speck2f.event.RegisterValue event</span>
+<span class="linenos"> 8</span><span class="n">event_type_filter</span><span class="o">.</span><span class="n">set_desired_type</span><span class="p">(</span><span class="s2">&quot;speck2f::event::RegisterValue&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">source_node</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">BasicSourceNode_speck2f_event_input_event</span><span class="p">(),</span> <span class="n">board</span><span class="o">.</span><span class="n">get_model_sink_node</span><span class="p">()])</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># graph has to start first</span>
+<span class="linenos">13</span><span class="n">graph</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># Read the first register</span>
+<span class="linenos">16</span><span class="n">source_node</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">speck2f</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">ReadRegisterValue</span><span class="p">(</span><span class="mh">0x0</span><span class="p">)])</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="c1"># a blocking call to wait 1 events</span>
+<span class="linenos">19</span><span class="nb">print</span><span class="p">(</span><span class="n">sink_node</span><span class="o">.</span><span class="n">get_n_events</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># [speck2f::event::RegisterValue(address=0, data=241)]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="setup-the-visualizer">
+<h2><a class="toc-backref" href="hands_on_speck2f_dev_kit.html#id5" role="doc-backlink">Setup The Visualizer</a><a class="headerlink" href="hands_on_speck2f_dev_kit.html#setup-the-visualizer" title="Link to this heading"></a></h2>
+<p>The Visualizer is a built-in GUI dedicated to displaying DVS events.
+It is necessary to launch the GUI in a separate process and direct the DVS events to it.</p>
+<section id="start-visualizer">
+<h3><a class="toc-backref" href="hands_on_speck2f_dev_kit.html#id6" role="doc-backlink">Start Visualizer</a><a class="headerlink" href="hands_on_speck2f_dev_kit.html#start-visualizer" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">socket</span>
+<span class="linenos"> 2</span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">threading</span><span class="w"> </span><span class="kn">import</span> <span class="n">Thread</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">def</span><span class="w"> </span><span class="nf">free_port</span><span class="p">():</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 7</span><span class="sd">    Determines a free port using sockets.</span>
+<span class="linenos"> 8</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 9</span>    <span class="n">free_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="linenos">10</span>    <span class="n">free_socket</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="linenos">11</span>    <span class="n">free_socket</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">12</span>    <span class="n">port</span> <span class="o">=</span> <span class="n">free_socket</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">13</span>    <span class="n">free_socket</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">return</span> <span class="n">port</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="c1"># the visualizer will receive from this endpoint</span>
+<span class="linenos">18</span><span class="n">streamer_endpoint</span> <span class="o">=</span> <span class="s2">&quot;tcp://0.0.0.0:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">free_port</span><span class="p">())</span>
+<span class="linenos">19</span><span class="n">width_proportion</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="linenos">20</span><span class="n">height_proportion</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="c1"># start visualizer in a isolated process which is required on mac, instead of a sub process.</span>
+<span class="linenos">23</span><span class="n">gui_cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;import samna, samnagui; samnagui.run_visualizer(&#39;</span><span class="si">{</span><span class="n">streamer_endpoint</span><span class="si">}</span><span class="s2">&#39;, </span><span class="si">{</span><span class="n">width_proportion</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">height_proportion</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="linenos">24</span><span class="n">os_cmd</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="si">}</span><span class="s1"> -c &quot;</span><span class="si">{</span><span class="n">gui_cmd</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+<span class="linenos">25</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Visualizer start command: &quot;</span><span class="p">,</span> <span class="n">os_cmd</span><span class="p">)</span>
+<span class="linenos">26</span><span class="n">gui_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">os_cmd</span><span class="p">,))</span>
+<span class="linenos">27</span><span class="n">gui_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="direct-events-to-the-visualizer">
+<h3><a class="toc-backref" href="hands_on_speck2f_dev_kit.html#id7" role="doc-backlink">Direct Events To The Visualizer</a><a class="headerlink" href="hands_on_speck2f_dev_kit.html#direct-events-to-the-visualizer" title="Link to this heading"></a></h3>
+<p>To direct events to the visualizer, a graph is necessary because we need to use filters:</p>
+<ul class="simple">
+<li><p>Speck2fDvsToVizConverter: convert <a class="reference internal" href="../../../reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a> and <a class="reference internal" href="../../../reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.DvsEvent</span></code></a> to
+<a class="reference internal" href="../../../reference/ui/index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.DvsEvent</span></code></a>.</p></li>
+<li><p>VizEventStreamer: stream the visualizer acceptable events to the visualizer.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">to_vis_graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">streamer</span> <span class="o">=</span> <span class="n">to_vis_graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">(</span>
+<span class="linenos"> 4</span>    <span class="p">[</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">(),</span> <span class="s2">&quot;Speck2fDvsToVizConverter&quot;</span><span class="p">,</span> <span class="s2">&quot;VizEventStreamer&quot;</span><span class="p">]</span>
+<span class="linenos"> 5</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># create a node to send visualizer configurations</span>
+<span class="linenos"> 8</span><span class="n">config_source</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">to_vis_graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">BasicSourceNode_ui_event</span><span class="p">(),</span> <span class="n">streamer</span><span class="p">])</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># set the streamer endpoint the same as the endpoint set when creating the visualizer</span>
+<span class="linenos">11</span><span class="n">streamer</span><span class="o">.</span><span class="n">set_streamer_endpoint</span><span class="p">(</span><span class="n">streamer_endpoint</span><span class="p">)</span>
+<span class="linenos">12</span><span class="k">if</span> <span class="n">streamer</span><span class="o">.</span><span class="n">wait_for_receiver_count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos">13</span>    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;connecting to visualizer on </span><span class="si">{</span><span class="n">streamer_endpoint</span><span class="si">}</span><span class="s1"> fails&#39;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="c1"># create a 128*128 resolution activity plot to display the DVS events</span>
+<span class="linenos">16</span><span class="n">visualizer_config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">VisualizerConfiguration</span><span class="p">(</span>
+<span class="linenos">17</span>    <span class="n">plots</span><span class="o">=</span><span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">ActivityPlotConfiguration</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">&quot;DVS Layer&quot;</span><span class="p">)]</span>
+<span class="linenos">18</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="c1"># start the graph</span>
+<span class="linenos">21</span><span class="n">to_vis_graph</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># send the configurations to the visualizer</span>
+<span class="linenos">24</span><span class="n">config_source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">visualizer_config</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="config-speck-2f-chip">
+<h2><a class="toc-backref" href="hands_on_speck2f_dev_kit.html#id8" role="doc-backlink">Config Speck 2f chip</a><a class="headerlink" href="hands_on_speck2f_dev_kit.html#config-speck-2f-chip" title="Link to this heading"></a></h2>
+<p>After setting up the sink and source node, we are ready to send and receive events to/from the Speck 2f.
+But in order to get some events from the Speck 2f, we need to configure the Speck 2f to do so.</p>
+<p>The very basic approach to get anything from the Speck 2f is to enable the monitoring of the
+<a class="reference internal" href="../../../models/speckSeries/speck2f.html#speck-2f-dvs-layer"><span class="std std-ref">DVS Pre-Processing Layer</span></a>.
+For more configurations, please check <a class="reference internal" href="../../../models/speckSeries/speck2f.html#configure-speck-2f"><span class="std std-ref">How to Configure Chip</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">speck2f</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">SpeckConfiguration</span><span class="p">()</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># enable the monitoring of the dvs pre-processing layers</span>
+<span class="linenos">4</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">monitor_enable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="c1"># apply the configuration to the Speck 2f</span>
+<span class="linenos">7</span><span class="n">board</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span><span class="o">.</span><span class="n">apply_configuration</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After <a class="reference internal" href="../../../reference/speck2f/index.html#samna.speck2f.Speck2fModel.apply_configuration" title="samna.speck2f.Speck2fModel.apply_configuration"><code class="xref py py-attr docutils literal notranslate"><span class="pre">apply_configuration</span></code></a>, you should be able to see
+DVS events on the visualizer.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../summary.html" class="btn btn-neutral float-left" title="Speck series" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="display_speck2f_dvs.html" class="btn btn-neutral float-right" title="Display Speck 2f DVS Events" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

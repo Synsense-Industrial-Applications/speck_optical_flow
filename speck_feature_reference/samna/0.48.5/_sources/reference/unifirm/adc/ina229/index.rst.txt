@@ -1,0 +1,19 @@
+########################
+samna.unifirm.adc.ina229
+########################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm.adc.ina229
+   :members:
+   :show-inheritance:
+

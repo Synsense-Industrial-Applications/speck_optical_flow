@@ -1,0 +1,49 @@
+.. _input-serial-interface-protocol:
+
+Input Serial Interface
+======================
+
+The serial to parallel converter (S2P) is an interface that receives
+serial data from an external source such as a sensor,
+microcontroller of an FPGA and converts it to the parallel data
+as an appropriate data feed for the IC.
+
+A symbol of the S2P block is shown in the following.
+
+.. only:: html
+
+    .. figure:: ../../figures/input_s2p_block.svg
+        :scale: 120%
+        
+        Input Serial Interface
+
+.. only:: pdf
+
+    .. figure:: ../../figures/input_s2p_block.pdf
+        :scale: 120%
+        
+        Input Serial Interface
+
+An example waveform for how we can communicate with S2P block is shown in
+the following. Please note the *S2P_CREADY* signal which is **HIGH** whenever
+the S2P block is ready to accept new data and stays **HIGH** until
+the first bit of the new data frame is received.
+
+The timing diagram for the communication is as follows. 
+
+.. note::
+
+    The *S2P_DATA* signal is sampled at the clock **rising** edge.
+    
+    **Setup** and **hold** times for the *S2P_DATA* signals are of 100 ps.
+
+
+.. wavedrom::
+
+    { "signal": [
+    { "name": "CLK",  "wave": "n...|........." },
+    { "name": "S2P_DATA",  "wave": "x34=|.56x...34", "data": ["a[n]","a[n-1]","","a[1]","a[0]","b[n]"] },
+    { "name": "S2P_DREADY", "wave": "01..|...0...1." },
+    { "name": "S2P_CREADY", "wave": "1.0.|....1...0", "phase": "0.5"}],
+    "head":{ "text":"Input Serial Interface Timing Diagram." }
+    }

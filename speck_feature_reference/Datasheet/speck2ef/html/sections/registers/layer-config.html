@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.6. Convolutional Layer Configuration Signal Description &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.7. Router Register Description" href="router.html" />
+    <link rel="prev" title="7.5. Convolutional Layer Register Description" href="layer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.6. Convolutional Layer Configuration Signal Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-signal-description">7.6.1. Detailed Signal Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ben-balancer-en">7.6.1.1. BEN (balancer_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#den-decimator-en">7.6.1.2. DEN (decimator_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dint-decimator-interval">7.6.1.3. DINT (decimator_interval)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scx-1-0-stride-casex">7.6.1.4. SCX[1:0] (Stride_CaseX)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zpy-2-0-zeropaddingy">7.6.1.5. ZPY[2:0] (zeropaddingY)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zpx-2-0-zeropaddingx">7.6.1.6. ZPX[2:0] (zeropaddingX)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ksz-3-0-ksize">7.6.1.7. KSZ[3:0] (ksize)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scy-1-0-stride-casey">7.6.1.8. SCY[1:0] (Stride_CaseY)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ifn-9-0-in-fnum">7.6.1.9. IFN[9:0] (in_fnum)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ofsx-5-0-out-fsizex">7.6.1.10. OFSX[5:0] (out_fsizeX)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ofn-9-0-out-fnum">7.6.1.11. OFN[9:0] (out_fnum)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ofsy-5-0-out-fsizey">7.6.1.12. OFSY[5:0] (out_fsizeY)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#skp-5-0-sramk-pulse">7.6.1.13. SKP[5:0] (sramK_pulse)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#skr-1-0-sramk-read">7.6.1.14. SKR[1:0] (sramK_read)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#skt-5-0-sramk-setup">7.6.1.15. SKT[5:0] (sramK_setup)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lken-leak-en">7.6.1.16. LKEN (leak_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slt-5-0-sraml-setup">7.6.1.17. SLT[5:0] (sramL_setup)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slp-5-0-sraml-pulse">7.6.1.18. SLP[5:0] (sramL_pulse)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slr-1-0-sraml-read">7.6.1.19. SLR[1:0] (sramL_read)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thrh-15-0-neuron-thr-hi">7.6.1.20. THRH[15:0] (neuron_thr_hi)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thrl-15-0-neuron-thr-lo">7.6.1.21. THRL[15:0] (neuron_thr_lo)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#snt-5-0-sramn-setup">7.6.1.22. SNT[5:0] (sramN_setup)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nrz-neuron-rtz-en">7.6.1.23. NRZ (neuron_rtz_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#snp-5-0-sramn-pulse">7.6.1.24. SNP[5:0] (sramN_pulse)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#snr-1-0-sramn-read">7.6.1.25. SNR[1:0] (sramN_read)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#snbt-1-0-sramn-bist-tsel">7.6.1.26. SNBT[1:0] (sramN_bist_tsel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#skbt-1-0-sramk-bist-tsel">7.6.1.27. SKBT[1:0] (sramK_bist_tsel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slbt-1-0-sraml-bist-tsel">7.6.1.28. SLBT[1:0] (sramL_bist_tsel)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.6. </span>Convolutional Layer Configuration Signal Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/layer-config.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="convolutional-layer-configuration-signal-description">
+<span id="layer-config-signals"></span><h1><span class="section-number">7.6. </span>Convolutional Layer Configuration Signal Description<a class="headerlink" href="#convolutional-layer-configuration-signal-description" title="Permalink to this heading"></a></h1>
+<p>More detailed descriptions of the Register Elements is provided below the table.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Convolutional Layer Configuration Signal Overview</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Register Bits</p></td>
+<td><p>Register(s)</p></td>
+<td><p>Signal Name</p></td>
+<td><p>Short Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-scx"><span class="std std-ref">SCX[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv0"><span class="std std-ref">CONV0[7:6]</span></a></p></td>
+<td><p>Stride_CaseX</p></td>
+<td><p>Stride in X direction. Maps to {1,2,4,8}.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-zpy"><span class="std std-ref">ZPY[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv0"><span class="std std-ref">CONV0[5:3]</span></a></p></td>
+<td><p>zeropaddingY</p></td>
+<td><p>Y Direction Zero padding.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-zpx"><span class="std std-ref">ZPX[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv0"><span class="std std-ref">CONV0[2:0]</span></a></p></td>
+<td><p>zeropaddingX</p></td>
+<td><p>X Direction Zero Padding.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-den"><span class="std std-ref">DEN</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv1"><span class="std std-ref">CONV1[6]</span></a></p></td>
+<td><p>decimator_en</p></td>
+<td><p>Output decimator enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-dint"><span class="std std-ref">DINT[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv0"><span class="std std-ref">CONV6[7:6]</span></a>, <a class="reference internal" href="layer-descriptions.html#reg-conv1"><span class="std std-ref">CONV1[7]</span></a></p></td>
+<td><p>decimator_interval</p></td>
+<td><p>Output decimator block interval.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-ksz"><span class="std std-ref">KSZ[3:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv1"><span class="std std-ref">CONV1[5:2]</span></a></p></td>
+<td><p>ksize</p></td>
+<td><p>Kernel Size = (KSZ+1)*(KSZ+1).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-scy"><span class="std std-ref">SCY[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv1"><span class="std std-ref">CONV1[1:0]</span></a></p></td>
+<td><p>Stride_CaseY</p></td>
+<td><p>Stride in Y direction. Maps to {1,2,4,8}.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-ifn"><span class="std std-ref">IFN[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv3"><span class="std std-ref">CONV3[1:0]</span></a>, <a class="reference internal" href="layer-descriptions.html#reg-conv2"><span class="std std-ref">2[7:0]</span></a></p></td>
+<td><p>in_fnum</p></td>
+<td><p>Number of input features to layer.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-ofsx"><span class="std std-ref">OFSX[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv3"><span class="std std-ref">CONV3[7:2]</span></a></p></td>
+<td><p>out_fsizeX</p></td>
+<td><p>Size of output feature maps in X dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-ofn"><span class="std std-ref">OFN[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv5"><span class="std std-ref">CONV5[7:0]</span></a>, <a class="reference internal" href="layer-descriptions.html#reg-conv4"><span class="std std-ref">4[7:6]</span></a></p></td>
+<td><p>out_fnum</p></td>
+<td><p>Number of output features to produce = OFN+1.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-ofsy"><span class="std std-ref">OFSY[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv4"><span class="std std-ref">CONV4[5:0]</span></a></p></td>
+<td><p>out_fsizeY</p></td>
+<td><p>Size of output feature maps in Y dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-skp"><span class="std std-ref">SKP[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv6"><span class="std std-ref">CONV6[5:0]</span></a></p></td>
+<td><p>sramK_pulse</p></td>
+<td><p>Timing Control Kernel SRAM - CLK Pulse.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-skr"><span class="std std-ref">SKR[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv7"><span class="std std-ref">CONV7[7:6]</span></a></p></td>
+<td><p>sramK_read</p></td>
+<td><p>Timing Control Kernel SRAM - Read Data Ready.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-skt"><span class="std std-ref">SKT[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv7"><span class="std std-ref">CONV7[5:0]</span></a></p></td>
+<td><p>sramK_setup</p></td>
+<td><p>Timing Control Kernel SRAM - CLK Setup.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-ben"><span class="std std-ref">BEN</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv8"><span class="std std-ref">CONV8[7]</span></a></p></td>
+<td><p>balancer_en</p></td>
+<td><p>Input congestion balancer enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lken"><span class="std std-ref">LKEN</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv8"><span class="std std-ref">CONV8[6]</span></a></p></td>
+<td><p>leak_en</p></td>
+<td><p>Enable membrane potential leakage.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-slt"><span class="std std-ref">SLT[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv8"><span class="std std-ref">CONV8[5:0]</span></a></p></td>
+<td><p>sramL_setup</p></td>
+<td><p>Timing Control Leak SRAM - CLK Setup.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-slp"><span class="std std-ref">SLP[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv9"><span class="std std-ref">CONV9[7:2]</span></a></p></td>
+<td><p>sramL_pulse</p></td>
+<td><p>Timing Control Leak SRAM - CLK Pulse.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-slr"><span class="std std-ref">SLR[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv9"><span class="std std-ref">CONV9[1:0]</span></a></p></td>
+<td><p>sramL_read</p></td>
+<td><p>Timing Control Leak SRAM - Read Data Ready.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-thrh"><span class="std std-ref">THRH[15:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv10"><span class="std std-ref">CONV10[7:0]</span></a>, <a class="reference internal" href="layer-descriptions.html#reg-conv11"><span class="std std-ref">11[7:0]</span></a></p></td>
+<td><p>neuron_thr_hi</p></td>
+<td><p>Neuron Upper Threshold.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-thrl"><span class="std std-ref">THRL[15:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv12"><span class="std std-ref">CONV12[7:0]</span></a>, <a class="reference internal" href="layer-descriptions.html#reg-conv13"><span class="std std-ref">13[7:0]</span></a></p></td>
+<td><p>neuron_thr_lo</p></td>
+<td><p>Neuron Lower Threshold.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-snt"><span class="std std-ref">SNT[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv14"><span class="std std-ref">CONV14[6:1]</span></a></p></td>
+<td><p>sramN_setup</p></td>
+<td><p>Timing Control Neuron SRAM - CLK Setup.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-nrz"><span class="std std-ref">NRZ</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv14"><span class="std std-ref">CONV14[0]</span></a></p></td>
+<td><p>neuron_rtz_en</p></td>
+<td><p>Enable Neuron return to Zero.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-snp"><span class="std std-ref">SNP[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv15"><span class="std std-ref">CONV15[7:2]</span></a></p></td>
+<td><p>sramN_pulse</p></td>
+<td><p>Timing Control Neuron SRAM - CLK Pulse.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-snr"><span class="std std-ref">SNR[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv15"><span class="std std-ref">CONV15[1:0]</span></a></p></td>
+<td><p>sramN_read</p></td>
+<td><p>Timing Control Neuron SRAM - Read Data Ready.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-skbt"><span class="std std-ref">SKBT[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv16"><span class="std std-ref">CONV16[5:4]</span></a></p></td>
+<td><p>sramK_bist_tsel</p></td>
+<td><p>BIST mode Kernel SRAM Read Timing Control.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-slbt"><span class="std std-ref">SLBT[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv16"><span class="std std-ref">CONV16[3:2]</span></a></p></td>
+<td><p>sramL_bist_tsel</p></td>
+<td><p>BIST mode Leak SRAM Read Timing Control.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-snbt"><span class="std std-ref">SNBT[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv16"><span class="std std-ref">CONV16[1:0]</span></a></p></td>
+<td><p>sramN_bist_tsel</p></td>
+<td><p>BIST mode Neuron SRAM Read Timing Control.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="detailed-signal-description">
+<h2><span class="section-number">7.6.1. </span>Detailed Signal Description<a class="headerlink" href="#detailed-signal-description" title="Permalink to this heading"></a></h2>
+<section id="ben-balancer-en">
+<span id="rbits-ben"></span><h3><span class="section-number">7.6.1.1. </span>BEN (balancer_en)<a class="headerlink" href="#ben-balancer-en" title="Permalink to this heading"></a></h3>
+<p>Spike input rate <a class="reference internal" href="../architecture/convolutional-layer.html#congestion-balancer"><span class="std std-ref">balancer</span></a> enable bit. When enabled, any spike received by the layer while the layer input pipeline is busy
+is discarded. As soon as the layer input is able to accept another input spike, the coming spike is forwarded.</p>
+</section>
+<section id="den-decimator-en">
+<span id="rbits-den"></span><h3><span class="section-number">7.6.1.2. </span>DEN (decimator_en)<a class="headerlink" href="#den-decimator-en" title="Permalink to this heading"></a></h3>
+<p>Spike output decimator enable bit. When enabled, only a fraction of the spikes generated in the layer
+is forwarded to the layer output.
+The fraction of forwarded spikes can be configured via the register bits <a class="reference internal" href="#rbits-dint"><span class="std std-ref">DINT</span></a></p>
+</section>
+<section id="dint-decimator-interval">
+<span id="rbits-dint"></span><h3><span class="section-number">7.6.1.3. </span>DINT (decimator_interval)<a class="headerlink" href="#dint-decimator-interval" title="Permalink to this heading"></a></h3>
+<p>Configures the fraction of forwarded spikes at the output of the layer when the <a class="reference internal" href="#rbits-den"><span class="std std-ref">DEN</span></a> bit is enabled.
+See <a class="reference internal" href="../architecture/convolutional-layer.html#decimator"><span class="std std-ref">Spike Decimator Block</span></a> for more information.</p>
+</section>
+<section id="scx-1-0-stride-casex">
+<span id="rbits-scx"></span><h3><span class="section-number">7.6.1.4. </span>SCX[1:0] (Stride_CaseX)<a class="headerlink" href="#scx-1-0-stride-casex" title="Permalink to this heading"></a></h3>
+<p>Stride in X direction. Maps to {1,2,4,8}</p>
+</section>
+<section id="zpy-2-0-zeropaddingy">
+<span id="rbits-zpy"></span><h3><span class="section-number">7.6.1.5. </span>ZPY[2:0] (zeropaddingY)<a class="headerlink" href="#zpy-2-0-zeropaddingy" title="Permalink to this heading"></a></h3>
+<p>Zero padding applies to start and end of input in Y direction.</p>
+</section>
+<section id="zpx-2-0-zeropaddingx">
+<span id="rbits-zpx"></span><h3><span class="section-number">7.6.1.6. </span>ZPX[2:0] (zeropaddingX)<a class="headerlink" href="#zpx-2-0-zeropaddingx" title="Permalink to this heading"></a></h3>
+<p>Zero padding applies to start and end of input in X direction.</p>
+</section>
+<section id="ksz-3-0-ksize">
+<span id="rbits-ksz"></span><h3><span class="section-number">7.6.1.7. </span>KSZ[3:0] (ksize)<a class="headerlink" href="#ksz-3-0-ksize" title="Permalink to this heading"></a></h3>
+<p>Size of kernels in layer. The kernel size X*Y will be (N+1)*(N+1) for a programmed value N.</p>
+</section>
+<section id="scy-1-0-stride-casey">
+<span id="rbits-scy"></span><h3><span class="section-number">7.6.1.8. </span>SCY[1:0] (Stride_CaseY)<a class="headerlink" href="#scy-1-0-stride-casey" title="Permalink to this heading"></a></h3>
+<p>Stride in Y direction. Maps to {1,2,4,8}</p>
+</section>
+<section id="ifn-9-0-in-fnum">
+<span id="rbits-ifn"></span><h3><span class="section-number">7.6.1.9. </span>IFN[9:0] (in_fnum)<a class="headerlink" href="#ifn-9-0-in-fnum" title="Permalink to this heading"></a></h3>
+<p>Number of input features to layer. The number of input features of a layer A must be equal with the sum of output features of all layers that are inputs to layer A. To parition where the features of a layer B that outputs to layer A are mapped in the inputs of layer A user must use shift feature number. This number will move the n output features of layer B in [&lt;shift feature number&gt;,&lt;shift feature number&gt; + n] space. If two or more output feature spaces from different layers overimpose the destination layer can-t make a difference between them. The input feature X and Y of a layer A has to be equal with output feature X and Y respectively of all layers that are inputs to layer A.</p>
+</section>
+<section id="ofsx-5-0-out-fsizex">
+<span id="rbits-ofsx"></span><h3><span class="section-number">7.6.1.10. </span>OFSX[5:0] (out_fsizeX)<a class="headerlink" href="#ofsx-5-0-out-fsizex" title="Permalink to this heading"></a></h3>
+<p>Size of output feature maps in X dimension. Calculated as fsize_out_X=[(fsize_in_Y-Filter_size+2*Zero_padding_X)/Stride_X]+1.</p>
+</section>
+<section id="ofn-9-0-out-fnum">
+<span id="rbits-ofn"></span><h3><span class="section-number">7.6.1.11. </span>OFN[9:0] (out_fnum)<a class="headerlink" href="#ofn-9-0-out-fnum" title="Permalink to this heading"></a></h3>
+<p>Number of output features to produce. Programmed value is N-1 for a number of features N.</p>
+</section>
+<section id="ofsy-5-0-out-fsizey">
+<span id="rbits-ofsy"></span><h3><span class="section-number">7.6.1.12. </span>OFSY[5:0] (out_fsizeY)<a class="headerlink" href="#ofsy-5-0-out-fsizey" title="Permalink to this heading"></a></h3>
+<p>Size of output feature maps in Y dimension. Calculated as fsize_out_Y=[(fsize_in_Y-Filter_size+2*Zero_padding_Y)/Stride_Y]+1.</p>
+</section>
+<section id="skp-5-0-sramk-pulse">
+<span id="rbits-skp"></span><h3><span class="section-number">7.6.1.13. </span>SKP[5:0] (sramK_pulse)<a class="headerlink" href="#skp-5-0-sramk-pulse" title="Permalink to this heading"></a></h3>
+<p>Timing Control Kernel SRAM - CLK Pulse. The default timing is ‘010000’, the dly ctl is linear for bit 0-4 with a binary step size of 200ps offset of 275ps, bit 5 adds a security delay of 6 ns on top.</p>
+</section>
+<section id="skr-1-0-sramk-read">
+<span id="rbits-skr"></span><h3><span class="section-number">7.6.1.14. </span>SKR[1:0] (sramK_read)<a class="headerlink" href="#skr-1-0-sramk-read" title="Permalink to this heading"></a></h3>
+<p>Timing Control Kernel SRAM - Read Data Ready.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The internal Kernel SRAM Read timing value is calculated as {SKR1, !(SKR0)}.
+Therefore, to obtain an internal setting of 0b01, the register SKR must be set to 0b00.</p>
+</div>
+</section>
+<section id="skt-5-0-sramk-setup">
+<span id="rbits-skt"></span><h3><span class="section-number">7.6.1.15. </span>SKT[5:0] (sramK_setup)<a class="headerlink" href="#skt-5-0-sramk-setup" title="Permalink to this heading"></a></h3>
+<p>Timing Control Kernel SRAM - CLK setup. The default timing is ‘010000’, the dly ctl is linear for bit 0-4 with a binary step size of 200ps, offset of 275ps, bit 5 adds a security delay of 6 ns on top.</p>
+</section>
+<section id="lken-leak-en">
+<span id="rbits-lken"></span><h3><span class="section-number">7.6.1.16. </span>LKEN (leak_en)<a class="headerlink" href="#lken-leak-en" title="Permalink to this heading"></a></h3>
+<p>Boolean value for enabling membrane potential leakage. 1 for true, 0 for false.</p>
+</section>
+<section id="slt-5-0-sraml-setup">
+<span id="rbits-slt"></span><h3><span class="section-number">7.6.1.17. </span>SLT[5:0] (sramL_setup)<a class="headerlink" href="#slt-5-0-sraml-setup" title="Permalink to this heading"></a></h3>
+<p>Timing Control Leak SRAM - CLK setup. The default timing is ‘010000’, the dly ctl is linear for bit 0-4 with a binary step size of 100ps, offset of 275ps, bit 5 adds a security delay of 3.6 ns on top</p>
+</section>
+<section id="slp-5-0-sraml-pulse">
+<span id="rbits-slp"></span><h3><span class="section-number">7.6.1.18. </span>SLP[5:0] (sramL_pulse)<a class="headerlink" href="#slp-5-0-sraml-pulse" title="Permalink to this heading"></a></h3>
+<p>Timing Control Leak SRAM - CLK Pulse. The default timing is ‘010000’, the dly ctl is linear for bit 0-4 with a binary step size of 200ps offset of 275ps, bit 5 adds a security delay of 6 ns on top</p>
+</section>
+<section id="slr-1-0-sraml-read">
+<span id="rbits-slr"></span><h3><span class="section-number">7.6.1.19. </span>SLR[1:0] (sramL_read)<a class="headerlink" href="#slr-1-0-sraml-read" title="Permalink to this heading"></a></h3>
+<p>Timing Control Leak SRAM - Read Data Ready.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The internal Leak SRAM Read timing value is calculated as {SLR1, !(SLR0)}.
+Therefore, to obtain an internal setting of 0b01, the register SLR must be set to 0b00.</p>
+</div>
+</section>
+<section id="thrh-15-0-neuron-thr-hi">
+<span id="rbits-thrh"></span><h3><span class="section-number">7.6.1.20. </span>THRH[15:0] (neuron_thr_hi)<a class="headerlink" href="#thrh-15-0-neuron-thr-hi" title="Permalink to this heading"></a></h3>
+<p>Neuron Upper Threshold: Programmed value of neuron firing threshold. 2K encoding - programm the threshold value x(-1) (invert).</p>
+</section>
+<section id="thrl-15-0-neuron-thr-lo">
+<span id="rbits-thrl"></span><h3><span class="section-number">7.6.1.21. </span>THRL[15:0] (neuron_thr_lo)<a class="headerlink" href="#thrl-15-0-neuron-thr-lo" title="Permalink to this heading"></a></h3>
+<p>Neuron Lower Threshold: The minimum value of the neuron membrane potential which cannot be surpassed by leak. 2K encoding - programm the threshold value x(-1) (invert).</p>
+</section>
+<section id="snt-5-0-sramn-setup">
+<span id="rbits-snt"></span><h3><span class="section-number">7.6.1.22. </span>SNT[5:0] (sramN_setup)<a class="headerlink" href="#snt-5-0-sramn-setup" title="Permalink to this heading"></a></h3>
+<p>Neuron SRAM setup timing. The default timing is ‘010000’, the dly ctl is linear for bit 0-4 with a binary step size of 100ps, offset of 275ps, bit 5 adds a security delay of 3.6 ns on top.</p>
+</section>
+<section id="nrz-neuron-rtz-en">
+<span id="rbits-nrz"></span><h3><span class="section-number">7.6.1.23. </span>NRZ (neuron_rtz_en)<a class="headerlink" href="#nrz-neuron-rtz-en" title="Permalink to this heading"></a></h3>
+<p>Neuron return to Zero. Return to zero, 1 if true, 0 if false. If false, the neuron membrane potential will be set to (membrane potential - high threshold) when fired.</p>
+</section>
+<section id="snp-5-0-sramn-pulse">
+<span id="rbits-snp"></span><h3><span class="section-number">7.6.1.24. </span>SNP[5:0] (sramN_pulse)<a class="headerlink" href="#snp-5-0-sramn-pulse" title="Permalink to this heading"></a></h3>
+<p>Neuron SRAM pulse timing. The default timing is ‘010000’, the dly ctl is linear for bit 0-4 with a binary step size of 200ps, offset of 275ps, bit 5 adds a security delay of 6 ns on top.</p>
+</section>
+<section id="snr-1-0-sramn-read">
+<span id="rbits-snr"></span><h3><span class="section-number">7.6.1.25. </span>SNR[1:0] (sramN_read)<a class="headerlink" href="#snr-1-0-sramn-read" title="Permalink to this heading"></a></h3>
+<p>Timing Control Neuron SRAM - Read Data Ready.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The internal Neuron SRAM Read timing value is calculated as {SNR1, !(SNR0)}.
+Therefore, to obtain an internal setting of 0b01, the register SNR must be set to 0b00.</p>
+</div>
+</section>
+<section id="snbt-1-0-sramn-bist-tsel">
+<span id="rbits-snbt"></span><h3><span class="section-number">7.6.1.26. </span>SNBT[1:0] (sramN_bist_tsel)<a class="headerlink" href="#snbt-1-0-sramn-bist-tsel" title="Permalink to this heading"></a></h3>
+<p>BIST mode Neuron SRAM Read Timing Control.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The internal BIST Neuron SRAM Read timing value is calculated as {SNBT1, !(SNBT0)}.
+Therefore, to obtain an internal setting of 0b01, the register SNBT must be set to 0b00.</p>
+</div>
+</section>
+<section id="skbt-1-0-sramk-bist-tsel">
+<span id="rbits-skbt"></span><h3><span class="section-number">7.6.1.27. </span>SKBT[1:0] (sramK_bist_tsel)<a class="headerlink" href="#skbt-1-0-sramk-bist-tsel" title="Permalink to this heading"></a></h3>
+<p>BIST mode Kernel SRAM Read Timing Control.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The internal BIST Kernel SRAM Read timing value is calculated as {SKBT1, !(SKBT0)}.
+Therefore, to obtain an internal setting of 0b01, the register SKBT must be set to 0b00.</p>
+</div>
+</section>
+<section id="slbt-1-0-sraml-bist-tsel">
+<span id="rbits-slbt"></span><h3><span class="section-number">7.6.1.28. </span>SLBT[1:0] (sramL_bist_tsel)<a class="headerlink" href="#slbt-1-0-sraml-bist-tsel" title="Permalink to this heading"></a></h3>
+<p>BIST mode Leak SRAM Read Timing Control.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The internal BIST Leak SRAM Read timing value is calculated as {SLBT1, !(SLBT0)}.
+Therefore, to obtain an internal setting of 0b01, the register SLBT must be set to 0b00.</p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="layer.html" class="btn btn-neutral float-left" title="7.5. Convolutional Layer Register Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="router.html" class="btn btn-neutral float-right" title="7.7. Router Register Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

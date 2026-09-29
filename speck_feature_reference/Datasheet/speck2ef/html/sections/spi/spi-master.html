@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10.3. SPI Master &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="11. JTAG Interface" href="../jtag/index.html" />
+    <link rel="prev" title="10.2. SPI Slave" href="spi-slave.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">10. SPI Interfaces</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="spi-overview.html">10.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spi-slave.html">10.2. SPI Slave</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.3. SPI Master</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#port">10.3.1. Port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#e2i-mode">10.3.2. E2I Mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#address-calculation">10.3.2.1. Address calculation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example">10.3.2.2. Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-data-organization">10.3.3. Flash Data Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spi-interface-registers">10.3.4. SPI Interface Registers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lx-kms">10.3.4.1. Lx_KMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lx-lms">10.3.4.2. Lx_LMS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nms0">10.3.4.3. NMS0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nms1">10.3.4.4. NMS1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nms2">10.3.4.5. NMS2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nms3">10.3.4.6. NMS3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nms4">10.3.4.7. NMS4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fms0">10.3.4.8. FMS0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fms1">10.3.4.9. FMS1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fms2">10.3.4.10. FMS2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-register-configuration">10.3.5. Example Register Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">10. </span>SPI Interfaces</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">10.3. </span>SPI Master</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/spi/spi-master.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spi-master">
+<span id="spi-master-interface"></span><h1><span class="section-number">10.3. </span>SPI Master<a class="headerlink" href="#spi-master" title="Permalink to this heading"></a></h1>
+<p>The following SPI master modes are supported:</p>
+<ul class="simple">
+<li><p>External to Internal (E2I): SPI master fetches data from external FLASH memory and writes to internal registers / SRAMs</p></li>
+<li><p>SPI Mode 0: CPOL = 0, CPHA = 0</p></li>
+</ul>
+<section id="port">
+<span id="spi-master-port"></span><h2><span class="section-number">10.3.1. </span>Port<a class="headerlink" href="#port" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Port Name</p></td>
+<td><p>Bits</p></td>
+<td><p>Description</p></td>
+<td><p>Remark</p></td>
+</tr>
+<tr class="row-even"><td><p>spi_m_clk_i</p></td>
+<td><p>1</p></td>
+<td><p>outgoing SPI clock</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>spi_m_ss_n_i</p></td>
+<td><p>1</p></td>
+<td><p>slave select</p></td>
+<td><p>low active</p></td>
+</tr>
+<tr class="row-even"><td><p>spi_m_mosi_i</p></td>
+<td><p>1</p></td>
+<td><p>outgoing data from master to external FLASH</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>spi_m_miso_o</p></td>
+<td><p>1</p></td>
+<td><p>incoming data to master from external FLASH</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="e2i-mode">
+<h2><span class="section-number">10.3.2. </span>E2I Mode<a class="headerlink" href="#e2i-mode" title="Permalink to this heading"></a></h2>
+<p>In this mode SPI master fetches data from external FLASH, then writes to internal register / SRAMs.</p>
+<p>Flash consists of blocks, sectors and pages.</p>
+<ul class="simple">
+<li><p>each block consists of 16 sectors, in total 64 KB</p></li>
+<li><p>each sector consists of 16 pages, in total 4 KB</p></li>
+<li><p>each page consists of 256 bytes</p></li>
+</ul>
+<section id="address-calculation">
+<h3><span class="section-number">10.3.2.1. </span>Address calculation<a class="headerlink" href="#address-calculation" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Address bits</p></td>
+<td><p>23:16</p></td>
+<td><p>15:12</p></td>
+<td><p>11:8</p></td>
+<td><p>7:0</p></td>
+</tr>
+<tr class="row-even"><td><p>Part</p></td>
+<td><p>Block (8 bits)</p></td>
+<td><p>Sector (4 bits)</p></td>
+<td><p>Page (4 bits)</p></td>
+<td><p>Byte (8 bits)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example">
+<h3><span class="section-number">10.3.2.2. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
+<p>For example 4 Mbit FLASH consists of 8 blocks, 8 Mbit FLASH consists of 16 blocks.</p>
+</section>
+</section>
+<section id="flash-data-organization">
+<h2><span class="section-number">10.3.3. </span>Flash Data Organization<a class="headerlink" href="#flash-data-organization" title="Permalink to this heading"></a></h2>
+<p>Data organization in FLASH is illustrated as following:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td><p>Block</p></td>
+<td><p>Sector</p></td>
+<td><p>Page</p></td>
+<td><p>Entries</p></td>
+<td><p>Data (8 bits per entry)</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0000</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>93</p></td>
+<td><p>Check word byte 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0001</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>CB</p></td>
+<td><p>Check word byte 1</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0002</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>A5</p></td>
+<td><p>Check word byte 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0003</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>E2</p></td>
+<td><p>Check word byte 3</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0004</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>–</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0005</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>–</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0006</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>–</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0007</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>–</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0008</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L0_KMS</p></td>
+<td><p>Layer 0 Kernel Memory Setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0009</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L1_KMS</p></td>
+<td><p>Layer 1 Kernel Memory Setting</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_000A</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L2_KMS</p></td>
+<td><p>Layer 2 Kernel Memory Setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_000B</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L3_KMS</p></td>
+<td><p>Layer 3 Kernel Memory Setting</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_000C</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L4_KMS</p></td>
+<td><p>Layer 4 Kernel Memory Setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_000D</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L5_KMS</p></td>
+<td><p>Layer 5 Kernel Memory Setting</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_000E</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L6_KMS</p></td>
+<td><p>Layer 6 Kernel Memory Setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_000F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L7_KMS</p></td>
+<td><p>Layer 7 Kernel Memory Setting</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0010</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L8_KMS</p></td>
+<td><p>Layer 8 Kernel Memory Setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0011</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L0_LMS</p></td>
+<td><p>Layer 0 Leak Memory Setting</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0012</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L1_LMS</p></td>
+<td><p>Layer 1 Leak Memory Setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0013</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L2_LMS</p></td>
+<td><p>Layer 2 Leak Memory Setting</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0014</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L3_LMS</p></td>
+<td><p>Layer 3 Leak Memory Setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0015</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L4_LMS</p></td>
+<td><p>Layer 4 Leak Memory Setting</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0016</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L5_LMS</p></td>
+<td><p>Layer 5 Leak Memory Setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0017</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L6_LMS</p></td>
+<td><p>Layer 6 Leak Memory Setting</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0018</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L7_LMS</p></td>
+<td><p>Layer 7 Leak Memory Setting</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0019</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>L8_LMS</p></td>
+<td><p>Layer 8 Leak Memory Setting</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_001A</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>NMS0</p></td>
+<td><p>Neuron Memory Setting 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_001B</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>NMS1</p></td>
+<td><p>Neuron Memory Setting 1</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_001C</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>NMS2</p></td>
+<td><p>Neuron Memory Setting 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_001D</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>NMS3</p></td>
+<td><p>Neuron Memory Setting 3</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_001E</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>NMS4</p></td>
+<td><p>Neuron Memory Setting 4</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_001F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>FMS0</p></td>
+<td><p>Filter Memory Setting 0</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0020</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>FMS1</p></td>
+<td><p>Filter Memory Setting 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0021</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>FMS2</p></td>
+<td><p>Filter Memory Setting 2</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0022 ~ 24’h00_003F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>29</p></td>
+<td><p>–</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0040 ~ 24’h00_007F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>2^6</p></td>
+<td><p>AI_REG</p></td>
+<td><p>Async interface registers</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0080 ~ 24’h00_00BF</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>2^6</p></td>
+<td><p>DV_REG</p></td>
+<td><p>DVS registers</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_00C0 ~ 24’h00_00FF</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>2^6</p></td>
+<td><p>RL_REG</p></td>
+<td><p>Readout layer registers</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0100 ~ 24’h00_013F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>2^6</p></td>
+<td><p>RT_REG</p></td>
+<td><p>Router registers</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0140 ~ 24’h00_023F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1-2</p></td>
+<td><p>2^8</p></td>
+<td><p>–</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0240 ~ 24’h00_027F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>2</p></td>
+<td><p>2^6</p></td>
+<td><p>–</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0280 ~ 24’h00_02BF</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>2</p></td>
+<td><p>2^6</p></td>
+<td><p>L0_REG</p></td>
+<td><p>Layer 0 registers</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_02C0 ~ 24’h00_02FF</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>2</p></td>
+<td><p>2^6</p></td>
+<td><p>L1_REG</p></td>
+<td><p>Layer 1 registers</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0300 ~ 24’h00_033F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
+<td><p>2^6</p></td>
+<td><p>L2_REG</p></td>
+<td><p>Layer 2 registers</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0340 ~ 24’h00_037F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
+<td><p>2^6</p></td>
+<td><p>L3_REG</p></td>
+<td><p>Layer 3 registers</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0380 ~ 24’h00_03BF</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
+<td><p>2^6</p></td>
+<td><p>L4_REG</p></td>
+<td><p>Layer 4 registers</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_03C0 ~ 24’h00_03FF</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>3</p></td>
+<td><p>2^6</p></td>
+<td><p>L5_REG</p></td>
+<td><p>Layer 5 registers</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0400 ~ 24’h00_043F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>4</p></td>
+<td><p>2^6</p></td>
+<td><p>L6_REG</p></td>
+<td><p>Layer 6 registers</p></td>
+</tr>
+<tr class="row-even"><td><p>24’h00_0440 ~ 24’h00_047F</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>4</p></td>
+<td><p>2^6</p></td>
+<td><p>L7_REG</p></td>
+<td><p>Layer 7 registers</p></td>
+</tr>
+<tr class="row-odd"><td><p>24’h00_0480 ~ 24’h00_04BF</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>4</p></td>
+<td><p>2^6</p></td>
+<td><p>L8_REG</p></td>
+<td><p>Layer 8 registers</p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>… ~ …</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>KRAMs and BRAMs</p></td>
+<td><p>Address defined by Lx_KMS and Lx_LMS registers</p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spi-interface-registers">
+<h2><span class="section-number">10.3.4. </span>SPI Interface Registers<a class="headerlink" href="#spi-interface-registers" title="Permalink to this heading"></a></h2>
+<p>These SPI interface registers are read from the external FLASH memory, and are used to configure the memory structure <em>on the fly</em>.</p>
+<section id="lx-kms">
+<h3><span class="section-number">10.3.4.1. </span>Lx_KMS<a class="headerlink" href="#lx-kms" title="Permalink to this heading"></a></h3>
+<p>Note: x = {0, 1, 2, 3, 4, 5, 6, 7, 8}</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>1</p></td>
+<td><p>rsvd</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved for future use</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>6:4</p></td>
+<td><p>3</p></td>
+<td><p>LxBA</p></td>
+<td><p>Layerx_Kernel_Block_Addr</p></td>
+<td><p>Layer x Kernel Block Location</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>3:2</p></td>
+<td><p>2</p></td>
+<td><p>LxSS</p></td>
+<td><p>Layerx_Kernel_Start_Sector</p></td>
+<td><p>higher 2 bits of start sector for Layer x Kernel Memory, lower 2 bits are “00”</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>1:0</p></td>
+<td><p>2</p></td>
+<td><p>LxES</p></td>
+<td><p>Layerx_Kernel_End_Sector</p></td>
+<td><p>higher 2 bits of end sector for Layer x Kernel Memory, lower 2 bits are “11”</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lx-lms">
+<h3><span class="section-number">10.3.4.2. </span>Lx_LMS<a class="headerlink" href="#lx-lms" title="Permalink to this heading"></a></h3>
+<p>Note: x = {0, 1, 2, 3, 4, 5, 6, 7, 8}</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7:5</p></td>
+<td><p>3</p></td>
+<td><p>LxBA</p></td>
+<td><p>Layerx_Leak_Block_Addr</p></td>
+<td><p>Layer x Leak block Location</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>4:1</p></td>
+<td><p>4</p></td>
+<td><p>LxSA</p></td>
+<td><p>Layerx_Leak_Sector_Addr</p></td>
+<td><p>Layer x Leak sector Location</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>LxSS</p></td>
+<td><p>Layerx_Leak_Sector_Section</p></td>
+<td><p>0: first 8 pages, 1: last 8 pages</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nms0">
+<h3><span class="section-number">10.3.4.3. </span>NMS0<a class="headerlink" href="#nms0" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>0</p></td>
+<td><p>INIT</p></td>
+<td><p>Neuron_Inital_Data[15:8]</p></td>
+<td><p>higher 8 bits of initial data for Neuron Memory</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nms1">
+<h3><span class="section-number">10.3.4.4. </span>NMS1<a class="headerlink" href="#nms1" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>0</p></td>
+<td><p>INIT</p></td>
+<td><p>Neuron_Inital_Data[7:0]</p></td>
+<td><p>lower 8 bits of initial data for Neuron Memory</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nms2">
+<h3><span class="section-number">10.3.4.5. </span>NMS2<a class="headerlink" href="#nms2" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7:6</p></td>
+<td><p>2</p></td>
+<td><p>L0_DEPTH</p></td>
+<td><p>Layer0_Depth</p></td>
+<td><p>Depth of the Layer 0 Neuron Memory</p>
+<p>00: 32K, 01: 64K, 10: 128K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>5:4</p></td>
+<td><p>2</p></td>
+<td><p>L1_DEPTH</p></td>
+<td><p>Layer1_Depth</p></td>
+<td><p>Depth of the Layer 1 Neuron Memory</p>
+<p>00: 32K, 01: 64K, 10: 128K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>3:2</p></td>
+<td><p>2</p></td>
+<td><p>L2_DEPTH</p></td>
+<td><p>Layer2_Depth</p></td>
+<td><p>Depth of the Layer 2 Neuron Memory</p>
+<p>00: 32K, 01: 64K, 10: 128K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1:0</p></td>
+<td><p>2</p></td>
+<td><p>L3_DEPTH</p></td>
+<td><p>Layer3_Depth</p></td>
+<td><p>Depth of the Layer 3 Neuron Memory</p>
+<p>00: 32K, 01: 64K, 10: 128K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nms3">
+<h3><span class="section-number">10.3.4.6. </span>NMS3<a class="headerlink" href="#nms3" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7:6</p></td>
+<td><p>2</p></td>
+<td><p>L4_DEPTH</p></td>
+<td><p>Layer4_Depth</p></td>
+<td><p>Depth of the Layer 4 Neuron Memory</p>
+<p>00: 32K, 01: 64K, 10: 128K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>5:4</p></td>
+<td><p>2</p></td>
+<td><p>L5_DEPTH</p></td>
+<td><p>Layer5_Depth</p></td>
+<td><p>Depth of the Layer 5 Neuron Memory</p>
+<p>00: 32K, 01: 64K, 10: 128K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>3:2</p></td>
+<td><p>2</p></td>
+<td><p>L6_DEPTH</p></td>
+<td><p>Layer6_Depth</p></td>
+<td><p>Depth of the Layer 6 Neuron Memory</p>
+<p>00: 32K, 01: 64K, 10: 128K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1:0</p></td>
+<td><p>2</p></td>
+<td><p>L7_DEPTH</p></td>
+<td><p>Layer7_Depth</p></td>
+<td><p>Depth of the Layer 7 Neuron Memory</p>
+<p>00: 32K, 01: 64K, 10: 128K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nms4">
+<h3><span class="section-number">10.3.4.7. </span>NMS4<a class="headerlink" href="#nms4" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7:6</p></td>
+<td><p>2</p></td>
+<td><p>L8_DEPTH</p></td>
+<td><p>Layer8_Depth</p></td>
+<td><p>Depth of the Layer 8 Neuron Memory</p>
+<p>00: 32K, 01: 64K, 10: 128K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>5:0</p></td>
+<td><p>6</p></td>
+<td><p>rsvd</p></td>
+<td><p>reserved</p></td>
+<td><p>Reserved for future use</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fms0">
+<h3><span class="section-number">10.3.4.8. </span>FMS0<a class="headerlink" href="#fms0" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>0</p></td>
+<td><p>INIT</p></td>
+<td><p>Filter_Inital_Data[15:8]</p></td>
+<td><p>higher 8 bits of initial data for Filter Memory</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fms1">
+<h3><span class="section-number">10.3.4.9. </span>FMS1<a class="headerlink" href="#fms1" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7:0</p></td>
+<td><p>0</p></td>
+<td><p>INIT</p></td>
+<td><p>Filter_Inital_Data[7:0]</p></td>
+<td><p>lower 8 bits of initial data for Filter Memory</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fms2">
+<h3><span class="section-number">10.3.4.10. </span>FMS2<a class="headerlink" href="#fms2" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Position</p></td>
+<td><p>Width</p></td>
+<td><p>Field</p></td>
+<td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Default Value</p></td>
+</tr>
+<tr class="row-even"><td><p>7:6</p></td>
+<td><p>2</p></td>
+<td><p>F_DEPTH</p></td>
+<td><p>Filter_Depth</p></td>
+<td><p>depth of the Filter Memory</p>
+<p>00: 8K, 01: 16K, 10: 32K, 11: N/A</p>
+</td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>5:0</p></td>
+<td><p>6</p></td>
+<td><p>rsvd</p></td>
+<td><p>reserved</p></td>
+<td><p>reserved for future use</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="example-register-configuration">
+<h2><span class="section-number">10.3.5. </span>Example Register Configuration<a class="headerlink" href="#example-register-configuration" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td><p>Data HEX</p></td>
+<td><p>Data BIN</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>93</p></td>
+<td><p>10010011</p></td>
+<td><p>Check word byte 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>CB</p></td>
+<td><p>11001011</p></td>
+<td><p>Check word byte 1</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>A5</p></td>
+<td><p>10100101</p></td>
+<td><p>Check word byte 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>E2</p></td>
+<td><p>11100010</p></td>
+<td><p>Check word byte 3</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>00</p></td>
+<td><p>00000000</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x05</p></td>
+<td><p>00</p></td>
+<td><p>00000000</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x06</p></td>
+<td><p>00</p></td>
+<td><p>00000000</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x07</p></td>
+<td><p>00</p></td>
+<td><p>00000000</p></td>
+<td><p>Reserved</p></td>
+</tr>
+<tr class="row-even"><td><p>0x08</p></td>
+<td><p>10</p></td>
+<td><p>00010000</p></td>
+<td><p>L0_KMS: Block 1, Start Sec. 0, End Sec. 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x09</p></td>
+<td><p>15</p></td>
+<td><p>00010101</p></td>
+<td><p>L1_KMS: Block 1, Start Sec. 4, End Sec. 7</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0A</p></td>
+<td><p>1A</p></td>
+<td><p>00011010</p></td>
+<td><p>L2_KMS: Block 1, Start Sec. 8, End Sec. 11</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0B</p></td>
+<td><p>21</p></td>
+<td><p>00100001</p></td>
+<td><p>L3_KMS: Block 2, Start Sec. 0, End Sec. 7</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0C</p></td>
+<td><p>2B</p></td>
+<td><p>00101011</p></td>
+<td><p>L4_KMS: Block 2, Start Sec. 8, End Sec. 15</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0D</p></td>
+<td><p>33</p></td>
+<td><p>00110011</p></td>
+<td><p>L5_KMS: Block 3, Start Sec. 0, End Sec. 15</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0E</p></td>
+<td><p>43</p></td>
+<td><p>01000011</p></td>
+<td><p>L6_KMS: Block 4, Start Sec. 0, End Sec. 15</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0F</p></td>
+<td><p>50</p></td>
+<td><p>01010000</p></td>
+<td><p>L7_KMS: Block 5, Start Sec. 0, End Sec. 3</p></td>
+</tr>
+<tr class="row-even"><td><p>0x10</p></td>
+<td><p>55</p></td>
+<td><p>01010101</p></td>
+<td><p>L8_KMS: Block 5, Start Sec. 4, End Sec. 7</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x11</p></td>
+<td><p>38</p></td>
+<td><p>00111000</p></td>
+<td><p>L0_LMS: Block 1, Sec. 12, Pages 0-8</p></td>
+</tr>
+<tr class="row-even"><td><p>0x12</p></td>
+<td><p>39</p></td>
+<td><p>00111001</p></td>
+<td><p>L1_LMS: Block 1, Sec. 12, Pages 9-15</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x13</p></td>
+<td><p>3A</p></td>
+<td><p>00111010</p></td>
+<td><p>L2_LMS: Block 1, Sec. 13, Pages 0-8</p></td>
+</tr>
+<tr class="row-even"><td><p>0x14</p></td>
+<td><p>3B</p></td>
+<td><p>00111011</p></td>
+<td><p>L3_LMS: Block 1, Sec. 13, Pages 9-15</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x15</p></td>
+<td><p>3C</p></td>
+<td><p>00111100</p></td>
+<td><p>L4_LMS: Block 1, Sec. 14, Pages 0-8</p></td>
+</tr>
+<tr class="row-even"><td><p>0x16</p></td>
+<td><p>3D</p></td>
+<td><p>00111101</p></td>
+<td><p>L5_LMS: Block 1, Sec. 14, Pages 9-15</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x17</p></td>
+<td><p>3E</p></td>
+<td><p>00111110</p></td>
+<td><p>L6_LMS: Block 1, Sec. 15, Pages 0-8</p></td>
+</tr>
+<tr class="row-even"><td><p>0x18</p></td>
+<td><p>3F</p></td>
+<td><p>00111111</p></td>
+<td><p>L7_LMS: Block 1, Sec. 15, Pages 9-15</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x19</p></td>
+<td><p>B0</p></td>
+<td><p>10110000</p></td>
+<td><p>L8_LMS: Block 5, Sec. 8, Pages 0-8</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1A</p></td>
+<td><p>AB</p></td>
+<td><p>10101011</p></td>
+<td><p>NMS0: Neuron initial data [15:8] = 0xAB</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1B</p></td>
+<td><p>CD</p></td>
+<td><p>11001101</p></td>
+<td><p>NMS1: Neuron initial data [7:0] = 0xCD</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1C</p></td>
+<td><p>A9</p></td>
+<td><p>10101001</p></td>
+<td><p>NMS2: Neuron Mem L0=128kB, L1=128kB, L2=128kB, L3=64kB</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1D</p></td>
+<td><p>40</p></td>
+<td><p>01000000</p></td>
+<td><p>NMS3: Neuron Mem L4=64kB, L5=32kB, L6=32kB, L7=32kB</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1E</p></td>
+<td><p>00</p></td>
+<td><p>00000000</p></td>
+<td><p>NMS4: Neuron Mem L8=32kB</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1F</p></td>
+<td><p>12</p></td>
+<td><p>00010010</p></td>
+<td><p>FMS0: Neuron initial data [15:8] = 0x12</p></td>
+</tr>
+<tr class="row-even"><td><p>0x20</p></td>
+<td><p>34</p></td>
+<td><p>00110100</p></td>
+<td><p>FMS1: Neuron initial data [7:0] = 0x34</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x21</p></td>
+<td><p>80</p></td>
+<td><p>10000000</p></td>
+<td><p>FMS2: Filter Mem = 32kB</p></td>
+</tr>
+</tbody>
+</table>
+<p>This configuration will set data locations in memory as shown in the following table:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0x10000-0x13FFF</p></td>
+<td><p>Kernel 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x14000-0x17FFF</p></td>
+<td><p>Kernel 1</p></td>
+</tr>
+<tr class="row-even"><td><p>0x18000-0x1BFFF</p></td>
+<td><p>Kernel 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x20000-0x27FFF</p></td>
+<td><p>Kernel 3</p></td>
+</tr>
+<tr class="row-even"><td><p>0x28000-0x2FFFF</p></td>
+<td><p>Kernel 4</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x30000-0x3FFFF</p></td>
+<td><p>Kernel 5</p></td>
+</tr>
+<tr class="row-even"><td><p>0x40000-0x4FFFF</p></td>
+<td><p>Kernel 6</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x50000-0x53FFF</p></td>
+<td><p>Kernel 7</p></td>
+</tr>
+<tr class="row-even"><td><p>0x54000-0x57FFF</p></td>
+<td><p>Kernel 8</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1C000-0x1C7FF</p></td>
+<td><p>Leak 0</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1C800-0x1CFFF</p></td>
+<td><p>Leak 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1D000-0x1D7FF</p></td>
+<td><p>Leak 2</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1D800-0x1DFFF</p></td>
+<td><p>Leak 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1E000-0x1E7FF</p></td>
+<td><p>Leak 4</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1E800-0x1EFFF</p></td>
+<td><p>Leak 5</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x1F000-0x1F7FF</p></td>
+<td><p>Leak 6</p></td>
+</tr>
+<tr class="row-even"><td><p>0x1F800-0x1FFFF</p></td>
+<td><p>Leak 7</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x58000-0x587FF</p></td>
+<td><p>Leak 8</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="spi-slave.html" class="btn btn-neutral float-left" title="10.2. SPI Slave" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../jtag/index.html" class="btn btn-neutral float-right" title="11. JTAG Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

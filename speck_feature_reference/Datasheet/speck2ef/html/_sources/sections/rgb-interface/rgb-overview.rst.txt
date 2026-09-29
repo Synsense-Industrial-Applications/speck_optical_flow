@@ -1,0 +1,6 @@
+.. _rgb-overview:
+
+RGB Interface
+=============
+
+For the moment, please refer to Dropbox paper document "RGB Interface Documentation" (link not provided for security reasons).

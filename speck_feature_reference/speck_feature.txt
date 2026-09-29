@@ -1,0 +1,280 @@
+================================================================================
+Speck2f 硬件特性笔记
+================================================================================
+用途：记录 Speck2f（samna / speck2f 工具链）中「代码里没有显式写出、但实际生效」
+      的硬件行为与隐含约束。这些特性往往决定了参数为什么必须成组出现。
+维护：本文件持续增补。新增条目请沿用文件末尾的模板，并尽量补上代码位置与验证方式。
+      未经验证的内容一律放到「待确认」，避免把推测当成结论。
+
+--------------------------------------------------------------------------------
+[001] bias 依赖慢时钟才生效（即文档中的 leak/bias processing）
+--------------------------------------------------------------------------------
+来源：口述 2026-09-21；2026-09-28 解答/更正待确认项（口述 + samna 文档核实）
+
+结论
+    1. bias 只有启用慢时钟（dk_io.set_slow_clk(True)）之后才会生效；
+       未启用慢时钟时 bias 完全失效 —— 不存在「改挂到其它时钟」的可能，
+       因为 Speck 的网络与 DVS 本身没有时钟、「主时钟」并不存在
+       （时钟与读出细节见 [003]）。
+    2. bias 是「每周期生效」的周期性累加：每个慢时钟周期（每 1/rate 秒）
+       将膜电位加上一次 bias 的数值，而不是一次性叠加的偏置。
+    3. leak 与 bias 是同一机制（文档原名 leak/bias processing）：
+       bias 值就是每个周期加进膜电位的量，负值即表现为「漏电」式下漂 ——
+       「leak 由 bias 引起」的说法成立，更准确地说：leak 就是这次累加本身
+       （2026-09-28 经 samna 0.48.6 官方文档核实）。
+
+机制
+    慢时钟启用后，硬件按 rate 决定的速度周期性工作：每 1/rate 秒执行一个周期，
+    每个周期将该层神经元的膜电位加上 bias 的数值 ——「每周期生效」。
+    单位时间内生效次数 = rate（rate 越大，单位时间累加的 bias 总量越大）。
+    未启用慢时钟时没有任何周期信号驱动累加，故 bias 完全失效。
+    . leak/bias 是同一处理块（文档名 leak/bias processing；本层开关 = leak_enable），
+      负 bias ⇒ 漏电式下漂；文档给出下限约束：leak 不能把膜电位压到 threshold_low
+      以下（原文 "…cannot be surpassed by leak"，本仓库 threshold_low=-1）。
+    . 越阈复位：本仓库 return_to_zero=True ⇒ 越阈发射后膜电位归零
+      （文档 "neurons … will return to 0 when firing"）。
+      注：复位与 bias 生效之间是否存在竞争（能否同时发生、谁先谁后）尚未知，
+      详见「待确认」②（2026-09-28 更正）。
+
+代码位置
+    dk_io.set_slow_clk_rate(<rate>)      # 指定慢时钟速率
+    dk_io.set_slow_clk(True)             # 启用慢时钟（bias 生效的前提）
+    create_layer(..., bias=<值>)         # 设定该层要累加的数值
+        config.cnn_layers[layer].biases         = ones(feature_count) * bias
+        config.cnn_layers[layer].leak_enable    = leak_enable
+        config.cnn_layers[layer].return_to_zero = True（本仓库全部层）
+    文档佐证（samna.speck2f.configuration.CnnLayerConfig，本地镜像 0.48.5）：
+        leak_enable:   "Enable leak/bias processing for this layer"
+        threshold_low: "minimum value of the neuron membrane potential which
+                        cannot be surpassed by leak"
+        return_to_zero: "neurons in this layer will return to 0 when firing"
+        leak_internal_slow_clk_enable: 用内部慢时钟替代外部 SLOW_CLK（需先开 leak_enable）
+    链接（在线 0.48.6）：https://synsense-sys-int.gitlab.io/samna/0.48.6/reference/speck2f/configuration/index.html
+    链接（本地镜像 0.48.5）：speck_feature_reference/samna/0.48.5/reference/speck2f/configuration/index.html
+    文档佐证（speck2ef 架构文档 §3.5.1「Leak (Bias) operation」，本地镜像）：
+        每层有一个 leak 生成块，用存放在专用「Leak SRAM」里的 leak 值更新全部神经元；
+        leak 电路由寄存器位 LKEN 开启、由 slow clock 触发（经 SLWCLK[7:0] 转发）。
+        —— 与前文吻合：LKEN = leak_enable；leak 值 = biases（专用 Leak SRAM）。
+        链接（本地）：speck_feature_reference/speck2ef/html/sections/architecture/convolutional-layer.html
+    文档佐证（论文，Nature Communications 15:4464 (2024)，本地 PDF，2026-09-28 补充）：
+        leak/bias 由独立的存储器控制器实现（每个输出通道存一个 signed 16-bit 值）；
+        bias 更新事件在「时间参考节拍」（reference tick）时发送给该层全部活跃
+        神经元 —— reference tick 由片外提供、完全可配置（即 devkit 慢时钟）。
+        —— 与「每周期生效、慢时钟驱动」吻合，且印证了 tick 的 off-chip 来源。
+        链接（本地）：speck_feature_reference/Speck相关文章_20260928/Spike-based dynamic computing with asynchronous sensing-computing neuromorphic chip.pdf
+
+相关实例（本仓库）
+    optical_flow_diag_split_onoff_seq3_conv.py      rate=32,   layer_0_0 / layer_0_1 的 bias=-2
+    optical_flow_diag_split_onoff_seq3_k2_conv.py   rate=32,   layer_0_0 / layer_0_1 的 bias=-2
+    optical_flow_axis_recurrent_4dir.py             rate=1000, 仅启用慢时钟，未使用 bias
+    algorithm_Demo/Demo_SNN.py                                 layer_0_0 / layer_0_1 同配置
+    algorithm_Demo/optical_flow_split_d_on_off_3_k_conv.py     同上（早期版本）
+    —— 本仓库中 leak_enable=True 与 bias=-2 总是成对出现（同一机制的两个参数）。
+
+待确认
+    ① 已结清（2026-09-28）：leak 与 bias 为同一机制（leak/bias processing），
+       不存在「两个作用互相抵消」的问题；bias 为负即为下漂，下漂下限为
+       threshold_low。
+    ② 未决（2026-09-28 更正）：越阈复位与 bias 生效之间可能存在竞争 ——
+       二者是否可能在同一时刻发生、发生时硬件如何处理，竞争的结果未知。
+       （此前「复位与 bias 串行、不会同时出现」的说法有误，已作废。）
+       文档依据（datasheet §3.2.4.7）：leak 操作「designed independent of the
+       asynchronous neuron calculations」、仅由 slow clock 驱动 —— 与事件驱动的
+       神经元更新是两条独立路径，结构上支持「可能竞争」的判断。
+       验证思路：在开 leak 的层上记录/monitor，观察越阈发射（归零）之后，
+       膜电位是否仍按每个慢时钟周期被 bias 照常累加。
+
+--------------------------------------------------------------------------------
+[002] 卷积对 in_feature 严格降序计入（索引高者先；layer 0、1 例外）；越阈发射后，晚到的负权重无法撤销
+--------------------------------------------------------------------------------
+来源：口述 2026-09-28（顺序规则经实验/观察确认）
+
+结论
+    1. 卷积 (out_feature, in_feature, x, y) 对 in_feature 维度的计算不是「同时求和」，
+       而是按 in_feature 索引从高到低依次计入（完整顺序见第 4 条）。
+       以 in_feature = 0~7 为例，高半区（4~7）的贡献先到，低半区（0~3）后到。
+    2. 「理论上同时到达」在物理上不成立：真实世界不存在严格同时的事件。
+       用组合逻辑电路实现的 Speck SNN 同样如此 —— 逻辑上同时产生的事件，
+       实际到达目标层仍有先后，且先后顺序由硬件结构决定（确定性、可复现），
+       不是随机抖动。
+    3. 神经元在累加过程中越阈即发射：若先到的一段贡献（如 feature4 的权重）已使
+       神经元发射脉冲，后到的贡献即使是负权重（如 feature0 为负），也无法
+       撤销/阻碍这次发射。
+    4. in_feature 的完整处理顺序 = 严格降序：7 → 6 → 5 → 4 → 3 → 2 → 1 → 0
+       （索引高的先处理）；更大的 in_feature 同样严格降序（如 16 特征时为
+       15>14>…>0）。此前观察到的「高位段先」只是该规则的一个切面。
+       目前实验与观察均符合此顺序（2026-09-28）。
+       例外：两个特殊并行层 layer 0 与 layer 1 均不符合该顺序（2026-09-28 确认）。
+    => 判决语义不是「∑ w_i·s_i 一次性过阈值」，而是「按 in_feature 顺序逐步累加的
+       部分和，任一时刻越阈即发射」：先到的正贡献可以「抢跑」锁定一次脉冲，
+       晚到的负贡献失去抑制机会（只能影响之后的状态）。
+
+机制（口述原例，2026-09-28）
+    用 destinations 把 layer_a 的输出复制成两份（分别对应 layer_b 的 in_feature
+    0~3 与 4~7）后连入 layer_b：layer_a 的同一个 feature 会同时出现在 layer_b 的
+    in_feature i（低半区）与 in_feature i+4（高半区）。
+    理论上 in_feature0 与 in_feature4 同时到达；实际上高半区先被计算，
+    feature4 的权重影响先到来。若 feature4 的贡献已使神经元越阈发射，
+    之后 feature0 的负权重也拦不住这次脉冲。
+
+顺序规则（2026-09-28 实验/观察补充）
+    . 普通卷积层：in_feature 严格降序处理（索引高者先）—— 0~7 上观测为
+      7>6>5>4>3>2>1>0；更大的 in_feature 同样严格降序（如 16 特征时 15>…>0）。
+      任意 i > j，i 的贡献先于 j 到达/计入；「高半区先」是本规则的特例。
+    . 例外：两个特殊并行层 —— layer 0 与 layer 1，均不符合上述降序特性
+      （2026-09-28 确认）。架构文档（speck2ef §3.5.2）：layer 0 有 2 个并行
+      卷积核、各处理 1/2 输入 spike；layer 1 有 2 个 kernel 接口、各处理
+      1/2 kernel 数据。凡涉及时序依赖的设计，不能对这两层套用本规则。
+
+代码位置
+    create_layer(..., destinations_0=..., destinations_1=...,
+                 feature_shift_0=..., feature_shift_1=...)
+    config.cnn_layers[layer].destinations[n].layer / .enable / .feature_shift
+    说明：destination 的第二路可用 feature_shift 把同一路输出平移到目标层的
+    另一段 in_feature，从而构造「同源 spike 进入不同 in_feature」的场景。
+
+相关实例（本仓库）
+    optical_flow_diag_split_onoff_seq3.py（onoff 家族各文件同构）
+        layer_1_0：destinations_0=layer_2_0, destinations_1=layer_2_0, feature_shift_1=4
+        layer_1_1：destinations_0=layer_2_1, destinations_1=layer_2_1, feature_shift_0=4
+        layer_2_x 的 input_shape_feature=8：layer_1_x 的 4 个输出既直接进入
+        in_feature 0~3，又经 feature_shift=4 复制进入 4~7 —— 即口述原例的结构。
+    同类复制型连线：optical_flow_axis_split_x.py 的 layer_1_0 → layer_2_0
+    （两个 destination 同目标，feature_shift_1=2，区段 0~1 / 2~3）等。
+
+待确认
+    ① 已结清（2026-09-28，实验/观察）：普通层 in_feature 严格降序处理
+       （0~7 上为 7>6>5>4>3>2>1>0；更大的 in_feature 同样严格降序，如 16 时
+       15>…>0）；「高位段先」为其特例。例外 = 两个特殊并行层 layer 0 与
+       layer 1，均不符合该顺序。此前「按 2 的幂/bit 分段」的假设可废弃。
+    ② 已结清（2026-09-28，口述 + datasheet 佐证）：
+       . 阈值判定含等号 —— 膜电位等于 threshold_high 也发射（口述确认）。
+       . 判决由每次输入事件到达触发一次（datasheet §3.2.4.6.2：异步特性，单次
+         到达即使超 2×阈值也只发一枪、不重复发）；不存在「攒一批 / 段末再判」
+         的边界 —— 与观察（feature4 到达即锁定、后到负值赶不上同一次判决）一致。
+       . 例外：特殊层 0/1（并行结构）；不套用本结论。
+    ③ 已结清（2026-09-28，口述确认）：
+       . 负贡献把电位往下压时，下限是 threshold_low：low=-1 时无论负值多大，
+         最多到 -1、不会更低；钳位由 threshold_low 决定，与负值大小无关。
+       . 之后的输入按正常规则累计：在任一到达时刻若累计值 ≥ threshold_high
+         即发射；不够则不发射，等后续输入继续累计。
+       . 除钳位外没有其它附加机制（原先「延迟发射 / 不发射」两种说法只是结果
+         表象，均由后续累计是否越阈决定）。
+    ④ 备注：本条目 = 口述结论 + 代码结构佐证；顺序部分自 2026-09-28 起有实验/
+       观察支持；与实测冲突时以实测为准。
+
+--------------------------------------------------------------------------------
+[003] 网络与 DVS 无时钟；IO 时钟只负责读出；读出事件顺序的可信度
+--------------------------------------------------------------------------------
+来源：口述 2026-09-28（解答 [001] 待确认项时补充；确认「按行随机读取」指仲裁树读出）；2026-09-28 文档核实（speck2ef / samna 本地镜像 + 官方论文）
+
+结论
+    1. Speck 上的网络与 DVS 本身没有时钟 —— 不存在「主时钟」。
+       器件上唯一的时钟是 IO 时钟，它与 slow_clk 无关。
+    2. IO 时钟只负责「把网络的输出送给上位机」（读出）这一件事，
+       不参与网络计算（网络是时钟无关的组合逻辑，见 [002]）。
+    3. 事件读出不是「按发生时间排队」：像素阵列采用仲裁制读出 —— 列、行各
+       一棵仲裁树（arbiter tree），同时到达的像素事件由仲裁依次放行，放行
+       顺序非确定（此前口述的「按行随机读取」即指这套行/列仲裁树读出，
+       2026-09-28 确认）。因此经 IO 读出的事件顺序可能跟实际发生顺序有所
+       偏差。
+       判据：只要没有出现超带宽现象（典型伪影：横条纹），读出的事件顺序
+       就是值得信赖的。
+
+用途（重要）
+    . 分析记录数据（recordings 的事件流、复盘 demo 现象）前，先检查有无
+      横条纹等带宽溢出伪影：
+        - 无：读出顺序可信，可据此分析事件先后（如 [002] 的时序效应）；
+        - 有：读出顺序不可信，该段数据不能用于顺序/时序分析。
+    . 本条目只约束「观测到的顺序」；硬件内部真实的先后机制不受影响。
+
+文档补充（2026-09-28 核实，本地镜像）
+    . 读出链路：层/DVS 消息从 Monitor bus（data1）或 Readout layer（data2）进入
+      芯片输出串行接口（P2S，26-bit 字、时钟下降沿有效）→ FPGA IO 模块 → 上位机。
+      可选：OUT1/OUT2 双通道并行（仅 data1 可用；data2 使能时 OUT2 无效）；
+      短字模式（仅发 LSB 17 bit，提速）。出处：speck2ef §9.5/§9.6
+      与寄存器 ii-config（P2SSEL / P2S2CH / P2SDL）。
+    . IO 时钟的官方定位：samna 称其为 “main clock (IO interface clock)”，默认开启；
+      官方说明 “Default is 25Mhz. Maximum 25Mhz.” —— 本仓库 Demo_record.py 的
+      25 MHz 即顶格值，1 MHz 的是主动降速。术语注意：此处 “main clock” 指
+      IO 接口时钟，不是网络计算时钟（与结论 1「不存在主时钟」不矛盾）。
+    . 「顺序不保证」在芯片内部就已存在（官方原话）：层输出 “the order of the
+      output spikes is not guaranteed”（并行层更明显）；DVS filter 的三段
+      monitor 消息 “order … is not guaranteed due to the asynchronous nature”。
+    . 超带宽的 FPGA 侧后果：IO 模块会丢弃「来不及接收」的事件；提供内部调试计数
+      request_dropped_events_num()。消息开销（影响带宽估算）：层/DVS 事件 1 条；
+      DVS filter 1 次更新 3 条；输入接口消息 2 条（LSB/MSB）。
+    . 官方论文（Nature Communications 15:4464 (2024)，「Spike-based dynamic
+      computing with asynchronous sensing-computing neuromorphic chip」；
+      本地 PDF：Speck相关文章_20260928/）：
+        · 无时钟表述：“no longer needs the global or local clock signal”、
+          “most extreme form of fine granular clock gating”；数据“follow
+          event-based timestamps rather than clock rising or falling edges”。
+        · IO 定量（“IO delay”）：每个 spike 的串行传输 = 输入 32 个 IO 时钟
+          周期、输出 26 个（对应 26-bit 字、1 bit/周期）；25 MHz 下输入传输
+          1.28 μs；串并转换（收+发）共 125 ns。
+        · 读出链路末端：“At the last stage of the asynchronous chain, we
+          serialize the data to be monitored to reduce the pin count.”
+          （串行化前先转 Bundle Data 编码）—— 即 P2S 一段的芯片侧行为。
+        · DVS 传感器端读出 = 仲裁制（不是逐行扫描）：每个像素挂一个 handshake
+          buffer、独立于 “arbitration readout system”；列、行各一棵仲裁树
+          （one arbiter tree for column arbitration and one for rows）；事件地址
+          由仲裁确认信号编码成 AER 字；单次仲裁 + ID 编码 ≈ 2.5–7.5 ns。
+        · 带宽数据点：传感器最坏约 500 Mb/s（全屏 100% 活动）、典型 50–100 Mb/s
+          （片上）；SNN core0 处理带宽 100 M SynOps/s、其余 core 30 M SynOps/s
+          （“maximally process without latency”）；读出层平均窗口 1/16/32 个
+          慢时钟周期、慢时钟范围 1–50 kHz。
+
+代码位置
+    对应 API（本仓库用法）：io_module.set_in_out_interface_clk_rate(<hz>)
+    已设置的实例：
+        algorithm_Demo/Demo_record.py      RECORDER_INTERFACE_CLOCK_HZ = 25_000_000（25 MHz）
+        algorithm_Demo/Demo_algorithm.py   1_000_000（1 MHz）
+        algorithm_Demo/DS_Demo.py          1_000_000（1 MHz）
+    被注释的实例（网络脚本，未生效）：
+        optical_flow_diag_split_onoff_seq3_conv.py / _seq3_k2_conv.py
+        algorithm_Demo/optical_flow_split_d_on_off_3_k_conv.py
+        # dk_io.set_in_out_interface_clk_rate(500000)
+    注意：slow_clk 的 API（set_slow_clk_rate / set_slow_clk）与 IO 时钟相互独立。
+    相关配置（2026-09-28 文档核实）：
+        io_module.set_dual_channel_output_enable(True)   # 双通道并行输出（提带宽；仅 monitor bus）
+        芯片寄存器（ii-config）：P2SSEL（data1/data2 选择）/ P2S2CH（双通道）/ P2SDL（17-bit 短字）
+        io_module.request_dropped_events_num()           # 查询 FPGA 侧丢弃事件数（内部调试）
+        官方注释：set_in_out_interface_clk_rate —— “Set the main clock (IO interface
+                  clock). Default is 25Mhz. Maximum 25Mhz.”
+
+相关实例（本仓库）
+    记录 / 回放工具：algorithm_Demo/Demo_record.py（记录）、
+    algorithm_Demo/offline_tools/event_stream_player.py（按时间戳回放 Layer-4 CSV）。
+
+待确认
+    ① 已结清（2026-09-28，口述确认 + 论文佐证）：「按行随机读取」= 传感器
+       的仲裁读出机制（「行」指行仲裁树）。机制：每个像素挂一个 handshake
+       buffer、独立于 arbitration readout system；列、行各一棵仲裁树，事件
+       地址由仲裁确认信号编码；单次仲裁 + ID 编码 ≈ 2.5–7.5 ns；同时到达的
+       像素事件按仲裁依次放行、顺序非确定。论文出处见上「文档补充」。
+    ② 除横条纹外超带宽的伪影形态：文档未写。可留意的两种「丢事件」来源：
+       芯片内 congestion balancer（层忙时丢输入）与 FPGA IO 模块丢弃（有计数）。
+       论文暗示处理器超带宽时可能先表现为延迟增大（core 带宽定义 =
+       “maximally process without latency”，推测），而非丢事件 —— 待实测区分
+       「延迟」与「丢弃」两种超限表现；具体伪影形态待实测归纳。
+    ③ 已结清（2026-09-28，论文数据）：定量关系 = 输出串行传输 26 个 IO 时钟
+       周期/spike（对应 26-bit 字、1 bit/周期）⇒ 单通道上限 = IO 频率 ÷ 26；
+       25 MHz 时 ≈ 0.96 M spike/s（17-bit 短字 ≈ 1.47 M，双通道再 ×2）。
+       输入为 32 个周期（≈0.78 M/s @25 MHz）。处置手段：提高 IO 时钟
+       （≤25 MHz）／开双通道（仅 monitor bus）／17-bit 短字／减少监控源、
+       降低事件率（decimator 等）／用 dropped 计数验证。
+       备注：论文给的是理想传输值，实际还受握手/缓冲/FPGA/USB 限制；论文讲的
+       是原始 Speck，Speck2f 数值可能略有差异（但 26 周期与 speck2ef 的
+       26-bit 字吻合）。
+
+================================================================================
+[模板] 新增条目
+================================================================================
+[编号] 一句话结论
+来源：      口述 / 实测 / 文档 / 推测
+结论：
+机制：
+代码位置：
+相关实例：
+待确认：

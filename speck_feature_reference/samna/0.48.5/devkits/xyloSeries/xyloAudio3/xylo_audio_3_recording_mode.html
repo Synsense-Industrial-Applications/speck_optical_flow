@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XyloAudio 3 Recording Mode &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="XyloAudio 3 Power Measurements" href="xylo_audio_3_power_measurement.html" />
+    <link rel="prev" title="XyloAudio 3 Manual Mode" href="xylo_audio_3_manual_mode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Development Kits</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#connecting-to-a-device">Connecting to a Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#common-methods-of-development-kits">Common Methods of Development Kits</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supported-development-kits">Supported Development Kits</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../speckSeries/summary.html">Speck series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapSeSeries/index.html">Dynap-SE series</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Xylo Series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#development-kits">Development Kits</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Development Kits</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Xylo Series</a></li>
+          <li class="breadcrumb-item"><a href="index.html">XyloAudio 3 Boards</a></li>
+      <li class="breadcrumb-item active">XyloAudio 3 Recording Mode</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/devkits/xyloSeries/xyloAudio3/xylo_audio_3_recording_mode.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="xyloaudio-3-recording-mode">
+<h1>XyloAudio 3 Recording Mode<a class="headerlink" href="xylo_audio_3_recording_mode.html#xyloaudio-3-recording-mode" title="Link to this heading"></a></h1>
+<p>In Recording mode, XyloAudio 3 allows you to capture input signals and obtain the output
+from the filter bank in the audio frontend. It supports recording from both analog and digital microphones,
+as well as simulated digital microphone input using <code class="docutils literal notranslate"><span class="pre">AfeSample</span></code> events.
+However, simulated analog microphone input is not supported.</p>
+<p>The filter bank consists of sixteen channels, each corresponding to an input neuron in the Xylo core.
+In Recording mode, whenever the IAF filter fires, a <code class="docutils literal notranslate"><span class="pre">Spike</span></code> event is triggered with the <code class="docutils literal notranslate"><span class="pre">neuron_id</span></code>
+set to the appropriate channel. The <code class="docutils literal notranslate"><span class="pre">timestep</span></code> member of the <code class="docutils literal notranslate"><span class="pre">Spike</span></code> event can be controlled using
+<a class="reference internal" href="../../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.DebugConfig.use_timestamps" title="samna.xyloAudio3.configuration.DebugConfig.use_timestamps"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.DebugConfig.use_timestamps</span></code></a>.
+By default, this setting is disabled, and the <code class="docutils literal notranslate"><span class="pre">timestep</span></code> reflects when the Xylo core receives the spike.
+When enabled, the <code class="docutils literal notranslate"><span class="pre">timestep</span></code> will contain the microsecond timestamp of the spike’s production.
+The timestep duration is controlled by <a class="reference internal" href="../../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap" title="samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap</span></code></a>.</p>
+<p>Below is an example demonstrating how to record a simulated digital microphone signal.
+The example uses the following packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">samna</span>                 <span class="mf">0.39.8</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">samna</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Open the device and connect the source and sink nodes so we can communicate with Xylo.</span>
+<span class="n">board</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;XyloAudio3TestBoard&quot;</span><span class="p">)</span>
+<span class="n">xylo</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">source_to</span><span class="p">(</span><span class="n">xylo</span><span class="o">.</span><span class="n">get_sink_node</span><span class="p">())</span>
+<span class="n">sink</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">sink_from</span><span class="p">(</span><span class="n">xylo</span><span class="o">.</span><span class="n">get_source_node</span><span class="p">())</span>
+<span class="n">stopwatch</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">get_stop_watch</span><span class="p">()</span>
+
+<span class="c1"># To obtain a valid timestep value in AFE spikes, we have to specify a timestep duration.</span>
+<span class="c1"># Default clock frequency was not changed, so we use that to calculate `tr_wrap`.</span>
+<span class="n">dt_s</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="c1"># 200 milliseconds</span>
+<span class="n">board_config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">XyloAudio3TestBoardDefaultConfig</span><span class="p">()</span>
+<span class="n">main_clock_frequency_hz</span> <span class="o">=</span> <span class="n">board_config</span><span class="o">.</span><span class="n">main_clock_frequency</span>
+<span class="n">tr_wrap</span> <span class="o">=</span> <span class="n">main_clock_frequency_hz</span> <span class="o">*</span> <span class="n">dt_s</span>
+
+<span class="c1"># Configure Xylo in Recording mode and configure the timestep duration.</span>
+<span class="n">xylo_config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">XyloConfiguration</span><span class="p">()</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">operation_mode</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">OperationMode</span><span class="o">.</span><span class="n">Recording</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">use_timestamps</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">time_resolution_wrap</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tr_wrap</span><span class="p">)</span>
+
+<span class="c1"># Choose digital microphone as input source.</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">input_source</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">InputSource</span><span class="o">.</span><span class="n">DigitalMicrophone</span>
+<span class="c1"># We need to set `clock_direction` to 1 (Xylo output), because there is no external clock.</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">digital_frontend</span><span class="o">.</span><span class="n">pdm_preprocessing</span><span class="o">.</span><span class="n">clock_direction</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">digital_frontend</span><span class="o">.</span><span class="n">pdm_preprocessing</span><span class="o">.</span><span class="n">clock_edge</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># Xylo clock frequency for PDM sampling can be influenced here.</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">sdm_clock_ratio</span> <span class="o">=</span> <span class="mi">49</span>
+<span class="c1"># Xylo clock frequency for spike to SAER output can be influenced here.</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">spk2saer_clock_ratio</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># Disable divisive normalisation for the test.</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">digital_frontend</span><span class="o">.</span><span class="n">filter_bank</span><span class="o">.</span><span class="n">dn_enable</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">xylo</span><span class="o">.</span><span class="n">apply_configuration</span><span class="p">(</span><span class="n">xylo_config</span><span class="p">)</span>
+
+<span class="c1"># Communication with the device is asynchronous, so we don&#39;t know when the configuration is finished.</span>
+<span class="c1"># Normally this is not a problem, because events are guaranteed to be sent in order.</span>
+<span class="c1"># But for this script we want to let Xylo run for a specific amount of time, so we need to synchronise somehow,</span>
+<span class="c1"># the easiest way is to read a register and wait for the response.</span>
+<span class="c1"># Because Xylo is already recording and emitting spike events, we can&#39;t expect a single event back as the response.</span>
+<span class="c1"># Instead we have to find the expected event inside the events that Xylo sends.</span>
+<span class="n">source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">ReadRegisterValue</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="mi">0</span><span class="p">)])</span>
+<span class="n">read_until</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="mf">3.0</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">now</span><span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="o">&lt;</span> <span class="n">read_until</span><span class="p">:</span>
+    <span class="n">remaining_time_ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">read_until</span> <span class="o">-</span> <span class="n">now</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+    <span class="n">events</span> <span class="o">=</span> <span class="n">sink</span><span class="o">.</span><span class="n">get_events_blocking</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">remaining_time_ms</span><span class="p">))</span>
+    <span class="n">expected_value</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">RegisterValue</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="mh">0x0001_0002</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">expected_value</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Xylo configuration takes unreasonably long (&gt;3s).&quot;</span><span class="p">)</span>
+
+<span class="c1"># Once the configuration is set, the chip is already recording input.</span>
+<span class="c1"># But we want to define a clear time window in which we record,</span>
+<span class="c1"># so we start the stopwatch to obtain event timesteps relative to this moment.</span>
+<span class="c1"># And also throw away any events we have received until now.</span>
+<span class="n">stopwatch</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">sink</span><span class="o">.</span><span class="n">clear_events</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Start recording now...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Record for 5 seconds</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Extract the spikes per output channel</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">sink</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+<span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">ev</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ev</span><span class="p">,</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">Spike</span><span class="p">)</span>
+    <span class="n">channels</span><span class="p">[</span><span class="n">ev</span><span class="o">.</span><span class="n">neuron_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ev</span><span class="o">.</span><span class="n">timestep</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="xylo_audio_3_manual_mode.html" class="btn btn-neutral float-left" title="XyloAudio 3 Manual Mode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="xylo_audio_3_power_measurement.html" class="btn btn-neutral float-right" title="XyloAudio 3 Power Measurements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

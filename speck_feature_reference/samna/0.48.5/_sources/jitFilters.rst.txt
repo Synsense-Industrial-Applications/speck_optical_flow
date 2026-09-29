@@ -1,0 +1,512 @@
+###########
+JIT Filters
+###########
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+In addition to the filters that are built into ``samna``, it is possible to define user specific JIT filters.
+
+These user specific JIT filters must be written in C++ and provide almost the full flexibility the language allows.
+The JIT filters are (just-in-time) compiled into the module when the filter nodes are instantiated in the graph.
+
+A distinction in terminology is made between a **JIT filter** and a **JIT filter node**.
+The former can be regarded as a template or a builder, of which the node is an instance.
+The latter is the actual node in the graph that the user can interact with and that is the one that is actually executed.
+
+--------------
+Initialisation
+--------------
+
+Initialisation is handled automatically when samna module is loaded so JIT filters are ready to go immediately after ``import samna``.
+
+--------------------
+Defining JIT Filters
+--------------------
+
+Two types of builders are available for defining JIT filters. The ``JitFilter`` is the most flexible and can be used to define any filter.
+The ``JitFunctionFilter`` is a specialisation of the ``JitFilter`` that can be used to define a subset of operations.
+
+These builders are subsequently passed to the ``graph.sequential`` method to instantiate the concrete filter nodes.
+Because the input type for a filter node is automatically deduced, the first element in the sequence cannot be a JIT filter.
+
+.. code-block:: python
+
+    # Define a JIT filter
+    jit_filter = samna.graph.JitFilter('FilterName', filter_source)
+    # Instantiate the JIT filter
+    _, jit_filter_node = graph.sequential([some_node, jit_filter])
+
+The concrete JIT filter nodes that are created in the ``sequential`` call are like any other filter node and can used in the same way.
+
+~~~~~~~~~~~~~~~~~
+JitFunctionFilter
+~~~~~~~~~~~~~~~~~
+
+The ``JitFunctionFilter`` is easy to use, because only the filter function must be provided,
+but it is strictly limited to *map* functions on events. Its constructor accepts two arguments:
+
+* ``name (str)``: Name of the filter to be created. Can not be ``filterFunction``.
+* ``source (str)``: Source code for the filter function passed. Must have a function called ``filterFunction``
+  that takes one event and returns one event. Input and output do not have to be the same type
+  and also templates can be used. The function must be pure, meaning it can have no state nor side effects.
+
+.. code-block:: python
+
+    filter_source = '''
+        template <typename Input>
+        auto filterFunction(const Input& input)
+        {
+            return std::to_string(input);
+        }
+    '''
+
+    samna.graph.JitFunctionFilter('FilterName', filter_source)
+
+~~~~~~~~~
+JitFilter
+~~~~~~~~~
+
+Sometimes it is necessary to define a filter that is not a pure function. For example the *reduce* function needs to keep track of the accumulated state.
+Because the ``JitFilter`` allows the user to write the complete C++ filter class, state can then be stored in class members.
+
+Although the ``JitFilter`` is more flexible than the ``JitFunctionFilter``, it is not as easy to use and subject to several requirements.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C++ Filter Class Requirements
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: cpp
+
+    template<typename Input, typename Output>
+    class FilterInterface {
+    public:
+        virtual ~FilterInterface() = default;
+
+        virtual void apply();
+    protected:
+        // Non-blocking method to receive input events.
+        std::optional<Input> receiveInput() noexcept;
+        // Blocking method to wait for input events, if timeout < 0 then wait indefinitely.
+        std::optional<Input> receiveInputOrTimeout(const std::chrono::system_clock::duration& timeout) noexcept;
+
+        void forwardResult(const Output& result);
+        void forwardResultsInBulk(const std::vector<Output>& container);
+    };
+
+The filter class must inherit from ``iris::FilterInterface<Input, Output>``. The ``Input`` and ``Output`` types can be the same.
+Generally, the ``Input`` and ``Output`` types are ``std::shared_ptr<const std::vector<T>>`` where ``T`` is the type of the events.
+
+The filter class must be default constructible, so its constructor cannot take any arguments.
+If the class has members that must be initialised, sensible defaults should be used.
+
+The ``apply`` method must be overridden. This method is evaluated by the filter graph and should apply the filter function on the input events.
+Inside this method the filter can call the protected ``receiveInput`` and ``forwardResult`` methods to receive and forward input and output events.
+Note that the ``apply`` method is evaluated from a different thread, so proper synchronisation is required when accessing members.
+The following implementation of ``apply`` can be used as a starting point.
+The ``JitFunctionFilter`` uses a similar implementation to apply the provided filter function.
+
+.. code-block:: cpp
+
+    template<typename Input, typename Output>
+    void FilterInterface<Input, Output>::apply()
+    {
+        Input inputValue;
+        std::vector<Output> results;
+
+        while (const auto input = this->receiveInput(inputValue)) {
+            results.emplace_back(predicate(inputValue));
+        }
+
+        if (results.empty()) {
+            return;
+        }
+
+        this->forwardResultsInBulk(std::move(results));
+    }
+
+To use the filter in python it must be registered in the module. The following class in svejs must be specialised for the user defined filter.
+
+.. code-block:: cpp
+
+    namespace svejs {
+        template<typename T>
+        struct RegisterImplementation<CustomFilter<T>> {
+            static constexpr inline auto registerConstructors()
+            {
+                return constructors(constructor<>());
+            }
+
+            static constexpr inline auto registerBaseClasses()
+            {
+                return svejs::BaseClasses<iris::NodeInterface>();
+            }
+
+            static inline auto registerName()
+            {
+                // TODO: Register the name of the filter here
+                return std::string("CustomFilter_") + svejs::snakeCase(svejs::registerName<T>());
+            }
+
+            static constexpr inline auto registerMembers()
+            {
+                // TODO: Register public members here
+                return members();
+            }
+
+            static constexpr inline auto registerMemberFunctions()
+            {
+                // TODO: Register public member functions here
+                return memberFunctions();
+            }
+        };
+    }
+
+Only the public API that needs to be accessible in python must be registered.
+The ``registerMembers`` function should return all the public members and the ``registerMemberFunctions`` function should return
+all the public member functions of the class that should be accessible from python.
+The ``registerName`` function should return the name of the filter class that should be used in the filter graph.
+All the namespaces provided in the registration will be turned into submodules and the names themselves converted to snake case.
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Preconditions and Limitations of JitFilter
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The JIT compilation of filters can have a significant cost in terms of time, in order to limit this effect internally samna has to make some assumptions about the filters.
+
+1. Members of the filter cannot have custom getters and setters in their svejs registration.
+2. Setting a member from a python dictionary is not allowed.
+3. Automatic generation of comparison operators, conversion to string operator, `from_json` and `to_json` methods is not available.
+4. It is possible to define new types to help develop JIT Filters but these types must be used only internally, they cannot be bound to python explicitly. The following snippet describes a valid and invalid use case of types introduced at JIT time.
+
+.. code-block:: python
+
+    # The following example is WRONG.
+
+    filter_source = '''
+
+        struct MyType{
+            auto doComputation(const Input& input);
+        };
+      
+        template <typename Input>
+        auto filterFunction(const Input& input)
+        {
+            return MyType{}; // Cannot return a new type out of the JIT function
+        }
+    '''
+
+    # The following example is CORRECT.
+
+    filter_source = '''
+
+        struct MyType{
+            auto doComputation(const Input& input);
+        };
+      
+        template <typename Input>
+        auto filterFunction(const Input& input)
+        {
+            MyType helper{};
+            auto results = helper.doComputation(input);  // MyType is used only within the JIT filter.
+            return results;
+        }
+    '''
+
+^^^^^^^^^^^^^^^^^^^
+Precompiled Headers
+^^^^^^^^^^^^^^^^^^^
+
+It is not possible to add custom headers to the ``JitFilter``. The available headers are precompiled by the module.
+In addition to all the event definitions in ``samna``, the following headers from the C++ standard library are included.
+
+* General utilities
+    * ``<any>``
+    * ``<chrono>``
+    * ``<cstdint>``
+    * ``<expected>``
+    * ``<functional>``
+    * ``<memory>``
+    * ``<optional>``
+    * ``<tuple>``
+    * ``<utility>``
+    * ``<variant>``
+* Algorithms and math
+    * ``<algorithm>``
+    * ``<numeric>``
+    * ``<random>``
+* Containers and iterators
+    * ``<array>``
+    * ``<deque>``
+    * ``<iterator>``
+    * ``<list>``
+    * ``<map>``
+    * ``<queue>``
+    * ``<set>``
+    * ``<span>``
+    * ``<stack>``
+    * ``<unordered_map>``
+    * ``<unordered_set>``
+    * ``<vector>``
+* Strings
+    * ``<string>``
+    * ``<string_view>``
+* Thread synchronization
+    * ``<atomic>``
+    * ``<mutex>``
+* IO
+    * ``<iostream>``
+
+^^^^^^^^^^^^^^^^^
+Example JitFilter
+^^^^^^^^^^^^^^^^^
+
+The code below is how to create a ``JitFilter`` for the ``EventRescaleFilter`` filter as it is implemented in samna.
+
+.. code-block:: python
+
+    filter_source = '''
+        template<typename T>
+        class EventRescaleFilter : public iris::FilterInterface<std::shared_ptr<const std::vector<T>>, std::shared_ptr<const std::vector<T>>> {
+        public:
+            void setRescalingCoefficients(double widthCoeff, double heightCoeff)
+            {
+                std::lock_guard lock{coeffMutex};
+                this->widthCoeff = widthCoeff;
+                this->heightCoeff = heightCoeff;
+            }
+
+            void reset()
+            {
+                std::lock_guard lock{coeffMutex};
+                widthCoeff = heightCoeff = 1.0;
+            }
+
+            void apply() override
+            {
+                auto result = std::make_shared<std::vector<T>>();
+
+                std::lock_guard lock{coeffMutex};
+
+                while (auto events = this->receiveInput()) {
+                    std::transform((*events)->cbegin(), (*events)->cend(), std::back_inserter(*result), [&, this](auto ev) {
+                        ev.x /= heightCoeff;
+                        ev.y /= widthCoeff;
+                        return ev;
+                    });
+                }
+
+                if (result->empty()) {
+                    return;
+                }
+
+                this->forwardResult(std::move(result));
+            }
+
+        private:
+            std::mutex coeffMutex;
+
+            double widthCoeff = 1.;
+            double heightCoeff = 1.;
+        };
+
+        namespace svejs {
+        template<typename T>
+        struct RegisterImplementation<EventRescaleFilter<T>> {
+
+            using Type = EventRescaleFilter<T>;
+
+            static constexpr inline auto registerConstructors()
+            {
+                return constructors(constructor<>());
+            }
+
+            static constexpr inline auto registerMembers()
+            {
+                return members();
+            }
+
+            static constexpr inline auto registerMemberFunctions()
+            {
+                return memberFunctions(memberFunction("setRescalingCoefficients", &Type::setRescalingCoefficients),
+                                    memberFunction("reset", &Type::reset));
+            }
+
+            static constexpr inline auto registerBaseClasses()
+            {
+                return svejs::BaseClasses<iris::NodeInterface>();
+            }
+
+            static inline auto registerName()
+            {
+                return std::string("graph::nodes::EventRescale_") + svejs::snakeCase(svejs::registerName<T>());
+            }
+        };
+        }
+    '''
+
+    EventRescaleFilter = samna.graph.JitFilter('EventRescaleFilter', filter_source) # The first argument of JitFilter must match the name of the filter class
+
+~~~~~~~~~~~~~
+C++ Templates
+~~~~~~~~~~~~~
+
+Although the above examples are defined using C++ templates, this is not required.
+It is possible to explicitly specify the input and output types of the filter.
+Using templates however allows the same node to be used to create filters for different event types.
+
+.. code-block:: python
+
+    crop_filter = samna.graph.JitFunctionFilter('CropFilter', crop_source)
+    speck_graph.sequential(['Speck2fForward', crop_filter])
+
+-----------------
+Sources and Sinks
+-----------------
+
+For all devices the specific ``BasicSourceNode`` and ``BasicSinkNode`` are already available to the user.
+JIT sources and sinks allow the user to easily connect sources and sinks in the ``sequential`` method.
+
+The ``JitSource`` builder is used to create a source node and if used, must be the first element in the sequence.
+Because it is the first node in the sequence, the type of events cannot be inferred and must be specified.
+
+.. code-block:: python
+
+    source_node, _ = graph.sequential([JitSource(speck2f.event.InputEvent), 'Speck2fForward'])
+    source_node.write(input_events)
+
+The ``JitSink`` builder is used to create a sink node and if used, must be the last element in the sequence.
+Its type is automatically deduced from the previous filter node.
+
+.. code-block:: python
+
+    _, sink_node = graph.sequential(['Speck2fForward', JitSink()])
+    output_events = sink_node.get_events()
+
+~~~~~~~~~~~~~~~~~~~~~
+Convenience Functions
+~~~~~~~~~~~~~~~~~~~~~
+
+A frequent use case is to create sources and sink nodes to interact with the devices.
+Convenience functions ``source_to`` and ``sink_from`` are provided to create these nodes without having to first create a filter graph.
+These functions use the ``JitSource`` and ``JitSink`` builders described above.
+
+.. code-block:: python
+
+    source_node = source_to(device_model.get_sink_node())
+    source_node.write(input_events)
+
+    sink_node = sink_from(device_model.get_source_node())
+    output_events = sink_node.get_events()
+
+----------------
+Built-in Filters
+----------------
+
+The following filters are already contained in ``samna`` and available to the user as JIT filters.
+See :ref:`Available Filters` for a description of the filters, of which this list is a subset.
+
+* ``JitEventCounterSink``
+* ``JitEventCrop``
+* ``JitEventDecimate``
+* ``JitEventRescale``
+* ``JitEventToggle``
+* ``JitEventTypeFilter``
+* ``JitMajorityReadout``
+* ``JitMemberSelect``
+* ``JitSpikeCollection``
+* ``JitSpikeCount``
+* ``JitSplitting``
+* ``JitZMQReceiver``
+* ``JitZMQStreamer``
+
+.. note::
+
+    Some of them need an arguments to indicate the type of output events. For example
+    :code:`samna.graph.JitMajorityReadout(samna.ui.Event)`.
+
+    +------------------------+----------------------------------------+
+    | Filter                 | Available arguments                    |
+    +========================+========================================+
+    || ``JitMajorityReadout``|| :class:`samna.ui.Event`               |
+    || ``JitSpikeCount``     |                                        |
+    || ``JitDvsEventToViz``  |                                        |
+    +------------------------+----------------------------------------+
+    || ``JitSpikeCollection``|| :class:`samna.speck2e.event.Spike`    |
+    |                        || :class:`samna.speck2f.event.Spike`    |
+    +------------------------+----------------------------------------+
+
+The advantage of using the JIT version is that the right filter is selected for the device automatically.
+For example, these 2 lines are equivalent:
+
+.. code-block:: python
+
+        graph.sequential([speck2f_model.get_source_node(), samna.graph.JitSpikeCollection(samna.speck2f.event.Spike)])
+        graph.sequential([speck2f_model.get_source_node(), 'Speck2fSpikeCollectionNode'])
+
+---------
+JIT Cache
+---------
+
+In order to allow users to have a faster experience with JIT filters a caching mechanism was introduced. Code compiled
+with the JIT will be cached as object files in a hidden folder placed in the user's home directory (``~/.samna/jit_cache``).
+
+The cache can be flushed programmatically with the `clear_jit_cache` function.
+
+.. code-block:: python
+
+        samna.jit.clear_jit_cache()
+
+---------------------
+Debugging JIT Filters
+---------------------
+
+It is possible to use the ``lldb`` debugger to debug JIT-compiled code. (``GDB`` can also work but ``lldb`` is recommended.)
+
+Both ``samna.graph.JitFilter`` and ``samna.graph.JitFunctionFilter`` accept a third argument of type ``bool``, 
+which determines whether to compile the JIT filter with debug information. By default, this argument is set to ``False``, 
+which compiles the filter for release mode. To enable debugging, this argument must be set to ``True``.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Steps to Debug With ``lldb``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **Enable Debug Information**  
+   Ensure the third argument of ``JitFilter`` or ``JitFunctionFilter`` is set to ``True``.
+
+2. **Start ``lldb`` with Python**  
+   Launch ``lldb`` by running:
+
+   .. code-block:: sh
+
+      lldb python
+
+3. **Configure JIT Debugging**  
+   Inside the ``lldb`` environment, enable JIT debugging with:
+
+   .. code-block:: sh
+
+      settings set plugin.jit-loader.gdb.enable on
+
+   This is the only setting required for debugging JIT-compiled code.
+
+4. **Set Breakpoints**  
+   You can set a breakpoint on the JIT-compiled function before running your script. 
+   For example ``filterFunction`` if you are using a ``JitFunctionFilter``:
+
+   .. code-block:: sh
+
+      b filterFunction
+
+5. **Run Your Script**  
+   Execute your script inside ``lldb`` using:
+
+   .. code-block:: sh
+
+      run YOUR_SCRIPT_NAME.py
+
+   The debugger will pause execution when a breakpoint is hit, allowing you to inspect the state of the program.
+
+This setup allows you to debug JIT-compiled code just like any other native code in ``lldb``.
+

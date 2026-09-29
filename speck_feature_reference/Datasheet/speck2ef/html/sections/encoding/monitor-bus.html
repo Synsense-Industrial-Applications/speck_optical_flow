@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9.4. Monitor Bus Encoding &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.5. Output Serial Interface" href="output-p2s.html" />
+    <link rel="prev" title="9.3. Input Serial Interface Bus Encoding" href="input-serial-interface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. Encoding and Programming</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">9.1. I/O Interfaces Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-s2p.html">9.2. Input Serial Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-serial-interface.html">9.3. Input Serial Interface Bus Encoding</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.4. Monitor Bus Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-p2s.html">9.5. Output Serial Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-serial-interface.html">9.6. Output Serial Interface Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-interrupt.html">9.7. Direct Readout Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">9. </span>Encoding and Programming</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9.4. </span>Monitor Bus Encoding</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/encoding/monitor-bus.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="monitor-bus-encoding">
+<span id="id1"></span><h1><span class="section-number">9.4. </span>Monitor Bus Encoding<a class="headerlink" href="#monitor-bus-encoding" title="Permalink to this heading"></a></h1>
+<p>The monitor bus provides a monitoring of messages generated at various levels of the Speck2e architecture.
+The monitor bus can be enabled by setting register bits <a class="reference internal" href="../registers/ii-config.html#rbits-p2ssel"><span class="std std-ref">ININT8:P2SSEL</span></a> to <cite>0b0</cite>.</p>
+<span id="monitor-encoding-table"></span><table class="table-small docutils align-default" id="id2">
+<caption><span class="caption-text">Speck2e Monitor Bus Encoding</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p>[25:22]</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+<td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+<td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Layer n (0-8)</p></td>
+<td><p><a class="reference internal" href="../registers/router-config.html#rbits-lxmtag"><span class="std std-ref">LxMTAG</span></a></p></td>
+<td colspan="10"><p class="centered">
+<strong>Feature Number [9:0]</strong></p></td>
+<td colspan="6"><p class="centered">
+<strong>Y[5:0]</strong></p></td>
+<td colspan="6"><p class="centered">
+<strong>X[5:0]</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>DVS Preprocessor</p></td>
+<td><p>1101</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>P</p></td>
+<td colspan="7"><p class="centered">
+<strong>Y[6:0]</strong></p></td>
+<td colspan="7"><p class="centered">
+<strong>X[6:0]</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Sensor</p></td>
+<td><p>1101</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>P</p></td>
+<td colspan="7"><p class="centered">
+<strong>Y[6:0]</strong></p></td>
+<td colspan="7"><p class="centered">
+<strong>X[6:0]</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Filter 1</p></td>
+<td><p>1101</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>P</p></td>
+<td colspan="7"><p class="centered">
+<strong>Y[6:0]</strong></p></td>
+<td colspan="7"><p class="centered">
+<strong>X[6:0]</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Filter 2</p></td>
+<td><p>1101</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td colspan="16"><p class="centered">
+<strong>Current Counter Value [15:0]</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Filter 3</p></td>
+<td><p>1101</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td colspan="16"><p class="centered">
+<strong>Previous (Stored) Counter Value [15:0]</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>In. Interface</p></td>
+<td><p>1100</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td colspan="14"><p class="centered">
+<strong>Input Interface LSB Part [13:0]</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>In. Interface</p></td>
+<td><p>1100</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td colspan="15"><p class="centered">
+<strong>Input Interface MSB Part [28:14]</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <cite>Filter 3</cite> data relative to the actual output spike from the filter is the <em>Current Counter Value</em> and not the <em>Previous Counter Value</em>.</p>
+</div>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="input-serial-interface.html" class="btn btn-neutral float-left" title="9.3. Input Serial Interface Bus Encoding" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="output-p2s.html" class="btn btn-neutral float-right" title="9.5. Output Serial Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

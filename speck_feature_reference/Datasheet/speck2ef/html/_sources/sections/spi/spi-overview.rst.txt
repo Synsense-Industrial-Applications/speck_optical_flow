@@ -1,0 +1,16 @@
+Overview
+========
+
+The Speck2e SPI module includes the following modules / logic:
+
+* :ref:`SPI slave<spi-slave-interface>` (spi_slv)
+* :ref:`SPI master<spi-master-interface>` (spi_mst)
+* data distributor (data_dist, works with spi_mst)
+* SPI slave / master mux
+
+SPI Bridge Mode
+***************
+
+The chip can be configured to bridge, i.e. directly connect the SPI Slave interface pins to the SPI Master interface.
+This allows direct control of a Flash memory connected to the SPI Master interface via the SPI Slave interface.
+Refer to :ref:`ININT9:SPIBRG<rbits-SPIBRG>`

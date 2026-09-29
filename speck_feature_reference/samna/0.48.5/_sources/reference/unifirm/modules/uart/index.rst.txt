@@ -1,0 +1,19 @@
+##########################
+samna.unifirm.modules.uart
+##########################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm.modules.uart
+   :members:
+   :show-inheritance:
+

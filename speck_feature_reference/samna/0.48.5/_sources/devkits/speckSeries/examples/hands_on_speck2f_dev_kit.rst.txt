@@ -1,0 +1,214 @@
+#################################
+Hands On Speck 2f Development Kit
+#################################
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+This is a complete example that provides basic steps on how to "light up" the development kit, 
+receive events from the chip, send events to the chip, and visualize the DVS events.
+
+A more concise example can be found in :ref:`Display Speck 2f DVS Events`.
+
+Please ensure you followed the :ref:`Install` instructions and connected the development
+kit to the USB 3 port with a USB 3.0 cable.
+
+**********************
+Open a Development Kit
+**********************
+
+We can easily open a specific device by its ``device_type_name``,
+for Speck 2f development kits, it can be ``Speck2fDevKit`` for Speck 2f development kit,
+or ``Speck2fModuleDevKit`` for Speck 2f module development kit.
+
+.. code-block:: python
+    :linenos:
+
+    import samna
+
+    try:
+        board = samna.device.open_device("Speck2fDevKit")
+    except:
+        board = samna.device.open_device("Speck2fModuleDevKit")
+
+
+For more details, please check :ref:`Device Controller`.
+
+*******************************
+Read/Write From/To The Speck 2f
+*******************************
+
+To read/write from/to the Speck 2f chip, it is necessary to create at least one
+:class:`sink_node <samna.BasicSinkNode_speck2f_event_output_event>` and one :class:`source_node <samna.BasicSourceNode_speck2f_event_input_event>`. 
+There are two ways to create them,
+either directly instantiate them from the chip model, or create them manually and use a :ref:`graph <Event Handling with Filter Graphs>` 
+to connect to the model.
+
+.. note::
+
+    The sink node buffers all the events it receives until you clear them or read the events. 
+    Otherwise, due to the accumulation of events, it could consume all the memory. 
+    
+    Usually we can use filters to reject unwanted events reach the sink node, like the 
+    ``Speck2fOutputEventTypeFilter`` node used in :ref:`Create Manually` section. But if instantiate 
+    it from the chip model, then it receives all events.
+
+=========================
+Instantiate From The Chip
+=========================
+
+This is the easiest way to create the :class:`sink_node <samna.BasicSinkNode_speck2f_event_output_event>` and 
+:class:`source_node <samna.BasicSourceNode_speck2f_event_input_event>`, but in this way you can't add filters between the 
+nodes and the chip to process the events.
+
+.. code-block:: python
+    :linenos:
+
+    # create a sink node to receive events from the Speck 2f
+    sink_node = samna.graph.sink_from(board.get_model_source_node())
+
+    # create a source node to send events to the Speck 2f
+    source_node = samna.graph.source_to(board.get_model_sink_node())
+
+    # Read the first register
+    source_node.write([samna.speck2f.event.ReadRegisterValue(0x0)])
+
+    # a blocking call to wait for 1 event
+    print(sink_node.get_n_events(1)) # [speck2f::event::RegisterValue(address=0, data=241)]
+
+===============
+Create Manually
+===============
+
+With a :ref:`graph <Event Handling with Filter Graphs>`, filters can be used to process events before 
+reaching the final destination. All available filters are listed in :ref:`Filters`.
+
+.. code-block:: python
+    :linenos:
+
+    graph = samna.graph.EventFilterGraph()
+
+    # add a event type filter to let only a specific type to pass 
+    _, event_type_filter, sink_node = graph.sequential([board.get_model_source_node(), 
+                                                        "Speck2fOutputEventTypeFilter", 
+                                                        samna.BasicSinkNode_speck2f_event_output_event()])
+    # only pass samna.speck2f.event.RegisterValue event 
+    event_type_filter.set_desired_type("speck2f::event::RegisterValue")
+
+    source_node, _ = graph.sequential([samna.BasicSourceNode_speck2f_event_input_event(), board.get_model_sink_node()])
+
+    # graph has to start first
+    graph.start()
+
+    # Read the first register
+    source_node.write([samna.speck2f.event.ReadRegisterValue(0x0)])
+
+    # a blocking call to wait 1 events
+    print(sink_node.get_n_events(1)) # [speck2f::event::RegisterValue(address=0, data=241)]
+
+********************
+Setup The Visualizer
+********************
+
+The Visualizer is a built-in GUI dedicated to displaying DVS events. 
+It is necessary to launch the GUI in a separate process and direct the DVS events to it.
+
+================
+Start Visualizer
+================
+
+.. code-block:: python
+    :linenos:
+
+    import socket
+    import sys, os
+    from threading import Thread
+
+    def free_port():
+        """
+        Determines a free port using sockets.
+        """
+        free_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        free_socket.bind(('0.0.0.0', 0))
+        free_socket.listen(5)
+        port = free_socket.getsockname()[1]
+        free_socket.close()
+
+        return port
+
+    # the visualizer will receive from this endpoint
+    streamer_endpoint = "tcp://0.0.0.0:" + str(free_port())
+    width_proportion = 0.75
+    height_proportion = 0.75
+
+    # start visualizer in a isolated process which is required on mac, instead of a sub process.
+    gui_cmd = f"import samna, samnagui; samnagui.run_visualizer('{streamer_endpoint}', {width_proportion}, {height_proportion})"
+    os_cmd = f'{sys.executable} -c "{gui_cmd}"'
+    print("Visualizer start command: ", os_cmd)
+    gui_thread = Thread(target=os.system, args=(os_cmd,))
+    gui_thread.start()
+
+===============================
+Direct Events To The Visualizer
+===============================
+
+To direct events to the visualizer, a graph is necessary because we need to use filters:
+
+- Speck2fDvsToVizConverter: convert :class:`samna.speck2f.event.Spike` and :class:`samna.speck2f.event.DvsEvent` to 
+  :class:`samna.ui.DvsEvent`.
+- VizEventStreamer: stream the visualizer acceptable events to the visualizer.
+
+.. code-block:: python
+    :linenos:
+
+    to_vis_graph = samna.graph.EventFilterGraph()
+
+    _, _, streamer = to_vis_graph.sequential(
+        [board.get_model_source_node(), "Speck2fDvsToVizConverter", "VizEventStreamer"]
+    )
+
+    # create a node to send visualizer configurations
+    config_source, _ = to_vis_graph.sequential([samna.BasicSourceNode_ui_event(), streamer])
+
+    # set the streamer endpoint the same as the endpoint set when creating the visualizer 
+    streamer.set_streamer_endpoint(streamer_endpoint)
+    if streamer.wait_for_receiver_count() == 0:
+        raise Exception(f'connecting to visualizer on {streamer_endpoint} fails')
+    
+    # create a 128*128 resolution activity plot to display the DVS events
+    visualizer_config = samna.ui.VisualizerConfiguration(
+        plots=[samna.ui.ActivityPlotConfiguration(128, 128, "DVS Layer")]
+    )
+
+    # start the graph
+    to_vis_graph.start()
+
+    # send the configurations to the visualizer
+    config_source.write([visualizer_config])
+
+********************
+Config Speck 2f chip
+********************
+
+After setting up the sink and source node, we are ready to send and receive events to/from the Speck 2f. 
+But in order to get some events from the Speck 2f, we need to configure the Speck 2f to do so.
+
+The very basic approach to get anything from the Speck 2f is to enable the monitoring of the 
+:ref:`DVS Pre-Processing Layer <speck_2f_dvs_layer>`. 
+For more configurations, please check :ref:`How to Configure Chip <configure_speck_2f>`.
+
+.. code-block:: python
+    :linenos:
+
+    config = samna.speck2f.configuration.SpeckConfiguration()
+
+    # enable the monitoring of the dvs pre-processing layers
+    config.dvs_layer.monitor_enable = True
+
+    # apply the configuration to the Speck 2f
+    board.get_model().apply_configuration(config)
+
+After :attr:`~samna.speck2f.Speck2fModel.apply_configuration`, you should be able to see 
+DVS events on the visualizer.
+

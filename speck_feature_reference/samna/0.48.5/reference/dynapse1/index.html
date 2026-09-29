@@ -1,0 +1,1564 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.dynapse1 &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="samna.dynapse1.nodes" href="nodes/index.html" />
+    <link rel="prev" title="samna.device" href="../device/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../device/index.html">samna.device</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="index.html#">samna.dynapse1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#module-samna.dynapse1">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna</a></li>
+      <li class="breadcrumb-item active">samna.dynapse1</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/dynapse1/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-dynapse1">
+<h1>samna.dynapse1<a class="headerlink" href="index.html#samna-dynapse1" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="nodes/index.html">samna.dynapse1.nodes</a></li>
+</ul>
+</div>
+</section>
+<section id="module-samna.dynapse1">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.dynapse1" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Chip">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Chip</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Chip" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Dynapse1Chip represents one DYNAP-SE1 chip, including 4 cores.
+The constructor function doesn’t accept any input parameters.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Chip.chip_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chip_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Chip.chip_id" title="Link to this definition"></a></dt>
+<dd><p>chip ID, [0,4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Chip.cores">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cores</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Chip.cores" title="Link to this definition"></a></dt>
+<dd><p>4 cores of the chip.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Core" title="samna.dynapse1.Dynapse1Core">samna.dynapse1.Dynapse1Core</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Chip.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Chip" title="samna.dynapse1.Dynapse1Chip"><span class="pre">samna.dynapse1.Dynapse1Chip</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Chip.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Chip.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Chip" title="samna.dynapse1.Dynapse1Chip"><span class="pre">samna.dynapse1.Dynapse1Chip</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Chip.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Configuration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Configuration</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Configuration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Dynapse1Configuration represents one DYNAP-SE1 configuration , including 4 DYNAP-SE1 chips.
+The constructor function doesn’t accept any input parameters.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Configuration.chips">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chips</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Configuration.chips" title="Link to this definition"></a></dt>
+<dd><p>4 chips of the configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Chip" title="samna.dynapse1.Dynapse1Chip">samna.dynapse1.Dynapse1Chip</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Configuration.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><span class="pre">samna.dynapse1.Dynapse1Configuration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Configuration.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Configuration.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><span class="pre">samna.dynapse1.Dynapse1Configuration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Configuration.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Core">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Core</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Core" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Dynapse1Core represents one DYNAP-SE1 core, containing 256 DYNAP-SE1 neurons and the their shared parameters.
+The constructor function of Dynapse1Core doesn’t accept any input parameters.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Core.chip_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chip_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Core.chip_id" title="Link to this definition"></a></dt>
+<dd><p>chip ID, [0,4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Core.core_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">core_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Core.core_id" title="Link to this definition"></a></dt>
+<dd><p>core ID, [0,4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Core.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Core" title="samna.dynapse1.Dynapse1Core"><span class="pre">samna.dynapse1.Dynapse1Core</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Core.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Core.neurons">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neurons</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Core.neurons" title="Link to this definition"></a></dt>
+<dd><p>neuron ID, [0,256).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Core.parameter_group">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameter_group</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Core.parameter_group" title="Link to this definition"></a></dt>
+<dd><p>ParameterGroup including 25 parameters shared by a
+core of neurons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1ParameterGroup" title="samna.dynapse1.Dynapse1ParameterGroup">samna.dynapse1.Dynapse1ParameterGroup</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Core.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Core" title="samna.dynapse1.Dynapse1Core"><span class="pre">samna.dynapse1.Dynapse1Core</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Core.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Destination</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Contains information (target chip and cores) of one outgoing destination in SRAM.
+The constructor function of Dynapse1Destination doesn’t accept any input parameters.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.core_mask">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">core_mask</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.core_mask" title="Link to this definition"></a></dt>
+<dd><p>target core mask.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.dx">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dx</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.dx" title="Link to this definition"></a></dt>
+<dd><ol class="lowerroman simple" start="510">
+<li></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.dy">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dy</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.dy" title="Link to this definition"></a></dt>
+<dd><p>dy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Destination" title="samna.dynapse1.Dynapse1Destination"><span class="pre">samna.dynapse1.Dynapse1Destination</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.in_use">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">in_use</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.in_use" title="Link to this definition"></a></dt>
+<dd><p>if this destination is occupied or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.sx">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sx</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.sx" title="Link to this definition"></a></dt>
+<dd><p>sx.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.sy">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sy</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.sy" title="Link to this definition"></a></dt>
+<dd><p>sy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.target_chip_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target_chip_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.target_chip_id" title="Link to this definition"></a></dt>
+<dd><p>target post chip ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Destination" title="samna.dynapse1.Dynapse1Destination"><span class="pre">samna.dynapse1.Dynapse1Destination</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Destination.virtual_core_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">virtual_core_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Destination.virtual_core_id" title="Link to this definition"></a></dt>
+<dd><p>virtual core ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1FpgaSpikeGen</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Can be used to configure spike generators of DYNAP-SE1 as self-defined spike generators.
+You cannot create a
+Dynapse1FpgaSpikeGen by yourself in Python script, instead you can only get the
+Dynapse1FpgaSpikeGen from a Dynapse1Mode.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.get_base_addr">
+<span class="sig-name descname"><span class="pre">get_base_addr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.get_base_addr" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>base_addr.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.get_isi">
+<span class="sig-name descname"><span class="pre">get_isi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.get_isi" title="Link to this definition"></a></dt>
+<dd><p>Get inter-spike interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>isi, inter-spike interval.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.get_isi_multiplier">
+<span class="sig-name descname"><span class="pre">get_isi_multiplier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.get_isi_multiplier" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>isi_multiplier.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.get_module_type">
+<span class="sig-name descname"><span class="pre">get_module_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.dynapse1.FpgaModuleType" title="samna.dynapse1.FpgaModuleType"><span class="pre">samna.dynapse1.FpgaModuleType</span></a></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.get_module_type" title="Link to this definition"></a></dt>
+<dd><p>WRONG for now. Do NOT call it.. Need to bind FpgaModuleType to Python…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>FpgaModuleType: FpgaModuleType.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.get_repeat_mode">
+<span class="sig-name descname"><span class="pre">get_repeat_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.get_repeat_mode" title="Link to this definition"></a></dt>
+<dd><p>Check if the repeat mode is on or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>repeat.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.get_stim_count">
+<span class="sig-name descname"><span class="pre">get_stim_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.get_stim_count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>stim_count.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.is_running">
+<span class="sig-name descname"><span class="pre">is_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.is_running" title="Link to this definition"></a></dt>
+<dd><p>Check if the FPGA spike generator(s) are on.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>run_status: if the Dynapse1PoissonGen is on.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.preload_stimulus">
+<span class="sig-name descname"><span class="pre">preload_stimulus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="index.html#samna.dynapse1.FpgaSpikeEvent" title="samna.dynapse1.FpgaSpikeEvent"><span class="pre">samna.dynapse1.FpgaSpikeEvent</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.preload_stimulus" title="Link to this definition"></a></dt>
+<dd><p>Preload FpgaSpikeEvents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>events</strong> (<em>list</em><em>[</em><a class="reference internal" href="index.html#samna.dynapse1.FpgaSpikeEvent" title="samna.dynapse1.FpgaSpikeEvent"><em>samna.dynapse1.FpgaSpikeEvent</em></a><em>]</em>) – FpgaSpikeEvents to be loaded.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.set_base_addr">
+<span class="sig-name descname"><span class="pre">set_base_addr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.set_base_addr" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>base_addr</strong> (<em>int</em>) – base_addr.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.set_isi">
+<span class="sig-name descname"><span class="pre">set_isi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.set_isi" title="Link to this definition"></a></dt>
+<dd><p>Set inter-spike interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>isi</strong> (<em>int</em>) – isi, inter-spike interval.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.set_isi_multiplier">
+<span class="sig-name descname"><span class="pre">set_isi_multiplier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.set_isi_multiplier" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>multiplier</strong> (<em>int</em>) – isi base.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.set_repeat_mode">
+<span class="sig-name descname"><span class="pre">set_repeat_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.set_repeat_mode" title="Link to this definition"></a></dt>
+<dd><p>If repeat is true, the pre loaded stimulus will be played repeatedly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>repeat</strong> (<em>bool</em>) – repeat.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.set_stim_count">
+<span class="sig-name descname"><span class="pre">set_stim_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.set_stim_count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stim_count</strong> (<em>int</em>) – stim_count.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.set_variable_isi_mode">
+<span class="sig-name descname"><span class="pre">set_variable_isi_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.set_variable_isi_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enabled</strong> (<em>bool</em>) – enabled.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.start" title="Link to this definition"></a></dt>
+<dd><p>Start the FPGA spike generator(s). If it’s already on, this function will do nothing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1FpgaSpikeGen.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen.stop" title="Link to this definition"></a></dt>
+<dd><p>stop the FPGA spike generator(s). If it’s already off, this function will do nothing.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Interface">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Interface</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Interface" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Using DYNAP-SE1 interface it is possible to monitor neuron activity using an oscilloscope,
+use Tau2 mode, and reset board timestamp. You cannot create a Dynapse1Interface by yourself
+in Python script, instead you can only get the API from a Dynapse1Model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Interface.monitor_neuron">
+<span class="sig-name descname"><span class="pre">monitor_neuron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Interface" title="samna.dynapse1.Dynapse1Interface"><span class="pre">samna.dynapse1.Dynapse1Interface</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Interface.monitor_neuron" title="Link to this definition"></a></dt>
+<dd><p>Select the neuron you want to monitor using oscilloscope. You can only monitor one neuron per core.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chip_id</strong> (<em>int</em>) – chip_id, [0,4).</p></li>
+<li><p><strong>neuron_id</strong> (<em>int</em>) – neuron id in the chip, [0,1023).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Interface.reset_tau_1">
+<span class="sig-name descname"><span class="pre">reset_tau_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Interface" title="samna.dynapse1.Dynapse1Interface"><span class="pre">samna.dynapse1.Dynapse1Interface</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Interface.reset_tau_1" title="Link to this definition"></a></dt>
+<dd><p>Switch a specific core to use tau1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chip_id</strong> (<em>int</em>) – chip_id, [0,4).</p></li>
+<li><p><strong>core_id</strong> (<em>int</em>) – core_id, [0,4).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Interface.reset_tau_2">
+<span class="sig-name descname"><span class="pre">reset_tau_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Interface" title="samna.dynapse1.Dynapse1Interface"><span class="pre">samna.dynapse1.Dynapse1Interface</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Interface.reset_tau_2" title="Link to this definition"></a></dt>
+<dd><p>Switch a specific core to use tau2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chip_id</strong> (<em>int</em>) – chip_id, [0,4).</p></li>
+<li><p><strong>core_id</strong> (<em>int</em>) – core_id, [0,4).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Interface.reset_timestamp">
+<span class="sig-name descname"><span class="pre">reset_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Interface" title="samna.dynapse1.Dynapse1Interface"><span class="pre">samna.dynapse1.Dynapse1Interface</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Interface.reset_timestamp" title="Link to this definition"></a></dt>
+<dd><p>Reset the time counter on the FPGA. Called automatically in the
+init of Dynapse1Model every time you open the board.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Interface.set_tau_2">
+<span class="sig-name descname"><span class="pre">set_tau_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Interface" title="samna.dynapse1.Dynapse1Interface"><span class="pre">samna.dynapse1.Dynapse1Interface</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Interface.set_tau_2" title="Link to this definition"></a></dt>
+<dd><p>Switch a specific neuron to use tau2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chip_id</strong> (<em>int</em>) – chip_id, [0,4).</p></li>
+<li><p><strong>neuron_id</strong> (<em>int</em>) – neuron id in the chip, [0,1023).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Model</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The DYNAP-SE1 model is the standard interface between Python code and
+a connected DYNAP-SE1 chip. Via the model it is possible to connect
+its source and sink nodes to the filtering system and apply
+configurations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.apply_configuration">
+<span class="sig-name descname"><span class="pre">apply_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><span class="pre">samna.dynapse1.Dynapse1Configuration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.apply_configuration" title="Link to this definition"></a></dt>
+<dd><p>Apply new configuration to the DYNAP-SE1 board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_config</strong> (<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><em>Dynapse1Configuration</em></a>) – new configuration.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.apply_configuration_by_chip">
+<span class="sig-name descname"><span class="pre">apply_configuration_by_chip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><span class="pre">samna.dynapse1.Dynapse1Configuration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.apply_configuration_by_chip" title="Link to this definition"></a></dt>
+<dd><p>Apply new configuration only to a single chip of the DYNAP-SE1 board. NOTE: be
+careful if you use this method because this is specifically designed for the user
+who only does experiments in a single chip. If you have network components in other
+chips, please don NOT use this method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><em>Dynapse1Configuration</em></a>) – new configuration.</p></li>
+<li><p><strong>chip_id</strong> (<em>int</em>) – the chip you want to change, [0,4).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.apply_configuration_by_core">
+<span class="sig-name descname"><span class="pre">apply_configuration_by_core</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><span class="pre">samna.dynapse1.Dynapse1Configuration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.apply_configuration_by_core" title="Link to this definition"></a></dt>
+<dd><p>Apply new configuration only to a single core of the DYNAP-SE1 board. NOTE: be
+careful if you use this method because this is specifically designed for the user
+who only does experiments in a single core. If you have network components in other
+cores, please don NOT use this method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><em>Dynapse1Configuration</em></a>) – new configuration.</p></li>
+<li><p><strong>chip_id</strong> (<em>int</em>) – the chip you want to change.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.get_configuration">
+<span class="sig-name descname"><span class="pre">get_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><span class="pre">samna.dynapse1.Dynapse1Configuration</span></a></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.get_configuration" title="Link to this definition"></a></dt>
+<dd><p>Get the current configuration of the DYNAP-SE1 board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>samna.dynapse1.Dynapse1Configuration: current configuration of the board.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.get_dynapse1_api">
+<span class="sig-name descname"><span class="pre">get_dynapse1_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Interface" title="samna.dynapse1.Dynapse1Interface"><span class="pre">samna.dynapse1.Dynapse1Interface</span></a></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.get_dynapse1_api" title="Link to this definition"></a></dt>
+<dd><p>Get Dynapse1Interface which can do monitor_neuron, reset_timestamp, reset_tau_1, reset_tau_2, set_tau_2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>samna.dynapse1.Dynapse1Interface: Dynapse1Interface.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.get_fpga_spike_gen">
+<span class="sig-name descname"><span class="pre">get_fpga_spike_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1FpgaSpikeGen" title="samna.dynapse1.Dynapse1FpgaSpikeGen"><span class="pre">samna.dynapse1.Dynapse1FpgaSpikeGen</span></a></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.get_fpga_spike_gen" title="Link to this definition"></a></dt>
+<dd><p>Get Dynapse1FpgaSpikeGen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>samna.dynapse1.Dynapse1FpgaSpikeGen: Dynapse1FpgaSpikeGen.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.get_poisson_gen">
+<span class="sig-name descname"><span class="pre">get_poisson_gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.get_poisson_gen" title="Link to this definition"></a></dt>
+<dd><p>Get Dynapse1PoissonGen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>samna.dynapse1.Dynapse1PoissonGen: Dynapse1PoissonGen.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.get_source_node">
+<span class="sig-name descname"><span class="pre">get_source_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.DeviceSourceNode_dynapse1_dynapse1_event</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.get_source_node" title="Link to this definition"></a></dt>
+<dd><p>Get the source node in the Dynapse1Model which sends spikes out.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter</strong> (<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Parameter" title="samna.dynapse1.Dynapse1Parameter"><em>Dynapse1Parameter</em></a>) – Dynapse1Parameter object.</p></li>
+<li><p><strong>chip_id</strong> (<em>int</em>) – chip_id, [0,4).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>graph.nodes.BasicSourceNode: BasicSourceNode with the event type Dynapse1Event.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.update_parameter_group">
+<span class="sig-name descname"><span class="pre">update_parameter_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1ParameterGroup" title="samna.dynapse1.Dynapse1ParameterGroup"><span class="pre">samna.dynapse1.Dynapse1ParameterGroup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.update_parameter_group" title="Link to this definition"></a></dt>
+<dd><p>Update the parameters of a specific core.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter_group</strong> (<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1ParameterGroup" title="samna.dynapse1.Dynapse1ParameterGroup"><em>Dynapse1ParameterGroup</em></a>) – Dynapse1ParameterGroup object.</p></li>
+<li><p><strong>chip_id</strong> (<em>int</em>) – chip_id, [0,4).</p></li>
+<li><p><strong>core_id</strong> (<em>int</em>) – core_id, [0,4).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Model.update_single_parameter">
+<span class="sig-name descname"><span class="pre">update_single_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Parameter" title="samna.dynapse1.Dynapse1Parameter"><span class="pre">samna.dynapse1.Dynapse1Parameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Model.update_single_parameter" title="Link to this definition"></a></dt>
+<dd><p>Update a single parameter of a specific core.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter</strong> (<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Parameter" title="samna.dynapse1.Dynapse1Parameter"><em>Dynapse1Parameter</em></a>) – Dynapse1Parameter object.</p></li>
+<li><p><strong>chip_id</strong> (<em>int</em>) – chip_id, [0,4).</p></li>
+<li><p><strong>core_id</strong> (<em>int</em>) – core_id, [0,4).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Neuron">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Neuron</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Neuron" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Dynapse1Neuron represents a silicon neuron on chip, containing information of neuron
+location, incoming and outgoing connections. The constructor function of Dynapse1Destination
+doesn’t accept any input parameters.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Neuron.chip_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chip_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Neuron.chip_id" title="Link to this definition"></a></dt>
+<dd><p>chip_id, [0,4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Neuron.core_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">core_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Neuron.core_id" title="Link to this definition"></a></dt>
+<dd><p>core_id, [0,4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Neuron.destinations">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">destinations</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Neuron.destinations" title="Link to this definition"></a></dt>
+<dd><p>list of destinations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Destination" title="samna.dynapse1.Dynapse1Destination">samna.dynapse1.Dynapse1Destination</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Neuron.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Neuron" title="samna.dynapse1.Dynapse1Neuron"><span class="pre">samna.dynapse1.Dynapse1Neuron</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Neuron.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Neuron.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Neuron.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>neuron_id, [0,256).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Neuron.synapses">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">synapses</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Neuron.synapses" title="Link to this definition"></a></dt>
+<dd><p>list of synapses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Synapse" title="samna.dynapse1.Dynapse1Synapse">samna.dynapse1.Dynapse1Synapse</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Neuron.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Neuron" title="samna.dynapse1.Dynapse1Neuron"><span class="pre">samna.dynapse1.Dynapse1Neuron</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Neuron.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Parameter">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Parameter</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Parameter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Dynapse1Parameter represents one parameter.
+The constructor function accept 0 or 3 input parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>param_name</strong> (<em>string</em>) – parameter name.</p></li>
+<li><p><strong>coarse_value</strong> (<em>int</em>) – parameter coarse value, [0, 8).</p></li>
+<li><p><strong>fine_value</strong> (<em>int</em>) – parameter fine value, [0, 256).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Parameter.coarse_value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coarse_value</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Parameter.coarse_value" title="Link to this definition"></a></dt>
+<dd><p>coarse value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Parameter.fine_value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fine_value</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Parameter.fine_value" title="Link to this definition"></a></dt>
+<dd><p>fine value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Parameter.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Parameter" title="samna.dynapse1.Dynapse1Parameter"><span class="pre">samna.dynapse1.Dynapse1Parameter</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Parameter.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Parameter.param_name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">param_name</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Parameter.param_name" title="Link to this definition"></a></dt>
+<dd><p>parameter name, in one of the following values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;IF_THR_N&quot;</span><span class="p">,</span> <span class="s2">&quot;PS_WEIGHT_INH_S_N&quot;</span><span class="p">,</span> <span class="s2">&quot;PS_WEIGHT_INH_F_N&quot;</span><span class="p">,</span>
+<span class="s2">&quot;PS_WEIGHT_EXC_S_N&quot;</span><span class="p">,</span>
+<span class="s2">&quot;PS_WEIGHT_EXC_F_N&quot;</span><span class="p">,</span> <span class="s2">&quot;IF_RFR_N&quot;</span><span class="p">,</span> <span class="s2">&quot;IF_TAU1_N&quot;</span><span class="p">,</span> <span class="s2">&quot;IF_AHTAU_N&quot;</span><span class="p">,</span>
+<span class="s2">&quot;IF_CASC_N&quot;</span><span class="p">,</span> <span class="s2">&quot;IF_TAU2_N&quot;</span><span class="p">,</span> <span class="s2">&quot;IF_BUF_P&quot;</span><span class="p">,</span>
+<span class="s2">&quot;IF_AHTHR_N&quot;</span><span class="p">,</span> <span class="s2">&quot;NPDPIE_THR_S_P&quot;</span><span class="p">,</span> <span class="s2">&quot;NPDPIE_THR_F_P&quot;</span><span class="p">,</span> <span class="s2">&quot;NPDPII_THR_F_P&quot;</span><span class="p">,</span> <span class="s2">&quot;NPDPII_THR_S_P&quot;</span><span class="p">,</span>
+<span class="s2">&quot;IF_NMDA_N&quot;</span><span class="p">,</span> <span class="s2">&quot;IF_DC_P&quot;</span><span class="p">,</span> <span class="s2">&quot;IF_AHW_P&quot;</span><span class="p">,</span> <span class="s2">&quot;NPDPII_TAU_S_P&quot;</span><span class="p">,</span>
+<span class="s2">&quot;NPDPII_TAU_F_P&quot;</span><span class="p">,</span> <span class="s2">&quot;NPDPIE_TAU_F_P&quot;</span><span class="p">,</span>
+<span class="s2">&quot;NPDPIE_TAU_S_P&quot;</span><span class="p">,</span> <span class="s2">&quot;R2R_P&quot;</span><span class="p">,</span> <span class="s2">&quot;PULSE_PWLK_P&quot;</span><span class="o">.</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Parameter.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Parameter" title="samna.dynapse1.Dynapse1Parameter"><span class="pre">samna.dynapse1.Dynapse1Parameter</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Parameter.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Parameter.type">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Parameter.type" title="Link to this definition"></a></dt>
+<dd><p>“P” or “N.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1ParameterGroup">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1ParameterGroup</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1ParameterGroup" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Dynapse1ParameterGroup represents a group of 25 parameters shared by a
+core of neurons.
+The constructor function doesn’t accept any input parameters.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1ParameterGroup.chip_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chip_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1ParameterGroup.chip_id" title="Link to this definition"></a></dt>
+<dd><p>chip ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1ParameterGroup.core_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">core_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1ParameterGroup.core_id" title="Link to this definition"></a></dt>
+<dd><p>core ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1ParameterGroup.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1ParameterGroup" title="samna.dynapse1.Dynapse1ParameterGroup"><span class="pre">samna.dynapse1.Dynapse1ParameterGroup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1ParameterGroup.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1ParameterGroup.get_linear_parameter">
+<span class="sig-name descname"><span class="pre">get_linear_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1ParameterGroup" title="samna.dynapse1.Dynapse1ParameterGroup"><span class="pre">samna.dynapse1.Dynapse1ParameterGroup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1ParameterGroup.get_linear_parameter" title="Link to this definition"></a></dt>
+<dd><p>Get a Dynapse1Parameter from the parameter group given the parameter name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>param_name</strong> (<em>string</em>) – parameter name.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>linear_param_value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1ParameterGroup.get_parameter_by_name">
+<span class="sig-name descname"><span class="pre">get_parameter_by_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1ParameterGroup" title="samna.dynapse1.Dynapse1ParameterGroup"><span class="pre">samna.dynapse1.Dynapse1ParameterGroup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Parameter" title="samna.dynapse1.Dynapse1Parameter"><span class="pre">samna.dynapse1.Dynapse1Parameter</span></a></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1ParameterGroup.get_parameter_by_name" title="Link to this definition"></a></dt>
+<dd><p>Get a Dynapse1Parameter from the parameter group given the parameter name.
+:param string param_name: parameter name.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1ParameterGroup.param_map">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">param_map</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1ParameterGroup.param_map" title="Link to this definition"></a></dt>
+<dd><p>parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1ParameterGroup" title="samna.dynapse1.Dynapse1ParameterGroup">samna.dynapse1.Dynapse1ParameterGroup</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1ParameterGroup.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1ParameterGroup" title="samna.dynapse1.Dynapse1ParameterGroup"><span class="pre">samna.dynapse1.Dynapse1ParameterGroup</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1ParameterGroup.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1PoissonGen</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Can be used to configure spike generators of DYNAP-SE1 as Poisson spike generators.
+You cannot create a Dynapse1PoissonGen by yourself in Python script,
+instead you can only get the Dynapse1PoissonGen from a Dynapse1Model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen.get_module_type">
+<span class="sig-name descname"><span class="pre">get_module_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.dynapse1.FpgaModuleType" title="samna.dynapse1.FpgaModuleType"><span class="pre">samna.dynapse1.FpgaModuleType</span></a></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen.get_module_type" title="Link to this definition"></a></dt>
+<dd><p>WRONG for now. Do NOT call it.. Need to bind FpgaModuleType to Python…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>FpgaModuleType: FpgaModuleType.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen.get_poisson_rate_hz">
+<span class="sig-name descname"><span class="pre">get_poisson_rate_hz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen.get_poisson_rate_hz" title="Link to this definition"></a></dt>
+<dd><p>Get the firing rate of a specific Poisson generator.</p>
+<p>:param int neuron_id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rates: rate of a specific Poisson generator.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen.get_poisson_rates_hz">
+<span class="sig-name descname"><span class="pre">get_poisson_rates_hz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen.get_poisson_rates_hz" title="Link to this definition"></a></dt>
+<dd><p>Get the firing rates of 1024 Poisson generators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rates: rate of a specific Poisson generator.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[float].</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen.is_running">
+<span class="sig-name descname"><span class="pre">is_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen.is_running" title="Link to this definition"></a></dt>
+<dd><p>Check if the Poisson generator(s) are on.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>run_status: if the Dynapse1PoissonGen is on.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen.set_chip_id">
+<span class="sig-name descname"><span class="pre">set_chip_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen.set_chip_id" title="Link to this definition"></a></dt>
+<dd><p>Set the target chip where the stimulated neurons are located.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chip_id</strong> (<em>int</em>) – chip_id.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen.start" title="Link to this definition"></a></dt>
+<dd><p>Start the Poisson generator(s). If it’s already on, will do nothing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen.stop" title="Link to this definition"></a></dt>
+<dd><p>Stop the Poisson generator(s). If it’s already off, will do nothing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen.write_poisson_rate_hz">
+<span class="sig-name descname"><span class="pre">write_poisson_rate_hz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen.write_poisson_rate_hz" title="Link to this definition"></a></dt>
+<dd><p>Set the firing rate of a specific Poisson generator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>neuron_id</strong> (<em>int</em>) – neuron_id, [0,1023).</p></li>
+<li><p><strong>rate_hz</strong> (<em>float</em>) – rate_hz.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1PoissonGen.write_poisson_rates_hz">
+<span class="sig-name descname"><span class="pre">write_poisson_rates_hz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1PoissonGen" title="samna.dynapse1.Dynapse1PoissonGen"><span class="pre">samna.dynapse1.Dynapse1PoissonGen</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1PoissonGen.write_poisson_rates_hz" title="Link to this definition"></a></dt>
+<dd><p>Set the firing rates of 1024 Poisson generators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rates</strong> (<em>list</em><em>[</em><em>float</em><em>]</em>) – rate list.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1SynType">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1SynType</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1SynType" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>GABA_B</p>
+<p>GABA_A</p>
+<p>NMDA</p>
+<p>AMPA</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1SynType.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1SynType.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Synapse">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Synapse</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Synapse" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Contains information (ID of presynaptic neuron, synapse type) of one incoming connection, CAM.
+The constructor function of Dynapse1Synapse doesn’t accept any input parameters.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Synapse.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Synapse" title="samna.dynapse1.Dynapse1Synapse"><span class="pre">samna.dynapse1.Dynapse1Synapse</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Synapse.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Synapse.listen_core_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">listen_core_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Synapse.listen_core_id" title="Link to this definition"></a></dt>
+<dd><p>listened pre core ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Synapse.listen_neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">listen_neuron_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Synapse.listen_neuron_id" title="Link to this definition"></a></dt>
+<dd><p>listened pre neuron ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Synapse.syn_type">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">syn_type</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Synapse.syn_type" title="Link to this definition"></a></dt>
+<dd><p>4 types. Note that GABA_A and GABA_B is switched, to be corrected.</p>
+<p>AMPA: Fast excitatory synapse. Old FAST_EXC synapse in cortexcontrol.</p>
+<p>NMDA: Slow excitatory synapse. Old SLOW_EXC synapse in cortexcontrol.</p>
+<p>GABA_B: Slow inhibitory synapse. Old SLOW_INH synapse in cortexcontrol.</p>
+<p>GABA_A: Shunting inhibitory synapse. Old FAST_INH synapse in cortexcontrol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1SynType" title="samna.dynapse1.Dynapse1SynType">samna.dynapse1.Dynapse1SynType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Synapse.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Synapse" title="samna.dynapse1.Dynapse1Synapse"><span class="pre">samna.dynapse1.Dynapse1Synapse</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Synapse.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Trace">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Dynapse1Trace</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Trace" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that stores the exponentially-decaying spiking traces of a list of monitored neurons in <cite>trace_map</cite>.</p>
+<p>The <cite>Dynapse1Trace</cite> event has three public attributes:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">trace_map</span></span></dt>
+<dd><p>A map that records the current trace values of monitored neurons. The neuron ID tuple is in the order of (chip, core, neuron).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>map(tuple(int, int, int), double)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">timestamp</span></span></dt>
+<dd><p>The DYNAP-SE1 timestamp when the <cite>Dynapse1Trace</cite> event is generated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">trigger_neuron</span></span></dt>
+<dd><p>The trigger neuron that triggers the traces update and the generation of this <cite>Dynapse1Trace</cite>. The neuron ID tuple is in the order of (chip, core, neuron).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(int, int, int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>The <cite>Dynapse1Trace</cite> events are generated by some <cite>Dynapse1NeuronTrace</cite> filter node, which can be connected to sink nodes to stream the events out.
+The events from the sink node can be used to trigger downstream algorithms, such as weight updates (LTP and LTD) in STDP or instantaneous firing rates tracking.</p>
+<p>The constructor function of <cite>Dynapse1Trace</cite> accepts:
+- 0 input parameters,
+- 2 inputs (<cite>timestamp</cite>, <cite>trigger_neuron</cite>), or
+- 3 inputs (<cite>timestamp</cite>, <cite>trigger_neuron</cite>, <cite>trace_map</cite>).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Trace.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Trace" title="samna.dynapse1.Dynapse1Trace"><span class="pre">samna.dynapse1.Dynapse1Trace</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Trace.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Trace.timestamp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Trace.timestamp" title="Link to this definition"></a></dt>
+<dd><p>timestamp of the Dynapse1Trace event when it’s generated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Trace.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Dynapse1Trace" title="samna.dynapse1.Dynapse1Trace"><span class="pre">samna.dynapse1.Dynapse1Trace</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Trace.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Trace.trace_map">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">trace_map</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Trace.trace_map" title="Link to this definition"></a></dt>
+<dd><p>a map that records the trace values of monitored neurons at timestamp.
+Neuron ID is specified as tuple(chip,core,neuron).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>map(tuple(int,int,int), double)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Dynapse1Trace.trigger_neuron">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">trigger_neuron</span></span><a class="headerlink" href="index.html#samna.dynapse1.Dynapse1Trace.trigger_neuron" title="Link to this definition"></a></dt>
+<dd><p>tuple(chip,core,neuron).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple(int,int,int)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.FpgaModuleType">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">FpgaModuleType</span></span><a class="headerlink" href="index.html#samna.dynapse1.FpgaModuleType" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>PoissonGen</p>
+<p>SpikeGen</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.FpgaModuleType.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="index.html#samna.dynapse1.FpgaModuleType.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.FpgaSpikeEvent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">FpgaSpikeEvent</span></span><a class="headerlink" href="index.html#samna.dynapse1.FpgaSpikeEvent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The constructor function of FpgaSpikeEvent accepts 0 or 4 input parameters as the following.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>core_mask</strong> (<em>int</em>) – 4-bits binary core mask specifying the target cores. e.g. 15 (i.e. 1111)
+means to target all 4 cores off the target chip.</p></li>
+<li><p><strong>neuron_id</strong> (<em>int</em>) – target neuron id.</p></li>
+<li><p><strong>target_chip</strong> (<em>int</em>) – target chip.</p></li>
+<li><p><strong>isi</strong> (<em>int</em>) – inter spike interval.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An FpgaSpikeEvent.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>FpgaSpikeEvent.</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.FpgaSpikeEvent.core_mask">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">core_mask</span></span><a class="headerlink" href="index.html#samna.dynapse1.FpgaSpikeEvent.core_mask" title="Link to this definition"></a></dt>
+<dd><p>core mask. 4-bits binary core mask specifying the target cores. e.g. 15 (i.e. 1111)
+means to target all 4 cores off the target chip.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.FpgaSpikeEvent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.FpgaSpikeEvent" title="samna.dynapse1.FpgaSpikeEvent"><span class="pre">samna.dynapse1.FpgaSpikeEvent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.FpgaSpikeEvent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.FpgaSpikeEvent.isi">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isi</span></span><a class="headerlink" href="index.html#samna.dynapse1.FpgaSpikeEvent.isi" title="Link to this definition"></a></dt>
+<dd><p>inter spike interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.FpgaSpikeEvent.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.FpgaSpikeEvent.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>target neuron ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.FpgaSpikeEvent.target_chip">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target_chip</span></span><a class="headerlink" href="index.html#samna.dynapse1.FpgaSpikeEvent.target_chip" title="Link to this definition"></a></dt>
+<dd><p>target chip ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.FpgaSpikeEvent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.FpgaSpikeEvent" title="samna.dynapse1.FpgaSpikeEvent"><span class="pre">samna.dynapse1.FpgaSpikeEvent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.FpgaSpikeEvent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.Spike">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">Spike</span></span><a class="headerlink" href="index.html#samna.dynapse1.Spike" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Spike of silicon DYNAP-SE1 neuron. The constructor function of Spike doesn’t accept any input parameters.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Spike.chip_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">chip_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Spike.chip_id" title="Link to this definition"></a></dt>
+<dd><p>chip_id, [0,4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Spike.core_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">core_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Spike.core_id" title="Link to this definition"></a></dt>
+<dd><p>core_id, [0,4).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Spike.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Spike" title="samna.dynapse1.Spike"><span class="pre">samna.dynapse1.Spike</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Spike.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Spike.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.dynapse1.Spike.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>neuron_id, [0,256).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.Spike.timestamp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="index.html#samna.dynapse1.Spike.timestamp" title="Link to this definition"></a></dt>
+<dd><p>timestamp, in microsecond, 1e-6 second.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.Spike.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.Spike" title="samna.dynapse1.Spike"><span class="pre">samna.dynapse1.Spike</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.Spike.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.dynapse1.TimestampWrapEvent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.dynapse1.</span></span><span class="sig-name descname"><span class="pre">TimestampWrapEvent</span></span><a class="headerlink" href="index.html#samna.dynapse1.TimestampWrapEvent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>TimestampWrapEvent is generated when the timestamp of DYNAP-SE1 is wrapped around.
+The constructor function of TimestampWrapEvent doesn’t accept any input parameters.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.TimestampWrapEvent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.TimestampWrapEvent" title="samna.dynapse1.TimestampWrapEvent"><span class="pre">samna.dynapse1.TimestampWrapEvent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.TimestampWrapEvent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.dynapse1.TimestampWrapEvent.timestamp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="index.html#samna.dynapse1.TimestampWrapEvent.timestamp" title="Link to this definition"></a></dt>
+<dd><p>timestamp, in microsecond, 1e-6 second.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.dynapse1.TimestampWrapEvent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.dynapse1.TimestampWrapEvent" title="samna.dynapse1.TimestampWrapEvent"><span class="pre">samna.dynapse1.TimestampWrapEvent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.dynapse1.TimestampWrapEvent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../device/index.html" class="btn btn-neutral float-left" title="samna.device" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nodes/index.html" class="btn btn-neutral float-right" title="samna.dynapse1.nodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

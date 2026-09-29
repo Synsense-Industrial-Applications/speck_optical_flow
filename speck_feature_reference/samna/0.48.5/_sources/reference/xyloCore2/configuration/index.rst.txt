@@ -1,0 +1,19 @@
+#############################
+samna.xyloCore2.configuration
+#############################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.xyloCore2.configuration
+   :members:
+   :show-inheritance:
+

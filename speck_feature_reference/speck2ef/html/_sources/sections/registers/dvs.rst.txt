@@ -1,0 +1,15 @@
+.. _dvs-registers:
+
+DVS Register Description
+========================
+
+.. only:: html
+
+    Detailed Register Description
+    *****************************
+
+    .. include:: dvs-descriptions.rst
+
+.. only:: pdf
+
+    .. include:: dvs-descriptions.rst

@@ -1,0 +1,145 @@
+.. _scan-chain-interface:
+
+Scan Chain Interface
+====================
+
+As described in :ref:`scanchain-overview`, the Speck2e Scan Chain (SC) interface
+includes internal signals:
+
++--------------+---------------------------------------+--------------+
+| Signal       | Description                           | External pin |
++--------------+---------------------------------------+--------------+
+| SCAN_HS_EN   | Scan chain control (handshake) enable | ---          |
++--------------+---------------------------------------+--------------+
+| SCAN_DATA_EN | Scan chain data enable                | ---          |
++--------------+---------------------------------------+--------------+
+| SCAN_CLK     | Scan chain control and data clock     | TCK          |
++--------------+---------------------------------------+--------------+
+| SCAN_IN      | Scan chain control and data in        | TDI + FF     |
++--------------+---------------------------------------+--------------+
+| SCAN_OUT     | Scan chain control and data out       | TDO          |
++--------------+---------------------------------------+--------------+
+
+.. warning::
+    The `IO4_TDI` pin is connected to the internal `SCAN_IN` signal via a Filp-Flop to force sampling of the data at `IO4_TDI` always on the rising edge.
+    Please refer to section below :ref:`scan-chain-timing` for the correct timing of the TDI/TDO data.
+
+
+Scan Chain Domain Enable
+************************
+
+In order to operate the scan chain, a SC sub-domain has to be activated first.
+This is done through a register setting. Refer to section :ref:`scan-chain-domains`
+for a list of registers associated to each sub-domain.
+
+.. warning::
+    Only a **single** SC sub-domain can be activated at each moment, otherwise
+    the SC bit stream will be injected to all active sub-domains, creating
+    a conflict and invalid output data.
+
+Example
+-------
+
+.. To activate the Layer Core 3 sub-domain relative to the Neuron memory interface,
+.. the register bit :ref:`NSEN<rbits-NSEN>` for Layer Core 3 (:ref:`register address<reg-NEURON13>`: '0011001101') has to be set to '1'.
+
+.. _scan-chain-timing:
+
+Scan Chain Interface Timing (for IC design use only)
+****************************************************
+
+After setting the SC enable bit for the selected sub-domain, the SC interface
+can be activated by setting pin *SCAN_HS_EN* to '1' and subsequently *SCAN_DATA_EN*
+to '1'.
+| In Speck2e this is done via JTAG commands (see :ref:`jtag-commands`).
+
+At this point, the SC of the sub-domain is ready to accept and output a bit stream.
+
+Both input and output data is sampled at the internal *SCAN_CLK* **falling edge**. When clocking the
+data in via JTAG, the data is sent/read via *TDI/TDO* pins at which the data is sampled at the **rising edge** of *JTAG_CLK*.
+
+.. warning:: In order to guarantee compatibility with the standard JTAG protocol, every bitstream should start with an extra '0' bit and the first output bit sampled on *TDO* should be ignored. For example, for a scan chain length of **5101** bits, the user should clock in **5102** bits of which the first is a '0' and the first bit received on *TDO* is ignored.
+
+.. graphviz::
+    :caption: SC bit stream clocking in/out example
+
+    digraph D {
+        rankdir=LR;
+
+        struct_in3 [shape=plaintext, label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+                <TR><TD>SCAN_IN</TD></TR><TR><TD> </TD></TR></TABLE>>];
+        subgraph cluster_sc3 {
+            graph [label = "Internal data after 10 clock cycles"];
+            sc3 [shape=plaintext, label=<
+                <TABLE BORDER="0" CELLBORDER="1" CELLPADDING="2" CELLSPACING="0"><TR>
+                <TD>1</TD><TD>1</TD><TD>0</TD><TD>0</TD><TD>1</TD><TD>1</TD><TD>0</TD><TD>0</TD><TD>1</TD><TD>1</TD></TR>
+                </TABLE>
+            >, fontcolor="blue"];
+        };
+        struct_out3 [shape=plaintext, label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+        <TR><TD>SCAN_OUT</TD></TR><TR><TD><FONT COLOR="red">1010100101</FONT></TD></TR></TABLE>>];
+        struct_in3 -> sc3 -> struct_out3 ;
+
+        struct_in2 [shape=plaintext, label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+                <TR><TD>SCAN_IN</TD></TR><TR><TD><FONT COLOR="blue">110011</FONT></TD></TR></TABLE>>];
+        subgraph cluster_sc2 {
+            label = " Internal data after 4 clock cycles "
+            sc2 [shape=plaintext, label=<
+                <TABLE BORDER="0" CELLBORDER="1" CELLPADDING="2" CELLSPACING="0"><TR>
+                <TD><FONT COLOR="blue">0</FONT></TD>
+                <TD><FONT COLOR="blue">0</FONT></TD>
+                <TD><FONT COLOR="blue">1</FONT></TD>
+                <TD><FONT COLOR="blue">1</FONT></TD>
+                <TD><FONT COLOR="red">1</FONT></TD>
+                <TD><FONT COLOR="red">0</FONT></TD>
+                <TD><FONT COLOR="red">1</FONT></TD>
+                <TD><FONT COLOR="red">0</FONT></TD>
+                <TD><FONT COLOR="red">1</FONT></TD>
+                <TD><FONT COLOR="red">0</FONT></TD>
+                </TR></TABLE>
+            >];
+        };
+        struct_out2 [shape=plaintext, label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+        <TR><TD>SCAN_OUT</TD></TR><TR><TD><FONT COLOR="red">0101</FONT></TD></TR></TABLE>>];
+        struct_in2 -> sc2 -> struct_out2 ;
+
+        struct_in1 [shape=plaintext, label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+                <TR><TD>SCAN_IN</TD></TR><TR><TD><FONT COLOR="blue">1100110011</FONT></TD></TR></TABLE>>];
+        subgraph cluster_sc1 {
+            label = "    Internal data at SC activation   "
+            sc1 [shape=plaintext, label=<
+                <TABLE BORDER="0" CELLBORDER="1" CELLPADDING="2" CELLSPACING="0"><TR>
+                <TD>1</TD><TD>0</TD><TD>1</TD><TD>0</TD><TD>1</TD><TD>0</TD><TD>0</TD><TD>1</TD><TD>0</TD><TD>1</TD>
+                </TR></TABLE>
+            >, fontcolor="red"];
+        };
+        struct_out1 [shape=plaintext, label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+        <TR><TD>SCAN_OUT</TD></TR><TR><TD> </TD></TR></TABLE>>];
+        struct_in1 -> sc1 -> struct_out1 ;
+    }
+
+
+The following diagram shows the SC operation for a sample bit stream of 10 bits, where
+bit #9 is the MSB and bit #0 is the LSB of the bitstring. The input bit string
+will displace the internal bit string (of the same length), so that the first output bit
+on *SCAN_OUT* will correspond to the first bit sent at the input (O#0).
+
+.. warning:: For IC Design use only: not relevant to design external chip interfaces.
+
+.. wavedrom::
+
+   {
+   "signal": [
+      { "name": "SCAN_CLK",    "wave": "l..p..|..l." },
+      { "name": "SCAN_HS_EN","wave":   "01....|...0" },
+      { "name": "SCAN_DATA_EN","wave": "0.1...|..0." },
+      { "name": "SCAN_IN","wave": "0..===|==0.", "data": ["IN#9","IN#8","","IN#1","IN#0"] },
+      { "name": "SCAN_OUT", "wave": "0..===|==0.", "data": ["O#0","O#1","","O#8","O#9"] }
+   ],
+   "head":{ "text":"Scan Chain timing diagram.", "tick":"0" }
+   }
+
+After the end of the bit stream clocking, the SC can be deactivated to resume chip operation
+(see :ref:`scan-chain-mode1`). In this case, *SCAN_DATA_EN* **must** be set to '0' before *SCAN_HS_EN*.
+A delay >10 ns should be introduced in between disabling *HS* and *DATA* SC enable signals
+to allow for control signals to propagate and stabilize.

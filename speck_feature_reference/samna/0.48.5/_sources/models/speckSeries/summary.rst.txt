@@ -1,0 +1,20 @@
+############
+Speck Series
+############
+
+**Speck** is a comprehensive, multicore spiking neural network processing chip which is able to support large-scale 
+spiking convolutional neural network (SCNN) with an fully asynchronous chip architecture. 
+Furthermore, it integrates the state-of-art dynamic vision sensor (DVS) that enables fully event-driven based, real-time, 
+highly integrated solution for varies dynamic visual scene. For classical applications, 
+speck can provide intelligence upon the scene at only mWs with a response latency in few ms.
+
+**********************
+Supported Speck Models
+**********************
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   speck2f
+   speck2e

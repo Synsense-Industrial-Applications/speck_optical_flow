@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.1. Configuration Register Reference Tables &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.2. Register Addressing" href="addressing.html" />
+    <link rel="prev" title="7. Registers" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.1. Configuration Register Reference Tables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#input-interface">7.1.1. Input Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#convolutional-layers">7.1.2. Convolutional Layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dvs-post-processing">7.1.3. DVS Post Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dvs-filter">7.1.4. DVS Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#router">7.1.5. Router</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#readout-layer">7.1.6. Readout Layer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.1. </span>Configuration Register Reference Tables</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/reftables.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="configuration-register-reference-tables">
+<span id="reg-ref-tables"></span><h1><span class="section-number">7.1. </span>Configuration Register Reference Tables<a class="headerlink" href="#configuration-register-reference-tables" title="Permalink to this heading"></a></h1>
+<section id="input-interface">
+<h2><span class="section-number">7.1.1. </span>Input Interface<a class="headerlink" href="#input-interface" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Speck2e Input Interface Register Map</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td><p>Name</p></td>
+<td><p>Bit 7</p></td>
+<td><p>Bit 6</p></td>
+<td><p>Bit 5</p></td>
+<td><p>Bit 4</p></td>
+<td><p>Bit 3</p></td>
+<td><p>Bit 2</p></td>
+<td><p>Bit 1</p></td>
+<td><p>Bit 0</p></td>
+<td><p>Reset Value</p></td>
+</tr>
+<tr class="row-even"><td><p>0x000</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0</span></a></p></td>
+<td><p>PR</p></td>
+<td><p>SR</p></td>
+<td><p>PRDVS</p></td>
+<td><p>SRDVS</p></td>
+<td><p>—</p></td>
+<td><p>CGUCE</p></td>
+<td><p>CGUIS</p></td>
+<td><p>CGUOVE</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x001</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint1"><span class="std std-ref">ININT1</span></a></p></td>
+<td><p>BLEN7</p></td>
+<td><p>BLEN6</p></td>
+<td><p>BLEN5</p></td>
+<td><p>BLEN4</p></td>
+<td><p>BLEN3</p></td>
+<td><p>BLEN2</p></td>
+<td><p>BLEN1</p></td>
+<td><p>BLEN0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x002</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint2"><span class="std std-ref">ININT2</span></a></p></td>
+<td><p>BLEN15</p></td>
+<td><p>BLEN14</p></td>
+<td><p>BLEN13</p></td>
+<td><p>BLEN12</p></td>
+<td><p>BLEN11</p></td>
+<td><p>BLEN10</p></td>
+<td><p>BLEN9</p></td>
+<td><p>BLEN8</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x003</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint3"><span class="std std-ref">ININT3</span></a></p></td>
+<td><p>BLEN23</p></td>
+<td><p>BLEN22</p></td>
+<td><p>BLEN21</p></td>
+<td><p>BLEN20</p></td>
+<td><p>BLEN19</p></td>
+<td><p>BLEN18</p></td>
+<td><p>BLEN17</p></td>
+<td><p>BLEN16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x004</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint4"><span class="std std-ref">ININT4</span></a></p></td>
+<td><p>BADDR7</p></td>
+<td><p>BADDR6</p></td>
+<td><p>BADDR5</p></td>
+<td><p>BADDR4</p></td>
+<td><p>BADDR3</p></td>
+<td><p>BADDR2</p></td>
+<td><p>BADDR1</p></td>
+<td><p>BADDR0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x005</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint5"><span class="std std-ref">ININT5</span></a></p></td>
+<td><p>BADDR15</p></td>
+<td><p>BADDR14</p></td>
+<td><p>BADDR13</p></td>
+<td><p>BADDR12</p></td>
+<td><p>BADDR11</p></td>
+<td><p>BADDR10</p></td>
+<td><p>BADDR9</p></td>
+<td><p>BADDR8</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x006</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint6"><span class="std std-ref">ININT6</span></a></p></td>
+<td><p>BADDR23</p></td>
+<td><p>BADDR22</p></td>
+<td><p>BADDR21</p></td>
+<td><p>BADDR20</p></td>
+<td><p>BADDR19</p></td>
+<td><p>BADDR18</p></td>
+<td><p>BADDR17</p></td>
+<td><p>BADDR16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x007</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint7"><span class="std std-ref">ININT7</span></a></p></td>
+<td><p>—</p></td>
+<td><p>IOSEL6</p></td>
+<td><p>IOSEL5</p></td>
+<td><p>IOSEL4</p></td>
+<td><p>IOSEL3</p></td>
+<td><p>IOSEL2</p></td>
+<td><p>IOSEL1</p></td>
+<td><p>IOSEL0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x008</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8</span></a></p></td>
+<td><p>—</p></td>
+<td><p>AERCM</p></td>
+<td><p>P2SM</p></td>
+<td><p>JTGM</p></td>
+<td><p>—</p></td>
+<td><p>P2SSEL</p></td>
+<td><p>P2S2CH</p></td>
+<td><p>P2SDL</p></td>
+<td><p>0x80</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x009</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint9"><span class="std std-ref">ININT9</span></a></p></td>
+<td><p>—</p></td>
+<td><p>SPIBRG</p></td>
+<td><p>IOPE5</p></td>
+<td><p>IOPE4</p></td>
+<td><p>IOPE3</p></td>
+<td><p>IOPE2</p></td>
+<td><p>IOPE1</p></td>
+<td><p>IOPE0</p></td>
+<td><p>0x1F</p></td>
+</tr>
+<tr class="row-even"><td><p>0x00A</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint10"><span class="std std-ref">ININT10</span></a></p></td>
+<td><p>SLWCLK7</p></td>
+<td><p>SLWCLK6</p></td>
+<td><p>SLWCLK5</p></td>
+<td><p>SLWCLK4</p></td>
+<td><p>SLWCLK3</p></td>
+<td><p>SLWCLK2</p></td>
+<td><p>SLWCLK1</p></td>
+<td><p>SLWCLK0</p></td>
+<td><p>0xC0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x00B to 0x021</p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint11"><span class="std std-ref">ININT11</span></a></p></td>
+<td><p>RGBx7</p></td>
+<td><p>RGBx6</p></td>
+<td><p>RGBx5</p></td>
+<td><p>RGBx4</p></td>
+<td><p>RGBx3</p></td>
+<td><p>RGBx2</p></td>
+<td><p>RGBx1</p></td>
+<td><p>RGBx0</p></td>
+<td><p>0x00</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="convolutional-layers">
+<h2><span class="section-number">7.1.2. </span>Convolutional Layers<a class="headerlink" href="#convolutional-layers" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>LID = 4-bit Layer ID, ‘0000’ to ‘1000’.</p>
+</div>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Speck2e Convolutional Layer Register Map</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td><p>Name</p></td>
+<td><p>Bit 7</p></td>
+<td><p>Bit 6</p></td>
+<td><p>Bit 5</p></td>
+<td><p>Bit 4</p></td>
+<td><p>Bit 3</p></td>
+<td><p>Bit 2</p></td>
+<td><p>Bit 1</p></td>
+<td><p>Bit 0</p></td>
+<td><p>Reset Value</p></td>
+</tr>
+<tr class="row-even"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x00</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv0"><span class="std std-ref">CONV0</span></a></p></td>
+<td><p>SCX1</p></td>
+<td><p>SCX0</p></td>
+<td><p>ZPY2</p></td>
+<td><p>ZPY1</p></td>
+<td><p>ZPY0</p></td>
+<td><p>ZPX2</p></td>
+<td><p>ZPX1</p></td>
+<td><p>ZPX0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x01</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv1"><span class="std std-ref">CONV1</span></a></p></td>
+<td><p>DINT0</p></td>
+<td><p>DEN</p></td>
+<td><p>KSZ3</p></td>
+<td><p>KSZ2</p></td>
+<td><p>KSZ1</p></td>
+<td><p>KSZ0</p></td>
+<td><p>SCY1</p></td>
+<td><p>SCY0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x02</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv2"><span class="std std-ref">CONV2</span></a></p></td>
+<td><p>IFN7</p></td>
+<td><p>IFN6</p></td>
+<td><p>IFN5</p></td>
+<td><p>IFN4</p></td>
+<td><p>IFN3</p></td>
+<td><p>IFN2</p></td>
+<td><p>IFN1</p></td>
+<td><p>IFN0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x03</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv3"><span class="std std-ref">CONV3</span></a></p></td>
+<td><p>OFSX5</p></td>
+<td><p>OFSX4</p></td>
+<td><p>OFSX3</p></td>
+<td><p>OFSX2</p></td>
+<td><p>OFSX1</p></td>
+<td><p>OFSX0</p></td>
+<td><p>IFN9</p></td>
+<td><p>IFN8</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x04</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv4"><span class="std std-ref">CONV4</span></a></p></td>
+<td><p>OFN1</p></td>
+<td><p>OFN0</p></td>
+<td><p>OFSY5</p></td>
+<td><p>OFSY4</p></td>
+<td><p>OFSY3</p></td>
+<td><p>OFSY2</p></td>
+<td><p>OFSY1</p></td>
+<td><p>OFSY0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x05</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv5"><span class="std std-ref">CONV5</span></a></p></td>
+<td><p>OFN9</p></td>
+<td><p>OFN8</p></td>
+<td><p>OFN7</p></td>
+<td><p>OFN6</p></td>
+<td><p>OFN5</p></td>
+<td><p>OFN4</p></td>
+<td><p>OFN3</p></td>
+<td><p>OFN2</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x06</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv6"><span class="std std-ref">CONV6</span></a></p></td>
+<td><p>DINT2</p></td>
+<td><p>DINT2</p></td>
+<td><p>SKP5</p></td>
+<td><p>SKP4</p></td>
+<td><p>SKP3</p></td>
+<td><p>SKP2</p></td>
+<td><p>SKP1</p></td>
+<td><p>SKP0</p></td>
+<td><p>0x20</p></td>
+</tr>
+<tr class="row-odd"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x07</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv7"><span class="std std-ref">CONV7</span></a></p></td>
+<td><p>SKR1</p></td>
+<td><p>SKR0</p></td>
+<td><p>SKT5</p></td>
+<td><p>SKT4</p></td>
+<td><p>SKT3</p></td>
+<td><p>SKT2</p></td>
+<td><p>SKT1</p></td>
+<td><p>SKT0</p></td>
+<td><p>0x50</p></td>
+</tr>
+<tr class="row-even"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x08</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv8"><span class="std std-ref">CONV8</span></a></p></td>
+<td><p>BEN</p></td>
+<td><p>LKEN</p></td>
+<td><p>SLT5</p></td>
+<td><p>SLT4</p></td>
+<td><p>SLT3</p></td>
+<td><p>SLT2</p></td>
+<td><p>SLT1</p></td>
+<td><p>SLT0</p></td>
+<td><p>0x20</p></td>
+</tr>
+<tr class="row-odd"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x09</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv9"><span class="std std-ref">CONV9</span></a></p></td>
+<td><p>SLP5</p></td>
+<td><p>SLP4</p></td>
+<td><p>SLP3</p></td>
+<td><p>SLP2</p></td>
+<td><p>SLP1</p></td>
+<td><p>SLP0</p></td>
+<td><p>SLR1</p></td>
+<td><p>SLR0</p></td>
+<td><p>0x40</p></td>
+</tr>
+<tr class="row-even"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x0A</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv10"><span class="std std-ref">CONV10</span></a></p></td>
+<td><p>THRH7</p></td>
+<td><p>THRH6</p></td>
+<td><p>THRH5</p></td>
+<td><p>THRH4</p></td>
+<td><p>THRH3</p></td>
+<td><p>THRH2</p></td>
+<td><p>THRH1</p></td>
+<td><p>THRH0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x0B</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv11"><span class="std std-ref">CONV11</span></a></p></td>
+<td><p>THRH15</p></td>
+<td><p>THRH14</p></td>
+<td><p>THRH13</p></td>
+<td><p>THRH12</p></td>
+<td><p>THRH11</p></td>
+<td><p>THRH10</p></td>
+<td><p>THRH9</p></td>
+<td><p>THRH8</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x0C</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv12"><span class="std std-ref">CONV12</span></a></p></td>
+<td><p>THRL7</p></td>
+<td><p>THRL6</p></td>
+<td><p>THRL5</p></td>
+<td><p>THRL4</p></td>
+<td><p>THRL3</p></td>
+<td><p>THRL2</p></td>
+<td><p>THRL1</p></td>
+<td><p>THRL0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x0D</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv13"><span class="std std-ref">CONV13</span></a></p></td>
+<td><p>THRL15</p></td>
+<td><p>THRL14</p></td>
+<td><p>THRL13</p></td>
+<td><p>THRL12</p></td>
+<td><p>THRL11</p></td>
+<td><p>THRL10</p></td>
+<td><p>THRL9</p></td>
+<td><p>THRL8</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x0E</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv14"><span class="std std-ref">CONV14</span></a></p></td>
+<td><p>—</p></td>
+<td><p>SNT5</p></td>
+<td><p>SNT4</p></td>
+<td><p>SNT3</p></td>
+<td><p>SNT2</p></td>
+<td><p>SNT1</p></td>
+<td><p>SNT0</p></td>
+<td><p>NRZ</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x0F</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv15"><span class="std std-ref">CONV15</span></a></p></td>
+<td><p>SNP5</p></td>
+<td><p>SNP4</p></td>
+<td><p>SNP3</p></td>
+<td><p>SNP2</p></td>
+<td><p>SNP1</p></td>
+<td><p>SNP0</p></td>
+<td><p>SNR1</p></td>
+<td><p>SNR0</p></td>
+<td><p>0x41</p></td>
+</tr>
+<tr class="row-even"><td><p>((LID + 0x6) &lt;&lt; 8) + 0x10</p></td>
+<td><p><a class="reference internal" href="layer-descriptions.html#reg-conv16"><span class="std std-ref">CONV16</span></a></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SKBT1</p></td>
+<td><p>SKBT0</p></td>
+<td><p>SLBT1</p></td>
+<td><p>SLBT0</p></td>
+<td><p>SNBT1</p></td>
+<td><p>SNBT0</p></td>
+<td><p>0x00</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dvs-post-processing">
+<h2><span class="section-number">7.1.3. </span>DVS Post Processing<a class="headerlink" href="#dvs-post-processing" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Speck2e DVS Post Processing Register Map</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td><p>Name</p></td>
+<td><p>Bit 7</p></td>
+<td><p>Bit 6</p></td>
+<td><p>Bit 5</p></td>
+<td><p>Bit 4</p></td>
+<td><p>Bit 3</p></td>
+<td><p>Bit 2</p></td>
+<td><p>Bit 1</p></td>
+<td><p>Bit 0</p></td>
+<td><p>Reset Value</p></td>
+</tr>
+<tr class="row-even"><td><p>0x100</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs0"><span class="std std-ref">DVS0</span></a></p></td>
+<td><p>DMOEN</p></td>
+<td><p>SMOEN</p></td>
+<td><p>DSD2EN</p></td>
+<td><p>DSD1EN</p></td>
+<td><p>DMI</p></td>
+<td><p>IM2</p></td>
+<td><p>IM1</p></td>
+<td><p>IM0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x101</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs1"><span class="std std-ref">DVS1</span></a></p></td>
+<td><p>COX6</p></td>
+<td><p>COX5</p></td>
+<td><p>COX4</p></td>
+<td><p>COX3</p></td>
+<td><p>COX2</p></td>
+<td><p>COX1</p></td>
+<td><p>COX0</p></td>
+<td><p>NA</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x102</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs2"><span class="std std-ref">DVS2</span></a></p></td>
+<td><p>COY6</p></td>
+<td><p>COY5</p></td>
+<td><p>COY4</p></td>
+<td><p>COY3</p></td>
+<td><p>COY2</p></td>
+<td><p>COY1</p></td>
+<td><p>COY0</p></td>
+<td><p>NA</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x103</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs3"><span class="std std-ref">DVS3</span></a></p></td>
+<td><p>CMX6</p></td>
+<td><p>CMX5</p></td>
+<td><p>CMX4</p></td>
+<td><p>CMX3</p></td>
+<td><p>CMX2</p></td>
+<td><p>CMX1</p></td>
+<td><p>CMX0</p></td>
+<td><p>NA</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x104</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs4"><span class="std std-ref">DVS4</span></a></p></td>
+<td><p>CMY6</p></td>
+<td><p>CMY5</p></td>
+<td><p>CMY4</p></td>
+<td><p>CMY3</p></td>
+<td><p>CMY2</p></td>
+<td><p>CMY1</p></td>
+<td><p>CMY0</p></td>
+<td><p>—</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x105</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs5"><span class="std std-ref">DVS5</span></a></p></td>
+<td><p>DSD23</p></td>
+<td><p>DSD22</p></td>
+<td><p>DSD21</p></td>
+<td><p>DSD20</p></td>
+<td><p>DSD13</p></td>
+<td><p>DSD12</p></td>
+<td><p>DSD11</p></td>
+<td><p>DSD10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x106</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs6"><span class="std std-ref">DVS6</span></a></p></td>
+<td><p>XME</p></td>
+<td><p>YME</p></td>
+<td><p>SSY1</p></td>
+<td><p>SSY0</p></td>
+<td><p>SSX1</p></td>
+<td><p>SSX0</p></td>
+<td><p>SPSS</p></td>
+<td><p>—</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x107</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs7"><span class="std std-ref">DVS7</span></a></p></td>
+<td><p>SDL7</p></td>
+<td><p>SDL6</p></td>
+<td><p>SDL5</p></td>
+<td><p>SDL</p></td>
+<td><p>SDL3</p></td>
+<td><p>SDL2</p></td>
+<td><p>SDL1</p></td>
+<td><p>SDL0</p></td>
+<td><p>0x40</p></td>
+</tr>
+<tr class="row-even"><td><p>0x108</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs8"><span class="std std-ref">DVS8</span></a></p></td>
+<td><p>SP13</p></td>
+<td><p>SP12</p></td>
+<td><p>SP11</p></td>
+<td><p>SP10</p></td>
+<td><p>SP03</p></td>
+<td><p>SP02</p></td>
+<td><p>SP01</p></td>
+<td><p>SP00</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x109</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs9"><span class="std std-ref">DVS9</span></a></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SENT</p></td>
+<td><p>SP34</p></td>
+<td><p>SP33</p></td>
+<td><p>SP32</p></td>
+<td><p>SP31</p></td>
+<td><p>SP30</p></td>
+<td><p>0x19</p></td>
+</tr>
+<tr class="row-even"><td><p>0x10A</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs10"><span class="std std-ref">DVS10</span></a></p></td>
+<td><p>SENS1</p></td>
+<td><p>SENS2</p></td>
+<td><p>SENSR</p></td>
+<td><p>SP44</p></td>
+<td><p>SP43</p></td>
+<td><p>SP42</p></td>
+<td><p>SP41</p></td>
+<td><p>SP40</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10B</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs11"><span class="std std-ref">DVS11</span></a></p></td>
+<td><p>SENBI1</p></td>
+<td><p>SENBI2</p></td>
+<td><p>SENBI3</p></td>
+<td><p>SP54</p></td>
+<td><p>SP53</p></td>
+<td><p>SP52</p></td>
+<td><p>SP51</p></td>
+<td><p>SP50</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x10C</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs12"><span class="std std-ref">DVS12</span></a></p></td>
+<td><p>SP73</p></td>
+<td><p>SP72</p></td>
+<td><p>SP71</p></td>
+<td><p>SP70</p></td>
+<td><p>SP63</p></td>
+<td><p>SP62</p></td>
+<td><p>SP61</p></td>
+<td><p>SP60</p></td>
+<td><p>0x83</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10D</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs13"><span class="std std-ref">DVS13</span></a></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SIO15</p></td>
+<td><p>SIO14</p></td>
+<td><p>SIO13</p></td>
+<td><p>SIO12</p></td>
+<td><p>SIO11</p></td>
+<td><p>SIO10</p></td>
+<td><p>0x83</p></td>
+</tr>
+<tr class="row-even"><td><p>0x10E</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs14"><span class="std std-ref">DVS14</span></a></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SIO25</p></td>
+<td><p>SIO24</p></td>
+<td><p>SIO23</p></td>
+<td><p>SIO22</p></td>
+<td><p>SIO21</p></td>
+<td><p>SIO20</p></td>
+<td><p>0x83</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10F</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs15"><span class="std std-ref">DVS15</span></a></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SIO35</p></td>
+<td><p>SIO34</p></td>
+<td><p>SIO33</p></td>
+<td><p>SIO32</p></td>
+<td><p>SIO31</p></td>
+<td><p>SIO30</p></td>
+<td><p>0x83</p></td>
+</tr>
+<tr class="row-even"><td><p>0x110</p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs16"><span class="std std-ref">DVS16</span></a></p></td>
+<td><p>SPUL</p></td>
+<td><p>SPSL</p></td>
+<td><p>SIO45</p></td>
+<td><p>SIO44</p></td>
+<td><p>SIO43</p></td>
+<td><p>SIO42</p></td>
+<td><p>SIO41</p></td>
+<td><p>SIO40</p></td>
+<td><p>0x83</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dvs-filter">
+<h2><span class="section-number">7.1.4. </span>DVS Filter<a class="headerlink" href="#dvs-filter" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">Speck2e DVS Filter Register Map</span><a class="headerlink" href="#id4" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td><p>Name</p></td>
+<td><p>Bit 7</p></td>
+<td><p>Bit 6</p></td>
+<td><p>Bit 5</p></td>
+<td><p>Bit 4</p></td>
+<td><p>Bit 3</p></td>
+<td><p>Bit 2</p></td>
+<td><p>Bit 1</p></td>
+<td><p>Bit 0</p></td>
+<td><p>Reset Value</p></td>
+</tr>
+<tr class="row-even"><td><p>0x118</p></td>
+<td><p><a class="reference internal" href="filter-descriptions.html#reg-filter0"><span class="std std-ref">FILTER0</span></a></p></td>
+<td><p>SFR1</p></td>
+<td><p>SFR0</p></td>
+<td><p>SFP5</p></td>
+<td><p>SFP4</p></td>
+<td><p>SFP3</p></td>
+<td><p>SFP2</p></td>
+<td><p>SFP1</p></td>
+<td><p>SFP0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x119</p></td>
+<td><p><a class="reference internal" href="filter-descriptions.html#reg-filter1"><span class="std std-ref">FILTER1</span></a></p></td>
+<td><p>FCKE</p></td>
+<td><p>FBYP</p></td>
+<td><p>SFT5</p></td>
+<td><p>SFT4</p></td>
+<td><p>SFT3</p></td>
+<td><p>SFT2</p></td>
+<td><p>SFT1</p></td>
+<td><p>SFT0</p></td>
+<td><p>0x50</p></td>
+</tr>
+<tr class="row-even"><td><p>0x11A</p></td>
+<td><p><a class="reference internal" href="filter-descriptions.html#reg-filter2"><span class="std std-ref">FILTER2</span></a></p></td>
+<td><p>FDEL7</p></td>
+<td><p>FDEL6</p></td>
+<td><p>FDEL5</p></td>
+<td><p>FDEL4</p></td>
+<td><p>FDEL3</p></td>
+<td><p>FDEL2</p></td>
+<td><p>FDEL1</p></td>
+<td><p>FDEL0</p></td>
+<td><p>0x05</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x11B</p></td>
+<td><p><a class="reference internal" href="filter-descriptions.html#reg-filter3"><span class="std std-ref">FILTER3</span></a></p></td>
+<td><p>FDEL15</p></td>
+<td><p>FDEL14</p></td>
+<td><p>FDEL13</p></td>
+<td><p>FDEL12</p></td>
+<td><p>FDEL11</p></td>
+<td><p>FDEL10</p></td>
+<td><p>FDEL9</p></td>
+<td><p>FDEL8</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x11C</p></td>
+<td><p><a class="reference internal" href="filter-descriptions.html#reg-filter4"><span class="std std-ref">FILTER4</span></a></p></td>
+<td><p>FMOE</p></td>
+<td><p>FKSY2</p></td>
+<td><p>FKSY1</p></td>
+<td><p>FKSY0</p></td>
+<td><p>HPFE</p></td>
+<td><p>FKSX2</p></td>
+<td><p>FKSX1</p></td>
+<td><p>FKSX0</p></td>
+<td><p>0x11</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x11D</p></td>
+<td><p><a class="reference internal" href="filter-descriptions.html#reg-filter5"><span class="std std-ref">FILTER5</span></a></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SFBT1</p></td>
+<td><p>SFBT0</p></td>
+<td><p>FMDST3</p></td>
+<td><p>FMDST2</p></td>
+<td><p>FMDST1</p></td>
+<td><p>FMDST0</p></td>
+<td><p>0x0A</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="router">
+<h2><span class="section-number">7.1.5. </span>Router<a class="headerlink" href="#router" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Speck2e Router Register Map</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td><p>Name</p></td>
+<td><p>Bit 7</p></td>
+<td><p>Bit 6</p></td>
+<td><p>Bit 5</p></td>
+<td><p>Bit 4</p></td>
+<td><p>Bit 3</p></td>
+<td><p>Bit 2</p></td>
+<td><p>Bit 1</p></td>
+<td><p>Bit 0</p></td>
+<td><p>Reset Value</p></td>
+</tr>
+<tr class="row-even"><td><p>0x300</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router0"><span class="std std-ref">ROUTER0</span></a></p></td>
+<td><p>L0DST23</p></td>
+<td><p>L0DST22</p></td>
+<td><p>L0DST21</p></td>
+<td><p>L0DST20</p></td>
+<td><p>L0DST13</p></td>
+<td><p>L0DST12</p></td>
+<td><p>L0DST11</p></td>
+<td><p>L0DST10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x301</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router1"><span class="std std-ref">ROUTER1</span></a></p></td>
+<td><p>L1DST23</p></td>
+<td><p>L1DST22</p></td>
+<td><p>L1DST21</p></td>
+<td><p>L1DST20</p></td>
+<td><p>L1DST13</p></td>
+<td><p>L1DST12</p></td>
+<td><p>L1DST11</p></td>
+<td><p>L1DST10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x302</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router2"><span class="std std-ref">ROUTER2</span></a></p></td>
+<td><p>L2DST23</p></td>
+<td><p>L2DST22</p></td>
+<td><p>L2DST21</p></td>
+<td><p>L2DST20</p></td>
+<td><p>L2DST13</p></td>
+<td><p>L2DST12</p></td>
+<td><p>L2DST11</p></td>
+<td><p>L2DST10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x303</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router3"><span class="std std-ref">ROUTER3</span></a></p></td>
+<td><p>L3DST23</p></td>
+<td><p>L3DST22</p></td>
+<td><p>L3DST21</p></td>
+<td><p>L3DST20</p></td>
+<td><p>L3DST13</p></td>
+<td><p>L3DST12</p></td>
+<td><p>L3DST11</p></td>
+<td><p>L3DST10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x304</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router4"><span class="std std-ref">ROUTER4</span></a></p></td>
+<td><p>L4DST23</p></td>
+<td><p>L4DST22</p></td>
+<td><p>L4DST21</p></td>
+<td><p>L4DST20</p></td>
+<td><p>L4DST13</p></td>
+<td><p>L4DST12</p></td>
+<td><p>L4DST11</p></td>
+<td><p>L4DST10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x305</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router5"><span class="std std-ref">ROUTER5</span></a></p></td>
+<td><p>L5DST23</p></td>
+<td><p>L5DST22</p></td>
+<td><p>L5DST21</p></td>
+<td><p>L5DST20</p></td>
+<td><p>L5DST13</p></td>
+<td><p>L5DST12</p></td>
+<td><p>L5DST11</p></td>
+<td><p>L5DST10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x306</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router6"><span class="std std-ref">ROUTER6</span></a></p></td>
+<td><p>L6DST23</p></td>
+<td><p>L6DST22</p></td>
+<td><p>L6DST21</p></td>
+<td><p>L6DST20</p></td>
+<td><p>L6DST13</p></td>
+<td><p>L6DST12</p></td>
+<td><p>L6DST11</p></td>
+<td><p>L6DST10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x307</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router7"><span class="std std-ref">ROUTER7</span></a></p></td>
+<td><p>L7DST23</p></td>
+<td><p>L7DST22</p></td>
+<td><p>L7DST21</p></td>
+<td><p>L7DST20</p></td>
+<td><p>L7DST13</p></td>
+<td><p>L7DST12</p></td>
+<td><p>L7DST11</p></td>
+<td><p>L7DST10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x308</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router8"><span class="std std-ref">ROUTER8</span></a></p></td>
+<td><p>L8DST23</p></td>
+<td><p>L8DST22</p></td>
+<td><p>L8DST21</p></td>
+<td><p>L8DST20</p></td>
+<td><p>L8DST13</p></td>
+<td><p>L8DST12</p></td>
+<td><p>L8DST11</p></td>
+<td><p>L8DST10</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x309</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router9"><span class="std std-ref">ROUTER9</span></a></p></td>
+<td><p>L3D2EN</p></td>
+<td><p>L3D1EN</p></td>
+<td><p>L2D2EN</p></td>
+<td><p>L2D1EN</p></td>
+<td><p>L1D2EN</p></td>
+<td><p>L1D1EN</p></td>
+<td><p>L0D2EN</p></td>
+<td><p>L0D1EN</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x30A</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10</span></a></p></td>
+<td><p>L3D2EN</p></td>
+<td><p>L3D1EN</p></td>
+<td><p>L2D2EN</p></td>
+<td><p>L2D1EN</p></td>
+<td><p>L1D2EN</p></td>
+<td><p>L1D1EN</p></td>
+<td><p>L0D2EN</p></td>
+<td><p>L0D1EN</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x30B</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router11"><span class="std std-ref">ROUTER11</span></a></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>L8D2EN</p></td>
+<td><p>L8D1EN</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x30C</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router12"><span class="std std-ref">ROUTER12</span></a></p></td>
+<td><p>L0PL11</p></td>
+<td><p>L0PL10</p></td>
+<td><p>L0PL21</p></td>
+<td><p>L0PL20</p></td>
+<td><p>L0FNO19</p></td>
+<td><p>L0FNO18</p></td>
+<td><p>L0FNO17</p></td>
+<td><p>L0FNO16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x30D</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router13"><span class="std std-ref">ROUTER13</span></a></p></td>
+<td><p>L0FNO15</p></td>
+<td><p>L0FNO14</p></td>
+<td><p>L0FNO13</p></td>
+<td><p>L0FNO12</p></td>
+<td><p>L0FNO11</p></td>
+<td><p>L0FNO10</p></td>
+<td><p>L0FNO29</p></td>
+<td><p>L0FNO28</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x30E</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router14"><span class="std std-ref">ROUTER14</span></a></p></td>
+<td><p>L0FNO27</p></td>
+<td><p>L0FNO26</p></td>
+<td><p>L0FNO25</p></td>
+<td><p>L0FNO24</p></td>
+<td><p>L0FNO23</p></td>
+<td><p>L0FNO22</p></td>
+<td><p>L0FNO21</p></td>
+<td><p>L0FNO20</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x30F</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router15"><span class="std std-ref">ROUTER15</span></a></p></td>
+<td><p>L1PL11</p></td>
+<td><p>L1PL10</p></td>
+<td><p>L1PL21</p></td>
+<td><p>L1PL20</p></td>
+<td><p>L1FNO19</p></td>
+<td><p>L1FNO18</p></td>
+<td><p>L1FNO17</p></td>
+<td><p>L1FNO16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x310</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router16"><span class="std std-ref">ROUTER16</span></a></p></td>
+<td><p>L1FNO15</p></td>
+<td><p>L1FNO14</p></td>
+<td><p>L1FNO13</p></td>
+<td><p>L1FNO12</p></td>
+<td><p>L1FNO11</p></td>
+<td><p>L1FNO10</p></td>
+<td><p>L1FNO29</p></td>
+<td><p>L1FNO28</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x311</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router17"><span class="std std-ref">ROUTER17</span></a></p></td>
+<td><p>L1FNO27</p></td>
+<td><p>L1FNO26</p></td>
+<td><p>L1FNO25</p></td>
+<td><p>L1FNO24</p></td>
+<td><p>L1FNO23</p></td>
+<td><p>L1FNO22</p></td>
+<td><p>L1FNO21</p></td>
+<td><p>L1FNO20</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x312</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router18"><span class="std std-ref">ROUTER18</span></a></p></td>
+<td><p>L2PL11</p></td>
+<td><p>L2PL10</p></td>
+<td><p>L2PL21</p></td>
+<td><p>L2PL20</p></td>
+<td><p>L2FNO19</p></td>
+<td><p>L2FNO18</p></td>
+<td><p>L2FNO17</p></td>
+<td><p>L2FNO16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x313</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router19"><span class="std std-ref">ROUTER19</span></a></p></td>
+<td><p>L2FNO15</p></td>
+<td><p>L2FNO14</p></td>
+<td><p>L2FNO13</p></td>
+<td><p>L2FNO12</p></td>
+<td><p>L2FNO11</p></td>
+<td><p>L2FNO10</p></td>
+<td><p>L2FNO29</p></td>
+<td><p>L2FNO28</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x314</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router20"><span class="std std-ref">ROUTER20</span></a></p></td>
+<td><p>L2FNO27</p></td>
+<td><p>L2FNO26</p></td>
+<td><p>L2FNO25</p></td>
+<td><p>L2FNO24</p></td>
+<td><p>L2FNO23</p></td>
+<td><p>L2FNO22</p></td>
+<td><p>L2FNO21</p></td>
+<td><p>L2FNO20</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x315</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router21"><span class="std std-ref">ROUTER21</span></a></p></td>
+<td><p>L3PL11</p></td>
+<td><p>L3PL10</p></td>
+<td><p>L3PL31</p></td>
+<td><p>L3PL30</p></td>
+<td><p>L3FNO19</p></td>
+<td><p>L3FNO18</p></td>
+<td><p>L3FNO17</p></td>
+<td><p>L3FNO16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x316</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router22"><span class="std std-ref">ROUTER22</span></a></p></td>
+<td><p>L3FNO15</p></td>
+<td><p>L3FNO14</p></td>
+<td><p>L3FNO13</p></td>
+<td><p>L3FNO12</p></td>
+<td><p>L3FNO11</p></td>
+<td><p>L3FNO10</p></td>
+<td><p>L3FNO29</p></td>
+<td><p>L3FNO28</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x317</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router23"><span class="std std-ref">ROUTER23</span></a></p></td>
+<td><p>L3FNO27</p></td>
+<td><p>L3FNO26</p></td>
+<td><p>L3FNO25</p></td>
+<td><p>L3FNO24</p></td>
+<td><p>L3FNO23</p></td>
+<td><p>L3FNO22</p></td>
+<td><p>L3FNO21</p></td>
+<td><p>L3FNO20</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x318</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router24"><span class="std std-ref">ROUTER24</span></a></p></td>
+<td><p>L4PL11</p></td>
+<td><p>L4PL10</p></td>
+<td><p>L4PL41</p></td>
+<td><p>L4PL40</p></td>
+<td><p>L4FNO19</p></td>
+<td><p>L4FNO18</p></td>
+<td><p>L4FNO17</p></td>
+<td><p>L4FNO16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x319</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router25"><span class="std std-ref">ROUTER25</span></a></p></td>
+<td><p>L4FNO15</p></td>
+<td><p>L4FNO14</p></td>
+<td><p>L4FNO13</p></td>
+<td><p>L4FNO12</p></td>
+<td><p>L4FNO11</p></td>
+<td><p>L4FNO10</p></td>
+<td><p>L4FNO29</p></td>
+<td><p>L4FNO28</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x31A</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router26"><span class="std std-ref">ROUTER26</span></a></p></td>
+<td><p>L4FNO27</p></td>
+<td><p>L4FNO26</p></td>
+<td><p>L4FNO25</p></td>
+<td><p>L4FNO24</p></td>
+<td><p>L4FNO23</p></td>
+<td><p>L4FNO22</p></td>
+<td><p>L4FNO21</p></td>
+<td><p>L4FNO20</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x31B</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router27"><span class="std std-ref">ROUTER27</span></a></p></td>
+<td><p>L5PL11</p></td>
+<td><p>L5PL10</p></td>
+<td><p>L5PL51</p></td>
+<td><p>L5PL50</p></td>
+<td><p>L5FNO19</p></td>
+<td><p>L5FNO18</p></td>
+<td><p>L5FNO17</p></td>
+<td><p>L5FNO16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x31C</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router28"><span class="std std-ref">ROUTER28</span></a></p></td>
+<td><p>L5FNO15</p></td>
+<td><p>L5FNO14</p></td>
+<td><p>L5FNO13</p></td>
+<td><p>L5FNO12</p></td>
+<td><p>L5FNO11</p></td>
+<td><p>L5FNO10</p></td>
+<td><p>L5FNO29</p></td>
+<td><p>L5FNO28</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x31D</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router29"><span class="std std-ref">ROUTER29</span></a></p></td>
+<td><p>L5FNO27</p></td>
+<td><p>L5FNO26</p></td>
+<td><p>L5FNO25</p></td>
+<td><p>L5FNO24</p></td>
+<td><p>L5FNO23</p></td>
+<td><p>L5FNO22</p></td>
+<td><p>L5FNO21</p></td>
+<td><p>L5FNO20</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x31E</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router30"><span class="std std-ref">ROUTER30</span></a></p></td>
+<td><p>L6PL11</p></td>
+<td><p>L6PL10</p></td>
+<td><p>L6PL61</p></td>
+<td><p>L6PL60</p></td>
+<td><p>L6FNO19</p></td>
+<td><p>L6FNO18</p></td>
+<td><p>L6FNO17</p></td>
+<td><p>L6FNO16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x31F</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router31"><span class="std std-ref">ROUTER31</span></a></p></td>
+<td><p>L6FNO15</p></td>
+<td><p>L6FNO14</p></td>
+<td><p>L6FNO13</p></td>
+<td><p>L6FNO12</p></td>
+<td><p>L6FNO11</p></td>
+<td><p>L6FNO10</p></td>
+<td><p>L6FNO29</p></td>
+<td><p>L6FNO28</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x320</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router32"><span class="std std-ref">ROUTER32</span></a></p></td>
+<td><p>L6FNO27</p></td>
+<td><p>L6FNO26</p></td>
+<td><p>L6FNO25</p></td>
+<td><p>L6FNO24</p></td>
+<td><p>L6FNO23</p></td>
+<td><p>L6FNO22</p></td>
+<td><p>L6FNO21</p></td>
+<td><p>L6FNO20</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x321</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router33"><span class="std std-ref">ROUTER33</span></a></p></td>
+<td><p>L7PL11</p></td>
+<td><p>L7PL10</p></td>
+<td><p>L7PL71</p></td>
+<td><p>L7PL70</p></td>
+<td><p>L7FNO19</p></td>
+<td><p>L7FNO18</p></td>
+<td><p>L7FNO17</p></td>
+<td><p>L7FNO16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x322</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router34"><span class="std std-ref">ROUTER34</span></a></p></td>
+<td><p>L7FNO15</p></td>
+<td><p>L7FNO14</p></td>
+<td><p>L7FNO13</p></td>
+<td><p>L7FNO12</p></td>
+<td><p>L7FNO11</p></td>
+<td><p>L7FNO10</p></td>
+<td><p>L7FNO29</p></td>
+<td><p>L7FNO28</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x323</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router35"><span class="std std-ref">ROUTER35</span></a></p></td>
+<td><p>L7FNO27</p></td>
+<td><p>L7FNO26</p></td>
+<td><p>L7FNO25</p></td>
+<td><p>L7FNO24</p></td>
+<td><p>L7FNO23</p></td>
+<td><p>L7FNO22</p></td>
+<td><p>L7FNO21</p></td>
+<td><p>L7FNO20</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x324</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router36"><span class="std std-ref">ROUTER36</span></a></p></td>
+<td><p>L8PL11</p></td>
+<td><p>L8PL10</p></td>
+<td><p>L8PL81</p></td>
+<td><p>L8PL80</p></td>
+<td><p>L8FNO19</p></td>
+<td><p>L8FNO18</p></td>
+<td><p>L8FNO17</p></td>
+<td><p>L8FNO16</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x325</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router37"><span class="std std-ref">ROUTER37</span></a></p></td>
+<td><p>L8FNO15</p></td>
+<td><p>L8FNO14</p></td>
+<td><p>L8FNO13</p></td>
+<td><p>L8FNO12</p></td>
+<td><p>L8FNO11</p></td>
+<td><p>L8FNO10</p></td>
+<td><p>L8FNO29</p></td>
+<td><p>L8FNO28</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x326</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router38"><span class="std std-ref">ROUTER38</span></a></p></td>
+<td><p>L8FNO27</p></td>
+<td><p>L8FNO26</p></td>
+<td><p>L8FNO25</p></td>
+<td><p>L8FNO24</p></td>
+<td><p>L8FNO23</p></td>
+<td><p>L8FNO22</p></td>
+<td><p>L8FNO21</p></td>
+<td><p>L8FNO20</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x327</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39</span></a></p></td>
+<td><p>L7MEN</p></td>
+<td><p>L6MEN</p></td>
+<td><p>L5MEN</p></td>
+<td><p>L4MEN</p></td>
+<td><p>L3MEN</p></td>
+<td><p>L2MEN</p></td>
+<td><p>L1MEN</p></td>
+<td><p>L0MEN</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x328</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router40"><span class="std std-ref">ROUTER40</span></a></p></td>
+<td><p>L0MTAG3</p></td>
+<td><p>L0MTAG2</p></td>
+<td><p>L0MTAG1</p></td>
+<td><p>L0MTAG0</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>L8MEN</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x329</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router41"><span class="std std-ref">ROUTER41</span></a></p></td>
+<td><p>L2MTAG3</p></td>
+<td><p>L2MTAG2</p></td>
+<td><p>L2MTAG1</p></td>
+<td><p>L2MTAG0</p></td>
+<td><p>L1MTAG3</p></td>
+<td><p>L1MTAG2</p></td>
+<td><p>L1MTAG1</p></td>
+<td><p>L1MTAG0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x32A</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router42"><span class="std std-ref">ROUTER42</span></a></p></td>
+<td><p>L4MTAG3</p></td>
+<td><p>L4MTAG2</p></td>
+<td><p>L4MTAG1</p></td>
+<td><p>L4MTAG0</p></td>
+<td><p>L3MTAG3</p></td>
+<td><p>L3MTAG2</p></td>
+<td><p>L3MTAG1</p></td>
+<td><p>L3MTAG0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x32B</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router43"><span class="std std-ref">ROUTER43</span></a></p></td>
+<td><p>L6MTAG3</p></td>
+<td><p>L6MTAG2</p></td>
+<td><p>L6MTAG1</p></td>
+<td><p>L6MTAG0</p></td>
+<td><p>L5MTAG3</p></td>
+<td><p>L5MTAG2</p></td>
+<td><p>L5MTAG1</p></td>
+<td><p>L5MTAG0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x32C</p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router44"><span class="std std-ref">ROUTER44</span></a></p></td>
+<td><p>L8MTAG3</p></td>
+<td><p>L8MTAG2</p></td>
+<td><p>L8MTAG1</p></td>
+<td><p>L8MTAG0</p></td>
+<td><p>L7MTAG3</p></td>
+<td><p>L7MTAG2</p></td>
+<td><p>L7MTAG1</p></td>
+<td><p>L7MTAG0</p></td>
+<td><p>0x00</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="readout-layer">
+<h2><span class="section-number">7.1.6. </span>Readout Layer<a class="headerlink" href="#readout-layer" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">Speck2e Readout Layer Register Map</span><a class="headerlink" href="#id6" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td><p>Name</p></td>
+<td><p>Bit 7</p></td>
+<td><p>Bit 6</p></td>
+<td><p>Bit 5</p></td>
+<td><p>Bit 4</p></td>
+<td><p>Bit 3</p></td>
+<td><p>Bit 2</p></td>
+<td><p>Bit 1</p></td>
+<td><p>Bit 0</p></td>
+<td><p>Reset Value</p></td>
+</tr>
+<tr class="row-even"><td><p>0x200</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout0"><span class="std std-ref">READOUT0</span></a></p></td>
+<td><p>CB11</p></td>
+<td><p>CB10</p></td>
+<td><p>RB02</p></td>
+<td><p>RB01</p></td>
+<td><p>RB00</p></td>
+<td><p>CB02</p></td>
+<td><p>CB01</p></td>
+<td><p>CB00</p></td>
+<td><p>0x3C</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x201</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout1"><span class="std std-ref">READOUT1</span></a></p></td>
+<td><p>RB20</p></td>
+<td><p>CB22</p></td>
+<td><p>CB21</p></td>
+<td><p>CB20</p></td>
+<td><p>RB12</p></td>
+<td><p>RB11</p></td>
+<td><p>RB10</p></td>
+<td><p>CB12</p></td>
+<td><p>0xCF</p></td>
+</tr>
+<tr class="row-even"><td><p>0x202</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout2"><span class="std std-ref">READOUT2</span></a></p></td>
+<td><p>RB32</p></td>
+<td><p>RB31</p></td>
+<td><p>RB30</p></td>
+<td><p>CB32</p></td>
+<td><p>CB31</p></td>
+<td><p>CB30</p></td>
+<td><p>RB22</p></td>
+<td><p>RB21</p></td>
+<td><p>0xF3</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x203</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout3"><span class="std std-ref">READOUT3</span></a></p></td>
+<td><p>CB51</p></td>
+<td><p>CB50</p></td>
+<td><p>RB42</p></td>
+<td><p>RB41</p></td>
+<td><p>RB40</p></td>
+<td><p>CB42</p></td>
+<td><p>CB41</p></td>
+<td><p>CB40</p></td>
+<td><p>0x3C</p></td>
+</tr>
+<tr class="row-even"><td><p>0x204</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout4"><span class="std std-ref">READOUT4</span></a></p></td>
+<td><p>RB60</p></td>
+<td><p>CB62</p></td>
+<td><p>CB61</p></td>
+<td><p>CB60</p></td>
+<td><p>RB52</p></td>
+<td><p>RB51</p></td>
+<td><p>RB50</p></td>
+<td><p>CB52</p></td>
+<td><p>0xCF</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x205</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout5"><span class="std std-ref">READOUT5</span></a></p></td>
+<td><p>RB72</p></td>
+<td><p>RB71</p></td>
+<td><p>RB70</p></td>
+<td><p>CB72</p></td>
+<td><p>CB71</p></td>
+<td><p>CB70</p></td>
+<td><p>RB62</p></td>
+<td><p>RB61</p></td>
+<td><p>0xF3</p></td>
+</tr>
+<tr class="row-even"><td><p>0x206</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout6"><span class="std std-ref">READOUT6</span></a></p></td>
+<td><p>CB91</p></td>
+<td><p>CB90</p></td>
+<td><p>RB82</p></td>
+<td><p>RB81</p></td>
+<td><p>RB80</p></td>
+<td><p>CB82</p></td>
+<td><p>CB81</p></td>
+<td><p>CB80</p></td>
+<td><p>0x3C</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x207</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout7"><span class="std std-ref">READOUT7</span></a></p></td>
+<td><p>RBA0</p></td>
+<td><p>CBA2</p></td>
+<td><p>CBA1</p></td>
+<td><p>CBA0</p></td>
+<td><p>RB92</p></td>
+<td><p>RB91</p></td>
+<td><p>RB90</p></td>
+<td><p>CB92</p></td>
+<td><p>0xCF</p></td>
+</tr>
+<tr class="row-even"><td><p>0x208</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout8"><span class="std std-ref">READOUT8</span></a></p></td>
+<td><p>RBB2</p></td>
+<td><p>RBB1</p></td>
+<td><p>RBB0</p></td>
+<td><p>CBB2</p></td>
+<td><p>CBB1</p></td>
+<td><p>CBB0</p></td>
+<td><p>RBA2</p></td>
+<td><p>RBA1</p></td>
+<td><p>0xF3</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x209</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout9"><span class="std std-ref">READOUT9</span></a></p></td>
+<td><p>CBD1</p></td>
+<td><p>CBD0</p></td>
+<td><p>RBC2</p></td>
+<td><p>RBC1</p></td>
+<td><p>RBC0</p></td>
+<td><p>CBC2</p></td>
+<td><p>CBC1</p></td>
+<td><p>CBC0</p></td>
+<td><p>0x3C</p></td>
+</tr>
+<tr class="row-even"><td><p>0x20A</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout10"><span class="std std-ref">READOUT10</span></a></p></td>
+<td><p>RBE0</p></td>
+<td><p>CBE2</p></td>
+<td><p>CBE1</p></td>
+<td><p>CBE0</p></td>
+<td><p>RBD2</p></td>
+<td><p>RBD1</p></td>
+<td><p>RBD0</p></td>
+<td><p>CBD2</p></td>
+<td><p>0xCF</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x20B</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout11"><span class="std std-ref">READOUT11</span></a></p></td>
+<td><p>OMSEL1</p></td>
+<td><p>OMSEL0</p></td>
+<td><p>AVGSEL3</p></td>
+<td><p>AVGSEL2</p></td>
+<td><p>AVGSEL1</p></td>
+<td><p>AVGSEL0</p></td>
+<td><p>RBE2</p></td>
+<td><p>RBE1</p></td>
+<td><p>0x83</p></td>
+</tr>
+<tr class="row-even"><td><p>0x20C</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout12"><span class="std std-ref">READOUT12</span></a></p></td>
+<td><p>TH7</p></td>
+<td><p>TH6</p></td>
+<td><p>TH5</p></td>
+<td><p>TH4</p></td>
+<td><p>TH3</p></td>
+<td><p>TH2</p></td>
+<td><p>TH1</p></td>
+<td><p>TH0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x20D</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout13"><span class="std std-ref">READOUT13</span></a></p></td>
+<td><p>TH15</p></td>
+<td><p>TH14</p></td>
+<td><p>TH13</p></td>
+<td><p>TH12</p></td>
+<td><p>TH11</p></td>
+<td><p>TH10</p></td>
+<td><p>TH9</p></td>
+<td><p>TH8</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x20E</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout14"><span class="std std-ref">READOUT14</span></a></p></td>
+<td><p>—</p></td>
+<td><p>INEN</p></td>
+<td><p>OVRTH</p></td>
+<td><p>BYPREG</p></td>
+<td><p>ROCS1</p></td>
+<td><p>ROCS0</p></td>
+<td><p>CH1632</p></td>
+<td><p>CH1</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x20F</p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout15"><span class="std std-ref">READOUT15</span></a></p></td>
+<td><p>REQDLY7</p></td>
+<td><p>REQDLY6</p></td>
+<td><p>REQDLY5</p></td>
+<td><p>REQDLY4</p></td>
+<td><p>REQDLY3</p></td>
+<td><p>REQDLY2</p></td>
+<td><p>REQDLY1</p></td>
+<td><p>REQDLY0</p></td>
+<td><p>0x10</p></td>
+</tr>
+<tr class="row-even"><td><p>0x210</p></td>
+<td><p><a class="reference internal" href="readout-readonly-descriptions.html#reg-readout16"><span class="std std-ref">READOUT16</span></a></p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>MIDX3</p></td>
+<td><p>MIDX2</p></td>
+<td><p>MIDX1</p></td>
+<td><p>MIDX0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x211</p></td>
+<td><p><a class="reference internal" href="readout-readonly-descriptions.html#reg-readout17"><span class="std std-ref">READOUT17</span></a></p></td>
+<td><p>MAVG7</p></td>
+<td><p>MAVG6</p></td>
+<td><p>MAVG5</p></td>
+<td><p>MAVG4</p></td>
+<td><p>MAVG3</p></td>
+<td><p>MAVG2</p></td>
+<td><p>MAVG1</p></td>
+<td><p>MAVG0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x212</p></td>
+<td><p><a class="reference internal" href="readout-readonly-descriptions.html#reg-readout18"><span class="std std-ref">READOUT18</span></a></p></td>
+<td><p>MAVG15</p></td>
+<td><p>MAVG14</p></td>
+<td><p>MAVG13</p></td>
+<td><p>MAVG12</p></td>
+<td><p>MAVG11</p></td>
+<td><p>MAVG10</p></td>
+<td><p>MAVG9</p></td>
+<td><p>MAVG8</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x213</p></td>
+<td><p><a class="reference internal" href="readout-readonly-descriptions.html#reg-readout19"><span class="std std-ref">READOUT19</span></a></p></td>
+<td><p>AVG7</p></td>
+<td><p>AVG6</p></td>
+<td><p>AVG5</p></td>
+<td><p>AVG4</p></td>
+<td><p>AVG3</p></td>
+<td><p>AVG2</p></td>
+<td><p>AVG1</p></td>
+<td><p>AVG0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x214</p></td>
+<td><p><a class="reference internal" href="readout-readonly-descriptions.html#reg-readout20"><span class="std std-ref">READOUT20</span></a></p></td>
+<td><p>AVG15</p></td>
+<td><p>AVG14</p></td>
+<td><p>AVG13</p></td>
+<td><p>AVG12</p></td>
+<td><p>AVG11</p></td>
+<td><p>AVG10</p></td>
+<td><p>AVG9</p></td>
+<td><p>AVG8</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x215</p></td>
+<td><p><a class="reference internal" href="readout-readonly-descriptions.html#reg-readout21"><span class="std std-ref">READOUT21</span></a></p></td>
+<td><p>THCMP7</p></td>
+<td><p>THCMP6</p></td>
+<td><p>THCMP5</p></td>
+<td><p>THCMP4</p></td>
+<td><p>THCMP3</p></td>
+<td><p>THCMP2</p></td>
+<td><p>THCMP1</p></td>
+<td><p>THCMP0</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-even"><td><p>0x216</p></td>
+<td><p><a class="reference internal" href="readout-readonly-descriptions.html#reg-readout22"><span class="std std-ref">READOUT22</span></a></p></td>
+<td><p>—</p></td>
+<td><p>THCMP14</p></td>
+<td><p>THCMP13</p></td>
+<td><p>THCMP12</p></td>
+<td><p>THCMP11</p></td>
+<td><p>THCMP10</p></td>
+<td><p>THCMP9</p></td>
+<td><p>THCMP8</p></td>
+<td><p>0x00</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="7. Registers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="addressing.html" class="btn btn-neutral float-right" title="7.2. Register Addressing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

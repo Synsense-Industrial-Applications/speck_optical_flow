@@ -1,0 +1,196 @@
+.. _readout-config-signals:
+
+Readout Layer Configuration Signal Description
+==============================================
+
+.. csv-table:: Readout Layer Configuration Signal Overview
+
+    "Register Bits",Register(s),"Signal Name","Short Description"
+    :ref:`CB0[2:0]<rbits-CBn>`,:ref:`READOUT0[2:0]<reg-READOUT0>`,clk_blk0,"Clock Delay Neuron 0."
+    :ref:`RB0[2:0]<rbits-RBn>`,:ref:`READOUT0[5:3]<reg-READOUT0>`,rst_blk0,"Reset Delay Neuron 0."
+    :ref:`CB1[2:0]<rbits-CBn>`,":ref:`READOUT1[0]<reg-READOUT1>`, :ref:`0[7:6]<reg-READOUT0>`",clk_blk1,"Clock Delay Neuron 1."
+    :ref:`RB1[2:0]<rbits-RBn>`,:ref:`READOUT1[3:1]<reg-READOUT1>`,rst_blk1,"Reset Delay Neuron 1."
+    :ref:`CB2[2:0]<rbits-CBn>`,:ref:`READOUT1[6:4]<reg-READOUT1>`,clk_blk2,"Clock Delay Neuron 2."
+    :ref:`RB2[2:0]<rbits-RBn>`,":ref:`READOUT2[1:0]<reg-READOUT2>`, :ref:`1[7]<reg-READOUT1>`",rst_blk2,"Reset Delay Neuron 2."
+    :ref:`CB3[2:0]<rbits-CBn>`,:ref:`READOUT2[4:2]<reg-READOUT2>`,clk_blk3,"Clock Delay Neuron 3."
+    :ref:`RB3[2:0]<rbits-RBn>`,:ref:`READOUT2[7:5]<reg-READOUT2>`,rst_blk3,"Reset Delay Neuron 3."
+    :ref:`CB4[2:0]<rbits-CBn>`,:ref:`READOUT3[2:0]<reg-READOUT3>`,clk_blk4,"Clock Delay Neuron 4."
+    :ref:`RB4[2:0]<rbits-RBn>`,:ref:`READOUT3[5:3]<reg-READOUT3>`,rst_blk4,"Reset Delay Neuron 4."
+    :ref:`CB5[2:0]<rbits-CBn>`,":ref:`READOUT4[0]<reg-READOUT4>`, :ref:`3[7:6]<reg-READOUT3>`",clk_blk5,"Clock Delay Neuron 5."
+    :ref:`RB5[2:0]<rbits-RBn>`,:ref:`READOUT4[3:1]<reg-READOUT4>`,rst_blk5,"Reset Delay Neuron 5."
+    :ref:`CB6[2:0]<rbits-CBn>`,:ref:`READOUT4[6:4]<reg-READOUT4>`,clk_blk6,"Clock Delay Neuron 6."
+    :ref:`RB6[2:0]<rbits-RBn>`,":ref:`READOUT5[1:0]<reg-READOUT5>`, :ref:`4[7]<reg-READOUT4>`",rst_blk6,"Reset Delay Neuron 6."
+    :ref:`CB7[2:0]<rbits-CBn>`,:ref:`READOUT5[4:2]<reg-READOUT5>`,clk_blk7,"Clock Delay Neuron 7."
+    :ref:`RB7[2:0]<rbits-RBn>`,:ref:`READOUT5[7:5]<reg-READOUT5>`,rst_blk7,"Reset Delay Neuron 7."
+    :ref:`CB8[2:0]<rbits-CBn>`,:ref:`READOUT6[2:0]<reg-READOUT6>`,clk_blk8,"Clock Delay Neuron 8."
+    :ref:`RB8[2:0]<rbits-RBn>`,:ref:`READOUT6[5:3]<reg-READOUT6>`,rst_blk8,"Reset Delay Neuron 8."
+    :ref:`CB9[2:0]<rbits-CBn>`,":ref:`READOUT7[0]<reg-READOUT7>`, :ref:`6[7:6]<reg-READOUT6>`",clk_blk9,"Clock Delay Neuron 9."
+    :ref:`RB9[2:0]<rbits-RBn>`,:ref:`READOUT7[3:1]<reg-READOUT7>`,rst_blk9,"Reset Delay Neuron 9."
+    :ref:`CBA[2:0]<rbits-CBn>`,:ref:`READOUT7[6:4]<reg-READOUT7>`,clk_blk10,"Clock Delay Neuron 10."
+    :ref:`RBA[2:0]<rbits-RBn>`,":ref:`READOUT8[1:0]<reg-READOUT8>`, :ref:`7[7]<reg-READOUT7>`",rst_blk10,"Reset Delay Neuron 10."
+    :ref:`CBB[2:0]<rbits-CBn>`,:ref:`READOUT8[4:2]<reg-READOUT8>`,clk_blk11,"Clock Delay Neuron 11."
+    :ref:`RBB[2:0]<rbits-RBn>`,:ref:`READOUT8[7:5]<reg-READOUT8>`,rst_blk11,"Reset Delay Neuron 11."
+    :ref:`CBC[2:0]<rbits-CBn>`,:ref:`READOUT9[2:0]<reg-READOUT9>`,clk_blk12,"Clock Delay Neuron 12."
+    :ref:`RBC[2:0]<rbits-RBn>`,:ref:`READOUT9[5:3]<reg-READOUT9>`,rst_blk12,"Reset Delay Neuron 12."
+    :ref:`CBD[2:0]<rbits-CBn>`,":ref:`READOUT10[0]<reg-READOUT10>`, :ref:`9[7:6]<reg-READOUT9>`",clk_blk13,"Clock Delay Neuron 13."
+    :ref:`RBD[2:0]<rbits-RBn>`,:ref:`READOUT10[3:1]<reg-READOUT10>`,rst_blk13,"Reset Delay Neuron 13."
+    :ref:`CBE[2:0]<rbits-CBn>`,:ref:`READOUT10[6:4]<reg-READOUT10>`,clk_blk14,"Clock Delay Neuron 14."
+    :ref:`RBE[2:0]<rbits-RBn>`,":ref:`READOUT11[1:0]<reg-READOUT11>`, :ref:`10[7]<reg-READOUT10>`",rst_blk14,"Reset Delay Neuron 14."
+    :ref:`AVGSEL[3:0]<rbits-AVGSEL>`,:ref:`READOUT11[5:2]<reg-READOUT11>`,average_sel,"Readout Layer Average Selection."
+    :ref:`OMSEL[1:0]<rbits-OMSEL>`,:ref:`READOUT11[7:6]<reg-READOUT11>`,output_mode_sel,"Readout Layer Mode Selection."
+    :ref:`TH[15:0]<rbits-TH>`,":ref:`READOUT12[7:0]<reg-READOUT12>`, :ref:`13[7:0]<reg-READOUT13>`",readout_threshold,"Readout Comparison Threshold."
+    :ref:`CH1<rbits-CH1>`,:ref:`READOUT14[0]<reg-READOUT14>`,choose_1,"If '1': time window = 1* *MOVING_AVERAGE_CLK* period (disable low-pass filtering). Overrides bit CH1632 when set to '1'"
+    :ref:`CH1632<rbits-CH1632>`,:ref:`READOUT14[1]<reg-READOUT14>`,choose_16_32,"If '0': time window = 16* *MOVING_AVERAGE_CLK* period, '1': time window = 32* *MOVING_AVERAGE_CLK* period."
+    :ref:`ROCS[1:0]<rbits-ROCS>`, :ref:`READOUT14[3:2]<reg-READOUT14>`,readout_conf_sel,"Readout Configuration Selector."
+    :ref:`BYPREG<rbits-BYPREG>`,:ref:`READOUT14[4]<reg-READOUT14>`,bypass_reg,"Enable Bypass of Output Flip-Flop."
+    :ref:`OVRTH<rbits-OVRTH>`,:ref:`READOUT14[5]<reg-READOUT14>`,override_threshold_max,"Override Output Layer Threshold compare. Sends interrupt at each slow clk cycle."
+    :ref:`INEN<rbits-INEN>`,:ref:`READOUT14[6]<reg-READOUT14>`,reg_input_enable,"Use register configurations ('1') or input serial interface settings ('0') for average_sel and output_mode_sel."
+    :ref:`REQDLY[7:0]<rbits-REQDLY>`, :ref:`READOUT15[7:0]<reg-READOUT15>`,io_interface_req_delay,"Output Mux Request Delay Selector."
+
+
+Detailed Signal Description
+***************************
+
+.. _rbits-CBn:
+
+CBn[2:0] (clk_blkn)
+--------------------
+
+See :ref:`readout-timing-config`.
+
+.. _rbits-RBn:
+
+RBn[2:0] (rst_blkn)
+--------------------
+
+See :ref:`readout-timing-config`.
+
+.. _rbits-AVGSEL:
+
+AVGSEL[3:0] (average_sel)
+------------------------------
+
+Readout Layer Average Selection. Used when :ref:`INEN<rbits-INEN>` == '1'. See :ref:`readout-neuron-selection` for more details.
+
+.. _rbits-OMSEL:
+
+OMSEL[1:0] (output_mode_sel)
+------------------------------
+
+Readout Layer Mode Selection. Used when :ref:`INEN<rbits-INEN>` == '1'. See :ref:`readout-output-modes` for more details.
+
+.. _rbits-TH:
+
+TH[15:0] (readout_threshold)
+-----------------------------------
+
+Readout neurons threshold value. Defaults to 0.
+
+The moving average of the output neurons is compared to the threshold value to produce
+an output if the received number of spikes is greater than the threshold.
+
+See :ref:`readout-layer` for further information on the readout layer.
+
+.. _rbits-CH1:
+
+CH1 (choose_1)
+---------------------
+
+Disables readout low pass filtering.
+
+.. note::
+    This register overrides CH1632 when set to '1'.
+
++-------------+-------------------------------------------------------+
+| CH1         | Configuration                                         |
++-------------+-------------------------------------------------------+
+| 0 (default) | time window = selected by :ref:`CH1632<rbits-CH1632>` |
++-------------+-------------------------------------------------------+
+| 1           | time window = 1 *MOVING_AVERAGE_CLK* period           |
++-------------+-------------------------------------------------------+
+
+.. _rbits-CH1632:
+
+CH1632 (choose_16_32)
+---------------------
+
+Selects readout moving average length (16 or 32 clock periods).
+
+.. note::
+    If CH1 is set, CH1632 is overridden and low pass filtering is disabled.
+
++-------------+-----------------------------------------------+
+| CH1632      | Configuration                                 |
++-------------+-----------------------------------------------+
+| 0 (default) | time window = 16* *MOVING_AVERAGE_CLK* period |
++-------------+-----------------------------------------------+
+| 1           | time window = 32* *MOVING_AVERAGE_CLK* period |
++-------------+-----------------------------------------------+
+
+.. _rbits-ROCS:
+
+ROCS[1:0] (readout_conf_sel)
+------------------------------------
+
+Readout configuration selection: addressing modes of the incoming spikes.
+
+There are 4 different addressing modes that could be selected. The valid configurations are the following:
+
++-----------+---------------+
+| ROCS[1:0] | Configuration |
++-----------+---------------+
+| 00        | 2x*2y*4f      |
++-----------+---------------+
+| 10        | 4x*4y*1f      |
++-----------+---------------+
+| 01        | 2x*4y*2f      |
++-----------+---------------+
+| 11        | 1x*1y*16f     |
++-----------+---------------+
+
+Where x, y and f represent, respectively, the X, Y and Feature dimensions of the events arriving at the
+Readout Layer.
+
+.. _rbits-BYPREG:
+
+BYPREG (bypass_reg)
+-------------------
+
+When enabled, the output Flip-Flop is bypassed, and the moving average values are directly pushed to the output bus *data2* without a register in between.
+
+In typical operation, BYPREG should be set to '0'.
+
+.. _rbits-OVRTH:
+
+OVRTH (override_threshold_max)
+------------------------------
+
+Override Output Layer Threshold compare. Sends interrupt at each slow clock cycle.
+
+.. _rbits-INEN:
+
+INEN (reg_input_enable)
+------------------------------
+
+Use register configurations or input serial interface settings for *average_sel* and *output_mode_sel*:
+
++---------+-----------------------------------------------------------------------------------------------------------------------------------+
+| Setting | Description                                                                                                                       |
++---------+-----------------------------------------------------------------------------------------------------------------------------------+
+| '0'     | *average_sel* and *output_mode_sel* are set by providing a special command to the Input Serial Interface                          |
++---------+-----------------------------------------------------------------------------------------------------------------------------------+
+| '1'     | *average_sel* and *output_mode_sel* are set by register bits :ref:`AVGSEL[3:0]<rbits-AVGSEL>` and  :ref:`OMSEL[1:0]<rbits-OMSEL>` |
++---------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+.. _rbits-REQDLY:
+
+REQDLY[7:0] (io_interface_req_delay)
+--------------------------------------
+
+This register element configures the delay of the request signal to the output serializer.
+This delay is implemented in order to ensure that the request signal arrives after the data is
+valid at the output serializer.
+For example, when using direct SRAM access through the BIST interface, the request signal to the
+output serializer comes directly from the read request to the SRAM. For this reason,
+a delay is introduced to respect the data ready timing of the SRAM.
+

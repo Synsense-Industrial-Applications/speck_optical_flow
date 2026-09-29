@@ -1,0 +1,133 @@
+.. _filter-config-signals:
+
+DVS Filter Configuration Signal Description
+================================================
+
+.. csv-table:: DVS Filter Configuration Signal Overview
+
+    "Register Bits",Register(s),"Signal Name","Short Description"
+    :ref:`SFR[1:0]<rbits-SFR>`,:ref:`FILTER0[7:6]<reg-FILTER0>`,sramF_read,"Timing Control Filter SRAM - Read Data Ready."
+    :ref:`SFP[5:0]<rbits-SFP>`,:ref:`FILTER0[5:0]<reg-FILTER0>`,sramF_pulse,"Timing Control Filter SRAM - CLK Pulse."
+    :ref:`FCKE<rbits-FCKE>`,:ref:`FILTER1[7]<reg-FILTER1>`,filter_clk_en,"Filter clock enable (using LEAK_CLK)."
+    :ref:`FBYP<rbits-FBYP>`,:ref:`FILTER1[6]<reg-FILTER1>`,filter_bypass,"Bypass filter if '1' (default)."
+    :ref:`SFT[5:0]<rbits-SFT>`,:ref:`FILTER1[5:0]<reg-FILTER1>`,sramF_setup,"Timing Control Filter SRAM - CLK Setup."
+    :ref:`FDEL[15:0]<rbits-FDEL>`,":ref:`FILTER3[7:0]<reg-FILTER3>`, :ref:`2[7:0]<reg-FILTER2>`",filter_delta,"Filter threshold."
+    :ref:`FMOE<rbits-FMOE>`,:ref:`FILTER4[7]<reg-FILTER4>`,filter_mon_en,"Filter monitor enable."
+    :ref:`FKSY[2:0]<rbits-FKSY>`,:ref:`FILTER4[6:4]<reg-FILTER4>`,filter_size_y,"Filter size in Y dimension."
+    :ref:`HPFE<rbits-HPFE>`,:ref:`FILTER4[3]<reg-FILTER4>`,hot_pixel_filter_en,"Main filter enable bit."
+    :ref:`FLPF<rbits-FLPF>`,:ref:`FILTER5[7]<reg-FILTER5>`,filter_lpf,"Enable low-pass filter mode (only in Speck 2f)."
+    :ref:`FKSX[2:0]<rbits-FKSX>`,:ref:`FILTER4[2:0]<reg-FILTER4>`,filter_size_x,"Filter size in X dimension."
+    :ref:`SFBT[1:0]<rbits-SFBT>`,:ref:`FILTER5[5:4]<reg-FILTER5>`,sramF_bist_tsel,"BIST mode Filter SRAM Read Timing Control."
+    :ref:`FMDST[3:0]<rbits-FMDST>`,:ref:`FILTER5[3:0]<reg-FILTER5>`,filter_mon_dest,"Filter monitor destination tag."
+
+
+Detailed Signal Description
+***************************
+
+
+.. _rbits-SFR:
+
+SFR[1:0] (sramF_read)
+----------------------------
+
+Timing Control Filter SRAM - Read Data Ready.
+
+.. note:: The internal Filter SRAM Read timing value is calculated as {SFR1, !(SFR0)}.
+    Therefore, to obtain an internal setting of 0b01, the register SFR must be set to 0b00.
+
+.. _rbits-SFP:
+
+SFP[5:0] (sramF_pulse)
+----------------------------
+
+Timing Control Filter SRAM - CLK Pulse.
+
+.. _rbits-FCKE:
+
+FCKE (filter_clk_en)
+----------------------------
+
+Filter clock enable. If '1', the *CLK_SLOW* signal
+is used as filter clock.
+
+.. note:: The *CLK_SLOW* is forwarded to the filter only when register bits
+   :ref:`SLWCLK[7:0]<rbits-SLWCLK>` are configured accordingly.
+
+.. _rbits-FBYP:
+
+FBYP (filter_bypass)
+----------------------------
+
+When '1' (default), the filter is bypassed.
+When '0', the DVS events are filtered.
+
+.. _rbits-SFT:
+
+SFT[5:0] (sramF_setup)
+----------------------------
+
+Timing Control Filter SRAM - CLK Setup.
+
+.. _rbits-FDEL:
+
+FDEL[15:0] (filter_delta)
+----------------------------
+
+Defines the threshold of the filter. See :ref:`dvs-filter`.
+
+.. _rbits-FMOE:
+
+FMOE (filter_mon_en)
+----------------------------
+
+Enables monitoring of the filter internal messages before counter delta comparison (for debug purposes).
+
+.. _rbits-FKSY:
+
+FKSY[2:0] (filter_size_y)
+----------------------------
+
+Filter size in the Y dimension.
+
+.. _rbits-FKSX:
+
+FKSX[2:0] (filter_size_x)
+----------------------------
+
+Filter size in the X dimension.
+
+.. _rbits-HPFE:
+
+HPFE (hot_pixel_filter_en)
+---------------------------
+
+Enables the filter when set to '1'.
+
+.. _rbits-FLPF:
+
+FLPF (filter_lpf)
+-----------------
+
+Filter low-pass mode enable bit. See :ref:`_filter-low-pass-mode`.
+
+.. _rbits-FMDST:
+
+FMDST[3:0] (filter_mon_dest)
+----------------------------
+
+Filter monitor destination tag. When FMOE is enabled,
+the FMDST is appended to the output message on the monitor bus.
+
+The FMDST should be set to the default value 0b1010 in order
+to match the table shown in :ref:`monitor-encoding-table`.
+
+.. _rbits-SFBT:
+
+SFBT[1:0] (sramF_bist_tsel)
+---------------------------
+
+BIST mode Filter SRAM Read Timing Control.
+
+.. note:: The internal BIST Filter SRAM Read timing value is calculated as {SFBT1, !(SFBT0)}.
+    Therefore, to obtain an internal setting of 0b01, the register SFBT must be set to 0b00.
+

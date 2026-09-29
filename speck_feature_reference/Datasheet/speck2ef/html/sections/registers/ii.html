@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.3. Input Interface Register Description &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.4. Input Interface Configuration Signal Description" href="ii-config.html" />
+    <link rel="prev" title="7.2. Register Addressing" href="addressing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.3. Input Interface Register Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-register-description">7.3.1. Detailed Register Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint0">7.3.1.1. Register: ININT0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint1">7.3.1.2. Register: ININT1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint2">7.3.1.3. Register: ININT2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint3">7.3.1.4. Register: ININT3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint4">7.3.1.5. Register: ININT4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint5">7.3.1.6. Register: ININT5</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint6">7.3.1.7. Register: ININT6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint7">7.3.1.8. Register: ININT7</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint8">7.3.1.9. Register: ININT8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint9">7.3.1.10. Register: ININT9</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint10">7.3.1.11. Register: ININT10</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint11">7.3.1.12. Register: ININT11</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint12">7.3.1.13. Register: ININT12</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint13">7.3.1.14. Register: ININT13</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint14">7.3.1.15. Register: ININT14</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint15">7.3.1.16. Register: ININT15</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint16">7.3.1.17. Register: ININT16</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint17">7.3.1.18. Register: ININT17</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint18">7.3.1.19. Register: ININT18</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint19">7.3.1.20. Register: ININT19</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint20">7.3.1.21. Register: ININT20</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint21">7.3.1.22. Register: ININT21</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint22">7.3.1.23. Register: ININT22</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint23">7.3.1.24. Register: ININT23</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint24">7.3.1.25. Register: ININT24</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint25">7.3.1.26. Register: ININT25</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint26">7.3.1.27. Register: ININT26</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint27">7.3.1.28. Register: ININT27</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint28">7.3.1.29. Register: ININT28</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint29">7.3.1.30. Register: ININT29</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint30">7.3.1.31. Register: ININT30</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint31">7.3.1.32. Register: ININT31</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint32">7.3.1.33. Register: ININT32</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-inint33">7.3.1.34. Register: ININT33</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.3. </span>Input Interface Register Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/ii.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="input-interface-register-description">
+<span id="ininterface-registers"></span><h1><span class="section-number">7.3. </span>Input Interface Register Description<a class="headerlink" href="#input-interface-register-description" title="Permalink to this heading"></a></h1>
+<section id="detailed-register-description">
+<h2><span class="section-number">7.3.1. </span>Detailed Register Description<a class="headerlink" href="#detailed-register-description" title="Permalink to this heading"></a></h2>
+<section id="register-inint0">
+<span id="reg-inint0"></span><h3><span class="section-number">7.3.1.1. </span>Register: ININT0<a class="headerlink" href="#register-inint0" title="Permalink to this heading"></a></h3>
+<p>Address: 0x000</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-pr"><span class="std std-ref">PRst</span></a></p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-sr"><span class="std std-ref">SRst</span></a></p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-prdvs"><span class="std std-ref">PRst_DVS</span></a></p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-srdvs"><span class="std std-ref">SRst_DVS</span></a></p></td>
+<td><p>NA</p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-cguce"><span class="std std-ref">cgu_clk_enable</span></a></p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-cguis"><span class="std std-ref">cgu_ii_sel</span></a></p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-cguove"><span class="std std-ref">cgu_overwrite_ext_mem_ok</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>PR</p></td>
+<td><p>SR</p></td>
+<td><p>PRDVS</p></td>
+<td><p>SRDVS</p></td>
+<td><p>—</p></td>
+<td><p>CGUCE</p></td>
+<td><p>CGUIS</p></td>
+<td><p>CGUOVE</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint1">
+<span id="reg-inint1"></span><h3><span class="section-number">7.3.1.2. </span>Register: ININT1<a class="headerlink" href="#register-inint1" title="Permalink to this heading"></a></h3>
+<p>Address: 0x001</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="ii-config.html#rbits-blen"><span class="std std-ref">burst_len[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>BLEN7</p></td>
+<td><p>BLEN6</p></td>
+<td><p>BLEN5</p></td>
+<td><p>BLEN4</p></td>
+<td><p>BLEN3</p></td>
+<td><p>BLEN2</p></td>
+<td><p>BLEN1</p></td>
+<td><p>BLEN0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint2">
+<span id="reg-inint2"></span><h3><span class="section-number">7.3.1.3. </span>Register: ININT2<a class="headerlink" href="#register-inint2" title="Permalink to this heading"></a></h3>
+<p>Address: 0x002</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="ii-config.html#rbits-blen"><span class="std std-ref">burst_len[15:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>BLEN15</p></td>
+<td><p>BLEN14</p></td>
+<td><p>BLEN13</p></td>
+<td><p>BLEN12</p></td>
+<td><p>BLEN11</p></td>
+<td><p>BLEN10</p></td>
+<td><p>BLEN9</p></td>
+<td><p>BLEN8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint3">
+<span id="reg-inint3"></span><h3><span class="section-number">7.3.1.4. </span>Register: ININT3<a class="headerlink" href="#register-inint3" title="Permalink to this heading"></a></h3>
+<p>Address: 0x003</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="ii-config.html#rbits-blen"><span class="std std-ref">burst_len[23:16]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>BLEN23</p></td>
+<td><p>BLEN22</p></td>
+<td><p>BLEN21</p></td>
+<td><p>BLEN20</p></td>
+<td><p>BLEN19</p></td>
+<td><p>BLEN18</p></td>
+<td><p>BLEN17</p></td>
+<td><p>BLEN16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint4">
+<span id="reg-inint4"></span><h3><span class="section-number">7.3.1.5. </span>Register: ININT4<a class="headerlink" href="#register-inint4" title="Permalink to this heading"></a></h3>
+<p>Address: 0x004</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="ii-config.html#rbits-baddr"><span class="std std-ref">burst_addr[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>BADDR7</p></td>
+<td><p>BADDR6</p></td>
+<td><p>BADDR5</p></td>
+<td><p>BADDR4</p></td>
+<td><p>BADDR3</p></td>
+<td><p>BADDR2</p></td>
+<td><p>BADDR1</p></td>
+<td><p>BADDR0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint5">
+<span id="reg-inint5"></span><h3><span class="section-number">7.3.1.6. </span>Register: ININT5<a class="headerlink" href="#register-inint5" title="Permalink to this heading"></a></h3>
+<p>Address: 0x005</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="ii-config.html#rbits-baddr"><span class="std std-ref">burst_addr[15:8]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>BADDR15</p></td>
+<td><p>BADDR14</p></td>
+<td><p>BADDR13</p></td>
+<td><p>BADDR12</p></td>
+<td><p>BADDR11</p></td>
+<td><p>BADDR10</p></td>
+<td><p>BADDR9</p></td>
+<td><p>BADDR8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint6">
+<span id="reg-inint6"></span><h3><span class="section-number">7.3.1.7. </span>Register: ININT6<a class="headerlink" href="#register-inint6" title="Permalink to this heading"></a></h3>
+<p>Address: 0x006</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="ii-config.html#rbits-baddr"><span class="std std-ref">burst_addr[23:16]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>BADDR23</p></td>
+<td><p>BADDR22</p></td>
+<td><p>BADDR21</p></td>
+<td><p>BADDR20</p></td>
+<td><p>BADDR19</p></td>
+<td><p>BADDR18</p></td>
+<td><p>BADDR17</p></td>
+<td><p>BADDR16</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint7">
+<span id="reg-inint7"></span><h3><span class="section-number">7.3.1.8. </span>Register: ININT7<a class="headerlink" href="#register-inint7" title="Permalink to this heading"></a></h3>
+<p>Address: 0x007</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td colspan="7"><p><a class="reference internal" href="ii-config.html#rbits-iosel"><span class="std std-ref">iosel[6:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>IOSEL6</p></td>
+<td><p>IOSEL5</p></td>
+<td><p>IOSEL4</p></td>
+<td><p>IOSEL3</p></td>
+<td><p>IOSEL2</p></td>
+<td><p>IOSEL1</p></td>
+<td><p>IOSEL0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint8">
+<span id="reg-inint8"></span><h3><span class="section-number">7.3.1.9. </span>Register: ININT8<a class="headerlink" href="#register-inint8" title="Permalink to this heading"></a></h3>
+<p>Address: 0x008</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-aercm"><span class="std std-ref">aerc_mon_en</span></a></p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-p2sm"><span class="std std-ref">p2s_mon_en</span></a></p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-jtgm"><span class="std std-ref">jtag_mon_en</span></a></p></td>
+<td><p>NA</p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-p2ssel"><span class="std std-ref">p2s_input_sel</span></a></p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-p2s2ch"><span class="std std-ref">p2s_two_ch_sel</span></a></p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-p2sdl"><span class="std std-ref">p2s_data_len</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>AERCM</p></td>
+<td><p>P2SM</p></td>
+<td><p>JTGM</p></td>
+<td><p>—</p></td>
+<td><p>P2SSEL</p></td>
+<td><p>P2S2CH</p></td>
+<td><p>P2SDL</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint9">
+<span id="reg-inint9"></span><h3><span class="section-number">7.3.1.10. </span>Register: ININT9<a class="headerlink" href="#register-inint9" title="Permalink to this heading"></a></h3>
+<p>Address: 0x009</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td><p><a class="reference internal" href="ii-config.html#rbits-spibrg"><span class="std std-ref">spi_bridge_mode</span></a></p></td>
+<td colspan="6"><p><a class="reference internal" href="ii-config.html#rbits-iope"><span class="std std-ref">iope[5:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>SPIBRG</p></td>
+<td><p>IOPE5</p></td>
+<td><p>IOPE4</p></td>
+<td><p>IOPE3</p></td>
+<td><p>IOPE2</p></td>
+<td><p>IOPE1</p></td>
+<td><p>IOPE0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint10">
+<span id="reg-inint10"></span><h3><span class="section-number">7.3.1.11. </span>Register: ININT10<a class="headerlink" href="#register-inint10" title="Permalink to this heading"></a></h3>
+<p>Address: 0x00A</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="ii-config.html#rbits-slwclk"><span class="std std-ref">slow_clock[7:0]</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SLWCLK7</p></td>
+<td><p>SLWCLK6</p></td>
+<td><p>SLWCLK5</p></td>
+<td><p>SLWCLK4</p></td>
+<td><p>SLWCLK3</p></td>
+<td><p>SLWCLK2</p></td>
+<td><p>SLWCLK1</p></td>
+<td><p>SLWCLK0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint11">
+<span id="reg-inint11"></span><h3><span class="section-number">7.3.1.12. </span>Register: ININT11<a class="headerlink" href="#register-inint11" title="Permalink to this heading"></a></h3>
+<p>Address: 0x00B</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><span class="xref std std-ref">rgb_dest[3:0]</span></p></td>
+<td><p><span class="xref std std-ref">rgb_form_sel</span></p></td>
+<td><p><span class="xref std std-ref">rgb_awt</span></p></td>
+<td><p><span class="xref std std-ref">rgb_if_en</span></p></td>
+<td><p><span class="xref std std-ref">rgb_mode</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RDST3</p></td>
+<td><p>RDST2</p></td>
+<td><p>RDST1</p></td>
+<td><p>RDST0</p></td>
+<td><p>RFSEL</p></td>
+<td><p>RAWT</p></td>
+<td><p>RIFEN</p></td>
+<td><p>RM</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint12">
+<span id="reg-inint12"></span><h3><span class="section-number">7.3.1.13. </span>Register: ININT12<a class="headerlink" href="#register-inint12" title="Permalink to this heading"></a></h3>
+<p>Address: 0x00C</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><span class="xref std std-ref">rgb_tsel[1:0]</span></p></td>
+<td colspan="4"><p><span class="xref std std-ref">rgb_frame_drop[3:0]</span></p></td>
+<td colspan="2"><p><span class="xref std std-ref">rgb_ch_sel[1:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RTSEL1</p></td>
+<td><p>RTSEL0</p></td>
+<td><p>RFRDP3</p></td>
+<td><p>RFRDP2</p></td>
+<td><p>RFRDP1</p></td>
+<td><p>RFRDP0</p></td>
+<td><p>RCHSEL1</p></td>
+<td><p>RCHSEL0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint13">
+<span id="reg-inint13"></span><h3><span class="section-number">7.3.1.14. </span>Register: ININT13<a class="headerlink" href="#register-inint13" title="Permalink to this heading"></a></h3>
+<p>Address: 0x00D</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_ini_data[7:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RINID7</p></td>
+<td><p>RINID6</p></td>
+<td><p>RINID5</p></td>
+<td><p>RINID4</p></td>
+<td><p>RINID3</p></td>
+<td><p>RINID2</p></td>
+<td><p>RINID1</p></td>
+<td><p>RINID0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint14">
+<span id="reg-inint14"></span><h3><span class="section-number">7.3.1.15. </span>Register: ININT14<a class="headerlink" href="#register-inint14" title="Permalink to this heading"></a></h3>
+<p>Address: 0x00E</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_ini_data[15:8]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RINID15</p></td>
+<td><p>RINID14</p></td>
+<td><p>RINID13</p></td>
+<td><p>RINID12</p></td>
+<td><p>RINID11</p></td>
+<td><p>RINID10</p></td>
+<td><p>RINID9</p></td>
+<td><p>RINID8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint15">
+<span id="reg-inint15"></span><h3><span class="section-number">7.3.1.16. </span>Register: ININT15<a class="headerlink" href="#register-inint15" title="Permalink to this heading"></a></h3>
+<p>Address: 0x00F</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><span class="xref std std-ref">rgb_mon_en</span></p></td>
+<td colspan="4"><p><span class="xref std std-ref">rgb_lfsr_deg4[3:0]</span></p></td>
+<td colspan="3"><p><span class="xref std std-ref">rgb_lfsr_deg3[2:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>RMEN</p></td>
+<td><p>RLDG43</p></td>
+<td><p>RLDG42</p></td>
+<td><p>RLDG41</p></td>
+<td><p>RLDG40</p></td>
+<td><p>RLDG32</p></td>
+<td><p>RLDG31</p></td>
+<td><p>RLDG30</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint16">
+<span id="reg-inint16"></span><h3><span class="section-number">7.3.1.17. </span>Register: ININT16<a class="headerlink" href="#register-inint16" title="Permalink to this heading"></a></h3>
+<p>Address: 0x010</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><span class="xref std std-ref">rgb_mon_63to32</span></p></td>
+<td><p><span class="xref std std-ref">rgb_mon_31to0</span></p></td>
+<td colspan="6"><p><span class="xref std std-ref">rgb_lfsr_deg6[5:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>RMMSB</p></td>
+<td><p>RMLSB</p></td>
+<td><p>RLDG65</p></td>
+<td><p>RLDG64</p></td>
+<td><p>RLDG63</p></td>
+<td><p>RLDG62</p></td>
+<td><p>RLDG61</p></td>
+<td><p>RLDG60</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint17">
+<span id="reg-inint17"></span><h3><span class="section-number">7.3.1.18. </span>Register: ININT17<a class="headerlink" href="#register-inint17" title="Permalink to this heading"></a></h3>
+<p>Address: 0x011</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><span class="xref std std-ref">rgb_size_sel</span></p></td>
+<td colspan="7"><p><span class="xref std std-ref">rgb_lfsr_deg7[6:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>RSZSL</p></td>
+<td><p>RLDG76</p></td>
+<td><p>RLDG75</p></td>
+<td><p>RLDG74</p></td>
+<td><p>RLDG73</p></td>
+<td><p>RLDG72</p></td>
+<td><p>RLDG71</p></td>
+<td><p>RLDG70</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint18">
+<span id="reg-inint18"></span><h3><span class="section-number">7.3.1.19. </span>Register: ININT18<a class="headerlink" href="#register-inint18" title="Permalink to this heading"></a></h3>
+<p>Address: 0x012</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_lfsr_deg8[7:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG87</p></td>
+<td><p>RLDG86</p></td>
+<td><p>RLDG85</p></td>
+<td><p>RLDG84</p></td>
+<td><p>RLDG83</p></td>
+<td><p>RLDG82</p></td>
+<td><p>RLDG81</p></td>
+<td><p>RLDG80</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint19">
+<span id="reg-inint19"></span><h3><span class="section-number">7.3.1.20. </span>Register: ININT19<a class="headerlink" href="#register-inint19" title="Permalink to this heading"></a></h3>
+<p>Address: 0x013</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><span class="xref std std-ref">rgb_lfsr_deg10[1:0]</span></p></td>
+<td><p>NA</p></td>
+<td colspan="5"><p><span class="xref std std-ref">rgb_lfsr_deg9[4:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG101</p></td>
+<td><p>RLDG100</p></td>
+<td><p>—</p></td>
+<td><p>RLDG94</p></td>
+<td><p>RLDG93</p></td>
+<td><p>RLDG92</p></td>
+<td><p>RLDG91</p></td>
+<td><p>RLDG90</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint20">
+<span id="reg-inint20"></span><h3><span class="section-number">7.3.1.21. </span>Register: ININT20<a class="headerlink" href="#register-inint20" title="Permalink to this heading"></a></h3>
+<p>Address: 0x014</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_lfsr_deg10[9:1]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG109</p></td>
+<td><p>RLDG108</p></td>
+<td><p>RLDG107</p></td>
+<td><p>RLDG106</p></td>
+<td><p>RLDG105</p></td>
+<td><p>RLDG104</p></td>
+<td><p>RLDG103</p></td>
+<td><p>RLDG102</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint21">
+<span id="reg-inint21"></span><h3><span class="section-number">7.3.1.22. </span>Register: ININT21<a class="headerlink" href="#register-inint21" title="Permalink to this heading"></a></h3>
+<p>Address: 0x015</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_lfsr_deg11[7:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG117</p></td>
+<td><p>RLDG116</p></td>
+<td><p>RLDG115</p></td>
+<td><p>RLDG114</p></td>
+<td><p>RLDG113</p></td>
+<td><p>RLDG112</p></td>
+<td><p>RLDG111</p></td>
+<td><p>RLDG110</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint22">
+<span id="reg-inint22"></span><h3><span class="section-number">7.3.1.23. </span>Register: ININT22<a class="headerlink" href="#register-inint22" title="Permalink to this heading"></a></h3>
+<p>Address: 0x016</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td colspan="5"><p><span class="xref std std-ref">rgb_lfsr_deg5[4:0]</span></p></td>
+<td colspan="3"><p><span class="xref std std-ref">rgb_lfsr_deg11[10:8]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>RLDG54</p></td>
+<td><p>RLDG53</p></td>
+<td><p>RLDG52</p></td>
+<td><p>RLDG51</p></td>
+<td><p>RLDG50</p></td>
+<td><p>RLDG1110</p></td>
+<td><p>RLDG119</p></td>
+<td><p>RLDG118</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint23">
+<span id="reg-inint23"></span><h3><span class="section-number">7.3.1.24. </span>Register: ININT23<a class="headerlink" href="#register-inint23" title="Permalink to this heading"></a></h3>
+<p>Address: 0x017</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_lfsr_deg12[7:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG127</p></td>
+<td><p>RLDG126</p></td>
+<td><p>RLDG125</p></td>
+<td><p>RLDG124</p></td>
+<td><p>RLDG123</p></td>
+<td><p>RLDG122</p></td>
+<td><p>RLDG121</p></td>
+<td><p>RLDG120</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint24">
+<span id="reg-inint24"></span><h3><span class="section-number">7.3.1.25. </span>Register: ININT24<a class="headerlink" href="#register-inint24" title="Permalink to this heading"></a></h3>
+<p>Address: 0x018</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td colspan="4"><p><span class="xref std std-ref">rgb_spk_thr[3:0]</span></p></td>
+<td colspan="4"><p><span class="xref std std-ref">rgb_lfsr_deg12[11:8]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>RTHR3</p></td>
+<td><p>RTHR2</p></td>
+<td><p>RTHR1</p></td>
+<td><p>RTHR0</p></td>
+<td><p>RLDG1211</p></td>
+<td><p>RLDG1210</p></td>
+<td><p>RLDG129</p></td>
+<td><p>RLDG128</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint25">
+<span id="reg-inint25"></span><h3><span class="section-number">7.3.1.26. </span>Register: ININT25<a class="headerlink" href="#register-inint25" title="Permalink to this heading"></a></h3>
+<p>Address: 0x019</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_lfsr_deg13[7:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG137</p></td>
+<td><p>RLDG136</p></td>
+<td><p>RLDG135</p></td>
+<td><p>RLDG134</p></td>
+<td><p>RLDG133</p></td>
+<td><p>RLDG132</p></td>
+<td><p>RLDG131</p></td>
+<td><p>RLDG130</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint26">
+<span id="reg-inint26"></span><h3><span class="section-number">7.3.1.27. </span>Register: ININT26<a class="headerlink" href="#register-inint26" title="Permalink to this heading"></a></h3>
+<p>Address: 0x01A</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td colspan="5"><p><span class="xref std std-ref">rgb_lfsr_deg13[12:8]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>RLDG1312</p></td>
+<td><p>RLDG1311</p></td>
+<td><p>RLDG1310</p></td>
+<td><p>RLDG139</p></td>
+<td><p>RLDG138</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint27">
+<span id="reg-inint27"></span><h3><span class="section-number">7.3.1.28. </span>Register: ININT27<a class="headerlink" href="#register-inint27" title="Permalink to this heading"></a></h3>
+<p>Address: 0x01B</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_lfsr_deg14[7:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG147</p></td>
+<td><p>RLDG146</p></td>
+<td><p>RLDG145</p></td>
+<td><p>RLDG144</p></td>
+<td><p>RLDG143</p></td>
+<td><p>RLDG142</p></td>
+<td><p>RLDG141</p></td>
+<td><p>RLDG140</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint28">
+<span id="reg-inint28"></span><h3><span class="section-number">7.3.1.29. </span>Register: ININT28<a class="headerlink" href="#register-inint28" title="Permalink to this heading"></a></h3>
+<p>Address: 0x01C</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td colspan="3"><p><span class="xref std std-ref">rgb_clk_dly[1:0]</span></p></td>
+<td colspan="6"><p><span class="xref std std-ref">rgb_lfsr_deg14[13:8]</span></p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>RCKDLY1</p></td>
+<td><p>RCKDLY0</p></td>
+<td><p>RLDG1413</p></td>
+<td><p>RLDG1412</p></td>
+<td><p>RLDG1411</p></td>
+<td><p>RLDG1410</p></td>
+<td><p>RLDG149</p></td>
+<td><p>RLDG148</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint29">
+<span id="reg-inint29"></span><h3><span class="section-number">7.3.1.30. </span>Register: ININT29<a class="headerlink" href="#register-inint29" title="Permalink to this heading"></a></h3>
+<p>Address: 0x01D</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_lfsr_deg15[7:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG157</p></td>
+<td><p>RLDG156</p></td>
+<td><p>RLDG155</p></td>
+<td><p>RLDG154</p></td>
+<td><p>RLDG153</p></td>
+<td><p>RLDG152</p></td>
+<td><p>RLDG151</p></td>
+<td><p>RLDG150</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint30">
+<span id="reg-inint30"></span><h3><span class="section-number">7.3.1.31. </span>Register: ININT30<a class="headerlink" href="#register-inint30" title="Permalink to this heading"></a></h3>
+<p>Address: 0x01E</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td colspan="7"><p><span class="xref std std-ref">rgb_lfsr_deg15[14:8]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>RLDG1514</p></td>
+<td><p>RLDG1513</p></td>
+<td><p>RLDG1512</p></td>
+<td><p>RLDG1511</p></td>
+<td><p>RLDG1510</p></td>
+<td><p>RLDG159</p></td>
+<td><p>RLDG158</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint31">
+<span id="reg-inint31"></span><h3><span class="section-number">7.3.1.32. </span>Register: ININT31<a class="headerlink" href="#register-inint31" title="Permalink to this heading"></a></h3>
+<p>Address: 0x01F</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_lfsr_deg16[7:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG167</p></td>
+<td><p>RLDG166</p></td>
+<td><p>RLDG165</p></td>
+<td><p>RLDG164</p></td>
+<td><p>RLDG163</p></td>
+<td><p>RLDG162</p></td>
+<td><p>RLDG161</p></td>
+<td><p>RLDG160</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint32">
+<span id="reg-inint32"></span><h3><span class="section-number">7.3.1.33. </span>Register: ININT32<a class="headerlink" href="#register-inint32" title="Permalink to this heading"></a></h3>
+<p>Address: 0x020</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_lfsr_deg16[15:8]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RLDG1615</p></td>
+<td><p>RLDG1614</p></td>
+<td><p>RLDG1613</p></td>
+<td><p>RLDG1612</p></td>
+<td><p>RLDG1611</p></td>
+<td><p>RLDG1610</p></td>
+<td><p>RLDG169</p></td>
+<td><p>RLDG168</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-inint33">
+<span id="reg-inint33"></span><h3><span class="section-number">7.3.1.34. </span>Register: ININT33<a class="headerlink" href="#register-inint33" title="Permalink to this heading"></a></h3>
+<p>Address: 0x021</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><span class="xref std std-ref">rgb_nom_max[7:0]</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>RNMAX7</p></td>
+<td><p>RNMAX6</p></td>
+<td><p>RNMAX5</p></td>
+<td><p>RNMAX4</p></td>
+<td><p>RNMAX3</p></td>
+<td><p>RNMAX2</p></td>
+<td><p>RNMAX1</p></td>
+<td><p>RNMAX0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="addressing.html" class="btn btn-neutral float-left" title="7.2. Register Addressing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ii-config.html" class="btn btn-neutral float-right" title="7.4. Input Interface Configuration Signal Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

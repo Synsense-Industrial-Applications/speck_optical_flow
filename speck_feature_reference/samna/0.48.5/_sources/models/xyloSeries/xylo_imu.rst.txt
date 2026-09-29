@@ -1,0 +1,108 @@
+########
+Xylo-IMU
+########
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+Xylo-IMU is a full digital AI chip which consists of
+
+a dedicated IMU data acquisition (MC3632) and conversion block (IMU_IF)
+
+and a processing core (Xylo-Core) of Spiking Neural Network (SNN).
+
+If enabled IMU_IF will read external IMU via SPI master interface, convert IMU data to spike and send the spike to Xylo-Core.
+
+Xylo-Core is a highly configurable SNN processing core, which supports both reservoir and feed-forward network.
+
+Xylo-IMU supports up to 16 input neurons (IN0 ~ IN15), 128 configurable input expansion neurons (IEN0 ~ IEN127), 496 configurable recurrent neurons (RN0 ~ RN495), 128 configurable output expansion neurons (OEN0 ~ OEN127) and up to 16 output readout neurons (ON0 ~ ON15) for classification purpose.
+
+Register / RAM configuration of Xylo-IMU is done via SPI slave interface, internal event (e.g. classification done) could be sent out via interrupt.
+
+***************
+Operation Mode:
+***************
+
+Xylo-Core can be configured to one of three operation mode:
+
+==============
+1. Manual Mode
+==============
+
+Manual mode is debug/test mode of Xylo-IMU. Everything is expected to be done manually in this mode. The procedure is:
+
+* Input :class:`samna.xyloImu.event.Spike` with timestep ignored.
+* Send :class:`samna.xyloImu.event.TriggerProcessing` with timestep ignored to process current input spikes.
+* Read/write register and memory manually.
+
+===================
+1. Accelerated Mode
+===================
+
+Accelerated mode bases on manual mode, and it mocks realtime mode by triggering processing and reading readout automatically. The procedure is:
+
+* Input :class:`samna.xyloImu.event.Spike` with precise and increasing timestep. When spike with latter timestep is received on FPGA, spikes of former timestep will be processed automatically.
+* Send :class:`samna.xyloImu.event.TriggerProcessing` event with target timestep to keep triggering processing by FPGA until target timestep reaches.
+* Read/write register and memory manually to get state after processing.
+
+It has following features:
+
+* Input spikes are processed automatically when spike of latter timestep is received.
+* Processing result of each timestep is read by FPGA automatically as :class:`samna.xyloImu.event.Readout`.
+* It runs in a high speed comparable to realtime mode.
+* It stops automatically when target timestep reaches.
+* You can debug like as manual mode when it stops.
+
+================
+3. RealTime Mode
+================
+
+RealTime mode is a mode that chip triggers processing automatically.
+
+According to its input, there are two use cases of this mode:
+
+^^^^^^^^^^^^^^^^^^^^^^^
+With Acceleration Input
+^^^^^^^^^^^^^^^^^^^^^^^
+
+You can debug with acceleration input under realtime mode. The procedure is:
+
+* Input specific count of :class:`samna.events.Acceleration` events.
+* Send :class:`samna.xyloImu.event.TriggerProcessing` with specific target timestep to process all input accelerations.
+* FPGA reads :class:`samna.xyloImu.event.Readout` of each timestep automatically while processing.
+* FPGA stops processing automatically when target timestep is reached.
+* User gets readouts and analyze.
+
+^^^^^^^^^^^^^^^^^
+With Sensor Input
+^^^^^^^^^^^^^^^^^
+
+Realtime mode with sensor input is typically used for production. The procedure is:
+
+* Apply a configuration of realtime mode with input interface enabled and data source as sensor input.
+* Send a default :class:`samna.xyloImu.event.TriggerProcessing` to trigger processing infinitely.
+* Keep running.
+
+***************
+Basic Examples:
+***************
+
+* :ref:`Xylo-Imu Readout`
+* :ref:`Xylo-Imu TriggerProcessing`
+* :ref:`Xylo-Imu Manual Mode`
+* :ref:`Xylo-Imu Accelerated Mode`
+* :ref:`Xylo-Imu RealTime Mode With Acceleration Input`
+* :ref:`Xylo-Imu RealTime Mode With Sensor Input`
+* :ref:`Mc3632 Read acceleration`
+* :ref:`Xylo-Imu Power Measurement`
+
+**************
+Api Reference:
+**************
+
+* Model: :class:`samna.xyloImu.XyloModel`
+* Event: :ref:`samna.xyloImu.event`
+* Configuration: :ref:`samna.xyloImu.configuration` 
+* Testboard: :class:`samna.xyloImuBoards.XyloImuTestBoard`
+* Mc3632: :class:`samna.unifirm.modules.mc3632.Mc3632`

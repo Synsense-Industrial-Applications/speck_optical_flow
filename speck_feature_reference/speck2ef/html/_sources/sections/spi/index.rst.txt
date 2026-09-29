@@ -1,0 +1,10 @@
+
+SPI Interfaces
+==============================
+
+.. toctree::
+   :titlesonly:
+
+   spi-overview
+   spi-slave
+   spi-master

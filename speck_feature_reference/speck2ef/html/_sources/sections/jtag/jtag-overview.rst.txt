@@ -1,0 +1,239 @@
+.. _jtag-overview:
+
+JTAG Interface
+==============
+
+Speck2e provides a JTAG interface that allows access to multiple internal chip resources:
+
+- Internal SRAMs (R/W)
+- Scan chains
+- Asynchronous Input/Output buses
+
+The JTAG interface is generally slower than SPI for internal SRAM R/W operations, and is
+implemented to provide alternative access to the memories for debugging and testing purposes.
+
+.. _jtag-port:
+
+JTAG Port
+*********
+
+The JTAG interface is accessible via the following pins:
+
++---------+-----------------+
+| Pin     | Description     |
++---------+-----------------+
+| IO5_TMS | Mode Select pin |
++---------+-----------------+
+| IO3_TCK | JTAG Clock      |
++---------+-----------------+
+| IO4_TDI | JTAG Data In    |
++---------+-----------------+
+| IO6_TDO | JTAG Data Out   |
++---------+-----------------+
+
+JTAG TAP Controller Operation
+*****************************
+
+The JTAG interface is represented by a state machine (TAP Controller) that is operated by
+the TMS and TCK signals as represented below:
+
+.. figure:: ../../figures/JTAG_TAP_Controller_State_Diagram.*
+        :scale: 100%
+        :alt: JTAG TAP Controller State Diagram
+
+        JTAG TAP Controller State Diagram
+
+In the state diagram, TMS selects the next state and a TCK pulse moves to one state to the selected one.
+
+When in the *SHIFT_IR* or *SHIFT_DR* states, the chip expects the user to
+clock in, respectively, an 8 bit instruction (see :ref:`jtag-commands`) or
+a data stream of variable length, depending on the operation mode.
+
+To clock in the data, TCK and TDI pins are used, while the output data is
+read simultaneously on the TDO pin.
+
+Getting to Reset State
+^^^^^^^^^^^^^^^^^^^^^^
+
+As shown in the TAP Controller State Machine diagram, the controller can be moved to
+the *TEST LOGIC RESET* state from any other state by:
+
+- Set TMS pin to '1'
+- Send 5 TCK pulses
+
+This guarantees that the current state is *TEST LOGIC RESET*.
+
+As illustrated in the diagram below, keeping TMS high for
+5 TCK cycle will force the state machine to go back to
+Test Logic Reset state no matter in  which state TAP
+controller is:
+
+.. wavedrom::
+
+   { "signal" : [
+         {},
+         { "name": "TCK",        "wave": "x0HlHlHlHlHlHl"},
+         { "name": "TMS",        "wave": "x1.........0.."},
+         { "name": "TDI",        "wave": "x............."},
+         { "name": "TDO",        "wave": "xz............"},
+         { "name": "state",      "wave": "2.2.2.2.2.2.2.", data: ['?', '?', '?','?','?', ['tspan', {class:'h6'}, 'Test Log. Rst'], ['tspan', {class:'h6'}, 'Run_Test/Idle']]},
+      ],
+      config: { hscale: 1 }
+   }
+
+|
+
+High level commands: *send_ir* and *send_dr*
+********************************************
+
+There are two main operations that the JTAG TAP state
+machine controls:
+
+- Instruction Register Scan (IR Scan)
+- Data Register Scan (DR Scan)
+
+These high-level commands are defined to simplify the further description
+of the different operating modes for the Speck2e JTAG interface.
+
+- *send_ir* (Send Instruction Register): corresponds to moving to the *SHIFT-IR* state, then clocking in the
+  instruction via the TDI/TCK pins. The instruction is always 8 bits long.
+- *send_dr* (Send Data Register): corresponds to moving to the *SHIFT-DR* state, then clocking in a stream
+  of bits of variable length via the TDI/TCK pins and, when required, recording the
+  output data available on the TDO pin.
+
+IR Scan Timing
+^^^^^^^^^^^^^^
+
+The following timing diagram shows the Instruction Register Scan operation:
+
+.. wavedrom::
+
+   { "signal" : [
+         {},
+         { "name": "TCK",        "wave": "lHlHlHlHlHlHlHlHlHlHlHlHlHlHlHl"},
+         { "name": "TMS",        "wave": "0.1...0.................1...0.."},
+         { "name": "TDI",        "wave": "x.........2.2.2.2.2.2.2.2.x....", data:['DI[0]','DI[1]', 'DI[2]', 'DI[3]', 'DI[4]', 'DI[5]', 'DI[6]', 'DI[7]']},
+         { "name": "TDO",        "wave": "z.........2.2.2.2.2.2.2.2.z....", data:['DO[0]','DO[1]', 'DO[2]', 'DO[3]', 'DO[4]', 'DO[5]', 'DO[6]', 'DO[7]']},
+         { "name": "state",      "wave": "2..2.2.2.2...............2.2.2.", data: [['tspan', {class:'h6'}, 'Run_Test/Idle'], 'DR-Scan', 'IR-Scan', 'Capture-IR','Shift-IR','Exit1-IR', 'Update-IR', ['tspan', {class:'h6'}, 'Run_Test/Idle']]},
+      ],
+      config: { hscale: 1 }
+   }
+
+|
+
+Some important information:
+
+- Instruction data is transferred always LSB first in TDI bus
+- The data received from TDO bus is also always LSB out first
+- Instruction length is fixed and it is “8-bits”
+- The captured instruction that is transferred to TDO bus is always “b0000_0101”
+
+DR Scan Timing
+^^^^^^^^^^^^^^
+
+The following timing diagram shows the Data Register Scan operation:
+
+.. wavedrom::
+
+   { "signal" : [
+         {},
+         { "name": "TCK",        "wave": "lHlHlHlHlHlHlHlHl|.HlHlHlHlHl"},
+         { "name": "TMS",        "wave": "0.1.0............|....1...0.."},
+         { "name": "TDI",        "wave": "x.......2.2.2.2.2|2.2.2.x....", data:['DI[0]','DI[1]', 'DI[2]', 'DI[3]', '', 'DI[n-3]', 'DI[n-2]', 'DI[n-1]']},
+         { "name": "TDO",        "wave": "z.......2.2.2.2.2|2.2.2.z....", data:['DO[0]','DO[1]', 'DO[2]', 'DO[3]', '', 'DO[n-3]', 'DO[n-2]', 'DO[n-1]']},
+         { "name": "state",      "wave": "2..2.2.2.........|.....2.2.2.", data: [['tspan', {class:'h6'}, 'Run_Test/Idle'], 'DR-Scan', 'Capture-DR','Shift-DR','Exit1-DR', 'Update-DR', ['tspan', {class:'h6'}, 'Run_Test/Idle']]},
+      ],
+      config: { hscale: 1 }
+   }
+
+|
+
+Some important information:
+
+- The data is transferred always LSB first in TDI bus
+- The data received from TDO bus is also always LSB out
+- Data length varies depending on the operation (e.g., scan chain, register read, or memory read)
+- The captured data that is transferred to TDO bus also varies with the operation in progress
+
+TDI/TDO Timing
+^^^^^^^^^^^^^^
+
+The timing for TDI/TDO is as follows:
+- TDI and TDO are sampled/valid on the **rising** edge of TCK
+
+JTAG IDCode
+***********
+
+The JTAG ID Code is provided for testing the JTAG functionality.
+
+ID = 0x149511C3
+
+The ID Code can be read out using the following sequence of commands:
+
+.. code::
+
+   send_ir(IDCODE, 8 bits)
+   send_dr(0x00000000, 32 bits)  # Read ID code on TDO
+
+send_ir(IDCODE, 8 bits)
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. wavedrom::
+
+   { "signal" : [
+         {},
+         { "name": "TCK",        "wave": "lPPPPPPPPPPPPPPPPP"},
+         { "name": "TMS",        "wave": "0.1.0........1.0...", phase:1},
+         { "name": "TDI",        "wave": "x.....10...........", phase:1},
+         { "name": "TDO",        "wave": "z.....x.......z....", phase:1},
+         { "name": "state", 	  "wave": "2.2222.......222..",data: ['Run_Test/Idle', 'DR-Scan', 'IR-Scan', 'Capture-IR','Shift-IR','Exit1-IR','Update-IR','Run_Test/Idle']},
+         {}
+      ],
+      config: { hscale: 2 },
+      head:{
+         text:'Register Read - Step 1 - Instruction for IDCODE (0x01)',
+         tick: -6
+      }
+   }
+
+|
+
+send_dr(0x00000000, 32 bits)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. wavedrom::
+
+   { "signal" : [
+         {},
+         { "name": "TCK",        "wave": "lPPPPPPPPPPPPPPPPPPPP"},
+         { "name": "TMS",        "wave": "0.10.................", phase:1},
+         { "name": "TDI",        "wave": "x....0...............", phase:1},
+         { "name": "TDO",        "wave": "z....1.0...1..0..10..", phase:1},
+         { "name": "state", 	  "wave": "2.222................",data: ['Run_Test/Idle', 'DR-Scan', 'Capture-DR', 'Shift-DR']},
+         {}
+      ],
+      config: { hscale: 2 },
+      head:{
+         text:'IDCODE register holds hex149511C3 -- transfer of Least Significant 16-bits',
+         tick: -5
+      }
+   }
+
+
+.. wavedrom::
+
+   { "signal" : [
+         {},
+         { "name": "TCK",        "wave": "PPPPPPPPPPPPPPPPPPPP"},
+         { "name": "TMS",        "wave": "0...............1.0.", phase:1},
+         { "name": "TDI",        "wave": "0................x..", phase:1},
+         { "name": "TDO",        "wave": "0101010.10.1010..z..", phase:1},
+         { "name": "state", 	  "wave": "2...............222.",data: ['Shift-DR', 'Exit1-DR', 'Update-DR', 'Run_Test/Idle']},
+         {}
+      ],
+      config: { hscale: 2 },
+      head:{
+         text:'IDCODE register holds hex149511C3 -- transfer of Most Significant 16-bits',
+         tick: 15
+      }
+   }

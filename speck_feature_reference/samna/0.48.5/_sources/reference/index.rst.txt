@@ -1,0 +1,47 @@
+#####
+samna
+#####
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   afe2/index
+   boards/index
+   camera/index
+   clustering/index
+   debugging/index
+   device/index
+   dynapse1/index
+   dynapse2/index
+   events/index
+   flasher/index
+   fxtree/index
+   graph/index
+   iris/index
+   jit/index
+   speck2e/index
+   speck2eTestBoard/index
+   speck2f/index
+   speck2fBoards/index
+   specksim/index
+   testingModule/index
+   ui/index
+   unifirm/index
+   util/index
+   xyloA2TestBoard/index
+   xyloAudio3/index
+   xyloCore2/index
+   xyloImu/index
+   xyloImuBoards/index
+
+
+Module content
+--------------
+
+.. automodule:: samna
+   :members:
+   :show-inheritance:
+

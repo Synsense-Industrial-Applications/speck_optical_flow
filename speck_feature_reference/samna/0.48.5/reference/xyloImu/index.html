@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.xyloImu &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="samna.xyloImu.configuration" href="configuration/index.html" />
+    <link rel="prev" title="samna.xyloCore2.event" href="../xyloCore2/event/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="index.html#">samna.xyloImu</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#module-samna.xyloImu">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna</a></li>
+      <li class="breadcrumb-item active">samna.xyloImu</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/xyloImu/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-xyloimu">
+<h1>samna.xyloImu<a class="headerlink" href="index.html#samna-xyloimu" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="configuration/index.html">samna.xyloImu.configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event/index.html">samna.xyloImu.event</a></li>
+</ul>
+</div>
+</section>
+<section id="module-samna.xyloImu">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.xyloImu" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.OperationMode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.</span></span><span class="sig-name descname"><span class="pre">OperationMode</span></span><a class="headerlink" href="index.html#samna.xyloImu.OperationMode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>Manual</p>
+<p>AcceleratedTime</p>
+<p>RealTime</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.OperationMode.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="index.html#samna.xyloImu.OperationMode.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.XyloModel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.</span></span><span class="sig-name descname"><span class="pre">XyloModel</span></span><a class="headerlink" href="index.html#samna.xyloImu.XyloModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Xylo-IMU is a full digital AI chip which consists of</p>
+<p>a dedicated IMU data acquisition and conversion block (IMU_IF)</p>
+<p>and a Spiking Neural Network (SNN) processing core (Xylo-Core).</p>
+<p>If enabled IMU_IF will read external IMU via SPI master interface, convert IMU data to spike and send the spike to Xylo-Core.</p>
+<p>Xylo-Core is a highly configurable SNN processing core, which supports both reservoir and feed-forward network.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.XyloModel.apply_configuration">
+<span class="sig-name descname"><span class="pre">apply_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.XyloModel" title="samna.xyloImu.XyloModel"><span class="pre">samna.xyloImu.XyloModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="configuration/index.html#samna.xyloImu.configuration.XyloConfiguration" title="samna.xyloImu.configuration.XyloConfiguration"><span class="pre">samna.xyloImu.configuration.XyloConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.XyloModel.apply_configuration" title="Link to this definition"></a></dt>
+<dd><p>Apply a specific samna.xyloImu.configuration.XyloConfiguration to the board. Note: This method will open memory access automatically.)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.XyloModel.close_ram_access">
+<span class="sig-name descname"><span class="pre">close_ram_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.XyloModel" title="samna.xyloImu.XyloModel"><span class="pre">samna.xyloImu.XyloModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.XyloModel.close_ram_access" title="Link to this definition"></a></dt>
+<dd><p>Disable memory reading and writing. You are encouraged to call this method to close memory access in order to save power after memory manipulation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.XyloModel.get_configuration">
+<span class="sig-name descname"><span class="pre">get_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.XyloModel" title="samna.xyloImu.XyloModel"><span class="pre">samna.xyloImu.XyloModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="configuration/index.html#samna.xyloImu.configuration.XyloConfiguration" title="samna.xyloImu.configuration.XyloConfiguration"><span class="pre">samna.xyloImu.configuration.XyloConfiguration</span></a></span></span><a class="headerlink" href="index.html#samna.xyloImu.XyloModel.get_configuration" title="Link to this definition"></a></dt>
+<dd><p>Get the cached configuration applied last.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.XyloModel.get_sink_node">
+<span class="sig-name descname"><span class="pre">get_sink_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.XyloModel" title="samna.xyloImu.XyloModel"><span class="pre">samna.xyloImu.XyloModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.DeviceSinkNode_xylo_imu_event_input_event</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.XyloModel.get_sink_node" title="Link to this definition"></a></dt>
+<dd><p>Get the very sink node of Xylo-IMU’s input events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.XyloModel.get_source_node">
+<span class="sig-name descname"><span class="pre">get_source_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.XyloModel" title="samna.xyloImu.XyloModel"><span class="pre">samna.xyloImu.XyloModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.DeviceSourceNode_xylo_imu_event_output_event</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.XyloModel.get_source_node" title="Link to this definition"></a></dt>
+<dd><p>Get the very source node of Xylo-IMU’s output events.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.XyloModel.open_ram_access">
+<span class="sig-name descname"><span class="pre">open_ram_access</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.XyloModel" title="samna.xyloImu.XyloModel"><span class="pre">samna.xyloImu.XyloModel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.XyloModel.open_ram_access" title="Link to this definition"></a></dt>
+<dd><p>Enable memory reading and writing. Xylo-IMU can’t manipulate memory by default, you should call this method to open it before manipulation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.xyloImu.validate_configuration">
+<span class="sig-prename descclassname"><span class="pre">samna.xyloImu.</span></span><span class="sig-name descname"><span class="pre">validate_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="configuration/index.html#samna.xyloImu.configuration.XyloConfiguration" title="samna.xyloImu.configuration.XyloConfiguration"><span class="pre">samna.xyloImu.configuration.XyloConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.xyloImu.validate_configuration" title="Link to this definition"></a></dt>
+<dd><p>Validate the given configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">xyloImu.configuration.XyloConfiguration</span></code>) – The configuration to validate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A pair of the validation result and the analysis string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.xyloImu.xylo_configuration_to_event">
+<span class="sig-prename descclassname"><span class="pre">samna.xyloImu.</span></span><span class="sig-name descname"><span class="pre">xylo_configuration_to_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="configuration/index.html#samna.xyloImu.configuration.XyloConfiguration" title="samna.xyloImu.configuration.XyloConfiguration"><span class="pre">samna.xyloImu.configuration.XyloConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="event/index.html#samna.xyloImu.event.Spike" title="samna.xyloImu.event.Spike"><span class="pre">samna.xyloImu.event.Spike</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.WriteRegisterValue" title="samna.xyloImu.event.WriteRegisterValue"><span class="pre">samna.xyloImu.event.WriteRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.ReadRegisterValue" title="samna.xyloImu.event.ReadRegisterValue"><span class="pre">samna.xyloImu.event.ReadRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.WriteMemoryValue" title="samna.xyloImu.event.WriteMemoryValue"><span class="pre">samna.xyloImu.event.WriteMemoryValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.ReadMemoryValue" title="samna.xyloImu.event.ReadMemoryValue"><span class="pre">samna.xyloImu.event.ReadMemoryValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.ReadMembranePotential" title="samna.xyloImu.event.ReadMembranePotential"><span class="pre">samna.xyloImu.event.ReadMembranePotential</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.ReadSynapticCurrent" title="samna.xyloImu.event.ReadSynapticCurrent"><span class="pre">samna.xyloImu.event.ReadSynapticCurrent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.ReadHiddenSpikeCount" title="samna.xyloImu.event.ReadHiddenSpikeCount"><span class="pre">samna.xyloImu.event.ReadHiddenSpikeCount</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.ReadVersion" title="samna.xyloImu.event.ReadVersion"><span class="pre">samna.xyloImu.event.ReadVersion</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.TriggerProcessing" title="samna.xyloImu.event.TriggerProcessing"><span class="pre">samna.xyloImu.event.TriggerProcessing</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloImu.event.TriggerReadout" title="samna.xyloImu.event.TriggerReadout"><span class="pre">samna.xyloImu.event.TriggerReadout</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../events/index.html#samna.events.Acceleration" title="samna.events.Acceleration"><span class="pre">samna.events.Acceleration</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.xyloImu.xylo_configuration_to_event" title="Link to this definition"></a></dt>
+<dd><p>Get the events for the given Xylo configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">xyloImu.configuration.XyloConfiguration</span></code>) – The configuration to turn into events.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../xyloCore2/event/index.html" class="btn btn-neutral float-left" title="samna.xyloCore2.event" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration/index.html" class="btn btn-neutral float-right" title="samna.xyloImu.configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

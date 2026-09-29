@@ -1,0 +1,139 @@
+###########
+Chip Models
+###########
+
+.. contents:: 
+   :local:
+   :depth: 2
+
+Chip models provide a hardware-agnostic interface for interacting with neuromorphic processors in Samna. 
+Each supported chip has a dedicated model to manage event routing and chip configuration.
+
+*************************
+Initializing a Chip Model
+*************************
+
+After opening a development kit, retrieve its associated chip model to begin operations:
+
+.. code-block:: python
+   :linenos:
+
+   # Get the chip model abstraction
+   chip_model = board.get_model()
+
+.. note::
+   Models bridge physical hardware and software - all interactions with the chip occur through this interface.
+
+************************
+Configuration Management
+************************
+
+Chip models expose a unified API for configuring neuromorphic processors.
+
+===============
+Basic Workflow
+===============
+
+1. **Create** a configuration object
+2. **Modify** parameters
+3. **Apply** to the chip
+
+-----------------------------------
+Example: Configuring a Speck2f Chip
+-----------------------------------
+
+.. code-block:: python
+   :linenos:
+
+   # 1. Create default config
+   config = samna.speck2f.configuration.SpeckConfiguration()
+
+   # 2. Customize parameters
+   config.dvs_layer.monitor_enable = True  # Enable layer monitoring
+
+   # 3. Apply configuration
+   chip_model.apply_configuration(config)
+
+===========
+Key Methods
+===========
+
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+
+   * - Method
+     - Description
+   * - ``apply_configuration(config)``
+     - Applies and validates configuration.
+   * - ``get_configuration()``
+     - Returns a **copy** of the last applied configuration (does not read hardware state).
+
+*********************
+Event Stream Handling
+*********************
+
+Chip models integrate seamlessly with Samna's event filtering system:
+
+==================
+Event Flow Diagram
+==================
+::
+
+   [Source Node] → (RX Events) → [Filter Graph]
+       ↑
+   [Chip Model]
+       ↑
+   [Sink Node] ←(TX Events) ← [Filter Graph]
+   
+==============
+Key Components
+==============
+
+- **Source Node**: Streams events **from** the chip 
+  (use ``get_source_node()``)
+- **Sink Node**: Sends events **to** the chip 
+  (use ``get_sink_node()``)
+
+**********************
+Common Model Functions
+**********************
+
+.. py:class:: Model
+
+   .. py:function:: get_source_node
+
+      Returns a reference to the source event node which will broadcast all events produced by the chip.
+
+   .. py:function:: get_sink_node
+
+      Returns a reference to the sink event node which will transmit all events it receives to the chip.
+
+   .. py:function:: get_configuration
+
+      Returns a copy of the current configuration of the chip. Note that this is simply a copy of configuration
+      provided to the last successful call to :py:meth:`apply_configuration`. This function does not read
+      physical chip state.
+
+   .. py:function:: apply_configuration(configuration)
+
+      Attempts to apply a configuration for the chip. The configuration will first be validated and the configuration
+      will only be applied if validation is successful. If validation does not succeed this method will throw an exception
+      containing a validation error message.
+
+      :param DeviceConfiguration configuration: The configuration specific to the type of chip.
+
+************************
+Supported Chips & Series
+************************
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   speckSeries/summary
+   xyloSeries/summary
+
+.. tip::
+   Use ``samna.<chip_series>.configuration`` namespaces for series-specific configurations 
+   (e.g., ``samna.speck2f.configuration``).

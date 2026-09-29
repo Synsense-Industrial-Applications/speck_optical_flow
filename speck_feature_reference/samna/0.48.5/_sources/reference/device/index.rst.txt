@@ -1,0 +1,19 @@
+############
+samna.device
+############
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.device
+   :members:
+   :show-inheritance:
+

@@ -1,0 +1,143 @@
+.. _convolutional-layer:
+
+Convolutional Layer
+===================
+
+In this section, we briefly describe the features of each of the 9 convolutional
+processing layers (layer cores) of Speck2e.
+
+Detailed descriptions of the :ref:`memory availability<memory-index>`, :ref:`configuration registers<layer-config-signals>` and other features
+of the convolutional layers can be found in the remainder of this document.
+
+The general features of a convolutional layer are:
+
+- **Max input dimension:** 128x128
+- **Max feature output:** size 64x64
+- **Max feature number:** 1024
+- **Weight resolution:** 8 bit
+- **Neuron state resolution:** 16
+- **Max kernel size:** 16x16
+- **Stride:** {1,2,4,8} independent in X/Y
+- **Padding:** [0..7] independent in X/Y
+- **Pooling:** 1:1, 1:2, 1:4
+- **Fanout:** of 2
+- **Total SRAM Size** 0.98157 MB partioned between the 9 layers
+
+.. _leak-operation:
+
+Leak (Bias) operation
+*********************
+
+Each layer includes a leak generation block, which will update all neuron values with
+provided leak values stored in a dedicated Leak SRAM.
+
+The leak circuitry is enabled in a layer by its corresponding register bit :ref:`LKEN<rbits-LKEN>`.
+
+In order to trigger the leak operation, the internal *slow clock* signal is used to provide
+a low-frequency clock of the desired frequency. The *slow clock* signal can be forwarded
+to the convolutional layers by configuring the register bits :ref:`SLWCLK[7:0]<rbits-SLWCLK>`.
+
+The leak clock signal is propagated to all layers with LKEN bit set to '1'.
+
+.. note::
+    The CLK_SLOW is internally enabled *only* when both pins *SCAN_HS_EN* and
+    *SCAN_DATA_EN* are disabled.
+
+    The CLK_SLOW pin is also used to trigger a DVS Filter Counter update
+    (see :ref:`filter-operation`) and as Scan Chain Clock when the Scan Chain
+    is enabled (see :ref:`scan-chain-interface`)
+
+.. _parallel-computation:
+
+Parallel Computing Layers
+*************************
+
+Layer 0
+-------
+
+Layer 0 implements a fully symmetric 2 parallel computation paths to improve throughput with respect to layer 3.
+
+The parallelism is implemented in order to be almost fully transparent to the user, who can consider layers 0, 1 and 2 exactly
+the same in terms of interfaces and programmability.
+
+Layer 0 differs from the other (regular) layers with the following characteristics:
+
+- 2 parallel convolutional cores, processing 1/2 of the input spikes each (2x speed improvement)
+- 2 copies of the same kernel sram, one for each convolutional core
+- 2 neuron updates at the same time when processing adjacent neuron addresses (best performance for even size kernels), with a best case 2x speed improvement
+
+The expected performance increase in throughput is around 3.5x compared to the regular layers.
+
+Two limitations of this parallel implementation are that:
+
+1) The order of the output spikes is not guaranteed. This issue also exists in regular layers, although with less variability.
+2) If a finite train of spikes is sent to the layer, it is not guaranteed that the last spike will be sent to the layer output. This is done to keep the implementation as simple and reliable as possible. Given issue (1), however, it is also not possible to predict what spike will be retained. When another spike is sent to the input of the layer, that should generate an output spike in the same data path, the retained spike will be 'flushed' out.
+
+Layer 1
+-------
+
+Layer 1 implements a partial parallelism in the data flow in order to improve throughput while limiting area utilization on chip.
+
+The parallelism is implemented to be fully transparent to the user.
+
+Layer 1 differs from the other (regular) layers with the following characteristics:
+
+- 2 kernel interfaces handling 1/2 of the kernel data each
+- 2 neuron updates at the same time when processing adjacent neuron addresses (best performance for even size kernels), with a best case 2x speed improvement
+
+The performance of this implementation still has to be characterized in the lab.
+
+Same as for layer 0, two limitations of this parallel implementation are that:
+
+1) The order of the output spikes is not guaranteed. This issue also exists in regular layers, although with less variability.
+2) If a finite train of spikes is sent to the layer, it is not guaranteed that the last spike will be sent to the layer output. This is done to keep the implementation as simple and reliable as possible. Given issue (1), however, it is also not possible to predict what spike will be retained. When another spike is sent to the input of the layer, that should generate an output spike in the same data path, the retained spike will be 'flushed' out.
+
+.. _congestion-balancer:
+
+Congestion Balancer Block
+*************************
+
+In Speck2e, each convolutional layer is equipped with a *congestion balancer* block at its data path input.
+
+The congestion balancer enables dropping of input spikes at any time when the convolutional core of the layer is busy processing previous data.
+Specifically, if a train of spikes are sent to the layer, a number of them will be accepted (via some buffering) and the convolution computation starts.
+If, for example, the kernel is very large and a new spike arrives while the layer input is busy, this new spike will be dropped. As soon as the layer is
+again available, a coming spike will be processed.
+
+This block is then able to adapt the spike input frequency to the convolution by capping it to the maximum that the layer can process.
+
+This block can be enabled via layer register :ref:`BEN<rbits-BEN>`. When disabled, the block will let all spikes through.
+
+.. _decimator:
+
+Spike Decimator Block
+*********************
+
+In Speck2e, each convolutional layer is equipped with a *decimator* block at its data path output.
+
+The decimator block enables the user to reduce the spike rate at the output of a convolutional layer.
+
+This block can be enabled via layer register :ref:`DEN<rbits-DEN>`. When disabled, the block will let all spikes through.
+
+The spike rate can be reduced by setting register bits :ref:`DINT[2:0]<rbits-DINT>`:
+
++------------------------------+--------------------------+
+| :ref:`DINT[2:0]<rbits-DINT>` | Description              |
++------------------------------+--------------------------+
+| 0b000                        | 1 spike passed every 2   |
++------------------------------+--------------------------+
+| 0b001                        | 1 spike passed every 4   |
++------------------------------+--------------------------+
+| 0b010                        | 1 spike passed every 8   |
++------------------------------+--------------------------+
+| 0b011                        | 1 spike passed every 16  |
++------------------------------+--------------------------+
+| 0b100                        | 1 spike passed every 32  |
++------------------------------+--------------------------+
+| 0b101                        | 1 spike passed every 64  |
++------------------------------+--------------------------+
+| 0b110                        | 1 spike passed every 128 |
++------------------------------+--------------------------+
+| 0b111                        | 1 spike passed every 256 |
++------------------------------+--------------------------+
+

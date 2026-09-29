@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10.2. SPI Slave &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10.3. SPI Master" href="spi-master.html" />
+    <link rel="prev" title="10.1. Overview" href="spi-overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">10. SPI Interfaces</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="spi-overview.html">10.1. Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10.2. SPI Slave</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#spi-modes">10.2.1. SPI Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#port">10.2.2. Port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operation-mode">10.2.3. Operation Mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-write">10.2.3.1. Single Write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#single-read">10.2.3.2. Single Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#burst-write">10.2.3.3. Burst Write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#burst-read">10.2.3.4. Burst Read</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#address-mapping">10.2.4. Address Mapping</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">10.2.4.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registers">10.2.4.2. Registers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#srams">10.2.4.3. SRAMs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spi-master.html">10.3. SPI Master</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">10. </span>SPI Interfaces</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">10.2. </span>SPI Slave</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/spi/spi-slave.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spi-slave">
+<span id="spi-slave-interface"></span><h1><span class="section-number">10.2. </span>SPI Slave<a class="headerlink" href="#spi-slave" title="Permalink to this heading"></a></h1>
+<p>The SPI slave interface provides a way to access Register and SRAM memories in Speck2e.
+In this page, the protocol and memory addressing schemes are described.</p>
+<section id="spi-modes">
+<h2><span class="section-number">10.2.1. </span>SPI Modes<a class="headerlink" href="#spi-modes" title="Permalink to this heading"></a></h2>
+<p>The following SPI modes are supported:</p>
+<ul class="simple">
+<li><p>Mode 0: CPOL = 0, CPHA = 0</p></li>
+<li><p>Mode 3: CPOL = 1, CPHA = 1</p></li>
+</ul>
+<p>SPI clock could run up to 1/16 of main clock frequency, max. 6.25 MHz.</p>
+</section>
+<section id="port">
+<span id="spi-slave-port"></span><h2><span class="section-number">10.2.2. </span>Port<a class="headerlink" href="#port" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Port Name</p></td>
+<td><p>Bits</p></td>
+<td><p>Description</p></td>
+<td><p>Remark</p></td>
+</tr>
+<tr class="row-even"><td><p>spi_s_clk_i</p></td>
+<td><p>1</p></td>
+<td><p>incoming SPI clock</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>spi_s_ss_n_i</p></td>
+<td><p>1</p></td>
+<td><p>slave select</p></td>
+<td><p>low active</p></td>
+</tr>
+<tr class="row-even"><td><p>spi_s_mosi_i</p></td>
+<td><p>1</p></td>
+<td><p>incoming data from master</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>spi_s_miso_o</p></td>
+<td><p>1</p></td>
+<td><p>outgoing data to master</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="operation-mode">
+<h2><span class="section-number">10.2.3. </span>Operation Mode<a class="headerlink" href="#operation-mode" title="Permalink to this heading"></a></h2>
+<p>A typical SPI timing is shown in the following figure:</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{signal: [
+  {name: 'spi_ss_n_i', wave: 'hl................h', phase: 0.0},
+  {name: 'spi_sclk_i', wave: '0.hlhl|.hlhlhl|.hl.', phase: -0.1},
+  {name: 'spi_mosi_i', wave: 'x3....|..4.....|.x.', phase: -0.0, data: ['instr[23:0]','wdata[7:0]']},
+  {name: 'spi_miso_o', wave: 'x2.......5.....|.x.', phase: -0.0, data: ['High Impedance','rdata[7:0]']},
+  {},],
+  config: {hscale:1},
+  foot:{
+    text:'SPI single access: CPOL = 0, CPHA = 0 : CLK idle state = low, data sampled on rising edge and shifted on falling edge',
+  }
+}
+</script>
+</div>
+<p>The following table lists the instruction fields from MSB to LSB:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Section</p></td>
+<td><p>Bits</p></td>
+<td><p>Function</p></td>
+</tr>
+<tr class="row-even"><td><p>ACC</p></td>
+<td><p>1</p></td>
+<td><p>0: read (RD), 1: write (WR)</p></td>
+</tr>
+<tr class="row-odd"><td><p>BM</p></td>
+<td><p>2</p></td>
+<td><p>0-: single mode (SM)</p>
+<p>10: short burst mode (SBM)</p>
+<p>11: long burst mode (LBM)</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>BL</p></td>
+<td><p>5</p></td>
+<td><p>SBM: burst length</p>
+<p>SM / LBM: don’t care</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>ADDR</p></td>
+<td><p>16</p></td>
+<td><p>SM: address</p>
+<p>SBM: starting address</p>
+<p>LBM: don’t care</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>In single mode (SM) the address can only be one of the first 2^16
+addresses.</p>
+<p>In short burst mode (SBM) the starting address can only be one of the
+first 2^16 addresses.</p>
+<p>In long burst mode (LBM) the starting address is specified in register
+BADDR (24 bit) and burst length in BLEN (24 bit).</p>
+<p>Depending on Access (ACC) and Burs Mode (BM) the following access types
+are supported:</p>
+<ul class="simple">
+<li><p>Single write</p></li>
+<li><p>Single read</p></li>
+<li><p>Burst write</p></li>
+<li><p>Burst read</p></li>
+</ul>
+<section id="single-write">
+<h3><span class="section-number">10.2.3.1. </span>Single Write<a class="headerlink" href="#single-write" title="Permalink to this heading"></a></h3>
+<p>A single write access waveform is shown in the following figure:</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{signal: [
+      {name: 'spi_ss_n_i', wave: 'hl.................h', phase:  0.0},
+      {name: 'spi_sclk_i', wave: '0.hlhlhl|hlhlhl.|hl.', phase: -0.1},
+      {name: 'spi_mosi_i', wave: 'x1.0.3...|4.....|.x.', phase: -0.0, data: ['instr[21:0]','wdata[7:0]']},
+      {name: 'spi_miso_o', wave: 'x...................', phase: -0.0, data: ['']},
+   ],
+   config: {hscale:1},
+   foot:{
+      text:'SPI single write: CPOL = 0, CPHA = 0 : CLK idle state = low, data sampled on rising edge and shifted on falling edge',
+   }
+}
+</script>
+</div>
+</section>
+<section id="single-read">
+<h3><span class="section-number">10.2.3.2. </span>Single Read<a class="headerlink" href="#single-read" title="Permalink to this heading"></a></h3>
+<p>A single read access waveform is shown in the following figure:</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{signal: [
+      {name: 'spi_ss_n_i', wave: 'hl.................h', phase:  0.0},
+      {name: 'spi_sclk_i', wave: '0.hlhlhl|hlhlhl.|hl.', phase: -0.1},
+      {name: 'spi_mosi_i', wave: 'x0...3...|x.......x.', phase: -0.0, data: ['instr[21:0]']},
+      {name: 'spi_miso_o', wave: 'x.........5.....|.x.', phase: -0.0, data: ['rdata[7:0]']},
+   ],
+   config: {hscale:1},
+   foot:{
+      text:'SPI single read: CPOL = 0, CPHA = 0 : CLK idle state = low, data sampled on rising edge and shifted on falling edge',
+   }
+}
+</script>
+</div>
+</section>
+<section id="burst-write">
+<h3><span class="section-number">10.2.3.3. </span>Burst Write<a class="headerlink" href="#burst-write" title="Permalink to this heading"></a></h3>
+<p>A burst write access waveform is shown in the following figure:</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{signal: [
+      {name: 'spi_ss_n_i', wave: 'hl.............................h', phase: -0.0, data: ['']},
+      {name: 'spi_sclk_i', wave: 'l.hlhlhl|hlhl|hlhl|hlhl|hlhl|hl.', phase: -0.0, data: ['']},
+      {name: 'spi_mosi_i', wave: 'x1...3....4....4....2....4....x.', phase: -0.0, data: ['instr[21:0]','wdata1[7:0]','wdata2[7:0]','......','wdata-n[7:0]']},
+      {name: 'spi_miso_o', wave: 'x.............................x.', phase: -0.0, data: ['']},
+   ],
+   config: {hscale:1},
+   foot:{
+      text:'SPI burst write: CPOL = 0, CPHA = 0 : CLK idle state = low, data sampled on rising edge and shifted on falling edge',
+   }
+}
+</script>
+</div>
+</section>
+<section id="burst-read">
+<h3><span class="section-number">10.2.3.4. </span>Burst Read<a class="headerlink" href="#burst-read" title="Permalink to this heading"></a></h3>
+<p>A burst read access waveform is shown in the following figure:</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{signal: [
+      {name: 'spi_ss_n_i', wave: 'hl.............................h', phase: -0.0},
+      {name: 'spi_sclk_i', wave: 'l.hlhlhl|hlhl|hlhl|hlhl|hlhl|hl.', phase: -0.0},
+      {name: 'spi_mosi_i', wave: 'x0.1.3....x...................x.', phase: -0.0, data: ['instr[21:0]']},
+      {name: 'spi_miso_o', wave: 'x.........5....5....2....5....x.', phase: -0.0, data: ['rdata1[7:0]','rdata2[7:0]','......','rdata-n[7:0]']},
+   ],
+   config: {hscale:1},
+   foot:{
+      text:'SPI burst read: CPOL = 0, CPHA = 0 : CLK idle state = low, data sampled on rising edge and shifted on falling edge',
+   }
+}
+</script>
+</div>
+</section>
+</section>
+<section id="address-mapping">
+<h2><span class="section-number">10.2.4. </span>Address Mapping<a class="headerlink" href="#address-mapping" title="Permalink to this heading"></a></h2>
+<section id="overview">
+<h3><span class="section-number">10.2.4.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Address mapping overview</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Entries</p></td>
+<td><p>Width (Bits)</p></td>
+<td><p>SPI Start Addr.</p></td>
+<td><p>SPI End Addr.</p></td>
+<td><p>Remark</p></td>
+</tr>
+<tr class="row-even"><td><p>Register</p></td>
+<td><p>Register Block</p></td>
+<td><p>2^9</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0000</p></td>
+<td><p>24’h00_0E10</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>N/A</p></td>
+<td><p>reserved</p></td>
+<td><p>2^20 - 2^9</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0E11</p></td>
+<td><p>24’h0F_FFFF</p></td>
+<td><p>not used</p></td>
+</tr>
+<tr class="row-even"><td><p>SRAM</p></td>
+<td><p>SRAMs</p></td>
+<td><p>3*(2^20)</p></td>
+<td><p>8</p></td>
+<td><p>24’h10_0000</p></td>
+<td><p>24’h49_7FFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>N/A</p></td>
+<td><p>reserved</p></td>
+<td><p>12*(2^20)</p></td>
+<td><p>8</p></td>
+<td><p>24’h49_8000</p></td>
+<td><p>24’hFF_FFFF</p></td>
+<td><p>not used</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="registers">
+<h3><span class="section-number">10.2.4.2. </span>Registers<a class="headerlink" href="#registers" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Entries</p></td>
+<td><p>Width (bits)</p></td>
+<td><p>SPI Start Addr.</p></td>
+<td><p>SPI End Addr.</p></td>
+</tr>
+<tr class="row-even"><td><p>ININT0-33</p></td>
+<td><p><a class="reference internal" href="../registers/ii.html#ininterface-registers"><span class="std std-ref">Input interface registers</span></a></p></td>
+<td><p>34</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0000</p></td>
+<td><p>24’h00_0021</p></td>
+</tr>
+<tr class="row-odd"><td><p>DVS0-16</p></td>
+<td><p><a class="reference internal" href="../registers/dvs.html#dvs-registers"><span class="std std-ref">DVS registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0100</p></td>
+<td><p>24’h00_0110</p></td>
+</tr>
+<tr class="row-even"><td><p>FILTER0-5</p></td>
+<td><p><a class="reference internal" href="../registers/filter.html#registers-filter"><span class="std std-ref">DVS filter registers</span></a></p></td>
+<td><p>6</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0118</p></td>
+<td><p>24’h00_012E</p></td>
+</tr>
+<tr class="row-odd"><td><p>READOUT0-22</p></td>
+<td><p><a class="reference internal" href="../registers/readout.html#readout-registers"><span class="std std-ref">Readout layer registers</span></a></p></td>
+<td><p>23</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0200</p></td>
+<td><p>24’h00_0216</p></td>
+</tr>
+<tr class="row-even"><td><p>ROUTER0-44</p></td>
+<td><p><a class="reference internal" href="../registers/router.html#router-registers"><span class="std std-ref">Router registers</span></a></p></td>
+<td><p>45</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0300</p></td>
+<td><p>24’h00_032C</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONV0-17 (L0)</p></td>
+<td><p><a class="reference internal" href="../registers/layer.html#layer-registers"><span class="std std-ref">Layer 0 registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0600</p></td>
+<td><p>24’h00_0610</p></td>
+</tr>
+<tr class="row-even"><td><p>CONV0-17 (L1)</p></td>
+<td><p><a class="reference internal" href="../registers/layer.html#layer-registers"><span class="std std-ref">Layer 1 registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0700</p></td>
+<td><p>24’h00_0710</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONV0-17 (L2)</p></td>
+<td><p><a class="reference internal" href="../registers/layer.html#layer-registers"><span class="std std-ref">Layer 2 registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0800</p></td>
+<td><p>24’h00_0810</p></td>
+</tr>
+<tr class="row-even"><td><p>CONV0-17 (L3)</p></td>
+<td><p><a class="reference internal" href="../registers/layer.html#layer-registers"><span class="std std-ref">Layer 3 registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0900</p></td>
+<td><p>24’h00_0910</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONV0-17 (L4)</p></td>
+<td><p><a class="reference internal" href="../registers/layer.html#layer-registers"><span class="std std-ref">Layer 4 registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0A00</p></td>
+<td><p>24’h00_0A10</p></td>
+</tr>
+<tr class="row-even"><td><p>CONV0-17 (L5)</p></td>
+<td><p><a class="reference internal" href="../registers/layer.html#layer-registers"><span class="std std-ref">Layer 5 registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0B00</p></td>
+<td><p>24’h00_0B10</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONV0-17 (L6)</p></td>
+<td><p><a class="reference internal" href="../registers/layer.html#layer-registers"><span class="std std-ref">Layer 6 registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0C00</p></td>
+<td><p>24’h00_0C10</p></td>
+</tr>
+<tr class="row-even"><td><p>CONV0-17 (L7)</p></td>
+<td><p><a class="reference internal" href="../registers/layer.html#layer-registers"><span class="std std-ref">Layer 7 registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0D00</p></td>
+<td><p>24’h00_0D10</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONV0-17 (L8)</p></td>
+<td><p><a class="reference internal" href="../registers/layer.html#layer-registers"><span class="std std-ref">Layer 8 registers</span></a></p></td>
+<td><p>17</p></td>
+<td><p>8</p></td>
+<td><p>24’h00_0E00</p></td>
+<td><p>24’h00_0E10</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="srams">
+<h3><span class="section-number">10.2.4.3. </span>SRAMs<a class="headerlink" href="#srams" title="Permalink to this heading"></a></h3>
+<p>The internal SRAMs can be accessed using SPI through their BIST interfaces.</p>
+<p>The addressing of the SRAMs follows the descriptions in <a class="reference internal" href="../memory/bist-access.html#bist-addressing"><span class="std std-ref">BIST Address mapping</span></a>. For each SRAM, the
+BIST address for the first SRAM word is always 0x00000. When accessing the specific SRAM via SPI,
+the starting address listed in the following table matches address 0x00000 of that SRAM.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For compatibility reasons, all SRAMs have the same available addressing size.
+Nonetheless, some SRAMs utilize only part of this addressing space. It is responsibility of
+the user to not write unavailable address locations. For example, Leak SRAMs are 1ki elements in
+size, so for Leak SRAM of layer 3, address 0x36_03FF should not be exceeded.</p>
+</div>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Description</p></td>
+<td><p>Entries</p></td>
+<td><p>Width (Bits)</p></td>
+<td><p>SPI Start Addr.</p></td>
+<td><p>SPI End Addr.</p></td>
+<td><p>Remark</p></td>
+</tr>
+<tr class="row-even"><td><p>L0_NRAM</p></td>
+<td><p>Layer 0 Neuron RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x10_0000</p></td>
+<td><p>0x11_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L1_NRAM</p></td>
+<td><p>Layer 1 Neuron RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x12_0000</p></td>
+<td><p>0x13_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L2_NRAM</p></td>
+<td><p>Layer 2 Neuron RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x14_0000</p></td>
+<td><p>0x15_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L3_NRAM</p></td>
+<td><p>Layer 3 Neuron RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x16_0000</p></td>
+<td><p>0x17_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L4_NRAM</p></td>
+<td><p>Layer 4 Neuron RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x18_0000</p></td>
+<td><p>0x19_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L5_NRAM</p></td>
+<td><p>Layer 5 Neuron RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x1A_0000</p></td>
+<td><p>0x1B_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L6_NRAM</p></td>
+<td><p>Layer 6 Neuron RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x1C_0000</p></td>
+<td><p>0x1D_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L7_NRAM</p></td>
+<td><p>Layer 7 Neuron RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x1E_0000</p></td>
+<td><p>0x1F_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L8_NRAM</p></td>
+<td><p>Layer 8 Neuron RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x20_0000</p></td>
+<td><p>0x21_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L0_KRAM</p></td>
+<td><p>Layer 0 Kernel RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x22_0000</p></td>
+<td><p>0x23_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L1_KRAM</p></td>
+<td><p>Layer 1 Kernel RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x24_0000</p></td>
+<td><p>0x25_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L2_KRAM</p></td>
+<td><p>Layer 2 Kernel RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x26_0000</p></td>
+<td><p>0x27_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L3_KRAM</p></td>
+<td><p>Layer 3 Kernel RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x28_0000</p></td>
+<td><p>0x29_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L4_KRAM</p></td>
+<td><p>Layer 4 Kernel RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x2A_0000</p></td>
+<td><p>0x2B_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L5_KRAM</p></td>
+<td><p>Layer 5 Kernel RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x2C_0000</p></td>
+<td><p>0x2D_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L6_KRAM</p></td>
+<td><p>Layer 6 Kernel RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x2E_0000</p></td>
+<td><p>0x2F_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L7_KRAM</p></td>
+<td><p>Layer 7 Kernel RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x30_0000</p></td>
+<td><p>0x31_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L8_KRAM</p></td>
+<td><p>Layer 8 Kernel RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x32_0000</p></td>
+<td><p>0x33_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L0_LRAM</p></td>
+<td><p>Layer 0 Bias / Leak RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x34_0000</p></td>
+<td><p>0x35_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L1_LRAM</p></td>
+<td><p>Layer 1 Bias / Leak RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x36_0000</p></td>
+<td><p>0x37_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L2_LRAM</p></td>
+<td><p>Layer 2 Bias / Leak RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x38_0000</p></td>
+<td><p>0x39_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L3_LRAM</p></td>
+<td><p>Layer 3 Bias / Leak RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x3A_0000</p></td>
+<td><p>0x3B_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L4_LRAM</p></td>
+<td><p>Layer 4 Bias / Leak RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x3C_0000</p></td>
+<td><p>0x3D_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L5_LRAM</p></td>
+<td><p>Layer 5 Bias / Leak RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x3E_0000</p></td>
+<td><p>0x3F_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L6_LRAM</p></td>
+<td><p>Layer 6 Bias / Leak RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x40_0000</p></td>
+<td><p>0x41_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>L7_LRAM</p></td>
+<td><p>Layer 7 Bias / Leak RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x42_0000</p></td>
+<td><p>0x43_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>L8_LRAM</p></td>
+<td><p>Layer 8 Bias / Leak RAM</p></td>
+<td><p>2^17</p></td>
+<td><p>8</p></td>
+<td><p>0x44_0000</p></td>
+<td><p>0x45_FFFF</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>FRAM</p></td>
+<td><p>Filter RAM</p></td>
+<td><p>2^15</p></td>
+<td><p>8</p></td>
+<td><p>0x48_0000</p></td>
+<td><p>0x49_7FFF</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="example">
+<h4><span class="section-number">10.2.4.3.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h4>
+<p>We want to write Neuron 137 of Layer 2:</p>
+<p>Neuron SRAMs have 16-bit words, so we need to do two writes of 8 bits.</p>
+<p>The address of the LSB part of the Neuron data is then:</p>
+<ul class="simple">
+<li><p>Starting SRAM addressing: 0x14_0000</p></li>
+<li><p>Neuron in hex: hex(137) = 0x89</p></li>
+<li><p>2x locations per neuron -&gt; starting relative location = 0x89 * 2 = 0x112</p></li>
+</ul>
+<p>Address of 8 LSB = 0x14_0112
+Address of 8 MSB = 0x14_0113</p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="spi-overview.html" class="btn btn-neutral float-left" title="10.1. Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spi-master.html" class="btn btn-neutral float-right" title="10.3. SPI Master" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flasher &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="3rd Party Cameras" href="3rdpartyCamera.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="flasher.html#">Flasher</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="flasher.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flasher.html#firmware-header-format">Firmware Header Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flasher.html#api-reference">Api Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Flasher</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/flasher.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="flasher">
+<h1>Flasher<a class="headerlink" href="flasher.html#flasher" title="Link to this heading"></a></h1>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="flasher.html#examples" id="id1">Examples</a></p></li>
+<li><p><a class="reference internal" href="flasher.html#firmware-header-format" id="id2">Firmware Header Format</a></p></li>
+<li><p><a class="reference internal" href="flasher.html#api-reference" id="id3">Api Reference</a></p></li>
+</ul>
+</nav>
+<p>This page will tell you how to flash a board with firmware.</p>
+<p>You can find the firmware for our boards <a class="reference external" href="https://www.dropbox.com/scl/fo/srjp39ljp4vwhokjm2j68/ACPOOrCj_gq6MTCsEoTBfKw?rlkey=ey5mfefdt3u3ybzjvxwu2qcux&amp;e=1&amp;st=xo8v4k88&amp;dl=0">here</a>.</p>
+<p>You can see all connected boards using command:  <cite>lsusb</cite>, it will list each device’s information:</p>
+<ul class="simple">
+<li><p>Bus number</p></li>
+<li><p>Device index</p></li>
+<li><p>vendor id</p></li>
+<li><p>product id</p></li>
+</ul>
+<p>for example there is a device : <cite>Bus 002 Device 003: ID 04b4:5bc2 Cypress Semiconductor Corp.</cite> , then this device has a bus number of 2, a device index of 3, a vendor id of 0x04b4 and a product id of 0x5bc2.</p>
+<p>Note every time you unplug and plug in, the devices information may be changed.</p>
+<section id="examples">
+<h2><a class="toc-backref" href="flasher.html#id1" role="doc-backlink">Examples</a><a class="headerlink" href="flasher.html#examples" title="Link to this heading"></a></h2>
+<p>Please replace the filename in example to the real firmware to run them.</p>
+<ul class="simple">
+<li><p><strong>flash empty board</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># assume there is only one empty device to flash</span>
+<span class="linenos"> 4</span><span class="n">d</span> <span class="o">=</span> <span class="n">get_empty_devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 5</span><span class="c1"># after done, the product id of the device will change to some other value from 0x00F3.</span>
+<span class="linenos"> 6</span><span class="n">program_empty_fx3_ram</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">PATH_TO_THE_FX3_IMAGE</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="c1"># don&#39;t unplug, we need to flash fx3 before unpluging. as device has changed, we should get device info again.</span>
+<span class="linenos"> 9</span><span class="n">d</span> <span class="o">=</span> <span class="n">get_programmable_devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">10</span><span class="c1"># after done, if the file written into flash is different from the file written into ram, you need reboot to take effect, i.e. unplug and plug in again to let the FX3 boot from flash.</span>
+<span class="linenos">11</span><span class="n">program_fx3_flash</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">PATH_TO_THE_FX3_IMAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>flash fx3 firmware to flash</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">d</span> <span class="o">=</span> <span class="n">get_programmable_devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">4</span><span class="n">program_fx3_flash</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">PATH_TO_THE_FX3_IMAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>flash fpga firmware to flash then boot it from flash</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">d</span> <span class="o">=</span> <span class="n">get_programmable_devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">4</span><span class="n">program_fpga_flash</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">PATH_TO_THE_FPGA_IMAGE</span><span class="p">)</span>  <span class="c1"># you don&#39;t need to unplug the board</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>program fpga firmware from PC</strong></p></li>
+</ul>
+<p>In this way the FPGA is programmed from the firmware in the PC directly, without writing to the flash. So it is
+a one-time only program and becomes invalid after power off.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">d</span> <span class="o">=</span> <span class="n">get_programmable_devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">4</span><span class="n">samna</span><span class="o">.</span><span class="n">flasher</span><span class="o">.</span><span class="n">program_fpga_from_pc</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">PATH_TO_THE_FPGA_IMAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>print firmware header</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># print fx3 firmware file header info</span>
+<span class="linenos"> 4</span><span class="n">print_firmware_header_from_file</span><span class="p">(</span><span class="n">PATH_TO_THE_FX3_IMAGE</span><span class="p">,</span> <span class="n">FileType</span><span class="o">.</span><span class="n">fx3Firmware</span><span class="p">)</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># print fpga firmware file header info</span>
+<span class="linenos"> 7</span><span class="n">print_firmware_header_from_file</span><span class="p">(</span><span class="n">PATH_TO_THE_FPGA_IMAGE</span><span class="p">,</span> <span class="n">FileType</span><span class="o">.</span><span class="n">fpgaFirmware</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1"># the second input enumerator can be neglected</span>
+<span class="linenos">10</span><span class="n">print_firmware_header_from_file</span><span class="p">(</span><span class="n">PATH_TO_THE_FX3_IMAGE</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">print_firmware_header_from_file</span><span class="p">(</span><span class="n">PATH_TO_THE_FPGA_IMAGE</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>write firmware header</strong></p></li>
+</ul>
+<p>If there is no header in the target file, a header will be added. Or a new header will overwrite the old header.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># write fx3 firmware header</span>
+<span class="linenos">4</span><span class="n">write_firmware_header</span><span class="p">(</span><span class="n">PATH_TO_THE_FX3_IMAGE</span><span class="p">,</span> <span class="n">FileType</span><span class="o">.</span><span class="n">fx3Firmware</span><span class="p">,</span> <span class="n">PRODUCT_ID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">VERSION</span><span class="p">,</span> <span class="n">OUTPUT_IMG_FILE</span><span class="p">)</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="c1"># write fpga firmware header</span>
+<span class="linenos">7</span><span class="n">write_firmware_header</span><span class="p">(</span><span class="n">PATH_TO_THE_FPGA_IMAGE</span><span class="p">,</span> <span class="n">FileType</span><span class="o">.</span><span class="n">fpgaFirmware</span><span class="p">,</span> <span class="n">PRODUCT_ID</span><span class="p">,</span> <span class="n">CHIP_ID</span><span class="p">,</span> <span class="n">VERSION</span><span class="p">,</span> <span class="n">OUTPUT_IMG_FILE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The available <code class="docutils literal notranslate"><span class="pre">PRODUCT_ID</span></code> for SynSense products are listed in <a class="reference internal" href="install.html#supported-devices"><span class="std std-ref">Supported Devices</span></a>.</p>
+<p>The available <code class="docutils literal notranslate"><span class="pre">CHIP_ID</span></code> are:</p>
+<ul class="simple">
+<li><p>Speck2fModuleDevKit: 21</p></li>
+<li><p>Speck2fDevKit: 22</p></li>
+<li><p>XyloImuTestBoard: 23</p></li>
+<li><p>XyloAudio3TestBoard: 24</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> is a list of three elements, representing the major, minor and patch respectively.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">OUTPUT_IMG_FILE</span></code> specifies the output firmware file, leave “” means overwrite the original firmware file.</p>
+<ul class="simple">
+<li><p><strong>print device info</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">d</span> <span class="o">=</span> <span class="n">get_programmable_devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">4</span><span class="n">print_firmware_info_from_device</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>make board empty</strong></p></li>
+</ul>
+<p>If you want to erase all images (fx3 image and fpga image), you can use the following commands:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">d</span> <span class="o">=</span> <span class="n">get_programmable_devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">4</span><span class="n">samna</span><span class="o">.</span><span class="n">flasher</span><span class="o">.</span><span class="n">make_board_empty</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>read daughter board info</strong></p></li>
+</ul>
+<p>Every daughter board has an unique daughter board info stores in the EEPROM, it can be read by the following commands:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">d</span> <span class="o">=</span> <span class="n">get_programmable_devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">4</span><span class="c1"># where the second parameter is the index of the daughter board, which is usually 0</span>
+<span class="linenos">5</span><span class="n">info</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">flasher</span><span class="o">.</span><span class="n">read_daughter_board_info</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">6</span>
+<span class="linenos">7</span><span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>read board info</strong></p></li>
+</ul>
+<p>Every mother board or dev kit main board has an unique board info stores in the flash, it can be read by the following commands:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">samna.flasher</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">d</span> <span class="o">=</span> <span class="n">get_programmable_devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">4</span><span class="n">info</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">flasher</span><span class="o">.</span><span class="n">read_board_info</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="firmware-header-format">
+<h2><a class="toc-backref" href="flasher.html#id2" role="doc-backlink">Firmware Header Format</a><a class="headerlink" href="flasher.html#firmware-header-format" title="Link to this heading"></a></h2>
+<p>main header:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span>Content: [SYN][TYPE][md5]
+Bytes:   [ 3 ][ 1  ][32 ]
+</pre></div>
+</div>
+<p>sub-header of fx3:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span>Content: [PID][version]
+Bytes:   [ 2 ][   3   ]
+</pre></div>
+</div>
+<p>sub-header of fpga:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span>Content: [PID][CID][version]
+Bytes:   [ 2 ][ 1 ][   3   ]
+</pre></div>
+</div>
+</section>
+<section id="api-reference">
+<h2><a class="toc-backref" href="flasher.html#id3" role="doc-backlink">Api Reference</a><a class="headerlink" href="flasher.html#api-reference" title="Link to this heading"></a></h2>
+<p>Flasher api <a class="reference internal" href="reference/flasher/index.html#samna-flasher"><span class="std std-ref">samna.flasher</span></a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="3rdpartyCamera.html" class="btn btn-neutral float-left" title="3rd Party Cameras" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="faq.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

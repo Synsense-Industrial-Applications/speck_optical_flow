@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.xyloCore2.configuration &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="samna.xyloCore2.event" href="../event/index.html" />
+    <link rel="prev" title="samna.xyloCore2" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">samna.xyloCore2</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#module-samna.xyloCore2">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">samna</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna.xyloCore2</a></li>
+      <li class="breadcrumb-item active">samna.xyloCore2.configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/reference/xyloCore2/configuration/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-xylocore2-configuration">
+<h1>samna.xyloCore2.configuration<a class="headerlink" href="index.html#samna-xylocore2-configuration" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.xyloCore2.configuration">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.xyloCore2.configuration" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.InputConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloCore2.configuration.</span></span><span class="sig-name descname"><span class="pre">InputConfig</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.InputConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The input weight configuration of xylo v2.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.InputConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.InputConfig" title="samna.xyloCore2.configuration.InputConfig"><span class="pre">samna.xyloCore2.configuration.InputConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.InputConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.InputConfig.syn2_weights">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">syn2_weights</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.InputConfig.syn2_weights" title="Link to this definition"></a></dt>
+<dd><p>The weights between input neurons and input expansion neurons of Isyn2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.InputConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.InputConfig" title="samna.xyloCore2.configuration.InputConfig"><span class="pre">samna.xyloCore2.configuration.InputConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.InputConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.InputConfig.weight_bit_shift">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weight_bit_shift</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.InputConfig.weight_bit_shift" title="Link to this definition"></a></dt>
+<dd><p>Input Weight Bit Shift.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.InputConfig.weights">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.InputConfig.weights" title="Link to this definition"></a></dt>
+<dd><p>The weights between input neurons and input expansion neurons.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.OutputNeuron">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloCore2.configuration.</span></span><span class="sig-name descname"><span class="pre">OutputNeuron</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.OutputNeuron" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The options for each output neuron.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.OutputNeuron.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.OutputNeuron" title="samna.xyloCore2.configuration.OutputNeuron"><span class="pre">samna.xyloCore2.configuration.OutputNeuron</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.OutputNeuron.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.OutputNeuron.i_syn_decay">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">i_syn_decay</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.OutputNeuron.i_syn_decay" title="Link to this definition"></a></dt>
+<dd><p>The decay parameter of synapse current (dash syn) of ON.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.OutputNeuron.threshold">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">threshold</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.OutputNeuron.threshold" title="Link to this definition"></a></dt>
+<dd><p>Threshold for membrane potential (Vth) of ON.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.OutputNeuron.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.OutputNeuron" title="samna.xyloCore2.configuration.OutputNeuron"><span class="pre">samna.xyloCore2.configuration.OutputNeuron</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.OutputNeuron.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.OutputNeuron.v_mem_bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_mem_bias</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.OutputNeuron.v_mem_bias" title="Link to this definition"></a></dt>
+<dd><p>The membrane potential bias of ON.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.OutputNeuron.v_mem_decay">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_mem_decay</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.OutputNeuron.v_mem_decay" title="Link to this definition"></a></dt>
+<dd><p>The decay parameter of membrane potential (dash mem) of ON.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReadoutConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloCore2.configuration.</span></span><span class="sig-name descname"><span class="pre">ReadoutConfig</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReadoutConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The readout weight and output neuron configuration of xylo v2.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReadoutConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.ReadoutConfig" title="samna.xyloCore2.configuration.ReadoutConfig"><span class="pre">samna.xyloCore2.configuration.ReadoutConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReadoutConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReadoutConfig.neurons">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neurons</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReadoutConfig.neurons" title="Link to this definition"></a></dt>
+<dd><p>A vector of output neuron configurations, each element is an instance of <a class="reference internal" href="index.html#samna.xyloCore2.configuration.OutputNeuron" title="samna.xyloCore2.configuration.OutputNeuron"><code class="xref py py-class docutils literal notranslate"><span class="pre">OutputNeuron</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReadoutConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.ReadoutConfig" title="samna.xyloCore2.configuration.ReadoutConfig"><span class="pre">samna.xyloCore2.configuration.ReadoutConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReadoutConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReadoutConfig.weight_bit_shift">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weight_bit_shift</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReadoutConfig.weight_bit_shift" title="Link to this definition"></a></dt>
+<dd><p>Output Weight Bit Shift.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReadoutConfig.weights">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReadoutConfig.weights" title="Link to this definition"></a></dt>
+<dd><p>Weights between reservoir neurons and output neurons.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloCore2.configuration.</span></span><span class="sig-name descname"><span class="pre">ReservoirConfig</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The reservoir weight and neuron configuration of xylo v2.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirConfig.aliasing">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">aliasing</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirConfig.aliasing" title="Link to this definition"></a></dt>
+<dd><p>Whether enable reservoir alias.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.ReservoirConfig" title="samna.xyloCore2.configuration.ReservoirConfig"><span class="pre">samna.xyloCore2.configuration.ReservoirConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirConfig.neurons">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neurons</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirConfig.neurons" title="Link to this definition"></a></dt>
+<dd><p>A vector of neuron configurations, each element is an instance of <a class="reference internal" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron" title="samna.xyloCore2.configuration.ReservoirNeuron"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReservoirNeuron</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirConfig.syn2_weights">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">syn2_weights</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirConfig.syn2_weights" title="Link to this definition"></a></dt>
+<dd><p>The 2nd recurrent synapse weight of reservoir neurons fanout.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.ReservoirConfig" title="samna.xyloCore2.configuration.ReservoirConfig"><span class="pre">samna.xyloCore2.configuration.ReservoirConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirConfig.weight_bit_shift">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weight_bit_shift</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirConfig.weight_bit_shift" title="Link to this definition"></a></dt>
+<dd><p>Reservoir Weight Bit Shift.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirConfig.weights">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirConfig.weights" title="Link to this definition"></a></dt>
+<dd><p>The recurrent synapse weights of reservoir neurons fanout.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirNeuron">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloCore2.configuration.</span></span><span class="sig-name descname"><span class="pre">ReservoirNeuron</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The options for each reservoir neuron.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirNeuron.alias_target">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alias_target</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron.alias_target" title="Link to this definition"></a></dt>
+<dd><p>The aliasing target neuron ID of RSN, default None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirNeuron.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron" title="samna.xyloCore2.configuration.ReservoirNeuron"><span class="pre">samna.xyloCore2.configuration.ReservoirNeuron</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirNeuron.i_syn2_decay">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">i_syn2_decay</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron.i_syn2_decay" title="Link to this definition"></a></dt>
+<dd><p>The decay parameter of 2nd synapse current (dash syn) of RSN.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirNeuron.i_syn_decay">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">i_syn_decay</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron.i_syn_decay" title="Link to this definition"></a></dt>
+<dd><p>The decay parameter of synapse current (dash syn) of RSN.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirNeuron.threshold">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">threshold</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron.threshold" title="Link to this definition"></a></dt>
+<dd><p>Threshold for membrane potential (Vth) of RSN.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirNeuron.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron" title="samna.xyloCore2.configuration.ReservoirNeuron"><span class="pre">samna.xyloCore2.configuration.ReservoirNeuron</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirNeuron.v_mem_bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_mem_bias</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron.v_mem_bias" title="Link to this definition"></a></dt>
+<dd><p>The membrane potential bias of RSN.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.ReservoirNeuron.v_mem_decay">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_mem_decay</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.ReservoirNeuron.v_mem_decay" title="Link to this definition"></a></dt>
+<dd><p>The decay parameter of membrane potential (dash mem) of RSN.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloCore2.configuration.</span></span><span class="sig-name descname"><span class="pre">XyloConfiguration</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Contains configuration options and network parameters for a xylo a2
+device. Applied to a device via <cite>apply_configuration()</cite> on the device
+model.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.bias_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bias_enable</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.bias_enable" title="Link to this definition"></a></dt>
+<dd><p>Whether enable reservoir alias</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.clear_network_state">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clear_network_state</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.clear_network_state" title="Link to this definition"></a></dt>
+<dd><p>Whether clear state memory when apply configuration.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.debug">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">debug</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.debug" title="Link to this definition"></a></dt>
+<dd><p>Options for debug.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.direct_fetch_state_ram">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">direct_fetch_state_ram</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.direct_fetch_state_ram" title="Link to this definition"></a></dt>
+<dd><p>If it’s set to True, Directly fetch state RAMs (NSCRAM, RSC2RAM, NMPRAM and RSPKRAM) during processing, RAM init via SPI interface needs to be done at first. Or do not directly fetch state RAMs (NSCRAM, RSC2RAM, NMPRAM and RSPKRAM) during processing, RAM init via SPI interface not needed</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.enable_hibernation_mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_hibernation_mode</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.enable_hibernation_mode" title="Link to this definition"></a></dt>
+<dd><p>If it’s set to True, enter hibernation mode when internal states decayed to stable / equilibrium state. Or do not enter hibernation mode when internal states decayed to stable / equilibrium state</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.XyloConfiguration" title="samna.xyloCore2.configuration.XyloConfiguration"><span class="pre">samna.xyloCore2.configuration.XyloConfiguration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.hibernation_mode_time_resolution_wrap">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hibernation_mode_time_resolution_wrap</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.hibernation_mode_time_resolution_wrap" title="Link to this definition"></a></dt>
+<dd><p>Hibernation Mode Time Resolution Wrap</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.input">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.input" title="Link to this definition"></a></dt>
+<dd><p>Input configuration. Instance of <a class="reference internal" href="index.html#samna.xyloCore2.configuration.InputConfig" title="samna.xyloCore2.configuration.InputConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.operation_mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">operation_mode</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.operation_mode" title="Link to this definition"></a></dt>
+<dd><p>Three modes to select:</p>
+<ul class="simple">
+<li><p>Manual mode.</p></li>
+<li><p>AcceleratedTime mode.</p></li>
+<li><p>RealTime mode.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.readout">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">readout</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.readout" title="Link to this definition"></a></dt>
+<dd><p>Readout configuration. Instance of <a class="reference internal" href="index.html#samna.xyloCore2.configuration.ReadoutConfig" title="samna.xyloCore2.configuration.ReadoutConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadoutConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.reservoir">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reservoir</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.reservoir" title="Link to this definition"></a></dt>
+<dd><p>Reservoir configuration. Instance of <a class="reference internal" href="index.html#samna.xyloCore2.configuration.ReservoirConfig" title="samna.xyloCore2.configuration.ReservoirConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReservoirConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.synapse2_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">synapse2_enable</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.synapse2_enable" title="Link to this definition"></a></dt>
+<dd><p>Whether enable Isyn2</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.time_resolution_wrap">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time_resolution_wrap</span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.time_resolution_wrap" title="Link to this definition"></a></dt>
+<dd><p>Time resolution wrap in full auto mode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloCore2.configuration.XyloConfiguration.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloCore2.configuration.XyloConfiguration" title="samna.xyloCore2.configuration.XyloConfiguration"><span class="pre">samna.xyloCore2.configuration.XyloConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloCore2.configuration.XyloConfiguration.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="samna.xyloCore2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../event/index.html" class="btn btn-neutral float-right" title="samna.xyloCore2.event" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

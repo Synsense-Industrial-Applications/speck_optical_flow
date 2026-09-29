@@ -1,0 +1,14 @@
+.. _speck-layers:
+
+Speck2e Computational Layers
+==============================
+
+The Speck2e architecture consists of a number of *layers*, reminescent
+of the layers composing a Convolutional Neural Network (CNN).
+
+Specifically, there are 11 Total layers:
+
+- 1x :ref:`Event (or DVS) Pre-Processing layer<event-pre-processing>`
+- 9x :ref:`Convolutional (incl. pooling) layers<convolutional-layer>`
+- 1x :ref:`Readout layer<readout-layer>` operating in average, max, max average, or threshold modes
+

@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.device &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="samna.dynapse1" href="../dynapse1/index.html" />
+    <link rel="prev" title="samna.debugging" href="../debugging/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="index.html#">samna.device</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#module-samna.device">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna</a></li>
+      <li class="breadcrumb-item active">samna.device</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/device/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-device">
+<h1>samna.device<a class="headerlink" href="index.html#samna-device" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.device">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.device" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.device.DeviceInfo">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.device.</span></span><span class="sig-name descname"><span class="pre">DeviceInfo</span></span><a class="headerlink" href="index.html#samna.device.DeviceInfo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>DeviceInfo is a structure that contains infomations about a device supported by Samna.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.device.DeviceInfo.device_type_name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device_type_name</span></span><a class="headerlink" href="index.html#samna.device.DeviceInfo.device_type_name" title="Link to this definition"></a></dt>
+<dd><p>The name of the device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.device.DeviceInfo.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><span class="pre">samna.device.DeviceInfo</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.device.DeviceInfo.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.device.DeviceInfo.logic_version">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logic_version</span></span><a class="headerlink" href="index.html#samna.device.DeviceInfo.logic_version" title="Link to this definition"></a></dt>
+<dd><p>The logical version of the device.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.device.DeviceInfo.serial_number">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">serial_number</span></span><a class="headerlink" href="index.html#samna.device.DeviceInfo.serial_number" title="Link to this definition"></a></dt>
+<dd><p>The serial number of the device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.device.DeviceInfo.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><span class="pre">samna.device.DeviceInfo</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.device.DeviceInfo.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.device.DeviceInfo.usb_bus_number">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">usb_bus_number</span></span><a class="headerlink" href="index.html#samna.device.DeviceInfo.usb_bus_number" title="Link to this definition"></a></dt>
+<dd><p>The USB bus number of the device.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.device.DeviceInfo.usb_device_address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">usb_device_address</span></span><a class="headerlink" href="index.html#samna.device.DeviceInfo.usb_device_address" title="Link to this definition"></a></dt>
+<dd><p>The USB device address of the device.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.device.close_device">
+<span class="sig-prename descclassname"><span class="pre">samna.device.</span></span><span class="sig-name descname"><span class="pre">close_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../dynapse1/index.html#samna.dynapse1.Dynapse1Model" title="samna.dynapse1.Dynapse1Model"><span class="pre">samna.dynapse1.Dynapse1Model</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.camera.inivation.Davis</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.camera.inivation.DvXplorer</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.camera.psee.Camera</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../xyloA2TestBoard/index.html#samna.xyloA2TestBoard.XyloA2TestBoard" title="samna.xyloA2TestBoard.XyloA2TestBoard"><span class="pre">samna.xyloA2TestBoard.XyloA2TestBoard</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../xyloImuBoards/index.html#samna.xyloImuBoards.XyloImuTestBoard" title="samna.xyloImuBoards.XyloImuTestBoard"><span class="pre">samna.xyloImuBoards.XyloImuTestBoard</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../xyloAudio3/index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../speck2eTestBoard/index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.Speck2fCharacterizationBoard" title="samna.speck2fBoards.Speck2fCharacterizationBoard"><span class="pre">samna.speck2fBoards.Speck2fCharacterizationBoard</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.Speck2fModuleDevKit" title="samna.speck2fBoards.Speck2fModuleDevKit"><span class="pre">samna.speck2fBoards.Speck2fModuleDevKit</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.Speck2fDevKit" title="samna.speck2fBoards.Speck2fDevKit"><span class="pre">samna.speck2fBoards.Speck2fDevKit</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.Speck2fLcc84LoulanBoard" title="samna.speck2fBoards.Speck2fLcc84LoulanBoard"><span class="pre">samna.speck2fBoards.Speck2fLcc84LoulanBoard</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.Speck2fModuleLoulanBoard" title="samna.speck2fBoards.Speck2fModuleLoulanBoard"><span class="pre">samna.speck2fBoards.Speck2fModuleLoulanBoard</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.Speck2fCharQiuciBoard" title="samna.speck2fBoards.Speck2fCharQiuciBoard"><span class="pre">samna.speck2fBoards.Speck2fCharQiuciBoard</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.dynapse2.Dynapse2Stack</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.dynapse2.Dynapse2DevBoard</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.device.close_device" title="Link to this definition"></a></dt>
+<dd><p>Close a given device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>(</strong> (<em>device</em>) – class:) : The device to close.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.device.get_all_devices">
+<span class="sig-prename descclassname"><span class="pre">samna.device.</span></span><span class="sig-name descname"><span class="pre">get_all_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><span class="pre">samna.device.DeviceInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.device.get_all_devices" title="Link to this definition"></a></dt>
+<dd><p>Get all supported devices that are currently connected to the machine.</p>
+<p>The list also contains devices that are currently open in a different process.
+For a list of devices that can still be opened from this process, use
+<a class="reference internal" href="index.html#samna.device.get_unopened_devices" title="samna.device.get_unopened_devices"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_unopened_devices()</span></code></a> instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of <a class="reference internal" href="index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceInfo</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.device.get_opened_devices">
+<span class="sig-prename descclassname"><span class="pre">samna.device.</span></span><span class="sig-name descname"><span class="pre">get_opened_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><span class="pre">samna.device.DeviceInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.device.get_opened_devices" title="Link to this definition"></a></dt>
+<dd><p>Get all devices that have been opened by this device controller.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of <a class="reference internal" href="index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceInfo</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.device.get_unopened_devices">
+<span class="sig-prename descclassname"><span class="pre">samna.device.</span></span><span class="sig-name descname"><span class="pre">get_unopened_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><span class="pre">samna.device.DeviceInfo</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.device.get_unopened_devices" title="Link to this definition"></a></dt>
+<dd><p>Get all supported devices that are currently connected to the machine and are not in use by any process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of <a class="reference internal" href="index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceInfo</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.device.open_device">
+<span class="sig-prename descclassname"><span class="pre">samna.device.</span></span><span class="sig-name descname"><span class="pre">open_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="index.html#samna.device.open_device" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>open_device(deviceInfo: samna.device.DeviceInfo, defaultConfig: samna.device.DefaultConfigBase = None) -&gt; Union[samna.dynapse1.Dynapse1Model, samna.camera.inivation.Davis, samna.camera.inivation.DvXplorer, samna.camera.psee.Camera, samna.xyloA2TestBoard.XyloA2TestBoard, samna.xyloImuBoards.XyloImuTestBoard, samna.xyloAudio3.XyloAudio3TestBoard, samna.speck2eTestBoard.Speck2eTestBoard, samna.speck2fBoards.Speck2fCharacterizationBoard, samna.speck2fBoards.Speck2fModuleDevKit, samna.speck2fBoards.Speck2fDevKit, samna.speck2fBoards.Speck2fLcc84LoulanBoard, samna.speck2fBoards.Speck2fModuleLoulanBoard, samna.speck2fBoards.Speck2fCharQiuciBoard, samna.dynapse2.Dynapse2Stack, samna.dynapse2.Dynapse2DevBoard]</p></li>
+</ol>
+<p>Open a device given its device info. Returns the previously opened device on subsequent calls.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deviceInfo</strong> (<a class="reference internal" href="index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceInfo</span></code></a>) – The device info of the device.</p></li>
+<li><p><strong>defaultConfig</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultConfigBase</span></code>]) – <p>The default configuration of the device,
+this should be one of follwing types:</p>
+<ul>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CharBoardDefaultConfig</span></code> for Speck2fCharacterizationBoard</p></li>
+<li><p><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.DevKitDefaultConfig" title="samna.speck2fBoards.DevKitDefaultConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DevKitDefaultConfig</span></code></a> for Speck2fModuleDevKit, Speck2fDevKit</p></li>
+<li><p><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.ZynqBoardDefaultConfig" title="samna.speck2fBoards.ZynqBoardDefaultConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ZynqBoardDefaultConfig</span></code></a> for Speck2fLcc84LoulanBoard and Speck2fModuleLoulanBoard</p></li>
+<li><p><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.ZynqCharBoardDefaultConfig" title="samna.speck2fBoards.ZynqCharBoardDefaultConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ZynqCharBoardDefaultConfig</span></code></a> for Speck2fCharQiuciBoard</p></li>
+</ul>
+<p>Once a default config is set, its settings are used until new defaults are provided in <cite>reset_board_soft</cite>.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The opened device.</p>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>open_device(nameAndId: str, defaultConfig: samna.device.DefaultConfigBase = None) -&gt; Union[samna.dynapse1.Dynapse1Model, samna.camera.inivation.Davis, samna.camera.inivation.DvXplorer, samna.camera.psee.Camera, samna.xyloA2TestBoard.XyloA2TestBoard, samna.xyloImuBoards.XyloImuTestBoard, samna.xyloAudio3.XyloAudio3TestBoard, samna.speck2eTestBoard.Speck2eTestBoard, samna.speck2fBoards.Speck2fCharacterizationBoard, samna.speck2fBoards.Speck2fModuleDevKit, samna.speck2fBoards.Speck2fDevKit, samna.speck2fBoards.Speck2fLcc84LoulanBoard, samna.speck2fBoards.Speck2fModuleLoulanBoard, samna.speck2fBoards.Speck2fCharQiuciBoard, samna.dynapse2.Dynapse2Stack, samna.dynapse2.Dynapse2DevBoard]</p></li>
+</ol>
+<p>Open a device given its device name and optionally an id in format of “NAME[:ID]”.</p>
+<dl class="simple">
+<dt>The current supported “NAME” are:</dt><dd><ul class="simple">
+<li><p>Dynapse1DevKit</p></li>
+<li><p>Davis346</p></li>
+<li><p>Davis240</p></li>
+<li><p>DVXplorer</p></li>
+<li><p>PSeeCamera</p></li>
+<li><p>XyloA2TestBoard</p></li>
+<li><p>Speck2eTestBoard</p></li>
+<li><p>Speck2etTestBoard</p></li>
+<li><p>Speck2eDevKit</p></li>
+<li><p>Speck2fCharacterizationBoard</p></li>
+<li><p>DYNAP-SE2 Stack</p></li>
+<li><p>DYNAP-SE2 DevBoard</p></li>
+<li><p>Speck2fModuleDevKit</p></li>
+<li><p>Speck2fDevKit</p></li>
+<li><p>Speck2fLcc84LoulanBoard</p></li>
+<li><p>Speck2fModuleLoulanBoard</p></li>
+<li><p>XyloImuTestBoard</p></li>
+<li><p>XyloAudio3TestBoard</p></li>
+<li><p>Speck2fCharQiuciBoard</p></li>
+</ul>
+</dd>
+</dl>
+<p>The optional ID allows the selection of a specific device to open. Subsequent calls with the same
+NAME and ID return the previously opened device.</p>
+<p>If no ID is provided, the next available device with the given device name will be opened.
+This usage never returns an already opened device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nameAndId</strong> (<em>string</em>) – It should be in format of “NAME[:ID]”</p></li>
+<li><p><strong>defaultConfig</strong> (Optional[<code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultConfigBase</span></code>]) – <p>The default configuration of the device,
+this should be one of following types:</p>
+<ul>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CharBoardDefaultConfig</span></code> for Speck2fCharacterizationBoard</p></li>
+<li><p><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.DevKitDefaultConfig" title="samna.speck2fBoards.DevKitDefaultConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DevKitDefaultConfig</span></code></a> for Speck2fModuleDevKit, Speck2fDevKit and Speck2fLcc84LoulanBoard</p></li>
+<li><p><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.ZynqBoardDefaultConfig" title="samna.speck2fBoards.ZynqBoardDefaultConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ZynqBoardDefaultConfig</span></code></a> for Speck2fLcc84LoulanBoard and Speck2fModuleLoulanBoard</p></li>
+<li><p><a class="reference internal" href="../speck2fBoards/index.html#samna.speck2fBoards.ZynqCharBoardDefaultConfig" title="samna.speck2fBoards.ZynqCharBoardDefaultConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ZynqCharBoardDefaultConfig</span></code></a> for Speck2fCharQiuciBoard</p></li>
+</ul>
+<p>Once a default config is set, its settings are used until new defaults are provided in <cite>reset_board_soft</cite>.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The opened device.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../debugging/index.html" class="btn btn-neutral float-left" title="samna.debugging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../dynapse1/index.html" class="btn btn-neutral float-right" title="samna.dynapse1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

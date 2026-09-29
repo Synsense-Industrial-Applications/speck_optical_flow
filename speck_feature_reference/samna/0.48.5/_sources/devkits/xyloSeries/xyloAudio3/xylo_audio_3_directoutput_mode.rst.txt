@@ -1,0 +1,106 @@
+******************************
+XyloAudio 3 Direct Output Mode
+******************************
+
+In Direct Output mode, XyloAudio 3 continuously processes events as they are received.
+Since the exact timing of event arrivals is uncertain, the chip must be configured to receive input
+directly from one of the onboard microphones, rather than event-based input.
+
+Once processing begins, the chip operates autonomously, collecting input during one timestep and
+processing it in the next. After each timestep is processed, the state of the chip's output pins is updated
+to reflect the classification result. Whenever the output pins change state,
+a :class:`samna.xyloAudio3.event.DirectOutputValue` event is generated.
+Interaction with the chip during this period is not possible.
+
+To stop the processing and regain control of the chip, you must reconfigure the chip into a different mode.
+
+Below is an example of how to use Direct Output mode with a basic input source configuration.
+For more detailed configuration options, refer to the :ref:`samna.xyloAudio3.configuration` documentation.
+The example uses the following packages:
+::
+
+    - samna                 0.39.8
+
+.. code-block:: python
+
+    import samna
+    import time
+
+    # Open the device and connect the source and sink nodes so we can communicate with Xylo.
+    board = samna.device.open_device("XyloAudio3TestBoard")
+    xylo = board.get_model()
+    source = samna.graph.source_to(xylo.get_sink_node())
+    sink = samna.graph.sink_from(xylo.get_source_node())
+    stopwatch = board.get_stop_watch()
+
+    # In Direct Output mode we have to specify a timestep duration.
+    # Default clock frequency was not changed, so we use that to calculate `tr_wrap`.
+    dt_s = 0.2 # 200 milliseconds
+    board_config = samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig()
+    main_clock_frequency_hz = board_config.main_clock_frequency
+    tr_wrap = main_clock_frequency_hz * dt_s
+
+    # Configure Xylo in Direct Output mode and configure the timestep and output duration.
+    xylo_config = samna.xyloAudio3.configuration.XyloConfiguration()
+    xylo_config.operation_mode = samna.xyloAudio3.OperationMode.DirectOutput
+    xylo_config.time_resolution_wrap = int(tr_wrap)
+    xylo_config.output_counter_wrap = int(tr_wrap * 0.5)
+
+    # Define a simple network configuration to map half the input neurons to
+    # the first output neuron and the other half to the second output neuron
+    input_count = 16
+    hidden_count = 2
+    output_count = 2
+    xylo_config.input.weights = ([[1, 0]] * (input_count // 2)) + ([[0,1]] * (input_count // 2))
+    xylo_config.hidden.weights = [[0] * hidden_count] * hidden_count
+    xylo_config.hidden.neurons = [samna.xyloAudio3.configuration.HiddenNeuron(threshold=16, v_mem_decay=1, i_syn_decay=1)] * hidden_count
+    xylo_config.readout.neurons = [samna.xyloAudio3.configuration.OutputNeuron(threshold=16, v_mem_decay=1, i_syn_decay=1)] * output_count
+    xylo_config.readout.weights = [[1, 0], [0, 1]]
+
+    # Configure the input source.
+    use_digital = True
+    if use_digital:
+        # Choose DigitalMicrophone as input source.
+        xylo_config.input_source = samna.xyloAudio3.InputSource.DigitalMicrophone
+        # We need to set `clock_direction` to 1 (Xylo output), because there is no external clock.
+        xylo_config.digital_frontend.pdm_preprocessing.clock_direction = 1
+        xylo_config.digital_frontend.pdm_preprocessing.clock_edge = 0
+        # Xylo clock frequency for PDM sampling can be influenced here.
+        xylo_config.debug.sdm_clock_ratio = 24
+    else:
+        # Choose AnalogMicrophone as input source.
+        xylo_config.input_source = samna.xyloAudio3.InputSource.AnalogMicrophone
+        # Disable automatic gain control by setting a fixed gain.
+        xylo_config.analog_frontend.automatic_gain_control.enable_pga_fixed_gain = True
+        xylo_config.analog_frontend.automatic_gain_control.pga_fixed_gain_index_value = 0
+
+    xylo.apply_configuration(xylo_config)
+
+    # Communication with the device is asynchronous, so we don't know when the configuration is finished.
+    # Normally this is not a problem, because events are guaranteed to be sent in order.
+    # But for this script we want to let Xylo run for a specific amount of time, so we need to synchronise somehow,
+    # the easiest way is to read a register and wait for the response.
+    source.write([samna.xyloAudio3.event.ReadRegisterValue(address=0)])
+    events = sink.get_n_events(1, timeout=1000)
+    assert len(events) == 1 and isinstance(events[0], samna.xyloAudio3.event.RegisterValue)
+
+    # Now we are ready to start processing, the chip keeps running indefinitely after this command.
+    stopwatch.start()
+    source.write([samna.xyloAudio3.event.TriggerProcessing()])
+    print("Start running in Direct Output mode...")
+
+    # Normally one would directly connect a peripheral to observe the output class.
+    # But for this example we just read and store events for 5 seconds.
+    output_values = []
+    read_until = time.time() + 5.0
+    while (now:= time.time()) < read_until:
+        remaining_time_ms = (read_until - now) * 1000
+        events = sink.get_events_blocking(int(remaining_time_ms))
+        for ev in events:
+            if isinstance(ev, samna.xyloAudio3.event.DirectOutputValue):
+                output_values.append(ev)
+
+    print("Continuing in Direct Output mode...")
+
+    # Xylo will keep running in Direct Output mode indefinitely
+    # Reapply a different configuration to stop running

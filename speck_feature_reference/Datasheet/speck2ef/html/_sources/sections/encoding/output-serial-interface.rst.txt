@@ -1,0 +1,38 @@
+.. _output-serial-interface-encoding:
+
+Output Serial Interface Encoding
+================================
+
+As described in the :ref:`output-serial-interface` section, the output interface receives
+data from both the Monitor bus (*data1*, channel #1) and the Output MUX (*data2*, channel #2).
+
+Source 1 (Monitor bus)
+-----------------------
+
+The encoding of the Monitor bus can be found in section: :ref:`monitor-bus-encoding`.
+
+.. _readout-to-p2s-encoding:
+
+Source 2 (Readout Layer)
+-------------------------
+
+When Source 2 is selected to be sent to the output serial interface, output serializer
+outputs the state of the :ref:`Readout Layer<readout-layer>`
+For the encoding in normal operation, see :ref:`readout-output-modes`.
+
+Encoding summary
+----------------
+
+.. table:: Speck2e Output Serial Interface Encoding
+    :class: table-small
+    :widths: 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+    +-----------------+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+--------+
+    | Input CH        | Bits                                                                                                                       |
+    +-----------------+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+--------+
+    |                 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0      |
+    +-----------------+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+--------+
+    | *Monitor Bus*   |  .. centered:: :ref:`Monitor bus [25:0]<monitor-bus-encoding>`                                                             |
+    +-----------------+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+--------+
+    | *Readout Layer* | 1  | 1  | 1  | 1  | 1  | .. centered:: :ref:`Readout Layer Output (neuron output layer data) [20:0]<readout-output-modes>` |
+    +-----------------+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+---+---+---+---+---+---+---+---+---+--------+

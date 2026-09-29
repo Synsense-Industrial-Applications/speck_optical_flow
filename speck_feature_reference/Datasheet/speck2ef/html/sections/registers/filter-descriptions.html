@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register: FILTER0 &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Register: FILTER0</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/filter-descriptions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="register-filter0">
+<span id="reg-filter0"></span><h1>Register: FILTER0<a class="headerlink" href="#register-filter0" title="Permalink to this heading"></a></h1>
+<p>Address: 0x118</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="filter-config.html#rbits-sfr"><span class="std std-ref">sramF_read</span></a></p></td>
+<td colspan="6"><p><a class="reference internal" href="filter-config.html#rbits-sfp"><span class="std std-ref">sramF_pulse</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SFR1</p></td>
+<td><p>SFR0</p></td>
+<td><p>SFP5</p></td>
+<td><p>SFP4</p></td>
+<td><p>SFP3</p></td>
+<td><p>SFP2</p></td>
+<td><p>SFP1</p></td>
+<td><p>SFP0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-filter1">
+<span id="reg-filter1"></span><h1>Register: FILTER1<a class="headerlink" href="#register-filter1" title="Permalink to this heading"></a></h1>
+<p>Address: 0x119</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="filter-config.html#rbits-fcke"><span class="std std-ref">filter_clk_en</span></a></p></td>
+<td><p><a class="reference internal" href="filter-config.html#rbits-fbyp"><span class="std std-ref">filter_bypass</span></a></p></td>
+<td colspan="6"><p><a class="reference internal" href="filter-config.html#rbits-sft"><span class="std std-ref">sramF_setup</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>FCKE</p></td>
+<td><p>FBYP</p></td>
+<td><p>SFT5</p></td>
+<td><p>SFT4</p></td>
+<td><p>SFT3</p></td>
+<td><p>SFT2</p></td>
+<td><p>SFT1</p></td>
+<td><p>SFT0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-filter2">
+<span id="reg-filter2"></span><h1>Register: FILTER2<a class="headerlink" href="#register-filter2" title="Permalink to this heading"></a></h1>
+<p>Address: 0x11A</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="filter-config.html#rbits-fdel"><span class="std std-ref">filter_delta</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>FDEL7</p></td>
+<td><p>FDEL6</p></td>
+<td><p>FDEL5</p></td>
+<td><p>FDEL4</p></td>
+<td><p>FDEL3</p></td>
+<td><p>FDEL2</p></td>
+<td><p>FDEL1</p></td>
+<td><p>FDEL0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-filter3">
+<span id="reg-filter3"></span><h1>Register: FILTER3<a class="headerlink" href="#register-filter3" title="Permalink to this heading"></a></h1>
+<p>Address: 0x11B</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="filter-config.html#rbits-fdel"><span class="std std-ref">filter_delta</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>FDEL15</p></td>
+<td><p>FDEL14</p></td>
+<td><p>FDEL13</p></td>
+<td><p>FDEL12</p></td>
+<td><p>FDEL11</p></td>
+<td><p>FDEL10</p></td>
+<td><p>FDEL9</p></td>
+<td><p>FDEL8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-filter4">
+<span id="reg-filter4"></span><h1>Register: FILTER4<a class="headerlink" href="#register-filter4" title="Permalink to this heading"></a></h1>
+<p>Address: 0x11C</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="filter-config.html#rbits-fmoe"><span class="std std-ref">filter_mon_en</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="filter-config.html#rbits-fksy"><span class="std std-ref">filter_size_y</span></a></p></td>
+<td><p><a class="reference internal" href="filter-config.html#rbits-hpfe"><span class="std std-ref">hot_pixel_filter_en</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="filter-config.html#rbits-fksx"><span class="std std-ref">filter_size_x</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>FMOE</p></td>
+<td><p>FKSY2</p></td>
+<td><p>FKSY1</p></td>
+<td><p>FKSY0</p></td>
+<td><p>HPFE</p></td>
+<td><p>FKSX2</p></td>
+<td><p>FKSX1</p></td>
+<td><p>FKSX0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-filter5">
+<span id="reg-filter5"></span><h1>Register: FILTER5<a class="headerlink" href="#register-filter5" title="Permalink to this heading"></a></h1>
+<p>Address: 0x11D</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="filter-config.html#rbits-flpf"><span class="std std-ref">filter_lpf</span></a> (only Speck 2f)</p></td>
+<td><p>NA</p></td>
+<td colspan="2"><p><a class="reference internal" href="filter-config.html#rbits-sfbt"><span class="std std-ref">sramF_bist_tsel</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="filter-config.html#rbits-fmdst"><span class="std std-ref">filter_mon_dest</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>FLPF</p></td>
+<td><p>—</p></td>
+<td><p>SFBT1</p></td>
+<td><p>SFBT0</p></td>
+<td><p>FMDST3</p></td>
+<td><p>FMDST2</p></td>
+<td><p>FMDST1</p></td>
+<td><p>FMDST0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.flasher &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="samna.fxtree" href="../fxtree/index.html" />
+    <link rel="prev" title="samna.events" href="../events/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../events/index.html">samna.events</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="index.html#">samna.flasher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#module-samna.flasher">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna</a></li>
+      <li class="breadcrumb-item active">samna.flasher</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/flasher/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-flasher">
+<h1>samna.flasher<a class="headerlink" href="index.html#samna-flasher" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.flasher">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.flasher" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.flasher.FileType">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">FileType</span></span><a class="headerlink" href="index.html#samna.flasher.FileType" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>none</p>
+<p>fx3Firmware</p>
+<p>fpgaFirmware</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.flasher.FileType.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="index.html#samna.flasher.FileType.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.erase_board_info">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">erase_board_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.erase_board_info" title="Link to this definition"></a></dt>
+<dd><p>Erase the board info on a specific board (Fx3 firmware version &gt;= 0.9.11).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info of a board.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.erase_fpga_from_flash">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">erase_fpga_from_flash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.erase_fpga_from_flash" title="Link to this definition"></a></dt>
+<dd><p>Erases FPGA firmware from the given device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.get_board_serial_num">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">get_board_serial_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.flasher.get_board_serial_num" title="Link to this definition"></a></dt>
+<dd><p>Get the serial number of the board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A string represents the serial number of the board.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.get_empty_devices">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">get_empty_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">samna.flasher.DeviceInfo</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.flasher.get_empty_devices" title="Link to this definition"></a></dt>
+<dd><p>Get all empty devices currently connected to the machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.get_programmable_devices">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">get_programmable_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">samna.flasher.DeviceInfo</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.flasher.get_programmable_devices" title="Link to this definition"></a></dt>
+<dd><p>Read all programmable devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.make_board_empty">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">make_board_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_yes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.make_board_empty" title="Link to this definition"></a></dt>
+<dd><p>Erase all firmware from the device and make it empty, after called, the product id of this device will change to 0x00F3 after unpluging and plug in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info object got by samna.flasher.get_programmable_devices.</p></li>
+<li><p><strong>autoYes</strong> (<em>bool</em>) – If true, no confirmation. Or it will ask your confirmation to overwrite the on board firmware. Default false.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.print_debug_log">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">print_debug_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.print_debug_log" title="Link to this definition"></a></dt>
+<dd><p>Erases FPGA firmware from the given device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.print_firmware_from_device">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">print_firmware_from_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.print_firmware_from_device" title="Link to this definition"></a></dt>
+<dd><p>Prints the firmware info from the given device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.print_firmware_header_from_file">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">print_firmware_header_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type:</span> <span class="pre">samna.flasher.FileType</span> <span class="pre">=</span> <span class="pre">&lt;FileType.none:</span> <span class="pre">0&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.print_firmware_header_from_file" title="Link to this definition"></a></dt>
+<dd><p>Prints the firmware header from the given file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fileName</strong> (<em>str</em>) – The path to the firmware file.</p></li>
+<li><p><strong>type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.FileType</span></code>) – The file type.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.print_firmware_info_from_device">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">print_firmware_info_from_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.print_firmware_info_from_device" title="Link to this definition"></a></dt>
+<dd><p>Prints the firmware info from the given device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.program_empty_fx3_ram">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">program_empty_fx3_ram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_yes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.program_empty_fx3_ram" title="Link to this definition"></a></dt>
+<dd><p>Program empty FX3 RAM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info object got by samna.flasher.get_programmable_devices.</p></li>
+<li><p><strong>fileName</strong> (<em>str</em>) – The path to the firmware file.</p></li>
+<li><p><strong>autoYes</strong> (<em>bool</em>) – If true, no confirmation. Or it will ask your confirmation to overwrite the on board firmware. Default false.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.program_fpga_flash">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">program_fpga_flash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_yes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.program_fpga_flash" title="Link to this definition"></a></dt>
+<dd><p>Flash the FPGA firmware to flash then boot it from the flash.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info object got by samna.flasher.get_programmable_devices.</p></li>
+<li><p><strong>fileName</strong> (<em>str</em>) – The path to the firmware file.</p></li>
+<li><p><strong>autoYes</strong> (<em>bool</em>) – If true, no confirmation. Or it will ask your confirmation to overwrite the on board firmware. Default false.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.program_fpga_from_pc">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">program_fpga_from_pc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.program_fpga_from_pc" title="Link to this definition"></a></dt>
+<dd><p>Program the FPGA RAM directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info object got by samna.flasher.get_programmable_devices.</p></li>
+<li><p><strong>fileName</strong> (<em>str</em>) – The path to the firmware file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.program_fx3_flash">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">program_fx3_flash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_yes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.program_fx3_flash" title="Link to this definition"></a></dt>
+<dd><p>Program FX3 flash.</p>
+<p>After flash, the firmware will take effect after unplug and plug in or press the reset button.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info object got by samna.flasher.get_programmable_devices.</p></li>
+<li><p><strong>fileName</strong> (<em>str</em>) – The path to the firmware file.</p></li>
+<li><p><strong>autoYes</strong> (<em>bool</em>) – If true, no confirmation. Or it will ask your confirmation to overwrite the on board firmware. Default false.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.read_board_info">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">read_board_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../fxtree/index.html#samna.fxtree.BoardInfo" title="samna.fxtree.BoardInfo"><span class="pre">samna.fxtree.BoardInfo</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.read_board_info" title="Link to this definition"></a></dt>
+<dd><p>Read info about a specific board (Fx3 firmware version &gt;= 0.9.11).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info of a board.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">fxtree::BoardInfo</span></code> or None if failed to read.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.read_daughter_board_info">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">read_daughter_board_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../fxtree/index.html#samna.fxtree.DaughterBoardInfo" title="samna.fxtree.DaughterBoardInfo"><span class="pre">samna.fxtree.DaughterBoardInfo</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.read_daughter_board_info" title="Link to this definition"></a></dt>
+<dd><p>Read info about a specific daughter board on a mother board (Fx3 firmware version &gt;= 0.8.3). The daughter board info is used to specifiy daughter board type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info of a mother board.</p></li>
+<li><p><strong>id</strong> (<em>int</em>) – The daughter board index on mother board.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">fxtree::DaughterBoardInfo</span></code> or None if failed to read.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.remove_firmware_header">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">remove_firmware_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.remove_firmware_header" title="Link to this definition"></a></dt>
+<dd><p>Removes the firmware header from the given file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fileName</strong> (<em>str</em>) – The path to the firmware file.</p></li>
+<li><p><strong>destFileName</strong> (<em>str</em>) – The destination file name, if it is empty, the original file will be overwritten.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.request_gpif">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">request_gpif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dev_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_gpif</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.request_gpif" title="Link to this definition"></a></dt>
+<dd><p>Erases FPGA firmware from the given device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info.</p></li>
+<li><p><strong>stopGpif</strong> (<em>bool</em>) – If true.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.write_board_info">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">write_board_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../fxtree/index.html#samna.fxtree.BoardInfo" title="samna.fxtree.BoardInfo"><span class="pre">samna.fxtree.BoardInfo</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.write_board_info" title="Link to this definition"></a></dt>
+<dd><p>Write board info to a specific board or mother board (Fx3 firmware version &gt;= 0.9.11).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info of a board.</p></li>
+<li><p><strong>boardInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">fxtree::BoardInfo</span></code>) – The board info to be written to the board.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.write_daughter_board_info">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">write_daughter_board_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">samna.flasher.DeviceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../fxtree/index.html#samna.fxtree.DaughterBoardInfo" title="samna.fxtree.DaughterBoardInfo"><span class="pre">samna.fxtree.DaughterBoardInfo</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.write_daughter_board_info" title="Link to this definition"></a></dt>
+<dd><p>Write daughter board info to a specific daughter board on a mother board (Fx3 firmware version &gt;= 0.8.3). The daughter board info is used to specifiy daughter board type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>devInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.DeviceInfo</span></code>) – The device info of a mother board.</p></li>
+<li><p><strong>daughterBoardInfo</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">fxtree::DaughterBoardInfo</span></code>) – The target daughter board info to be written. The board_index in the info should be assigned to the target daughter board index before calling.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.flasher.write_firmware_header">
+<span class="sig-prename descclassname"><span class="pre">samna.flasher.</span></span><span class="sig-name descname"><span class="pre">write_firmware_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.flasher.FileType" title="samna.flasher.FileType"><span class="pre">samna.flasher.FileType</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.flasher.write_firmware_header" title="Link to this definition"></a></dt>
+<dd><p>Writes the firmware header to the given file. If no header in file, add a header. If a header exists, overwrite the old header with new header.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fileName</strong> (<em>str</em>) – Original firmware path.</p></li>
+<li><p><strong>type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">flasher.FileType</span></code>) – The file type.</p></li>
+<li><p><strong>productId</strong> (<em>int</em>) – The product ID. You can look up by <cite>lsusb</cite> command. e.g. 0x5bc2</p></li>
+<li><p><strong>configurationId</strong> (<em>int</em>) – Configuration id corresponding to the device. Please consult the flasher documentation.</p></li>
+<li><p><strong>version</strong> (<em>list</em><em>(</em><em>int</em><em>)</em>) – An integer array of a fixed length of 3, e.g. [3,6,9].</p></li>
+<li><p><strong>destFileName</strong> (<em>str</em>) – The destination file name, if it is empty, the original file will be overwritten.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../events/index.html" class="btn btn-neutral float-left" title="samna.events" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../fxtree/index.html" class="btn btn-neutral float-right" title="samna.fxtree" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device Controller &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chip Models" href="models/models.html" />
+    <link rel="prev" title="Logging" href="logging.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="deviceController.html#">Device Controller</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deviceController.html#firmware-version-check">Firmware Version Check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deviceController.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Device Controller</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/deviceController.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="device-controller">
+<h1>Device Controller<a class="headerlink" href="deviceController.html#device-controller" title="Link to this heading"></a></h1>
+<p>The device controller manages devices that are supported by samna.
+Methods are provided to list/open/close devices.</p>
+<p>The details of the device controller APIs can be find in <a class="reference internal" href="reference/device/index.html#samna-device"><span class="std std-ref">samna.device</span></a>.</p>
+<p>Note Samna only supports devices with USB cables which are USB 3.0 capable.</p>
+<section id="firmware-version-check">
+<h2>Firmware Version Check<a class="headerlink" href="deviceController.html#firmware-version-check" title="Link to this heading"></a></h2>
+<p>When opening a device, samna checks the firmware version installed on the device against
+the version supported by this release of samna.</p>
+<p>Firmware versions with an incompatible major or minor version are rejected immediately.</p>
+<p>A firmware version is considered compatible if it has the <strong>same major version</strong> and
+a <strong>minor version equal to or higher</strong> than the one supported by samna.
+If the firmware’s <strong>minor version is higher</strong> than the supported one, it may include features
+that are not recognized or supported by this version of samna.</p>
+<p>The <strong>patch version</strong> is ignored during compatibility checks.
+However, newer patch versions may include minor improvements or bug fixes.</p>
+<p>For instructions on upgrading the firmware, see <a class="reference internal" href="flasher.html"><span class="doc">Flasher</span></a>.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="deviceController.html#examples" title="Link to this heading"></a></h2>
+<p>There are two ways to open a device.</p>
+<p>The first one is to get a <a class="reference internal" href="reference/device/index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceInfo</span></code></a> object if you are not sure
+what boards are connected.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get device infos of all unopened devices</span>
+<span class="n">deviceInfos</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">get_unopened_devices</span><span class="p">()</span>
+
+<span class="c1"># Print device infos to see what devices are connected</span>
+<span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">deviceInfos</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+
+<span class="c1"># Select the device you want to open, here we want to open the first one</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="n">deviceInfos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The second way to open a device is using a string of format <code class="code docutils literal notranslate"><span class="pre">NAME[:INDEX]</span></code>.
+This is helpful if you want to open a specific type of device.
+The optional index is used to select a specific device if multiple of the same type are connected.
+Without the index argument, the next available device of this type is opened.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we open the first Speck2fDevKit</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;Speck2fDevKit:0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please refer to the <code class="code docutils literal notranslate"><span class="pre">supported</span> <span class="pre">device</span> <span class="pre">name</span></code> column of table in <a class="reference internal" href="install.html#supported-devices"><span class="std std-ref">Supported Devices</span></a> for the supported device names of the second approach.</p>
+<p>Devices can only be opened once on a machine. Devices opened in other processes can not
+be opened again in this process.</p>
+<p>Multiple calls to open a device using the same <a class="reference internal" href="reference/device/index.html#samna.device.DeviceInfo" title="samna.device.DeviceInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceInfo</span></code></a> or the same
+name and index string will return the previously opened device.
+However, multiple calls using the same name without index will not open previously opened devices,
+but the next available one instead. When no devices are available a runtime error is raised.</p>
+<p>Devices can be closed again using the returned device object when opening the device.
+After the device is closed, all actions on that device are invalid and should not be called.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Close the device</span>
+<span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">close_device</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># Device handle can not be used anymore</span>
+<span class="c1"># device.get_model()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="logging.html" class="btn btn-neutral float-left" title="Logging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="models/models.html" class="btn btn-neutral float-right" title="Chip Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

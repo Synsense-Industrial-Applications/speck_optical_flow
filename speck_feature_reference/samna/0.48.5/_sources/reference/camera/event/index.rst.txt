@@ -1,0 +1,19 @@
+##################
+samna.camera.event
+##################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.camera.event
+   :members:
+   :show-inheritance:
+

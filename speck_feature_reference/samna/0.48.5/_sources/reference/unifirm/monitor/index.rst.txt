@@ -1,0 +1,20 @@
+#####################
+samna.unifirm.monitor
+#####################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   ina226/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm.monitor
+   :members:
+   :show-inheritance:
+

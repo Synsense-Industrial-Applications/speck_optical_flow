@@ -1,0 +1,209 @@
+.. _input-serial-interface-encoding:
+
+Input Serial Interface Bus Encoding
+===================================
+
+The Input Serial Interface (ISI) of Speck2e extends the standalone chip functionality
+by enabling:
+
+- Direct injection of Events (spikes) from the outside.
+- Use of an external DVS (or equivalent) sensor instead of the internal DVS.
+- Sensor pixel configuration.
+- *On the fly* configuration of the Readout Layer modes.
+
+The ISI receives 32-bit data frames (see :ref:`input-serial-interface` for the communication protocol).
+Their encoding is defined in order to optimize bandwith utilization.
+
+.. note::
+    The SPI Slave interface is still active while using the ISI, and can be used in parallel
+    to read/write SRAM or register memories.
+
+.. _isi-resets:
+
+Reset Signals
+*************
+
+The ISI provides its own reset signals to the internal chip blocks.
+
+If the user wants to set the internal reset signals via the ISI, the bit :ref:`CGUIS<rbits-CGUIS>` must be set to '1'.
+
+.. note::
+
+    If the internal reset signals are set via the registers, and no special ISI command has been
+    issued yet, if the user sets :ref:`CGUIS<rbits-CGUIS>` = '1', all the internal resets immediately go to '0'.
+    Normally, the user should set the ISI Reset Signals to the current register set value, then set :ref:`CGUIS<rbits-CGUIS>` = '1'.
+
+.. code::
+
+    10001000000000000000000000000000   # PRst='1': release PRst
+    10001100000000000000000000000000   # SRst='1': release SRst
+    11011000000000000000000000000000   # PRst_DVS='1': release PRst_DVS (optional)
+    11011100000000000000000000000000   # SRst_DVS='1': release SRst_DVS (optional)
+
+.. _s2p-operating-modes:
+
+Operating Modes
+***************
+
+Asynchronous Modes
+------------------
+
+In the Asynchronous modes, the data is forwarded to the internal asynchronous bus.
+
+.. only:: html
+
+    .. table:: Asynchronous Modes
+
+        +---------------------+----------------------------------------------------------------------+
+        | Mode                | Description                                                          |
+        +---------------------+----------------------------------------------------------------------+
+        | Router              | | The chip will direct the input messages                            |
+        |                     | | directly to the Layer Cores.                                       |
+        +---------------------+----------------------------------------------------------------------+
+        | External DVS        | | The chip is set to receive events from an external DVS sensor.     |
+        |                     | | The events are forwarded to the internal DVS Pre-Processing block. |
+        +---------------------+----------------------------------------------------------------------+
+        | Sensor Config       | | The chip is set to receive configuration set/reset data for the    |
+        |                     | | internal DVS Sensor                                                |
+        +---------------------+----------------------------------------------------------------------+
+
+.. only:: pdf
+
+    .. table:: Asynchronous Modes
+        :widths: 5 20
+
+        +---------------------+----------------------------------------------------------------------+
+        | Mode                | Description                                                          |
+        +---------------------+----------------------------------------------------------------------+
+        | Router              | | The chip will direct the input messages                            |
+        |                     | | directly to the Layer Cores.                                       |
+        +---------------------+----------------------------------------------------------------------+
+        | External DVS        | | The chip is set to receive events from an external DVS sensor.     |
+        |                     | | The events are forwarded to the internal DVS Pre-Processing block. |
+        +---------------------+----------------------------------------------------------------------+
+        | Sensor Config       | | The chip is set to receive configuration set/reset data for the    |
+        |                     | | internal DVS Sensor                                                |
+        +---------------------+----------------------------------------------------------------------+
+
+.. _ii-special-commands:
+
+Special Commands
+----------------
+
+Special commands are defined to provide control of the internal reset signals as well as Readout Layer
+configuration (class average selection and output mode selection).
+
+.. table::
+   :class: table-small
+
+   +-----------------+-----+-----+-----+-----+-------------------------+----------+-----+-----+------+
+   | Special Command | 31  | 30  | 29  | 28  | 27                      | 26       | 25  | 24  | 23:0 |
+   +-----------------+-----+-----+-----+-----+-------------------------+----------+-----+-----+------+
+   | Main Reset      | 1   | 0   | x   | x   | PRst                    | SRst     |     |     | x    |
+   +-----------------+-----+-----+-----+-----+-------------------------+----------+-----+-----+------+
+   | Main Reset      | 1   | 1   | 0   | 0   | reg_rb                  |          |     |     | x    |
+   +-----------------+-----+-----+-----+-----+-------------------------+----------+-----+-----+------+
+   | DVS Reset       | 1   | 1   | 0   | 1   | PRst_DVS                | SRst_DVS |     |     | x    |
+   +-----------------+-----+-----+-----+-----+-------------------------+----------+-----+-----+------+
+   | Readout - 1     | 1   | 1   | 1   | 0   | .. centered:: average_sel[3:0]                 | x    |
+   +-----------------+-----+-----+-----+-----+-------------------------+----------+-----+-----+------+
+   | Readout - 2     | 1   | 1   | 1   | 1   | .. centered:: output_mode_sel[1:0] |     |     | x    |
+   +-----------------+-----+-----+-----+-----+-------------------------+----------+-----+-----+------+
+
+.. only:: html
+
+    .. table:: Special Commands
+
+        +-------------------------+-----------------------------------------------------------------------+
+        | Command                 | Description                                                           |
+        +-------------------------+-----------------------------------------------------------------------+
+        | *Prst*/*SRst*           | | Set or clear *SRst* and/or *Prst* internal signals.                 |
+        +-------------------------+-----------------------------------------------------------------------+
+        | Register rst            | | Set or clear the *reg_rb* internal signal.                          |
+        +-------------------------+-----------------------------------------------------------------------+
+        | DVS rst                 | | Set or clear *PRst_DVS*, *SRst_DVS* internal signals.               |
+        +-------------------------+-----------------------------------------------------------------------+
+        | Set Average Selection   | | Sets the internal *average_sel[3:0]* internal value                 |
+        |                         | | (see :ref:`readout-neuron-selection`).                              |
+        +-------------------------+-----------------------------------------------------------------------+
+        | Output Mode Selection   | | Sets the internal *output_mode_sel[1:0]* internal value             |
+        |                         | | (see :ref:`readout-output-modes`).                                  |
+        +-------------------------+-----------------------------------------------------------------------+
+
+.. only:: pdf
+
+    .. table:: Special Commands
+        :widths: 7 20
+
+        +-------------------------+-----------------------------------------------------------------------+
+        | Command                 | Description                                                           |
+        +-------------------------+-----------------------------------------------------------------------+
+        | *PRst*/*SRst*           | | Set or clear *SRst* and/or *PRst* internal signals.                 |
+        +-------------------------+-----------------------------------------------------------------------+
+        | Register rst            | | Set or clear the *reg_rb* internal signal.                          |
+        +-------------------------+-----------------------------------------------------------------------+
+        | DVS rst                 | | Set or clear *PRst_DVS*, *SRst_DVS* internal signals.               |
+        +-------------------------+-----------------------------------------------------------------------+
+        | Set Average Selection   | | Sets the internal *average_sel[3:0]* internal value                 |
+        |                         | | (see :ref:`readout-neuron-selection`).                              |
+        +-------------------------+-----------------------------------------------------------------------+
+        | Output Mode Selection   | | Sets the internal *output_mode_sel[1:0]* internal value             |
+        |                         | | (see :ref:`readout-output-modes`).                                  |
+        +-------------------------+-----------------------------------------------------------------------+
+
+.. _c-p-d-ref-tables:
+
+Reference Tables
+****************
+
+.. table:: Speck2e Asynchronous Modes Reference Table (events to layers, external DVS data, sensor config)
+   :class: table-small
+   :widths: 5 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+   +--------------------+-----+-----+-----+-----+-----+-------------------+----+----+----+-----+-----+-----+-----+-----+----+----+-----+----------+----+----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+   | Async Events       | 31  | 30  | 29  | 28  | 27  | 26                | 25 | 24 | 23 | 22  | 21  | 20  | 19  | 18  | 17 | 16 | 15  | 14       | 13 | 12 | 11  | 10  | 9   | 8   | 7   | 6   | 5   | 4   | 3   | 2   | 1   | 0   |
+   +--------------------+-----+-----+-----+-----+-----+-------------------+----+----+----+-----+-----+-----+-----+-----+----+----+-----+----------+----+----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+   | Router Mode        | 0   | 0   | 0   | 0   | | Target Layer [3:0]:             |                                                             |                                       |                                         |
+   |                    |     |     |     |     | | 0b0000-0b1000 -> Layer 0-8      |                                                             |                                       |                                         |
+   |                    |     |     |     |     | | 0b1100 -> Readout Layer         | Feature Number[9:0]                                         |         Y-Address[6:0]                |               X-Address[6:0]            |
+   +--------------------+-----+-----+-----+-----+-----+-------------------+----+----+----+-----+-----+-----+-----+-----+----+----+-----+----------+----+----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+   | External DVS Mode  | 0   | 0   | 0   | 0   | 1   | 1                 | 0  | 1  | x  | x   | x   | x   | x   | x   | x  | P  |               Y-Address[7:0]                     |               X-Address[7:0]                  |
+   +--------------------+-----+-----+-----+-----+-----+-------------------+----+----+----+-----+-----+-----+-----+-----+----+----+-----+----------+----+----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+   |                    |     |     |     |     |     |                   | x  | x  | x  | x   | x   | x   | x   | x   | x  | x  | x   | | 0: SET | | Y-Address[6:0]                      | | X-Address[6:0]                        |
+   | Sensor Config Mode | 0   | 0   | 0   | 1   | x   |  x                |    |    |    |     |     |     |     |     |    |    |     | | 1: RST | | (in SET mode)                       | | (in SET mode)                         |
+   +--------------------+-----+-----+-----+-----+-----+-------------------+----+----+----+-----+-----+-----+-----+-----+----+----+-----+----------+----+----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+
+.. Programming Examples
+.. ********************
+
+.. In this section, some high level examples are shown, to illustrate the various operating modes.
+
+.. .. _ii-chip-startup:
+
+.. Chip Start-up/reset
+.. -------------------
+
+.. After chip power on, or when a complete chip reset is required (via the RB pin), a reset sequence must be issued.
+
+.. .. note::
+
+..     All reset signals are *active low*. During normal chip operation, when using the internal DVS sensor,
+..     PRst, PRst_DVS, SRst, SRst_DVS must be all set to '1'. *PRst_DVS* and *SRst_DVS* are used to
+..     selectively disable the interhal DVS sensor.
+
+
+.. Reset Sequence:
+
+.. At chip startup, the *RB* pin must be set to **VSS** (reset), then raised to **VDD** (released). When *RB* is released,
+.. all internal reset signals are set to '0' (reset) by the input interface.
+
+.. The following command sequence is then required to release the internal reset signals in the correct order.
+
+.. .. code::
+
+..     10000000000000000000000000000000   # PRst='0', SRst='0': assert PRst/SRst
+..     10001000000000000000000000000000   # PRst='1', SRst='0': release PRst
+..     10001100000000000000000000000000   # PRst='1', SRst='1': release SRst
+..     11011000000000000000000000000000   # PRst_DVS='1', SRst_DVS='0': release PRst_DVS
+..     11011100000000000000000000000000   # PRst_DVS='1', SRst_DVS='1': release SRst_DVS
+

@@ -437,7 +437,7 @@ create_layer(
     padding=2,stride=1,kernel_size=5,
     input_shape_feature=8,input_shape_size_x=64,input_shape_size_y=64,
     output_shape_feature=16,output_shape_size_x=64,output_shape_size_y=64,
-    threshold_high=3,threshold_low=-1,
+    threshold_high=4,threshold_low=-1,
     weights=weights,
     monitor_enable=True,
     leak_enable=True,

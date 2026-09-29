@@ -1,0 +1,19 @@
+########
+samna.ui
+########
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.ui
+   :members:
+   :show-inheritance:
+

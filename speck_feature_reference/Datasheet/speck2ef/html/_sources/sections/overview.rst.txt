@@ -1,0 +1,35 @@
+Device Overview
+===============
+
+Speck2e/et/f is a multi-core, neuromorphic processor chip featuring an integrated DVS sensor for real-time, fully integrated vision applications.
+
+.. note:: The remainder of the document equally applies to Speck2e, v2et and v2f, unless explicitly stated. Section :ref:`changes-v2e-et-f` summarizes the changes between the three chip versions.
+
+Key features
+************
+
+Communication Interfaces
+------------------------
+
+- SPI Master: automatic loading of SRAM and register data from an external FLASH memory.
+- SPI Slave: R/W of SRAM and register data.
+- Async input interface: write sensor settings and input external events (e.g., from an external DVS or other sensor).
+- Async output interface: monitor bus output, readout layer data.
+- JTAG: internal Scan Chains, register and SRAM R/W, Async data in/out (same capabilities as async I/O interfaces).
+- Interrupt lines: 4 output pins (encoding max *no class active* + 15 output classes) and 1 interrupt pin.
+
+Pixel Array
+-----------
+
+- 128x128 DVS Pixel array.
+- 1 bit conf per pixel (1 kill).
+- Noise filter and hot pixel rejection.
+
+Output Layer
+------------
+
+- 15 classes.
+- Selectable moving average between 1, 16 and 32 time steps.
+- 4 readout modes: (1) inactive, (2) threshold, (3) max spiking class, (4) specific class.
+- 4 encoded output pins + interrupt pin for direct max/threshod class readout.
+

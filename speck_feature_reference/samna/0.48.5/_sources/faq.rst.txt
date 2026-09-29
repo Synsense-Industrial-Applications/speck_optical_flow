@@ -1,0 +1,44 @@
+.. _faq:
+
+===
+FAQ
+===
+
+Do you have a question/doubt? Here are the ones that we know how to answer!
+If you stil have any question, please `talk to us <https://gitlab.com/synsense/samna-issues/issues>`_.
+
+**Q: I tried to run samna and it fails with a segmentation fault (core dumped) message.**
+
+A: This is likely a USB permissions issue. Try running Python with sudo. If that works you can change the USB
+permissions for your user to make it work without sudo. :ref:`See the install section <udev_rules>`.
+
+.. _samnagui_path:
+
+**Q: I can't run :code:`samnagui` after installing samna using pip.**
+
+A: :code:`samnagui` is a script that pip will install where it has been configured to install scripts provided
+by packages. On Linux this is usually in either :code:`~/.local/bin` or in :code:`/usr/bin`. :code:`~/.local/bin`
+will often not be present in your :code:`PATH` and you will have to add it.
+
+.. code-block:: text
+
+   # export PATH=$PATH:/path/to/your/home/.local/bin
+
+**Q: Error: "terminate called after throwing an instance of 'zmq::error_t' what():  Address already in use"**
+
+This error indicates that the endpoint you set to the :class:`VizEventStreamer` is already in use. Please try 
+another endpoint or use the following code snippet to find the endpoint that is free:
+
+.. code-block:: python
+   :linenos:
+
+   def free_port():
+      """
+      Determines a free port using sockets.
+      """
+      free_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+      free_socket.bind(('0.0.0.0', 0))
+      free_socket.listen(5)
+      port = free_socket.getsockname()[1]
+      free_socket.close()
+      return port

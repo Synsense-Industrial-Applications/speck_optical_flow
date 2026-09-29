@@ -1,0 +1,147 @@
+###################
+Record Speck 2f DVS
+###################
+
+.. contents:: Content
+   :local:
+   :depth: 2
+
+Here is a simple example of how to record the DVS events from the Speck 2f development kit.
+For how to use the recorded events, please refer to :ref:`Using recorded events on Speck 2f` example.
+
+****************
+Setup Visualizer 
+****************
+
+First we have to setup the visualizer similar to :ref:`Display Speck 2f DVS Events`. 
+However, we don't add ``gui_process.join()`` and ``graph.stop()`` because we don't want them to 
+block our code.
+
+.. code-block:: python
+    :linenos:
+
+    import samna
+    import sys
+    import os
+    from threading import Thread
+
+    def open_speck2f_dev_kit():
+        devices = [
+            device
+            for device in samna.device.get_unopened_devices()
+            if device.device_type_name.startswith("Speck2f")
+        ]
+        assert devices, "Speck2f board not found"
+
+        return samna.device.open_device(devices[0])
+
+
+    def build_samna_event_route(dk, graph, endpoint):
+        # build a graph in samna to show dvs
+        _, _, streamer = graph.sequential(
+            [dk.get_model_source_node(), "Speck2fDvsToVizConverter", "VizEventStreamer"]
+        )
+
+        config_source, _ = graph.sequential([samna.BasicSourceNode_ui_event(), streamer])
+
+        streamer.set_streamer_endpoint(endpoint)
+        if streamer.wait_for_receiver_count() == 0:
+            raise Exception(f'connecting to visualizer on {endpoint} fails')
+        
+        visualizer_config = samna.ui.VisualizerConfiguration(
+            plots=[samna.ui.ActivityPlotConfiguration(128, 128, "DVS Layer")]
+        )
+
+        config_source.write([visualizer_config])
+
+
+    def open_visualizer(width_proportion, height_proportion, receiver_endpoint):
+        # start visualizer in a isolated process which is required on mac, instead of a sub process.
+        gui_cmd = f"import samna, samnagui; samnagui.run_visualizer('{receiver_endpoint}', {width_proportion}, {height_proportion})"
+        os_cmd = f'{sys.executable} -c "{gui_cmd}"'
+        print("Visualizer start command: ", os_cmd)
+        gui_thread = Thread(target=os.system, args=(os_cmd,))
+        gui_thread.start()
+
+        return gui_thread
+
+
+    streamer_endpoint = "tcp://0.0.0.0:40001"
+    width_proportion = 0.75
+    height_proportion = 0.75
+
+    gui_process = open_visualizer(width_proportion, height_proportion, streamer_endpoint)
+
+    dk = open_speck2f_dev_kit()
+
+    # route events
+    graph = samna.graph.EventFilterGraph()
+    build_samna_event_route(dk, graph, streamer_endpoint)
+
+    graph.start()
+
+    # modify configuration
+    config = samna.speck2f.configuration.SpeckConfiguration()
+    # enable dvs event monitoring
+    config.dvs_layer.monitor_enable = True
+    dk.get_model().apply_configuration(config)
+
+.. _record_speck_2f_dvs:
+
+*****************
+Record DVS Events
+*****************
+
+Following the above code, we could create a function to record the DVS events given a name and duration.
+
+Here we use a simple encoding to save the events to a file.
+The events are saved in the following order: x, y, feature, timestamp.
+The x, y, feature and timestamp are all 4 bytes long (little endian), so the file size is 16 bytes per event.
+
+.. list-table::
+    :header-rows: 1
+
+    * - X
+      - Y
+      - Feature/Polarity
+      - Timestamp
+    * - 4 bytes
+      - 4 bytes
+      - 4 bytes
+      - 4 bytes
+
+.. code-block:: python
+    :linenos:
+
+    import time
+    stopwatch = dk.get_stop_watch()
+
+    def record_dvs(name: str, duration: int):
+        """
+        Record DVS events for a given duration and save to a file.
+        """
+        # create a sink node to receive the DVS events
+        sink = samna.graph.sink_from(dk.get_model_source_node())
+
+        # start timestamp from 0 
+        stopwatch.start(True)
+
+        # clear events already in the sink node
+        sink.clear_events()
+
+        time.sleep(duration)
+
+        events = sink.get_events()
+
+        with open(name, "wb") as f:
+            for event in events:
+                if isinstance(event, samna.speck2f.event.Spike):
+                    f.write((event.x).to_bytes(4, byteorder = 'little'))
+                    f.write((event.y).to_bytes(4, byteorder = 'little'))
+                    f.write((event.feature).to_bytes(4, byteorder = 'little'))
+                    f.write((event.timestamp).to_bytes(4, byteorder = 'little'))
+
+.. note::
+    
+    The :ref:`sink node <Sinks>` is created as a local variable in the function, so it is destroyed 
+    after the function returns to prevent it takes all memory.

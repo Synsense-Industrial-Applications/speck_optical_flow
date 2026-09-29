@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XyloAudio 3 &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Development Kits" href="../../devkits/index.html" />
+    <link rel="prev" title="Xylo-IMU" href="xylo_imu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Chip Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../models.html#initializing-a-chip-model">Initializing a Chip Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models.html#configuration-management">Configuration Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models.html#event-stream-handling">Event Stream Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models.html#common-model-functions">Common Model Functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../models.html#supported-chips-series">Supported Chips &amp; Series</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../speckSeries/summary.html">Speck Series</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="summary.html">Xylo Series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="summary.html#supported-xylo-related-models">Supported Xylo Related Models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../models.html">Chip Models</a></li>
+          <li class="breadcrumb-item"><a href="summary.html">Xylo Series</a></li>
+      <li class="breadcrumb-item active">XyloAudio 3</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/models/xyloSeries/xylo_audio_3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="xyloaudio-3">
+<h1>XyloAudio 3<a class="headerlink" href="xylo_audio_3.html#xyloaudio-3" title="Link to this heading"></a></h1>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="xylo_audio_3.html#input-sources" id="id1">Input Sources</a></p></li>
+<li><p><a class="reference internal" href="xylo_audio_3.html#operation-modes" id="id2">Operation Modes</a></p>
+<ul>
+<li><p><a class="reference internal" href="xylo_audio_3.html#accelerated-time-mode-samna-xyloaudio3-operationmode-acceleratedtime" id="id3">Accelerated-Time Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.AcceleratedTime</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="xylo_audio_3.html#real-time-mode-samna-xyloaudio3-operationmode-realtime" id="id4">Real-Time Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.RealTime</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="xylo_audio_3.html#direct-output-mode-samna-xyloaudio3-operationmode-directoutput" id="id5">Direct Output Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.DirectOutput</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="xylo_audio_3.html#manual-mode-samna-xyloaudio3-operationmode-manual" id="id6">Manual Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.Manual</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="xylo_audio_3.html#recording-mode-samna-xyloaudio3-operationmode-recording" id="id7">Recording Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.Recording</span></code>)</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>XyloAudio 3 is a fully digital AI chip based on Spiking Neural Network (SNN) and Reservoir Computing technology.
+It includes a frontend with support for analog and digital microphones and is designed for audio applications,
+such as ambient sound detection.</p>
+<section id="input-sources">
+<h2><a class="toc-backref" href="xylo_audio_3.html#id1" role="doc-backlink">Input Sources</a><a class="headerlink" href="xylo_audio_3.html#input-sources" title="Link to this heading"></a></h2>
+<p>XyloAudio 3 receives input primarily through a microphone connected to the audio frontend.
+The frontend supports both analog and digital (PDM) microphones, and the active microphone is selected by setting the
+<a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration.input_source" title="samna.xyloAudio3.configuration.XyloConfiguration.input_source"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration.input_source</span></code></a> attribute to either
+<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.InputSource.AnalogMicrophone</span></code> or <code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.InputSource.DigitalMicrophone</span></code>.</p>
+<p>It is also possible to simulate microphone input by sending them as <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.AfeSample" title="samna.xyloAudio3.event.AfeSample"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.AfeSample</span></code></a>
+events in software.
+To simulate analog microphone input, set the input source to <code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.InputSource.AdcEvents</span></code> and
+send the 10-bits ADC values as an <code class="docutils literal notranslate"><span class="pre">AfeSample</span></code> event.
+For digital microphone input simulation, set the input source to <code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.InputSource.PdmEvents</span></code> and
+send 16 bits of the PDM 1-bit signal per <code class="docutils literal notranslate"><span class="pre">AfeSample</span></code> event.</p>
+<p>To bypass the audio frontend or work directly with the SNN core, <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.Spike" title="samna.xyloAudio3.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.Spike</span></code></a> events
+can be sent directly to the chip. To do this, set the input source to <code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.InputSource.SpikeEvents</span></code>.</p>
+</section>
+<section id="operation-modes">
+<h2><a class="toc-backref" href="xylo_audio_3.html#id2" role="doc-backlink">Operation Modes</a><a class="headerlink" href="xylo_audio_3.html#operation-modes" title="Link to this heading"></a></h2>
+<p>XyloAudio 3 can be configured to operate in one of four modes, each supporting a different use case.
+The operation mode is selected with <a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration.operation_mode" title="samna.xyloAudio3.configuration.XyloConfiguration.operation_mode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration.operation_mode</span></code></a>.</p>
+<p>In general the user starts in Accelerated-Time mode to develop and debug their application.
+Once the user is satisfied with the state of the model, the Real-Time or Direct Output mode is used
+to deploy the model.</p>
+<section id="accelerated-time-mode-samna-xyloaudio3-operationmode-acceleratedtime">
+<h3><a class="toc-backref" href="xylo_audio_3.html#id3" role="doc-backlink">Accelerated-Time Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.AcceleratedTime</span></code>)</a><a class="headerlink" href="xylo_audio_3.html#accelerated-time-mode-samna-xyloaudio3-operationmode-acceleratedtime" title="Link to this heading"></a></h3>
+<p>Accelerated-Time mode introduces software support to automate event processing and network state monitoring,
+while still guaranteeing users full control over the timing of input events.</p>
+<p>In this mode the user can simply specify a list of timed input events, i.e. with <code class="docutils literal notranslate"><span class="pre">timestep</span></code> filled correctly,
+and the system automatically processes each timestep and does a readout after each timestep.
+In addition, the system can automatically add detailed network state of specific neurons by specifying the,
+<code class="docutils literal notranslate"><span class="pre">monitor_neuron_v_mem</span></code>, <code class="docutils literal notranslate"><span class="pre">monitor_neuron_i_syn</span></code> and <code class="docutils literal notranslate"><span class="pre">monitor_neuron_spike</span></code> fields in
+<a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration.debug" title="samna.xyloAudio3.configuration.XyloConfiguration.debug"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration.debug</span></code></a>.</p>
+<p>These automatic monitoring capabilities and guaranteed reproducibility make Accelerated-Time the recommended mode
+for application development or benchmarking.</p>
+<p>Typical operation looks as follows.</p>
+<ul class="simple">
+<li><p>Configure the network neurons for which state monitoring should be enabled.</p></li>
+<li><p>Send all input events to be processed in order. The <code class="docutils literal notranslate"><span class="pre">timestep</span></code> field should be monotonically increasing,
+if the <code class="docutils literal notranslate"><span class="pre">timestep</span></code> field contains a timestep smaller than the current one, it is treated as the current one.</p></li>
+<li><p>Send <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.TriggerProcessing" title="samna.xyloAudio3.event.TriggerProcessing"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.TriggerProcessing</span></code></a> with the last <code class="docutils literal notranslate"><span class="pre">timestep</span></code> to process the last events.
+Normally an increase in <cite>timestep</cite> value automatically starts processing the previous timestep,
+but because the system can not tell when the last event arrives, it requires an extra event to indicate that
+the last timestep is ready to process.</p></li>
+<li><p>Collect all <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.Spike" title="samna.xyloAudio3.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.Spike</span></code></a> and <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.Readout" title="samna.xyloAudio3.event.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.Readout</span></code></a> events.</p></li>
+</ul>
+<p>There is exactly one <code class="docutils literal notranslate"><span class="pre">Readout</span></code> event per timestep, so when the last is received, the chip has finished processing.
+When the chip is not processing, the user still has full access to the registers and memories.</p>
+</section>
+<section id="real-time-mode-samna-xyloaudio3-operationmode-realtime">
+<h3><a class="toc-backref" href="xylo_audio_3.html#id4" role="doc-backlink">Real-Time Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.RealTime</span></code>)</a><a class="headerlink" href="xylo_audio_3.html#real-time-mode-samna-xyloaudio3-operationmode-realtime" title="Link to this heading"></a></h3>
+<p>In Real-Time mode the chip is continually processing input without any intervention from the software
+according to its internal timestep counter. The length of a timestep is controlled by
+<a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap" title="samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap</span></code></a>.
+The user must ensure that the length of the timestep is large enough to completely process the given network.
+Whenever a timestep is finished the software produces a <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.Readout" title="samna.xyloAudio3.event.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.Readout</span></code></a> event.
+Unlike Accelerated-Time mode, network state monitoring is not available in this mode.</p>
+<p>Interaction with the chip, and therefore precise control, is not possible in this mode.
+This also means that input must be supplied from a microphone connected to the audio frontend
+and it is not possible to send software input events.</p>
+<p><strong>The lack of precise control makes this mode not suited for development.</strong></p>
+<p>Typical operation looks as follows.</p>
+<ul class="simple">
+<li><p>Configure the chip for Real-Time mode with the appropriate microphone input.</p></li>
+<li><p>Send a <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.TriggerProcessing" title="samna.xyloAudio3.event.TriggerProcessing"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.TriggerProcessing</span></code></a> event to trigger continuous processing.</p></li>
+<li><p>The system will keep running indefinitely.</p></li>
+</ul>
+</section>
+<section id="direct-output-mode-samna-xyloaudio3-operationmode-directoutput">
+<h3><a class="toc-backref" href="xylo_audio_3.html#id5" role="doc-backlink">Direct Output Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.DirectOutput</span></code>)</a><a class="headerlink" href="xylo_audio_3.html#direct-output-mode-samna-xyloaudio3-operationmode-directoutput" title="Link to this heading"></a></h3>
+<p>The chip also supports directly outputting a classification result on its three output pins,
+which is known as Direct Output mode. The output pins have the following encoding:</p>
+<ul class="simple">
+<li><p>0: default state (none of ON0 ~ ON6 fires)</p></li>
+<li><p>1: at least ON0 fired</p></li>
+<li><p>2: ON0 did not fire, at least ON1 fired</p></li>
+<li><p>3: ON0 ~ ON1 did not fire, at least ON2 fired</p></li>
+<li><p>4: ON0 ~ ON2 did not fire, at least ON3 fired</p></li>
+<li><p>5: ON0 ~ ON3 did not fire, at least ON4 fired</p></li>
+<li><p>6: ON0 ~ ON4 did not fire, at least ON5 fired</p></li>
+<li><p>7: ON0 ~ ON5 did not fire, at least ON6 fired</p></li>
+</ul>
+<p>In Direct Output mode the chip is continually processing input without any intervention from the software
+according to its internal timestep counter. The length of a timestep is controlled by
+<a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap" title="samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap</span></code></a>.
+The user must ensure that the length of the timestep is large enough to completely process the given network.
+The value of the output pins is held for the time controlled by
+<a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration.output_counter_wrap" title="samna.xyloAudio3.configuration.XyloConfiguration.output_counter_wrap"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration.output_counter_wrap</span></code></a>.</p>
+<p>Whenever the state of the output pins changes, the software produces a <code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.DirectOutputValue</span></code>
+event. This reports the <code class="docutils literal notranslate"><span class="pre">value</span></code> of the pins and the <code class="docutils literal notranslate"><span class="pre">timestep</span></code> at which the event was generated.
+If <a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.DebugConfig.use_timestamps" title="samna.xyloAudio3.configuration.DebugConfig.use_timestamps"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.DebugConfig.use_timestamps</span></code></a> is enabled, the events will contain
+microsecond-precision timestamps instead of timesteps.</p>
+<p>Unlike Accelerated-Time mode, network state monitoring is not available in this mode.</p>
+<p>Interaction with the chip, and therefore precise control, is not possible in this mode.
+This also means that input must be supplied from a microphone connected to the audio frontend
+and it is not possible to send software input events.</p>
+<p><strong>The lack of precise control makes this mode not suited for development.</strong></p>
+<p>Typical operation looks as follows.</p>
+<ul class="simple">
+<li><p>Configure the chip for Direct Output mode with the appropriate microphone input.</p></li>
+<li><p>Send a <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.TriggerProcessing" title="samna.xyloAudio3.event.TriggerProcessing"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.TriggerProcessing</span></code></a> event to trigger continuous processing.</p></li>
+<li><p>The system will keep running indefinitely.</p></li>
+</ul>
+</section>
+<section id="manual-mode-samna-xyloaudio3-operationmode-manual">
+<h3><a class="toc-backref" href="xylo_audio_3.html#id6" role="doc-backlink">Manual Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.Manual</span></code>)</a><a class="headerlink" href="xylo_audio_3.html#manual-mode-samna-xyloaudio3-operationmode-manual" title="Link to this heading"></a></h3>
+<p>In Manual mode the user has full control over the chip with minimal software support.
+This means that the user must perform all operations manually, i.e. the user must actively poll the chip’s state.
+Furthermore there is no notion of time in this mode, so the <code class="docutils literal notranslate"><span class="pre">timestep</span></code> fields in events are ignored.</p>
+<p>This complete control makes it the possible to debug and test the XyloAudio 3 chip.</p>
+<p>Typical operation looks as follows.</p>
+<ul class="simple">
+<li><p>Send input events to be processed in a single time step, e.g. <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.Spike" title="samna.xyloAudio3.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.Spike</span></code></a>.</p></li>
+<li><p>Send a <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.TriggerProcessing" title="samna.xyloAudio3.event.TriggerProcessing"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.TriggerProcessing</span></code></a> event to process the input from the previous step.</p></li>
+<li><p>Poll the status register and wait for the chip to finish processing.</p></li>
+<li><p>Read registers and memory to obtain the readout and network states.</p></li>
+</ul>
+<p>To read memory, <code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.Debug.ram_access_enable</span></code> must be enabled first.
+Note that accessing memory while the chip is processing a timestep can lead to errors or unpredictable results.
+Therefore, it is crucial to wait for the chip to finish processing before reading the state.</p>
+</section>
+<section id="recording-mode-samna-xyloaudio3-operationmode-recording">
+<h3><a class="toc-backref" href="xylo_audio_3.html#id7" role="doc-backlink">Recording Mode (<code class="docutils literal notranslate"><span class="pre">samna.xyloAudio3.OperationMode.Recording</span></code>)</a><a class="headerlink" href="xylo_audio_3.html#recording-mode-samna-xyloaudio3-operationmode-recording" title="Link to this heading"></a></h3>
+<p>Recording mode allows the readout of <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.Spike" title="samna.xyloAudio3.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.Spike</span></code></a> events generated by the filter bank
+in the audio frontend. The <code class="docutils literal notranslate"><span class="pre">neuron_id</span></code> indicates which of the sixteen channels produced the spike, corresponding
+to one of the sixteen input neurons of the chip. The <code class="docutils literal notranslate"><span class="pre">timestep</span></code> field shows when the spike was produced, measured
+in timesteps based on the <a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap" title="samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap</span></code></a> setting.
+If <a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna.xyloAudio3.configuration.DebugConfig.use_timestamps" title="samna.xyloAudio3.configuration.DebugConfig.use_timestamps"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.DebugConfig.use_timestamps</span></code></a> is enabled, the events will contain
+microsecond-precision timestamps instead of timesteps.</p>
+<p>Recording mode supports capturing output from both the analog and digital microphones in the frontend.
+For the digital microphone, software input events of type <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna.xyloAudio3.event.AfeSample" title="samna.xyloAudio3.event.AfeSample"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.event.AfeSample</span></code></a> can also be recorded.</p>
+<p>Note that the SNN core is not accessible in Recording mode. If processing is required, the user has to first record
+the audio frontend output spikes and subsequently send them to the chip in Accelerated-Time mode.</p>
+<section id="basic-examples">
+<h4>Basic Examples<a class="headerlink" href="xylo_audio_3.html#basic-examples" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloAudio3/xylo_audio_3_accelerated_mode.html#xyloaudio-3-accelerated-time-mode"><span class="std std-ref">XyloAudio 3 Accelerated-Time Mode</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloAudio3/xylo_audio_3_realtime_mode.html#xyloaudio-3-real-time-mode"><span class="std std-ref">XyloAudio 3 Real-Time Mode</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloAudio3/xylo_audio_3_manual_mode.html#xyloaudio-3-manual-mode"><span class="std std-ref">XyloAudio 3 Manual Mode</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloAudio3/xylo_audio_3_recording_mode.html#xyloaudio-3-recording-mode"><span class="std std-ref">XyloAudio 3 Recording Mode</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloAudio3/xylo_audio_3_directoutput_mode.html#xyloaudio-3-direct-output-mode"><span class="std std-ref">XyloAudio 3 Direct Output Mode</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloAudio3/xylo_audio_3_power_measurement.html#xyloaudio-3-power-measurements"><span class="std std-ref">XyloAudio 3 Power Measurements</span></a></p></li>
+</ul>
+</section>
+<section id="api-reference">
+<h4>API Reference<a class="headerlink" href="xylo_audio_3.html#api-reference" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Model: <code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.XyloModel</span></code></p></li>
+<li><p>Event: <a class="reference internal" href="../../reference/xyloAudio3/event/index.html#samna-xyloaudio3-event"><span class="std std-ref">samna.xyloAudio3.event</span></a></p></li>
+<li><p>Configuration: <a class="reference internal" href="../../reference/xyloAudio3/configuration/index.html#samna-xyloaudio3-configuration"><span class="std std-ref">samna.xyloAudio3.configuration</span></a></p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="xylo_imu.html" class="btn btn-neutral float-left" title="Xylo-IMU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../devkits/index.html" class="btn btn-neutral float-right" title="Development Kits" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

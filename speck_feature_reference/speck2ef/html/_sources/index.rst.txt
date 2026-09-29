@@ -1,0 +1,38 @@
+.. Speck2e/et/f Datasheet documentation master file.
+
+Speck2e/et/f (SYNS91103/SYNS91104/SYNS91105) Datasheet
+========================================================
+
+.. only:: html
+
+   Get this document as PDF: `speckv2e.pdf <./speck2e.pdf>`_.
+
+.. toctree::
+   :numbered:
+   :maxdepth: 2
+   :caption: Contents:
+
+   sections/overview
+   sections/changes-v2f
+   sections/chip-startup
+   sections/architecture/index
+   sections/pinout
+   sections/dvs-sensor/index
+   sections/electrical-characteristics
+   sections/registers/index
+   sections/memory/index
+   sections/encoding/index
+   sections/spi/index
+   sections/jtag/index
+   sections/rgb-interface/index
+   sections/scanchain/index
+   sections/abbreviations
+   sections/change-history
+   sections/bug-tracker
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

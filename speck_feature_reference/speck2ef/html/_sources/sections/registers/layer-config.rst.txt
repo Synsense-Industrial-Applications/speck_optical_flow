@@ -1,0 +1,262 @@
+.. _layer-config-signals:
+
+Convolutional Layer Configuration Signal Description
+====================================================
+
+More detailed descriptions of the Register Elements is provided below the table.
+
+.. csv-table:: Convolutional Layer Configuration Signal Overview
+
+    Register Bits,Register(s),Signal Name,"Short Description"
+    :ref:`SCX[1:0]<rbits-SCX>`,:ref:`CONV0[7:6]<reg-CONV0>`,Stride_CaseX,"Stride in X direction. Maps to {1,2,4,8}."
+    :ref:`ZPY[2:0]<rbits-ZPY>`,:ref:`CONV0[5:3]<reg-CONV0>`,zeropaddingY,"Y Direction Zero padding."
+    :ref:`ZPX[2:0]<rbits-ZPX>`,:ref:`CONV0[2:0]<reg-CONV0>`,zeropaddingX,"X Direction Zero Padding."
+    :ref:`DEN<rbits-DEN>`,:ref:`CONV1[6]<reg-CONV1>`,decimator_en,"Output decimator enable bit."
+    :ref:`DINT[2:0]<rbits-DINT>`,":ref:`CONV6[7:6]<reg-CONV0>`, :ref:`CONV1[7]<reg-CONV1>`",decimator_interval,"Output decimator block interval."
+    :ref:`KSZ[3:0]<rbits-KSZ>`,:ref:`CONV1[5:2]<reg-CONV1>`,ksize,"Kernel Size = (KSZ+1)*(KSZ+1)."
+    :ref:`SCY[1:0]<rbits-SCY>`,:ref:`CONV1[1:0]<reg-CONV1>`,Stride_CaseY,"Stride in Y direction. Maps to {1,2,4,8}."
+    :ref:`IFN[9:0]<rbits-IFN>`,":ref:`CONV3[1:0]<reg-CONV3>`, :ref:`2[7:0]<reg-CONV2>`",in_fnum,"Number of input features to layer."
+    :ref:`OFSX[5:0]<rbits-OFSX>`,:ref:`CONV3[7:2]<reg-CONV3>`,out_fsizeX,"Size of output feature maps in X dimension."
+    :ref:`OFN[9:0]<rbits-OFN>`,":ref:`CONV5[7:0]<reg-CONV5>`, :ref:`4[7:6]<reg-CONV4>`",out_fnum,"Number of output features to produce = OFN+1."
+    :ref:`OFSY[5:0]<rbits-OFSY>`,:ref:`CONV4[5:0]<reg-CONV4>`,out_fsizeY,"Size of output feature maps in Y dimension."
+    :ref:`SKP[5:0]<rbits-SKP>`,:ref:`CONV6[5:0]<reg-CONV6>`,sramK_pulse,"Timing Control Kernel SRAM - CLK Pulse."
+    :ref:`SKR[1:0]<rbits-SKR>`,:ref:`CONV7[7:6]<reg-CONV7>`,sramK_read,"Timing Control Kernel SRAM - Read Data Ready."
+    :ref:`SKT[5:0]<rbits-SKT>`,:ref:`CONV7[5:0]<reg-CONV7>`,sramK_setup,"Timing Control Kernel SRAM - CLK Setup."
+    :ref:`BEN<rbits-BEN>`,:ref:`CONV8[7]<reg-CONV8>`,balancer_en,"Input congestion balancer enable bit."
+    :ref:`LKEN<rbits-LKEN>`,:ref:`CONV8[6]<reg-CONV8>`,leak_en,"Enable membrane potential leakage."
+    :ref:`SLT[5:0]<rbits-SLT>`,:ref:`CONV8[5:0]<reg-CONV8>`,sramL_setup,"Timing Control Leak SRAM - CLK Setup."
+    :ref:`SLP[5:0]<rbits-SLP>`,:ref:`CONV9[7:2]<reg-CONV9>`,sramL_pulse,"Timing Control Leak SRAM - CLK Pulse."
+    :ref:`SLR[1:0]<rbits-SLR>`,:ref:`CONV9[1:0]<reg-CONV9>`,sramL_read,"Timing Control Leak SRAM - Read Data Ready."
+    :ref:`THRH[15:0]<rbits-THRH>`,":ref:`CONV10[7:0]<reg-CONV10>`, :ref:`11[7:0]<reg-CONV11>`",neuron_thr_hi,"Neuron Upper Threshold."
+    :ref:`THRL[15:0]<rbits-THRL>`,":ref:`CONV12[7:0]<reg-CONV12>`, :ref:`13[7:0]<reg-CONV13>`",neuron_thr_lo,"Neuron Lower Threshold."
+    :ref:`SNT[5:0]<rbits-SNT>`,:ref:`CONV14[6:1]<reg-CONV14>`,sramN_setup,"Timing Control Neuron SRAM - CLK Setup."
+    :ref:`NRZ<rbits-NRZ>`,:ref:`CONV14[0]<reg-CONV14>`,neuron_rtz_en,"Enable Neuron return to Zero."
+    :ref:`SNP[5:0]<rbits-SNP>`,:ref:`CONV15[7:2]<reg-CONV15>`,sramN_pulse,"Timing Control Neuron SRAM - CLK Pulse."
+    :ref:`SNR[1:0]<rbits-SNR>`,:ref:`CONV15[1:0]<reg-CONV15>`,sramN_read,"Timing Control Neuron SRAM - Read Data Ready."
+    :ref:`SKBT[1:0]<rbits-SKBT>`,:ref:`CONV16[5:4]<reg-CONV16>`,sramK_bist_tsel,"BIST mode Kernel SRAM Read Timing Control."
+    :ref:`SLBT[1:0]<rbits-SLBT>`,:ref:`CONV16[3:2]<reg-CONV16>`,sramL_bist_tsel,"BIST mode Leak SRAM Read Timing Control."
+    :ref:`SNBT[1:0]<rbits-SNBT>`,:ref:`CONV16[1:0]<reg-CONV16>`,sramN_bist_tsel,"BIST mode Neuron SRAM Read Timing Control."
+
+Detailed Signal Description
+***************************
+.. _rbits-BEN:
+
+
+BEN (balancer_en)
+-----------------
+
+Spike input rate :ref:`balancer<congestion-balancer>` enable bit. When enabled, any spike received by the layer while the layer input pipeline is busy
+is discarded. As soon as the layer input is able to accept another input spike, the coming spike is forwarded.
+
+.. _rbits-DEN:
+
+DEN (decimator_en)
+------------------
+
+Spike output decimator enable bit. When enabled, only a fraction of the spikes generated in the layer
+is forwarded to the layer output.
+The fraction of forwarded spikes can be configured via the register bits :ref:`DINT<rbits-DINT>`
+
+.. _rbits-DINT:
+
+DINT (decimator_interval)
+-------------------------
+
+Configures the fraction of forwarded spikes at the output of the layer when the :ref:`DEN<rbits-DEN>` bit is enabled.
+See :ref:`decimator` for more information.
+
+.. _rbits-SCX:
+
+SCX[1:0] (Stride_CaseX)
+-----------------------
+
+Stride in X direction. Maps to {1,2,4,8}
+
+.. _rbits-ZPY:
+
+ZPY[2:0] (zeropaddingY)
+-----------------------
+
+Zero padding applies to start and end of input in Y direction.
+
+.. _rbits-ZPX:
+
+ZPX[2:0] (zeropaddingX)
+-----------------------
+
+Zero padding applies to start and end of input in X direction.
+
+.. _rbits-KSZ:
+
+KSZ[3:0] (ksize)
+----------------
+
+Size of kernels in layer. The kernel size X*Y will be (N+1)*(N+1) for a programmed value N.
+
+.. _rbits-SCY:
+
+SCY[1:0] (Stride_CaseY)
+-----------------------
+
+Stride in Y direction. Maps to {1,2,4,8}
+
+.. _rbits-IFN:
+
+IFN[9:0] (in_fnum)
+------------------
+
+Number of input features to layer. The number of input features of a layer A must be equal with the sum of output features of all layers that are inputs to layer A. To parition where the features of a layer B that outputs to layer A are mapped in the inputs of layer A user must use shift feature number. This number will move the n output features of layer B in [<shift feature number>,<shift feature number> + n] space. If two or more output feature spaces from different layers overimpose the destination layer can-t make a difference between them. The input feature X and Y of a layer A has to be equal with output feature X and Y respectively of all layers that are inputs to layer A.
+
+.. _rbits-OFSX:
+
+OFSX[5:0] (out_fsizeX)
+----------------------
+
+Size of output feature maps in X dimension. Calculated as fsize_out_X=[(fsize_in_Y-Filter_size+2*Zero_padding_X)/Stride_X]+1.
+
+.. _rbits-OFN:
+
+OFN[9:0] (out_fnum)
+------------------------------
+
+Number of output features to produce. Programmed value is N-1 for a number of features N.
+
+.. _rbits-OFSY:
+
+OFSY[5:0] (out_fsizeY)
+------------------------------
+
+Size of output feature maps in Y dimension. Calculated as fsize_out_Y=[(fsize_in_Y-Filter_size+2*Zero_padding_Y)/Stride_Y]+1.
+
+.. _rbits-SKP:
+
+SKP[5:0] (sramK_pulse)
+------------------------------
+
+Timing Control Kernel SRAM - CLK Pulse. The default timing is '010000', the dly ctl is linear for bit 0-4 with a binary step size of 200ps offset of 275ps, bit 5 adds a security delay of 6 ns on top.
+
+.. _rbits-SKR:
+
+SKR[1:0] (sramK_read)
+------------------------------
+
+Timing Control Kernel SRAM - Read Data Ready.
+
+.. note:: The internal Kernel SRAM Read timing value is calculated as {SKR1, !(SKR0)}.
+    Therefore, to obtain an internal setting of 0b01, the register SKR must be set to 0b00.
+
+.. _rbits-SKT:
+
+SKT[5:0] (sramK_setup)
+------------------------------
+
+Timing Control Kernel SRAM - CLK setup. The default timing is '010000', the dly ctl is linear for bit 0-4 with a binary step size of 200ps, offset of 275ps, bit 5 adds a security delay of 6 ns on top.
+
+.. _rbits-LKEN:
+
+LKEN (leak_en)
+------------------------------
+
+Boolean value for enabling membrane potential leakage. 1 for true, 0 for false.
+
+.. _rbits-SLT:
+
+SLT[5:0] (sramL_setup)
+------------------------------
+
+Timing Control Leak SRAM - CLK setup. The default timing is '010000', the dly ctl is linear for bit 0-4 with a binary step size of 100ps, offset of 275ps, bit 5 adds a security delay of 3.6 ns on top
+
+.. _rbits-SLP:
+
+SLP[5:0] (sramL_pulse)
+------------------------------
+
+Timing Control Leak SRAM - CLK Pulse. The default timing is '010000', the dly ctl is linear for bit 0-4 with a binary step size of 200ps offset of 275ps, bit 5 adds a security delay of 6 ns on top
+
+.. _rbits-SLR:
+
+SLR[1:0] (sramL_read)
+------------------------------
+
+Timing Control Leak SRAM - Read Data Ready.
+
+.. note:: The internal Leak SRAM Read timing value is calculated as {SLR1, !(SLR0)}.
+    Therefore, to obtain an internal setting of 0b01, the register SLR must be set to 0b00.
+
+.. _rbits-THRH:
+
+THRH[15:0] (neuron_thr_hi)
+----------------------------
+
+Neuron Upper Threshold: Programmed value of neuron firing threshold. 2K encoding - programm the threshold value x(-1) (invert).
+
+.. _rbits-THRL:
+
+THRL[15:0] (neuron_thr_lo)
+----------------------------
+
+Neuron Lower Threshold: The minimum value of the neuron membrane potential which cannot be surpassed by leak. 2K encoding - programm the threshold value x(-1) (invert).
+
+.. _rbits-SNT:
+
+SNT[5:0] (sramN_setup)
+--------------------------
+
+Neuron SRAM setup timing. The default timing is '010000', the dly ctl is linear for bit 0-4 with a binary step size of 100ps, offset of 275ps, bit 5 adds a security delay of 3.6 ns on top.
+
+.. _rbits-NRZ:
+
+NRZ (neuron_rtz_en)
+---------------------
+
+Neuron return to Zero. Return to zero, 1 if true, 0 if false. If false, the neuron membrane potential will be set to (membrane potential - high threshold) when fired.
+
+.. _rbits-SNP:
+
+SNP[5:0] (sramN_pulse)
+--------------------------
+
+Neuron SRAM pulse timing. The default timing is '010000', the dly ctl is linear for bit 0-4 with a binary step size of 200ps, offset of 275ps, bit 5 adds a security delay of 6 ns on top.
+
+.. _rbits-SNR:
+
+SNR[1:0] (sramN_read)
+--------------------------
+
+Timing Control Neuron SRAM - Read Data Ready.
+
+.. note:: The internal Neuron SRAM Read timing value is calculated as {SNR1, !(SNR0)}.
+    Therefore, to obtain an internal setting of 0b01, the register SNR must be set to 0b00.
+
+.. _rbits-SNBT:
+
+SNBT[1:0] (sramN_bist_tsel)
+---------------------------
+
+BIST mode Neuron SRAM Read Timing Control.
+
+.. note:: The internal BIST Neuron SRAM Read timing value is calculated as {SNBT1, !(SNBT0)}.
+    Therefore, to obtain an internal setting of 0b01, the register SNBT must be set to 0b00.
+
+
+.. _rbits-SKBT:
+
+SKBT[1:0] (sramK_bist_tsel)
+------------------------------
+
+BIST mode Kernel SRAM Read Timing Control.
+
+.. note:: The internal BIST Kernel SRAM Read timing value is calculated as {SKBT1, !(SKBT0)}.
+    Therefore, to obtain an internal setting of 0b01, the register SKBT must be set to 0b00.
+
+
+.. _rbits-SLBT:
+
+SLBT[1:0] (sramL_bist_tsel)
+------------------------------
+
+BIST mode Leak SRAM Read Timing Control.
+
+.. note:: The internal BIST Leak SRAM Read timing value is calculated as {SLBT1, !(SLBT0)}.
+    Therefore, to obtain an internal setting of 0b01, the register SLBT must be set to 0b00.
+

@@ -1,0 +1,69 @@
+############
+Speck series
+############
+
+********
+Speck 2f
+********
+
+.. _speck2f_slow_clock:
+
+==========
+Slow Clock
+==========
+
+The Speck 2f development kit offers a clock source originating from the on - board FPGA. 
+This clock source can be utilized as the external slow clock for the Speck 2f. 
+
+.. code-block:: python
+   :linenos:
+
+   # get the io module of the chip, 
+   # which controls the IO pins of the chip
+   io = board.get_io_module()
+
+   # set the slow clock rate to 100Hz for example 
+   io.set_slow_clk_rate(100)
+
+   # enable the slow clock
+   io.set_slow_clk(True)
+
+========
+Examples
+========
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   examples/hands_on_speck2f_dev_kit
+   examples/display_speck2f_dvs
+   examples/generate_config_binary
+   examples/record_speck2f_dvs
+   examples/using_recorded_events
+   examples/connect_multiple_speck2f_dev_kits_to_one_viz
+   examples/display_speck2f_image_reconstructor_filter
+
+=============
+Api Reference
+=============
+
+* :class:`~samna.speck2fBoards.DevKitPowerModule`: Power measurement APIs
+* :class:`~samna.speck2fBoards.Speck2fDevKit`: Speck 2f development kit APIs
+* :class:`~samna.speck2fBoards.Speck2fModuleDevKit`: Speck 2f module development kit APIs
+* :class:`~samna.speck2fBoards.UnifirmModule`: On-board FPGA APIs
+
+********
+Speck 2e
+********
+
+The ``Speck2eTestBoard`` is mostly similar to the speck 2f development kits.
+Therefore the examples can be followed with minor modifications replacing the device name.
+
+=============
+Api Reference
+=============
+
+* :class:`~samna.speck2eTestBoard.PowerModule`: Power measurement APIs
+* :class:`~samna.speck2eTestBoard.Speck2eTestBoard`: Speck 2e test board APIs
+* :class:`~samna.speck2eTestBoard.UnifirmModule`: On-board FPGA APIs

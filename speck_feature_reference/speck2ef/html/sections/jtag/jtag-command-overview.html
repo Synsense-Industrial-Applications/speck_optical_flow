@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11.2. JTAG Command Reference &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="11.3. JTAG SRAM Access" href="jtag-srams.html" />
+    <link rel="prev" title="11.1. JTAG Interface" href="jtag-overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. JTAG Interface</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="jtag-overview.html">11.1. JTAG Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.2. JTAG Command Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-srams.html">11.3. JTAG SRAM Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-registers.html">11.4. JTAG Register Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-scan-chains.html">11.5. JTAG Scan Chain Access and Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-async.html">11.6. JTAG Asynchronous I/O Operation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">11. </span>JTAG Interface</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">11.2. </span>JTAG Command Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/jtag/jtag-command-overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jtag-command-reference">
+<span id="jtag-commands"></span><h1><span class="section-number">11.2. </span>JTAG Command Reference<a class="headerlink" href="#jtag-command-reference" title="Permalink to this heading"></a></h1>
+<p>The length of the JTAG instruction register is 8 bits.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Name</p></td>
+<td><p>Value</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>EXTEST</p></td>
+<td><p>0x00</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>IDCODE</p></td>
+<td><p>0x01</p></td>
+<td><p>Get Chip JTAG ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>SAMPLE_PRELOAD</p></td>
+<td><p>0x02</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>SET_ADDR</p></td>
+<td><p>0x10</p></td>
+<td><p>Set SRAM or Register address for R/W operation.</p></td>
+</tr>
+<tr class="row-even"><td><p>REGISTER_READ</p></td>
+<td><p>0x11</p></td>
+<td><p>Read register at the given address (see <span class="xref std std-ref">jtag-reg-r</span>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>REGISTER_WRITE</p></td>
+<td><p>0x12</p></td>
+<td><p>Write register at the given address (see <span class="xref std std-ref">jtag-reg-w</span>).</p></td>
+</tr>
+<tr class="row-even"><td><p>SRAM_READ</p></td>
+<td><p>0x13</p></td>
+<td><p>Read SRAM at the given address (see <span class="xref std std-ref">jtag-sram-r</span>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>SRAM_WRITE</p></td>
+<td><p>0x14</p></td>
+<td><p>Write SRAM at the given address (see <span class="xref std std-ref">jtag-sram-w</span>).</p></td>
+</tr>
+<tr class="row-even"><td><p>SCAN_SHIFT</p></td>
+<td><p>0x08</p></td>
+<td><p>Connect an Async Logic Scan Chain to TCK/TDI/TDO (see <span class="xref std std-ref">jtag-scan-activation</span>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCAN_BLK_SEL</p></td>
+<td><p>0x09</p></td>
+<td><p>Set Scan Chain block address (see <span class="xref std std-ref">jtag-scan-domains</span>).</p></td>
+</tr>
+<tr class="row-even"><td><p>SCAN_HSEN_OFF</p></td>
+<td><p>0x0A</p></td>
+<td><p>Disable Scan Chain Handshake Enable bit (see <span class="xref std std-ref">jtag-scan-activation</span>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCAN_HSEN_ON</p></td>
+<td><p>0x0B</p></td>
+<td><p>Enable Scan Chain Handshake Enable bit (see <span class="xref std std-ref">jtag-scan-activation</span>).</p></td>
+</tr>
+<tr class="row-even"><td><p>SCAN_DEN_OFF</p></td>
+<td><p>0x0C</p></td>
+<td><p>Disable Scan Chain Data Enable bit (see <span class="xref std std-ref">jtag-scan-activation</span>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCAN_DEN_ON</p></td>
+<td><p>0x0D</p></td>
+<td><p>Enable Scan Chain Handshake Data bit (see <span class="xref std std-ref">jtag-scan-activation</span>).</p></td>
+</tr>
+<tr class="row-even"><td><p>ASYNC_INPUT_ACK</p></td>
+<td><p>0x20</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ASYNC_INPUT_READ</p></td>
+<td><p>0x21</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ASYNC_INPUT</p></td>
+<td><p>0x22</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ASYNC_OUTPUT</p></td>
+<td><p>0x30</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>READOUT</p></td>
+<td><p>0x31</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>SPI_MON</p></td>
+<td><p>0x32</p></td>
+<td><p>Readout SPI block internal Monitor data {mon_vld, spi_mon[39:0]}.</p></td>
+</tr>
+<tr class="row-even"><td><p>BYPASS</p></td>
+<td><p>0xFF</p></td>
+<td><p>JTAG Bypass mode.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="jtag-overview.html" class="btn btn-neutral float-left" title="11.1. JTAG Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="jtag-srams.html" class="btn btn-neutral float-right" title="11.3. JTAG SRAM Access" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

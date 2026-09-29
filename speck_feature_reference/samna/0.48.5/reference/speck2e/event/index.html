@@ -1,0 +1,1444 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.speck2e.event &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="samna.speck2eTestBoard" href="../../speck2eTestBoard/index.html" />
+    <link rel="prev" title="samna.speck2e.configuration" href="../configuration/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">samna.speck2e</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#module-samna.speck2e">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">samna</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna.speck2e</a></li>
+      <li class="breadcrumb-item active">samna.speck2e.event</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/reference/speck2e/event/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-speck2e-event">
+<h1>samna.speck2e.event<a class="headerlink" href="index.html#samna-speck2e-event" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.speck2e.event">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.speck2e.event" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.AverageSel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">AverageSel</span></span><a class="headerlink" href="index.html#samna.speck2e.event.AverageSel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Set the average select of readout layer through async serial interface.</p>
+<p>This should be set through SPI usually.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.AverageSel.average_sel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">average_sel</span></span><a class="headerlink" href="index.html#samna.speck2e.event.AverageSel.average_sel" title="Link to this definition"></a></dt>
+<dd><p>The average select.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.AverageSel.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.AverageSel" title="samna.speck2e.event.AverageSel"><span class="pre">samna.speck2e.event.AverageSel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.AverageSel.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.AverageSel.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.AverageSel" title="samna.speck2e.event.AverageSel"><span class="pre">samna.speck2e.event.AverageSel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.AverageSel.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.BiasValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">BiasValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.BiasValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A response to a bias value read request.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.BiasValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.BiasValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the bias.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.BiasValue.bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bias</span></span><a class="headerlink" href="index.html#samna.speck2e.event.BiasValue.bias" title="Link to this definition"></a></dt>
+<dd><p>The value of the bias.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.BiasValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.BiasValue" title="samna.speck2e.event.BiasValue"><span class="pre">samna.speck2e.event.BiasValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.BiasValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.BiasValue.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.BiasValue.layer" title="Link to this definition"></a></dt>
+<dd><p>The layer of the bias.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.BiasValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.BiasValue" title="samna.speck2e.event.BiasValue"><span class="pre">samna.speck2e.event.BiasValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.BiasValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.DvsEvent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">DvsEvent</span></span><a class="headerlink" href="index.html#samna.speck2e.event.DvsEvent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The DVS event for Speck 2e.</p>
+<p>On Speck 2e these events can only be sent to the DVS preprocessing
+layer.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.DvsEvent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.DvsEvent" title="samna.speck2e.event.DvsEvent"><span class="pre">samna.speck2e.event.DvsEvent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.DvsEvent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.DvsEvent.p">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p</span></span><a class="headerlink" href="index.html#samna.speck2e.event.DvsEvent.p" title="Link to this definition"></a></dt>
+<dd><p>Polarity</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.DvsEvent.timestamp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="index.html#samna.speck2e.event.DvsEvent.timestamp" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.DvsEvent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.DvsEvent" title="samna.speck2e.event.DvsEvent"><span class="pre">samna.speck2e.event.DvsEvent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.DvsEvent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.DvsEvent.x">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="index.html#samna.speck2e.event.DvsEvent.x" title="Link to this definition"></a></dt>
+<dd><p>X location</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.DvsEvent.y">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="index.html#samna.speck2e.event.DvsEvent.y" title="Link to this definition"></a></dt>
+<dd><p>Y location</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterDvsEvent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FilterDvsEvent</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterDvsEvent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The X/Y/Polarity information for the internally generated Counter update in memory</p>
+<p>This event is used for low level operations and should not be needed
+under normal conditions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterDvsEvent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FilterDvsEvent" title="samna.speck2e.event.FilterDvsEvent"><span class="pre">samna.speck2e.event.FilterDvsEvent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterDvsEvent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterDvsEvent.p">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterDvsEvent.p" title="Link to this definition"></a></dt>
+<dd><p>The polarity.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterDvsEvent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FilterDvsEvent" title="samna.speck2e.event.FilterDvsEvent"><span class="pre">samna.speck2e.event.FilterDvsEvent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterDvsEvent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterDvsEvent.x">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterDvsEvent.x" title="Link to this definition"></a></dt>
+<dd><p>The x coordinate.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterDvsEvent.y">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterDvsEvent.y" title="Link to this definition"></a></dt>
+<dd><p>The y coordinate.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FilterValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A response to a filter sram value read request.</p>
+<p>This event is used for low level operations and should not be needed
+under normal conditions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValue.counter_data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counter_data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValue.counter_data" title="Link to this definition"></a></dt>
+<dd><p>The filter sram value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FilterValue" title="samna.speck2e.event.FilterValue"><span class="pre">samna.speck2e.event.FilterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FilterValue" title="samna.speck2e.event.FilterValue"><span class="pre">samna.speck2e.event.FilterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValue.x">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValue.x" title="Link to this definition"></a></dt>
+<dd><p>The x coordinate.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValue.y">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValue.y" title="Link to this definition"></a></dt>
+<dd><p>The y coordinate.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValueCurrent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FilterValueCurrent</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValueCurrent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The current Counter value of the original event received from the Event Pre-Processing Layer.</p>
+<p>This event is used for low level operations and should not be needed
+under normal conditions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValueCurrent.counter_data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counter_data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValueCurrent.counter_data" title="Link to this definition"></a></dt>
+<dd><p>The current counter value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValueCurrent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FilterValueCurrent" title="samna.speck2e.event.FilterValueCurrent"><span class="pre">samna.speck2e.event.FilterValueCurrent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValueCurrent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValueCurrent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FilterValueCurrent" title="samna.speck2e.event.FilterValueCurrent"><span class="pre">samna.speck2e.event.FilterValueCurrent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValueCurrent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValuePrevious">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FilterValuePrevious</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValuePrevious" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The previous Counter value at the location X/Y, i.e., the counter value stored in the SRAM.</p>
+<p>This event is used for low level operations and should not be needed
+under normal conditions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValuePrevious.counter_data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counter_data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValuePrevious.counter_data" title="Link to this definition"></a></dt>
+<dd><p>The current counter value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValuePrevious.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FilterValuePrevious" title="samna.speck2e.event.FilterValuePrevious"><span class="pre">samna.speck2e.event.FilterValuePrevious</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValuePrevious.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FilterValuePrevious.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FilterValuePrevious" title="samna.speck2e.event.FilterValuePrevious"><span class="pre">samna.speck2e.event.FilterValuePrevious</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FilterValuePrevious.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashErase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FlashErase</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashErase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Indicate to erase flash.</p>
+<p>Only available under spi-bridge mode.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashErase.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashErase.address" title="Link to this definition"></a></dt>
+<dd><p>The address(24-bit) to erase.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashErase.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashErase" title="samna.speck2e.event.FlashErase"><span class="pre">samna.speck2e.event.FlashErase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashErase.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashErase.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashErase" title="samna.speck2e.event.FlashErase"><span class="pre">samna.speck2e.event.FlashErase</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashErase.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashErase.type">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashErase.type" title="Link to this definition"></a></dt>
+<dd><p>Erase type shall be a value of <cite>speck2e.FlashEraseType</cite>:
+1: erase a 4KB sector from address;
+2: erase a 32KB block from address;
+3: erase a 64KB block from address;
+4: erase chip, address not use.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashQueryStatus">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FlashQueryStatus</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashQueryStatus" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Query flash status.</p>
+<p>Only available under spi-bridge mode.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashRead">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FlashRead</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashRead" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Indicate to read data directly from flash.</p>
+<p>Only available under spi-bridge mode.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashRead.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashRead.address" title="Link to this definition"></a></dt>
+<dd><p>The address(24-bit) to read.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashRead.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashRead" title="samna.speck2e.event.FlashRead"><span class="pre">samna.speck2e.event.FlashRead</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashRead.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashRead.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashRead" title="samna.speck2e.event.FlashRead"><span class="pre">samna.speck2e.event.FlashRead</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashRead.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashSpiRaw">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FlashSpiRaw</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashSpiRaw" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Raw byte stream to send to DI pin.</p>
+<p>Only available under spi-bridge mode.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashSpiRaw.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashSpiRaw" title="samna.speck2e.event.FlashSpiRaw"><span class="pre">samna.speck2e.event.FlashSpiRaw</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashSpiRaw.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashSpiRaw.raw_data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raw_data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashSpiRaw.raw_data" title="Link to this definition"></a></dt>
+<dd><p>Raw byte stream.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashSpiRaw.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashSpiRaw" title="samna.speck2e.event.FlashSpiRaw"><span class="pre">samna.speck2e.event.FlashSpiRaw</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashSpiRaw.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashStatus">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FlashStatus</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashStatus" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Status of flash, value is one of <cite>speck2e.FlashStatusType</cite>.</p>
+<p>Only available under spi-bridge mode.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashStatus.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashStatus" title="samna.speck2e.event.FlashStatus"><span class="pre">samna.speck2e.event.FlashStatus</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashStatus.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashStatus.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashStatus" title="samna.speck2e.event.FlashStatus"><span class="pre">samna.speck2e.event.FlashStatus</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashStatus.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FlashValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Data read directly from flash.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address(24-bit) read from.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashValue.data" title="Link to this definition"></a></dt>
+<dd><p>The data read from the address.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashValue" title="samna.speck2e.event.FlashValue"><span class="pre">samna.speck2e.event.FlashValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashValue" title="samna.speck2e.event.FlashValue"><span class="pre">samna.speck2e.event.FlashValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashWrite">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FlashWrite</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashWrite" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Indicate to write data to state register.</p>
+<p>Only available under spi-bridge mode.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashWrite.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashWrite.address" title="Link to this definition"></a></dt>
+<dd><p>The address(24-bit) to write.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashWrite.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashWrite.data" title="Link to this definition"></a></dt>
+<dd><p>The data(24-bit) to write.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashWrite.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashWrite" title="samna.speck2e.event.FlashWrite"><span class="pre">samna.speck2e.event.FlashWrite</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashWrite.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashWrite.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.FlashWrite" title="samna.speck2e.event.FlashWrite"><span class="pre">samna.speck2e.event.FlashWrite</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashWrite.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.FlashWriteEnable">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">FlashWriteEnable</span></span><a class="headerlink" href="index.html#samna.speck2e.event.FlashWriteEnable" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Enable writing.</p>
+<p>Only available under spi-bridge mode.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.Frame">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">Frame</span></span><a class="headerlink" href="index.html#samna.speck2e.event.Frame" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>DVP frame data.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.Frame.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.Frame.data" title="Link to this definition"></a></dt>
+<dd><p>The frame data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.Frame.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.Frame" title="samna.speck2e.event.Frame"><span class="pre">samna.speck2e.event.Frame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.Frame.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.Frame.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.Frame" title="samna.speck2e.event.Frame"><span class="pre">samna.speck2e.event.Frame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.Frame.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.InputInterfaceEvent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">InputInterfaceEvent</span></span><a class="headerlink" href="index.html#samna.speck2e.event.InputInterfaceEvent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>InputInterface events are returned from the Speck 2e when <cite>monitor_input_enable = True</cite>.</p>
+<p>The Speck 2e has an asynchronous bus interface which may be
+configured to echo events received by the asynchronous bus.</p>
+<p>This is a low-level event type which is used for debugging.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.InputInterfaceEvent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.InputInterfaceEvent" title="samna.speck2e.event.InputInterfaceEvent"><span class="pre">samna.speck2e.event.InputInterfaceEvent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.InputInterfaceEvent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.InputInterfaceEvent.msp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">msp</span></span><a class="headerlink" href="index.html#samna.speck2e.event.InputInterfaceEvent.msp" title="Link to this definition"></a></dt>
+<dd><p>True if this event is a most significant word part, false otherwise.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.InputInterfaceEvent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.InputInterfaceEvent" title="samna.speck2e.event.InputInterfaceEvent"><span class="pre">samna.speck2e.event.InputInterfaceEvent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.InputInterfaceEvent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.InputInterfaceEvent.value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="index.html#samna.speck2e.event.InputInterfaceEvent.value" title="Link to this definition"></a></dt>
+<dd><p>Encoded event value.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.KillSensorPixel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">KillSensorPixel</span></span><a class="headerlink" href="index.html#samna.speck2e.event.KillSensorPixel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>KillSensorPixel are used to disable a particular pixel in the DVS array.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.KillSensorPixel.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.KillSensorPixel" title="samna.speck2e.event.KillSensorPixel"><span class="pre">samna.speck2e.event.KillSensorPixel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.KillSensorPixel.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.KillSensorPixel.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.KillSensorPixel" title="samna.speck2e.event.KillSensorPixel"><span class="pre">samna.speck2e.event.KillSensorPixel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.KillSensorPixel.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.KillSensorPixel.x">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="index.html#samna.speck2e.event.KillSensorPixel.x" title="Link to this definition"></a></dt>
+<dd><p>The x coorinate of the pixel to be killed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.KillSensorPixel.y">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="index.html#samna.speck2e.event.KillSensorPixel.y" title="Link to this definition"></a></dt>
+<dd><p>The y coorinate of the pixel to be killed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.NeuronValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">NeuronValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.NeuronValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A response to a neuron value read request.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.NeuronValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.NeuronValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the neuron.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.NeuronValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.NeuronValue" title="samna.speck2e.event.NeuronValue"><span class="pre">samna.speck2e.event.NeuronValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.NeuronValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.NeuronValue.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.NeuronValue.layer" title="Link to this definition"></a></dt>
+<dd><p>The layer of the neuron.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.NeuronValue.neuron_state">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_state</span></span><a class="headerlink" href="index.html#samna.speck2e.event.NeuronValue.neuron_state" title="Link to this definition"></a></dt>
+<dd><p>The value of the neuron.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.NeuronValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.NeuronValue" title="samna.speck2e.event.NeuronValue"><span class="pre">samna.speck2e.event.NeuronValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.NeuronValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.OutputModeSel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">OutputModeSel</span></span><a class="headerlink" href="index.html#samna.speck2e.event.OutputModeSel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Set the output mode of readout layer through async serial interface.</p>
+<p>This should be set through SPI usually.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.OutputModeSel.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.OutputModeSel" title="samna.speck2e.event.OutputModeSel"><span class="pre">samna.speck2e.event.OutputModeSel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.OutputModeSel.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.OutputModeSel.mode_sel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode_sel</span></span><a class="headerlink" href="index.html#samna.speck2e.event.OutputModeSel.mode_sel" title="Link to this definition"></a></dt>
+<dd><p>The output mode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.OutputModeSel.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.OutputModeSel" title="samna.speck2e.event.OutputModeSel"><span class="pre">samna.speck2e.event.OutputModeSel</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.OutputModeSel.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadBiasValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">ReadBiasValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadBiasValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that will create a read request for a bias value.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadBiasValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadBiasValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the bias to read from in its layer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadBiasValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadBiasValue" title="samna.speck2e.event.ReadBiasValue"><span class="pre">samna.speck2e.event.ReadBiasValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadBiasValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadBiasValue.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadBiasValue.layer" title="Link to this definition"></a></dt>
+<dd><p>The layer containing the bias to be read from</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadBiasValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadBiasValue" title="samna.speck2e.event.ReadBiasValue"><span class="pre">samna.speck2e.event.ReadBiasValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadBiasValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadFilterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">ReadFilterValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadFilterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read filter sram value at a coordinate.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadFilterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadFilterValue" title="samna.speck2e.event.ReadFilterValue"><span class="pre">samna.speck2e.event.ReadFilterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadFilterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadFilterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadFilterValue" title="samna.speck2e.event.ReadFilterValue"><span class="pre">samna.speck2e.event.ReadFilterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadFilterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadFilterValue.x">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadFilterValue.x" title="Link to this definition"></a></dt>
+<dd><p>The x coordinate</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadFilterValue.y">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadFilterValue.y" title="Link to this definition"></a></dt>
+<dd><p>The y coordinate</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadNeuronValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">ReadNeuronValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadNeuronValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that will create a read request for a neuron state value.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadNeuronValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadNeuronValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the neuron to read from in its layer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadNeuronValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadNeuronValue" title="samna.speck2e.event.ReadNeuronValue"><span class="pre">samna.speck2e.event.ReadNeuronValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadNeuronValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadNeuronValue.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadNeuronValue.layer" title="Link to this definition"></a></dt>
+<dd><p>The layer containing the neuron to be read from</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadNeuronValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadNeuronValue" title="samna.speck2e.event.ReadNeuronValue"><span class="pre">samna.speck2e.event.ReadNeuronValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadNeuronValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadRegisterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">ReadRegisterValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadRegisterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that will create a register read request.</p>
+<p>This event is used for low level operations and should not be needed
+under normal conditions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadRegisterValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadRegisterValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the register to be read.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadRegisterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadRegisterValue" title="samna.speck2e.event.ReadRegisterValue"><span class="pre">samna.speck2e.event.ReadRegisterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadRegisterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadRegisterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadRegisterValue" title="samna.speck2e.event.ReadRegisterValue"><span class="pre">samna.speck2e.event.ReadRegisterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadRegisterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadSramValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">ReadSramValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadSramValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read a byte from one sram address.</p>
+<p>This event is used for low level operations and should not be needed
+under normal conditions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadSramValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadSramValue.address" title="Link to this definition"></a></dt>
+<dd><p>The sram address.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadSramValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadSramValue" title="samna.speck2e.event.ReadSramValue"><span class="pre">samna.speck2e.event.ReadSramValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadSramValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadSramValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadSramValue" title="samna.speck2e.event.ReadSramValue"><span class="pre">samna.speck2e.event.ReadSramValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadSramValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadWeightValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">ReadWeightValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadWeightValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that will create a read request for a weight value.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadWeightValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadWeightValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the weight to read from in its layer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadWeightValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadWeightValue" title="samna.speck2e.event.ReadWeightValue"><span class="pre">samna.speck2e.event.ReadWeightValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadWeightValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadWeightValue.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadWeightValue.layer" title="Link to this definition"></a></dt>
+<dd><p>The layer containing the weight to be read from</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadWeightValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadWeightValue" title="samna.speck2e.event.ReadWeightValue"><span class="pre">samna.speck2e.event.ReadWeightValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadWeightValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadoutPinValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">ReadoutPinValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadoutPinValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The readout pins events of Speck 2e.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadoutPinValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadoutPinValue" title="samna.speck2e.event.ReadoutPinValue"><span class="pre">samna.speck2e.event.ReadoutPinValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadoutPinValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadoutPinValue.index">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">index</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadoutPinValue.index" title="Link to this definition"></a></dt>
+<dd><p>The value of the readout pins, represent the neuron index of max average</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadoutPinValue.timestamp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadoutPinValue.timestamp" title="Link to this definition"></a></dt>
+<dd><p>Timestamp of the event</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadoutPinValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadoutPinValue" title="samna.speck2e.event.ReadoutPinValue"><span class="pre">samna.speck2e.event.ReadoutPinValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadoutPinValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadoutValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">ReadoutValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadoutValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The readout events of Speck 2e.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadoutValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadoutValue" title="samna.speck2e.event.ReadoutValue"><span class="pre">samna.speck2e.event.ReadoutValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadoutValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadoutValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.ReadoutValue" title="samna.speck2e.event.ReadoutValue"><span class="pre">samna.speck2e.event.ReadoutValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadoutValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.ReadoutValue.value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ReadoutValue.value" title="Link to this definition"></a></dt>
+<dd><p>The value of the readout,
+needs to be decoded according to how you set the <code class="code docutils literal notranslate"><span class="pre">output_mod_sel</span></code> of <a class="reference internal" href="../configuration/index.html#samna.speck2e.configuration.ReadoutConfig" title="samna.speck2e.configuration.ReadoutConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadoutConfig</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.RegisterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">RegisterValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.RegisterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A response to a register value read request.</p>
+<p>This event is used for low level operations and should not be needed
+under normal conditions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.RegisterValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.RegisterValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the register.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.RegisterValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.RegisterValue.data" title="Link to this definition"></a></dt>
+<dd><p>The value of the register.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.RegisterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.RegisterValue" title="samna.speck2e.event.RegisterValue"><span class="pre">samna.speck2e.event.RegisterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.RegisterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.RegisterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.RegisterValue" title="samna.speck2e.event.RegisterValue"><span class="pre">samna.speck2e.event.RegisterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.RegisterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.RequestSpiMon">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">RequestSpiMon</span></span><a class="headerlink" href="index.html#samna.speck2e.event.RequestSpiMon" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The event to monitor the SPI bus. For debug only.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.ResetSensorPixel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">ResetSensorPixel</span></span><a class="headerlink" href="index.html#samna.speck2e.event.ResetSensorPixel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Enable all pixels in the DVS array.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.SpiMon">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">SpiMon</span></span><a class="headerlink" href="index.html#samna.speck2e.event.SpiMon" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The readout pins events of Speck 2e.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.SpiMon.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.SpiMon.data" title="Link to this definition"></a></dt>
+<dd><p>The result of <a class="reference internal" href="index.html#samna.speck2e.event.RequestSpiMon" title="samna.speck2e.event.RequestSpiMon"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequestSpiMon</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.SpiMon.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.SpiMon" title="samna.speck2e.event.SpiMon"><span class="pre">samna.speck2e.event.SpiMon</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.SpiMon.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.SpiMon.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.SpiMon" title="samna.speck2e.event.SpiMon"><span class="pre">samna.speck2e.event.SpiMon</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.SpiMon.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.Spike">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">Spike</span></span><a class="headerlink" href="index.html#samna.speck2e.event.Spike" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Spikes are events that can be consumed and produced by Speck 2e.</p>
+<p>When sending spike events to Speck 2e, the properties will be
+interpreted as the destination layer, feature, x, y that should
+receive the event. The timestamp property will be used to inject the
+event into Speck 2e when the external event sequencer timestamp is
+equal to or greater than the event timestamp.</p>
+<p>When receing spike events from Speck 2e the properties should be
+interpreted as the layer, feature, x, y neuron that generated the
+spike. The timestamp parameter is the timestamp at which speck2e
+sent out the event.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.Spike.feature">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feature</span></span><a class="headerlink" href="index.html#samna.speck2e.event.Spike.feature" title="Link to this definition"></a></dt>
+<dd><p>Target/producing feature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.Spike.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.Spike" title="samna.speck2e.event.Spike"><span class="pre">samna.speck2e.event.Spike</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.Spike.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.Spike.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.Spike.layer" title="Link to this definition"></a></dt>
+<dd><p>Target layer if it is an input, producing layer if it is an output.
+As a target layer, it can be [0, 8] which stands for the 9 CNN layers if you want to
+inject spikes into one of the CNN layers, or 12 if you want to send to the readout layers.
+If it is an output, the layer in [0, 8] represents the output CNN layer,
+layer 13 means it is an output from the DVS pre-processing layer if you enabled the
+<a class="reference internal" href="../configuration/index.html#samna.speck2e.configuration.DvsLayerConfig.monitor_enable" title="samna.speck2e.configuration.DvsLayerConfig.monitor_enable"><code class="xref py py-class docutils literal notranslate"><span class="pre">monitor_enable</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.Spike.timestamp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="index.html#samna.speck2e.event.Spike.timestamp" title="Link to this definition"></a></dt>
+<dd><p>When receiving a Spike event from a chip the timestamp will be
+populated with the time at which the event leave the chip.</p>
+<p>When sending a Spike event to a chip the timestamp will be used to
+control when the event will be applied to the chip.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.Spike.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.Spike" title="samna.speck2e.event.Spike"><span class="pre">samna.speck2e.event.Spike</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.Spike.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.Spike.x">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="index.html#samna.speck2e.event.Spike.x" title="Link to this definition"></a></dt>
+<dd><p>Target/producing x coordinate.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.Spike.y">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="index.html#samna.speck2e.event.Spike.y" title="Link to this definition"></a></dt>
+<dd><p>Target/producing y coordinate.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.SramValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">SramValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.SramValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A response to a sram value read request.</p>
+<p>This event is used for low level operations and should not be needed
+under normal conditions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.SramValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.SramValue.address" title="Link to this definition"></a></dt>
+<dd><p>The sram address.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.SramValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.SramValue.data" title="Link to this definition"></a></dt>
+<dd><p>The sram value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.SramValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.SramValue" title="samna.speck2e.event.SramValue"><span class="pre">samna.speck2e.event.SramValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.SramValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.SramValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.SramValue" title="samna.speck2e.event.SramValue"><span class="pre">samna.speck2e.event.SramValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.SramValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.WeightValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">WeightValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WeightValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A response to a kernel weight value read request.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WeightValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WeightValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the kernel weight.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WeightValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WeightValue" title="samna.speck2e.event.WeightValue"><span class="pre">samna.speck2e.event.WeightValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WeightValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WeightValue.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WeightValue.layer" title="Link to this definition"></a></dt>
+<dd><p>The layer of the kernel weight.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WeightValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WeightValue" title="samna.speck2e.event.WeightValue"><span class="pre">samna.speck2e.event.WeightValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WeightValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WeightValue.weight">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weight</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WeightValue.weight" title="Link to this definition"></a></dt>
+<dd><p>The value of the kernel weight.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteBiasValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">WriteBiasValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteBiasValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that will write a bias value.</p>
+<p>This event is used for low level operations. Biases will be written
+automatically when a configuration is applied. Prefer using the
+configuration whenever possible.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteBiasValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteBiasValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the bias that will be written to.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteBiasValue.bias">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bias</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteBiasValue.bias" title="Link to this definition"></a></dt>
+<dd><p>The bias value to write</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteBiasValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteBiasValue" title="samna.speck2e.event.WriteBiasValue"><span class="pre">samna.speck2e.event.WriteBiasValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteBiasValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteBiasValue.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteBiasValue.layer" title="Link to this definition"></a></dt>
+<dd><p>The layer containing the bias that will be written to.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteBiasValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteBiasValue" title="samna.speck2e.event.WriteBiasValue"><span class="pre">samna.speck2e.event.WriteBiasValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteBiasValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteFilterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">WriteFilterValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteFilterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Set filter counter value at a location.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteFilterValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteFilterValue.data" title="Link to this definition"></a></dt>
+<dd><p>The filter counter value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteFilterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteFilterValue" title="samna.speck2e.event.WriteFilterValue"><span class="pre">samna.speck2e.event.WriteFilterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteFilterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteFilterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteFilterValue" title="samna.speck2e.event.WriteFilterValue"><span class="pre">samna.speck2e.event.WriteFilterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteFilterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteFilterValue.x">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteFilterValue.x" title="Link to this definition"></a></dt>
+<dd><p>X coordinate</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteFilterValue.y">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteFilterValue.y" title="Link to this definition"></a></dt>
+<dd><p>Y coordinate</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteNeuronValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">WriteNeuronValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteNeuronValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that will write the neuron state value of a single neuron.</p>
+<p>This event is used for low level operations. Initial neuron state
+values will be written automatically when a configuration is applied.
+Prefer using the configuration whenever possible.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteNeuronValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteNeuronValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the neuron to be written to</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteNeuronValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteNeuronValue" title="samna.speck2e.event.WriteNeuronValue"><span class="pre">samna.speck2e.event.WriteNeuronValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteNeuronValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteNeuronValue.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteNeuronValue.layer" title="Link to this definition"></a></dt>
+<dd><p>The layer containing the neuron to be written to</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteNeuronValue.neuron_state">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_state</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteNeuronValue.neuron_state" title="Link to this definition"></a></dt>
+<dd><p>The value which will be written to the neuron state address</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteNeuronValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteNeuronValue" title="samna.speck2e.event.WriteNeuronValue"><span class="pre">samna.speck2e.event.WriteNeuronValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteNeuronValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteRegisterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">WriteRegisterValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteRegisterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that will write a register value.</p>
+<p>This event is used for low level operations. Registers will be written
+automatically when a configuration is applied. Prefer using the
+configuration whenever possible.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteRegisterValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteRegisterValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the register to be written.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteRegisterValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteRegisterValue.data" title="Link to this definition"></a></dt>
+<dd><p>The value to be written</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteRegisterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteRegisterValue" title="samna.speck2e.event.WriteRegisterValue"><span class="pre">samna.speck2e.event.WriteRegisterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteRegisterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteRegisterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteRegisterValue" title="samna.speck2e.event.WriteRegisterValue"><span class="pre">samna.speck2e.event.WriteRegisterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteRegisterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteSramValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">WriteSramValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteSramValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Write a byte to one sram address.</p>
+<p>This event is used for low level operations and should not be needed
+under normal conditions.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteSramValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteSramValue.address" title="Link to this definition"></a></dt>
+<dd><p>The sram address.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteSramValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteSramValue.data" title="Link to this definition"></a></dt>
+<dd><p>The sram value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteSramValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteSramValue" title="samna.speck2e.event.WriteSramValue"><span class="pre">samna.speck2e.event.WriteSramValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteSramValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteSramValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteSramValue" title="samna.speck2e.event.WriteSramValue"><span class="pre">samna.speck2e.event.WriteSramValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteSramValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteWeightValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">WriteWeightValue</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteWeightValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that will write a kernel weight.</p>
+<p>This event is used for low level operations. Kernel weights will be
+written automatically when a configuration is applied. Prefer using
+the configuration whenever possible.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteWeightValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteWeightValue.address" title="Link to this definition"></a></dt>
+<dd><p>The address of the kernel that will be written to.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteWeightValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteWeightValue" title="samna.speck2e.event.WriteWeightValue"><span class="pre">samna.speck2e.event.WriteWeightValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteWeightValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteWeightValue.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteWeightValue.layer" title="Link to this definition"></a></dt>
+<dd><p>The layer containing the kernel weight that will be written to.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteWeightValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.WriteWeightValue" title="samna.speck2e.event.WriteWeightValue"><span class="pre">samna.speck2e.event.WriteWeightValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteWeightValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2e.event.WriteWeightValue.weight">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weight</span></span><a class="headerlink" href="index.html#samna.speck2e.event.WriteWeightValue.weight" title="Link to this definition"></a></dt>
+<dd><p>The weight value to write</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.speck2e.event.compute_sram_address">
+<span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">compute_sram_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.Spike" title="samna.speck2e.event.Spike"><span class="pre">samna.speck2e.event.Spike</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.DvsEvent" title="samna.speck2e.event.DvsEvent"><span class="pre">samna.speck2e.event.DvsEvent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.KillSensorPixel" title="samna.speck2e.event.KillSensorPixel"><span class="pre">samna.speck2e.event.KillSensorPixel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ResetSensorPixel" title="samna.speck2e.event.ResetSensorPixel"><span class="pre">samna.speck2e.event.ResetSensorPixel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.OutputModeSel" title="samna.speck2e.event.OutputModeSel"><span class="pre">samna.speck2e.event.OutputModeSel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.AverageSel" title="samna.speck2e.event.AverageSel"><span class="pre">samna.speck2e.event.AverageSel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.AsiRequest</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.ReadoutRequest</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.ScanChainValue</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteNeuronValue" title="samna.speck2e.event.WriteNeuronValue"><span class="pre">samna.speck2e.event.WriteNeuronValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadNeuronValue" title="samna.speck2e.event.ReadNeuronValue"><span class="pre">samna.speck2e.event.ReadNeuronValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteWeightValue" title="samna.speck2e.event.WriteWeightValue"><span class="pre">samna.speck2e.event.WriteWeightValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadWeightValue" title="samna.speck2e.event.ReadWeightValue"><span class="pre">samna.speck2e.event.ReadWeightValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteBiasValue" title="samna.speck2e.event.WriteBiasValue"><span class="pre">samna.speck2e.event.WriteBiasValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadBiasValue" title="samna.speck2e.event.ReadBiasValue"><span class="pre">samna.speck2e.event.ReadBiasValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteRegisterValue" title="samna.speck2e.event.WriteRegisterValue"><span class="pre">samna.speck2e.event.WriteRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadRegisterValue" title="samna.speck2e.event.ReadRegisterValue"><span class="pre">samna.speck2e.event.ReadRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteFilterValue" title="samna.speck2e.event.WriteFilterValue"><span class="pre">samna.speck2e.event.WriteFilterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadFilterValue" title="samna.speck2e.event.ReadFilterValue"><span class="pre">samna.speck2e.event.ReadFilterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteSramValue" title="samna.speck2e.event.WriteSramValue"><span class="pre">samna.speck2e.event.WriteSramValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadSramValue" title="samna.speck2e.event.ReadSramValue"><span class="pre">samna.speck2e.event.ReadSramValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.IdCodeRequest</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashRead" title="samna.speck2e.event.FlashRead"><span class="pre">samna.speck2e.event.FlashRead</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashWrite" title="samna.speck2e.event.FlashWrite"><span class="pre">samna.speck2e.event.FlashWrite</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashErase" title="samna.speck2e.event.FlashErase"><span class="pre">samna.speck2e.event.FlashErase</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashSpiRaw" title="samna.speck2e.event.FlashSpiRaw"><span class="pre">samna.speck2e.event.FlashSpiRaw</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashWriteEnable" title="samna.speck2e.event.FlashWriteEnable"><span class="pre">samna.speck2e.event.FlashWriteEnable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashQueryStatus" title="samna.speck2e.event.FlashQueryStatus"><span class="pre">samna.speck2e.event.FlashQueryStatus</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.RequestSpiMon" title="samna.speck2e.event.RequestSpiMon"><span class="pre">samna.speck2e.event.RequestSpiMon</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.Frame" title="samna.speck2e.event.Frame"><span class="pre">samna.speck2e.event.Frame</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.compute_sram_address" title="Link to this definition"></a></dt>
+<dd><p>Compute the address of the a given event in the SRAM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">speck2e.event.Speck2eInputEvent</span></code>) – The event to compute the address for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The address of the event in the SRAM if it’s possible to compute the address, otherwise return None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.speck2e.event.compute_sram_address_t">
+<span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">compute_sram_address_t</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2e.event.Spike" title="samna.speck2e.event.Spike"><span class="pre">samna.speck2e.event.Spike</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.DvsEvent" title="samna.speck2e.event.DvsEvent"><span class="pre">samna.speck2e.event.DvsEvent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.KillSensorPixel" title="samna.speck2e.event.KillSensorPixel"><span class="pre">samna.speck2e.event.KillSensorPixel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ResetSensorPixel" title="samna.speck2e.event.ResetSensorPixel"><span class="pre">samna.speck2e.event.ResetSensorPixel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.OutputModeSel" title="samna.speck2e.event.OutputModeSel"><span class="pre">samna.speck2e.event.OutputModeSel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.AverageSel" title="samna.speck2e.event.AverageSel"><span class="pre">samna.speck2e.event.AverageSel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.AsiRequest</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.ReadoutRequest</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.ScanChainValue</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteNeuronValue" title="samna.speck2e.event.WriteNeuronValue"><span class="pre">samna.speck2e.event.WriteNeuronValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadNeuronValue" title="samna.speck2e.event.ReadNeuronValue"><span class="pre">samna.speck2e.event.ReadNeuronValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteWeightValue" title="samna.speck2e.event.WriteWeightValue"><span class="pre">samna.speck2e.event.WriteWeightValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadWeightValue" title="samna.speck2e.event.ReadWeightValue"><span class="pre">samna.speck2e.event.ReadWeightValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteBiasValue" title="samna.speck2e.event.WriteBiasValue"><span class="pre">samna.speck2e.event.WriteBiasValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadBiasValue" title="samna.speck2e.event.ReadBiasValue"><span class="pre">samna.speck2e.event.ReadBiasValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteRegisterValue" title="samna.speck2e.event.WriteRegisterValue"><span class="pre">samna.speck2e.event.WriteRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadRegisterValue" title="samna.speck2e.event.ReadRegisterValue"><span class="pre">samna.speck2e.event.ReadRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteFilterValue" title="samna.speck2e.event.WriteFilterValue"><span class="pre">samna.speck2e.event.WriteFilterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadFilterValue" title="samna.speck2e.event.ReadFilterValue"><span class="pre">samna.speck2e.event.ReadFilterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WriteSramValue" title="samna.speck2e.event.WriteSramValue"><span class="pre">samna.speck2e.event.WriteSramValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadSramValue" title="samna.speck2e.event.ReadSramValue"><span class="pre">samna.speck2e.event.ReadSramValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.IdCodeRequest</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashRead" title="samna.speck2e.event.FlashRead"><span class="pre">samna.speck2e.event.FlashRead</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashWrite" title="samna.speck2e.event.FlashWrite"><span class="pre">samna.speck2e.event.FlashWrite</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashErase" title="samna.speck2e.event.FlashErase"><span class="pre">samna.speck2e.event.FlashErase</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashSpiRaw" title="samna.speck2e.event.FlashSpiRaw"><span class="pre">samna.speck2e.event.FlashSpiRaw</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashWriteEnable" title="samna.speck2e.event.FlashWriteEnable"><span class="pre">samna.speck2e.event.FlashWriteEnable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashQueryStatus" title="samna.speck2e.event.FlashQueryStatus"><span class="pre">samna.speck2e.event.FlashQueryStatus</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.RequestSpiMon" title="samna.speck2e.event.RequestSpiMon"><span class="pre">samna.speck2e.event.RequestSpiMon</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2e.event.compute_sram_address_t" title="Link to this definition"></a></dt>
+<dd><p>Compute the address of the a given event in the SRAM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">speck2e.event.Speck2etInputEvent</span></code>) – The event to compute the address for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The address of the event in the SRAM if it’s possible to compute the address, otherwise return None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.speck2e.event.determine_sram_eventrom_address">
+<span class="sig-prename descclassname"><span class="pre">samna.speck2e.event.</span></span><span class="sig-name descname"><span class="pre">determine_sram_eventrom_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.speck2e.event.Spike" title="samna.speck2e.event.Spike"><span class="pre">samna.speck2e.event.Spike</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.DvsEvent" title="samna.speck2e.event.DvsEvent"><span class="pre">samna.speck2e.event.DvsEvent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.InputInterfaceEvent" title="samna.speck2e.event.InputInterfaceEvent"><span class="pre">samna.speck2e.event.InputInterfaceEvent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.NeuronValue" title="samna.speck2e.event.NeuronValue"><span class="pre">samna.speck2e.event.NeuronValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.BiasValue" title="samna.speck2e.event.BiasValue"><span class="pre">samna.speck2e.event.BiasValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.WeightValue" title="samna.speck2e.event.WeightValue"><span class="pre">samna.speck2e.event.WeightValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.RegisterValue" title="samna.speck2e.event.RegisterValue"><span class="pre">samna.speck2e.event.RegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadoutValue" title="samna.speck2e.event.ReadoutValue"><span class="pre">samna.speck2e.event.ReadoutValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FilterValue" title="samna.speck2e.event.FilterValue"><span class="pre">samna.speck2e.event.FilterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.SramValue" title="samna.speck2e.event.SramValue"><span class="pre">samna.speck2e.event.SramValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FilterDvsEvent" title="samna.speck2e.event.FilterDvsEvent"><span class="pre">samna.speck2e.event.FilterDvsEvent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FilterValueCurrent" title="samna.speck2e.event.FilterValueCurrent"><span class="pre">samna.speck2e.event.FilterValueCurrent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FilterValuePrevious" title="samna.speck2e.event.FilterValuePrevious"><span class="pre">samna.speck2e.event.FilterValuePrevious</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.ScanChainValue</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.IdCode</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashValue" title="samna.speck2e.event.FlashValue"><span class="pre">samna.speck2e.event.FlashValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashSpiRaw" title="samna.speck2e.event.FlashSpiRaw"><span class="pre">samna.speck2e.event.FlashSpiRaw</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.FlashStatus" title="samna.speck2e.event.FlashStatus"><span class="pre">samna.speck2e.event.FlashStatus</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.ReadoutPinValue" title="samna.speck2e.event.ReadoutPinValue"><span class="pre">samna.speck2e.event.ReadoutPinValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="index.html#samna.speck2e.event.SpiMon" title="samna.speck2e.event.SpiMon"><span class="pre">samna.speck2e.event.SpiMon</span></a></span></span><a class="headerlink" href="index.html#samna.speck2e.event.determine_sram_eventrom_address" title="Link to this definition"></a></dt>
+<dd><p>Determine the SRAM event for the given address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>address</strong> (<em>int</em>) – The address to determine the event for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The event for the given address.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../configuration/index.html" class="btn btn-neutral float-left" title="samna.speck2e.configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../speck2eTestBoard/index.html" class="btn btn-neutral float-right" title="samna.speck2eTestBoard" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,719 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.xyloImu.event &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="samna.xyloImuBoards" href="../../xyloImuBoards/index.html" />
+    <link rel="prev" title="samna.xyloImu.configuration" href="../configuration/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">samna.xyloImu</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#module-samna.xyloImu">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">samna</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna.xyloImu</a></li>
+      <li class="breadcrumb-item active">samna.xyloImu.event</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/reference/xyloImu/event/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-xyloimu-event">
+<h1>samna.xyloImu.event<a class="headerlink" href="index.html#samna-xyloimu-event" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.xyloImu.event">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.xyloImu.event" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.HiddenSpikeCount">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">HiddenSpikeCount</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.HiddenSpikeCount" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadHiddenSpike.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.HiddenSpikeCount.count">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.HiddenSpikeCount.count" title="Link to this definition"></a></dt>
+<dd><p>Generated / aliased spike count of this hidden neuron.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.HiddenSpikeCount.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.HiddenSpikeCount" title="samna.xyloImu.event.HiddenSpikeCount"><span class="pre">samna.xyloImu.event.HiddenSpikeCount</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.HiddenSpikeCount.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.HiddenSpikeCount.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.HiddenSpikeCount.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.HiddenSpikeCount.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.HiddenSpikeCount" title="samna.xyloImu.event.HiddenSpikeCount"><span class="pre">samna.xyloImu.event.HiddenSpikeCount</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.HiddenSpikeCount.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Interrupt">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">Interrupt</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Interrupt" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An output event which indicates an interrupt has occured on the chip.
+The generation of Interrupt is controlled by IE register.
+By default interrupt always emits when trigger processing done.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MembranePotential">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">MembranePotential</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MembranePotential" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadMembranePotential.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MembranePotential.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.MembranePotential" title="samna.xyloImu.event.MembranePotential"><span class="pre">samna.xyloImu.event.MembranePotential</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MembranePotential.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MembranePotential.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MembranePotential.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MembranePotential.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.MembranePotential" title="samna.xyloImu.event.MembranePotential"><span class="pre">samna.xyloImu.event.MembranePotential</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MembranePotential.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MembranePotential.value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MembranePotential.value" title="Link to this definition"></a></dt>
+<dd><p>The membrane potential of this neuron.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MemoryValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">MemoryValue</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MemoryValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadMemoryValue.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MemoryValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MemoryValue.address" title="Link to this definition"></a></dt>
+<dd><p>The reading memory address which equals to the address in corresponding ReadMemoryValue.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MemoryValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MemoryValue.data" title="Link to this definition"></a></dt>
+<dd><p>The memory value that we read.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MemoryValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.MemoryValue" title="samna.xyloImu.event.MemoryValue"><span class="pre">samna.xyloImu.event.MemoryValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MemoryValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.MemoryValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.MemoryValue" title="samna.xyloImu.event.MemoryValue"><span class="pre">samna.xyloImu.event.MemoryValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.MemoryValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadHiddenSpikeCount">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">ReadHiddenSpikeCount</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadHiddenSpikeCount" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read spike count of a hidden neuron.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadHiddenSpikeCount.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadHiddenSpikeCount" title="samna.xyloImu.event.ReadHiddenSpikeCount"><span class="pre">samna.xyloImu.event.ReadHiddenSpikeCount</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadHiddenSpikeCount.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadHiddenSpikeCount.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadHiddenSpikeCount.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadHiddenSpikeCount.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadHiddenSpikeCount" title="samna.xyloImu.event.ReadHiddenSpikeCount"><span class="pre">samna.xyloImu.event.ReadHiddenSpikeCount</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadHiddenSpikeCount.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadMembranePotential">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">ReadMembranePotential</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadMembranePotential" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read membrane potential of a hidden neuron or output neuron</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadMembranePotential.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadMembranePotential" title="samna.xyloImu.event.ReadMembranePotential"><span class="pre">samna.xyloImu.event.ReadMembranePotential</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadMembranePotential.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadMembranePotential.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadMembranePotential.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0. Output neurons locate right after hidden neurons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadMembranePotential.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadMembranePotential" title="samna.xyloImu.event.ReadMembranePotential"><span class="pre">samna.xyloImu.event.ReadMembranePotential</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadMembranePotential.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadMemoryValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">ReadMemoryValue</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadMemoryValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read memory value from Xylo-IMU.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadMemoryValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadMemoryValue.address" title="Link to this definition"></a></dt>
+<dd><p>The memory address to read from.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadMemoryValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadMemoryValue" title="samna.xyloImu.event.ReadMemoryValue"><span class="pre">samna.xyloImu.event.ReadMemoryValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadMemoryValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadMemoryValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadMemoryValue" title="samna.xyloImu.event.ReadMemoryValue"><span class="pre">samna.xyloImu.event.ReadMemoryValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadMemoryValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadRegisterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">ReadRegisterValue</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadRegisterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read register value of Xylo-IMU.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadRegisterValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadRegisterValue.address" title="Link to this definition"></a></dt>
+<dd><p>The register address to read from.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadRegisterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadRegisterValue" title="samna.xyloImu.event.ReadRegisterValue"><span class="pre">samna.xyloImu.event.ReadRegisterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadRegisterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadRegisterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadRegisterValue" title="samna.xyloImu.event.ReadRegisterValue"><span class="pre">samna.xyloImu.event.ReadRegisterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadRegisterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadSynapticCurrent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">ReadSynapticCurrent</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadSynapticCurrent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read synaptic current of a hidden neuron or output neuron</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadSynapticCurrent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadSynapticCurrent" title="samna.xyloImu.event.ReadSynapticCurrent"><span class="pre">samna.xyloImu.event.ReadSynapticCurrent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadSynapticCurrent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadSynapticCurrent.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadSynapticCurrent.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0. Output neurons locate right after hidden neurons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadSynapticCurrent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.ReadSynapticCurrent" title="samna.xyloImu.event.ReadSynapticCurrent"><span class="pre">samna.xyloImu.event.ReadSynapticCurrent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadSynapticCurrent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.ReadVersion">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">ReadVersion</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.ReadVersion" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Read the fixed version of Xylo-IMU.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Readout">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">Readout</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Readout" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>State memory and output values read by FPGA automatically or triggered by TriggerReadout event manually,
+which contains a processed timestep and all neuron state after processing of that timestep.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Readout.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.Readout" title="samna.xyloImu.event.Readout"><span class="pre">samna.xyloImu.event.Readout</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Readout.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Readout.hidden_spikes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hidden_spikes</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Readout.hidden_spikes" title="Link to this definition"></a></dt>
+<dd><p>Spike count values of monitored hidden neurons,
+which is only available in accelerated mode and whose range is configured by <a class="reference internal" href="../configuration/index.html#samna.xyloImu.configuration.DebugConfig.monitor_neuron_spike" title="samna.xyloImu.configuration.DebugConfig.monitor_neuron_spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.configuration.DebugConfig.monitor_neuron_spike</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Readout.neuron_i_syns">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_i_syns</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Readout.neuron_i_syns" title="Link to this definition"></a></dt>
+<dd><p>Synaptic current values of monitored hidden neurons and output neurons,
+which is only available in accelerated mode and whose range is configured by <a class="reference internal" href="../configuration/index.html#samna.xyloImu.configuration.DebugConfig.monitor_neuron_i_syn" title="samna.xyloImu.configuration.DebugConfig.monitor_neuron_i_syn"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.configuration.DebugConfig.monitor_neuron_i_syn</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Readout.neuron_v_mems">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_v_mems</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Readout.neuron_v_mems" title="Link to this definition"></a></dt>
+<dd><p>Membrane potential values of monitored hidden neurons and output neurons,
+which is only available in accelerated mode and whose range is configured by <a class="reference internal" href="../configuration/index.html#samna.xyloImu.configuration.DebugConfig.monitor_neuron_v_mem" title="samna.xyloImu.configuration.DebugConfig.monitor_neuron_v_mem"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.configuration.DebugConfig.monitor_neuron_v_mem</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Readout.output_spikes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_spikes</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Readout.output_spikes" title="Link to this definition"></a></dt>
+<dd><p>Spike count values of all output neurons.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Readout.output_v_mems">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_v_mems</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Readout.output_v_mems" title="Link to this definition"></a></dt>
+<dd><p>Membrane potential values of all output neurons.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Readout.timestep">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestep</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Readout.timestep" title="Link to this definition"></a></dt>
+<dd><p>Corresponding processed timestep of this event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Readout.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.Readout" title="samna.xyloImu.event.Readout"><span class="pre">samna.xyloImu.event.Readout</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Readout.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.RegisterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">RegisterValue</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.RegisterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadRegisterValue event.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.RegisterValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.RegisterValue.address" title="Link to this definition"></a></dt>
+<dd><p>The reading address, it equals to the address in corresponding ReadRegisterValue.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.RegisterValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.RegisterValue.data" title="Link to this definition"></a></dt>
+<dd><p>The register value that read.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.RegisterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.RegisterValue" title="samna.xyloImu.event.RegisterValue"><span class="pre">samna.xyloImu.event.RegisterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.RegisterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.RegisterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.RegisterValue" title="samna.xyloImu.event.RegisterValue"><span class="pre">samna.xyloImu.event.RegisterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.RegisterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Spike">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">Spike</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Spike" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Spikes are events that can be consumed and produced by Xylo-IMU.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Spike.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.Spike" title="samna.xyloImu.event.Spike"><span class="pre">samna.xyloImu.event.Spike</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Spike.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Spike.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Spike.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>The target neuron id of the spike event.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Spike.timestep">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestep</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Spike.timestep" title="Link to this definition"></a></dt>
+<dd><p>When receiving a Spike event from a chip the timestamp will be
+populated with the time at which the event leave the chip in microseconds.</p>
+<p>When sending a Spike event to a chip the timestamp will be used to
+control which timestep the event will be applied to the chip.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Spike.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.Spike" title="samna.xyloImu.event.Spike"><span class="pre">samna.xyloImu.event.Spike</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Spike.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.SynapticCurrent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">SynapticCurrent</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.SynapticCurrent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadSynapticCurrent.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.SynapticCurrent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.SynapticCurrent" title="samna.xyloImu.event.SynapticCurrent"><span class="pre">samna.xyloImu.event.SynapticCurrent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.SynapticCurrent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.SynapticCurrent.neuron_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neuron_id</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.SynapticCurrent.neuron_id" title="Link to this definition"></a></dt>
+<dd><p>Corresponding neuron id, start from 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.SynapticCurrent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.SynapticCurrent" title="samna.xyloImu.event.SynapticCurrent"><span class="pre">samna.xyloImu.event.SynapticCurrent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.SynapticCurrent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.SynapticCurrent.value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.SynapticCurrent.value" title="Link to this definition"></a></dt>
+<dd><p>The synaptic current of this neuron.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.TriggerProcessing">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">TriggerProcessing</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.TriggerProcessing" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Trigger specific times until target timestep reaches in accelerated mode or realtime mode,
+and trigger once in manual mode.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.TriggerProcessing.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.TriggerProcessing" title="samna.xyloImu.event.TriggerProcessing"><span class="pre">samna.xyloImu.event.TriggerProcessing</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.TriggerProcessing.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.TriggerProcessing.target_timestep">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target_timestep</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.TriggerProcessing.target_timestep" title="Link to this definition"></a></dt>
+<dd><p>Target timestep to reach after processing, only available in accelerated mode or realtime mode.</p>
+<p>The target timestep itself won’t be processed.
+e.g. If you set target timestep to 10, then after all processing complete,
+the result of <a class="reference internal" href="index.html#samna.xyloImu.event.TriggerReadout" title="samna.xyloImu.event.TriggerReadout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.TriggerReadout</span></code></a> event will give you <a class="reference internal" href="index.html#samna.xyloImu.event.Readout" title="samna.xyloImu.event.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.Readout</span></code></a> event with timestep=9.</p>
+<p>If a value smaller than current timestep is set for target timestep, nothing happens.</p>
+<p>Default no effect if this value is not set in accelerated mode,
+default triggering infinitely if this value is not set in realtime mode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.TriggerProcessing.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.TriggerProcessing" title="samna.xyloImu.event.TriggerProcessing"><span class="pre">samna.xyloImu.event.TriggerProcessing</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.TriggerProcessing.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.TriggerReadout">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">TriggerReadout</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.TriggerReadout" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Trigger to get last processed timestep and all neuron state after processing.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Version">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">Version</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Version" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The response event of ReadVersion.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Version.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.Version" title="samna.xyloImu.event.Version"><span class="pre">samna.xyloImu.event.Version</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Version.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Version.major">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">major</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Version.major" title="Link to this definition"></a></dt>
+<dd><p>Major part of Xylo version which is fixed at 1.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Version.minor">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">minor</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Version.minor" title="Link to this definition"></a></dt>
+<dd><p>Minor part of Xylo version which is fixed at 1.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.Version.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.Version" title="samna.xyloImu.event.Version"><span class="pre">samna.xyloImu.event.Version</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.Version.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteMemoryValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">WriteMemoryValue</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteMemoryValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Write a memory value to Xylo-IMU.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteMemoryValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteMemoryValue.address" title="Link to this definition"></a></dt>
+<dd><p>The memory address to write to.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteMemoryValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteMemoryValue.data" title="Link to this definition"></a></dt>
+<dd><p>The data writing to the address.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteMemoryValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.WriteMemoryValue" title="samna.xyloImu.event.WriteMemoryValue"><span class="pre">samna.xyloImu.event.WriteMemoryValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteMemoryValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteMemoryValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.WriteMemoryValue" title="samna.xyloImu.event.WriteMemoryValue"><span class="pre">samna.xyloImu.event.WriteMemoryValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteMemoryValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteRegisterValue">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloImu.event.</span></span><span class="sig-name descname"><span class="pre">WriteRegisterValue</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteRegisterValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Write register value of Xylo-IMU.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteRegisterValue.address">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteRegisterValue.address" title="Link to this definition"></a></dt>
+<dd><p>Target register address.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteRegisterValue.data">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteRegisterValue.data" title="Link to this definition"></a></dt>
+<dd><p>The new register value to write.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteRegisterValue.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.WriteRegisterValue" title="samna.xyloImu.event.WriteRegisterValue"><span class="pre">samna.xyloImu.event.WriteRegisterValue</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteRegisterValue.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloImu.event.WriteRegisterValue.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloImu.event.WriteRegisterValue" title="samna.xyloImu.event.WriteRegisterValue"><span class="pre">samna.xyloImu.event.WriteRegisterValue</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloImu.event.WriteRegisterValue.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../configuration/index.html" class="btn btn-neutral float-left" title="samna.xyloImu.configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../xyloImuBoards/index.html" class="btn btn-neutral float-right" title="samna.xyloImuBoards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+================================================================================
+网络结构笔记（本项目代码情况，非硬件特性）
+================================================================================
+用途：记录本仓库（speck_optical_flow）中 SNN 网络配置的结构性事实与判别方法 ——
+      seq3 / seq5 的划分、onoff 与 seq 的正交关系、M 变量、各版本文件的差异与
+      改名决定等。硬件行为与隐含约束见 speck_feature.txt。
+维护：本文件持续增补。新增条目请沿用文件末尾的模板，并尽量补上代码位置与验证方式。
+      未经验证的内容一律放到「待确认」，避免把推测当成结论。
+
+--------------------------------------------------------------------------------
+[001] seq 与 onoff 是两个正交维度；M = 序列长度
+--------------------------------------------------------------------------------
+来源：口述 2026-09-21（结论部分）+ 代码实测（判据部分）
+      （2026-09-28 自 speck_feature.txt 迁出，原编号 [002]）
+
+结论
+    1. seq 的真实用途 = 要求「连续 N 次事件」按正确顺序出现，N 即序列长度。
+    2. onoff 只是额外增加一层 on/off 成对过滤（相当于噪点过滤），
+       它不会影响 seq 的逻辑 —— 二者是正交维度。
+    3. 目前本仓库的 SNN 网络结构分为 seq3 与 seq5 两档。
+
+M 变量（序列长度的旋钮）
+    seq5 版本可以通过修改 M 把序列长度改成 4（M=5 -> M=4）；
+    但 M 设为 3 会报错。这可以作为判断网络属于 seq3 还是 seq5 的「弱证据」。
+
+    实测核对（2026-09-21，Python 3.13 + numpy 2.1.3，逐行代入所有 w_128 赋值）：
+      . optical_flow_diag_split_onoff_seq5.py（非 k2，深度块槽位 = M - 2）
+            M=7 -> 5 格、M=5 -> 3 格、M=4 -> 2 格：全部 OK
+            M=3 -> 1 格：w_2_to_4 的两行报 ValueError（右侧算出 2 个元素）；
+                        w_3_to_4 的两行 OK
+            => 「只改 M 就能降一档」在这个文件上成立，与口述一致。
+      . optical_flow_diag_split_onoff_seq5_k2.py（深度块槽位 = M）
+            M=5 全 OK；
+            M=4 时，前 3 个块的 10 处**硬编码 5 元素列表**立刻报 ValueError；
+            M=3 时 12/14 行报 ValueError（只有 w_3_to_4 的两行 OK）
+            => 只改 M 连 4 都不行，必须同时把那 10 处列表改成 M 个元素。
+
+    机制说明（重要）
+      . 报错类型一律是 ValueError: shape mismatch / could not be broadcast，
+        **绝对不是 IndexError**。因为数组形状 np.zeros((2, 2, M, M)) 与索引
+        range(M) 都随 M 缩放，二者恒等，不可能越界；出问题的永远是
+        赋值号右侧列表的元素个数。
+      . 静默陷阱：[-1] * (M - 4) 在 M < 4 时得到空列表（Python 负数乘法不报错），
+        于是整个列表比槽位多 1 个，直到赋值那一刻才报错。要支持更小的 M
+        必须改公式本身，不是只改长度。
+      . 辅助函数 shift_pattern() 自带边界判断 + assert（"平移会丢掉非零 tap"），
+        所以它也不会产生越界，只会断言失败。
+
+实测判据 A —— M 块的图案长度
+    . seq5 形式：图案长度 = M
+        w_128 = np.zeros((2, 2, M, M))
+        w_128[1, 1, range(M), range(M)] = [0] + [-1] * (M - 4) + [-2, 0, 0]
+        w_128[1, 1, range(M), range(M)] = [0] + [1] * (M - 3) + [2, 0]
+        -> M=5 得 5 个元素（seq5）；M=4 得 4 个（seq4）；
+           M=3 时元素数与 range(M) 不符 -> ValueError（与上面「M=3 报错」一致）
+    . seq3 形式：图案长度 = M - 2
+        w_128 = np.zeros((2, 2, M - 2, M - 2))
+        w_128[1, 1, range(M - 2), range(M - 2)] = [-1] * (M - 4) + [-2, 0]
+        -> M=5 得 3 个元素（seq3）；M=3 同样因长度不符报错
+    这两块构造的都是 w_2_to_4 / w_3_to_4（「深度对比」用的核）。
+
+实测判据 C —— 输入极性配置（判断是否属于 on/off 家族）
+    . on/off 家族：input_shape_feature=2 且 config.dvs_layer.merge 被注释掉
+        —— 成对判决必须同时拿到 on 与 off 两个极性流。
+    . 非 on/off 家族：input_shape_feature=1 且 config.dvs_layer.merge = True
+        —— 极性流被合并成单路，结构上无法做 on/off 成对判决。
+        含 axis_shift / axis_shift_lr / axis_split_x / axis_split_y / axis_split_y_score /
+        diag_shift / diag_split / diag_split_conv / diag_split_turn_seq5。
+      （axis_general 与 axis_recurrent_4dir 是各自的早期写法，不属于上述两类。）
+    推论：merge=True（单路极性）是 turn 的必要条件但不充分 —— diag_split / diag_shift /
+    diag_split_conv 用同一套输入配置，却没有 turn 的三阶读出。turn 的增量就是那三阶读出。
+
+实测判据 D —— CNN 层槽位是否已满（解释「为什么不能把某功能塞进别的版本」）
+    optimal_sram_config() 里 for i in range(1, 9) 加上 cnn_layers[0] => 共 9 个 CNN 层。
+    . on/off 家族与 turn 两边都把槽位 0~8 全部占满，只是分配方式不同：
+        on/off 家族：0/1（或 5）给前端 layer_0_x，2 给末级 layer_4；
+        turn      ：0/1/2 全部给三阶读出 layer_4_0/4_1/4_2。
+    => 没有空槽位可插入 turn 的读出级，二者不能简单合并。
+
+实测判据 B —— 核链级数（结构判据，最终采用）
+    . 3 套核：w_1_to_2 / w_0_to_3 / w_2_to_3                        -> seq3
+    . 5 套核：上述 3 套 + w_2_to_4 / w_3_to_4（两级「深度对比」）    -> seq5
+    实测启用后两套（即末级为 16->8 的 3x3 深度对比，且 relay 接入末级）的文件：
+        optical_flow_diag_split.py
+        optical_flow_diag_split_conv.py
+        optical_flow_diag_split_onoff_seq5.py      （2026-09-21 由 onoff 改名）
+        optical_flow_diag_split_turn_seq5.py       （2026-09-21 由 turn 改名）
+        optical_flow_diag_split_onoff_seq5_k2.py
+    未启用（末级退化为 1x1 通道重排/合并）的文件：
+        optical_flow_diag_shift.py
+        optical_flow_diag_split_onoff_seq3.py / _seq3_full / _seq3_conv / _seq3_k2 / _seq3_k2_conv
+
+判别结论（2026-09-21 采用判据 B）
+    采用理由：
+      (1) 「snn 网络结构分为 seq3 和 seq5」——判据应当是结构；
+      (2) seq3 是从 onoff 去掉 2 级（实测仅 11 行 diff：断开 relay + 简化末级）
+          之后才被命名出来的，反证被派生的源头（onoff）不是 seq3；
+      (3) 若把 onoff 判为 seq3，会与已有文件 optical_flow_diag_split_onoff_seq3.py
+          同名冲突；判为 seq5 则无冲突。
+    据此已为两个缺失标记的文件补上 _seq5。
+
+未尽事项 / 待确认
+    - 判据 A 与判据 B 在 onoff / turn / diag_split 上不一致：它们的深度核图案是 3 个
+      元素（像 seq3），但确实启用了 5 套核（像 seq5）。本次以判据 B 定案；若真实语义
+      是判据 A，则上述改名需要逆转。
+    - optical_flow_diag_shift.py 按判据 B 应为 seq3，optical_flow_diag_split.py 与
+      optical_flow_diag_split_conv.py 应为 seq5，但本次未改名（它们是整个家族的基础名，
+      影响面大），待确认后统一处理。
+    - 轴向上（axis_*）所有文件都只有 3 套核，按同一判据都是 seq3，同样未改名。
+
+================================================================================
+[模板] 新增条目
+================================================================================
+[编号] 一句话结论
+来源：      口述 / 实测 / 文档 / 推测
+结论：
+机制：
+代码位置：
+相关实例：
+待确认：

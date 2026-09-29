@@ -1,0 +1,21 @@
+###########
+Xylo Series
+###########
+
+The **Xylo** series features fully digital AI chips designed with Spiking Neural Networks (SNNs) and
+Reservoir Computing technology. These chips are versatile and capable of supporting a wide range of applications,
+including keyword spotting (KWS), electrocardiogram (ECG) anomaly detection, vibration anomaly detection,
+and ambient sound detection. With the right network configuration and training, Xylo chips can deliver powerful,
+efficient solutions for these and other tasks.
+
+*****************************
+Supported Xylo Related Models
+*****************************
+
+.. toctree::
+   :maxdepth: 1
+
+   afe_v2
+   xylo_v2
+   xylo_imu
+   xylo_audio_3

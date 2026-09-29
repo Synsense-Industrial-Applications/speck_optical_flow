@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9.5. Output Serial Interface &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.6. Output Serial Interface Encoding" href="output-serial-interface.html" />
+    <link rel="prev" title="9.4. Monitor Bus Encoding" href="monitor-bus.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. Encoding and Programming</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">9.1. I/O Interfaces Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-s2p.html">9.2. Input Serial Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-serial-interface.html">9.3. Input Serial Interface Bus Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor-bus.html">9.4. Monitor Bus Encoding</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.5. Output Serial Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#block-diagram">9.5.1. Block Diagram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#register-settings">9.5.2. Register Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-bus-selection">9.5.2.1. Input bus selection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#double-speed-output">9.5.3. Double speed output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reduced-output-word-length">9.5.4. Reduced output word length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timing-diagrams">9.5.5. Timing Diagrams</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="output-serial-interface.html">9.6. Output Serial Interface Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-interrupt.html">9.7. Direct Readout Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">9. </span>Encoding and Programming</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9.5. </span>Output Serial Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/encoding/output-p2s.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="output-serial-interface">
+<span id="output-serial-interface-protocol"></span><h1><span class="section-number">9.5. </span>Output Serial Interface<a class="headerlink" href="#output-serial-interface" title="Permalink to this heading"></a></h1>
+<p>The output serial interface enables the readout of the state of Speck2e through a custom serial protocol.
+In this section, the operation and configuration of the output interface is described.</p>
+<p>For the output data encoding, refer to section <span class="xref std std-ref">output-interface-encoding</span>.</p>
+<section id="block-diagram">
+<span id="output-p2s-block"></span><h2><span class="section-number">9.5.1. </span>Block Diagram<a class="headerlink" href="#block-diagram" title="Permalink to this heading"></a></h2>
+<p>The following block diagram shows the output interface, including the two internal inputs <cite>data1</cite> and <cite>data2</cite>.
+Input <cite>data1</cite> receives asynchronous messages from all the active Monitor buses across the chip.
+Input <cite>data2</cite> receives messages from the  <a class="reference internal" href="../architecture/readout-layer.html#readout-layer"><span class="std std-ref">Readout Layer</span></a>.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/output_p2s_block.svg"><img alt="../../_images/output_p2s_block.svg" height="138" src="../../_images/output_p2s_block.svg" width="386" /></a>
+<figcaption>
+<p><span class="caption-text">Output Serial Interface</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="register-settings">
+<h2><span class="section-number">9.5.2. </span>Register Settings<a class="headerlink" href="#register-settings" title="Permalink to this heading"></a></h2>
+<section id="input-bus-selection">
+<h3><span class="section-number">9.5.2.1. </span>Input bus selection<a class="headerlink" href="#input-bus-selection" title="Permalink to this heading"></a></h3>
+<p>Register bits <a class="reference internal" href="../registers/ii-config.html#rbits-p2ssel"><span class="std std-ref">ININT8:P2SSEL</span></a> select the input bus (data1 or data2) that will be forwarded to
+the chip output.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../registers/ii-config.html#rbits-p2ssel"><span class="std std-ref">ININT8:P2SSEL</span></a></p></td>
+<td><p>Action</p></td>
+</tr>
+<tr class="row-even"><td><p>0 (default)</p></td>
+<td><p>data1 active (Monitor Bus)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>data2 active (Readout Layer)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="double-speed-output">
+<h2><span class="section-number">9.5.3. </span>Double speed output<a class="headerlink" href="#double-speed-output" title="Permalink to this heading"></a></h2>
+<p>The output serializer provides two data pins <cite>OUT1</cite> and <cite>OUT2</cite>. In normal operation, only pin <cite>OUT1</cite> is enabled.
+Register <a class="reference internal" href="../registers/ii-config.html#rbits-p2s2ch"><span class="std std-ref">ININT8:P2S2CH</span></a> can be set to ‘1’ to enable both output serial data pins. In this configuration, two messages can be read out
+from the chip in <em>parallel</em>, i.e., <cite>OUT1</cite> will output 26 bits of message 1 and <cite>OUT2</cite> will output at the same time, and with
+the same timing, message 2.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The dual output mode is not available when <em>data2</em>, i.e. readout layer data output is enabled.
+If the dual output mode is enabled while <em>data2</em> output is enabled, pin <cite>OUT2</cite> will be set to ‘0’.</p>
+</div>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../registers/ii-config.html#rbits-p2s2ch"><span class="std std-ref">ININT8:P2S2CH</span></a></p></td>
+<td><p>Action</p></td>
+</tr>
+<tr class="row-even"><td><p>0 (default)</p></td>
+<td><p>Single output pin enabled (OUT1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Dual parallel output pins (OUT1/2)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reduced-output-word-length">
+<h2><span class="section-number">9.5.4. </span>Reduced output word length<a class="headerlink" href="#reduced-output-word-length" title="Permalink to this heading"></a></h2>
+<p>The output serializer can be configured to send only the LSB 17 bits to the output pins <cite>OUT1</cite> (and <cite>OUT2</cite> when enabled).
+The configuration is via register bit <a class="reference internal" href="../registers/ii-config.html#rbits-p2sdl"><span class="std std-ref">ININT8:P2SDL</span></a>.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../registers/ii-config.html#rbits-p2sdl"><span class="std std-ref">ININT8:P2SDL</span></a></p></td>
+<td><p>Action</p></td>
+</tr>
+<tr class="row-even"><td><p>0 (default)</p></td>
+<td><p>26-bit output word length</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>17-bit output word length</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="timing-diagrams">
+<h2><span class="section-number">9.5.5. </span>Timing Diagrams<a class="headerlink" href="#timing-diagrams" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The data at the output serial interface is valid at the <strong>falling</strong> “edge” of the clock.</p>
+</div>
+<p>The timing diagram for the communication is as follows.</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{ "signal": [
+    { "name": "CLK",  "wave":       "p.....|....." },
+    { "name": "data1[25:0]","wave": "x3....|....x", "data": ["data           "] },
+    { "name": "req1", "wave":       "0.1...|...0.", "node": "..r.......s"},
+    { "name": "ack1", "wave":       "0.....|..1.0", "node": ".........a.b"},
+    { "name": "P2S_DVALID", "wave": "0..1..|..0..", "node": "...d"},
+    { "name": "P2S_OUT1", "wave":   "x..34=|56.0." , "data": ["d[25]","d[24]","","d[1]","d[0]"]}
+],
+"edge": ["r~>d", "a~>s", "s~>b" ],
+"head":{ "text":"Output Serial Interface Timing Diagram For 1 Output Channel and Input data1.", "tick":0 }
+}
+</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When the data2 parallel input is selected via the register <a class="reference internal" href="../registers/ii-config.html#rbits-p2ssel"><span class="std std-ref">ININT8:P2SSEL</span></a>,
+the operation is the same as for data1 input. Bits &lt;25:21&gt; are filled with ‘1’ in this case.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="monitor-bus.html" class="btn btn-neutral float-left" title="9.4. Monitor Bus Encoding" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="output-serial-interface.html" class="btn btn-neutral float-right" title="9.6. Output Serial Interface Encoding" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

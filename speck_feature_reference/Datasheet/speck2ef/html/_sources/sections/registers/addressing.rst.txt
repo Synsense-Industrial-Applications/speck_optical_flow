@@ -1,0 +1,55 @@
+.. _reg-addressing:
+
+Register Addressing
+===================
+
+As described in section :ref:`speck-layers`, Speck2e contains a number
+of blocks called *layers*.
+
+For simplicity of use, each of these main blocks contains a register
+configuration block, in which register values are stored, and the register
+addresses are defined to reflect this architecture.
+
+A complete register address is then composed of two parts: 4 MSBs selecting the register
+block, and 8 LSBs selecting the specific 8-bit register in the selected block:
+
++-----------------------+------------------------------+
+| Block selector [11:8] | Register word selector [7:0] |
++-----------------------+------------------------------+
+
+In the following table, we summarize the 4 MSBs of the addresses of the target layers:
+
++-----------+-----------------------------------+
+| Address   | Target Layer                      |
++-----------+-----------------------------------+
+| 0000      | Input Interface                   |
++-----------+-----------------------------------+
+| 0001      | DVS Pre-processing and DVS Filter |
++-----------+-----------------------------------+
+| 0010      | Readout Layer                     |
++-----------+-----------------------------------+
+| 0011      | Router                            |
++-----------+-----------------------------------+
+| 0110:1110 | Layer Core 0-8                    |
++-----------+-----------------------------------+
+
+.. note::
+    The Input Interface and the Readout Layer are not properly computational layers. They
+    contain register configuration blocks, but they cannot receive events *per se*
+    from the other layers.
+
+
+Example
+*******
+
+As an example, we consider register :ref:`reg-CONV13` in layer 3.
+
+Register CONV13 is available in every :ref:`convolutional layer<convolutional-layer>` (0-8).
+
+The register address is '100100001101':
+
++-------------+-------------------+
+| Layer 3 + 6 | Specific register |
++-------------+-------------------+
+| '1001'      | '00001101'        |
++-------------+-------------------+

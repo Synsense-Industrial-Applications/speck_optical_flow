@@ -1,0 +1,18 @@
+.. _layer-registers:
+
+Convolutional Layer Register Description
+========================================
+
+The following tables provide the detailed structure of each register.
+Each of the following registers is available independently in each Convolutional Layer.
+
+.. only:: html
+
+    Detailed Register Description
+    *****************************
+
+    .. include:: layer-descriptions.rst
+
+.. only:: pdf
+
+    .. include:: layer-descriptions.rst

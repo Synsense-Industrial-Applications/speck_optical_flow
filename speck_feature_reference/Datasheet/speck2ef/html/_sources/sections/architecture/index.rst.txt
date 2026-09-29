@@ -1,0 +1,25 @@
+.. _chip-architecture:
+
+Chip Architecture
+=================
+
+Speck2e implements a spiking neural network exploiting a massively parallel
+architecture based on the asynchronous logic paradigm.
+
+The real-time input to this neural network can be provided by the internal Dynamic
+Vision Sensor (DVS), or by an external source (video, audio or any other signal),
+through the :ref:`Input Serial Interface<input-serial-interface-encoding>`.
+
+The data coming from the internal DVS or external source (External DVS mode)
+is then forwarded to the Internal Event Pre-processing
+
+.. toctree::
+    :maxdepth: 1
+
+    block-diagram
+    layer-overview
+    event-pre-processing
+    dvs-filter
+    convolutional-layer
+    readout-layer
+    slow-clock

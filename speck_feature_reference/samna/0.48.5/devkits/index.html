@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Development Kits &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Speck series" href="speckSeries/summary.html" />
+    <link rel="prev" title="XyloAudio 3" href="../models/xyloSeries/xylo_audio_3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models/models.html">Chip Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="index.html#">Development Kits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#connecting-to-a-device">Connecting to a Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#common-methods-of-development-kits">Common Methods of Development Kits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#sink-and-source-node-of-the-chip">Sink and Source Node of the Chip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#timestamp">Timestamp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#power-measurement">Power measurement</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#supported-development-kits">Supported Development Kits</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="speckSeries/summary.html">Speck series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynapSeSeries/index.html">Dynap-SE series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xyloSeries/index.html">Xylo Series</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Development Kits</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/devkits/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="development-kits">
+<h1>Development Kits<a class="headerlink" href="index.html#development-kits" title="Link to this heading"></a></h1>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="index.html#connecting-to-a-device" id="id1">Connecting to a Device</a></p></li>
+<li><p><a class="reference internal" href="index.html#common-methods-of-development-kits" id="id2">Common Methods of Development Kits</a></p>
+<ul>
+<li><p><a class="reference internal" href="index.html#sink-and-source-node-of-the-chip" id="id3">Sink and Source Node of the Chip</a></p></li>
+<li><p><a class="reference internal" href="index.html#timestamp" id="id4">Timestamp</a></p></li>
+<li><p><a class="reference internal" href="index.html#power-measurement" id="id5">Power measurement</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="index.html#supported-development-kits" id="id6">Supported Development Kits</a></p></li>
+</ul>
+</nav>
+<p>All the cameras and development kits supported by Samna can be opened via the device controller. The device controller
+provides the <code class="code docutils literal notranslate"><span class="pre">get_unopened_devices()</span></code> function which will return a list of <code class="code docutils literal notranslate"><span class="pre">DeviceInfo</span></code> objects that specify
+every supported device currently available to the system.</p>
+<p>The dev kit objects contain methods that let you access the device models of the SynSense devices present on the dev kit.
+The device models give you a way to interact with the chip and hook into the filter graph system.
+If you only want to work with models on the chip, you only need to interact with the device model.</p>
+<p>The dev kit object also includes methods to work with lower level firmware settings that may be tuned for performance
+reasons and any other peripherals present on the dev kit, such as power measurement. Not all development kits will have
+the same set of peripherals.</p>
+<section id="connecting-to-a-device">
+<h2><a class="toc-backref" href="index.html#id1" role="doc-backlink">Connecting to a Device</a><a class="headerlink" href="index.html#connecting-to-a-device" title="Link to this heading"></a></h2>
+<p>Devices can be opened via the device controller as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># Using the device controller we can retrieve a list of the supported devices</span>
+<span class="linenos"> 2</span><span class="c1"># currently connected to the system</span>
+<span class="linenos"> 3</span><span class="n">devices</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">get_unopened_devices</span><span class="p">()</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="c1"># We can select a device based on the type of device, or serial number</span>
+<span class="linenos"> 6</span><span class="c1"># If we only have 1 device connected we can simply choose that one</span>
+<span class="linenos"> 7</span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">devices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 8</span>    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;No devices found&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">chosen_board</span> <span class="o">=</span> <span class="n">devices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># open the board</span>
+<span class="linenos">13</span><span class="n">board</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="n">chosen_board</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is assumed the <code class="docutils literal notranslate"><span class="pre">board</span></code> is obtained in below scripts.</p>
+</section>
+<section id="common-methods-of-development-kits">
+<h2><a class="toc-backref" href="index.html#id2" role="doc-backlink">Common Methods of Development Kits</a><a class="headerlink" href="index.html#common-methods-of-development-kits" title="Link to this heading"></a></h2>
+<section id="sink-and-source-node-of-the-chip">
+<h3><a class="toc-backref" href="index.html#id3" role="doc-backlink">Sink and Source Node of the Chip</a><a class="headerlink" href="index.html#sink-and-source-node-of-the-chip" title="Link to this heading"></a></h3>
+<p>Samna provides consistent methods to read and write from/to the chip,
+please check <a class="reference internal" href="../quickStart.html#event-handling-with-filter-graphs"><span class="std std-ref">Event Handling with Filter Graphs</span></a>.</p>
+</section>
+<section id="timestamp">
+<h3><a class="toc-backref" href="index.html#id4" role="doc-backlink">Timestamp</a><a class="headerlink" href="index.html#timestamp" title="Link to this heading"></a></h3>
+<p>All development kits include an embedded high-precision stopwatch with microsecond-level resolution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The enabling or disabling of the stopwatch solely determines whether the internal timestamp increments or not.</p>
+</div>
+<ul>
+<li><p>Output Events</p>
+<p>Events that include a timestamp attribute record the precise time at which the event arrives at the FPGA.</p>
+<p>The timestamp reflects the value of the internal stopwatch counter at the moment the event is captured.
+Even if the stopwatch is disabled and the timestamp is not reset, the output events will have a non-zero timestamp.</p>
+</li>
+<li><p>Input Events</p>
+<p>The FPGA schedules and dispatches events to the chip with hardware-triggered precision.
+When the <a class="reference internal" href="../reference/unifirm/timestamp/index.html#samna.unifirm.timestamp.StopWatch" title="samna.unifirm.timestamp.StopWatch"><code class="xref py py-class docutils literal notranslate"><span class="pre">StopWatch</span></code></a> module is enabled,
+the FPGA will <strong>ONLY</strong> forward events that have a <code class="docutils literal notranslate"><span class="pre">timestamp</span></code> attribute and for which the timestamp value is less than
+or equal to the internal clock of the FPGA stopwatch module.
+Events with a timestamp greater than the internal clock of the FPGA
+will be blocked until the internal clock surpasses the timestamp value.</p>
+<p>Once an event has a timestamp larger than the internal timestamp and is blocked by the FPGA, all subsequent events will be blocked,
+even those with a timestamp less than or equal to the internal timestamp.</p>
+<p>Even when the stopwatch is disabled, the FPGA will continue to block events whose timestamps are greater than the internal timestamp.</p>
+</li>
+</ul>
+<p>The <a class="reference internal" href="../reference/unifirm/timestamp/index.html#samna.unifirm.timestamp.StopWatch" title="samna.unifirm.timestamp.StopWatch"><code class="xref py py-class docutils literal notranslate"><span class="pre">StopWatch</span></code></a> controls the FPGA stopwatch block. Once started,
+the internal clock of the FPGA stopwatch module starts ticking. It reset the timestamp to 0 on every call to
+<a class="reference internal" href="../reference/unifirm/timestamp/index.html#samna.unifirm.timestamp.StopWatch.start" title="samna.unifirm.timestamp.StopWatch.start"><code class="xref py py-attr docutils literal notranslate"><span class="pre">start</span></code></a> with keyword <code class="docutils literal notranslate"><span class="pre">reset=True</span></code>, which is the default value.</p>
+<p>The timestamp is stored in a <code class="docutils literal notranslate"><span class="pre">uint32_t</span></code> type, causing it to overflow approximately every 71.58 minutes.
+To reset the timestamp, one can use <a class="reference internal" href="../reference/unifirm/timestamp/index.html#samna.unifirm.timestamp.StopWatch.reset" title="samna.unifirm.timestamp.StopWatch.reset"><code class="xref py py-attr docutils literal notranslate"><span class="pre">reset</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># get the stop watch</span>
+<span class="linenos"> 2</span><span class="n">sw</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">get_stop_watch</span><span class="p">()</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># start the stop watch</span>
+<span class="linenos"> 5</span><span class="n">sw</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># reset the internal clock of the FPGA stopwatch module</span>
+<span class="linenos"> 8</span><span class="n">sw</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># stop the stop watch</span>
+<span class="linenos">11</span><span class="n">sw</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="power-measurement">
+<h3><a class="toc-backref" href="index.html#id5" role="doc-backlink">Power measurement</a><a class="headerlink" href="index.html#power-measurement" title="Link to this heading"></a></h3>
+<p>Samna offers a unified interface for accurately measuring the power consumption
+of the SynSense chip with an accuracy of <span class="math notranslate nohighlight">\(\pm 50\mu A\)</span>.
+The measurement is defined by the <a class="reference internal" href="../reference/unifirm/modules/events/index.html#samna.unifirm.modules.events.PowerMeasurement" title="samna.unifirm.modules.events.PowerMeasurement"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerMeasurement</span></code></a> event in Watt.
+The <a class="reference internal" href="../reference/unifirm/modules/events/index.html#samna.unifirm.modules.events.PowerMeasurement.channel" title="samna.unifirm.modules.events.PowerMeasurement.channel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.unifirm.modules.events.PowerMeasurement.channel</span></code></a> attribute represents the power trace for this measurement.
+It should be noted that this attribute varies across different development kits,
+please refer to the specific development kit page for details.</p>
+<p>The <a class="reference internal" href="../reference/unifirm/modules/events/index.html#samna.unifirm.modules.events.PowerMeasurement" title="samna.unifirm.modules.events.PowerMeasurement"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerMeasurement</span></code></a> also support <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>,
+if you want to have it, please check <a class="reference internal" href="index.html#timestamp"><span class="std std-ref">Timestamp</span></a> for more details.</p>
+<p>If the desired measurement frequency is not natively supported by the power measurement circuits,
+resampling with a filter may be necessary. This should be considered when performing continuous power measurements.
+Specifically, if the measurement is active for a long time before and after the period of interest,
+the filtering can cause distortion: samples at the start of the period may appear lower than they actually are,
+and samples after the period may appear higher.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># get the handle to the power monitor</span>
+<span class="linenos"> 4</span><span class="n">power_monitor</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">get_power_monitor</span><span class="p">()</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># create a sink node to receive the measurement</span>
+<span class="linenos"> 7</span><span class="n">sink</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">sink_from</span><span class="p">(</span><span class="n">power_monitor</span><span class="o">.</span><span class="n">get_source_node</span><span class="p">())</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="c1"># Single-shot measurement</span>
+<span class="linenos">10</span><span class="n">power_monitor</span><span class="o">.</span><span class="n">single_shot_power_measurement</span><span class="p">()</span>
+<span class="linenos">11</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">12</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Single-shot:&quot;</span><span class="p">,</span> <span class="n">sink</span><span class="o">.</span><span class="n">get_events</span><span class="p">())</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="c1"># Continuous measurement (1 Hz)</span>
+<span class="linenos">15</span><span class="n">power_monitor</span><span class="o">.</span><span class="n">start_auto_power_measurement</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">17</span><span class="n">power_monitor</span><span class="o">.</span><span class="n">stop_auto_power_measurement</span><span class="p">()</span>
+<span class="linenos">18</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Continuous:&quot;</span><span class="p">,</span> <span class="n">sink</span><span class="o">.</span><span class="n">get_events</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Refer to <a class="reference internal" href="../reference/boards/common/power/index.html#samna-boards-common-power"><span class="std std-ref">Power Module</span></a> for API details.</p>
+</section>
+</section>
+<section id="supported-development-kits">
+<h2><a class="toc-backref" href="index.html#id6" role="doc-backlink">Supported Development Kits</a><a class="headerlink" href="index.html#supported-development-kits" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="speckSeries/summary.html">Speck series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynapSeSeries/index.html">Dynap-SE series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xyloSeries/index.html">Xylo Series</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../models/xyloSeries/xylo_audio_3.html" class="btn btn-neutral float-left" title="XyloAudio 3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="speckSeries/summary.html" class="btn btn-neutral float-right" title="Speck series" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1315 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.speck2f.configuration &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="samna.speck2f.event" href="../event/index.html" />
+    <link rel="prev" title="samna.speck2f" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">samna.speck2f</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#module-samna.speck2f">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">samna</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna.speck2f</a></li>
+      <li class="breadcrumb-item active">samna.speck2f.configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/reference/speck2f/configuration/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-speck2f-configuration">
+<h1>samna.speck2f.configuration<a class="headerlink" href="index.html#samna-speck2f-configuration" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.speck2f.configuration">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.speck2f.configuration" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">CnnLayerConfig</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Configuration options for CNN layers.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.biases">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">biases</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.biases" title="Link to this definition"></a></dt>
+<dd><p>Contains bias values for features in a layer.</p>
+<p>Formatted as [feature].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tensor array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.destinations">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">destinations</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.destinations" title="Link to this definition"></a></dt>
+<dd><p>List of 2 <a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDestination" title="samna.speck2f.configuration.CnnLayerDestination"><code class="xref py py-class docutils literal notranslate"><span class="pre">CnnLayerDestination</span></code></a> which describe target
+destination layers for events produced in this layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Array of 2 fixed length</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.dimensions">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.dimensions" title="Link to this definition"></a></dt>
+<dd><p>Specifies padding, stride,
+kernel size and I/O shape of the layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDimensions" title="samna.speck2f.configuration.CnnLayerDimensions"><code class="xref py py-class docutils literal notranslate"><span class="pre">CnnLayerDimensions</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerConfig" title="samna.speck2f.configuration.CnnLayerConfig"><span class="pre">samna.speck2f.configuration.CnnLayerConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.input_congestion_balancer_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_congestion_balancer_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.input_congestion_balancer_enable" title="Link to this definition"></a></dt>
+<dd><p>Enable input congestion balancer (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>In Speck 2f, each convolutional layer is equipped with a congestion balancer block at its data path input.
+The congestion balancer enables dropping of input spikes at any time when the convolutional core of the layer
+is busy processing previous data. Specifically, if a train of spikes is sent to the layer, a number of them
+will be accepted (via some buffering) and the convolution computation starts.
+If, for example, the kernel is very large and a new spike arrives while the layer input is busy, this new spike will be dropped.
+As soon as the layer is again available, a incoming spike will be processed.</p>
+<p>This block is then able to adapt the spike input frequency to the convolution by capping it to the maximum that the layer can process.</p>
+<p>When disabled, the block will let all spikes through.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.leak_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">leak_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.leak_enable" title="Link to this definition"></a></dt>
+<dd><p>Enable leak/bias processing for this layer (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>A slow clk must be provided to SLOW_CLK pin.</p>
+<p>CAUTION: May impact performance significantly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.leak_internal_slow_clk_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">leak_internal_slow_clk_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.leak_internal_slow_clk_enable" title="Link to this definition"></a></dt>
+<dd><p>forward internally generated slow clock to convolutional layers’ leak generator
+to replace the need of external slow clk.</p>
+<p>The <a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerConfig.leak_enable" title="samna.speck2f.configuration.CnnLayerConfig.leak_enable"><code class="xref py py-class docutils literal notranslate"><span class="pre">leak_enable</span></code></a> must be set to <code class="code docutils literal notranslate"><span class="pre">True</span></code> first</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.monitor_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monitor_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.monitor_enable" title="Link to this definition"></a></dt>
+<dd><p>Enable monitoring of this layer (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>When <code class="code docutils literal notranslate"><span class="pre">True</span></code>, all events produced by this
+layer will also be output on the monitoring bus. If <code class="code docutils literal notranslate"><span class="pre">False</span></code>, events
+will only go to layers selected in the <a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDestination.layer" title="samna.speck2f.configuration.CnnLayerDestination.layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">layer</span></code></a> list.</p>
+<p>Monitoring should only be enabled on development kits that support
+fast readout of events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.neurons_initial_value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neurons_initial_value</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.neurons_initial_value" title="Link to this definition"></a></dt>
+<dd><p>Contains initial neuron membrane potential values for neurons in a
+layer.</p>
+<p>Formatted as [feature][x][y].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tensor array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.output_decimator_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_decimator_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.output_decimator_enable" title="Link to this definition"></a></dt>
+<dd><p>Enable output decimator (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>In Speck 2f, each convolutional layer is equipped with a decimator block at its data path output.
+The decimator block enables the user to reduce the spike rate at the output of a convolutional layer.
+When disabled, the block will let all spikes through.
+The spike rate can be reduced by setting <a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerConfig.output_decimator_interval" title="samna.speck2f.configuration.CnnLayerConfig.output_decimator_interval"><code class="xref py py-class docutils literal notranslate"><span class="pre">output_decimator_interval</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.output_decimator_interval">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_decimator_interval</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.output_decimator_interval" title="Link to this definition"></a></dt>
+<dd><p>Output decimator block interval (default is 1 spike passed every 2).</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>value</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0b000</p></td>
+<td><p>1 spike passed every 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b001</p></td>
+<td><p>1 spike passed every 4</p></td>
+</tr>
+<tr class="row-even"><td><p>0b010</p></td>
+<td><p>1 spike passed every 8</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b011</p></td>
+<td><p>1 spike passed every 16</p></td>
+</tr>
+<tr class="row-even"><td><p>0b100</p></td>
+<td><p>1 spike passed every 32</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b101</p></td>
+<td><p>1 spike passed every 128</p></td>
+</tr>
+<tr class="row-even"><td><p>0b110</p></td>
+<td><p>1 spike passed every 256</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b111</p></td>
+<td><p>1 spike passed every 512</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.return_to_zero">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">return_to_zero</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.return_to_zero" title="Link to this definition"></a></dt>
+<dd><p>If <code class="code docutils literal notranslate"><span class="pre">True</span></code>, neurons in this layer will return to 0 when firing. Otherwise
+their threshold will be subtracted from the value their membrane
+potential reached before firing (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.threshold_high">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">threshold_high</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.threshold_high" title="Link to this definition"></a></dt>
+<dd><p>Set the high threshold (default 0), can be in range [0, 32767].</p>
+<p>When the neuron’s membrane potential becomes equal to or greater than this value the neuron will fire.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.threshold_low">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">threshold_low</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.threshold_low" title="Link to this definition"></a></dt>
+<dd><p>Set the low threshold (default -1), can be in range [-32768, -1].</p>
+<p>The minimum value of the neuron membrane potential which cannot be surpassed by leak.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerConfig" title="samna.speck2f.configuration.CnnLayerConfig"><span class="pre">samna.speck2f.configuration.CnnLayerConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerConfig.weights">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerConfig.weights" title="Link to this definition"></a></dt>
+<dd><p>4 dimensional list of lists representing kernel parameters.</p>
+<p>Formatted as [feature][channel][x][y].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tensor array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDestination">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">CnnLayerDestination</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDestination" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Configuration options for CNN layer destinations.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDestination.enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDestination.enable" title="Link to this definition"></a></dt>
+<dd><p>Enable this destination (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">False</span></code> no events will be forwarded, if <code class="code docutils literal notranslate"><span class="pre">True</span></code> all events will be forwarded to this destination.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDestination.feature_shift">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feature_shift</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDestination.feature_shift" title="Link to this definition"></a></dt>
+<dd><p>Shift feature IDs (default 0).</p>
+<p>The feature ID observed in the target layer will be the ID in this layer + feature_shift.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDestination.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDestination" title="samna.speck2f.configuration.CnnLayerDestination"><span class="pre">samna.speck2f.configuration.CnnLayerDestination</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDestination.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDestination.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDestination.layer" title="Link to this definition"></a></dt>
+<dd><p>Target layer ID (default 0).</p>
+<p>Allowed values [0, 8] and 12, where [0, 8] are the CNN layers and layer 12 is the readout layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDestination.pooling">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pooling</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDestination.pooling" title="Link to this definition"></a></dt>
+<dd><p>Pooling will be applied to events before reaching the selected destination layer (default 1).</p>
+<p>Allowed values: {1, 2, 4}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDestination.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDestination" title="samna.speck2f.configuration.CnnLayerDestination"><span class="pre">samna.speck2f.configuration.CnnLayerDestination</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDestination.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">CnnLayerDimensions</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Describes the dimensions of a Cnn layer as the configurable parameters.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDimensions" title="samna.speck2f.configuration.CnnLayerDimensions"><span class="pre">samna.speck2f.configuration.CnnLayerDimensions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.get_biases_array_dimensions">
+<span class="sig-name descname"><span class="pre">get_biases_array_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDimensions" title="samna.speck2f.configuration.CnnLayerDimensions"><span class="pre">samna.speck2f.configuration.CnnLayerDimensions</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.get_biases_array_dimensions" title="Link to this definition"></a></dt>
+<dd><p>Function to get the dimension of the bias array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of the dimension in the format of [feature].</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.get_neuron_states_array_dimensions">
+<span class="sig-name descname"><span class="pre">get_neuron_states_array_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDimensions" title="samna.speck2f.configuration.CnnLayerDimensions"><span class="pre">samna.speck2f.configuration.CnnLayerDimensions</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">3</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.get_neuron_states_array_dimensions" title="Link to this definition"></a></dt>
+<dd><p>Function to get the dimension of the neuron states array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of the dimension in the format of [feature, x, y].</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.get_weights_array_dimensions">
+<span class="sig-name descname"><span class="pre">get_weights_array_dimensions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDimensions" title="samna.speck2f.configuration.CnnLayerDimensions"><span class="pre">samna.speck2f.configuration.CnnLayerDimensions</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.get_weights_array_dimensions" title="Link to this definition"></a></dt>
+<dd><p>Function to get the dimension of the weights array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of the dimension in the format of [feature, channel, x, y].</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.input_shape">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_shape</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.input_shape" title="Link to this definition"></a></dt>
+<dd><p>Shape of features on the input of this layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="index.html#samna.speck2f.configuration.IOShape" title="samna.speck2f.configuration.IOShape"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOShape</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.kernel_size">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kernel_size</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.kernel_size" title="Link to this definition"></a></dt>
+<dd><p>Kernel size for all features in this layer. All kernels are square (default 1).</p>
+<p>Allowed values [1, 16]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.output_shape">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_shape</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.output_shape" title="Link to this definition"></a></dt>
+<dd><p>Shape of features on the output of this layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="index.html#samna.speck2f.configuration.IOShape" title="samna.speck2f.configuration.IOShape"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOShape</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.padding">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">padding</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.padding" title="Link to this definition"></a></dt>
+<dd><p>Padding of all features in this layer (default (0, 0)).</p>
+<p>Allowed values [0, 7].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Vec2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.stride">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stride</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.stride" title="Link to this definition"></a></dt>
+<dd><p>Stride for all features in this layer (default (1, 1)).</p>
+<p>Allowed values {1, 2, 4, 8}.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Vec2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.CnnLayerDimensions.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerDimensions" title="samna.speck2f.configuration.CnnLayerDimensions"><span class="pre">samna.speck2f.configuration.CnnLayerDimensions</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.CnnLayerDimensions.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsFilterConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">DvsFilterConfig</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsFilterConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The DVS Filter Block is included in the DVS pre-processing layer of Speck 2f in order to filter events
+depending on neighboring pixel activity. In general, an event at position (x,y) is forwarded by the filter when at least one
+pixel in the vicinity of (x,y) has spiked in a defined time window before the (x,y) event.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsFilterConfig.enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsFilterConfig.enable" title="Link to this definition"></a></dt>
+<dd><p>Enable the filter (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>A clock (&lt;1KHz) must be provided to SLOW_CLK pin if <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsFilterConfig.internal_slow_clk" title="samna.speck2f.configuration.DvsFilterConfig.internal_slow_clk"><code class="xref py py-class docutils literal notranslate"><span class="pre">internal_slow_clk</span></code></a>
+is <code class="code docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsFilterConfig.filter_size">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filter_size</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsFilterConfig.filter_size" title="Link to this definition"></a></dt>
+<dd><p>Filter window size in the X/Y dimension (default (1, 1)).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Vec2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsFilterConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.DvsFilterConfig" title="samna.speck2f.configuration.DvsFilterConfig"><span class="pre">samna.speck2f.configuration.DvsFilterConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsFilterConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsFilterConfig.hot_pixel_filter_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hot_pixel_filter_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsFilterConfig.hot_pixel_filter_enable" title="Link to this definition"></a></dt>
+<dd><p>Enable hot pixel filtering, default is enabled (default <code class="code docutils literal notranslate"><span class="pre">True</span></code>).
+Can’t work with <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsFilterConfig.low_pass_mode_enable" title="samna.speck2f.configuration.DvsFilterConfig.low_pass_mode_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">low</span> <span class="pre">pass</span> <span class="pre">filter</span> <span class="pre">mode</span></code></a> at the same time</p>
+<p>The <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsFilterConfig.enable" title="samna.speck2f.configuration.DvsFilterConfig.enable"><code class="xref py py-class docutils literal notranslate"><span class="pre">enable</span></code></a> has to be set <code class="code docutils literal notranslate"><span class="pre">True</span></code> first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsFilterConfig.internal_slow_clk">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">internal_slow_clk</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsFilterConfig.internal_slow_clk" title="Link to this definition"></a></dt>
+<dd><p>Forward internally generated slow clock to DVS filter to replace the need of external slow clk (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>The <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsFilterConfig.enable" title="samna.speck2f.configuration.DvsFilterConfig.enable"><code class="xref py py-class docutils literal notranslate"><span class="pre">enable</span></code></a> must be set to <code class="code docutils literal notranslate"><span class="pre">True</span></code> first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsFilterConfig.low_pass_mode_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">low_pass_mode_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsFilterConfig.low_pass_mode_enable" title="Link to this definition"></a></dt>
+<dd><p>When enabled, the filter works as a low-pass filter.
+Can’t work with <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsFilterConfig.hot_pixel_filter_enable" title="samna.speck2f.configuration.DvsFilterConfig.hot_pixel_filter_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hot</span> <span class="pre">pixel</span> <span class="pre">filter</span> <span class="pre">mode</span></code></a> at the same time</p>
+<p>The <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsFilterConfig.enable" title="samna.speck2f.configuration.DvsFilterConfig.enable"><code class="xref py py-class docutils literal notranslate"><span class="pre">enable</span></code></a> has to be set <code class="code docutils literal notranslate"><span class="pre">True</span></code> first.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsFilterConfig.threshold">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">threshold</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsFilterConfig.threshold" title="Link to this definition"></a></dt>
+<dd><p>Defines the threshold of the filter (default 5).</p>
+<p>This value is used to compare the current counter
+value with the value of the pixels neighboring the current spiking pixel.
+If any of the neighboring pixels has a value difference within the delta value, the filter emits the current spike.
+Otherwise, the current spike is blocked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsFilterConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.DvsFilterConfig" title="samna.speck2f.configuration.DvsFilterConfig"><span class="pre">samna.speck2f.configuration.DvsFilterConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsFilterConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">DvsLayerConfig</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Configuration options for event pre-process layer.
+The event pre-processing layer receives as input the events coming from the internal DVS,
+or from an external source through the Input Serial Interface</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.cut">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cut</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.cut" title="Link to this definition"></a></dt>
+<dd><p>Select the bottom right point of region of interest (default [127, 127]).
+It needs to be used with <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerConfig.origin" title="samna.speck2f.configuration.DvsLayerConfig.origin"><code class="xref py py-class docutils literal notranslate"><span class="pre">origin</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Vec2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.destinations">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">destinations</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.destinations" title="Link to this definition"></a></dt>
+<dd><p>Destinations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of 2 <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerDestination" title="samna.speck2f.configuration.DvsLayerDestination"><code class="xref py py-class docutils literal notranslate"><span class="pre">DvsLayerDestination</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerConfig" title="samna.speck2f.configuration.DvsLayerConfig"><span class="pre">samna.speck2f.configuration.DvsLayerConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.merge">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">merge</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.merge" title="Link to this definition"></a></dt>
+<dd><p>merge the two polarities from the DVS (On/Off) (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">True</span></code>, Merge all events marking them with Polarity = <cite>1</cite>. If False, Pass all events and maintain the polarity information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.mirror">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mirror</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.mirror" title="Link to this definition"></a></dt>
+<dd><p>Enable mirroring or not of the X or Y dimension (default (<code class="code docutils literal notranslate"><span class="pre">False</span></code>, <code class="code docutils literal notranslate"><span class="pre">False</span></code>)).</p>
+<p>Mirroring is reversing image on X or Y dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object(x bool, y bool)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.mirror_diagonal">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mirror_diagonal</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.mirror_diagonal" title="Link to this definition"></a></dt>
+<dd><p>Enables mirroring of the input events along the diagonal. (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>)</p>
+<p>when set to <code class="code docutils literal notranslate"><span class="pre">True</span></code>, it swaps X with Y.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.monitor_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monitor_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.monitor_enable" title="Link to this definition"></a></dt>
+<dd><p>Enables the DVS Pre-Processing Spike Monitor Bus (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>When enabled, output messages of the dvs pre-processing block
+are forwarded on the monitor bus to the output serial interface data1 input.</p>
+<p>This is typically openned when you want speck2f to output dvs events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.off_channel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">off_channel</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.off_channel" title="Link to this definition"></a></dt>
+<dd><p>Whether pass events with OFF polarity. (default <code class="code docutils literal notranslate"><span class="pre">True</span></code>).</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">True</span></code>, pass events with OFF polarity. If <code class="code docutils literal notranslate"><span class="pre">False</span></code>, block events with OFF polarity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.on_channel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_channel</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.on_channel" title="Link to this definition"></a></dt>
+<dd><p>Whether pass events with ON polarity. (default <code class="code docutils literal notranslate"><span class="pre">True</span></code>).</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">True</span></code>, pass events with ON polarity. If code:<cite>False</cite>, block events with ON polarity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.origin">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">origin</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.origin" title="Link to this definition"></a></dt>
+<dd><p>Select the top left point of region of interest (default [0, 0]).
+It needs to be used with <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerConfig.cut" title="samna.speck2f.configuration.DvsLayerConfig.cut"><code class="xref py py-class docutils literal notranslate"><span class="pre">cut</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Vec2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.pass_sensor_events">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pass_sensor_events</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.pass_sensor_events" title="Link to this definition"></a></dt>
+<dd><p>Pass/Drop Internal DVS Events (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).
+This will be automatically set by setting <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerConfig.raw_monitor_enable" title="samna.speck2f.configuration.DvsLayerConfig.raw_monitor_enable"><code class="xref py py-class docutils literal notranslate"><span class="pre">raw_monitor_enable</span></code></a> and
+<a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerConfig.monitor_enable" title="samna.speck2f.configuration.DvsLayerConfig.monitor_enable"><code class="xref py py-class docutils literal notranslate"><span class="pre">monitor_enable</span></code></a>.</p>
+<p>If disabled, the internal sensor events are dropped, i.e., not forwarded to the DVS  pre-processing block.</p>
+<p>This is typically used when sensor data is provided by an external source (Ext DVS Mode).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.pooling">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pooling</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.pooling" title="Link to this definition"></a></dt>
+<dd><p>Pooling is collecting DVS events in an area, available values are {1, 2, 4}, you can set pooling value on X/Y dimension separately (default (1, 1)).</p>
+<p>For example, if you set <cite>config.dvs_layer.pooling.x = 2</cite> and <cite>config.dvs_layer.pooling.y = 2</cite>, the DVS events of a <cite>2x2</cite> pixel area are summed together.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Vec2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.raw_monitor_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raw_monitor_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.raw_monitor_enable" title="Link to this definition"></a></dt>
+<dd><p>Enables the DVS Monitor Bus (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>When enabled, input messages to the DVS pre-processing block
+are forwarded on the monitor bus to the output serial interface data1 input.</p>
+<p>These messages are the raw messages coming from the internal DVS or an external sensor (Ext DVS Mode) before pre-processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerConfig" title="samna.speck2f.configuration.DvsLayerConfig"><span class="pre">samna.speck2f.configuration.DvsLayerConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerDestination">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">DvsLayerDestination</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerDestination" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Configuration options for dvs layer destination. It can have 2 destinations.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerDestination.enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerDestination.enable" title="Link to this definition"></a></dt>
+<dd><p>if this destination is enabled (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerDestination.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerDestination" title="samna.speck2f.configuration.DvsLayerDestination"><span class="pre">samna.speck2f.configuration.DvsLayerDestination</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerDestination.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerDestination.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerDestination.layer" title="Link to this definition"></a></dt>
+<dd><p>destination layer that is going to receive output data (default 0).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.DvsLayerDestination.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerDestination" title="samna.speck2f.configuration.DvsLayerDestination"><span class="pre">samna.speck2f.configuration.DvsLayerDestination</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.DvsLayerDestination.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.FactoryConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">FactoryConfig</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.FactoryConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Contains the factory configurations for Speck 2f.
+Most configurations here are tuned for best performance.
+The configurations that user could modify are given with doc strings.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.FactoryConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.FactoryConfig" title="samna.speck2f.configuration.FactoryConfig"><span class="pre">samna.speck2f.configuration.FactoryConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.FactoryConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.FactoryConfig.internal_slow_clk_divider">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">internal_slow_clk_divider</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.FactoryConfig.internal_slow_clk_divider" title="Link to this definition"></a></dt>
+<dd><p>set the power of internal slow clock divider. Default 17. Must be one of 14, 15, 16 and 17.</p>
+<p>The internally generated clock exploits the random continuous generation of internal DVS events
+(even though the generation frequency can fluctuate) by dividing the number of generated events by a constant (2^14 to 2^17).
+In a typical application, the slow clock toggles at a speed of around 10Hz to 10kHz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.FactoryConfig.monitor_dual_channel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monitor_dual_channel</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.FactoryConfig.monitor_dual_channel" title="Link to this definition"></a></dt>
+<dd><p>enable the dual channel output feature. This could improve the output bandwidth
+if you have extremely high output throughput,
+otherwise it may decrease the performance. Default <code class="code docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.FactoryConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.FactoryConfig" title="samna.speck2f.configuration.FactoryConfig"><span class="pre">samna.speck2f.configuration.FactoryConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.FactoryConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.IOShape">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">IOShape</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.IOShape" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Describes the input or output shape of a CNN layer.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.IOShape.feature_count">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feature_count</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.IOShape.feature_count" title="Link to this definition"></a></dt>
+<dd><p>Number of features in the input or output (default 1).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.IOShape.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.IOShape" title="samna.speck2f.configuration.IOShape"><span class="pre">samna.speck2f.configuration.IOShape</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.IOShape.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.IOShape.size">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">size</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.IOShape.size" title="Link to this definition"></a></dt>
+<dd><p>Size of each feature (default (1, 1)).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Vec2</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.IOShape.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.IOShape" title="samna.speck2f.configuration.IOShape"><span class="pre">samna.speck2f.configuration.IOShape</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.IOShape.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">ReadoutConfig</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The main use of the post-processing block is to calculate the moving average over a time window for a maximum of 15 neurons,
+provide the maximum average of the 15 neurons and compare the value of the calculated moving averages against a specified threshold.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.enable" title="Link to this definition"></a></dt>
+<dd><p>enable the readout block, a slow clk (frequency depends on the algorithm model) must be provided to SLOW_CLK pin (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.ReadoutConfig" title="samna.speck2f.configuration.ReadoutConfig"><span class="pre">samna.speck2f.configuration.ReadoutConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.internal_slow_clk">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">internal_slow_clk</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.internal_slow_clk" title="Link to this definition"></a></dt>
+<dd><p>forward internally generated slow clk to the readout block to replace the need of external slow clk (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).
+The <a class="reference internal" href="index.html#samna.speck2f.configuration.ReadoutConfig.enable" title="samna.speck2f.configuration.ReadoutConfig.enable"><code class="xref py py-class docutils literal notranslate"><span class="pre">enable</span></code></a> must be set to <code class="code docutils literal notranslate"><span class="pre">True</span></code> first.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.low_pass_filter32_not16">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">low_pass_filter32_not16</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.low_pass_filter32_not16" title="Link to this definition"></a></dt>
+<dd><p>Selects readout moving average length (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>False</p></td>
+<td><p>time window = 16* <em>MOVING_AVERAGE_CLK</em> period</p></td>
+</tr>
+<tr class="row-odd"><td><p>True</p></td>
+<td><p>time window = 32* <em>MOVING_AVERAGE_CLK</em> period</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.low_pass_filter_disable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">low_pass_filter_disable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.low_pass_filter_disable" title="Link to this definition"></a></dt>
+<dd><p>Disables readout low pass filtering (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>False</p></td>
+<td><p>time window = selected by <a class="reference internal" href="index.html#samna.speck2f.configuration.ReadoutConfig.low_pass_filter32_not16" title="samna.speck2f.configuration.ReadoutConfig.low_pass_filter32_not16"><code class="xref py py-class docutils literal notranslate"><span class="pre">low_pass_filter32_not16</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>True</p></td>
+<td><p>time window = 1 <em>MOVING_AVERAGE_CLK</em> period</p></td>
+</tr>
+</tbody>
+</table>
+<p>This overrides <a class="reference internal" href="index.html#samna.speck2f.configuration.ReadoutConfig.low_pass_filter32_not16" title="samna.speck2f.configuration.ReadoutConfig.low_pass_filter32_not16"><code class="xref py py-class docutils literal notranslate"><span class="pre">low_pass_filter32_not16</span></code></a> when set to <code class="code docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.monitor_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monitor_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.monitor_enable" title="Link to this definition"></a></dt>
+<dd><p>Allow monitoring of readout events (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>You will receive <a class="reference internal" href="../event/index.html#samna.speck2f.event.ReadoutValue" title="samna.speck2f.event.ReadoutValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadoutValue</span></code></a> from the model if enabled.</p>
+<p><strong>Please note that if you turn this on, you can’t get any events from CNN layers or the DVS sensor anymore.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.output_mode_sel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_mode_sel</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.output_mode_sel" title="Link to this definition"></a></dt>
+<dd><p>Select the readout output mode (default 0).</p>
+<p>There are 4 different modes where the output data are multiplexed. In the following table the different data output modes are described:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>output_mode_sel</p></td>
+<td><p>data_out[20]</p></td>
+<td><p>data_out[19:16]</p></td>
+<td><p>data_out[15:0]</p></td>
+</tr>
+<tr class="row-even"><td><p>0b00</p></td>
+<td><p>data valid</p></td>
+<td><p>neuron index of max average</p></td>
+<td><p>power down (clock gating)</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b01</p></td>
+<td><p>data valid</p></td>
+<td><p>neuron index of max average</p></td>
+<td><p>threshold compare output</p></td>
+</tr>
+<tr class="row-even"><td><p>0b10</p></td>
+<td><p>data valid</p></td>
+<td><p>neuron index of max average</p></td>
+<td><p>average output of the selected neuron</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b11</p></td>
+<td><p>max spiking neuron above threshold</p></td>
+<td><p>neuron index of max average</p></td>
+<td><p>average output of max spiking neuron</p></td>
+</tr>
+</tbody>
+</table>
+<p>If <code class="code docutils literal notranslate"><span class="pre">output_mode_sel</span></code> equals to <code class="code docutils literal notranslate"><span class="pre">0b00</span></code> then the clk_gated signal and the <code class="code docutils literal notranslate"><span class="pre">data_out[15:0]</span></code> are equal to 0.</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">output_mode_sel</span></code> equals to <code class="code docutils literal notranslate"><span class="pre">0b01</span></code> then the <code class="code docutils literal notranslate"><span class="pre">data_out[15:0]</span></code> consists of the data of the threshold comparison,
+the index of the maximum moving average neuron and the data valid signal.
+The threshold comparison data is the 16 bit value of the comparison of each neurons’ moving average with the threshold.</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">output_mode_sel</span></code> equals to <code class="code docutils literal notranslate"><span class="pre">0b10</span></code> then the <code class="code docutils literal notranslate"><span class="pre">data_out[15:0]</span></code> consists of the moving average of the selected neuron,
+the index of the maximum moving average neuron and the data valid signal.
+The data valid signal is asserted after all the computations have finished in order to ensure correct sampling of the data.</p>
+<p>If :<code class="code docutils literal notranslate"><span class="pre">output_mode_sel</span></code> equals to <code class="code docutils literal notranslate"><span class="pre">0b11</span></code> then the <code class="code docutils literal notranslate"><span class="pre">data_out[15:0]</span></code> consists of the maximum average of the 15 neurons,
+the index of the maximum moving average neuron and the comparison output between the maximum moving average and the threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.output_neuron_num">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_neuron_num</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.output_neuron_num" title="Link to this definition"></a></dt>
+<dd><p>select one of the 15 readout neurons (default 0).</p>
+<p>The internal signal <a class="reference internal" href="index.html#samna.speck2f.configuration.ReadoutConfig.output_mode_sel" title="samna.speck2f.configuration.ReadoutConfig.output_mode_sel"><code class="xref py py-class docutils literal notranslate"><span class="pre">output_mode_sel</span></code></a> enable the selection of one of the 15 output neurons.
+The neuron selection is used when signals <a class="reference internal" href="index.html#samna.speck2f.configuration.ReadoutConfig.output_mode_sel" title="samna.speck2f.configuration.ReadoutConfig.output_mode_sel"><code class="xref py py-class docutils literal notranslate"><span class="pre">output_mode_sel</span></code></a> == <code class="code docutils literal notranslate"><span class="pre">0b10</span></code>.</p>
+<p>Selected neuron number = average_sel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.override_threshold_max">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">override_threshold_max</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.override_threshold_max" title="Link to this definition"></a></dt>
+<dd><p>Override Output Layer Threshold compare (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>Sends interrupt at each slow clock cycle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.readout_configuration_sel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">readout_configuration_sel</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.readout_configuration_sel" title="Link to this definition"></a></dt>
+<dd><p>Addressing modes of the incoming spikes (default 0).</p>
+<p>There are 4 different addressing modes that could be selected. The valid configurations are the following:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Value</p></td>
+<td><p>Configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>0b00</p></td>
+<td><p>2x*2y*4f</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b10</p></td>
+<td><p>4x*4y*1f</p></td>
+</tr>
+<tr class="row-even"><td><p>0b01</p></td>
+<td><p>2x*4y*2f</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b11</p></td>
+<td><p>1x*1y*16f</p></td>
+</tr>
+</tbody>
+</table>
+<p>Where x, y and f represent, respectively, the X, Y and Feature dimensions of the events arriving at the Readout Layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.readout_pin_monitor_enable">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">readout_pin_monitor_enable</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.readout_pin_monitor_enable" title="Link to this definition"></a></dt>
+<dd><p>enable/disable the monitor of the readout pins (default <code class="code docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>If enabled, the <a class="reference internal" href="../event/index.html#samna.speck2f.event.ReadoutPinValue" title="samna.speck2f.event.ReadoutPinValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadoutPinValue</span></code></a> will be outputted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.threshold">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">threshold</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.threshold" title="Link to this definition"></a></dt>
+<dd><p>Readout neurons threshold value (default 0).</p>
+<p>The moving average of the output neurons is compared to the threshold value to produce an output
+if the received number of spikes is greater than the threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.ReadoutConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.ReadoutConfig" title="samna.speck2f.configuration.ReadoutConfig"><span class="pre">samna.speck2f.configuration.ReadoutConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.ReadoutConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.SpeckConfiguration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2f.configuration.</span></span><span class="sig-name descname"><span class="pre">SpeckConfiguration</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.SpeckConfiguration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Contains configuration options and network parameters for a Speck 2f
+device. Applied to a device via <cite>apply_configuration()</cite> on the device
+model.</p>
+<p>The configuration is divided into settings for the 9 CNN layers, the
+DVS event pre-processing layer and the readout layer. The factory
+configuration and debug configuration sub structs are pre-populated
+with default values and are only used for debug scenarios.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.SpeckConfiguration.cnn_layers">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cnn_layers</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.SpeckConfiguration.cnn_layers" title="Link to this definition"></a></dt>
+<dd><p>List of 5 <a class="reference internal" href="index.html#samna.speck2f.configuration.CnnLayerConfig" title="samna.speck2f.configuration.CnnLayerConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">CnnLayerConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.SpeckConfiguration.debug_config">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">debug_config</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.SpeckConfiguration.debug_config" title="Link to this definition"></a></dt>
+<dd><p>Instace of <code class="xref py py-class docutils literal notranslate"><span class="pre">DebugConfig</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.SpeckConfiguration.dvs_filter">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dvs_filter</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.SpeckConfiguration.dvs_filter" title="Link to this definition"></a></dt>
+<dd><p>Instance of <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsFilterConfig" title="samna.speck2f.configuration.DvsFilterConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DvsFilterConfig</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.SpeckConfiguration.dvs_layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dvs_layer</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.SpeckConfiguration.dvs_layer" title="Link to this definition"></a></dt>
+<dd><p>Instance of <a class="reference internal" href="index.html#samna.speck2f.configuration.DvsLayerConfig" title="samna.speck2f.configuration.DvsLayerConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">DvsLayerConfig</span></code></a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.SpeckConfiguration.factory_config">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">factory_config</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.SpeckConfiguration.factory_config" title="Link to this definition"></a></dt>
+<dd><p>Instance of <a class="reference internal" href="index.html#samna.speck2f.configuration.FactoryConfig" title="samna.speck2f.configuration.FactoryConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">FactoryConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.SpeckConfiguration.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.SpeckConfiguration" title="samna.speck2f.configuration.SpeckConfiguration"><span class="pre">samna.speck2f.configuration.SpeckConfiguration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.SpeckConfiguration.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.SpeckConfiguration.readout">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">readout</span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.SpeckConfiguration.readout" title="Link to this definition"></a></dt>
+<dd><p>Instance of <a class="reference internal" href="index.html#samna.speck2f.configuration.ReadoutConfig" title="samna.speck2f.configuration.ReadoutConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReadoutConfig</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2f.configuration.SpeckConfiguration.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2f.configuration.SpeckConfiguration" title="samna.speck2f.configuration.SpeckConfiguration"><span class="pre">samna.speck2f.configuration.SpeckConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2f.configuration.SpeckConfiguration.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="samna.speck2f" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../event/index.html" class="btn btn-neutral float-right" title="samna.speck2f.event" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

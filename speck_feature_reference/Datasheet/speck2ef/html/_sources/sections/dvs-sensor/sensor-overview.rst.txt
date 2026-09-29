@@ -1,0 +1,27 @@
+.. _sensor-overview:
+
+Internal DVS Sensor
+===================
+
+
+Pixel Operation
+---------------
+
+Initially the pixel is at *RESET* voltage (which is set by :ref:`sensor_p4<pixel-thresholds>`).
+When a change in light intensity occurs, the pixel voltage either goes
+higher or lower with respect to its *RESET* voltage.
+
+During this time, assuming it goes higher, if it exceeds *OFF* threshold voltage,
+it generates an *OFF* event.
+
+On the other hand, if it goes below than the *RESET* voltage, and goes even lower
+than the *ON* threshold voltage it generates an *ON* event.
+
+Once the pixel generates an event (either *ON* or *OFF*), a reset pulse is generated
+that takes back the pixel to the *RESET* voltage.
+The duration of this *RESET* pulse is set by the *RESET* time parameter (:ref:`sensor_p7<pixel-thresholds>`).
+
+At this point, the pixel reset is released, but we may have some unwanted behavior
+immediately after this happens.
+To eliminate that, we ignore the upcoming events from that pixel
+for a certain time. This duration is set by the *IGNORE* time parameter (:ref:`sensor_p6<pixel-thresholds>`).

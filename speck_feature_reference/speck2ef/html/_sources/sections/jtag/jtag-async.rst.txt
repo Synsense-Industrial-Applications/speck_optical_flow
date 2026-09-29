@@ -1,0 +1,91 @@
+
+JTAG Asynchronous I/O Operation
+===============================
+
+The Speck2e JTAG interface enables sending and receiving asynchronous events from
+the chip. The JTAG effectively provides an alternative to the Asynchronous I/O interfaces
+for AER communication for testing purposes.
+
+Due to the nature of the JTAG serial protocol, however, asynchronous events can only be sent or
+received from the chip using a polling operation. Specifically, since no *chip_ready* or *data_ready*
+signal is present, the user must provide a value and read back the internal *acknowledge* signal
+from the chip by continuously reading a specific data register of the JTAG interface.
+
+The following sections provide a detailed description of the asynchronous I/O protocol via JTAG.
+
+Sending Asynchronous Events via JTAG
+************************************
+
+This operation is equivalent to sending a single asynchronous event via the chip :ref:`Async Input Serial Interface<input-serial-interface-encoding>`
+
+The Async input data bus is 32 bit wide in Speck2e.
+
+.. code::
+
+   send_ir(ASYNC_INPUT_ACK, 0x20, 8 bits)
+   ack_state = 0b00
+   # Check ACK internal state until ack is received:
+   while ack_state == 0b00:
+      ack_state = send_dr(0b00, 2 bits)  # Receive 2 bits giving the ACK status information
+
+   send_ir(ASYNC_INPUT, 0x22, 8 bits)
+   send_dr(data[31:0], 32 bits)  # Async input message data
+
+
+If a new message has to be sent in, the operation can be immediately repeated. Otherwise, the JTAG TAP Controller can be put back into RESET state.
+
+
+Receiving Asynchronous Events via JTAG
+**************************************
+
+This operation is equivalent to receiving a single asynchronous event via the chip from channel *data1* (see :ref:`Async Output Serial Interface<output-serial-interface-encoding>`).
+
+Before reading out an asynchronous event through the JTAG interface, the following register bits have to be configured:
+
++-------------------+---------------+
+| Bit               | Configure to: |
++-------------------+---------------+
+| :ref:`rbits-P2SM` | 0             |
++-------------------+---------------+
+| :ref:`rbits-JTGM` | 1             |
++-------------------+---------------+
+
+Operation steps:
+
+.. code::
+
+   send_ir(ASYNC_OUTPUT, 0x30, 8 bits)
+
+   data = 0xFF_FFFF
+   while data == 0xFF_FFFF:
+      data = send_dr(0x00_0000, 24 bits)  # Receive async output message data
+
+When the data read from the JTAG is different from 0xFF_FFFF, it can be interpreted as a valid async message.
+
+Receiving Readout Events via JTAG
+*********************************
+
+This operation is similar to the task of receiving asynchronous events.
+
+The only difference is that whenever the *READOUT* command is issued to the JTAG,
+the chip will send out the information of the readout layer output as a 24-bit word padded with '0':
+So for a fast consecutive attempts,  might get the same data output that belongs to the same timestamp.
+
+It is suggested to check the *INTERRUPT* pin behaviour too. After *INTERRUPT* rising edge the user should assert JTAG Readout command so that at the READOUT will work after each decision is done.
+
++-----------------------+----+----+----+---------------------------------------------------------------------------------------------------+
+| *Readout layer data*  | 0  | 0  | 0  | .. centered:: :ref:`Readout Layer Output (neuron output layer data) [20:0]<readout-output-modes>` |
++-----------------------+----+----+----+---------------------------------------------------------------------------------------------------+
+
+Operation steps:
+
+- Set :ref:`rbits-P2SM` = 0b0
+- Set :ref:`rbits-JTGM` = 0b1.
+- Wait for the *INTERRUPT* pin raising edge.
+
+.. code::
+
+   send_ir(READOUT, 0x31, 8 bits)
+
+   data = send_dr(0x00_0000, 24 bits)  # Receive async readout layer data
+

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.10. DVS Configuration Signal Description &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.11. DVS Filter Register Description" href="filter.html" />
+    <link rel="prev" title="7.9. DVS Register Description" href="dvs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.10. DVS Configuration Signal Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-signal-description">7.10.1. Detailed Signal Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dmoen-dvs-mon">7.10.1.1. DMOEN (DVS_Mon)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#smoen-spike-mon">7.10.1.2. SMOEN (Spike_Mon)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dsd2en-spike-dst2">7.10.1.3. DSD2EN (Spike_Dst2)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dsd1en-spike-dst1">7.10.1.4. DSD1EN (Spike_Dst1)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dmi-diagonal-mirror-en">7.10.1.5. DMI (diagonal_mirror_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#im-2-0-image-mode">7.10.1.6. IM[2:0] (image_mode)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cox-6-0-cut-origin-x">7.10.1.7. COX[6:0] (cut_origin_x)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssx-1-0-subsamp-x">7.10.1.8. SSX[1:0] (subsamp_x)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#coy-6-0-cut-origin-y">7.10.1.9. COY[6:0] (cut_origin_y)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssy-1-0-subsamp-y">7.10.1.10. SSY[1:0] (subsamp_y)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cmx-6-0-cut-max-x">7.10.1.11. CMX[6:0] (cut_max_x)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xme-x-mirror-en">7.10.1.12. XME (x_mirror_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cmy-6-0-cut-max-y">7.10.1.13. CMY[6:0] (cut_max_y)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yme-y-mirror-en">7.10.1.14. YME (y_mirror_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dsd2-4-0-spike-dst2">7.10.1.15. DSD2[4:0] (Spike_Dst2)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dsd1-4-0-spike-dst1">7.10.1.16. DSD1[4:0] (Spike_Dst1)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sdl-7-0-sensor-dly">7.10.1.17. SDL[7:0] (sensor_dly)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sp1-3-0-sensor-p1">7.10.1.18. SP1[3:0] (sensor_p1)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sp1-3-0-sensor-p0">7.10.1.19. SP1[3:0] (sensor_p0)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sp4-4-0-sensor-p4">7.10.1.20. SP4[4:0] (sensor_p4)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sp3-4-0-sensor-p3">7.10.1.21. SP3[4:0] (sensor_p3)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sp5-4-0-sensor-p5">7.10.1.22. SP5[4:0] (sensor_p5)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spss-sensor-pass">7.10.1.23. SPSS (sensor_pass)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sp7-3-0-sensor-p7">7.10.1.24. SP7[3:0] (sensor_p7)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sp6-3-0-sensor-p6">7.10.1.25. SP6[3:0] (sensor_p6)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sens1-sensor-en-startup1">7.10.1.26. SENS1 (sensor_en_startup1)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sens2-sensor-en-startup2">7.10.1.27. SENS2 (sensor_en_startup2)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sensr-sensor-en-startupref">7.10.1.28. SENSR (sensor_en_startupref)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#senbi1-sensor-en-bias1">7.10.1.29. SENBI1 (sensor_en_bias1)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#senbi2-sensor-en-bias2">7.10.1.30. SENBI2 (sensor_en_bias2)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#senbi3-sensor-en-bias3">7.10.1.31. SENBI3 (sensor_en_bias3)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sio1-5-0-sensor-iout1">7.10.1.32. SIO1[5:0] (sensor_iout1)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sent-sensor-en-test">7.10.1.33. SENT (sensor_en_test)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sio2-5-0-sensor-iout2">7.10.1.34. SIO2[5:0] (sensor_iout2)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spul-sensor-pulse">7.10.1.35. SPUL (sensor_pulse)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spsl-sensor-sel-pulse">7.10.1.36. SPSL (sensor_sel_pulse)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sio3-5-0-sensor-iout3">7.10.1.37. SIO3[5:0] (sensor_iout3)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sio4-5-0-sensor-iout4">7.10.1.38. SIO4[5:0] (sensor_iout4)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.10. </span>DVS Configuration Signal Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/dvs-config.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dvs-configuration-signal-description">
+<span id="dvs-config-signals"></span><h1><span class="section-number">7.10. </span>DVS Configuration Signal Description<a class="headerlink" href="#dvs-configuration-signal-description" title="Permalink to this heading"></a></h1>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">DVS Configuration Signal Overview</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Register Bits</p></td>
+<td><p>Register(s)</p></td>
+<td><p>Signal Name</p></td>
+<td><p>Short Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-dmoen"><span class="std std-ref">DMOEN</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs0"><span class="std std-ref">DVS0[7]</span></a></p></td>
+<td><p>DVS_Mon</p></td>
+<td><p>DVS Core Monitor Bus Enable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-smoen"><span class="std std-ref">SMOEN</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs0"><span class="std std-ref">DVS0[6]</span></a></p></td>
+<td><p>Spike_Mon</p></td>
+<td><p>Spike Monitor Bus Enable.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-dsd2en"><span class="std std-ref">DSD2EN</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs0"><span class="std std-ref">DVS0[5]</span></a></p></td>
+<td><p>Spike_Dst2</p></td>
+<td><p>Destination 2 Enable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-dsd1en"><span class="std std-ref">DSD1EN</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs0"><span class="std std-ref">DVS0[4]</span></a></p></td>
+<td><p>Spike_Dst1</p></td>
+<td><p>Destination 1 Enable.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-dmi"><span class="std std-ref">DMI</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs0"><span class="std std-ref">DVS0[3]</span></a></p></td>
+<td><p>diagonal_mirror_en</p></td>
+<td><p>Enable image transposition (diagonal mirroring): ‘1’ = X &lt;-&gt; Y.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-im"><span class="std std-ref">IM[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs0"><span class="std std-ref">DVS0[2:0]</span></a></p></td>
+<td><p>image_mode</p></td>
+<td><p>Filters/merges events coming from the DVS bus.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cox"><span class="std std-ref">COX[6:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs1"><span class="std std-ref">DVS1[7:1]</span></a></p></td>
+<td><p>cut_origin_x</p></td>
+<td><p>ROI Min X coordinate, calculated from the image origin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-coy"><span class="std std-ref">COY[6:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs2"><span class="std std-ref">DVS2[7:1]</span></a></p></td>
+<td><p>cut_origin_y</p></td>
+<td><p>ROI Min Y coordinate, calculated from the image origin.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cmx"><span class="std std-ref">CMX[6:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs3"><span class="std std-ref">DVS3[7:1]</span></a></p></td>
+<td><p>cut_max_x</p></td>
+<td><p>ROI Max X coordinate, calculated from the image origin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-cmy"><span class="std std-ref">CMY[6:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs4"><span class="std std-ref">DVS4[7:1]</span></a></p></td>
+<td><p>cut_max_y</p></td>
+<td><p>ROI Max Y coordinate, calculated from the image origin.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-dsd2"><span class="std std-ref">DSD2[3:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs5"><span class="std std-ref">DVS5[7:4]</span></a></p></td>
+<td><p>Spike_Dst2</p></td>
+<td><p>Destination 2 layer address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-dsd1"><span class="std std-ref">DSD1[3:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs5"><span class="std std-ref">DVS5[3:0]</span></a></p></td>
+<td><p>Spike_Dst1</p></td>
+<td><p>Destination 1 layer address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-xme"><span class="std std-ref">XME</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs6"><span class="std std-ref">DVS6[7]</span></a></p></td>
+<td><p>x_mirror_en</p></td>
+<td><p>Enable mirroring of the X dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-yme"><span class="std std-ref">YME</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs6"><span class="std std-ref">DVS6[6]</span></a></p></td>
+<td><p>y_mirror_en</p></td>
+<td><p>Enable mirroring of the Y dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-ssx"><span class="std std-ref">SSX[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs6"><span class="std std-ref">DVS6[5:4]</span></a></p></td>
+<td><p>subsamp_x</p></td>
+<td><p>X Dimension Pooling.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-ssy"><span class="std std-ref">SSY[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs6"><span class="std std-ref">DVS6[3:2]</span></a></p></td>
+<td><p>subsamp_y</p></td>
+<td><p>Y Dimension Pooling.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-spss"><span class="std std-ref">SPSS</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs6"><span class="std std-ref">DVS6[1]</span></a></p></td>
+<td><p>sensor_pass</p></td>
+<td><p>Pass/Drop internal sensor events.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sdl"><span class="std std-ref">SDL[7:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs7"><span class="std std-ref">DVS7[7:0]</span></a></p></td>
+<td><p>sensor_dly</p></td>
+<td><p>Sensor configuration delay control.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-sp1"><span class="std std-ref">SP1[3:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs8"><span class="std std-ref">DVS8[7:4]</span></a></p></td>
+<td><p>sensor_p1</p></td>
+<td><p>Current Control P1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sp0"><span class="std std-ref">SP0[3:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs8"><span class="std std-ref">DVS8[3:0]</span></a></p></td>
+<td><p>sensor_p0</p></td>
+<td><p>Current Control P0.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-sent"><span class="std std-ref">SENT</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs9"><span class="std std-ref">DVS9[5]</span></a></p></td>
+<td><p>sensor_en_test</p></td>
+<td><p>Sensor test mode enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sp3"><span class="std std-ref">SP3[4:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs9"><span class="std std-ref">DVS9[4:0]</span></a></p></td>
+<td><p>sensor_p3</p></td>
+<td><p>Current Control P3.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-sens1"><span class="std std-ref">SENS1</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs10"><span class="std std-ref">DVS10[7]</span></a></p></td>
+<td><p>sensor_en_startup1</p></td>
+<td><p>Main bias startup enable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sens2"><span class="std std-ref">SENS2</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs10"><span class="std std-ref">DVS10[6]</span></a></p></td>
+<td><p>sensor_en_startup2</p></td>
+<td><p>Main bias startup enable.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-sensr"><span class="std std-ref">SENSR</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs10"><span class="std std-ref">DVS10[5]</span></a></p></td>
+<td><p>sensor_en_startupref</p></td>
+<td><p>Main bias startup reference enable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sp4"><span class="std std-ref">SP4[4:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs9"><span class="std std-ref">DVS10[4:0]</span></a></p></td>
+<td><p>sensor_p4</p></td>
+<td><p>Current Control P4.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-senbi1"><span class="std std-ref">SENBI1</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs11"><span class="std std-ref">DVS11[7]</span></a></p></td>
+<td><p>sensor_en_bias1</p></td>
+<td><p>Enable for main_bias1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-senbi2"><span class="std std-ref">SENBI2</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs11"><span class="std std-ref">DVS11[6]</span></a></p></td>
+<td><p>sensor_en_bias2</p></td>
+<td><p>Enable for main_bias2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-senbi3"><span class="std std-ref">SENBI3</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs11"><span class="std std-ref">DVS11[5]</span></a></p></td>
+<td><p>sensor_en_bias3</p></td>
+<td><p>Enable for main_bias3.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sp5"><span class="std std-ref">SP5[3:0]</span></a></p></td>
+<td><p><span class="xref std std-ref">DVS11[4:0]</span></p></td>
+<td><p>sensor_p5</p></td>
+<td><p>Current Control P5.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-sp7"><span class="std std-ref">SP7[3:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs12"><span class="std std-ref">DVS12[7:4]</span></a></p></td>
+<td><p>sensor_p7</p></td>
+<td><p>Current Control P7.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sp6"><span class="std std-ref">SP6[3:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs12"><span class="std std-ref">DVS12[3:0]</span></a></p></td>
+<td><p>sensor_p6</p></td>
+<td><p>Current Control P6.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-sio1"><span class="std std-ref">SIO1[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs13"><span class="std std-ref">DVS13[5:0]</span></a></p></td>
+<td><p>sensor_iout1</p></td>
+<td><p>Sensor reference current setting for parameter 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sio2"><span class="std std-ref">SIO2[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs14"><span class="std std-ref">DVS14[5:0]</span></a></p></td>
+<td><p>sensor_iout2</p></td>
+<td><p>Sensor reference current setting for parameter 1.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-sio3"><span class="std std-ref">SIO3[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs15"><span class="std std-ref">DVS15[5:0]</span></a></p></td>
+<td><p>sensor_iout3</p></td>
+<td><p>Sensor reference current setting for parameters 2, 3, 4 and 5.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-spul"><span class="std std-ref">SPUL</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs16"><span class="std std-ref">DVS16[7]</span></a></p></td>
+<td><p>sensor_pulse</p></td>
+<td><p>Pulse output enable bit</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-spsl"><span class="std std-ref">SPSL</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs16"><span class="std std-ref">DVS16[6]</span></a></p></td>
+<td><p>sensor_sel_pulse</p></td>
+<td><p>Select signal for pulse output</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sio4"><span class="std std-ref">SIO4[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-descriptions.html#reg-dvs16"><span class="std std-ref">DVS16[5:0]</span></a></p></td>
+<td><p>sensor_iout4</p></td>
+<td><p>Sensor reference current setting for parameters 6.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="detailed-signal-description">
+<h2><span class="section-number">7.10.1. </span>Detailed Signal Description<a class="headerlink" href="#detailed-signal-description" title="Permalink to this heading"></a></h2>
+<section id="dmoen-dvs-mon">
+<span id="rbits-dmoen"></span><h3><span class="section-number">7.10.1.1. </span>DMOEN (DVS_Mon)<a class="headerlink" href="#dmoen-dvs-mon" title="Permalink to this heading"></a></h3>
+<p>Enables the DVS Monitor Bus. When enabled, input messages to the dvs pre-processing block are
+forwarded on the <a class="reference internal" href="../encoding/monitor-bus.html#monitor-bus-encoding"><span class="std std-ref">monitor bus</span></a> to the output serial interface <em>data1</em> input.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These messages are the <em>raw</em> messages coming from the internal DVS or an external sensor
+(Ext DVS Mode) before pre-processing.</p>
+</div>
+</section>
+<section id="smoen-spike-mon">
+<span id="rbits-smoen"></span><h3><span class="section-number">7.10.1.2. </span>SMOEN (Spike_Mon)<a class="headerlink" href="#smoen-spike-mon" title="Permalink to this heading"></a></h3>
+<p>Enables the DVS Pre-Processing Spike Monitor Bus. When enabled, output messages of the dvs pre-processing block are
+forwarded on the <a class="reference internal" href="../encoding/monitor-bus.html#monitor-bus-encoding"><span class="std std-ref">monitor bus</span></a> to the output serial interface <em>data1</em> input.</p>
+</section>
+<section id="dsd2en-spike-dst2">
+<span id="rbits-dsd2en"></span><h3><span class="section-number">7.10.1.3. </span>DSD2EN (Spike_Dst2)<a class="headerlink" href="#dsd2en-spike-dst2" title="Permalink to this heading"></a></h3>
+<p>Enable forwarding to Destination 2 layer (address defined in bits <a class="reference internal" href="#rbits-dsd2"><span class="std std-ref">DSD2[4:0] (Spike_Dst2)</span></a>.</p>
+</section>
+<section id="dsd1en-spike-dst1">
+<span id="rbits-dsd1en"></span><h3><span class="section-number">7.10.1.4. </span>DSD1EN (Spike_Dst1)<a class="headerlink" href="#dsd1en-spike-dst1" title="Permalink to this heading"></a></h3>
+<p>Enable forwarding to Destination 1 layer (address defined in bits <a class="reference internal" href="#rbits-dsd1"><span class="std std-ref">DSD1[4:0] (Spike_Dst1)</span></a>.</p>
+</section>
+<section id="dmi-diagonal-mirror-en">
+<span id="rbits-dmi"></span><h3><span class="section-number">7.10.1.5. </span>DMI (diagonal_mirror_en)<a class="headerlink" href="#dmi-diagonal-mirror-en" title="Permalink to this heading"></a></h3>
+<p>Enables mirroring of the input events along the diagonal: when set to ‘1’, it swaps X with Y.</p>
+</section>
+<section id="im-2-0-image-mode">
+<span id="rbits-im"></span><h3><span class="section-number">7.10.1.6. </span>IM[2:0] (image_mode)<a class="headerlink" href="#im-2-0-image-mode" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="dvs-descriptions.html#reg-dvs0"><span class="std std-ref">DVS0[2:0]</span></a></p>
+<p>DVS event filtering. Filters/merges events coming from the DVS Bus (Sensor or External).</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>IM[2:0]</p></td>
+<td><p>Configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>000</p></td>
+<td><p>Pass Events with both polarity (to ON <em>and</em> to OFF). Merge all events marking them with Polarity = ‘1’.</p></td>
+</tr>
+<tr class="row-odd"><td><p>001</p></td>
+<td><p>Pass only Events with OFF polarity. Mark all events with Polarity ‘1’.</p></td>
+</tr>
+<tr class="row-even"><td><p>010</p></td>
+<td><p>Pass only Events with ON polarity. Mark all events with Polarity ‘1’.</p></td>
+</tr>
+<tr class="row-odd"><td><p>011</p></td>
+<td><p>Block <em>all</em> events.</p></td>
+</tr>
+<tr class="row-even"><td><p>1xx</p></td>
+<td><p>Pass <em>all</em> events and maintain the polarity information.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cox-6-0-cut-origin-x">
+<span id="rbits-cox"></span><h3><span class="section-number">7.10.1.7. </span>COX[6:0] (cut_origin_x)<a class="headerlink" href="#cox-6-0-cut-origin-x" title="Permalink to this heading"></a></h3>
+<p>ROI Min X coordinate, calculated from the image origin.</p>
+</section>
+<section id="ssx-1-0-subsamp-x">
+<span id="rbits-ssx"></span><h3><span class="section-number">7.10.1.8. </span>SSX[1:0] (subsamp_x)<a class="headerlink" href="#ssx-1-0-subsamp-x" title="Permalink to this heading"></a></h3>
+<p>Select the level of Pooling in the X dimension. Values {0, 1, 2} map to a Pooling of {1, 2, 4}.</p>
+</section>
+<section id="coy-6-0-cut-origin-y">
+<span id="rbits-coy"></span><h3><span class="section-number">7.10.1.9. </span>COY[6:0] (cut_origin_y)<a class="headerlink" href="#coy-6-0-cut-origin-y" title="Permalink to this heading"></a></h3>
+<p>ROI Min Y coordinate, calculated from the image origin.</p>
+</section>
+<section id="ssy-1-0-subsamp-y">
+<span id="rbits-ssy"></span><h3><span class="section-number">7.10.1.10. </span>SSY[1:0] (subsamp_y)<a class="headerlink" href="#ssy-1-0-subsamp-y" title="Permalink to this heading"></a></h3>
+<p>Select the level of Pooling in the Y dimension. Values {0, 1, 2} map to a Pooling of {1, 2, 4}.</p>
+</section>
+<section id="cmx-6-0-cut-max-x">
+<span id="rbits-cmx"></span><h3><span class="section-number">7.10.1.11. </span>CMX[6:0] (cut_max_x)<a class="headerlink" href="#cmx-6-0-cut-max-x" title="Permalink to this heading"></a></h3>
+<p>ROI Max X coordinate, calculated from the image origin.</p>
+</section>
+<section id="xme-x-mirror-en">
+<span id="rbits-xme"></span><h3><span class="section-number">7.10.1.12. </span>XME (x_mirror_en)<a class="headerlink" href="#xme-x-mirror-en" title="Permalink to this heading"></a></h3>
+<p>Enable mirroring of the X dimension.</p>
+</section>
+<section id="cmy-6-0-cut-max-y">
+<span id="rbits-cmy"></span><h3><span class="section-number">7.10.1.13. </span>CMY[6:0] (cut_max_y)<a class="headerlink" href="#cmy-6-0-cut-max-y" title="Permalink to this heading"></a></h3>
+<p>ROI Max Y coordinate, calculated from the image origin.</p>
+</section>
+<section id="yme-y-mirror-en">
+<span id="rbits-yme"></span><h3><span class="section-number">7.10.1.14. </span>YME (y_mirror_en)<a class="headerlink" href="#yme-y-mirror-en" title="Permalink to this heading"></a></h3>
+<p>Enable mirroring of the Y dimension.</p>
+</section>
+<section id="dsd2-4-0-spike-dst2">
+<span id="rbits-dsd2"></span><h3><span class="section-number">7.10.1.15. </span>DSD2[4:0] (Spike_Dst2)<a class="headerlink" href="#dsd2-4-0-spike-dst2" title="Permalink to this heading"></a></h3>
+<p>Destination 2 layer address.</p>
+</section>
+<section id="dsd1-4-0-spike-dst1">
+<span id="rbits-dsd1"></span><h3><span class="section-number">7.10.1.16. </span>DSD1[4:0] (Spike_Dst1)<a class="headerlink" href="#dsd1-4-0-spike-dst1" title="Permalink to this heading"></a></h3>
+<p>Destination 1 layer address.</p>
+</section>
+<section id="sdl-7-0-sensor-dly">
+<span id="rbits-sdl"></span><h3><span class="section-number">7.10.1.17. </span>SDL[7:0] (sensor_dly)<a class="headerlink" href="#sdl-7-0-sensor-dly" title="Permalink to this heading"></a></h3>
+<p>Sensor configuration valid -&gt; ack delay control. This register controls the timing of the ack signal
+for a sensor configuration event coming from the Input Serial Interface (see <a class="reference internal" href="../encoding/input-serial-interface.html#s2p-operating-modes"><span class="std std-ref">ISI Operating Modes</span></a>)</p>
+</section>
+<section id="sp1-3-0-sensor-p1">
+<span id="rbits-sp1"></span><h3><span class="section-number">7.10.1.18. </span>SP1[3:0] (sensor_p1)<a class="headerlink" href="#sp1-3-0-sensor-p1" title="Permalink to this heading"></a></h3>
+<p>Current Control P1.</p>
+</section>
+<section id="sp1-3-0-sensor-p0">
+<span id="rbits-sp0"></span><h3><span class="section-number">7.10.1.19. </span>SP1[3:0] (sensor_p0)<a class="headerlink" href="#sp1-3-0-sensor-p0" title="Permalink to this heading"></a></h3>
+<p>Current Control P0.</p>
+</section>
+<section id="sp4-4-0-sensor-p4">
+<span id="rbits-sp4"></span><h3><span class="section-number">7.10.1.20. </span>SP4[4:0] (sensor_p4)<a class="headerlink" href="#sp4-4-0-sensor-p4" title="Permalink to this heading"></a></h3>
+<p>Current Control P4.</p>
+</section>
+<section id="sp3-4-0-sensor-p3">
+<span id="rbits-sp3"></span><h3><span class="section-number">7.10.1.21. </span>SP3[4:0] (sensor_p3)<a class="headerlink" href="#sp3-4-0-sensor-p3" title="Permalink to this heading"></a></h3>
+<p>Current Control P3.</p>
+</section>
+<section id="sp5-4-0-sensor-p5">
+<span id="rbits-sp5"></span><h3><span class="section-number">7.10.1.22. </span>SP5[4:0] (sensor_p5)<a class="headerlink" href="#sp5-4-0-sensor-p5" title="Permalink to this heading"></a></h3>
+<p>Current Control P5.</p>
+</section>
+<section id="spss-sensor-pass">
+<span id="rbits-spss"></span><h3><span class="section-number">7.10.1.23. </span>SPSS (sensor_pass)<a class="headerlink" href="#spss-sensor-pass" title="Permalink to this heading"></a></h3>
+<p>Pass/Drop Internal DVS Events. If disabled, the internal sensor events are dropped, i.e., not forwarded to the DVS <a class="reference internal" href="../architecture/event-pre-processing.html#event-pre-processing"><span class="std std-ref">pre-processing block</span></a>.</p>
+<p>This is typically used when sensor data is provided by an external source (Ext DVS Mode).</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>SPSS</p></td>
+<td><p>Configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>‘0’</p></td>
+<td><p>Drop internal DVS events</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘1’</p></td>
+<td><p>Forward internal DVS events to DVS pre-processing block</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sp7-3-0-sensor-p7">
+<span id="rbits-sp7"></span><h3><span class="section-number">7.10.1.24. </span>SP7[3:0] (sensor_p7)<a class="headerlink" href="#sp7-3-0-sensor-p7" title="Permalink to this heading"></a></h3>
+<p>Current Control P7.</p>
+</section>
+<section id="sp6-3-0-sensor-p6">
+<span id="rbits-sp6"></span><h3><span class="section-number">7.10.1.25. </span>SP6[3:0] (sensor_p6)<a class="headerlink" href="#sp6-3-0-sensor-p6" title="Permalink to this heading"></a></h3>
+<p>Current Control P6.</p>
+</section>
+<section id="sens1-sensor-en-startup1">
+<span id="rbits-sens1"></span><h3><span class="section-number">7.10.1.26. </span>SENS1 (sensor_en_startup1)<a class="headerlink" href="#sens1-sensor-en-startup1" title="Permalink to this heading"></a></h3>
+<p>Main bias startup enable. See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-main-bias-settings"><span class="std std-ref">Sensor Main Bias Settings</span></a> for details.</p>
+</section>
+<section id="sens2-sensor-en-startup2">
+<span id="rbits-sens2"></span><h3><span class="section-number">7.10.1.27. </span>SENS2 (sensor_en_startup2)<a class="headerlink" href="#sens2-sensor-en-startup2" title="Permalink to this heading"></a></h3>
+<p>Main bias startup enable. See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-main-bias-settings"><span class="std std-ref">Sensor Main Bias Settings</span></a> for details.</p>
+</section>
+<section id="sensr-sensor-en-startupref">
+<span id="rbits-sensr"></span><h3><span class="section-number">7.10.1.28. </span>SENSR (sensor_en_startupref)<a class="headerlink" href="#sensr-sensor-en-startupref" title="Permalink to this heading"></a></h3>
+<p>Main bias startup reference voltage enable. See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-main-bias-settings"><span class="std std-ref">Sensor Main Bias Settings</span></a> for details.</p>
+</section>
+<section id="senbi1-sensor-en-bias1">
+<span id="rbits-senbi1"></span><h3><span class="section-number">7.10.1.29. </span>SENBI1 (sensor_en_bias1)<a class="headerlink" href="#senbi1-sensor-en-bias1" title="Permalink to this heading"></a></h3>
+<p>Enable for main_bias1 (beta multiplier). See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-main-bias-settings"><span class="std std-ref">Sensor Main Bias Settings</span></a> for details.</p>
+</section>
+<section id="senbi2-sensor-en-bias2">
+<span id="rbits-senbi2"></span><h3><span class="section-number">7.10.1.30. </span>SENBI2 (sensor_en_bias2)<a class="headerlink" href="#senbi2-sensor-en-bias2" title="Permalink to this heading"></a></h3>
+<p>Enable for main_bias2 (cascoded-beta multiplier). See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-main-bias-settings"><span class="std std-ref">Sensor Main Bias Settings</span></a> for details.</p>
+</section>
+<section id="senbi3-sensor-en-bias3">
+<span id="rbits-senbi3"></span><h3><span class="section-number">7.10.1.31. </span>SENBI3 (sensor_en_bias3)<a class="headerlink" href="#senbi3-sensor-en-bias3" title="Permalink to this heading"></a></h3>
+<p>Enable for main_bias3 (temperature-compansated cascoded-beta multiplier). See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-main-bias-settings"><span class="std std-ref">Sensor Main Bias Settings</span></a> for details.</p>
+</section>
+<section id="sio1-5-0-sensor-iout1">
+<span id="rbits-sio1"></span><h3><span class="section-number">7.10.1.32. </span>SIO1[5:0] (sensor_iout1)<a class="headerlink" href="#sio1-5-0-sensor-iout1" title="Permalink to this heading"></a></h3>
+<p>Sensor reference current setting for parameter 0. See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-settings"><span class="std std-ref">Sensor Register Settings</span></a> for details.</p>
+</section>
+<section id="sent-sensor-en-test">
+<span id="rbits-sent"></span><h3><span class="section-number">7.10.1.33. </span>SENT (sensor_en_test)<a class="headerlink" href="#sent-sensor-en-test" title="Permalink to this heading"></a></h3>
+<p>Enable for Vref output.</p>
+</section>
+<section id="sio2-5-0-sensor-iout2">
+<span id="rbits-sio2"></span><h3><span class="section-number">7.10.1.34. </span>SIO2[5:0] (sensor_iout2)<a class="headerlink" href="#sio2-5-0-sensor-iout2" title="Permalink to this heading"></a></h3>
+<p>Sensor reference current setting for parameter 1. See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-settings"><span class="std std-ref">Sensor Register Settings</span></a> for details.</p>
+</section>
+<section id="spul-sensor-pulse">
+<span id="rbits-spul"></span><h3><span class="section-number">7.10.1.35. </span>SPUL (sensor_pulse)<a class="headerlink" href="#spul-sensor-pulse" title="Permalink to this heading"></a></h3>
+<p>Enable for pulse output.</p>
+</section>
+<section id="spsl-sensor-sel-pulse">
+<span id="rbits-spsl"></span><h3><span class="section-number">7.10.1.36. </span>SPSL (sensor_sel_pulse)<a class="headerlink" href="#spsl-sensor-sel-pulse" title="Permalink to this heading"></a></h3>
+<p>Select signal for pulse output. 1: reset pulse, 0: ignore pulse.</p>
+</section>
+<section id="sio3-5-0-sensor-iout3">
+<span id="rbits-sio3"></span><h3><span class="section-number">7.10.1.37. </span>SIO3[5:0] (sensor_iout3)<a class="headerlink" href="#sio3-5-0-sensor-iout3" title="Permalink to this heading"></a></h3>
+<p>Sensor reference current setting for parameters 2, 3, 4 and 5. See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-settings"><span class="std std-ref">Sensor Register Settings</span></a> for details.</p>
+</section>
+<section id="sio4-5-0-sensor-iout4">
+<span id="rbits-sio4"></span><h3><span class="section-number">7.10.1.38. </span>SIO4[5:0] (sensor_iout4)<a class="headerlink" href="#sio4-5-0-sensor-iout4" title="Permalink to this heading"></a></h3>
+<p>Sensor reference current setting for parameters 6. See <a class="reference internal" href="../dvs-sensor/parameters.html#sensor-settings"><span class="std std-ref">Sensor Register Settings</span></a> for details.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dvs.html" class="btn btn-neutral float-left" title="7.9. DVS Register Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="filter.html" class="btn btn-neutral float-right" title="7.11. DVS Filter Register Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

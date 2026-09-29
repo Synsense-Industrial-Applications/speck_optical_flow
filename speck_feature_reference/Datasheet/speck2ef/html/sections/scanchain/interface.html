@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>13.5. Scan Chain Interface &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="13.6. Scan Chain Bit Stream Analysis" href="analysis.html" />
+    <link rel="prev" title="13.4. Scan Chain Operation Modes" href="operation-modes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">13. Scan Chain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">13.1. Scan Chain Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connectivity.html">13.2. Scan Chain Connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connectivity.html#cell-connectivity-example">13.3. Cell connectivity example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operation-modes.html">13.4. Scan Chain Operation Modes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">13.5. Scan Chain Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scan-chain-domain-enable">13.5.1. Scan Chain Domain Enable</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example">13.5.1.1. Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scan-chain-interface-timing-for-ic-design-use-only">13.5.2. Scan Chain Interface Timing (for IC design use only)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="analysis.html">13.6. Scan Chain Bit Stream Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">13. </span>Scan Chain</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">13.5. </span>Scan Chain Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/scanchain/interface.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scan-chain-interface">
+<span id="id1"></span><h1><span class="section-number">13.5. </span>Scan Chain Interface<a class="headerlink" href="#scan-chain-interface" title="Permalink to this heading"></a></h1>
+<p>As described in <a class="reference internal" href="overview.html#scanchain-overview"><span class="std std-ref">Scan Chain Overview</span></a>, the Speck2e Scan Chain (SC) interface
+includes internal signals:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Signal</p></td>
+<td><p>Description</p></td>
+<td><p>External pin</p></td>
+</tr>
+<tr class="row-even"><td><p>SCAN_HS_EN</p></td>
+<td><p>Scan chain control (handshake) enable</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCAN_DATA_EN</p></td>
+<td><p>Scan chain data enable</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>SCAN_CLK</p></td>
+<td><p>Scan chain control and data clock</p></td>
+<td><p>TCK</p></td>
+</tr>
+<tr class="row-odd"><td><p>SCAN_IN</p></td>
+<td><p>Scan chain control and data in</p></td>
+<td><p>TDI + FF</p></td>
+</tr>
+<tr class="row-even"><td><p>SCAN_OUT</p></td>
+<td><p>Scan chain control and data out</p></td>
+<td><p>TDO</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <cite>IO4_TDI</cite> pin is connected to the internal <cite>SCAN_IN</cite> signal via a Filp-Flop to force sampling of the data at <cite>IO4_TDI</cite> always on the rising edge.
+Please refer to section below <a class="reference internal" href="#scan-chain-timing"><span class="std std-ref">Scan Chain Interface Timing (for IC design use only)</span></a> for the correct timing of the TDI/TDO data.</p>
+</div>
+<section id="scan-chain-domain-enable">
+<h2><span class="section-number">13.5.1. </span>Scan Chain Domain Enable<a class="headerlink" href="#scan-chain-domain-enable" title="Permalink to this heading"></a></h2>
+<p>In order to operate the scan chain, a SC sub-domain has to be activated first.
+This is done through a register setting. Refer to section <a class="reference internal" href="connectivity.html#scan-chain-domains"><span class="std std-ref">Scan Chain Domains</span></a>
+for a list of registers associated to each sub-domain.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only a <strong>single</strong> SC sub-domain can be activated at each moment, otherwise
+the SC bit stream will be injected to all active sub-domains, creating
+a conflict and invalid output data.</p>
+</div>
+<section id="example">
+<h3><span class="section-number">13.5.1.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="scan-chain-interface-timing-for-ic-design-use-only">
+<span id="scan-chain-timing"></span><h2><span class="section-number">13.5.2. </span>Scan Chain Interface Timing (for IC design use only)<a class="headerlink" href="#scan-chain-interface-timing-for-ic-design-use-only" title="Permalink to this heading"></a></h2>
+<p>After setting the SC enable bit for the selected sub-domain, the SC interface
+can be activated by setting pin <em>SCAN_HS_EN</em> to ‘1’ and subsequently <em>SCAN_DATA_EN</em>
+to ‘1’.
+| In Speck2e this is done via JTAG commands (see <a class="reference internal" href="../jtag/jtag-command-overview.html#jtag-commands"><span class="std std-ref">JTAG Command Reference</span></a>).</p>
+<p>At this point, the SC of the sub-domain is ready to accept and output a bit stream.</p>
+<p>Both input and output data is sampled at the internal <em>SCAN_CLK</em> <strong>falling edge</strong>. When clocking the
+data in via JTAG, the data is sent/read via <em>TDI/TDO</em> pins at which the data is sampled at the <strong>rising edge</strong> of <em>JTAG_CLK</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In order to guarantee compatibility with the standard JTAG protocol, every bitstream should start with an extra ‘0’ bit and the first output bit sampled on <em>TDO</em> should be ignored. For example, for a scan chain length of <strong>5101</strong> bits, the user should clock in <strong>5102</strong> bits of which the first is a ‘0’ and the first bit received on <em>TDO</em> is ignored.</p>
+</div>
+<figure class="align-default" id="id2">
+digraph D {
+    rankdir=LR;
+
+    struct_in3 [shape=plaintext, label=&lt;&lt;TABLE CELLPADDING=&quot;0&quot; BORDER=&quot;0&quot; CELLSPACING=&quot;0&quot;&gt;
+            &lt;TR&gt;&lt;TD&gt;SCAN_IN&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt; &lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&gt;];
+    subgraph cluster_sc3 {
+        graph [label = &quot;Internal data after 10 clock cycles&quot;];
+        sc3 [shape=plaintext, label=&lt;
+            &lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLPADDING=&quot;2&quot; CELLSPACING=&quot;0&quot;&gt;&lt;TR&gt;
+            &lt;TD&gt;1&lt;/TD&gt;&lt;TD&gt;1&lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;TD&gt;1&lt;/TD&gt;&lt;TD&gt;1&lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;TD&gt;1&lt;/TD&gt;&lt;TD&gt;1&lt;/TD&gt;&lt;/TR&gt;
+            &lt;/TABLE&gt;
+        &gt;, fontcolor=&quot;blue&quot;];
+    };
+    struct_out3 [shape=plaintext, label=&lt;&lt;TABLE CELLPADDING=&quot;0&quot; BORDER=&quot;0&quot; CELLSPACING=&quot;0&quot;&gt;
+    &lt;TR&gt;&lt;TD&gt;SCAN_OUT&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt;&lt;FONT COLOR=&quot;red&quot;&gt;1010100101&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&gt;];
+    struct_in3 -&gt; sc3 -&gt; struct_out3 ;
+
+    struct_in2 [shape=plaintext, label=&lt;&lt;TABLE CELLPADDING=&quot;0&quot; BORDER=&quot;0&quot; CELLSPACING=&quot;0&quot;&gt;
+            &lt;TR&gt;&lt;TD&gt;SCAN_IN&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt;&lt;FONT COLOR=&quot;blue&quot;&gt;110011&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&gt;];
+    subgraph cluster_sc2 {
+        label = &quot; Internal data after 4 clock cycles &quot;
+        sc2 [shape=plaintext, label=&lt;
+            &lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLPADDING=&quot;2&quot; CELLSPACING=&quot;0&quot;&gt;&lt;TR&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;blue&quot;&gt;0&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;blue&quot;&gt;0&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;blue&quot;&gt;1&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;blue&quot;&gt;1&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;red&quot;&gt;1&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;red&quot;&gt;0&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;red&quot;&gt;1&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;red&quot;&gt;0&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;red&quot;&gt;1&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;TD&gt;&lt;FONT COLOR=&quot;red&quot;&gt;0&lt;/FONT&gt;&lt;/TD&gt;
+            &lt;/TR&gt;&lt;/TABLE&gt;
+        &gt;];
+    };
+    struct_out2 [shape=plaintext, label=&lt;&lt;TABLE CELLPADDING=&quot;0&quot; BORDER=&quot;0&quot; CELLSPACING=&quot;0&quot;&gt;
+    &lt;TR&gt;&lt;TD&gt;SCAN_OUT&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt;&lt;FONT COLOR=&quot;red&quot;&gt;0101&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&gt;];
+    struct_in2 -&gt; sc2 -&gt; struct_out2 ;
+
+    struct_in1 [shape=plaintext, label=&lt;&lt;TABLE CELLPADDING=&quot;0&quot; BORDER=&quot;0&quot; CELLSPACING=&quot;0&quot;&gt;
+            &lt;TR&gt;&lt;TD&gt;SCAN_IN&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt;&lt;FONT COLOR=&quot;blue&quot;&gt;1100110011&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&gt;];
+    subgraph cluster_sc1 {
+        label = &quot;    Internal data at SC activation   &quot;
+        sc1 [shape=plaintext, label=&lt;
+            &lt;TABLE BORDER=&quot;0&quot; CELLBORDER=&quot;1&quot; CELLPADDING=&quot;2&quot; CELLSPACING=&quot;0&quot;&gt;&lt;TR&gt;
+            &lt;TD&gt;1&lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;TD&gt;1&lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;TD&gt;1&lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;TD&gt;1&lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;TD&gt;1&lt;/TD&gt;
+            &lt;/TR&gt;&lt;/TABLE&gt;
+        &gt;, fontcolor=&quot;red&quot;];
+    };
+    struct_out1 [shape=plaintext, label=&lt;&lt;TABLE CELLPADDING=&quot;0&quot; BORDER=&quot;0&quot; CELLSPACING=&quot;0&quot;&gt;
+    &lt;TR&gt;&lt;TD&gt;SCAN_OUT&lt;/TD&gt;&lt;/TR&gt;&lt;TR&gt;&lt;TD&gt; &lt;/TD&gt;&lt;/TR&gt;&lt;/TABLE&gt;&gt;];
+    struct_in1 -&gt; sc1 -&gt; struct_out1 ;
+}<figcaption>
+<p><span class="caption-text">SC bit stream clocking in/out example</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The following diagram shows the SC operation for a sample bit stream of 10 bits, where
+bit #9 is the MSB and bit #0 is the LSB of the bitstring. The input bit string
+will displace the internal bit string (of the same length), so that the first output bit
+on <em>SCAN_OUT</em> will correspond to the first bit sent at the input (O#0).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For IC Design use only: not relevant to design external chip interfaces.</p>
+</div>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{
+"signal": [
+   { "name": "SCAN_CLK",    "wave": "l..p..|..l." },
+   { "name": "SCAN_HS_EN","wave":   "01....|...0" },
+   { "name": "SCAN_DATA_EN","wave": "0.1...|..0." },
+   { "name": "SCAN_IN","wave": "0..===|==0.", "data": ["IN#9","IN#8","","IN#1","IN#0"] },
+   { "name": "SCAN_OUT", "wave": "0..===|==0.", "data": ["O#0","O#1","","O#8","O#9"] }
+],
+"head":{ "text":"Scan Chain timing diagram.", "tick":"0" }
+}
+</script>
+</div>
+<p>After the end of the bit stream clocking, the SC can be deactivated to resume chip operation
+(see <a class="reference internal" href="operation-modes.html#scan-chain-mode1"><span class="std std-ref">MODE 1: Normal Async Operation</span></a>). In this case, <em>SCAN_DATA_EN</em> <strong>must</strong> be set to ‘0’ before <em>SCAN_HS_EN</em>.
+A delay &gt;10 ns should be introduced in between disabling <em>HS</em> and <em>DATA</em> SC enable signals
+to allow for control signals to propagate and stabilize.</p>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="operation-modes.html" class="btn btn-neutral float-left" title="13.4. Scan Chain Operation Modes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="analysis.html" class="btn btn-neutral float-right" title="13.6. Scan Chain Bit Stream Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

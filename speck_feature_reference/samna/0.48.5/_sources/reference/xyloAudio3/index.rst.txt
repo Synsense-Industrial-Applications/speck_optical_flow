@@ -1,0 +1,21 @@
+################
+samna.xyloAudio3
+################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   configuration/index
+   event/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.xyloAudio3
+   :members:
+   :show-inheritance:
+

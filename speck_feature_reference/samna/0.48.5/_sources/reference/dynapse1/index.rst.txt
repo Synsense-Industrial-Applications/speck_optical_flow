@@ -1,0 +1,20 @@
+##############
+samna.dynapse1
+##############
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   nodes/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.dynapse1
+   :members:
+   :show-inheritance:
+

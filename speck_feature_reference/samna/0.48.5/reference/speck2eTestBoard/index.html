@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.speck2eTestBoard &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="samna.speck2eTestBoard.encoder" href="encoder/index.html" />
+    <link rel="prev" title="samna.speck2e.event" href="../speck2e/event/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="index.html#">samna.speck2eTestBoard</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#module-samna.speck2eTestBoard">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna</a></li>
+      <li class="breadcrumb-item active">samna.speck2eTestBoard</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/speck2eTestBoard/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-speck2etestboard">
+<h1>samna.speck2eTestBoard<a class="headerlink" href="index.html#samna-speck2etestboard" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="encoder/index.html">samna.speck2eTestBoard.encoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fpgaTestSuite/index.html">samna.speck2eTestBoard.fpgaTestSuite</a></li>
+</ul>
+</div>
+</section>
+<section id="module-samna.speck2eTestBoard">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.speck2eTestBoard" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.MeasurementChannels">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2eTestBoard.</span></span><span class="sig-name descname"><span class="pre">MeasurementChannels</span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.MeasurementChannels" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>Io</p>
+<p>Ram</p>
+<p>Logic</p>
+<p>PixelDigital</p>
+<p>PixelAnalog</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.MeasurementChannels.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.MeasurementChannels.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.PowerModule">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2eTestBoard.</span></span><span class="sig-name descname"><span class="pre">PowerModule</span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.PowerModule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A handle which offers basic power api.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.PowerModule.get_adc_core">
+<span class="sig-name descname"><span class="pre">get_adc_core</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.PowerModule" title="samna.speck2eTestBoard.PowerModule"><span class="pre">samna.speck2eTestBoard.PowerModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.unifirm.adc.ads1119.Ads1119</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.PowerModule.get_adc_core" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.PowerModule.get_adc_io">
+<span class="sig-name descname"><span class="pre">get_adc_io</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.PowerModule" title="samna.speck2eTestBoard.PowerModule"><span class="pre">samna.speck2eTestBoard.PowerModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.unifirm.adc.ads1119.Ads1119</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.PowerModule.get_adc_io" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.PowerModule.set_vdd_io">
+<span class="sig-name descname"><span class="pre">set_vdd_io</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.PowerModule" title="samna.speck2eTestBoard.PowerModule"><span class="pre">samna.speck2eTestBoard.PowerModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.PowerModule.set_vdd_io" title="Link to this definition"></a></dt>
+<dd><p>Set IO Power Supply</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.PowerModule.set_vdd_logic">
+<span class="sig-name descname"><span class="pre">set_vdd_logic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.PowerModule" title="samna.speck2eTestBoard.PowerModule"><span class="pre">samna.speck2eTestBoard.PowerModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.PowerModule.set_vdd_logic" title="Link to this definition"></a></dt>
+<dd><p>Set Digital Power Supply</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.PowerModule.set_vdd_pixel_analog">
+<span class="sig-name descname"><span class="pre">set_vdd_pixel_analog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.PowerModule" title="samna.speck2eTestBoard.PowerModule"><span class="pre">samna.speck2eTestBoard.PowerModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.PowerModule.set_vdd_pixel_analog" title="Link to this definition"></a></dt>
+<dd><p>Set Pixel Field Analog Power Supply</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.PowerModule.set_vdd_pixel_digital">
+<span class="sig-name descname"><span class="pre">set_vdd_pixel_digital</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.PowerModule" title="samna.speck2eTestBoard.PowerModule"><span class="pre">samna.speck2eTestBoard.PowerModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.PowerModule.set_vdd_pixel_digital" title="Link to this definition"></a></dt>
+<dd><p>Set Pixel Field Digital Power Supply</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.PowerModule.set_vdd_ram">
+<span class="sig-name descname"><span class="pre">set_vdd_ram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.PowerModule" title="samna.speck2eTestBoard.PowerModule"><span class="pre">samna.speck2eTestBoard.PowerModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.PowerModule.set_vdd_ram" title="Link to this definition"></a></dt>
+<dd><p>Set SRAM Power Supply</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2eTestBoard.</span></span><span class="sig-name descname"><span class="pre">Speck2eTestBoard</span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Composite object that allows access to all the board features of a
+Speck 2e testboard.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_board_serial_number">
+<span class="sig-name descname"><span class="pre">get_board_serial_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_board_serial_number" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Get the serial number of the board.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The board serial number.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_dac">
+<span class="sig-name descname"><span class="pre">get_dac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.unifirm.dac.dac7678.Dac7678</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_dac" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_edge_detection_module">
+<span class="sig-name descname"><span class="pre">get_edge_detection_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../unifirm/modules/edgeDetection/index.html#samna.unifirm.modules.edgeDetection.EdgeDetectionModule" title="samna.unifirm.modules.edgeDetection.EdgeDetectionModule"><span class="pre">samna.unifirm.modules.edgeDetection.EdgeDetectionModule</span></a></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_edge_detection_module" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A handle to an <code class="xref py py-class docutils literal notranslate"><span class="pre">EdgeDetectionModule</span></code> object
+providing a source node to output pulse detection events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_firmware_versions">
+<span class="sig-name descname"><span class="pre">get_firmware_versions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../boards/common/index.html#samna.boards.common.FirmwareVersions" title="samna.boards.common.FirmwareVersions"><span class="pre">samna.boards.common.FirmwareVersions</span></a></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_firmware_versions" title="Link to this definition"></a></dt>
+<dd><p>Get the Fxtree and Unifirm versions of this board.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_io_module">
+<span class="sig-name descname"><span class="pre">get_io_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_io_module" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A handle to the unifirm IO module. Useful in debug scenarios.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../speck2e/index.html#samna.speck2e.Speck2eModel" title="samna.speck2e.Speck2eModel"><span class="pre">samna.speck2e.Speck2eModel</span></a></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_model" title="Link to this definition"></a></dt>
+<dd><p>Get the model of the Speck 2e device on this board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../speck2e/index.html#samna.speck2e.Speck2eModel" title="samna.speck2e.Speck2eModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">Speck2eModel</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_model_sink_node">
+<span class="sig-name descname"><span class="pre">get_model_sink_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.DeviceSinkNode_speck2e_event_speck2et_input_event</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.DeviceSinkNode_speck2e_event_speck2e_input_event</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_model_sink_node" title="Link to this definition"></a></dt>
+<dd><p>Convenience function to get the model sink node directly</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_model_source_node">
+<span class="sig-name descname"><span class="pre">get_model_source_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.DeviceSourceNode_speck2e_event_output_event</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_model_source_node" title="Link to this definition"></a></dt>
+<dd><p>Convenience function to get the model source node directly</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_power_module">
+<span class="sig-name descname"><span class="pre">get_power_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.speck2eTestBoard.PowerModule" title="samna.speck2eTestBoard.PowerModule"><span class="pre">samna.speck2eTestBoard.PowerModule</span></a></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_power_module" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A handle to an <a class="reference internal" href="index.html#samna.speck2eTestBoard.PowerModule" title="samna.speck2eTestBoard.PowerModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerModule</span></code></a> object which is used to control power
+trace voltage and measure power consumption.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_power_monitor">
+<span class="sig-name descname"><span class="pre">get_power_monitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../boards/common/power/index.html#samna.boards.common.power.PowerMonitor" title="samna.boards.common.power.PowerMonitor"><span class="pre">samna.boards.common.power.PowerMonitor</span></a></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_power_monitor" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A handle to an <a class="reference internal" href="../boards/common/power/index.html#samna.boards.common.power.PowerMonitor" title="samna.boards.common.power.PowerMonitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerMonitor</span></code></a> object which is used to read power.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_reader_writer">
+<span class="sig-name descname"><span class="pre">get_reader_writer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">unifirm::UnifirmReaderWriter</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_reader_writer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_stop_watch">
+<span class="sig-name descname"><span class="pre">get_stop_watch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../unifirm/timestamp/index.html#samna.unifirm.timestamp.StopWatch" title="samna.unifirm.timestamp.StopWatch"><span class="pre">samna.unifirm.timestamp.StopWatch</span></a></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_stop_watch" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A handle to the stopwatch object to control timestamp in events, for debug purpose. See <a class="reference internal" href="../unifirm/timestamp/index.html#samna.unifirm.timestamp.StopWatch" title="samna.unifirm.timestamp.StopWatch"><code class="xref py py-class docutils literal notranslate"><span class="pre">StopWatch</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.get_usb_controller">
+<span class="sig-name descname"><span class="pre">get_usb_controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.fxtree.FxTreeDevice</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.get_usb_controller" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A handle to an <code class="xref py py-class docutils literal notranslate"><span class="pre">FxTreeDevice</span></code> object which is used to control the Cypress
+SuperSpeed USB 3.0 peripheral controller. It it mainly used for debugging.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.read_write">
+<span class="sig-name descname"><span class="pre">read_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.read_write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.reset_board_soft">
+<span class="sig-name descname"><span class="pre">reset_board_soft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.reset_board_soft" title="Link to this definition"></a></dt>
+<dd><p>Reset the FPGA and reset the peripherals. Select where the configuration comes from for the Speck 2e chip (External flash or PC).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bootFromPc</strong> (<em>bool</em>) – False if there is an external flash contains valid data, otherwise it has to be set to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.reset_model">
+<span class="sig-name descname"><span class="pre">reset_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.reset_model" title="Link to this definition"></a></dt>
+<dd><p>Reset the Speck 2e chip and select where the configuration comes from (External flash or PC).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bootFromPc</strong> (<em>bool</em>) – False if there is an external flash contains valid data, otherwise it has to be set to True.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.start_reader_writer">
+<span class="sig-name descname"><span class="pre">start_reader_writer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.start_reader_writer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.Speck2eTestBoard.stop_reader_writer">
+<span class="sig-name descname"><span class="pre">stop_reader_writer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard" title="samna.speck2eTestBoard.Speck2eTestBoard"><span class="pre">samna.speck2eTestBoard.Speck2eTestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.Speck2eTestBoard.stop_reader_writer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.speck2eTestBoard.</span></span><span class="sig-name descname"><span class="pre">UnifirmModule</span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The control of the Speck 2e IO module inside the FPGA.
+The main clock, SPI clock, slow clock and JTAG clock can be controlled. You could also
+control the five powers individually and assert/deassert the Speck 2e chip.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.assert_reset">
+<span class="sig-name descname"><span class="pre">assert_reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.assert_reset" title="Link to this definition"></a></dt>
+<dd><p>Assert reset of the Speck 2f.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.deassert_reset">
+<span class="sig-name descname"><span class="pre">deassert_reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.deassert_reset" title="Link to this definition"></a></dt>
+<dd><p>Deassert reset of the Speck 2f.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.enable_asi_interface">
+<span class="sig-name descname"><span class="pre">enable_asi_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.enable_asi_interface" title="Link to this definition"></a></dt>
+<dd><p>Enable the ASI interface. Internal debug only.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.enable_jtag">
+<span class="sig-name descname"><span class="pre">enable_jtag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.enable_jtag" title="Link to this definition"></a></dt>
+<dd><p>Enable JTAG interface, internal debug only. Default disabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enable</strong> (<em>bool</em>) – <code class="code docutils literal notranslate"><span class="pre">True</span></code> to enable the JTAG interface, <code class="code docutils literal notranslate"><span class="pre">False</span></code> disable it.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.enable_power">
+<span class="sig-name descname"><span class="pre">enable_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.enable_power" title="Link to this definition"></a></dt>
+<dd><p>Controls the enable/disable of the five power traces
+(VDD_IO, VDD_RAM, VDD_LOGIC, VDD_PIXEL_DIGITAL, VDD_PIXEL_ANALOG).
+These five channels are controlled by the lower five bits respectively, 1 means enable and 0 means disable.
+Default all enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – the channels to be enable/disabled.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.pulse_in_out_interface_clk">
+<span class="sig-name descname"><span class="pre">pulse_in_out_interface_clk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.pulse_in_out_interface_clk" title="Link to this definition"></a></dt>
+<dd><p>Generate one pulse of the main clock. Internal debug only.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.pulse_slow_clk">
+<span class="sig-name descname"><span class="pre">pulse_slow_clk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.pulse_slow_clk" title="Link to this definition"></a></dt>
+<dd><p>Generate one pulse on the external slow clock.
+This is useful if you want to manually control the computation of the READOUT block,
+CNN layer leakage block or DVS filter block. If you want those blocks to perform
+one computation, just invoke this method one time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.reset_through_registers">
+<span class="sig-name descname"><span class="pre">reset_through_registers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.reset_through_registers" title="Link to this definition"></a></dt>
+<dd><p>Reset the Speck 2f through registers. Internal debug only.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.set_dual_channel_output_enable">
+<span class="sig-name descname"><span class="pre">set_dual_channel_output_enable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.set_dual_channel_output_enable" title="Link to this definition"></a></dt>
+<dd><p>Enable the dual channel output feature. This could improve the output bandwidth
+if you have extremely high output throughput.
+Otherwise it may decrease the performance. Default disabled.
+Note you should control this feature through the
+<a class="reference internal" href="../speck2e/configuration/index.html#samna.speck2e.configuration.FactoryConfig.monitor_dual_channel" title="samna.speck2e.configuration.FactoryConfig.monitor_dual_channel"><code class="xref py py-class docutils literal notranslate"><span class="pre">monitor_dual_channel</span></code></a>,
+instead of invoking this method directly!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enable</strong> (<em>bool</em>) – <code class="code docutils literal notranslate"><span class="pre">True</span></code> to enable this feature, <code class="code docutils literal notranslate"><span class="pre">False</span></code> to disable it.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.set_in_out_interface_clk">
+<span class="sig-name descname"><span class="pre">set_in_out_interface_clk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.set_in_out_interface_clk" title="Link to this definition"></a></dt>
+<dd><p>Enable/disable the main clock (IO interface clock). Default enabled.
+The main clock is essential to Speck 2f, it must be enable otherwise you can’t use the chip.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>onOff</strong> (<em>bool</em>) – <code class="code docutils literal notranslate"><span class="pre">True</span></code> to enable the main clock, <code class="code docutils literal notranslate"><span class="pre">False</span></code> to disable the main clock.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.set_in_out_interface_clk_rate">
+<span class="sig-name descname"><span class="pre">set_in_out_interface_clk_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.set_in_out_interface_clk_rate" title="Link to this definition"></a></dt>
+<dd><p>Set the main clock (IO interface clock). Default is 25Mhz. Maximum 25Mhz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>clock</strong> (<em>int</em>) – clock in Hz.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.set_jtag_clk_rate">
+<span class="sig-name descname"><span class="pre">set_jtag_clk_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.set_jtag_clk_rate" title="Link to this definition"></a></dt>
+<dd><p>Set the JTAG clock rate in Hz. Internal debug only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>frequency</strong> (<em>int</em>) – JTAG clock in Hz.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.set_slow_clk">
+<span class="sig-name descname"><span class="pre">set_slow_clk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.set_slow_clk" title="Link to this definition"></a></dt>
+<dd><p>Enable/disable the external slow clock. Default disabled.
+The slow clock can used with the Readout block, CNN layer leakage block and DVS filter block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>onOff</strong> (<em>bool</em>) – <code class="code docutils literal notranslate"><span class="pre">True</span></code> to enable the slow clock, <code class="code docutils literal notranslate"><span class="pre">False</span></code> to disable it.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.set_slow_clk_rate">
+<span class="sig-name descname"><span class="pre">set_slow_clk_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.set_slow_clk_rate" title="Link to this definition"></a></dt>
+<dd><p>Set the external slow clock rate in Hz. Default 1000Hz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>frequency</strong> (<em>int</em>) – slow clock rate in Hz.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.set_spi_clk_rate">
+<span class="sig-name descname"><span class="pre">set_spi_clk_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.set_spi_clk_rate" title="Link to this definition"></a></dt>
+<dd><p>Set CPI clock rate in Hz, which can not exceeds 1/16 of the main clock. Default 1.5625Mhz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>freq</strong> (<em>int</em>) – clock rate in Hz.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.UnifirmModule.write_config">
+<span class="sig-name descname"><span class="pre">write_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.speck2eTestBoard.UnifirmModule" title="samna.speck2eTestBoard.UnifirmModule"><span class="pre">samna.speck2eTestBoard.UnifirmModule</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.UnifirmModule.write_config" title="Link to this definition"></a></dt>
+<dd><p>Write raw configuration for IO module, internal debug only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> (<em>int</em>) – the IO module register address</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – value to be written</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../speck2e/event/index.html" class="btn btn-neutral float-left" title="samna.speck2e.event" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="encoder/index.html" class="btn btn-neutral float-right" title="samna.speck2eTestBoard.encoder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

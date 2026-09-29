@@ -1,0 +1,259 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XyloAudio 3 Power Measurements &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="XyloAudio 3 Direct Output Mode" href="xylo_audio_3_directoutput_mode.html" />
+    <link rel="prev" title="XyloAudio 3 Recording Mode" href="xylo_audio_3_recording_mode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Development Kits</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#connecting-to-a-device">Connecting to a Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#common-methods-of-development-kits">Common Methods of Development Kits</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supported-development-kits">Supported Development Kits</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../speckSeries/summary.html">Speck series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapSeSeries/index.html">Dynap-SE series</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Xylo Series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#development-kits">Development Kits</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Development Kits</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Xylo Series</a></li>
+          <li class="breadcrumb-item"><a href="index.html">XyloAudio 3 Boards</a></li>
+      <li class="breadcrumb-item active">XyloAudio 3 Power Measurements</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/devkits/xyloSeries/xyloAudio3/xylo_audio_3_power_measurement.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="xyloaudio-3-power-measurements">
+<h1>XyloAudio 3 Power Measurements<a class="headerlink" href="xylo_audio_3_power_measurement.html#xyloaudio-3-power-measurements" title="Link to this heading"></a></h1>
+<p>The XyloAudio 3 development kit is equipped with Analog-to-Digital Converters (ADCs) for on-board power monitoring.
+The <code class="xref py py-class docutils literal notranslate"><span class="pre">samna.boards.common.PowerMonitor</span></code> class provides an interface for both <strong>one-shot</strong> and
+<strong>continuous</strong> power measurements. In continuous mode, power consumption is sampled at a user-defined target frequency.
+Power measurement results are reported as <a class="reference internal" href="../../../reference/unifirm/modules/events/index.html#samna.unifirm.modules.events.PowerMeasurement" title="samna.unifirm.modules.events.PowerMeasurement"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.unifirm.modules.events.PowerMeasurement</span></code></a> events.</p>
+<p>Each power measurement event includes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">channel</span></code>: The power channel being measured.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: The power consumption in watts.</p></li>
+</ul>
+<p>The sampling period for the ADC is fixed at 1.080 ms, corresponding to a sample frequency of 925.9 Hz.
+To obtain the target frequency, the original signal is filtered with a moving average filter and then resampled,
+using linear interpolation if required.</p>
+<p>The available measurement channels are described in <a class="reference internal" href="../../../reference/xyloAudio3/index.html#samna.xyloAudio3.MeasurementChannels" title="samna.xyloAudio3.MeasurementChannels"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.MeasurementChannels</span></code></a>.</p>
+<p>Note that <code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.xyloAudio3.configuration.Debug.ram_access_enable</span></code> has a big influence on power consumption.
+Therefore it is advised to disable RAM access whenever it’s not necessary.</p>
+<p>Below is an example showing how to compute the average power consumption over a 3-second period.
+The following package versions are used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">samna</span>                 <span class="mf">0.39.10</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">samna</span>
+
+<span class="c1"># Configure the board with a lower clock frequency to reduce power consumption.</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">XyloAudio3TestBoardDefaultConfig</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">main_clock_frequency</span> <span class="o">=</span> <span class="mi">25_000_000</span>
+
+<span class="c1"># Open the device and connect to the power monitor.</span>
+<span class="n">board</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;XyloAudio3TestBoard&quot;</span><span class="p">,</span> <span class="n">defaultConfig</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+<span class="n">power_monitor</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">get_power_monitor</span><span class="p">()</span>
+<span class="n">sink_pm</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">sink_from</span><span class="p">(</span><span class="n">power_monitor</span><span class="o">.</span><span class="n">get_source_node</span><span class="p">())</span>
+<span class="n">stopwatch</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">get_stop_watch</span><span class="p">()</span>
+
+<span class="c1"># Start the stopwatch to add timestamps to the power measurement events.</span>
+<span class="n">stopwatch</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+<span class="c1"># Start sampling power on all channels at a target frequency of 50 Hz.</span>
+<span class="c1"># Due to discretization the real frequency can vary slightly from 50 Hz.</span>
+<span class="n">real_freq</span> <span class="o">=</span> <span class="n">power_monitor</span><span class="o">.</span><span class="n">start_auto_power_measurement</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Power measurements are streamed as PowerMeasurement events.</span>
+<span class="c1"># Calculate the number of samples to collect over the specified duration (3 seconds).</span>
+<span class="n">duration_in_s</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="n">channels</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">duration_in_s</span> <span class="o">*</span> <span class="n">real_freq</span><span class="p">)</span> <span class="o">*</span> <span class="n">channels</span>
+<span class="n">events</span> <span class="o">=</span> <span class="n">sink_pm</span><span class="o">.</span><span class="n">get_n_events</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">duration_in_s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Stop the automatic power measurement.</span>
+<span class="n">power_monitor</span><span class="o">.</span><span class="n">stop_auto_power_measurement</span><span class="p">()</span>
+
+<span class="c1"># Calculate the average power consumption for each channel.</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">sums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">samna</span><span class="o">.</span><span class="n">unifirm</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">PowerMeasurement</span><span class="p">)</span>
+    <span class="n">sums</span><span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">channel</span><span class="p">]</span> <span class="o">+=</span> <span class="n">e</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">counts</span><span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">channel</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Compute the average power consumption in milliwatts (mW).</span>
+<span class="n">avgs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="o">/</span><span class="n">count</span> <span class="o">*</span> <span class="mi">1000</span> <span class="k">for</span> <span class="nb">sum</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">counts</span><span class="p">)]</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="xylo_audio_3_recording_mode.html" class="btn btn-neutral float-left" title="XyloAudio 3 Recording Mode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="xylo_audio_3_directoutput_mode.html" class="btn btn-neutral float-right" title="XyloAudio 3 Direct Output Mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

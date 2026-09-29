@@ -1,0 +1,112 @@
+.. _jtag-srams:
+
+JTAG SRAM Access
+================
+
+The JTAG interface can be used to read/write all SRAMs of Speck2e.
+
+SRAM Write Operation
+********************
+
+An SRAM can be read/written by first sending a *SET_ADDR* command, followed by
+streaming in 24 bits to the internal ADDR register of the JTAG interface
+in the following format:
+
+ADDR_REGISTER [23:0] breakdown:
+
++----------------------+---------+
+| Part                 | Bits    |
++----------------------+---------+
+| SRAM ID              | [23:17] |
++----------------------+---------+
+| SRAM Initial Address | [16:0]  |
++----------------------+---------+
+
+SRAM ID table:
+
++------------+---------------------+
+| SRAM ID    | Block               |
++------------+---------------------+
+| 0b001_0000 | Neuron SRAM layer 0 |
++------------+---------------------+
+| 0b001_0001 | Neuron SRAM layer 1 |
++------------+---------------------+
+| 0b001_0010 | Neuron SRAM layer 2 |
++------------+---------------------+
+| 0b001_0011 | Neuron SRAM layer 3 |
++------------+---------------------+
+| 0b001_0100 | Neuron SRAM layer 4 |
++------------+---------------------+
+| 0b001_0101 | Neuron SRAM layer 5 |
++------------+---------------------+
+| 0b001_0110 | Neuron SRAM layer 6 |
++------------+---------------------+
+| 0b001_0111 | Neuron SRAM layer 7 |
++------------+---------------------+
+| 0b001_1000 | Neuron SRAM layer 8 |
++------------+---------------------+
+| 0b010_0000 | Kernel SRAM layer 0 |
++------------+---------------------+
+| 0b010_0001 | Kernel SRAM layer 1 |
++------------+---------------------+
+| 0b010_0010 | Kernel SRAM layer 2 |
++------------+---------------------+
+| 0b010_0011 | Kernel SRAM layer 3 |
++------------+---------------------+
+| 0b010_0100 | Kernel SRAM layer 4 |
++------------+---------------------+
+| 0b010_0101 | Kernel SRAM layer 5 |
++------------+---------------------+
+| 0b010_0110 | Kernel SRAM layer 6 |
++------------+---------------------+
+| 0b010_0111 | Kernel SRAM layer 7 |
++------------+---------------------+
+| 0b010_1000 | Kernel SRAM layer 8 |
++------------+---------------------+
+| 0b011_0000 | Leak SRAM Layer 0   |
++------------+---------------------+
+| 0b011_0001 | Leak SRAM layer 1   |
++------------+---------------------+
+| 0b011_0010 | Leak SRAM layer 2   |
++------------+---------------------+
+| 0b011_0011 | Leak SRAM layer 3   |
++------------+---------------------+
+| 0b011_0100 | Leak SRAM layer 4   |
++------------+---------------------+
+| 0b011_0101 | Leak SRAM layer 5   |
++------------+---------------------+
+| 0b011_0110 | Leak SRAM layer 6   |
++------------+---------------------+
+| 0b011_0111 | Leak SRAM layer 7   |
++------------+---------------------+
+| 0b011_1000 | Leak SRAM layer 8   |
++------------+---------------------+
+| 0b100_0000 | Filter SRAM         |
++------------+---------------------+
+
+
+After loading the ADDR register, a stream of consequent data elements can be
+written in, after sending the *SRAM_WRITE* command:
+
+.. code::
+
+   send_ir(SET_ADDR, 8 bits)
+   send_dr(ADDR_REGISTER, 24 bits)
+   send_ir(SRAM_WRITE, 8 bits)
+   send_dr(data[7:0], 8 bits)  # Addr
+   send_dr(data[7:0], 8 bits)  # Addr + 1
+   ...
+   send_dr(data[7:0], 8 bits)  # Addr + n
+
+
+.. _jtag-sram-read:
+
+SRAM Read Operation
+*******************
+
+.. code::
+
+   send_ir(SET_ADDR, 8 bits)
+   send_dr(ADDR_REGISTER, 24 bits)
+   send_ir(SRAM_READ, 8 bits)
+   send_dr(0b0000_0000, 8 bits)  # SRAM Data @Addr received at pin TDO

@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.ui &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="samna.unifirm" href="../unifirm/index.html" />
+    <link rel="prev" title="samna.testingModule.event" href="../testingModule/event/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="index.html#">samna.ui</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#module-samna.ui">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna</a></li>
+      <li class="breadcrumb-item active">samna.ui</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/ui/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-ui">
+<h1>samna.ui<a class="headerlink" href="index.html#samna-ui" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.ui">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.ui" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.ui.ActivityPlotConfiguration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.ui.</span></span><span class="sig-name descname"><span class="pre">ActivityPlotConfiguration</span></span><a class="headerlink" href="index.html#samna.ui.ActivityPlotConfiguration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A configuration for a plot that shows all dvs events.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.ActivityPlotConfiguration.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.ActivityPlotConfiguration" title="samna.ui.ActivityPlotConfiguration"><span class="pre">samna.ui.ActivityPlotConfiguration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.ui.ActivityPlotConfiguration.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.ActivityPlotConfiguration.image_height">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">image_height</span></span><a class="headerlink" href="index.html#samna.ui.ActivityPlotConfiguration.image_height" title="Link to this definition"></a></dt>
+<dd><p>The y span of all dvs events.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.ActivityPlotConfiguration.image_width">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">image_width</span></span><a class="headerlink" href="index.html#samna.ui.ActivityPlotConfiguration.image_width" title="Link to this definition"></a></dt>
+<dd><p>The x span of all dvs events</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.ActivityPlotConfiguration.layout">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layout</span></span><a class="headerlink" href="index.html#samna.ui.ActivityPlotConfiguration.layout" title="Link to this definition"></a></dt>
+<dd><p>top left x, top left y, bottom right x, bottom right y. the input values should be between 0 and 1. default 0,0,1,1 which means this plot spreads over whole area of current window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The proportion value array of this plot in current window work area</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.ActivityPlotConfiguration.title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="index.html#samna.ui.ActivityPlotConfiguration.title" title="Link to this definition"></a></dt>
+<dd><p>Plot title.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.ActivityPlotConfiguration.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.ActivityPlotConfiguration" title="samna.ui.ActivityPlotConfiguration"><span class="pre">samna.ui.ActivityPlotConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.ui.ActivityPlotConfiguration.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.ui.DvsEvent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.ui.</span></span><span class="sig-name descname"><span class="pre">DvsEvent</span></span><a class="headerlink" href="index.html#samna.ui.DvsEvent" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A general DVS event that can be be displayed by the Samna Visualizer.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.DvsEvent.channel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channel</span></span><a class="headerlink" href="index.html#samna.ui.DvsEvent.channel" title="Link to this definition"></a></dt>
+<dd><p>The channel of events, 0 is green and 1 is red.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.DvsEvent.col">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">col</span></span><a class="headerlink" href="index.html#samna.ui.DvsEvent.col" title="Link to this definition"></a></dt>
+<dd><p>A uint64_t value represents the X coordinate</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.DvsEvent.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><span class="pre">samna.ui.DvsEvent</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.ui.DvsEvent.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.DvsEvent.id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="index.html#samna.ui.DvsEvent.id" title="Link to this definition"></a></dt>
+<dd><p>Reserved.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.DvsEvent.layer">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer</span></span><a class="headerlink" href="index.html#samna.ui.DvsEvent.layer" title="Link to this definition"></a></dt>
+<dd><p>Reserved.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.DvsEvent.row">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">row</span></span><a class="headerlink" href="index.html#samna.ui.DvsEvent.row" title="Link to this definition"></a></dt>
+<dd><p>A uint64_t value represents the Y coordinate</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.DvsEvent.timestamp">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timestamp</span></span><a class="headerlink" href="index.html#samna.ui.DvsEvent.timestamp" title="Link to this definition"></a></dt>
+<dd><p>The timestamp of this event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.DvsEvent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><span class="pre">samna.ui.DvsEvent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.ui.DvsEvent.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.ui.FramePlotConfiguration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.ui.</span></span><span class="sig-name descname"><span class="pre">FramePlotConfiguration</span></span><a class="headerlink" href="index.html#samna.ui.FramePlotConfiguration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A configuration for a plot that shows a frame.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.FramePlotConfiguration.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.FramePlotConfiguration" title="samna.ui.FramePlotConfiguration"><span class="pre">samna.ui.FramePlotConfiguration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.ui.FramePlotConfiguration.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.FramePlotConfiguration.layout">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layout</span></span><a class="headerlink" href="index.html#samna.ui.FramePlotConfiguration.layout" title="Link to this definition"></a></dt>
+<dd><p>top left x, top left y, bottom right x, bottom right y. the input values should be between 0 and 1. default 0,0,1,1 which means this plot spreads over whole area of current window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The proportion value array of this plot in current window work area</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.FramePlotConfiguration.title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="index.html#samna.ui.FramePlotConfiguration.title" title="Link to this definition"></a></dt>
+<dd><p>Plot title.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.FramePlotConfiguration.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.FramePlotConfiguration" title="samna.ui.FramePlotConfiguration"><span class="pre">samna.ui.FramePlotConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.ui.FramePlotConfiguration.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.ui.Measurement">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.ui.</span></span><span class="sig-name descname"><span class="pre">Measurement</span></span><a class="headerlink" href="index.html#samna.ui.Measurement" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that contains a measurement</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.Measurement.channel">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channel</span></span><a class="headerlink" href="index.html#samna.ui.Measurement.channel" title="Link to this definition"></a></dt>
+<dd><p>Channel of this measurement belongs to.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.Measurement.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.Measurement" title="samna.ui.Measurement"><span class="pre">samna.ui.Measurement</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.ui.Measurement.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.Measurement.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.Measurement" title="samna.ui.Measurement"><span class="pre">samna.ui.Measurement</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.ui.Measurement.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.Measurement.value">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="index.html#samna.ui.Measurement.value" title="Link to this definition"></a></dt>
+<dd><p>Value of this measurement.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.ui.</span></span><span class="sig-name descname"><span class="pre">PowerMeasurementPlotConfiguration</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A line plot dedicated to display the power measurement changes over time.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.channel_count">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channel_count</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.channel_count" title="Link to this definition"></a></dt>
+<dd><p>Count of channels to show</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.default_y_max">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_y_max</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.default_y_max" title="Link to this definition"></a></dt>
+<dd><p>Max y in y axis when all values is zero, default 1.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.PowerMeasurementPlotConfiguration" title="samna.ui.PowerMeasurementPlotConfiguration"><span class="pre">samna.ui.PowerMeasurementPlotConfiguration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.label_interval">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label_interval</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.label_interval" title="Link to this definition"></a></dt>
+<dd><p>0, 2.5, 5.0, 7.5 …</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The span interval that we show labels in x axis. default 2.5 which means labels are going to show at x distances from origin</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.label_unit_name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label_unit_name</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.label_unit_name" title="Link to this definition"></a></dt>
+<dd><p>The label unit name. default “s” which is part of the label, like “0s”, “2.5s”, “5.0s”, “7.5s” …</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.layout">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layout</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.layout" title="Link to this definition"></a></dt>
+<dd><p>top left x, top left y, bottom right x, bottom right y. the input values should be between 0 and 1. default 0,0,1,1 which means this plot spreads over whole area of current window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The proportion value array of this plot in current window work area</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.line_names">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">line_names</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.line_names" title="Link to this definition"></a></dt>
+<dd><p>A string array which is names of each line.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.max_y_rate">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_y_rate</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.max_y_rate" title="Link to this definition"></a></dt>
+<dd><p>The rate that max y value in y axis keeps than current value peek. usually we set this bigger than 1, default 1 which means max y in y axis is equal to the max y value of all points to show.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.plot_title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plot_title</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.plot_title" title="Link to this definition"></a></dt>
+<dd><p>Title of plot showing above lines, default empty.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.show_point_circle">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">show_point_circle</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.show_point_circle" title="Link to this definition"></a></dt>
+<dd><p>Set if show a solid circle at each point, default false.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.show_x_span">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">show_x_span</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.show_x_span" title="Link to this definition"></a></dt>
+<dd><p>X coordinate span to show in the line at the same time, default 10 which means to show all points with x value between the newest X and the newest X substract 10.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.title" title="Link to this definition"></a></dt>
+<dd><p>Plot title.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.PowerMeasurementPlotConfiguration" title="samna.ui.PowerMeasurementPlotConfiguration"><span class="pre">samna.ui.PowerMeasurementPlotConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.x_label_name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x_label_name</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.x_label_name" title="Link to this definition"></a></dt>
+<dd><p>X axis label to illustrate x axis, default empty.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.PowerMeasurementPlotConfiguration.y_label_name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y_label_name</span></span><a class="headerlink" href="index.html#samna.ui.PowerMeasurementPlotConfiguration.y_label_name" title="Link to this definition"></a></dt>
+<dd><p>Y axis label to illustrate y axis, default empty.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.ui.Readout">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.ui.</span></span><span class="sig-name descname"><span class="pre">Readout</span></span><a class="headerlink" href="index.html#samna.ui.Readout" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event that represent a readout result of a CNN network.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.Readout.feature">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feature</span></span><a class="headerlink" href="index.html#samna.ui.Readout.feature" title="Link to this definition"></a></dt>
+<dd><p>The feature</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.Readout.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.Readout" title="samna.ui.Readout"><span class="pre">samna.ui.Readout</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.ui.Readout.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.Readout.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.Readout" title="samna.ui.Readout"><span class="pre">samna.ui.Readout</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.ui.Readout.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.ui.ReadoutPlotConfiguration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.ui.</span></span><span class="sig-name descname"><span class="pre">ReadoutPlotConfiguration</span></span><a class="headerlink" href="index.html#samna.ui.ReadoutPlotConfiguration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A configuration for a plot that show an image.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.ReadoutPlotConfiguration.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.ReadoutPlotConfiguration" title="samna.ui.ReadoutPlotConfiguration"><span class="pre">samna.ui.ReadoutPlotConfiguration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.ui.ReadoutPlotConfiguration.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.ReadoutPlotConfiguration.images">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">images</span></span><a class="headerlink" href="index.html#samna.ui.ReadoutPlotConfiguration.images" title="Link to this definition"></a></dt>
+<dd><p>The image path array which indicates all features.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.ReadoutPlotConfiguration.layout">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layout</span></span><a class="headerlink" href="index.html#samna.ui.ReadoutPlotConfiguration.layout" title="Link to this definition"></a></dt>
+<dd><p>top left x, top left y, bottom right x, bottom right y. the input values should be between 0 and 1. default 0,0,1,1 which means this plot spreads over whole area of current window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The proportion value array of this plot in current window work area</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.ReadoutPlotConfiguration.title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="index.html#samna.ui.ReadoutPlotConfiguration.title" title="Link to this definition"></a></dt>
+<dd><p>Plot title.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.ReadoutPlotConfiguration.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.ReadoutPlotConfiguration" title="samna.ui.ReadoutPlotConfiguration"><span class="pre">samna.ui.ReadoutPlotConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.ui.ReadoutPlotConfiguration.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.ui.SpikeCount">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.ui.</span></span><span class="sig-name descname"><span class="pre">SpikeCount</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCount" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>An event encompasses the count of a specific feature of a series of Spikes.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCount.count">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCount.count" title="Link to this definition"></a></dt>
+<dd><p>The count of this feature.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCount.feature">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feature</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCount.feature" title="Link to this definition"></a></dt>
+<dd><p>The feature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.SpikeCount.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.SpikeCount" title="samna.ui.SpikeCount"><span class="pre">samna.ui.SpikeCount</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.ui.SpikeCount.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.SpikeCount.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.SpikeCount" title="samna.ui.SpikeCount"><span class="pre">samna.ui.SpikeCount</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.ui.SpikeCount.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.ui.</span></span><span class="sig-name descname"><span class="pre">SpikeCountPlotConfiguration</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>A line plot dedicated to display the spike count changes over time.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.channel_count">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">channel_count</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.channel_count" title="Link to this definition"></a></dt>
+<dd><p>Count of channels to show</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.default_y_max">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_y_max</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.default_y_max" title="Link to this definition"></a></dt>
+<dd><p>Max y in y axis when all values is zero, default 1.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.SpikeCountPlotConfiguration" title="samna.ui.SpikeCountPlotConfiguration"><span class="pre">samna.ui.SpikeCountPlotConfiguration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.label_interval">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label_interval</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.label_interval" title="Link to this definition"></a></dt>
+<dd><p>0, 2.5, 5.0, 7.5 …</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The span interval that we show labels in x axis. default 2.5 which means labels are going to show at x distances from origin</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.label_unit_name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label_unit_name</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.label_unit_name" title="Link to this definition"></a></dt>
+<dd><p>The label unit name. default “s” which is part of the label, like “0s”, “2.5s”, “5.0s”, “7.5s” …</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.layout">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layout</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.layout" title="Link to this definition"></a></dt>
+<dd><p>top left x, top left y, bottom right x, bottom right y. the input values should be between 0 and 1. default 0,0,1,1 which means this plot spreads over whole area of current window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The proportion value array of this plot in current window work area</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.line_names">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">line_names</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.line_names" title="Link to this definition"></a></dt>
+<dd><p>A string array which is names of each line.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.max_y_rate">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_y_rate</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.max_y_rate" title="Link to this definition"></a></dt>
+<dd><p>The rate that max y value in y axis keeps than current value peek. usually we set this bigger than 1, default 1 which means max y in y axis is equal to the max y value of all points to show.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.plot_title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plot_title</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.plot_title" title="Link to this definition"></a></dt>
+<dd><p>Title of plot showing above lines, default empty.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.show_point_circle">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">show_point_circle</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.show_point_circle" title="Link to this definition"></a></dt>
+<dd><p>Set if show a solid circle at each point, default false.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.show_x_span">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">show_x_span</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.show_x_span" title="Link to this definition"></a></dt>
+<dd><p>X coordinate span to show in the line at the same time, default 10 which means to show all points with x value between the newest X and the newest X substract 10.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.title">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.title" title="Link to this definition"></a></dt>
+<dd><p>Plot title.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.ui.SpikeCountPlotConfiguration" title="samna.ui.SpikeCountPlotConfiguration"><span class="pre">samna.ui.SpikeCountPlotConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.x_label_name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">x_label_name</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.x_label_name" title="Link to this definition"></a></dt>
+<dd><p>X axis label to illustrate x axis, default empty.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.ui.SpikeCountPlotConfiguration.y_label_name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">y_label_name</span></span><a class="headerlink" href="index.html#samna.ui.SpikeCountPlotConfiguration.y_label_name" title="Link to this definition"></a></dt>
+<dd><p>Y axis label to illustrate y axis, default empty.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../testingModule/event/index.html" class="btn btn-neutral float-left" title="samna.testingModule.event" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../unifirm/index.html" class="btn btn-neutral float-right" title="samna.unifirm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

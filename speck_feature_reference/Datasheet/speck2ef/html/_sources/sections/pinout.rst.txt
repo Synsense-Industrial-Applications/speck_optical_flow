@@ -1,0 +1,106 @@
+.. _pinout-main:
+
+Pinout Overview
+===============
+
+.. _pinout-diagram:
+
+Pinout diagram
+**************
+
+.. only:: html
+
+    .. figure:: ../figures/Speck2e_bonding_diagram.svg
+        :scale: 100%
+        :class: img-limit-width
+
+        Speck2e Pad Ring and Bonding diagram
+
+.. only:: pdf
+
+    .. figure:: ../figures/Speck2e_bonding_diagram.pdf
+        :scale: 150%
+
+        Speck2e Pad Ring and Bonding diagram
+
+.. _pin-locations:
+
+Pin Locations
+*************
+
+
+.. csv-table:: Speck2e (SYNS91103) and v2e test (SYNS91104) Left Pin Locations
+   :class: table-small
+   :file: ../tables/pin_locations_left.csv
+   :widths: 7, 7, 4, 10, 10, 8, 3, 3, 3, 3
+
+.. csv-table:: Speck2e (SYNS91103) and v2e test (SYNS91104) Bottom Pin Locations
+   :class: table-small
+   :file: ../tables/pin_locations_bottom.csv
+   :widths: 7, 7, 4, 10, 10, 8, 3, 3, 3, 3
+
+.. csv-table:: Speck2e (SYNS91103) and v2e test (SYNS91104) Right Pin Locations
+   :class: table-small
+   :file: ../tables/pin_locations_right.csv
+   :widths: 7, 7, 4, 10, 10, 8, 3, 3, 3, 3
+
+.. csv-table:: Speck2e (SYNS91103) and v2e test (SYNS91104) Top Pin Locations
+   :class: table-small
+   :file: ../tables/pin_locations_top.csv
+   :widths: 7, 7, 4, 10, 10, 8, 3, 3, 3, 3
+
+Pin description
+***************
+
+.. csv-table:: Speck2e Pin Description
+   :class: table-small
+   :file: ../tables/pinout_description.csv
+
+.. _gpio-configuration:
+
+GPIO Pin Configuration
+**********************
+
+The GPIO Pins can be configured via register bits :ref:`IOSEL[6:3]<rbits-IOSEL>` as summarized in the following tables:
+
++--------+----------------+----------------+----------------+----------------+
+|        | IOSEL[6:5]=b00 | IOSEL[6:5]=b01 | IOSEL[6:5]=b10 | IOSEL[6:5]=b11 |
++--------+----------------+----------------+----------------+----------------+
+| GPIO7  | SPI_M_MISO     | S2P_DATA       |                | SPI_S_MISO     |
++--------+----------------+----------------+----------------+----------------+
+| GPIO8  | SPI_M_MOSI     | S2P_CREADY     | P2S_OUT1       | SPI_S_MOSI     |
++--------+----------------+----------------+----------------+----------------+
+| GPIO9  | SPI_M_CLK      | S2P_DREADY     | P2S_DREADY     | SPI_S_CLK      |
++--------+----------------+----------------+----------------+----------------+
+| GPIO10 | SPI_M_SS_N     |                |                | SPI_S_SS_N     |
++--------+----------------+----------------+----------------+----------------+
+
++--------+----------------+----------------+----------------+----------------+
+|        | IOSEL[4:3]=b00 | IOSEL[4:3]=b01 | IOSEL[4:3]=b10 | IOSEL[4:3]=b11 |
++--------+----------------+----------------+----------------+----------------+
+| GPIO11 | SPI_S_MISO     | S2P_CREADY     | P2S_OUT1       | READOUT1       |
++--------+----------------+----------------+----------------+----------------+
+| GPIO12 | SPI_S_MOSI     | S2P_DATA       | P2S_DREADY     | READOUT2       |
++--------+----------------+----------------+----------------+----------------+
+| GPIO13 | SPI_S_CLK      | S2P_DREADY     |                | READOUT3       |
++--------+----------------+----------------+----------------+----------------+
+| GPIO14 | SPI_S_SS_N     |                |                | READOUT4       |
++--------+----------------+----------------+----------------+----------------+
+
+.. note:: 
+    1) GPIO7 to GPIO10 pins are used for SPI Master pins always during the power-up. After download is finished, these pins are configured via the register setting in IOSEL[6:5] bits.
+    2) GPIO11 to GPIO14 pins state during power-up is defined by ModeSel pin state. If it is connected to “high”, these pins are powered up as READOUT signals otherwise they can be used for SPI slave pins
+    3) The states of GPIO11 to GPIO14 after download from external memory is complete is defined by IOSEL[4:3] register setting"
+
+Moreover, some ports can be disabled using bits :ref:`IOSEL[2:0]<rbits-IOSEL>` when not used (e.g. not bonded out in a module):
+
++----------+--------------------------------------------------------------------------------------------------------------------+
+| Bit      | Description                                                                                                        |
++----------+--------------------------------------------------------------------------------------------------------------------+
+| IOSEL[0] | Disables READOUT pins and sets them to high Z (IO20_READOUT1_O, IO21_READOUT2_O, IO22_READOUT3_O, IO23_READOUT4_O) |
++----------+--------------------------------------------------------------------------------------------------------------------+
+| IOSEL[1] | Disables P2S pins and sets them to high Z (IO18_P2S_OUT1_O, IO19_P2S_DREADY_O)                                     |
++----------+--------------------------------------------------------------------------------------------------------------------+
+| IOSEL[2] | Disables S2P pins and sets them to high Z (IO17_S2P_CREADY_O)                                                      |
++----------+--------------------------------------------------------------------------------------------------------------------+
+

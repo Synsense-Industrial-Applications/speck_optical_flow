@@ -1,0 +1,75 @@
+.. _memory-access-bist:
+
+Direct Memory Access Mode (BIST)
+================================
+
+In Speck2e, all internal SRAMs can be directly read/written only through
+the SPI and JTAG interfaces. Both these interfaces communicate to the memory via 
+the physical BIST SRAM interfaces.
+
+.. _bist-addressing:
+
+BIST Address mapping
+********************
+
+Since the BIST interface in Speck2e has an 8-bit bus width, while some internal SRAMs
+require 16-bit data elements, the BIST address scheme for the various SRAMs is defined
+to enable writing/reading a 16-bit data element in two 8-bit write/read operations.
+
+Kernel Memories
+---------------
+
+In all kernel memories (8-bit data elements), the internal addressing is **equivalent** to the BIST addressing.
+
++------------+-----------------------------------+-------------------+----------------------+
+| Layer Core | Kernel memory entries (addr bits) | BIST address bits | Memory size in bytes |
++------------+-----------------------------------+-------------------+----------------------+
+| 0-2        | 16 ki (14 bits)                   | 14 bits           | 16 kB                |
++------------+-----------------------------------+-------------------+----------------------+
+| 3-4        | 32 ki (15 bits)                   | 15 bits           | 32 kB                |
++------------+-----------------------------------+-------------------+----------------------+
+| 5-6        | 64 ki (16 bits)                   | 16 bits           | 64 kB                |
++------------+-----------------------------------+-------------------+----------------------+
+| 7-8        | 16 ki (14 bits)                   | 14 bits           | 16 kB                |
++------------+-----------------------------------+-------------------+----------------------+
+
+Leak/Neuron/Filter Memories
+---------------------------
+
+In all Leak/Neuron/Filter memories, each internal memory element can be accessed by 2 BIST R/W operations.
+
+In these memories, the BIST address is equivalent to the internal address << 1,
+with the LSB indicating bits [16:8] ('1') or [7:0] ('0') of the memory element:
+
+Neuron:
+
++------------+-----------------------------------+-------------------+----------------------+
+| Layer Core | Neuron memory entries (addr bits) | BIST address bits | Memory size in bytes |
++------------+-----------------------------------+-------------------+----------------------+
+| 0-2        | 64 ki (16 bits)                   | 17 bits           | 128 kB               |
++------------+-----------------------------------+-------------------+----------------------+
+| 3-4        | 32 ki (15 bits)                   | 16 bits           | 64 kB                |
++------------+-----------------------------------+-------------------+----------------------+
+| 5-6        | 16 ki (14 bits)                   | 15 bits           | 32 kB                |
++------------+-----------------------------------+-------------------+----------------------+
+| 7-8        | 16 ki (14 bits)                   | 15 bits           | 32 kB                |
++------------+-----------------------------------+-------------------+----------------------+
+
+Leak:
+
++------------+---------------------------------+-------------------+----------------------+
+| Layer Core | Leak memory entries (addr bits) | BIST address bits | Memory size in bytes |
++------------+---------------------------------+-------------------+----------------------+
+| 0-8        | 1ki (10 bits)                   | 11 bits           | 2 kB                 |
++------------+---------------------------------+-------------------+----------------------+
+
+DVS Filter:
+
++------------+---------------------+-------------------+----------------------+
+| SRAM       | Entries (addr bits) | BIST address bits | Memory size in bytes |
++------------+---------------------+-------------------+----------------------+
+| DVS Filter | 16 ki (14 bits)     | 15 bits           | 32 kB                |
++------------+---------------------+-------------------+----------------------+
+
+
+

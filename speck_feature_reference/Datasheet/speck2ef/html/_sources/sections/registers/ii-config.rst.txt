@@ -1,0 +1,308 @@
+.. _ii-config-signals:
+
+Input Interface Configuration Signal Description
+================================================
+
+.. csv-table:: Input Interface Configuration Signal Overview
+
+    "Register Bits",Register(s),"Signal Name","Short Description"
+    :ref:`PR<rbits-PR>`,:ref:`ININT0[7]<reg-ININT0>`,PRst,"Main Logic PRst"
+    :ref:`SR<rbits-SR>`,:ref:`ININT0[6]<reg-ININT0>`,SRst,"Main Logic SRst"
+    :ref:`PRDVS<rbits-PRDVS>`,:ref:`ININT0[5]<reg-ININT0>`,PRst_DVS,"Internal DVS PRst"
+    :ref:`SRDVS<rbits-SRDVS>`,:ref:`ININT0[4]<reg-ININT0>`,SRst_DVS,"Internal DVS SRst"
+    :ref:`CGUCE<rbits-CGUCE>`,:ref:`ININT0[2]<reg-ININT0>`,cgu_clk_enable,"Force spi master and slave clk enable"
+    :ref:`CGUIS<rbits-CGUIS>`,:ref:`ININT0[1]<reg-ININT0>`,cgu_ii_sel,"Select origin of Reset signals: '0': registers, '1': s2p interface"
+    :ref:`CGUOVE<rbits-CGUOVE>`,:ref:`ININT0[0]<reg-ININT0>`,cgu_overwrite_ext_mem_ok,"Enable chip config from SPI slave after external Flash loaded. '0' (default) = disabled"
+    :ref:`BLEN[23:0]<rbits-BLEN>`,":ref:`ININT1[7:0]<reg-ININT1>`, :ref:`2[7:0]<reg-ININT2>`, :ref:`3[7:0]<reg-ININT3>`",burst_len,"SPI Slave input burst length"
+    :ref:`BADDR[23:0]<rbits-BADDR>`,":ref:`ININT4[7:0]<reg-ININT4>`, :ref:`5[7:0]<reg-ININT5>`, :ref:`6[7:0]<reg-ININT6>`",burst_addr,"SPI Slave input burst starting target address"
+    :ref:`IOSEL[6:0]<rbits-IOSEL>`,:ref:`ININT7[6:0]<reg-ININT7>`,iosel,"I/O ring configuration selector."
+    :ref:`AERCM<rbits-AERCM>`,:ref:`ININT8[6]<reg-ININT8>`,aerc_mon_en,"Input Interface Monitor enable"
+    :ref:`P2SM<rbits-P2SM>`,:ref:`ININT8[5]<reg-ININT8>`,p2s_mon_en,"General monitor bus enable via P2S output interface."
+    :ref:`JTGM<rbits-JTGM>`,:ref:`ININT8[4]<reg-ININT8>`,jtag_mon_en,"Enable forwarding of monitor bus to JTAG interface."
+    :ref:`P2SSEL<rbits-P2SSEL>`,:ref:`ININT8[2]<reg-ININT8>`,p2s_input_sel,"Output P2S input selector ('0': monitor bus, '1': readout layer output)"
+    :ref:`P2S2CH<rbits-P2S2CH>`,:ref:`ININT8[1]<reg-ININT8>`,p2s_two_ch_sel,"Output P2S dual channel: '0': disabled, '1': enabled."
+    :ref:`P2SDL<rbits-P2SDL>`,:ref:`ININT8[0]<reg-ININT8>`,p2s_data_len,"Output P2S data word length."
+    :ref:`SPIBRG<rbits-SPIBRG>`,:ref:`ININT9[6]<reg-ININT9>`,spi_bridge_mode,"SPI bridge mode enable bit."
+    :ref:`IOPE[5:0]<rbits-IOPE>`,:ref:`ININT9[5:0]<reg-ININT9>`,iope,"I/O ring pull-up/pull-down enable."
+    :ref:`SLWCLK[7:0]<rbits-SLWCLK>`,:ref:`ININT10[7:0]<reg-ININT10>`,slow_clock,"Slow Clock configuration."
+    :ref:`RM<rbits-RM>`,:ref:`ININT11[0]<reg-ININT11>`,rgb_mode,"RGB camera input decoder forwarded to internal bus."
+    :ref:`RIFEN<rbits-RIFEN>`,:ref:`ININT11[1]<reg-ININT11>`,rgb_if_en,"RGB camera input decoder enable."
+    :ref:`RAWT<rbits-RAWT>`,:ref:`ININT11[2]<reg-ININT11>`,rgb_awt,"RGB decoder SRAM configuration."
+    :ref:`RFSEL<rbits-RFSEL>`,:ref:`ININT11[3]<reg-ININT11>`,rgb_form_sel,"RGB decoder format selection: '0': RGB565, '1': YUYV."
+    :ref:`RDST[3:0]<rbits-RDST>`,:ref:`ININT11[7:4]<reg-ININT11>`,rgb_dest,"RGB decoder target layer address."
+    :ref:`RCHSEL[1:0]<rbits-RCHSEL>`,:ref:`ININT12[1:0]<reg-ININT12>`,rgb_ch_sel,"RGB camera channel select signal: '0': R, '1': G, '2': B."
+    :ref:`RFRDP[3:0]<rbits-RFRDP>`,:ref:`ININT12[5:2]<reg-ININT12>`,rgb_frame_drop,"RGB number of gap frames between interframe difference."
+    :ref:`RTSEL[1:0]<rbits-RTSEL>`,:ref:`ININT12[7:6]<reg-ININT12>`,rgb_tsel,"RGB camera input decoder SRAM TSEL configuration."
+    :ref:`RINID[15:0]<rbits-RINID>`,":ref:`ININT14[7:0]<reg-ININT14>`, :ref:`ININT13[7:0]<reg-ININT13>`",rgb_ini_data,"RGB camera input initial data for LFSR."
+    :ref:`RLDG3[2:0]<rbits-RLDG3>`,:ref:`ININT15[2:0]<reg-ININT15>`,rgb_lfsr_deg3,"RGB decoder mask for 3 degree LFSR."
+    :ref:`RLDG4[3:0]<rbits-RLDG4>`,:ref:`ININT15[6:3]<reg-ININT15>`,rgb_lfsr_deg4,"RGB decoder mask for 4 degree LFSR."
+    :ref:`RMEN<rbits-RMEN>`,:ref:`ININT15[7]<reg-ININT15>`,rgb_mon_en,"RGB decoder monitor enable."
+    :ref:`RLDG6[5:0]<rbits-RLDG6>`,:ref:`ININT16[5:0]<reg-ININT16>`,rgb_lfsr_deg6,"RGB decoder mask for 6 degree LFSR."
+    :ref:`RMLSB<rbits-RMLSB>`,:ref:`ININT16[6]<reg-ININT16>`,rgb_mon_31to0,"RGB decoder 32 LSB monitor data to JTAG."
+    :ref:`RMMSB<rbits-RMMSB>`,:ref:`ININT16[7]<reg-ININT16>`,rgb_mon_63to32,"RGB decoder 32 MSB monitor data to JTAG."
+    :ref:`RLDG7[6:0]<rbits-RLDG7>`,:ref:`ININT17[6:0]<reg-ININT17>`,rgb_lfsr_deg7,"RGB decoder mask for 7 degree LFSR."
+    :ref:`RSZSL<rbits-RSZSL>`,:ref:`ININT17[7]<reg-ININT17>`,rgb_size_sel,"RGB decoder resize to '0': 64x64, '1': 128x128."
+    :ref:`RLDG8[7:0]<rbits-RLDG8>`,:ref:`ININT18[7:0]<reg-ININT18>`,rgb_lfsr_deg8,"RGB decoder mask for 8 degree LFSR."
+    :ref:`RLDG9[4:0]<rbits-RLDG9>`,:ref:`ININT19[4:0]<reg-ININT19>`,rgb_lfsr_deg9,"RGB decoder mask for 9 degree LFSR."
+    :ref:`RLDG10[9:0]<rbits-RLDG10>`,":ref:`ININT20[7:0]<reg-ININT20>`, :ref:`ININT19[7:6]<reg-ININT19>`",rgb_lfsr_deg10,"RGB decoder mask for 10 degree LFSR."
+    :ref:`RLDG11[10:0]<rbits-RLDG11>`,":ref:`ININT22[2:0]<reg-ININT22>`, :ref:`ININT21[7:0]<reg-ININT21>`",rgb_lfsr_deg11,"RGB decoder mask for 11 degree LFSR."
+    :ref:`RLDG5[4:0]<rbits-RLDG5>`,:ref:`ININT22[7:3]<reg-ININT22>`,rgb_lfsr_deg5,"RGB decoder mask for 5 degree LFSR."
+    :ref:`RLDG12[11:0]<rbits-RLDG12>`,":ref:`ININT24[3:0]<reg-ININT24>`, :ref:`ININT23[7:0]<reg-ININT23>`",rgb_lfsr_deg12,"RGB decoder mask for 12 degree LFSR."
+    :ref:`RTHR[3:0]<rbits-RTHR>`,:ref:`ININT24[7:4]<reg-ININT24>`,rgb_spk_thr,"RGB decoder threshold for event output."
+    :ref:`RLDG13[12:0]<rbits-RLDG13>`,":ref:`ININT26[4:0]<reg-ININT26>`, :ref:`ININT25[7:0]<reg-ININT25>`",rgb_lfsr_deg13,"RGB decoder mask for 13 degree LFSR."
+    :ref:`RLDG14[13:0]<rbits-RLDG14>`,":ref:`ININT28[5:0]<reg-ININT28>`, :ref:`ININT27[7:0]<reg-ININT27>`",rgb_lfsr_deg14,"RGB decoder mask for 14 degree LFSR."
+    :ref:`RCKDLY[1:0]<rbits-RCKDLY>`,:ref:`ININT28[7:6]<reg-ININT28>`,rgb_clk_dly,"RGB decoder cam_pclock delay in increments of 1.2ns."
+    :ref:`RLDG15[14:0]<rbits-RLDG15>`,":ref:`ININT30[6:0]<reg-ININT30>`, :ref:`ININT29[7:0]<reg-ININT29>`",rgb_lfsr_deg15,"RGB decoder mask for 15 degree LFSR."
+    :ref:`RLDG16[15:0]<rbits-RLDG16>`,":ref:`ININT32[7:0]<reg-ININT32>`, :ref:`ININT31[7:0]<reg-ININT31>`",rgb_lfsr_deg16,"RGB decoder mask for 16 degree LFSR."
+    :ref:`RNMAX[7:0]<rbits-RNMAX>`,:ref:`ININT33[7:0]<reg-ININT33>`,rgb_nom_max,"RGB decoder max value for normalization."
+
+Detailed Signal Description
+***************************
+
+
+.. _rbits-PR:
+
+PR (PRst)
+---------
+
+Location: :ref:`ININT0[7]<reg-ININT0>`
+
+Main Logic PRst. This signal is forwarded to the internal logic only when :ref:`CGUIS<rbits-CGUIS>` = '0'.
+
+
+.. _rbits-SR:
+
+SR (SRst)
+---------
+
+Location: :ref:`ININT0[6]<reg-ININT0>`
+
+Main Logic SRst. This signal is forwarded to the internal logic only when :ref:`CGUIS<rbits-CGUIS>` = '0'.
+
+
+.. _rbits-PRDVS:
+
+PRDVS (PRst_DVS)
+----------------
+
+Location: :ref:`ININT0[5]<reg-ININT0>`
+
+Internal DVS PRst. This signal is forwarded to the internal logic only when :ref:`CGUIS<rbits-CGUIS>` = '0'.
+
+
+.. _rbits-SRDVS:
+
+SRDVS (SRst_DVS)
+----------------
+
+Location: :ref:`ININT0[4]<reg-ININT0>`
+
+Internal DVS SRst. This signal is forwarded to the internal logic only when :ref:`CGUIS<rbits-CGUIS>` = '0'.
+
+
+.. _rbits-CGUCE:
+
+CGUCE (cgu_clk_enable)
+----------------------
+
+Location: :ref:`ININT0[2]<reg-ININT0>`
+
+Force spi master and slave clk enable.
+
+
+.. _rbits-CGUIS:
+
+CGUIS (cgu_ii_sel)
+------------------
+
+Location: :ref:`ININT0[1]<reg-ININT0>`
+
+Select origin of Reset signals (PRst, SRst, PRst_DVS, SRst_DVS):
+
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Setting | Description                                                                                                                                                             |
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| '0'     | Internal reset signals are set by the corresponding register settings (:ref:`PR<rbits-PR>`, :ref:`SR<rbits-SR>`, :ref:`PRDVS<rbits-PRDVS>`, :ref:`SRDVS<rbits-SRDVS>`). |
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| '1'     | Internal reset signals are set by the :ref:`Input Serial Interface<input-serial-interface-encoding>` (see :ref:`ISI Reset Signals<isi-resets>`).                        |
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+.. _rbits-CGUOVE:
+
+CGUOVE (cgu_overwrite_ext_mem_ok)
+---------------------------------
+
+Location: :ref:`ININT0[0]<reg-ININT0>`
+
+Enable chip config from SPI slave after external Flash loaded. '0' (default) = disabled.
+
+
+.. _rbits-BLEN:
+
+BLEN[23:0] (burst_len)
+----------------------
+
+Location: :ref:`ININT1[7:0]<reg-ININT1>`, :ref:`2[7:0]<reg-ININT2>`, :ref:`3[7:0]<reg-ININT3>`
+
+SPI Slave input burst length.
+
+
+.. _rbits-BADDR:
+
+BADDR[23:0] (burst_addr)
+------------------------
+
+Location: :ref:`ININT4[7:0]<reg-ININT4>`, :ref:`5[7:0]<reg-ININT5>`, :ref:`6[7:0]<reg-ININT6>`
+
+SPI Slave input burst starting target address.
+
+
+.. _rbits-IOSEL:
+
+IOSEL[6:0] (iosel)
+------------------
+
+Location: :ref:`ININT7[6:0]<reg-ININT7>`
+
+I/O ring configuration selector. See section :ref:`gpio-configuration` for the configuration details.
+
+.. _rbits-P2SSEL:
+
+P2SSEL (p2s_input_sel)
+----------------------
+
+Location: :ref:`ININT8[2]<reg-ININT8>`
+
+Output P2S input selector ('0': monitor bus, '1': readout layer output).
+
+.. _rbits-P2S2CH:
+
+P2S2CH (p2s_two_ch_sel)
+-----------------------
+
+Location: :ref:`ININT8[1]<reg-ININT8>`
+
+Output P2S dual channel: '0': disabled, '1': enabled.
+
+.. _rbits-P2SDL:
+
+P2SDL (p2s_data_len)
+--------------------
+
+Location: :ref:`ININT8[0]<reg-ININT8>`
+
+Output P2S data word length selector. When '0': a full data word of 26 bits is clocked at the `OUT1` (and `OUT2`, when enabled).
+When '1': only the LSB 17 bits are sent to the output (for faster throughput, when the MSBs are obvious by configuration).
+
+.. _rbits-AERCM:
+
+AERCM (aerc_mon_en)
+-------------------
+
+Location: :ref:`ININT8[6]<reg-ININT8>`
+
+Input Interface Monitor enable.
+
+.. _rbits-P2SM:
+
+P2SM (p2s_mon_en)
+-----------------
+
+Location: :ref:`ININT8[5]<reg-ININT8>`
+
+General monitor bus enable via P2S output interface..
+
+.. _rbits-JTGM:
+
+JTGM (jtag_mon_en)
+------------------
+
+Location: :ref:`ININT8[4]<reg-ININT8>`
+
+Enable forwarding of monitor bus to JTAG interface..
+
+
+.. _rbits-SPIBRG:
+
+SPIBRG (iospi_bridge_modepe)
+----------------------------
+
+Location: :ref:`ININT9[6]<reg-ININT9>`
+
+SPI Bridge mode enable bit. When enabled, the SPI Slave interface of the chip is directly connected to the
+SPI Master interface. This mode enables direct Write or Read of an SPI external Flash memory connected to the
+SPI Master interface of the chip. When enabled, the SPI Slave interface pins do not control any more the internal
+memory interfaces of the chip, i.e. SPI cannot be used any more to read/write SRAMs and registers.
+
+.. _rbits-IOPE:
+
+IOPE[5:0] (iope)
+----------------
+
+Location: :ref:`ININT9[5:0]<reg-ININT9>`
+
+I/O ring pull-down enable bits.
+The pull-down settings are summarized in the following table. When an IOPE bit is set, the pull-down resistors are enabled
+for the corresponding chip pins:
+
++----------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| IOPE bit | Pin group     | Pull-down enabled for pins                                                                                                                                                                     |
++----------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 0        | Mode sel      | IO26_MODE_SEL_I                                                                                                                                                                                |
++----------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 1        | S2P           | IO15_S2P_DREADY_I, IO16_S2P_DATA_I                                                                                                                                                             |
++----------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2        | GPIO 11-14    | GPIO12_SPI_S_MOSI_IO, GPIO13_SPI_S_CLK_IO, GPIO14_SPI_S_SS_N_IO                                                                                                                                |
++----------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 3        | GPIO 7-10     | GPIO7_SPI_M_MISO_IO, GPIO8_SPI_M_MOSI_IO, GPIO9_SPI_M_CLK_IO, GPIO10_SPI_M_SS_N_IO                                                                                                             |
++----------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 4        | Fixed inputs  | IO1_CLK_I, I02_RB_I, IO3_TCK_I, IO4_TDI_I, IO5_TMS_I                                                                                                                                           |
++----------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 5        | RGB Interface | IO40_RGB_PCLK_I, IO29_RGB_HREF_I, IO28_RGB_VSYNC_I, IO31_RGB_INT_CLK_I, IO32_RGB_D2_I, IO33_RGB_D3_I, IO34_RGB_D4_I, IO35_RGB_D5_I, IO36_RGB_D6_I, IO37_RGB_D7_I, IO38_RGB_D8_I, IO39_RGB_D9_I |
++----------+---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. note:: In the case of GPIO pins, the pull-down resistors are active only when the pin is set to *Input*.
+
+.. _rbits-SLWCLK:
+
+SLWCLK[7:0] (slow_clock)
+------------------------
+
+Location: :ref:`ININT10[7:0]<reg-ININT10>`
+
+Configuration register for the *SLOW_CLK* pin. For a description of the slow clock use and generation
+in Speck2e, see :ref:`slow-clock`.
+
++-------------+---------------------------------------------------------------------------------+
+| Bit         | Description                                                                     |
++-------------+---------------------------------------------------------------------------------+
+| SLWCLK[0]   | Forward *SLOW_CLK* to readout block                                             |
++-------------+---------------------------------------------------------------------------------+
+| SLWCLK[1]   | Forward internally generated slow clock to readout block                        |
++-------------+---------------------------------------------------------------------------------+
+| SLWCLK[2]   | Forward *SLOW_CLK* to convolutional layers' leak generator                      |
++-------------+---------------------------------------------------------------------------------+
+| SLWCLK[3]   | Forward internally generated slow clock to convolutional layers' leak generator |
++-------------+---------------------------------------------------------------------------------+
+| SLWCLK[4]   | Forward *SLOW_CLK* to DVS filter                                                |
++-------------+---------------------------------------------------------------------------------+
+| SLWCLK[5]   | Forward internally generated slow clock to DVS filter                           |
++-------------+---------------------------------------------------------------------------------+
+| SLWCLK[6:7] | Configure clk divider for internal slow clock generation                        |
++-------------+---------------------------------------------------------------------------------+
+
+Internal slow clock divider configuration (SLWCLK[6:7]):
+
++---------------+-----------------+
+| Configuration | Description     |
++---------------+-----------------+
+| 00            | 14-bit division |
++---------------+-----------------+
+| 01            | 15-bit division |
++---------------+-----------------+
+| 10            | 16-bit division |
++---------------+-----------------+
+| 11            | 17-bit division |
++---------------+-----------------+

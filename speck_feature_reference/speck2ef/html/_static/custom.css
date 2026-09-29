@@ -1,0 +1,62 @@
+.wy-nav-content {
+    max-width: 100%;
+}
+
+.rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+    background-color: #e4f4ff;
+}
+
+.rst-content table.docutils:not(.field-list) tr:first-child td {
+    font-weight: bold;
+    background:#c0e7ff;
+}
+
+.rst-content table.docutils td{
+    font-size: 100%;
+}
+
+.rst-content .line-block{
+    margin-bottom: 0px;
+}
+
+.ui.tabular.menu a.item{
+    padding: 5px;
+}
+
+.ui.tabular.menu a.item p{
+    font-size: 12px;
+}
+
+.rst-content table.table-small{
+    table-layout:fixed;
+    /* width: 100%; */
+    max-width: 1300px;
+    /* min-width: 500px; */
+}
+
+.rst-content table.table-small td p{
+    font-size: 16px;
+}
+
+.rst-content table.table-small td{
+    padding: 4px 8px;
+}
+
+.rst-content img.img-limit-width{
+    max-width: 1300px;
+}
+
+@media (max-width: 1720px) {
+  .rst-content img.img-limit-width{
+    max-width: 100%;
+  }
+}
+
+/* .highlight .c1, .mi, .o, .n, .m{
+    font-size: 16px;
+} */
+
+
+.rst-content div[class^='highlight'] pre{
+    font-size: 16px;
+}

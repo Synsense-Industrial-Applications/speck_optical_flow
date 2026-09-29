@@ -1,0 +1,205 @@
+#######
+Flasher
+#######
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+This page will tell you how to flash a board with firmware.
+
+You can find the firmware for our boards `here <https://www.dropbox.com/scl/fo/srjp39ljp4vwhokjm2j68/ACPOOrCj_gq6MTCsEoTBfKw?rlkey=ey5mfefdt3u3ybzjvxwu2qcux&e=1&st=xo8v4k88&dl=0>`_.
+
+You can see all connected boards using command:  `lsusb`, it will list each device's information:
+
+* Bus number
+* Device index
+* vendor id
+* product id
+
+for example there is a device : `Bus 002 Device 003: ID 04b4:5bc2 Cypress Semiconductor Corp.` , then this device has a bus number of 2, a device index of 3, a vendor id of 0x04b4 and a product id of 0x5bc2.
+
+Note every time you unplug and plug in, the devices information may be changed.
+
+********
+Examples
+********
+
+Please replace the filename in example to the real firmware to run them.
+
+* **flash empty board**
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    # assume there is only one empty device to flash
+    d = get_empty_devices()[0]
+    # after done, the product id of the device will change to some other value from 0x00F3.
+    program_empty_fx3_ram(d, PATH_TO_THE_FX3_IMAGE)
+
+    # don't unplug, we need to flash fx3 before unpluging. as device has changed, we should get device info again.
+    d = get_programmable_devices()[0]
+    # after done, if the file written into flash is different from the file written into ram, you need reboot to take effect, i.e. unplug and plug in again to let the FX3 boot from flash.
+    program_fx3_flash(d, PATH_TO_THE_FX3_IMAGE)
+
+* **flash fx3 firmware to flash**
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    d = get_programmable_devices()[0]
+    program_fx3_flash(d, PATH_TO_THE_FX3_IMAGE)
+
+* **flash fpga firmware to flash then boot it from flash**
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    d = get_programmable_devices()[0]
+    program_fpga_flash(d, PATH_TO_THE_FPGA_IMAGE)  # you don't need to unplug the board
+
+* **program fpga firmware from PC**
+
+In this way the FPGA is programmed from the firmware in the PC directly, without writing to the flash. So it is 
+a one-time only program and becomes invalid after power off.
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    d = get_programmable_devices()[0]
+    samna.flasher.program_fpga_from_pc(d, PATH_TO_THE_FPGA_IMAGE)
+
+* **print firmware header**
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    # print fx3 firmware file header info
+    print_firmware_header_from_file(PATH_TO_THE_FX3_IMAGE, FileType.fx3Firmware)
+
+    # print fpga firmware file header info
+    print_firmware_header_from_file(PATH_TO_THE_FPGA_IMAGE, FileType.fpgaFirmware)
+
+    # the second input enumerator can be neglected
+    print_firmware_header_from_file(PATH_TO_THE_FX3_IMAGE)
+    print_firmware_header_from_file(PATH_TO_THE_FPGA_IMAGE)
+
+* **write firmware header**
+
+If there is no header in the target file, a header will be added. Or a new header will overwrite the old header.
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    # write fx3 firmware header
+    write_firmware_header(PATH_TO_THE_FX3_IMAGE, FileType.fx3Firmware, PRODUCT_ID, 0, VERSION, OUTPUT_IMG_FILE)
+
+    # write fpga firmware header
+    write_firmware_header(PATH_TO_THE_FPGA_IMAGE, FileType.fpgaFirmware, PRODUCT_ID, CHIP_ID, VERSION, OUTPUT_IMG_FILE)
+
+The available ``PRODUCT_ID`` for SynSense products are listed in :ref:`Supported Devices`.
+
+The available ``CHIP_ID`` are:
+
+- Speck2fModuleDevKit: 21
+- Speck2fDevKit: 22
+- XyloImuTestBoard: 23
+- XyloAudio3TestBoard: 24
+
+The ``VERSION`` is a list of three elements, representing the major, minor and patch respectively.
+
+The ``OUTPUT_IMG_FILE`` specifies the output firmware file, leave "" means overwrite the original firmware file.
+
+* **print device info**
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    d = get_programmable_devices()[0]
+    print_firmware_info_from_device(d)
+
+* **make board empty**
+
+If you want to erase all images (fx3 image and fpga image), you can use the following commands:
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    d = get_programmable_devices()[0]
+    samna.flasher.make_board_empty(d)
+
+* **read daughter board info**
+
+Every daughter board has an unique daughter board info stores in the EEPROM, it can be read by the following commands:
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    d = get_programmable_devices()[0]
+    # where the second parameter is the index of the daughter board, which is usually 0
+    info = samna.flasher.read_daughter_board_info(d, 0)
+
+    print(info)
+
+* **read board info**
+
+Every mother board or dev kit main board has an unique board info stores in the flash, it can be read by the following commands:
+
+.. code-block:: python
+    :linenos:
+
+    from samna.flasher import *
+
+    d = get_programmable_devices()[0]
+    info = samna.flasher.read_board_info(d)
+
+    print(info)
+
+**********************
+Firmware Header Format
+**********************
+
+main header:
+
+.. code-block:: rst
+
+    Content: [SYN][TYPE][md5]
+    Bytes:   [ 3 ][ 1  ][32 ]
+
+sub-header of fx3:
+
+.. code-block:: rst
+
+    Content: [PID][version]
+    Bytes:   [ 2 ][   3   ]
+
+sub-header of fpga:
+
+.. code-block:: rst
+
+    Content: [PID][CID][version]
+    Bytes:   [ 2 ][ 1 ][   3   ]
+
+*************
+Api Reference
+*************
+
+Flasher api :ref:`samna.flasher`

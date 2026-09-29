@@ -1,0 +1,19 @@
+###########################
+samna.xyloImu.configuration
+###########################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.xyloImu.configuration
+   :members:
+   :show-inheritance:
+

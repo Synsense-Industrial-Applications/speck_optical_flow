@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9.3. Input Serial Interface Bus Encoding &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.4. Monitor Bus Encoding" href="monitor-bus.html" />
+    <link rel="prev" title="9.2. Input Serial Interface" href="input-s2p.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. Encoding and Programming</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">9.1. I/O Interfaces Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-s2p.html">9.2. Input Serial Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.3. Input Serial Interface Bus Encoding</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reset-signals">9.3.1. Reset Signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operating-modes">9.3.2. Operating Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#asynchronous-modes">9.3.2.1. Asynchronous Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#special-commands">9.3.2.2. Special Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reference-tables">9.3.3. Reference Tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="monitor-bus.html">9.4. Monitor Bus Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-p2s.html">9.5. Output Serial Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-serial-interface.html">9.6. Output Serial Interface Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-interrupt.html">9.7. Direct Readout Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">9. </span>Encoding and Programming</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9.3. </span>Input Serial Interface Bus Encoding</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/encoding/input-serial-interface.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="input-serial-interface-bus-encoding">
+<span id="input-serial-interface-encoding"></span><h1><span class="section-number">9.3. </span>Input Serial Interface Bus Encoding<a class="headerlink" href="#input-serial-interface-bus-encoding" title="Permalink to this heading"></a></h1>
+<p>The Input Serial Interface (ISI) of Speck2e extends the standalone chip functionality
+by enabling:</p>
+<ul class="simple">
+<li><p>Direct injection of Events (spikes) from the outside.</p></li>
+<li><p>Use of an external DVS (or equivalent) sensor instead of the internal DVS.</p></li>
+<li><p>Sensor pixel configuration.</p></li>
+<li><p><em>On the fly</em> configuration of the Readout Layer modes.</p></li>
+</ul>
+<p>The ISI receives 32-bit data frames (see <span class="xref std std-ref">input-serial-interface</span> for the communication protocol).
+Their encoding is defined in order to optimize bandwith utilization.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The SPI Slave interface is still active while using the ISI, and can be used in parallel
+to read/write SRAM or register memories.</p>
+</div>
+<section id="reset-signals">
+<span id="isi-resets"></span><h2><span class="section-number">9.3.1. </span>Reset Signals<a class="headerlink" href="#reset-signals" title="Permalink to this heading"></a></h2>
+<p>The ISI provides its own reset signals to the internal chip blocks.</p>
+<p>If the user wants to set the internal reset signals via the ISI, the bit <a class="reference internal" href="../registers/ii-config.html#rbits-cguis"><span class="std std-ref">CGUIS</span></a> must be set to ‘1’.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the internal reset signals are set via the registers, and no special ISI command has been
+issued yet, if the user sets <a class="reference internal" href="../registers/ii-config.html#rbits-cguis"><span class="std std-ref">CGUIS</span></a> = ‘1’, all the internal resets immediately go to ‘0’.
+Normally, the user should set the ISI Reset Signals to the current register set value, then set <a class="reference internal" href="../registers/ii-config.html#rbits-cguis"><span class="std std-ref">CGUIS</span></a> = ‘1’.</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">10001000000000000000000000000000</span>   <span class="c1"># PRst=&#39;1&#39;: release PRst</span>
+<span class="mi">10001100000000000000000000000000</span>   <span class="c1"># SRst=&#39;1&#39;: release SRst</span>
+<span class="mi">11011000000000000000000000000000</span>   <span class="c1"># PRst_DVS=&#39;1&#39;: release PRst_DVS (optional)</span>
+<span class="mi">11011100000000000000000000000000</span>   <span class="c1"># SRst_DVS=&#39;1&#39;: release SRst_DVS (optional)</span>
+</pre></div>
+</div>
+</section>
+<section id="operating-modes">
+<span id="s2p-operating-modes"></span><h2><span class="section-number">9.3.2. </span>Operating Modes<a class="headerlink" href="#operating-modes" title="Permalink to this heading"></a></h2>
+<section id="asynchronous-modes">
+<h3><span class="section-number">9.3.2.1. </span>Asynchronous Modes<a class="headerlink" href="#asynchronous-modes" title="Permalink to this heading"></a></h3>
+<p>In the Asynchronous modes, the data is forwarded to the internal asynchronous bus.</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Asynchronous Modes</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Mode</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>Router</p></td>
+<td><div class="line-block">
+<div class="line">The chip will direct the input messages</div>
+<div class="line">directly to the Layer Cores.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>External DVS</p></td>
+<td><div class="line-block">
+<div class="line">The chip is set to receive events from an external DVS sensor.</div>
+<div class="line">The events are forwarded to the internal DVS Pre-Processing block.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Sensor Config</p></td>
+<td><div class="line-block">
+<div class="line">The chip is set to receive configuration set/reset data for the</div>
+<div class="line">internal DVS Sensor</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="special-commands">
+<span id="ii-special-commands"></span><h3><span class="section-number">9.3.2.2. </span>Special Commands<a class="headerlink" href="#special-commands" title="Permalink to this heading"></a></h3>
+<p>Special commands are defined to provide control of the internal reset signals as well as Readout Layer
+configuration (class average selection and output mode selection).</p>
+<table class="table-small docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Special Command</p></td>
+<td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+<td><p>23:0</p></td>
+</tr>
+<tr class="row-even"><td><p>Main Reset</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>PRst</p></td>
+<td><p>SRst</p></td>
+<td></td>
+<td></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-odd"><td><p>Main Reset</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>reg_rb</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-even"><td><p>DVS Reset</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>PRst_DVS</p></td>
+<td><p>SRst_DVS</p></td>
+<td></td>
+<td></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-odd"><td><p>Readout - 1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td colspan="4"><p class="centered">
+<strong>average_sel[3:0]</strong></p></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-even"><td><p>Readout - 2</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td colspan="2"><p class="centered">
+<strong>output_mode_sel[1:0]</strong></p></td>
+<td></td>
+<td></td>
+<td><p>x</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Special Commands</span><a class="headerlink" href="#id3" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Command</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Prst</em>/<em>SRst</em></p></td>
+<td><div class="line-block">
+<div class="line">Set or clear <em>SRst</em> and/or <em>Prst</em> internal signals.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Register rst</p></td>
+<td><div class="line-block">
+<div class="line">Set or clear the <em>reg_rb</em> internal signal.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DVS rst</p></td>
+<td><div class="line-block">
+<div class="line">Set or clear <em>PRst_DVS</em>, <em>SRst_DVS</em> internal signals.</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Set Average Selection</p></td>
+<td><div class="line-block">
+<div class="line">Sets the internal <em>average_sel[3:0]</em> internal value</div>
+<div class="line">(see <a class="reference internal" href="../architecture/readout-layer.html#readout-neuron-selection"><span class="std std-ref">Output Neuron selection</span></a>).</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Output Mode Selection</p></td>
+<td><div class="line-block">
+<div class="line">Sets the internal <em>output_mode_sel[1:0]</em> internal value</div>
+<div class="line">(see <a class="reference internal" href="../architecture/readout-layer.html#readout-output-modes"><span class="std std-ref">Data Output Modes</span></a>).</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="reference-tables">
+<span id="c-p-d-ref-tables"></span><h2><span class="section-number">9.3.3. </span>Reference Tables<a class="headerlink" href="#reference-tables" title="Permalink to this heading"></a></h2>
+<table class="table-small docutils align-default" id="id5">
+<caption><span class="caption-text">Speck2e Asynchronous Modes Reference Table (events to layers, external DVS data, sensor config)</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Async Events</p></td>
+<td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+<td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+<td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+<td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>Router Mode</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td colspan="4"><div class="line-block">
+<div class="line">Target Layer [3:0]:</div>
+<div class="line">0b0000-0b1000 -&gt; Layer 0-8</div>
+<div class="line">0b1100 -&gt; Readout Layer</div>
+</div>
+</td>
+<td colspan="10"><p>Feature Number[9:0]</p></td>
+<td colspan="7"><p>Y-Address[6:0]</p></td>
+<td colspan="7"><p>X-Address[6:0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>External DVS Mode</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>P</p></td>
+<td colspan="8"><p>Y-Address[7:0]</p></td>
+<td colspan="8"><p>X-Address[7:0]</p></td>
+</tr>
+<tr class="row-even"><td><p>Sensor Config Mode</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><p>x</p></td>
+<td><div class="line-block">
+<div class="line">0: SET</div>
+<div class="line">1: RST</div>
+</div>
+</td>
+<td colspan="7"><div class="line-block">
+<div class="line">Y-Address[6:0]</div>
+<div class="line">(in SET mode)</div>
+</div>
+</td>
+<td colspan="7"><div class="line-block">
+<div class="line">X-Address[6:0]</div>
+<div class="line">(in SET mode)</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="input-s2p.html" class="btn btn-neutral float-left" title="9.2. Input Serial Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="monitor-bus.html" class="btn btn-neutral float-right" title="9.4. Monitor Bus Encoding" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

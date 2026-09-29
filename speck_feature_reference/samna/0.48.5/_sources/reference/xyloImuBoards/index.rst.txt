@@ -1,0 +1,19 @@
+###################
+samna.xyloImuBoards
+###################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.xyloImuBoards
+   :members:
+   :show-inheritance:
+

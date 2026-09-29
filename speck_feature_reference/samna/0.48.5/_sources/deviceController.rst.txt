@@ -1,0 +1,81 @@
+#################
+Device Controller
+#################
+
+The device controller manages devices that are supported by samna.
+Methods are provided to list/open/close devices.
+
+The details of the device controller APIs can be find in :ref:`samna.device`.
+
+Note Samna only supports devices with USB cables which are USB 3.0 capable.
+
+**********************
+Firmware Version Check
+**********************
+
+When opening a device, samna checks the firmware version installed on the device against
+the version supported by this release of samna.
+
+Firmware versions with an incompatible major or minor version are rejected immediately.
+
+A firmware version is considered compatible if it has the **same major version** and
+a **minor version equal to or higher** than the one supported by samna.  
+If the firmware's **minor version is higher** than the supported one, it may include features
+that are not recognized or supported by this version of samna.
+
+The **patch version** is ignored during compatibility checks.
+However, newer patch versions may include minor improvements or bug fixes.
+
+For instructions on upgrading the firmware, see :doc:`flasher`.
+
+********
+Examples
+********
+
+There are two ways to open a device. 
+
+The first one is to get a :class:`~samna.device.DeviceInfo` object if you are not sure
+what boards are connected.
+
+.. code-block:: python
+
+    # Get device infos of all unopened devices
+    deviceInfos = samna.device.get_unopened_devices()
+
+    # Print device infos to see what devices are connected
+    for info in deviceInfos:
+        print(info)
+
+    # Select the device you want to open, here we want to open the first one
+    device = samna.device.open_device(deviceInfos[0])
+
+The second way to open a device is using a string of format :code:`NAME[:INDEX]`.
+This is helpful if you want to open a specific type of device.
+The optional index is used to select a specific device if multiple of the same type are connected.
+Without the index argument, the next available device of this type is opened.
+
+.. code-block:: python
+
+    # Here we open the first Speck2fDevKit
+    device = samna.device.open_device("Speck2fDevKit:0")
+
+Please refer to the :code:`supported device name` column of table in :ref:`Supported devices` for the supported device names of the second approach.
+
+Devices can only be opened once on a machine. Devices opened in other processes can not
+be opened again in this process.
+
+Multiple calls to open a device using the same :class:`~samna.device.DeviceInfo` or the same 
+name and index string will return the previously opened device.
+However, multiple calls using the same name without index will not open previously opened devices,
+but the next available one instead. When no devices are available a runtime error is raised.
+
+Devices can be closed again using the returned device object when opening the device.
+After the device is closed, all actions on that device are invalid and should not be called.
+
+.. code-block:: python
+
+    # Close the device
+    samna.device.close_device(device)
+
+    # Device handle can not be used anymore
+    # device.get_model()

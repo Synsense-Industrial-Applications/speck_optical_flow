@@ -1,0 +1,15 @@
+.. _ininterface-registers:
+
+Input Interface Register Description
+====================================
+
+.. only:: html
+
+    Detailed Register Description
+    *****************************
+
+    .. include:: ii-descriptions.rst
+
+.. only:: pdf
+
+    .. include:: ii-descriptions.rst

@@ -1,0 +1,19 @@
+##########
+samna.iris
+##########
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.iris
+   :members:
+   :show-inheritance:
+

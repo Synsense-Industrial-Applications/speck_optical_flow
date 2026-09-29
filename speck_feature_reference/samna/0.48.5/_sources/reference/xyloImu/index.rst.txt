@@ -1,0 +1,21 @@
+#############
+samna.xyloImu
+#############
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   configuration/index
+   event/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.xyloImu
+   :members:
+   :show-inheritance:
+

@@ -1,0 +1,16 @@
+Known Speck2e/et/f Bugs
+=========================
+
+.. only:: html
+
+   For both Speck2e/et and v2f:
+
+   - Leak generation for layers 0 and 1 is unusable due to a bug in the address compression
+     of the leak events.
+   - The Scan Chain half clk delay causes the cutoff of the last bit of the SC. The scan_en signal should be also delayed by half clk.
+   - The layer output mapping to the output layer in the router has shifted bits.
+     This can be temporarily corrected in SW selecting higher output class range for the pooling layer.
+   - The IOSEL[1] bit should also disable output IO18_P2S_OUT1_O.
+
+
+test note.

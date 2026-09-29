@@ -1,0 +1,195 @@
+##########
+Visualizer
+##########
+
+.. contents:: Content
+   :local:
+   :depth: 2
+
+The Samna visualizer can be started in a process separately from the Python process where you import Samna
+(Note: before import samnagui, we should import samna first).
+This can be done either via the provided :code:`samnagui` script by executing
+
+.. code-block:: bash
+
+   $ samnagui
+
+From a terminal. Or by calling :code:`samna.run_visualizer` from Python.
+
+.. py:function:: samna.run_visualizer(receiver_endpoint, width_proportion, height_proportion)
+
+   Opens the visualizer window, set the window size relative to main monitor size, configures its receiving endpoint.
+
+   Params:
+
+   :code:`receiver_endpoint` : the visualiser's endpoint for receiving events (e.g. "tcp://0.0.0.0:33335").
+
+   :code:`width_proportion` : the rate between window width and workarea width of main monitor, default 0.75,
+   which means this window has a width which equals to 3/4 width of main monitor's workarea.
+
+   :code:`height_proportion` : the rate between window height and workarea height of main monitor, default 0.75,
+   which means this window has a height which equals to 3/4 height of main monitor's workarea.
+
+Since the visualizer operates in a separate process, we must utilize the streaming capabilities of the event filter graph to 
+transmit :ref:`configurations <samna.ui>` and events to the visualizer. The configurations that the visualizer can accept are
+listed in :ref:`Plots`.
+
+An full illustration of how to link the streamer to the visualizer can be found in :ref:`Display Speck 2f DVS Events`. 
+
+*****
+Plots
+*****
+
+There are several plots that can be displayed in the visualizer.
+To configure the plots, a graph with a :class:`samna.BasicSourceNode_ui_event` node is required.
+
+.. code-block:: python
+   :linenos:
+
+   import samna
+
+   graph = samna.graph.EventFilterGraph()
+   config_source, _ = graph.sequential([samna.BasicSourceNode_ui_event(), streamer])
+
+One visualizer can have several different type of plots, and there layout can be configured by the ``layout`` keyword argument 
+of each plot, default takes the full space of the visualizer.
+
+=============
+Activity Plot
+=============
+
+The :class:`activity plot <samna.ui.ActivityPlotConfiguration>` is a 2D plot that shows the activity of the DVS events in a 2D grid. 
+The grid size can be configured. 
+
+.. code-block:: python
+   :linenos:
+
+   # create an activity plot with size 128*128 and titled "DVS Layer"
+   visualizer_config = samna.ui.VisualizerConfiguration(
+      plots=[samna.ui.ActivityPlotConfiguration(128, 128, "DVS Layer")]
+   )
+
+   config_source.write([visualizer_config])
+
+============
+Readout Plot
+============
+
+The :class:`readout plot <samna.ui.ReadoutPlotConfiguration>` is a plot that can display an image which could be used to display the readout of a neuron network.
+The displayed image is determined by the :class:`samna.ui.Readout` event sent to the visualizer.
+
+.. code-block:: python
+   :linenos:
+
+   images = ["example1.jpg", "example2.jpg"]
+
+   # create a readout plot titled "Readout" with two images
+   visualizer_config = samna.ui.VisualizerConfiguration(
+      plots=[samna.ui.ReadoutPlotConfiguration("Readout", images)]
+   )
+
+   config_source.write([visualizer_config])
+
+=========
+Line Plot
+=========
+
+The line plot is a type of plot capable of presenting a line graph, 
+which is utilized to showcase the variations of certain values over time.
+However, you can't use create this plot directly, but use :ref:`Spike Count Plot` and :ref:`Power Measurement Plot` instead.
+
+================
+Spike Count Plot
+================
+
+This is an implementation of :ref:`Line Plot` dedicated to display the spike count changes over time sent as :class:`samna.ui.SpikeCount`.
+
+.. code-block:: python
+   :linenos:
+
+   feature_names = ["Closed", "Open"]
+
+   # create a line plot to display the Spike count changes over time.
+   visualizer_config = samna.ui.VisualizerConfiguration(
+      plots=[samna.ui.SpikeCountPlotConfiguration(
+                  title="Spike Count",
+                  channel_count= len(feature_names),
+                  line_names= feature_names,
+                  layout= [0, 0, 1, 1],
+                  show_x_span=25,
+                  label_interval=2.5,
+                  max_y_rate=1.2,
+                  show_point_circle=True,
+                  default_y_max=10,
+      )]
+   )
+
+   config_source.write([visualizer_config])
+
+Please check :class:`samna.ui.SpikeCountPlotConfiguration` for more details.
+
+======================
+Power Measurement Plot
+======================
+
+This is an implementation of :ref:`Line Plot` dedicated to display the power measurement changes over time sent as :class:`samna.ui.Measurement`.
+It have the same interface as :ref:`Spike Count Plot`.`
+
+Please check :class:`samna.ui.PowerMeasurementPlotConfiguration` for more details.
+
+==========
+Frame Plot
+==========
+
+The :class:`frame plot <samna.ui.FramePlotConfiguration>` is a type of plot capable of presenting a frame sent through 
+:class:`samna.events.Frame` event.
+
+.. code-block:: python
+   :linenos:
+
+   # create a frame plot titled "Frame"
+   visualizer_config = samna.ui.VisualizerConfiguration(
+      plots=[samna.ui.FramePlotConfiguration("Frame")]
+   )
+
+   config_source.write([visualizer_config])
+
+*************************
+Open Multiple Visualizers
+*************************
+
+It is possible to open multiple visualizers, each with its own streamer endpoint.
+
+.. code-block:: python
+   :linenos:
+
+   import sys, os
+   from threading import Thread
+
+   def open_visualizer(width_proportion, height_proportion, receiver_endpoint):
+        # start visualizer in a isolated process which is required on mac, instead of a sub process.
+        gui_cmd = f"import samna, samnagui; samnagui.run_visualizer('{receiver_endpoint}', {width_proportion}, {height_proportion})"
+        os_cmd = f'{sys.executable} -c "{gui_cmd}"'
+        print("Visualizer start command: ", os_cmd)
+        gui_thread = Thread(target=os.system, args=(os_cmd,))
+        gui_thread.start()
+
+        return gui_thread
+
+   streamer_endpoint_1 = "tcp://0.0.0.0:40001"
+   streamer_endpoint_2 = "tcp://0.0.0.0:40002"
+   width_proportion = 0.75
+   height_proportion = 0.75
+
+   viz_process_1 = open_visualizer(width_proportion, height_proportion, streamer_endpoint_1)
+   viz_process_2 = open_visualizer(width_proportion, height_proportion, streamer_endpoint_2)
+
+To forward events to the visualizer, they need to be sent to the streamer endpoint of that visualizer.
+
+**************
+API Reference:
+**************
+
+* Visualizer ui configuration events :mod:`samna.ui`
+* Related filters (SpikeCollectionNode, SpikeCountNode, CustomFilterNode, MeasurementToVizConverter): :ref:`Filters`
+* Power monitor: :class:`samna.boards.common.power.PowerMonitor`

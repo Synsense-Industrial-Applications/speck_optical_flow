@@ -1,0 +1,46 @@
+.. _reg-ref-tables:
+
+Configuration Register Reference Tables
+=======================================
+
+Input Interface
+***************
+
+.. csv-table:: Speck2e Input Interface Register Map
+   :file: ../../tables/ii_registers.csv
+
+Convolutional Layers
+********************
+
+.. note::
+
+   LID = 4-bit Layer ID, '0000' to '1000'.
+
+.. csv-table:: Speck2e Convolutional Layer Register Map
+   :file: ../../tables/layer_registers.csv
+
+
+DVS Post Processing
+*******************
+
+.. csv-table:: Speck2e DVS Post Processing Register Map
+   :file: ../../tables/dvs_registers.csv
+
+DVS Filter
+**********
+
+.. csv-table:: Speck2e DVS Filter Register Map
+   :file: ../../tables/filter_registers.csv
+
+
+Router
+******
+
+.. csv-table:: Speck2e Router Register Map
+      :file: ../../tables/router_registers.csv
+
+Readout Layer
+*************
+
+.. csv-table:: Speck2e Readout Layer Register Map
+      :file: ../../tables/readout_registers.csv

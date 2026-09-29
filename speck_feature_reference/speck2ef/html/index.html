@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speck2e/et/f (SYNS91103/SYNS91104/SYNS91105) Datasheet &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. Device Overview" href="sections/overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Speck2e
+              <img src="_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sections/overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Speck2e/et/f (SYNS91103/SYNS91104/SYNS91105) Datasheet</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="speck2e-et-f-syns91103-syns91104-syns91105-datasheet">
+<h1>Speck2e/et/f (SYNS91103/SYNS91104/SYNS91105) Datasheet<a class="headerlink" href="#speck2e-et-f-syns91103-syns91104-syns91105-datasheet" title="Permalink to this heading"></a></h1>
+<p>Get this document as PDF: <a class="reference external" href="./speck2e.pdf">speckv2e.pdf</a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sections/overview.html">1. Device Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/overview.html#key-features">1.1. Key features</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/chip-startup.html">2. Chip Startup Sequence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/chip-startup.html#power-up">2.1. Power up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/chip-startup.html#setting-internal-reset-signals">2.2. Setting Internal Reset Signals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/architecture/index.html">3. Chip Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/block-diagram.html">3.1. Top Level Block Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/layer-overview.html">3.2. Speck2e Computational Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/event-pre-processing.html">3.3. Event Pre-Processing Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/dvs-filter.html">3.4. DVS Event Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/convolutional-layer.html">3.5. Convolutional Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/readout-layer.html">3.6. Readout Layer (Post Processing)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/architecture/slow-clock.html">3.7. Internal Slow Clock</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/pinout.html">4. Pinout Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/pinout.html#pinout-diagram">4.1. Pinout diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/pinout.html#pin-locations">4.2. Pin Locations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/pinout.html#pin-description">4.3. Pin description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/pinout.html#gpio-pin-configuration">4.4. GPIO Pin Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/dvs-sensor/index.html">5. Internal DVS Sensor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/dvs-sensor/sensor-overview.html">5.1. Internal DVS Sensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/dvs-sensor/parameters.html">5.2. Internal DVS Sensor Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/electrical-characteristics.html">6. Electrical Characteristics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/electrical-characteristics.html#power-supply-pins">6.1. Power supply pins</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/registers/index.html">7. Registers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/registers/readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/memory/index.html">8. Internal SRAM Memory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/memory/memory-configuration.html">8.1. Memory configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/memory/layer-sizing-constraints.html">8.2. Layer Sizing Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/memory/bist-access.html">8.3. Direct Memory Access Mode (BIST)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/encoding/index.html">9. Encoding and Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/encoding/overview.html">9.1. I/O Interfaces Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/encoding/input-s2p.html">9.2. Input Serial Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/encoding/input-serial-interface.html">9.3. Input Serial Interface Bus Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/encoding/monitor-bus.html">9.4. Monitor Bus Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/encoding/output-p2s.html">9.5. Output Serial Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/encoding/output-serial-interface.html">9.6. Output Serial Interface Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/encoding/readout-interrupt.html">9.7. Direct Readout Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/spi/index.html">10. SPI Interfaces</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/spi/spi-overview.html">10.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/spi/spi-slave.html">10.2. SPI Slave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/spi/spi-master.html">10.3. SPI Master</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/jtag/index.html">11. JTAG Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/jtag/jtag-overview.html">11.1. JTAG Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/jtag/jtag-command-overview.html">11.2. JTAG Command Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/jtag/jtag-srams.html">11.3. JTAG SRAM Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/jtag/jtag-registers.html">11.4. JTAG Register Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/jtag/jtag-scan-chains.html">11.5. JTAG Scan Chain Access and Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/jtag/jtag-async.html">11.6. JTAG Asynchronous I/O Operation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/rgb-interface/index.html">12. RGB Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/rgb-interface/rgb-overview.html">12.1. RGB Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/scanchain/index.html">13. Scan Chain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sections/scanchain/overview.html">13.1. Scan Chain Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/scanchain/connectivity.html">13.2. Scan Chain Connectivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/scanchain/connectivity.html#cell-connectivity-example">13.3. Cell connectivity example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/scanchain/operation-modes.html">13.4. Scan Chain Operation Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/scanchain/interface.html">13.5. Scan Chain Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sections/scanchain/analysis.html">13.6. Scan Chain Bit Stream Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sections/abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sections/bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sections/overview.html" class="btn btn-neutral float-right" title="1. Device Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

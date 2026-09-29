@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.5. Convolutional Layer Register Description &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.6. Convolutional Layer Configuration Signal Description" href="layer-config.html" />
+    <link rel="prev" title="7.4. Input Interface Configuration Signal Description" href="ii-config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.5. Convolutional Layer Register Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-register-description">7.5.1. Detailed Register Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv0">7.5.1.1. Register: CONV0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv1">7.5.1.2. Register: CONV1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv2">7.5.1.3. Register: CONV2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv3">7.5.1.4. Register: CONV3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv4">7.5.1.5. Register: CONV4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv5">7.5.1.6. Register: CONV5</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv6">7.5.1.7. Register: CONV6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv7">7.5.1.8. Register: CONV7</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv8">7.5.1.9. Register: CONV8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv9">7.5.1.10. Register: CONV9</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv10">7.5.1.11. Register: CONV10</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv11">7.5.1.12. Register: CONV11</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv12">7.5.1.13. Register: CONV12</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv13">7.5.1.14. Register: CONV13</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv14">7.5.1.15. Register: CONV14</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv15">7.5.1.16. Register: CONV15</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-conv16">7.5.1.17. Register: CONV16</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.5. </span>Convolutional Layer Register Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/layer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="convolutional-layer-register-description">
+<span id="layer-registers"></span><h1><span class="section-number">7.5. </span>Convolutional Layer Register Description<a class="headerlink" href="#convolutional-layer-register-description" title="Permalink to this heading"></a></h1>
+<p>The following tables provide the detailed structure of each register.
+Each of the following registers is available independently in each Convolutional Layer.</p>
+<section id="detailed-register-description">
+<h2><span class="section-number">7.5.1. </span>Detailed Register Description<a class="headerlink" href="#detailed-register-description" title="Permalink to this heading"></a></h2>
+<section id="register-conv0">
+<span id="reg-conv0"></span><h3><span class="section-number">7.5.1.1. </span>Register: CONV0<a class="headerlink" href="#register-conv0" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x00</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-scx"><span class="std std-ref">Stride_CaseX</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="layer-config.html#rbits-zpy"><span class="std std-ref">zeropaddingY</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="layer-config.html#rbits-zpx"><span class="std std-ref">zeropaddingX</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SCX1</p></td>
+<td><p>SCX0</p></td>
+<td><p>ZPY2</p></td>
+<td><p>ZPY1</p></td>
+<td><p>ZPY0</p></td>
+<td><p>ZPX2</p></td>
+<td><p>ZPX1</p></td>
+<td><p>ZPX0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv1">
+<span id="reg-conv1"></span><h3><span class="section-number">7.5.1.2. </span>Register: CONV1<a class="headerlink" href="#register-conv1" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x01</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="layer-config.html#rbits-dint"><span class="std std-ref">decimator_interval[0]</span></a></p></td>
+<td><p><a class="reference internal" href="layer-config.html#rbits-den"><span class="std std-ref">decimator_en</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="layer-config.html#rbits-ksz"><span class="std std-ref">ksize</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-scy"><span class="std std-ref">Stride_CaseY</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>DINT0</p></td>
+<td><p>DEN</p></td>
+<td><p>KSZ3</p></td>
+<td><p>KSZ2</p></td>
+<td><p>KSZ1</p></td>
+<td><p>KSZ0</p></td>
+<td><p>SCY1</p></td>
+<td><p>SCY0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv2">
+<span id="reg-conv2"></span><h3><span class="section-number">7.5.1.3. </span>Register: CONV2<a class="headerlink" href="#register-conv2" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x02</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="layer-config.html#rbits-ifn"><span class="std std-ref">in_fnum</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>IFN7</p></td>
+<td><p>IFN6</p></td>
+<td><p>IFN5</p></td>
+<td><p>IFN4</p></td>
+<td><p>IFN3</p></td>
+<td><p>IFN2</p></td>
+<td><p>IFN1</p></td>
+<td><p>IFN0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv3">
+<span id="reg-conv3"></span><h3><span class="section-number">7.5.1.4. </span>Register: CONV3<a class="headerlink" href="#register-conv3" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x03</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="layer-config.html#rbits-ofsx"><span class="std std-ref">out_fsizeX</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-ifn"><span class="std std-ref">in_fnum</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>OFSX5</p></td>
+<td><p>OFSX4</p></td>
+<td><p>OFSX3</p></td>
+<td><p>OFSX2</p></td>
+<td><p>OFSX1</p></td>
+<td><p>OFSX0</p></td>
+<td><p>IFN9</p></td>
+<td><p>IFN8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv4">
+<span id="reg-conv4"></span><h3><span class="section-number">7.5.1.5. </span>Register: CONV4<a class="headerlink" href="#register-conv4" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x04</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-ofn"><span class="std std-ref">out_fnum</span></a></p></td>
+<td colspan="6"><p><a class="reference internal" href="layer-config.html#rbits-ofsy"><span class="std std-ref">out_fsizeY</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>OFN1</p></td>
+<td><p>OFN0</p></td>
+<td><p>OFSY5</p></td>
+<td><p>OFSY4</p></td>
+<td><p>OFSY3</p></td>
+<td><p>OFSY2</p></td>
+<td><p>OFSY1</p></td>
+<td><p>OFSY0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv5">
+<span id="reg-conv5"></span><h3><span class="section-number">7.5.1.6. </span>Register: CONV5<a class="headerlink" href="#register-conv5" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x05</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="layer-config.html#rbits-ofn"><span class="std std-ref">out_fnum</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>OFN9</p></td>
+<td><p>OFN8</p></td>
+<td><p>OFN7</p></td>
+<td><p>OFN6</p></td>
+<td><p>OFN5</p></td>
+<td><p>OFN4</p></td>
+<td><p>OFN3</p></td>
+<td><p>OFN2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv6">
+<span id="reg-conv6"></span><h3><span class="section-number">7.5.1.7. </span>Register: CONV6<a class="headerlink" href="#register-conv6" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x06</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-dint"><span class="std std-ref">decimator_interval[2:1]</span></a></p></td>
+<td colspan="6"><p><a class="reference internal" href="layer-config.html#rbits-skp"><span class="std std-ref">sramK_pulse</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>DINT2</p></td>
+<td><p>DINT2</p></td>
+<td><p>SKP5</p></td>
+<td><p>SKP4</p></td>
+<td><p>SKP3</p></td>
+<td><p>SKP2</p></td>
+<td><p>SKP1</p></td>
+<td><p>SKP0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv7">
+<span id="reg-conv7"></span><h3><span class="section-number">7.5.1.8. </span>Register: CONV7<a class="headerlink" href="#register-conv7" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x07</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-skr"><span class="std std-ref">sramK_read</span></a></p></td>
+<td colspan="6"><p><a class="reference internal" href="layer-config.html#rbits-skt"><span class="std std-ref">sramK_setup</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SKR1</p></td>
+<td><p>SKR0</p></td>
+<td><p>SKT5</p></td>
+<td><p>SKT4</p></td>
+<td><p>SKT3</p></td>
+<td><p>SKT2</p></td>
+<td><p>SKT1</p></td>
+<td><p>SKT0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv8">
+<span id="reg-conv8"></span><h3><span class="section-number">7.5.1.9. </span>Register: CONV8<a class="headerlink" href="#register-conv8" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x08</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="layer-config.html#rbits-ben"><span class="std std-ref">balancer_en</span></a></p></td>
+<td><p><a class="reference internal" href="layer-config.html#rbits-lken"><span class="std std-ref">leak_en</span></a></p></td>
+<td colspan="6"><p><a class="reference internal" href="layer-config.html#rbits-slt"><span class="std std-ref">sramL_setup</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>BEN</p></td>
+<td><p>LKEN</p></td>
+<td><p>SLT5</p></td>
+<td><p>SLT4</p></td>
+<td><p>SLT3</p></td>
+<td><p>SLT2</p></td>
+<td><p>SLT1</p></td>
+<td><p>SLT0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv9">
+<span id="reg-conv9"></span><h3><span class="section-number">7.5.1.10. </span>Register: CONV9<a class="headerlink" href="#register-conv9" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x09</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="layer-config.html#rbits-slp"><span class="std std-ref">sramL_pulse</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-slr"><span class="std std-ref">sramL_read</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SLP5</p></td>
+<td><p>SLP4</p></td>
+<td><p>SLP3</p></td>
+<td><p>SLP2</p></td>
+<td><p>SLP1</p></td>
+<td><p>SLP0</p></td>
+<td><p>SLR1</p></td>
+<td><p>SLR0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv10">
+<span id="reg-conv10"></span><h3><span class="section-number">7.5.1.11. </span>Register: CONV10<a class="headerlink" href="#register-conv10" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x0A</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="layer-config.html#rbits-thrh"><span class="std std-ref">neuron_thr_hi</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>THRH7</p></td>
+<td><p>THRH6</p></td>
+<td><p>THRH5</p></td>
+<td><p>THRH4</p></td>
+<td><p>THRH3</p></td>
+<td><p>THRH2</p></td>
+<td><p>THRH1</p></td>
+<td><p>THRH0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv11">
+<span id="reg-conv11"></span><h3><span class="section-number">7.5.1.12. </span>Register: CONV11<a class="headerlink" href="#register-conv11" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x0B</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="layer-config.html#rbits-thrh"><span class="std std-ref">neuron_thr_hi</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>THRH15</p></td>
+<td><p>THRH14</p></td>
+<td><p>THRH13</p></td>
+<td><p>THRH12</p></td>
+<td><p>THRH11</p></td>
+<td><p>THRH10</p></td>
+<td><p>THRH9</p></td>
+<td><p>THRH8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv12">
+<span id="reg-conv12"></span><h3><span class="section-number">7.5.1.13. </span>Register: CONV12<a class="headerlink" href="#register-conv12" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x0C</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="layer-config.html#rbits-thrl"><span class="std std-ref">neuron_thr_lo</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>THRL7</p></td>
+<td><p>THRL6</p></td>
+<td><p>THRL5</p></td>
+<td><p>THRL4</p></td>
+<td><p>THRL3</p></td>
+<td><p>THRL2</p></td>
+<td><p>THRL1</p></td>
+<td><p>THRL0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv13">
+<span id="reg-conv13"></span><h3><span class="section-number">7.5.1.14. </span>Register: CONV13<a class="headerlink" href="#register-conv13" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x0D</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="layer-config.html#rbits-thrl"><span class="std std-ref">neuron_thr_lo</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>THRL15</p></td>
+<td><p>THRL14</p></td>
+<td><p>THRL13</p></td>
+<td><p>THRL12</p></td>
+<td><p>THRL11</p></td>
+<td><p>THRL10</p></td>
+<td><p>THRL9</p></td>
+<td><p>THRL8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv14">
+<span id="reg-conv14"></span><h3><span class="section-number">7.5.1.15. </span>Register: CONV14<a class="headerlink" href="#register-conv14" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x0E</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td colspan="6"><p><a class="reference internal" href="layer-config.html#rbits-snt"><span class="std std-ref">sramN_setup</span></a></p></td>
+<td><p><a class="reference internal" href="layer-config.html#rbits-nrz"><span class="std std-ref">neuron_rtz_en</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>SNT5</p></td>
+<td><p>SNT4</p></td>
+<td><p>SNT3</p></td>
+<td><p>SNT2</p></td>
+<td><p>SNT1</p></td>
+<td><p>SNT0</p></td>
+<td><p>NRZ</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv15">
+<span id="reg-conv15"></span><h3><span class="section-number">7.5.1.16. </span>Register: CONV15<a class="headerlink" href="#register-conv15" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x0F</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="6"><p><a class="reference internal" href="layer-config.html#rbits-snp"><span class="std std-ref">sramN_pulse</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-snr"><span class="std std-ref">sramN_read</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SNP5</p></td>
+<td><p>SNP4</p></td>
+<td><p>SNP3</p></td>
+<td><p>SNP2</p></td>
+<td><p>SNP1</p></td>
+<td><p>SNP0</p></td>
+<td><p>SNR1</p></td>
+<td><p>SNR0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-conv16">
+<span id="reg-conv16"></span><h3><span class="section-number">7.5.1.17. </span>Register: CONV16<a class="headerlink" href="#register-conv16" title="Permalink to this heading"></a></h3>
+<p>Address: ((Layer ID (0-8) + 0x6) &lt;&lt; 8) + 0x10</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-skbt"><span class="std std-ref">sramK_bist_tsel</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-slbt"><span class="std std-ref">sramL_bist_tsel</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="layer-config.html#rbits-snbt"><span class="std std-ref">sramN_bist_tsel</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SKBT1</p></td>
+<td><p>SKBT0</p></td>
+<td><p>SLBT1</p></td>
+<td><p>SLBT0</p></td>
+<td><p>SNBT1</p></td>
+<td><p>SNBT0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ii-config.html" class="btn btn-neutral float-left" title="7.4. Input Interface Configuration Signal Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="layer-config.html" class="btn btn-neutral float-right" title="7.6. Convolutional Layer Configuration Signal Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

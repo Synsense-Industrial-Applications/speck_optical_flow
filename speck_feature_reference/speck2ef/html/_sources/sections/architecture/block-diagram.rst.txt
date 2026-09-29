@@ -1,0 +1,24 @@
+.. _top-block-diagram:
+
+Top Level Block Diagram
+=======================
+
+In this section, the high-level block diagram of Speck2e/f is described.
+
+.. note:: In Speck2f the RGB
+
+
+.. only:: html
+
+    .. figure:: ../../figures/Speck2e_block_diagram.*
+        :scale: 140%
+
+        Speck2e Top Level Block Diagram
+
+.. only:: pdf
+
+    .. figure:: ../../figures/Speck2e_block_diagram.pdf
+        :scale: 150%
+
+        Speck2e Top Level Block Diagram
+

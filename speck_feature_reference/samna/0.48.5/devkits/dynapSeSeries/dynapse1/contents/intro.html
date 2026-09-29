@@ -1,0 +1,215 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DYNAP-SE1 introduction &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Xylo Series" href="../../../xyloSeries/index.html" />
+    <link rel="prev" title="DYNAP-SE1" href="../summary.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Development Kits</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#connecting-to-a-device">Connecting to a Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../index.html#common-methods-of-development-kits">Common Methods of Development Kits</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html#supported-development-kits">Supported Development Kits</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../speckSeries/summary.html">Speck series</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">Dynap-SE series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../../index.html#supported-development-kits">Supported development kits:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../xyloSeries/index.html">Xylo Series</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Development Kits</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Dynap-SE series</a></li>
+          <li class="breadcrumb-item"><a href="../summary.html">DYNAP-SE1</a></li>
+      <li class="breadcrumb-item active">DYNAP-SE1 introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/devkits/dynapSeSeries/dynapse1/contents/intro.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dynap-se1-introduction">
+<h1>DYNAP-SE1 introduction<a class="headerlink" href="intro.html#dynap-se1-introduction" title="Link to this heading"></a></h1>
+<p>A DYNAP-SE1 board has 4 <a class="reference internal" href="../../../../reference/dynapse1/index.html#samna.dynapse1.Dynapse1Chip" title="samna.dynapse1.Dynapse1Chip"><code class="xref py py-func docutils literal notranslate"><span class="pre">chips</span></code></a> and each chip contains 4
+<a class="reference internal" href="../../../../reference/dynapse1/index.html#samna.dynapse1.Dynapse1Core" title="samna.dynapse1.Dynapse1Core"><code class="xref py py-func docutils literal notranslate"><span class="pre">cores</span></code></a> featuring 256 silicon <code class="xref py py-func docutils literal notranslate"><span class="pre">neurons</span></code>.
+We call the state of the 4 chips a <a class="reference internal" href="../../../../reference/dynapse1/index.html#samna.dynapse1.Dynapse1Configuration" title="samna.dynapse1.Dynapse1Configuration"><code class="xref py py-func docutils literal notranslate"><span class="pre">configuration</span></code></a>.
+Each silicon neuron has 64 <a class="reference internal" href="../../../../reference/dynapse1/index.html#samna.dynapse1.Dynapse1Synapse" title="samna.dynapse1.Dynapse1Synapse"><code class="xref py py-func docutils literal notranslate"><span class="pre">synapses</span></code></a> to receive the
+incoming connections of its presynaptic neurons.
+Each core holds a <a class="reference internal" href="../../../../reference/dynapse1/index.html#samna.dynapse1.Dynapse1ParameterGroup" title="samna.dynapse1.Dynapse1ParameterGroup"><code class="xref py py-func docutils literal notranslate"><span class="pre">parameter</span> <span class="pre">group</span></code></a> to store the
+neuronal and synaptic parameters for its 256 neurons and their incoming synapses.
+The neurons in the same core share the same parameter values.
+There are 4 types of synapses: AMPA, NMDA, GABA_A, and GABA_B.
+1024 spike generators are available implemented on the FPGA.
+Each of the spike generator can be used as a <code class="xref py py-func docutils literal notranslate"><span class="pre">Poisson</span> <span class="pre">spike</span> <span class="pre">generator</span></code> or a <code class="xref py py-func docutils literal notranslate"><span class="pre">normal</span> <span class="pre">FPGA</span> <span class="pre">spike</span> <span class="pre">generator</span></code>.</p>
+<p>To use DYNAP-SE1, we recommend a utilities <a class="reference external" href="https://gitlab.com/neuroinf/ctxctl_contrib/-/tree/samna-dynapse1">library</a> based on Samna, developed primarily by the <a class="reference external" href="https://www.ini.uzh.ch/en/research/groups/ncs.html">NCS
+group</a> of <a class="reference external" href="https://www.ini.uzh.ch/en.html">INI</a>.
+This Python repository adds more features to Samna for DYNAP-SE1, which wraps around the plain
+Samna classes and functions to provide more user-friendly and convenient Python APIs
+for constructing networks, configuring hardware parameters, monitoring neurons activity,
+implementing learning algorithms, etc.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../summary.html" class="btn btn-neutral float-left" title="DYNAP-SE1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../xyloSeries/index.html" class="btn btn-neutral float-right" title="Xylo Series" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

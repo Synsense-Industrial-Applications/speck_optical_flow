@@ -1,0 +1,97 @@
+**************************
+XyloAudio 3 Recording Mode
+**************************
+
+In Recording mode, XyloAudio 3 allows you to capture input signals and obtain the output
+from the filter bank in the audio frontend. It supports recording from both analog and digital microphones,
+as well as simulated digital microphone input using ``AfeSample`` events.
+However, simulated analog microphone input is not supported.
+
+The filter bank consists of sixteen channels, each corresponding to an input neuron in the Xylo core.
+In Recording mode, whenever the IAF filter fires, a ``Spike`` event is triggered with the ``neuron_id``
+set to the appropriate channel. The ``timestep`` member of the ``Spike`` event can be controlled using
+:attr:`samna.xyloAudio3.configuration.DebugConfig.use_timestamps`.
+By default, this setting is disabled, and the ``timestep`` reflects when the Xylo core receives the spike.
+When enabled, the ``timestep`` will contain the microsecond timestamp of the spike's production.
+The timestep duration is controlled by :attr:`samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap`.
+
+Below is an example demonstrating how to record a simulated digital microphone signal.
+The example uses the following packages:
+::
+
+    - samna                 0.39.8
+
+.. code-block:: python
+
+    import samna
+    import time
+
+    # Open the device and connect the source and sink nodes so we can communicate with Xylo.
+    board = samna.device.open_device("XyloAudio3TestBoard")
+    xylo = board.get_model()
+    source = samna.graph.source_to(xylo.get_sink_node())
+    sink = samna.graph.sink_from(xylo.get_source_node())
+    stopwatch = board.get_stop_watch()
+
+    # To obtain a valid timestep value in AFE spikes, we have to specify a timestep duration.
+    # Default clock frequency was not changed, so we use that to calculate `tr_wrap`.
+    dt_s = 0.2 # 200 milliseconds
+    board_config = samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig()
+    main_clock_frequency_hz = board_config.main_clock_frequency
+    tr_wrap = main_clock_frequency_hz * dt_s
+
+    # Configure Xylo in Recording mode and configure the timestep duration.
+    xylo_config = samna.xyloAudio3.configuration.XyloConfiguration()
+    xylo_config.operation_mode = samna.xyloAudio3.OperationMode.Recording
+    xylo_config.debug.use_timestamps = False
+    xylo_config.time_resolution_wrap = int(tr_wrap)
+
+    # Choose digital microphone as input source.
+    xylo_config.input_source = samna.xyloAudio3.InputSource.DigitalMicrophone
+    # We need to set `clock_direction` to 1 (Xylo output), because there is no external clock.
+    xylo_config.digital_frontend.pdm_preprocessing.clock_direction = 1
+    xylo_config.digital_frontend.pdm_preprocessing.clock_edge = 0
+    # Xylo clock frequency for PDM sampling can be influenced here.
+    xylo_config.debug.sdm_clock_ratio = 49
+    # Xylo clock frequency for spike to SAER output can be influenced here.
+    xylo_config.debug.spk2saer_clock_ratio = 1
+    # Disable divisive normalisation for the test.
+    xylo_config.digital_frontend.filter_bank.dn_enable = False
+
+    xylo.apply_configuration(xylo_config)
+
+    # Communication with the device is asynchronous, so we don't know when the configuration is finished.
+    # Normally this is not a problem, because events are guaranteed to be sent in order.
+    # But for this script we want to let Xylo run for a specific amount of time, so we need to synchronise somehow,
+    # the easiest way is to read a register and wait for the response.
+    # Because Xylo is already recording and emitting spike events, we can't expect a single event back as the response.
+    # Instead we have to find the expected event inside the events that Xylo sends.
+    source.write([samna.xyloAudio3.event.ReadRegisterValue(address=0)])
+    read_until = time.time() + 3.0
+    while (now:= time.time()) < read_until:
+        remaining_time_ms = (read_until - now) * 1000
+        events = sink.get_events_blocking(int(remaining_time_ms))
+        expected_value = samna.xyloAudio3.event.RegisterValue(address=0, data=0x0001_0002)
+        if expected_value in events:
+            break
+    else:
+        raise RuntimeError("Xylo configuration takes unreasonably long (>3s).")
+
+    # Once the configuration is set, the chip is already recording input.
+    # But we want to define a clear time window in which we record, 
+    # so we start the stopwatch to obtain event timesteps relative to this moment.
+    # And also throw away any events we have received until now.
+    stopwatch.start()
+    sink.clear_events()
+
+    print("Start recording now...")
+
+    # Record for 5 seconds
+    time.sleep(5)
+
+    # Extract the spikes per output channel
+    events = sink.get_events()
+    channels = [list() for _ in range(16)]
+    for ev in events:
+        assert isinstance(ev, samna.xyloAudio3.event.Spike)
+        channels[ev.neuron_id].append(ev.timestep)

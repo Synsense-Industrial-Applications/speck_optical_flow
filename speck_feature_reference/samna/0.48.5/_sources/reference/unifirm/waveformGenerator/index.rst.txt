@@ -1,0 +1,19 @@
+###############################
+samna.unifirm.waveformGenerator
+###############################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm.waveformGenerator
+   :members:
+   :show-inheritance:
+

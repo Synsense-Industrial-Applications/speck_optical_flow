@@ -1,0 +1,20 @@
+###################
+samna.boards.common
+###################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   power/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.boards.common
+   :members:
+   :show-inheritance:
+

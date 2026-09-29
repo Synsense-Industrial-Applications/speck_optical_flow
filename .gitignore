@@ -5,8 +5,9 @@ imgui.ini
 # generated speck configs
 *.bin
 
-# local hardware notes (kept out of the repo)
+# local notes (kept out of the repo)
 speck_feature.txt
+network_notes.txt
 
 # editor settings (machine-specific)
 .vscode/

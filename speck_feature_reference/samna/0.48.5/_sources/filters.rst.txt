@@ -1,0 +1,1018 @@
+#######
+Filters
+#######
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+Event filter nodes are the primary way of interacting with event streams in Samna.
+They are configured from Python and run in the C++ backend; enabling high performance while
+being easy to use.
+
+============
+Filter Nodes
+============
+
+Filter nodes come in three types
+
+------
+Source
+------
+
+Source nodes can only produce events and only have an output. They are the beginning of any filter chain
+and typically attached to event producing device models. Source nodes can also be instantiated from Python
+and used to inject events into a filter chain periodically or on request.
+
+----
+Sink
+----
+
+Sink nodes are the opposite of source nodes. They only consume events and terminate any filter chain.
+Sink nodes are found on device models where they send all consumed events to the device.
+They can also be instantiated in Python as buffer nodes that capture all consumed events and provide them
+when polled.
+
+------
+Filter
+------
+
+A filter node has both an input and an output, it is effectively both a source and a sink.
+Filters work on collections of events and can perform any operation on the collection.
+Common operations include performing inference on network out, type conversion, splitting streams,
+forwarding to a network sink, and droppping events based on pattern matching.
+
+Available built-in filters are listed in :ref:`Available Filters`. And users can also create their own filters 
+by utilizing the JIT compiler that ships with Samna, please refer to :ref:`JIT Filters`.
+
+-------------
+Special Nodes
+-------------
+
+^^^^^^^^^^^^^
+ZMQ Streamers
+^^^^^^^^^^^^^
+
+ZMQ source and sink nodes can be used to transmit events streams over a network.
+These nodes are used when connecting to the GUI, but can also be used to transmit events between any two
+instances of Samna.
+
+^^^^^^^^^^^^^^^
+ZMQStreamerNode
+^^^^^^^^^^^^^^^
+
+The ZMQ sink node can be connected as any sink to a filter chain. Any events consumed by the ZMQ sink
+will be broadcast on the TCP/IP address and port configured in the sink node.
+
+^^^^^^^^^^^^^^^
+ZMQReceiverNode
+^^^^^^^^^^^^^^^
+
+The ZMQ source node can be connected as any source to a filter chain. It receives event streams on
+the TCP/IP addresses configured in the node and sources them on its output.
+
+-------------
+Devices Nodes
+-------------
+
+Device models contain a source node and a sink node. Events sent to the sink node will be sent to the device
+and events produced by the device will appear in the source node.
+
+================
+EventFilterGraph
+================
+
+Filters can be composed in a :class:`samna.graph.EventFilterGraph` to perform more complex operations. 
+The  :class:`samna.graph.EventFilterGraph` is a directed acyclic graph of filter nodes.
+
+Filter graph construction is done with the high level :attr:`samna.graph.EventFilterGraph.sequential` method, 
+which adds all the nodes given as a list and connects them sequentially.
+The method returns a list of handles to the nodes added to the graph, 
+which can be used to manipulate the nodes or for further connections.
+
+--------------
+Create a Graph
+--------------
+
+.. code-block:: python
+   :linenos:
+
+   graph = samna.graph.EventFilterGraph()
+
+---------------
+Creating a node
+---------------
+
+Nodes can be created either inside or outside a filter graph. But for built-in :ref:`filters <Available Filters>`,
+they can only be created inside a graph.
+
+To add a node in a graph
+
+.. code-block:: python
+   :linenos:
+
+   [node] = graph.sequential(["Speck2fOutputEventTypeFilter"])
+
+To create a node outside a graph, instantiate the node directly.
+Subsequently the node can be connected to a filter graph using the `sequential` method.
+
+.. code-block:: python
+   :linenos:
+
+   sink = samna.BasicSinkNode_speck2f_event_output_event()
+   graph.sequential([board.get_model_source_node(), sink])
+
+----------------
+Connecting Nodes
+----------------
+
+Nodes that are passed as a list to `Grahp.sequential()` are automatically connected.
+
+.. code-block:: python
+   :linenos:
+
+   crop_node, decimate_node = graph.sequential(["DvsEventCrop", "DvsEventDecimate"])
+
+^^^^^^^^^^^^^^^^^^^^^
+Branching and Merging
+^^^^^^^^^^^^^^^^^^^^^
+
+Branches are created by using a node already in the graph as the first node in a `sequential` call.
+Conversely merges are created by using an existing node as the last node in a `sequential` call.
+
+.. code-block:: python
+   :linenos:
+
+   # Create first path
+   node1, node2_1, node3 = graph.sequential([board.get_model_source_node(), 
+                                             "Speck2fOutputEventTypeFilter", 
+                                             samna.BasicSinkNode_speck2f_event_output_event()])
+   # Create second path
+   _, node2_2, _ = graph.sequential([node1, "Speck2fForward", node3])
+
+========
+Examples
+========
+
+----------------
+Streaming Events
+----------------
+
+One of the main features of the filtering system is the ability to stream across process and network boundaries.
+This can be achieved using the ZMQ receiver and streamer nodes. We use these nodes to connect event streams to
+the GUI for display.
+
+.. code-block:: python
+   :linenos:
+
+   # the visualizer contains a ZMQ receiver, we can open it with an endpoint
+   samnagui.run_visualizer("tcp://0.0.0.0:40000", 0.75, 0.75)
+
+   # Add a streamer node that streams visualization events to our graph
+   [streamer_node] = graph.sequential(["VizEventStreamer"])
+   # stream on the same endpoint as the receiver is listening to
+   streamer_node.set_streamer_endpoint("tcp://0.0.0.0:40000")
+
+Now all events reaching the `streamer_node` will be transmitted and received by the receiving node in the GUI.
+
+--------------------------------
+Filtering Events With Predicates
+--------------------------------
+
+Some filters allow for setting the predicates they will use to let events through or discard them.
+One of these filters is the `MemberSelect` which only you filter events based on a whitelisted set
+of parameters.
+
+.. code-block:: python
+   :linenos:
+
+   graph = samna.graph.EventFilterGraph()
+   [filter] = graph.sequential(["Speck2fMemberSelect"])
+
+   filter.set_white_list([0,1,2], "layer") # only events from layers 0,1,2 will pass through
+
+=================
+Available Filters
+=================
+
+In addition to the available filters listed below, users can define their own filters as described in :doc:`jitFilters`. 
+For filters that can be instantiated for different boards, 
+the JIT built-in filters described :ref:`here <Built-in Filters>` provide a convenient alternative.
+
+------------------
+Member Select Node
+------------------
+
+.. py:class:: MemberSelect
+
+   Creates a filter node that filters events with specific attribute values from all events.
+
+   As different types of event can have the same attribute name, in order for :code:`MemberSelect` to filter on a single type of events, it is strongly suggested that events should be filtered by :code:`EventTypeFilter` first before passing them to :code:`MemberSelect`.
+
+   .. py:method:: void set_white_list(whiteList, attrName)
+
+      :param List[int] whiteList: Attribute values that are going to pass, events with other values will be discarded. Values should be of the same type of event member type, currently only two types are supported : :code:`int` and :code:`string`.
+      :param string attrName: The name of attribute in the event. e.g. if we are going to deal with :code:`layer` attribute, we can use :code:`"layer"`.
+
+   Available instances for different boards:
+
+   - ``Speck2fInputMemberSelect``: member select in Speck 2f input events, which are
+
+      - :class:`samna.speck2f.event.Spike`
+      - :class:`samna.speck2f.event.DvsEvent`
+      - :class:`samna.speck2f.event.KillSensorPixel`
+      - :class:`samna.speck2f.event.ResetSensorPixel`
+      - :class:`samna.speck2f.event.OutputModeSel`
+      - :class:`samna.speck2f.event.AverageSel`
+      - :class:`samna.speck2f.event.AsiRequest`
+      - :class:`samna.speck2f.event.ReadoutRequest`
+      - :class:`samna.speck2f.event.ScanChainValue`
+      - :class:`samna.speck2f.event.WriteNeuronValue`
+      - :class:`samna.speck2f.event.ReadNeuronValue`
+      - :class:`samna.speck2f.event.WriteWeightValue`
+      - :class:`samna.speck2f.event.ReadWeightValue`
+      - :class:`samna.speck2f.event.WriteBiasValue`
+      - :class:`samna.speck2f.event.ReadBiasValue`
+      - :class:`samna.speck2f.event.WriteRegisterValue`
+      - :class:`samna.speck2f.event.ReadRegisterValue`
+      - :class:`samna.speck2f.event.WriteFilterValue`
+      - :class:`samna.speck2f.event.ReadFilterValue`
+      - :class:`samna.speck2f.event.WriteSramValue`
+      - :class:`samna.speck2f.event.ReadSramValue`
+
+   - ``Speck2fOutputMemberSelect``: member select in Speck 2f output events, which are
+
+      - :class:`samna.speck2f.event.Spike`
+      - :class:`samna.speck2f.event.DvsEvent`
+      - :class:`samna.speck2f.event.InputInterfaceEvent`
+      - :class:`samna.speck2f.event.NeuronValue`
+      - :class:`samna.speck2f.event.BiasValue`
+      - :class:`samna.speck2f.event.WeightValue`
+      - :class:`samna.speck2f.event.RegisterValue`
+      - :class:`samna.speck2f.event.ReadoutValue`
+      - :class:`samna.speck2f.event.FilterValue`
+      - :class:`samna.speck2f.event.SramValue`
+      - :class:`samna.speck2f.event.FilterDvsEvent`
+      - :class:`samna.speck2f.event.FilterValueCurrent`
+      - :class:`samna.speck2f.event.FilterValuePrevious`
+      - :class:`samna.speck2f.event.ScanChainValue`
+
+   - ``PostClusteringEventMemberFilter``: member select in :class:`samna.clustering.events.PostClusteringEvent`
+
+---------------------------
+Background Noise Rater Node
+---------------------------
+
+.. py:class:: BackgroundNoiseRater
+
+   Calculate event rate of dvs events and spikes, which is :
+   
+   `dvs and spike event count` / (`last timestamp` - `first timestamp`)
+
+   .. py:method:: get_result()
+
+      :Returns: Get accumulated event rate since setup.
+
+   .. py:method:: get_result_per_polarity()
+
+      :Returns: Get event rate of two polarities since setup respectively.
+
+   .. py:method:: get_raw_result()
+
+      :Returns: Get event rate for each pixel, which is a two dimensional array of size (y scale, x scale).
+
+   .. py:method:: get_raw_result_per_polarity()
+
+      :Returns: Get event rate for each polarity and pixel, which is a three dimensional array of size (2, y scale, x scale).
+
+   .. py:method:: setup(x, y)
+
+      :param int x: The x scale to count.
+      :param int x: The y scale to count.
+
+      Clear accumulated data and set x scale and y scale, all dvs event and spike with x coordinate within [0, x - 1] and 
+      y coordinate within [0, y - 1] will be taken into account.
+
+   .. py:method:: reset()
+
+      Setup again with previous x scale and y scale.
+
+   Available instances for different boards:
+
+   * ``Speck2fBackgroundNoiseRater``: compute events rate for Speck 2f :class:`samna.speck2f.event.DvsEvent` 
+      and :class:`samna.speck2f.event.Spike`.
+
+------------
+Forward Node
+------------
+
+.. py:class:: Forward
+
+   Simply forwards all events.
+
+   Available instances for different boards:
+
+   * ``Speck2fForward``: forward all type of Speck 2f events.
+
+-------------------------
+Dvs To Viz Converter Node
+-------------------------
+
+.. py:class:: DvsToVizConverter
+
+   A filter node that filters DVS events and Spike events from all output events and convert them to :class:`samna.ui.DvsEvent` 
+   that are accepted by the :ref:`Samna Visualizer <Visualizer>`. If you wish to display DVS events on the visualizer, this node is essential. 
+   For instructions on how to use this node, please refer to :ref:`Displaying Events in the Visualizer`.
+
+   Available instances for different boards:
+
+   * ``Speck2fDvsToVizConverter``: converts events from Speck 2f :class:`~samna.speck2f.event.DvsEvent` 
+     and :class:`~samna.speck2f.event.Spike` to :class:`samna.ui.DvsEvent` for visualization.
+   * ``PostClusterEventToVizEvent``: converts events from :class:`samna.clustering.events.PostClusteringEvent` to :class:`samna.ui.DvsEvent` for visualization.
+   * ``CameraToVizConverter``: converts events from a Inivation camera or a PSEE camera to :class:`samna.ui.DvsEvent` for visualization.
+   * ``Dynapse1EventToVizConverter``: converts events from a Dynapse1 to :class:`samna.ui.DvsEvent` for visualization.
+
+---------------------
+Spike Collection Node
+---------------------
+
+.. py:class:: SpikeCollectionNode
+
+   Select spike events from the output events and categorize them into collections based on time intervals.
+
+   .. py:method:: set_interval_milli_sec(interval)
+
+      :param int interval: The time interval in milliseconds that we divide the spike events.
+
+   .. py:method:: get_interval_milli_sec()
+
+      :Returns: The time interval in milliseconds.
+
+   Available instances for different boards:
+
+   * ``Speck2fSpikeCollectionNode``: collect :class:`samna.speck2f.event.Spike` given a time interval.
+
+----------------
+Spike Count Node
+----------------
+
+.. py:class:: SpikeCountNode
+
+   Counts spike events and outputs :class:`samna.ui.SpikeCount` that can be visualized in the Visualizer.. 
+   It sums spike events in each collection grouping by feature value.
+
+   .. py:method:: set_feature_count(feature_count)
+
+      :param int feature_count: Feature value count. it should be set before this filter is applied. e.g. if 2 is set, then all feature value in spike events should be in [0, 1]
+
+   .. py:method:: get_feature_count()
+
+      :Returns: Feature value count.
+
+   Available instances for different boards:
+
+   * ``Speck2fSpikeCountNode``: count the number of :class:`samna.speck2f.event.Spike` events grouped by feature value and outputs :class:`samna.ui.SpikeCount` events. 
+
+---------------------
+Majority Readout Node
+---------------------
+
+.. py:class:: MajorityReadoutNode
+
+   Calculate readout events from spike collections in specific way and outputs :class:`samna.ui.Readout` that can be visualized in the Visualizer..
+
+   Available instances for different boards:
+
+   * ``Speck2fMajorityReadoutNode``: calculate readout events from :class:`samna.speck2f.event.Spike` events and outputs :class:`samna.ui.Readout` events.
+
+---------------------------------
+Measurement To Viz Converter Node
+---------------------------------
+
+.. py:class:: MeasurementToVizConverter
+
+   A filter that transform power measurement events to :class:`samna.ui.Measurement` that can be visualized in the Visualizer.
+
+   Available instances for different boards:
+
+   - ``MeasurementToVizConverter``: transform power measurement events to :class:`samna.ui.Measurement` that can be visualized in the Visualizer.
+
+-----------------------------
+Camera To Chip Dvs Event Node
+-----------------------------
+
+.. py:class:: cameraToChipExternalDvsEvent
+
+   Creates a filter node that converts from Inivation or PSEE camera DVS events to chip input events.
+
+   * ``CameraToSpeck2fInput``: The :class:`samna.camera.event.DvsEvent` are converted 
+     to :class:`samna.speck2f.event.DvsEvent` that can be fed to the chip.
+
+----------------------
+Event Type Filter Node
+----------------------
+
+.. py:class:: EventTypeFilter
+
+   Pass or reject specific type of event from all types of event.
+
+   .. py:method:: get_available_types()
+
+      :Returns: a str list which contains all available names for event types, the first one is the variant type name.
+
+   .. py:method:: set_desired_type(new_desired_type)
+
+   :param str new_desired_type: the type name which indicates the event type to pass, only this type of events will pass the filter node.
+
+   .. py:method:: get_desired_type()
+
+      :Returns: the desired event type name.
+
+   .. py:method:: set_rejected_type(new_rejected_type)
+
+   :param str new_rejected_type: the type name which indicates the event type to reject, all other types of events will pass the filter node.
+
+   .. py:method:: get_rejected_type()
+
+      :Returns: the rejected event type name.
+
+   Available instances for different boards:
+
+   * ``Speck2fInputEventTypeFilter``: can filter one type of events from all Speck 2f input events, which are
+
+      - :class:`speck2f::event::Spike <samna.speck2f.event.Spike>`
+      - :class:`speck2f::event::DvsEvent <samna.speck2f.event.DvsEvent>`
+      - :class:`speck2f::event::KillSensorPixel <samna.speck2f.event.KillSensorPixel>`
+      - :class:`speck2f::event::ResetSensorPixel <samna.speck2f.event.ResetSensorPixel>`
+      - :class:`speck2f::event::OutputModeSel <samna.speck2f.event.OutputModeSel>`
+      - :class:`speck2f::event::AverageSel <samna.speck2f.event.AverageSel>`
+      - :class:`speck2f::event::AsiRequest <samna.speck2f.event.AsiRequest>`
+      - :class:`speck2f::event::ReadoutRequest <samna.speck2f.event.ReadoutRequest>`
+      - :class:`speck2f::event::ScanChainValue <samna.speck2f.event.ScanChainValue>`
+      - :class:`speck2f::event::WriteNeuronValue <samna.speck2f.event.WriteNeuronValue>`
+      - :class:`speck2f::event::ReadNeuronValue <samna.speck2f.event.ReadNeuronValue>`
+      - :class:`speck2f::event::WriteWeightValue <samna.speck2f.event.WriteWeightValue>`
+      - :class:`speck2f::event::ReadWeightValue <samna.speck2f.event.ReadWeightValue>`
+      - :class:`speck2f::event::WriteBiasValue <samna.speck2f.event.WriteBiasValue>`
+      - :class:`speck2f::event::ReadBiasValue <samna.speck2f.event.ReadBiasValue>`
+      - :class:`speck2f::event::WriteRegisterValue <samna.speck2f.event.WriteRegisterValue>`
+      - :class:`speck2f::event::ReadRegisterValue <samna.speck2f.event.ReadRegisterValue>`
+      - :class:`speck2f::event::WriteFilterValue <samna.speck2f.event.WriteFilterValue>`
+      - :class:`speck2f::event::ReadFilterValue <samna.speck2f.event.ReadFilterValue>`
+      - :class:`speck2f::event::WriteSramValue <samna.speck2f.event.WriteSramValue>`
+      - :class:`speck2f::event::ReadSramValue <samna.speck2f.event.ReadSramValue>`
+
+   * ``Speck2fOutputEventTypeFilter``: can filter one type of events from all Speck 2f output events, which are
+
+      - :class:`speck2f::event::Spike <samna.speck2f.event.Spike>`
+      - :class:`speck2f::event::DvsEvent <samna.speck2f.event.DvsEvent>`
+      - :class:`speck2f::event::InputInterfaceEvent <samna.speck2f.event.InputInterfaceEvent>`
+      - :class:`speck2f::event::NeuronValue <samna.speck2f.event.NeuronValue>`
+      - :class:`speck2f::event::BiasValue <samna.speck2f.event.BiasValue>`
+      - :class:`speck2f::event::WeightValue <samna.speck2f.event.WeightValue>`
+      - :class:`speck2f::event::RegisterValue <samna.speck2f.event.RegisterValue>`
+      - :class:`speck2f::event::ReadoutValue <samna.speck2f.event.ReadoutValue>`
+      - :class:`speck2f::event::FilterValue <samna.speck2f.event.FilterValue>`
+      - :class:`speck2f::event::SramValue <samna.speck2f.event.SramValue>`
+      - :class:`speck2f::event::FilterDvsEvent <samna.speck2f.event.FilterDvsEvent>`
+      - :class:`speck2f::event::FilterValueCurrent <samna.speck2f.event.FilterValueCurrent>`
+      - :class:`speck2f::event::FilterValuePrevious <samna.speck2f.event.FilterValuePrevious>`
+      - :class:`speck2f::event::ScanChainValue <samna.speck2f.event.ScanChainValue>`
+
+   * ``XyloImuOutputEventTypeFilter``: can filter one type of events from all Xylo IMU output events, which are
+
+      - :class:`xylo::event::Spike <samna.xylo.event.Spike>`
+      - :class:`xylo::event::Readout <samna.xylo.event.Readout>`
+      - :class:`xylo::event::RegisterValue <samna.xylo.event.RegisterValue>`
+      - :class:`xylo::event::MemoryValue <samna.xylo.event.MemoryValue>`
+      - :class:`xylo::event::MembranePotential <samna.xylo.event.MembranePotential>`
+      - :class:`xylo::event::SynapticCurrent <samna.xylo.event.SynapticCurrent>`
+      - :class:`xylo::event::HiddenSpikeCount <samna.xylo.event.HiddenSpikeCount>`
+      - :class:`xylo::event::Version <samna.xylo.event.Version>`
+      - :class:`xylo::event::Interrupt <samna.xylo.event.Interrupt>`
+
+   * ``Mc3632OutputEventTypeFilter``: can filter one type of events from all Mc3632 output events, which are
+
+      - :class:`unifirm::modules::mc3632::RegisterValue <samna.unifirm.modules.mc3632.RegisterValue>`
+      - :class:`events::Acceleration <samna.events.Acceleration>`
+
+   * ``ClusterOutputEventTypeFilter``: can filter one type of cluster output events, currently only one
+  
+     - :class:`clustering::events::PostClusteringEvent <samna.clustering.events.PostClusteringEvent>`
+
+-----------------------
+Viz Event Streamer Node
+-----------------------
+
+.. py:class:: VizEventStreamer
+
+   Creates a tcp sender node that sends raw image events for visualization.
+
+   .. py:method:: set_streamer_endpoint(newEndpoint)
+
+   Set the sending tcp endpoint which will be bound by the streamer.
+
+   .. py:method:: get_connected_receiver_count()
+
+   :Returns: Get receiver count connected to this streamer.
+
+   .. py:method:: wait_for_receiver_count(count, timeout_milli_sec)
+
+   :Returns: Actual receivers count after wait.
+
+   Wait for receivers count to be greater than or equal to a specific number
+
+   .. py:method:: is_receiver_connected(receiver_id)
+
+   :Returns: Whether specific receiver is connected.
+
+   Available instances for different boards:
+
+   - ``VizEventStreamer``: Stream :class:`samna.ui.DvsEvent`, :class:`samna.ui.SpikeCount`, :class:`samna.ui.Readout`, 
+     :class:`samna.ui.Measurement`, :class:`samna.ui.ActivityPlotConfiguration`, :class:`samna.ui.ReadoutPlotConfiguration`,
+     :class:`samna.ui.LinePlotConfiguration`, :class:`samna.ui.FramePlotConfiguration`, :class:`samna.ui.PlotConfiguration`,
+     :class:`samna.events.Frame` events to :class:`VizEventReceiver`.
+
+-----------------------
+Viz Event Receiver Node
+-----------------------
+
+.. py:class:: VizEventReceiver
+
+   Creates a tcp receiver node that receives raw image events for visualization.
+
+   .. py:method:: set_receiver_endpoint(endpoint)
+
+   Set the receiving tcp endpoint which is used to connect streamer.
+
+   .. py:method:: is_connected()
+
+   :Returns: If current receiver is connected to a streamer or not.
+
+   .. py:method:: wait_for_connect(timeout_milli_sec)
+
+   :Returns: Connected or not.
+
+   Wait to be connected or timeout.
+
+   .. py:method:: reconnect()
+
+   Reconnect using previous endpoint.
+
+   .. py:method:: get_id()
+
+   :Returns: Get id string of this receiver.
+
+   Available instances for different boards:
+
+   - ``VizEventReceiver``: Receive :class:`samna.ui.DvsEvent`, :class:`samna.ui.SpikeCount`, :class:`samna.ui.Readout`, 
+     :class:`samna.ui.Measurement`, :class:`samna.ui.ActivityPlotConfiguration`, :class:`samna.ui.ReadoutPlotConfiguration`,
+     :class:`samna.ui.LinePlotConfiguration`, :class:`samna.ui.FramePlotConfiguration`, :class:`samna.ui.PlotConfiguration`,
+     :class:`samna.events.Frame` events from :class:`VizEventStreamer`.
+
+---------------
+Event Crop Node
+---------------
+
+.. py:class:: EventCrop
+
+   Creates a cropping filter for DVS type events.
+   Events within the region of interested will be recentered in the output image space
+   and forwarded. Events outside will be dropped.
+
+   .. py:method:: set_roi(xtl, ytl, xbr, ybr)
+
+      Set the region of interest that will be cropped out of the input image space.
+      The region is defined using the top left and bottom right corners of a rectangle.
+      The region of interest defines the output image space which spans x coordinates [xtl, xbr]
+      and y coordinates [ytl, ybr].
+
+      :param int xtl: Top left x coordinate of the cropping rectangle.
+      :param int ytl: Top left y coordinate of the cropping rectangle.
+      :param int xbr: Bottom right x coordinate of the cropping rectangle.
+      :param int ybr: Bottom right y coordinate of the cropping rectangle.
+
+   Available instances:
+
+   * ``DvsEventCrop``: process and outputs :class:`samna.camera.event.DvsEvent`.
+   * ``Speck2fDvsEventCrop``: process and outputs :class:`samna.speck2f.event.DvsEvent`.
+   * ``Speck2fSpikeEventCrop``: process and outputs :class:`samna.speck2f.event.Spike`.
+   * ``PostClusteringEventCrop``: process and outputs :class:`samna.clustering.events.PostClusteringEvent`.
+
+-----------------------
+Dvs Event Decimate Node
+-----------------------
+
+.. py:class:: DvsEventDecimate
+
+   Creates a decimate filter for camera DVS events.
+   The decimate filter uses the decimation fraction M/L to
+   drop events in the stream.
+
+   A fraction of M/L will let through L out of M events.
+
+   Example: Let M/L be 10/1. Then 1 out of every 10 events will be let
+   through.
+
+   Note: Only L=1 is currently supported.
+
+   .. py:method:: set_decimation_fraction(M, L)
+
+      :param int M: The nominator in the decimation fraction.
+      :param int L: The denominator in the decimation fraction.
+
+   Available instances:
+
+   - ``DvsEventDecimate``: process and outputs :class:`samna.camera.event.DvsEvent`.
+
+------------------
+Event Rescale Node
+------------------
+
+.. py:class:: EventRescaleNode
+
+   Creates a rescaling filter node for camera DVS events.
+
+   The rescale node scales the input image by :code:`width_coeff` and :code:`height_coeff`, in the way of :code:`width = width / width_coeff` and :code:`height = height / height_coeff`.
+
+   This filter does not perform interpolation and non integer scaling factors are therefore
+   unlikely to work well as events will not be spaced evenly in the output image space.
+
+   .. py:method:: set_rescaling_coefficients(width_coeff, height_coeff)
+
+      :param float width_coeff: The coefficient to scale width.
+      :param float height_coeff: The coefficient to scale height.
+
+   .. py:method:: reset()
+
+      Reset width and height coefficient to 1.
+
+   Available instances:
+
+   * ``DvsEventRescale``: process and outputs :class:`samna.camera.event.DvsEvent`.
+   * ``PostClusteringEventRescale``: process and outputs :class:`samna.clustering.events.PostClusteringEvent`.
+
+-----------------------------
+Dvs Event Cluster Filter Node
+-----------------------------
+   
+.. py:class:: DvsEventClusterFilterNode
+
+   Spatial and temporal filter of events.
+
+   .. py:method:: set_spatial_relation_threshold(threshold)
+
+      :param int threshold: Threshold to determine if event is spatially related to the collected events.
+
+   .. py:method:: set_spatial_distance_threshold(threshold)
+
+      :param int threshold: Distance that determines if two events are spatially related.
+
+   .. py:method:: set_black_noise_timeconstant(timeconstant)
+
+      :param int timeconstant: Time in us that get suppressed by black noise filter.
+
+   .. py:method:: set_black_noise_distance(distance)
+
+      :param int distance: Distance of events to compare to determines black noise.
+
+   .. py:method:: set_time_collected_events(time)
+
+      :param int time: Maximum time in us events will be stored in the buffer.
+
+   .. py:method:: get_collected_events()
+
+      :Returns: The collected events.
+
+   .. py:method:: get_collected_events_length()
+
+      :returns: Number of currently collected events.
+
+   .. py:method:: reset()
+
+      Clears the collected event buffer.
+
+   Available instances:
+
+   * ``DvsEventClusterFilter``: process and outputs :class:`samna.camera.event.DvsEvent`. 
+
+---------------------------------------
+Dvs Event Efficient Cluster Filter Node
+---------------------------------------
+
+.. py:class:: DvsEventEfficientClusterFilterNode
+
+   A more efficient implementation of the :code:`DvsEventClusterFilterNode`.
+
+   .. py:method:: set_spatial_relation_threshold(threshold)
+
+      :param int threshold: Threshold to determine if event is spatially related to the collected events.
+
+   .. py:method:: set_spatial_distance_threshold(threshold)
+
+      :param int threshold: Distance that determines if two events are spatially related.
+
+   .. py:method:: set_black_noise_timeconstant(timeconstant)
+
+      :param int timeconstant: Time in us that get suppressed by black noise filter.
+
+   .. py:method:: set_number_events_to_activate_black_noise_filter(count)
+
+      :param int count: Number of events necessary to activate black noise filter.
+
+   .. py:method:: set_maximum_collected_events(count)
+
+      :param int count: Maximum number of events to process in the filter.
+
+   .. py:method:: set_time_collected_events(time)
+
+      :param int time: Maximum time in us events will be stored in the buffer.
+
+   .. py:method:: get_collected_events()
+
+      :Returns: The collected events.
+
+   .. py:method:: get_collected_events_length()
+
+      :returns: Number of currently collected events.
+
+   .. py:method:: reset()
+
+      Clears the collected event buffer.
+
+   Available instances:
+
+   - ``DvsEventEfficientClusterFilter``: process and outputs :class:`samna.camera.event.DvsEvent`. 
+
+-----------------------------
+Image Reconstruct Filter Node
+-----------------------------
+
+.. py:class:: ImageReconstructFilter
+
+   The `ImageReconstructFilter` accumulates streams of events to reconstruct an image.
+   The filter accepts both DVS or spike events as input and produces a `samna.events.Frame` event as output.
+   The algorithm is an accumulator with exponential decay and is tunable with parameters.
+   Events fed to the filter, must have a monotonically increasing time stamp. Out of order events are ignored.
+   
+   .. py:method:: reset()
+
+      Resets the internal pixel potentials and timing state of the filter. 
+      Parameters changed through setters are not reset to their defaults.
+
+   .. py:method:: set_filter_size(size_x, size_y)
+
+      :param int size_x: Width of the filter resolution.
+      :param int size_y: Height of the filter resolution.
+
+   .. py:method:: set_event_contribution(contribution)
+
+      :param float contribution: Contribution amount of a single event.
+
+   .. py:method:: set_decay_contribution(contribution)
+
+      :param float contribution: Rate of decay.
+
+   .. py:method:: set_potentials(min_potential, max_potential)
+
+      Set the potential limits for the pixels.
+      max_potential must be strictly greater than min_potential.
+      Calling this method resets the internal state of the filter.
+
+      :param float min_potential: Minimum potential of a pixel.
+      :param float max_potential: Maximum potential of a pixel.
+
+   .. py:method:: set_synchronous_decay(enable)
+
+      :param bool enable: Enable synchronous decay when generating a frame.
+
+   .. py:method:: set_frame_rate(limit)
+
+      :param int limit: Maximum number of frames per second to generate.
+
+   Available instances:
+
+   * ``Speck2fDvsImageReconstructFilter``: process :class:`samna.speck2f.event.DvsEvent` or :class:`samna.speck2f.event.Spike` and 
+     outputs :class:`samna.events.Frame` events.
+   * ``DvsEventImageReconstructFilter``: process :class:`samna.camera.event.DvsEvent` and outputs :class:`samna.events.Frame` events.
+
+---------------------------
+Dynapse1 Neuron Select Node
+---------------------------
+
+.. py:class:: Dynapse1NeuronSelect
+
+   Pass spikes of selected neurons from all received spikes.
+
+   .. py:method:: set_neurons(neuron_ids)
+
+      Select neurons to be monitored.
+
+      :param list[tuple(int,int,int)] neuron_ids: list of neuron ids (chip,core,neuron) of selected neurons to be monitored.
+
+   .. py:method:: reset()
+
+      Reset filter to pass all spikes.
+
+   * ``Dynapse1NeuronSelect``
+
+--------------------------
+Dynapse1 Neuron Trace Node 
+--------------------------
+
+.. py:class:: Dynapse1NeuronTrace
+
+   Implementation of event-driven exponentially-decaying spiking 
+   traces of a list of monitored neurons, which can be used to implement
+   STDP-like learning algorithms or to track the instantaneous firing rates.
+
+   The Dynapse1NeuronTrace node receives spikes, maintains the neuron traces of monitored neurons,
+   and generates samna.dynapse1.Dynapse1Trace events whenever a trigger neuron fires. The neuron
+   traces are updated as the following:
+
+   - When a monitored neuron fires, its trace value will be increased according to 
+   - When the trigger neuron spikes, all traces of monitored neurons be decreased/decayed 
+     exponentially from the last update point.
+
+   The monitored neurons, trigger neurons and time constants of the exponentially-decaying traces
+   can be set using function set_neurons.
+   Also, Dynapse1NeuronTrace has the following private attributes that affect the trace 
+   tracking which can be checked/configured by the get/set functions below.
+   
+   .. py:attribute:: method
+
+      The way how the trace is increased when a monitor neuron spikes.
+      Default value is "increase_by".
+      - "increase_by": increase by a constant value.
+      - "increase_to": increase to a constant value.
+
+      :type: string
+
+   .. py:attribute:: increment
+
+      The constant value of trace increase. Default value is 1.
+
+      :type: float
+
+   .. py:attribute:: value_only_at_trigger
+
+      It's "true" by default so that the filter node only generates
+      samna.dynapse1.Dynapse1Trace event with traces of all monitored neurons only when a trigger neuron fires.
+      If it's "false", when a monitored neurons fires, a samna.dynapse1.Dynapse1Trace event with only 
+      trace of that neuron will be generated additionally by the filter. It can be useful when you want
+      to observe the detailed trajectory of the traces.
+
+      :type: bool
+
+   .. py:attribute:: value_before_spike
+
+      It's "true" by default so that when a monitored neuron spikes, 
+      the trace value before the increase will be stored, otherwise the trace value after increment will
+      be captured. For STDP algorithms, "true" is needed for the traces.
+
+      :type: bool
+
+   .. py:method:: set_neurons(trace_map_neuron_ids, trigger_neuron_ids, tau_list)
+
+      Select neurons to be monitored.
+
+      :param list[tuple(int,int,int)] trace_map_neuron_ids: list of neuron ids
+        (chip,core,neuron) of selected neurons to be monitored.
+      :param list[tuple(int,int,int)] trigger_neuron_ids: list of neuron ids
+        (chip,core,neuron) of selected neurons that trigger trace event generation.
+      :param list[int] tau_list: list of time constants for traces of monitored neurons,
+        in microsecond.
+
+   .. py:method:: set_trace_parameters(method, increment)
+
+      Change method and increment.
+
+      :param str method: string of increase method, can be "increase_by" or "increase_to".
+      :param float increment: constant value of the trace increase.
+
+   .. py:method:: set_tau_list(trace_neuron_ids, tau_list)
+
+      Change trace time constants of some monitored neurons.
+
+      :param list[tuple(int,int,int)] trace_neuron_ids: list of neuron ids
+        (chip,core,neuron) of some monitored neurons.
+      :param list[int] tau_list: list of time constants, in microsecond.
+
+   .. py:method:: set_tau(tau)
+
+      Set time constants for all neuron traces.
+      
+      :param int tau: time constant, in microsecond.
+
+   .. py:method:: set_value_only_at_trigger(value_only_at_trigger)
+
+      Change value_only_at_trigger.
+
+      :param bool value_only_at_trigger: value_only_at_trigger.
+
+   .. py:method:: set_value_before_spike()
+
+      Change value_before_spike.
+
+      :param bool value_before_spike: value_before_spike.
+
+   .. py:method:: get_tau_list(trace_neuron_ids)
+
+      Get tau_list of trace_neuron_ids.
+
+      :param list[tuple(int,int,int)] trace_neuron_ids: list of monitored neuron ids in trace map.
+
+      :returns:
+         list[int]: tau_list of trace_neuron_ids.
+
+   .. py:method:: get_method()
+
+      Get method of trace increase.
+
+      :returns:
+         str: method.
+
+   .. py:method:: get_increment()
+
+      Get constant value of trace increase.
+
+      :returns:
+         float: increment.
+
+   .. py:method:: get_value_only_at_trigger()
+
+      Get value_only_at_trigger.
+
+      :returns:
+         bool: value_only_at_trigger.
+
+   .. py:method:: get_value_before_spike()
+
+      Get value_before_spike.
+
+      :returns:
+         bool: value_before_spike.
+
+
+   .. py:method:: reset_traces_to_zero()
+
+      Reset all traces values to 0.
+
+   .. py:method:: reset()
+
+      Clear out stored trace map, delete monitored neurons and trigger neurons lists.
+      Reset the trace parameters (increment, method, value_only_at_trigger and 
+      value_before_spike) to default values.
+
+   * ``Dynapse1NeuronTrace``
+
+=====
+Sinks
+=====
+
+.. py:class:: BasicSinkNode_<T>
+
+   This filter is defined for :code:`T` for each model, 
+   the detailed API documentation can be find in :ref:`Module content`.
+
+   A basic sink node that captures any output event from a model. 
+   Events received by the sink node will accumulate until they are read or cleaned
+   from the sink with one of its methods.
+        
+   Please be aware that if you don't read or clean it repeatedly, 
+   it may **consume all available memory** due to the accumulation of events.
+
+   .. py:method:: get_events()
+
+      Clear the event accumulation buffer and return previously accumulated events.
+
+      This method takes some time to return if the accumulated events are huge.
+
+      :return: A list of output events of that model.
+
+   .. py:method:: get_events_blocking(timeout)
+
+      Clear the event accumulation buffer and return previously accumulated events.
+      If there are no events available, wait for the specified timeout. If no timeout is specified, wait indefinitely.
+
+      This method takes some time to return if the accumulated events are huge.
+
+      :param int timeout: The timeout in milliseconds, no timeout by default.
+      :return: A list of events or empty list if timeout is reached.
+
+   .. py:method:: get_n_events(n, timeout)
+
+      Get the specified number of events from the event accumulation buffer.
+      If there are not enough events available, wait for the specified timeout. If no timeout is specified, wait indefinitely.
+      If after the timeout there are still not enough events available, return all available events.
+
+      This method takes some time to return if the accumulated events are huge.
+
+      :param int n: Number of events to wait for.
+      :param int timeout: The timeout in milliseconds, no timeout by default.
+      :return: A list with at most `n` events.
+
+   .. py:method:: clear_events()
+
+      Directly clear the event accumulation buffer without returning events.
+

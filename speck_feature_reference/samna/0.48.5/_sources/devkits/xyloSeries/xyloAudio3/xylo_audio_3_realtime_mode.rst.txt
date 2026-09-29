@@ -1,0 +1,106 @@
+**************************
+XyloAudio 3 Real-Time Mode
+**************************
+
+In Real-Time mode, XyloAudio 3 continuously processes events as they are received.
+Since the exact timing of event arrival is uncertain, the chip must be configured to receive input
+directly from one of the onboard microphones instead of event-based input.
+
+Once processing begins, the chip operates autonomously, collecting input during one timestep and
+processing it in the next. After processing each timestep, the chip outputs all generated ``Spike`` events
+along with a ``Readout`` event containing the output state.
+Interaction with the chip during this period is not possible.
+
+To stop the processing and regain control of the chip, you must send a ``TriggerProcessing`` event.
+
+Below is an example of how to use Real-Time mode with a basic input source configuration.
+For more detailed configuration options, refer to the :ref:`samna.xyloAudio3.configuration` documentation.
+The example uses the following packages:
+::
+
+    - samna                 0.39.6
+
+.. code-block:: python
+
+    import samna
+    import time
+
+    # Open the device and connect the source and sink nodes so we can communicate with Xylo.
+    board = samna.device.open_device("XyloAudio3TestBoard")
+    xylo = board.get_model()
+    source = samna.graph.source_to(xylo.get_sink_node())
+    sink = samna.graph.sink_from(xylo.get_source_node())
+
+    # In Real-Time mode we have to specify a timestep duration.
+    # Default clock frequency was not changed, so we use that to calculate `tr_wrap`.
+    dt_s = 0.2 # 200 milliseconds
+    board_config = samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig()
+    main_clock_frequency_hz = board_config.main_clock_frequency
+    tr_wrap = main_clock_frequency_hz * dt_s
+
+    # Configure Xylo in Real-Time mode and configure the timestep duration.
+    xylo_config = samna.xyloAudio3.configuration.XyloConfiguration()
+    xylo_config.operation_mode = samna.xyloAudio3.OperationMode.RealTime
+    xylo_config.time_resolution_wrap = int(tr_wrap)
+
+    # Define a simple network configuration
+    input_count = 3
+    hidden_count = 5
+    output_count = 2
+    xylo_config.input.weights = [[1] * hidden_count] * input_count
+    xylo_config.hidden.weights = [[1] * hidden_count] * hidden_count
+    xylo_config.hidden.neurons = [samna.xyloAudio3.configuration.HiddenNeuron(threshold=16, v_mem_decay=1, i_syn_decay=1)] * hidden_count
+    xylo_config.readout.neurons = [samna.xyloAudio3.configuration.OutputNeuron(threshold=16, v_mem_decay=1, i_syn_decay=1)] * output_count
+    xylo_config.readout.weights = [[1] * output_count] * hidden_count
+
+    # Configure the input source.
+    use_digital_mic = True
+    if use_digital_mic:
+        # Choose PDM as input source.
+        xylo_config.input_source = samna.xyloAudio3.InputSource.DigitalMicrophone
+        # We need to set `clock_direction` to 1 (Xylo output), because there is no external clock.
+        xylo_config.digital_frontend.pdm_preprocessing.clock_direction = 1
+        xylo_config.digital_frontend.pdm_preprocessing.clock_edge = 0
+        # Xylo clock frequency for PDM sampling can be influenced here.
+        xylo_config.debug.sdm_clock_ratio = 24
+    else:
+        # Choose ADC as input source.
+        xylo_config.input_source = samna.xyloAudio3.InputSource.AnalogMicrophone
+        # Disable automatic gain control by setting a fixed gain.
+        xylo_config.analog_frontend.automatic_gain_control.enable_pga_fixed_gain = True
+        xylo_config.analog_frontend.automatic_gain_control.pga_fixed_gain_index_value = 0
+
+    xylo.apply_configuration(xylo_config)
+
+    # Communication with the device is asynchronous, so we don't know when the configuration is finished.
+    # Normally this is not a problem, because events are guaranteed to be sent in order.
+    # But for this script we want to let Xylo run for a specific amount of time, so we need to synchronise somehow,
+    # the easiest way is to read a register and wait for the response.
+    source.write([samna.xyloAudio3.event.ReadRegisterValue(address=0)])
+    events = sink.get_n_events(1, timeout=1000)
+    assert len(events) == 1 and isinstance(events[0], samna.xyloAudio3.event.RegisterValue)
+
+    # Now we are ready to start processing, the chip keeps running indefinitely after this command.
+    source.write([samna.xyloAudio3.event.TriggerProcessing()])
+
+    # Normally one would continuously read the events and process them (e.g. plotting).
+    # But for this example we just read events for 3 seconds.
+    last_timestep = -1
+    read_until = time.time() + 3.0
+    while (now:= time.time()) < read_until:
+        remaining_time_ms = (read_until - now) * 1000
+        events = sink.get_events_blocking(int(remaining_time_ms))
+        if events:
+            print("Received: ", events)
+            for ev in events:
+                if isinstance(ev, samna.xyloAudio3.event.Readout):
+                    last_timestep = ev.timestep
+
+    # With a 200ms timestep, around 15 timesteps should have passed in 3 seconds
+    # However, this can vary due to communication delays, so can not be relied upon
+    print(f"Last timestep: {last_timestep}")
+
+    print("Continuing in Real-Time mode...")
+    # Xylo will keep running in Real-Time mode indefinitely
+    # To stop, you can use `source.write([samna.xyloAudio3.event.TriggerProcessing(target_timestep=0)])`
+    # or reapply a configuration

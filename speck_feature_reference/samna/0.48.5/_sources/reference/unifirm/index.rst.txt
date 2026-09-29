@@ -1,0 +1,25 @@
+#############
+samna.unifirm
+#############
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   adc/index
+   dac/index
+   modules/index
+   monitor/index
+   timestamp/index
+   waveformGenerator/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm
+   :members:
+   :show-inheritance:
+

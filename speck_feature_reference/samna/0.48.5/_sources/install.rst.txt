@@ -1,0 +1,144 @@
+#######
+Install
+#######
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+Samna is available on pypi. To install using pip:
+
+**Method one**: install shim of samna from pypi. when first import, real samna of corresponding version will be installed automatically, the shim will be replaced by the real samna, so you can use it directly as real samna. 
+
+.. code-block:: bash
+
+   pip install samna
+   import samna
+
+
+**Method two**: install samna from specific remote source.
+
+.. code-block:: bash
+
+   pip install samna --index-url https://gitlab.com/api/v4/projects/27423070/packages/pypi/simple
+
+Note that pip will not automatically upgrade samna if it is already installed.
+To do that you will need to add the :code:`--upgrade` flag.
+
+Samna depends on some basic system packages, you need to install them before import samna:
+
+* ubuntu : :code:`apt install mesa-common-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libglu1-mesa-dev libxcb-dri2-0-dev libxcb-dri3-dev libxcb-present-dev libxcb-sync-dev libx11-xcb-dev libxcb-glx0-dev`
+
+* centos : :code:`yum install  libXrandr libXi  libXinerama libXcursor libGL mesa-libGL-devel mesa-libGLU`
+
+======================
+OS and Python Versions
+======================
+
+Samna is currently available for Linux with libc >= 2.28 and MacOS >= 13.3.
+
+Samna is distributed for Python 3.9-3.13 on Linux and 3.9-3.13 on MacOS.
+
+For Windows users have a look at :ref:`wsl_support`.
+
+.. _udev_rules:
+
+===========================
+Udev Rules on Linux Systems
+===========================
+
+You will probably need to add the following udev rules in order for Samna to detect
+any devices connected to your system.
+
+For SynSense devices, the following rules should be added to a file in :code:`/etc/udev/rules.d`:
+
+.. code-block:: text
+
+   SUBSYSTEM=="usb", ATTR{idVendor}=="04b4", MODE="0666"
+   SUBSYSTEM=="usb", ATTR{idVendor}=="152a", MODE="0666"
+   SUBSYSTEM=="usb", ATTR{idVendor}=="337d", MODE="0666"
+
+Executing the ``install-synsense-rules`` script distributed with samna will add these rules.
+
+:download:`Or download the file here <../extras/60-synsense.rules>` and move it to the directory mentioned above.
+
+After adding the rules, udev needs to be reloaded to use the new rules.
+
+.. code-block:: text
+
+   udevadm control --reload-rules
+   udevadm trigger
+
+
+.. _wsl_support:
+
+==============================
+WSL Support **(experimental)**
+==============================
+
+Samna 0.48.0 introduces **experimental support** for WSL on Windows, allowing Samna running in WSL
+to use devices connected to the Windows PC.
+
+To access USB devices in WSL, you need to install
+`usbipd-win <https://github.com/dorssel/usbipd-win>`_. Follow the instructions there to attach a USB
+device to a WSL distribution. Please keep in mind that WSL is a Linux system, so the
+:ref:`udev_rules` apply.
+
+Once the USB device shows up in WSL under ``lsusb``, you can connect normally with the
+:ref:`Device Controller`.
+
+.. note::
+
+   Networking on WSL mostly works, but is still a major work in progress.  
+   If you encounter problems with the Samna visualizer, keep in mind that it uses TCP sockets.  
+   Ensure that WSL is configured so that you can connect to socket applications inside WSL.
+
+
+=================
+Supported Devices
+=================
+
+You can use :code:`lsusb` command on Linux to see if a specific device can be discovered by Samna:
+
+.. code-block:: text
+
+   Bus 002 Device 003: ID 05e3:0620 Genesys Logic, Inc. USB3.1 Hub
+   Bus 002 Device 022: ID 337d:5bc8
+   Bus 002 Device 002: ID 05e3:0620 Genesys Logic, Inc. USB3.1 Hub
+
+For example, :code:`337d:5bca` is a typical id for Speck2fDevKit.
+
+However, if you see something has VID:PID :code:`04b4:00f1`:
+
+.. code-block:: text
+
+   Bus 001 Device 119: ID 04b4:00f1 Cypress Semiconductor Corp. Speck2fDevKit
+
+Then you connected this device to a USB 2 port which can't work with Samna,
+please ensure that you are using a USB 3 compatible cable and connect it to a USB 3 port.
+
+Here is a list of device name (used to open a device), vendor id and product id for all supported devices:
+
+============================  =========  ==========
+supported device name         vendor id  product id
+============================  =========  ==========
+Speck2eTestBoard              04b4       5bc7
+Speck2etTestBoard             04b4       5bc7
+Speck2eDevKit                 337d       5bc8
+Speck2fCharacterizationBoard  337d       5bc8
+XyloA2TestBoard               04b4       5bc2
+Davis240                      152a       841b
+Davis346                      152a       841a
+DVXplorer                     152a       8419
+PSeeCamera                    04b4       00f4
+Dynapse1DevKit                --         --
+DYNAP-SE2 DevBoard            151f       012b
+DYNAP-SE2 Stack               151f       0130
+Speck2fModuleDevKit           337d       5bc9
+Speck2fDevKit                 337d       5bca
+Speck2fLcc84LoulanBoard       337d       5bcb
+XyloImuTestBoard              337d       5bc8
+XyloAudio3TestBoard           337d       5bc8
+Speck2fModuleLoulanBoard      337d       5bcb
+Speck2fCharQiuciBoard         337d       5bcc
+============================  =========  ==========

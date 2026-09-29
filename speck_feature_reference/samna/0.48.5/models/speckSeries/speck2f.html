@@ -1,0 +1,742 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speck 2f &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Speck 2e" href="speck2e.html" />
+    <link rel="prev" title="Speck Series" href="summary.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Chip Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../models.html#initializing-a-chip-model">Initializing a Chip Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models.html#configuration-management">Configuration Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models.html#event-stream-handling">Event Stream Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models.html#common-model-functions">Common Model Functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../models.html#supported-chips-series">Supported Chips &amp; Series</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="summary.html">Speck Series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="summary.html#supported-speck-models">Supported Speck Models</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloSeries/summary.html">Xylo Series</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../models.html">Chip Models</a></li>
+          <li class="breadcrumb-item"><a href="summary.html">Speck Series</a></li>
+      <li class="breadcrumb-item active">Speck 2f</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/models/speckSeries/speck2f.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="speck-2f">
+<h1>Speck 2f<a class="headerlink" href="speck2f.html#speck-2f" title="Link to this heading"></a></h1>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="speck2f.html#key-features" id="id4">Key Features</a></p>
+<ul>
+<li><p><a class="reference internal" href="speck2f.html#dvs-layer" id="id5">DVS Layer</a></p></li>
+<li><p><a class="reference internal" href="speck2f.html#cnn-layer" id="id6">CNN Layer</a></p></li>
+<li><p><a class="reference internal" href="speck2f.html#readout-layer" id="id7">Readout Layer</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="speck2f.html#how-to-configure-chip" id="id8">How to Configure Chip</a></p>
+<ul>
+<li><p><a class="reference internal" href="speck2f.html#dvs-layer-dvs-pre-processing-layer" id="id9">DVS Layer (DVS Pre-Processing Layer)</a></p></li>
+<li><p><a class="reference internal" href="speck2f.html#dvs-filtering" id="id10">DVS Filtering</a></p></li>
+<li><p><a class="reference internal" href="speck2f.html#cnn-layers" id="id11">CNN layers</a></p></li>
+<li><p><a class="reference internal" href="speck2f.html#id3" id="id12">Readout Layer</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="speck2f.html#api-reference" id="id13">API Reference</a></p></li>
+</ul>
+</nav>
+<p>Speck 2f is a comprehensive, multicore spiking neural network processing chip capable of supporting large-scale spiking convolutional
+neural networks (SCNN) with a fully asynchronous chip architecture. It is fully configurable with the spiking neuron capacity of 0.32
+million. Furthermore, it integrates a state-of-the-art dynamic vision sensor (DVS) that enables fully event-driven based, real-time,
+highly integrated solutions for varied dynamic visual scene.</p>
+<p>Speck 2f can provide intelligence upon the scene at only milliwatts with a response latency in few milliseconds for classical applications,
+such as:</p>
+<ul class="simple">
+<li><p>Event streaming classification</p></li>
+<li><p>Pattern recognition</p></li>
+<li><p>Smart device control, e.g. home appliance gesture control</p></li>
+<li><p>Behavior detection* Event streaming classification</p></li>
+<li><p>Pattern recognition</p></li>
+<li><p>Smart device control, e.g. home appliance gesture control</p></li>
+<li><p>Behavior detection</p></li>
+<li><p>Security/safety monitoring to identify intruders or dangerous conditions.</p></li>
+<li><p>Ultra-low power edge computing</p></li>
+</ul>
+<section id="key-features">
+<h2><a class="toc-backref" href="speck2f.html#id4" role="doc-backlink">Key Features</a><a class="headerlink" href="speck2f.html#key-features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>SPI master/slave interface for easy configuration</p></li>
+<li><p>1x internal DVS</p></li>
+<li><p>9x Convolutional (incl. pooling) layers</p></li>
+<li><p>1x Readout layer operating in average, max, max average, or threshold modes</p></li>
+<li><p>Asynchronous serial interface</p></li>
+<li><p>Ultra-low average working power consumption (~ 1 mW)</p></li>
+</ul>
+<section id="dvs-layer">
+<h3><a class="toc-backref" href="speck2f.html#id5" role="doc-backlink">DVS Layer</a><a class="headerlink" href="speck2f.html#dvs-layer" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>128 x 128 Pixel Array</p></li>
+<li><p>Noise filter and hot pixel rejection</p></li>
+<li><p>On only / Off only / Both / Merge filtering of DVS event polarity</p></li>
+<li><p>Sum pooling 1:1, 1:2, 1:4</p></li>
+<li><p>ROI selection</p></li>
+<li><p>Mirroring in both X/Y</p></li>
+<li><p>Rotate in 90-degree steps</p></li>
+<li><p>Fanout of 2</p></li>
+</ul>
+</section>
+<section id="cnn-layer">
+<h3><a class="toc-backref" href="speck2f.html#id6" role="doc-backlink">CNN Layer</a><a class="headerlink" href="speck2f.html#cnn-layer" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Max 9 convolutional processing layers</p></li>
+<li><p>Max input dimension: 128x128</p></li>
+<li><p>Max feature output size: 64x64</p></li>
+<li><p>Max feature number: 1024</p></li>
+<li><p>Weight resolution: 8 bit</p></li>
+<li><p>Neuron state resolution: 16</p></li>
+<li><p>Max kernel size: 16x16</p></li>
+<li><p>Stride: {1, 2, 4, 8} independent in X/Y</p></li>
+<li><p>Padding: [0..7] independent in X/Y</p></li>
+<li><p>Pooling: 1:1, 1:2, 1:4</p></li>
+<li><p>Fanout: 2</p></li>
+<li><p>Leak operation on each layer</p></li>
+<li><p>Spike decimator on each layer</p></li>
+<li><p>Spike congestion balancer on each layer</p></li>
+<li><p>Parallel computing on layer 0 and layer 1</p></li>
+</ul>
+</section>
+<section id="readout-layer">
+<h3><a class="toc-backref" href="speck2f.html#id7" role="doc-backlink">Readout Layer</a><a class="headerlink" href="speck2f.html#readout-layer" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>15 classes and 1 idle class</p></li>
+<li><p>Selectable moving average between 1, 6 and 32 time steps.</p></li>
+<li><p>4 readout modes: inactive/threshold/max spiking class/specific class.</p></li>
+<li><p>4 readout pins and 1 interrupt</p></li>
+</ul>
+</section>
+</section>
+<section id="how-to-configure-chip">
+<span id="configure-speck-2f"></span><h2><a class="toc-backref" href="speck2f.html#id8" role="doc-backlink">How to Configure Chip</a><a class="headerlink" href="speck2f.html#how-to-configure-chip" title="Link to this heading"></a></h2>
+<p>To configure the chip, the initial step is to acquire the
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.SpeckConfiguration" title="samna.speck2f.configuration.SpeckConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">configuration</span> <span class="pre">object</span></code></a> for the Speck 2f.
+This can be accomplished using the following Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">speck2f</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">SpeckConfiguration</span><span class="p">()</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="c1"># modify config object</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="c1"># apply the configuration</span>
+<span class="linenos">6</span><span class="n">board</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span><span class="o">.</span><span class="n">apply_configuration</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In subsequent sections, it is assumed that you have already obtained the configuration object <code class="docutils literal notranslate"><span class="pre">config</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Speck 2f, numerous aspects can be monitored. However,
+merely enabling them as detailed below is insufficient for retrieving the output of the CNN layer in Python or visualizing it using the Visualizer.
+Please refer to <a class="reference internal" href="../../quickStart.html#event-handling-with-filter-graphs"><span class="std std-ref">Event Handling with Filter Graphs</span></a> and <a class="reference internal" href="../../quickStart.html#visualization"><span class="std std-ref">Visualization</span></a>.</p>
+</div>
+<section id="dvs-layer-dvs-pre-processing-layer">
+<span id="speck-2f-dvs-layer"></span><h3><a class="toc-backref" href="speck2f.html#id9" role="doc-backlink">DVS Layer (DVS Pre-Processing Layer)</a><a class="headerlink" href="speck2f.html#dvs-layer-dvs-pre-processing-layer" title="Link to this heading"></a></h3>
+<p>The DVS Pre-Processing Layer monitoring can be enabled by setting
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.monitor_enable" title="samna.speck2f.configuration.DvsLayerConfig.monitor_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.monitor_enable</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.
+The output event type is <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a> with <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.Spike.layer" title="samna.speck2f.event.Spike.layer"><code class="xref py py-attr docutils literal notranslate"><span class="pre">layer</span></code></a> equals to 13.</p>
+<p>The <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.Spike.timestamp" title="samna.speck2f.event.Spike.timestamp"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike.timestamp</span></code></a> can store the timestamp that the chip emits it in microsecond, to
+enable the timestamp, please check <a class="reference internal" href="../../devkits/index.html#timestamp"><span class="std std-ref">Timestamp</span></a> section.</p>
+<p>In <a class="reference internal" href="../../gui/index.html#visualizer"><span class="std std-ref">Samna Visualizer</span></a>, events with <code class="docutils literal notranslate"><span class="pre">polarity</span> <span class="pre">=</span> <span class="pre">0</span></code> are visually represented in green,
+while events with <code class="docutils literal notranslate"><span class="pre">polarity</span> <span class="pre">=</span> <span class="pre">1</span></code> are shown in red.
+This color-coded visualization aids in quickly distinguishing between different polarities of DVS events.</p>
+<p>By default, events originating from the internal sensor are <strong>NOT</strong> forwarded to the DVS Pre-Processing Layer,
+instead, they are simply discarded.
+This functionality is regulated by the attribute
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.pass_sensor_events" title="samna.speck2f.configuration.DvsLayerConfig.pass_sensor_events"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.pass_sensor_events</span></code></a>.
+If either the <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.monitor_enable" title="samna.speck2f.configuration.DvsLayerConfig.monitor_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.monitor_enable</span></code></a> or the
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.raw_monitor_enable" title="samna.speck2f.configuration.DvsLayerConfig.raw_monitor_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.raw_monitor_enable</span></code></a>
+attribute is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.pass_sensor_events" title="samna.speck2f.configuration.DvsLayerConfig.pass_sensor_events"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.pass_sensor_events</span></code></a>
+is automatically set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>Typically, if one intends to send DVS events to the pre-processing layer from an external source,
+the <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.pass_sensor_events" title="samna.speck2f.configuration.DvsLayerConfig.pass_sensor_events"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.pass_sensor_events</span></code></a>
+attribute should be set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<section id="region-of-interest">
+<h4>Region of Interest<a class="headerlink" href="speck2f.html#region-of-interest" title="Link to this heading"></a></h4>
+<p>The region of interest (ROI) is configured using the coordinates of the
+top - left and bottom - right points. The top - left point coordinates
+are specified by <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.origin" title="samna.speck2f.configuration.DvsLayerConfig.origin"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.origin.x</span></code></a>
+and <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.origin" title="samna.speck2f.configuration.DvsLayerConfig.origin"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.origin.y</span></code></a>,
+while the bottom - right point coordinates are set by
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.cut" title="samna.speck2f.configuration.DvsLayerConfig.cut"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.cut.x</span></code></a>
+and <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.cut" title="samna.speck2f.configuration.DvsLayerConfig.cut"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.cut.y</span></code></a>.</p>
+<p>By default, the top - left point is set to [0, 0],
+and the bottom - right point is set to [127, 127].
+This default configuration corresponds to the full area coverage of the DVS sensor.</p>
+</section>
+<section id="mirroring">
+<h4>Mirroring<a class="headerlink" href="speck2f.html#mirroring" title="Link to this heading"></a></h4>
+<p>The DVS pre-processing layer supports mirror along the diagonal and thg x/y axis.</p>
+<p>90 - degree clockwise Rotation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">mirror</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">2</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">mirror_diagonal</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>90 - degree counterclockwise Rotation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">mirror</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">2</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">mirror_diagonal</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>180 - degree Rotation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">mirror</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">2</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">mirror</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>For more details, please check <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.mirror" title="samna.speck2f.configuration.DvsLayerConfig.mirror"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.speck2f.configuration.DvsLayerConfig.mirror</span></code></a> and
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.mirror_diagonal" title="samna.speck2f.configuration.DvsLayerConfig.mirror_diagonal"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.speck2f.configuration.DvsLayerConfig.mirror_diagonal</span></code></a>.</p>
+</section>
+<section id="polarity-manipulation">
+<h4>Polarity Manipulation<a class="headerlink" href="speck2f.html#polarity-manipulation" title="Link to this heading"></a></h4>
+<p>By default, the DVS pre-processing layer yields DVS events with two polarities.</p>
+<p>If you wish to merge the two polarities into a single value of 0,
+you can achieve this by setting the
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.merge</span> <span class="pre">&lt;samna.speck2f.configuration.DvsLayerConfig.merge&gt;`</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>Alternatively, you have the option to specify which polarity of events are allowed to pass through:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.on_channel" title="samna.speck2f.configuration.DvsLayerConfig.on_channel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.on_channel</span></code></a>: whether pass event with ON polarity. If enabled, the polarity of these events will also be set to 0.</p></li>
+<li><p><a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.off_channel" title="samna.speck2f.configuration.DvsLayerConfig.off_channel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.off_channel</span></code></a>: whether pass event with OFF polarity. If enabled, the polarity of these events will also be set to 0.</p></li>
+</ul>
+</section>
+<section id="pooling">
+<h4>Pooling<a class="headerlink" href="speck2f.html#pooling" title="Link to this heading"></a></h4>
+<p>The DVS pre - processing layer additionally offers support for pooling.
+Pooling refers to the process of aggregating DVS events within a specific area.
+The available values for pooling are restricted to the set {1, 2, 4}.</p>
+<p>You have the flexibility to independently configure the pooling values for the X and Y dimensions.
+The default values for the X and Y dimensions are set to (1, 1).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">pooling</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">2</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">pooling</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>For more details, please check <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.pooling" title="samna.speck2f.configuration.DvsLayerConfig.pooling"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.speck2f.configuration.DvsLayerConfig.pooling</span></code></a>.</p>
+</section>
+<section id="raw-dvs-event-monitoring">
+<h4>Raw DVS Event Monitoring<a class="headerlink" href="speck2f.html#raw-dvs-event-monitoring" title="Link to this heading"></a></h4>
+<p>One can also enable the RAW DVS events from the sensor by simply setting the attribute
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerConfig.raw_monitor_enable" title="samna.speck2f.configuration.DvsLayerConfig.raw_monitor_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_layer.raw_monitor_enable</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.
+Once this functionality is enabled, instances of the <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.DvsEvent</span></code></a> event are output.
+These events can also be visualized using the <a class="reference internal" href="../../gui/index.html#visualizer"><span class="std std-ref">Samna Visualizer</span></a>.</p>
+<p>The <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent.timestamp" title="samna.speck2f.event.DvsEvent.timestamp"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.speck2f.event.DvsEvent.timestamp</span></code></a> can store the timestamp that the chip emits it in microsecond, to
+enable the timestamp, please check <a class="reference internal" href="../../devkits/index.html#timestamp"><span class="std std-ref">Timestamp</span></a> section.</p>
+</section>
+<section id="destination">
+<h4>Destination<a class="headerlink" href="speck2f.html#destination" title="Link to this heading"></a></h4>
+<p>The DVS pre-processing layer allows the user to configure two <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsLayerDestination" title="samna.speck2f.configuration.DvsLayerDestination"><code class="xref py py-attr docutils literal notranslate"><span class="pre">destinations</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># enable the first destination</span>
+<span class="linenos">2</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">destination</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">enable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">3</span><span class="c1"># connect the DVS pre-processing layer output to the CNN layer 0</span>
+<span class="linenos">4</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">destination</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">5</span><span class="c1"># enable the second destination</span>
+<span class="linenos">6</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">destination</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">enable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">7</span><span class="c1"># connect the DVS pre-processing layer output to the CNN layer 1</span>
+<span class="linenos">8</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">destination</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dvs-filtering">
+<h3><a class="toc-backref" href="speck2f.html#id10" role="doc-backlink">DVS Filtering</a><a class="headerlink" href="speck2f.html#dvs-filtering" title="Link to this heading"></a></h3>
+<p>The DVS Filter Block is included in the DVS pre-processing layer of Speck 2f
+in order to filter events depending on neighboring pixel
+(<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsFilterConfig.filter_size" title="samna.speck2f.configuration.DvsFilterConfig.filter_size"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_filter.filter_size.x,</span> <span class="pre">config.dvs_filter.filter_size.y</span></code></a>)
+activity.</p>
+<p>To activate the filter block, the first step is to set the attribute
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsFilterConfig.enable" title="samna.speck2f.configuration.DvsFilterConfig.enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_filter.enable</span></code></a> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.
+Additionally, a clock source for the filter must be specified, and there are two methods to accomplish this:</p>
+<ol class="arabic">
+<li><p>Utilize a clock sourced externally. In the case of using the Speck 2f development kit,
+the <a class="reference internal" href="../../devkits/speckSeries/summary.html#speck2f-slow-clock"><span class="std std-ref">FPGA slow clock module</span></a> can be employed.</p></li>
+<li><p>Enable the internal slow clock of the Speck 2f for DVS filtering</p>
+<p>This can be done by setting <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsFilterConfig.internal_slow_clk" title="samna.speck2f.configuration.DvsFilterConfig.internal_slow_clk"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_filter.internal_slow_clk</span></code></a>
+to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default is <code class="docutils literal notranslate"><span class="pre">False</span></code>).
+The internally generated clock utilizes the random and continuous generation of internal DVS events
+(even though the generation frequency may fluctuate) by dividing the number of generated events
+by a constant (ranging from <span class="math notranslate nohighlight">\(2^{14}\)</span> to <span class="math notranslate nohighlight">\(2^{17}\)</span>). The exponent is set by
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.FactoryConfig.internal_slow_clk_divider" title="samna.speck2f.configuration.FactoryConfig.internal_slow_clk_divider"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.factory_config.internal_slow_clk_divider</span></code></a>
+(default is 17).</p>
+</li>
+</ol>
+<p>The filter block supports two <strong>MUTUALLY EXCLUSIVE</strong> modes: hot pixel filter mode and low-pass filter mode.</p>
+<section id="hot-pixel-filter-mode">
+<h4>Hot Pixel filter Mode<a class="headerlink" href="speck2f.html#hot-pixel-filter-mode" title="Link to this heading"></a></h4>
+<p>This mode serves as the <strong>default</strong> one. It can be disabled via
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsFilterConfig.hot_pixel_filter_enable" title="samna.speck2f.configuration.DvsFilterConfig.hot_pixel_filter_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_filter.hot_pixel_filter_enable</span></code></a>.
+The filter forwards an event at position (x,y) if at least one pixel in the vicinity of (x,y) has spiked within a
+defined time window prior to the (x,y) event. The defined time window can be configured using
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsFilterConfig.threshold" title="samna.speck2f.configuration.DvsFilterConfig.threshold"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_filter.threshold</span></code></a>.</p>
+</section>
+<section id="low-pass-filter-mode">
+<h4>Low-Pass Filter Mode<a class="headerlink" href="speck2f.html#low-pass-filter-mode" title="Link to this heading"></a></h4>
+<p>This mode is enabled through <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsFilterConfig.low_pass_mode_enable" title="samna.speck2f.configuration.DvsFilterConfig.low_pass_mode_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_filter.low_pass_mode_enable</span></code></a>.</p>
+<p>In this mode, the filter works as a low-pass filter. This mode can be used to filter out 50/60 Hz light
+flickering noise produced by some lights such as fluorescent or LED lights that output a square wave with the
+frequency of the mains power supply.</p>
+<p>When this mode is enabled, an event is passed only if no event in the neighboring pixels within the selected
+time window have spiked too close to the current event. The defined time window can be configured using
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.DvsFilterConfig.threshold" title="samna.speck2f.configuration.DvsFilterConfig.threshold"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.dvs_filter.threshold</span></code></a>.</p>
+</section>
+</section>
+<section id="cnn-layers">
+<h3><a class="toc-backref" href="speck2f.html#id11" role="doc-backlink">CNN layers</a><a class="headerlink" href="speck2f.html#cnn-layers" title="Link to this heading"></a></h3>
+<p>Speck 2f has 9 CNN layers, each of which is controlled by <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerConfig" title="samna.speck2f.configuration.CnnLayerConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">config.cnn_layers</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># get the first layer</span>
+<span class="linenos">2</span><span class="n">cnn</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cnn_layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>In common use cases, the configuration of network is set through <a class="reference external" href="https://sinabs.readthedocs.io/">Sinabs</a>.
+Here are some configurations that are usually not set by <a class="reference external" href="https://sinabs.readthedocs.io/">Sinabs</a>.</p>
+<section id="parallel-computing-layers">
+<h4>Parallel Computing Layers<a class="headerlink" href="speck2f.html#parallel-computing-layers" title="Link to this heading"></a></h4>
+<section id="layer-0">
+<h5>Layer 0<a class="headerlink" href="speck2f.html#layer-0" title="Link to this heading"></a></h5>
+<p>Layer 0 implements a fully symmetric 2 parallel computation paths to improve throughput with respect to layer 3.</p>
+<p>The parallelism is implemented in order to be almost fully transparent to the user, who can consider layers 0, 1 and 2 exactly
+the same in terms of interfaces and programmability.</p>
+<p>Layer 0 differs from the other (regular) layers with the following characteristics:</p>
+<ul class="simple">
+<li><p>2 parallel convolutional cores, processing 1/2 of the input spikes each (2x speed improvement)</p></li>
+<li><p>2 copies of the same kernel sram, one for each convolutional core</p></li>
+<li><p>2 neuron updates at the same time when processing adjacent neuron addresses (best performance for even size kernels), with a best case 2x speed improvement</p></li>
+</ul>
+<p>The expected performance increase in throughput is around 3.5x compared to the regular layers.</p>
+<p>Two limitations of this parallel implementation are that:</p>
+<ol class="arabic simple">
+<li><p>The order of the output spikes is not guaranteed. This issue also exists in regular layers, although with less variability.</p></li>
+<li><p>If a finite train of spikes is sent to the layer, it is not guaranteed that the last spike will be sent to the layer output.
+This is done to keep the implementation as simple and reliable as possible. Given issue (1), however,
+it is also not possible to predict what spike will be retained. When another spike is sent to the input of the layer,
+that should generate an output spike in the same data path, the retained spike will be ‘flushed’ out.</p></li>
+</ol>
+</section>
+<section id="layer-1">
+<h5>Layer 1<a class="headerlink" href="speck2f.html#layer-1" title="Link to this heading"></a></h5>
+<p>Layer 1 implements a partial parallelism in the data flow in order to improve throughput while limiting area utilization on chip.</p>
+<p>The parallelism is implemented to be fully transparent to the user.</p>
+<p>Layer 1 differs from the other (regular) layers with the following characteristics:</p>
+<ul class="simple">
+<li><p>2 kernel interfaces handling 1/2 of the kernel data each</p></li>
+<li><p>2 neuron updates at the same time when processing adjacent neuron addresses (best performance for even size kernels), with a best case 2x speed improvement</p></li>
+</ul>
+<p>The performance of this implementation still has to be characterized in the lab.</p>
+<p>Same as for layer 0, two limitations of this parallel implementation are that:</p>
+<ol class="arabic simple">
+<li><p>The order of the output spikes is not guaranteed. This issue also exists in regular layers, although with less variability.</p></li>
+<li><p>If a finite train of spikes is sent to the layer, it is not guaranteed that the last spike will be sent to the layer output.
+This is done to keep the implementation as simple and reliable as possible. Given issue (1), however,
+it is also not possible to predict what spike will be retained. When another spike is sent to the input of the layer,
+that should generate an output spike in the same data path, the retained spike will be ‘flushed’ out.</p></li>
+</ol>
+</section>
+</section>
+<section id="monitoring">
+<h4>Monitoring<a class="headerlink" href="speck2f.html#monitoring" title="Link to this heading"></a></h4>
+<p>Each CNN layer also supports monitoring its output as <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a>
+with <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.Spike.layer" title="samna.speck2f.event.Spike.layer"><code class="xref py py-attr docutils literal notranslate"><span class="pre">layer</span></code></a> equals the layer index by enabling:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cnn</span><span class="o">.</span><span class="n">monitor_enable</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.Spike.timestamp" title="samna.speck2f.event.Spike.timestamp"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike.timestamp</span></code></a> can store the timestamp that the chip emits it in microsecond, to
+enable the timestamp, please check <a class="reference internal" href="../../devkits/index.html#timestamp"><span class="std std-ref">Timestamp</span></a> section.</p>
+</section>
+<section id="input-congestion-balancer">
+<h4>Input Congestion Balancer<a class="headerlink" href="speck2f.html#input-congestion-balancer" title="Link to this heading"></a></h4>
+<p>In Speck 2f, each convolutional layer is equipped with a congestion balancer block at its data path input.</p>
+<p>The congestion balancer enables dropping of input spikes at any time when the convolutional core of the layer
+is busy processing previous data. Specifically, if a train of spikes are sent to the layer,
+a number of them will be accepted (via some buffering) and the convolution computation starts.
+If, for example, the kernel is very large and a new spike arrives while the layer input is busy, this new spike will be dropped.
+As soon as the layer is again available, an incoming spike will be processed again.</p>
+<p>This block is then able to adapt the spike input frequency to the convolution by capping it to the maximum that the layer can process.</p>
+<p>This block can be enabled via
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerConfig.input_congestion_balancer_enable" title="samna.speck2f.configuration.CnnLayerConfig.input_congestion_balancer_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cnn.input_congestion_balancer_enable</span></code></a>
+(default <code class="docutils literal notranslate"><span class="pre">False</span></code>). When disabled, the block will let all spikes through.</p>
+</section>
+<section id="output-decimator">
+<h4>Output Decimator<a class="headerlink" href="speck2f.html#output-decimator" title="Link to this heading"></a></h4>
+<p>In Speck 2f, each convolutional layer is equipped with a decimator block at its data path output.
+The decimator block enables the user to reduce the spike rate at the output of a convolutional layer.
+When disabled, the block will let all spikes through. There are 8 levels that the user can set to control
+the spike rate (default is 1 spike passed every 2):</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerConfig.output_decimator_interval" title="samna.speck2f.configuration.CnnLayerConfig.output_decimator_interval"><code class="xref py py-attr docutils literal notranslate"><span class="pre">output_decimator_interval</span></code></a></p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1 spike passed every 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1 spike passed every 4</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>1 spike passed every 8</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>1 spike passed every 16</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>1 spike passed every 32</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>1 spike passed every 64</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>1 spike passed every 128</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>1 spike passed every 256</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># enable output decimator first</span>
+<span class="linenos">2</span><span class="n">cnn</span><span class="o">.</span><span class="n">output_decimator_enable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="c1"># set 1 spike passed every 32</span>
+<span class="linenos">5</span><span class="n">cnn</span><span class="o">.</span><span class="n">output_decimator_interval</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</section>
+<section id="leak">
+<h4>Leak<a class="headerlink" href="speck2f.html#leak" title="Link to this heading"></a></h4>
+<p>Each layer includes a leak generation block, which will update all neuron values with provided leak values stored in a dedicated Leak SRAM:
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerConfig.biases" title="samna.speck2f.configuration.CnnLayerConfig.biases"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cnn.bias</span></code></a>, which is a list of <code class="docutils literal notranslate"><span class="pre">int16_t</span></code> with length equals to the feature count.</p>
+<p>The leak circuitry is enabled in a layer by its corresponding <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerConfig.leak_enable" title="samna.speck2f.configuration.CnnLayerConfig.leak_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cnn.leak_enable</span></code></a>.</p>
+<p>In order to trigger the leak operation, a slow clock signal is need.
+Similar to <a class="reference internal" href="speck2f.html#dvs-filtering"><span class="std std-ref">DVS filter</span></a>, there are two slow clock sources that a user can choose:</p>
+<ol class="arabic">
+<li><p>Utilize a clock sourced externally. In the case of using the Speck 2f development kit,
+the <a class="reference internal" href="../../devkits/speckSeries/summary.html#speck2f-slow-clock"><span class="std std-ref">FPGA slow clock module</span></a> can be employed.</p></li>
+<li><p>Enable the internal slow clock of the Speck 2f for CNN leak</p>
+<p>This can be done by setting <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerConfig.leak_internal_slow_clk_enable" title="samna.speck2f.configuration.CnnLayerConfig.leak_internal_slow_clk_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cnn.leak_internal_slow_clk_enable</span></code></a>
+to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default is <code class="docutils literal notranslate"><span class="pre">False</span></code>).
+The internally generated clock utilizes the random and continuous generation of internal DVS events
+(even though the generation frequency may fluctuate) by dividing the number of generated events
+by a constant (ranging from <span class="math notranslate nohighlight">\(2^{14}\)</span> to <span class="math notranslate nohighlight">\(2^{17}\)</span>). The exponent is set by
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.FactoryConfig.internal_slow_clk_divider" title="samna.speck2f.configuration.FactoryConfig.internal_slow_clk_divider"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.factory_config.internal_slow_clk_divider</span></code></a>
+(default is 17).</p>
+</li>
+</ol>
+</section>
+<section id="destinations">
+<h4>Destinations<a class="headerlink" href="speck2f.html#destinations" title="Link to this heading"></a></h4>
+<p>If you are using <a class="reference external" href="https://sinabs.readthedocs.io/">Sinabs</a>, it usually sets the destination.
+Here’s how to manually set the destinations for each layer.</p>
+<p>Each CNN layer has two <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerDestination" title="samna.speck2f.configuration.CnnLayerDestination"><code class="xref py py-class docutils literal notranslate"><span class="pre">destinations</span></code></a>.
+This means you can connect the output of each layer to two distinct destinations.
+For each destination, different values of
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerDestination.pooling" title="samna.speck2f.configuration.CnnLayerDestination.pooling"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pooling</span></code></a> are available, which can be 1, 2, or 4, and
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerDestination.feature_shift" title="samna.speck2f.configuration.CnnLayerDestination.feature_shift"><code class="xref py py-attr docutils literal notranslate"><span class="pre">feature</span> <span class="pre">number</span> <span class="pre">offset</span></code></a>
+can be within the range [MIN_FEATURE - 1, MAX_FEATURE - 1].</p>
+<p>The <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.CnnLayerDestination.feature_shift" title="samna.speck2f.configuration.CnnLayerDestination.feature_shift"><code class="xref py py-attr docutils literal notranslate"><span class="pre">feature_shift</span></code></a>
+shifts the feature number of features going to destination by N.
+It is important to configure this number correctly so that there is no overlap in feature space between inputs and outputs.
+When configuring take into account the feature space of each input for a layer and shift them so that they don’t overlap
+in the input of the destination layer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># get the configure object of the CNN layer 0</span>
+<span class="linenos"> 2</span><span class="n">cnn</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">cnn_layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="c1"># enable the first destination</span>
+<span class="linenos"> 5</span><span class="n">cnn</span><span class="o">.</span><span class="n">destinations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">enable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="c1"># connect the output to CNN layer 1</span>
+<span class="linenos"> 8</span><span class="n">cnn</span><span class="o">.</span><span class="n">destinations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># set pooling to 1</span>
+<span class="linenos">11</span><span class="n">cnn</span><span class="o">.</span><span class="n">destinations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pooling</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="c1"># set feature number offset to 10</span>
+<span class="linenos">14</span><span class="n">cnn</span><span class="o">.</span><span class="n">destinations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">feature_shift</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id3">
+<h3><a class="toc-backref" href="speck2f.html#id12" role="doc-backlink">Readout Layer</a><a class="headerlink" href="speck2f.html#id3" title="Link to this heading"></a></h3>
+<p>In Speck 2f, the readout layer serves as the post - processing layer.
+The main use of the post-processing block is to calculate the moving average over a time window for a maximum of 15 neurons,
+provide the maximum average of the 15 neurons and compare the value of the calculated moving averages against a specified threshold.</p>
+<p>When an interrupt occurs and is correctly configured, the output results can be made readable via the 4 readout pins.
+By leveraging the readout pin monitoring feature offered by the development kit,
+it becomes feasible to validate your model in a manner closely approximating real-world application scenarios.</p>
+<p>The readout pin monitoring feature can be enabled via Samna. To enable the readout layer,
+the <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.ReadoutConfig.enable" title="samna.speck2f.configuration.ReadoutConfig.enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.readout.enable</span></code></a> needs to be set
+to <code class="code docutils literal notranslate"><span class="pre">True</span></code> first.</p>
+<section id="slow-clock-signal">
+<h4>Slow clock Signal<a class="headerlink" href="speck2f.html#slow-clock-signal" title="Link to this heading"></a></h4>
+<p>A slow clk is needed, and we also have two options:</p>
+<ol class="arabic">
+<li><p>Utilize a clock sourced externally. In the case of using the Speck 2f development kit,
+the <a class="reference internal" href="../../devkits/speckSeries/summary.html#speck2f-slow-clock"><span class="std std-ref">FPGA slow clock module</span></a> can be employed.</p></li>
+<li><p>Enable the internal slow clock of the Speck 2f for readout block</p>
+<p>This can be done by setting <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.ReadoutConfig.internal_slow_clk" title="samna.speck2f.configuration.ReadoutConfig.internal_slow_clk"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.readout.internal_slow_clk</span></code></a>
+to <code class="docutils literal notranslate"><span class="pre">True</span></code> (default is <code class="docutils literal notranslate"><span class="pre">False</span></code>).
+The internally generated clock utilizes the random and continuous generation of internal DVS events
+(even though the generation frequency may fluctuate) by dividing the number of generated events
+by a constant (ranging from <span class="math notranslate nohighlight">\(2^{14}\)</span> to <span class="math notranslate nohighlight">\(2^{17}\)</span>). The exponent is set by
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.FactoryConfig.internal_slow_clk_divider" title="samna.speck2f.configuration.FactoryConfig.internal_slow_clk_divider"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.factory_config.internal_slow_clk_divider</span></code></a></p>
+</li>
+</ol>
+</section>
+<section id="forward-events-to-the-readout-block">
+<h4>Forward events to the readout block<a class="headerlink" href="speck2f.html#forward-events-to-the-readout-block" title="Link to this heading"></a></h4>
+<p>To forward events to the readout block, simply set the destination layer to 12.
+It can be both from external events or internal events:</p>
+<ol class="arabic">
+<li><p>Forward CNN layer events to the readout block</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Enable the first destination of a CNN layer and set its destination to the readout block</span>
+<span class="linenos">2</span><span class="n">cnn</span><span class="o">.</span><span class="n">enable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">3</span><span class="n">cnn</span><span class="o">.</span><span class="n">destinations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</li>
+<li><p>Forward DVS pre-processing layer events to the readout block</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># enable the first dvs pre-processing layer destination and set its destination to the readout block</span>
+<span class="linenos">2</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">destinations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">enable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">3</span><span class="n">config</span><span class="o">.</span><span class="n">dvs_layer</span><span class="o">.</span><span class="n">destinations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">layer</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</li>
+<li><p>Forward external events to the readout block. A source node is necessary to send events to the
+Speck 2f, please check <a class="reference internal" href="../../quickStart.html#sending-events-to-a-chip"><span class="std std-ref">Sending Events to a Chip</span></a>. The external events must be
+<a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a> with <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.Spike.layer" title="samna.speck2f.event.Spike.layer"><code class="xref py py-attr docutils literal notranslate"><span class="pre">layer</span></code></a> equals to 12.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># create a source node to inject events to the chip model</span>
+<span class="linenos">2</span><span class="n">source</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">source_to</span><span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span><span class="o">.</span><span class="n">get_sink_node</span><span class="p">())</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="c1"># send one spike event to the readout block</span>
+<span class="linenos">5</span><span class="n">source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">speck2f</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">Spike</span><span class="p">(</span><span class="n">layer</span><span class="o">=</span><span class="mi">12</span><span class="p">)])</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="configure-the-readout-block">
+<h4>Configure the readout block<a class="headerlink" href="speck2f.html#configure-the-readout-block" title="Link to this heading"></a></h4>
+<p>According to the CNN model, the user needs to set the addressing mode of the incoming spikes.
+There are 4 different addressing modes that could be selected through
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.ReadoutConfig.readout_configuration_sel" title="samna.speck2f.configuration.ReadoutConfig.readout_configuration_sel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.readout.readout_configuration_sel</span></code></a>:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.ReadoutConfig.readout_configuration_sel" title="samna.speck2f.configuration.ReadoutConfig.readout_configuration_sel"><code class="xref py py-attr docutils literal notranslate"><span class="pre">readout_configuration_sel</span></code></a></p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>2x*2y*4f</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>4x*4y*1f</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>2x*4y*2f</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>1x*1y*16f</p></td>
+</tr>
+</tbody>
+</table>
+<p>The moving average of the output neurons is compared to the threshold value to produce an output if the received number of spikes
+is greater than the threshold set by <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.ReadoutConfig.threshold" title="samna.speck2f.configuration.ReadoutConfig.threshold"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.readout.threshold</span></code></a> ([0, 65535]).</p>
+<p>The Speck 2f readout layer also provides a low pass filter. There are two selectable time windows,
+16 (16 * slow clk period) and 32 (32 * slow clk period), which can be chosen by
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.ReadoutConfig.low_pass_filter32_not16" title="samna.speck2f.configuration.ReadoutConfig.low_pass_filter32_not16"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.readout.low_pass_filter32_not16</span></code></a>. The default
+value is <code class="code docutils literal notranslate"><span class="pre">False</span></code>, which is 16 * slow clk period. The low pass filter is <strong>ENABLED BY DEFAULT</strong>,
+if you don’t want to use it, please set
+<a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.ReadoutConfig.low_pass_filter_disable" title="samna.speck2f.configuration.ReadoutConfig.low_pass_filter_disable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.readout.low_pass_filter_disable</span></code></a> to <code class="code docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</section>
+<section id="readout-block-output">
+<h4>Readout block output<a class="headerlink" href="speck2f.html#readout-block-output" title="Link to this heading"></a></h4>
+<p>To monitor the 4 readout pins, <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna.speck2f.configuration.ReadoutConfig.readout_pin_monitor_enable" title="samna.speck2f.configuration.ReadoutConfig.readout_pin_monitor_enable"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config.readout.readout_pin_monitor_enable</span></code></a>
+needs to be set to <code class="code docutils literal notranslate"><span class="pre">True</span></code>. If there is a valid result, an interrupt
+is generated by the chip and a <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.ReadoutPinValue" title="samna.speck2f.event.ReadoutPinValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadoutPinValue</span></code></a> event is sent to Samna.
+The <a class="reference internal" href="../../reference/speck2f/event/index.html#samna.speck2f.event.ReadoutPinValue" title="samna.speck2f.event.ReadoutPinValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadoutPinValue</span></code></a> contains 2 members, an index, indicating the feature,
+and a timestamp in microsecond, indicating when this event happened.</p>
+<p>To receive events from the chip model, a sink node is necessary, please check <a class="reference internal" href="../../quickStart.html#receiving-events-from-a-chip-model"><span class="std std-ref">Receiving Events from a Chip model</span></a>.</p>
+</section>
+</section>
+</section>
+<section id="api-reference">
+<h2><a class="toc-backref" href="speck2f.html#id13" role="doc-backlink">API Reference</a><a class="headerlink" href="speck2f.html#api-reference" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Model: <a class="reference internal" href="../../reference/speck2f/index.html#samna-speck2f"><span class="std std-ref">samna.speck2f</span></a></p></li>
+<li><p>Event: <a class="reference internal" href="../../reference/speck2f/event/index.html#samna-speck2f-event"><span class="std std-ref">samna.speck2f.event</span></a></p></li>
+<li><p>Configuration: <a class="reference internal" href="../../reference/speck2f/configuration/index.html#samna-speck2f-configuration"><span class="std std-ref">samna.speck2f.configuration</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="summary.html" class="btn btn-neutral float-left" title="Speck Series" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="speck2e.html" class="btn btn-neutral float-right" title="Speck 2e" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+.. _scan-chain-modes:
+
+Scan Chain Operation Modes
+==========================
+
+The scan chain in Speck2e can be operated in two different modes:
+
+1. Enabling the scan chain during normal async operation, to freeze then read out the internal status.
+   Similarly, using the scan chain to set the chip into a defined state, then enable continuous async operation by disabling the scan chain.
+2. Automated testing/profiling of the chip by setting the chip in a lock-non-lock state and running a single async step.
+
+At any moment during async operation of the chip, the scan chain can be enabled in a sub-domain of the chip to
+freeze its operation and provide a current snapshot of its internal state.
+
+.. _scan-chain-mode1:
+
+MODE 1: Normal Async Operation
+******************************
+
+This mode is used to load and save snapshots of the chip in operation.
+
+.. caution::
+    If you load a non valid configuration, e.g setting the control
+    to an invalid state the system may lock up when set back in async mode.
+
+The procedure in this mode is simple:
+
+1. Select the internal sub-domain to be tested, using the relative registers (see :ref:`scan-chain-activation-regs`).
+2. Start in normal async operation.
+3. Set scan chain control enable pin *SCAN_HS_EN* and set scan chain data enable *SCAN_DATA_EN* to **active**.
+4. Read the state of scan chain, write a new state into the scan chain (*SCAN_CLK*, *SCAN_IN*, *SCAN_OUT*).
+5. Set scan chain data enable *SCAN_DATA_EN* to **inactive**.
+6. Wait at least for the delay of the critical data path of your system (a few ns).
+7. Set scan chain control enable *SCAN_HS_EN* **inactive**.
+
+This is because to resume normal handshake operation the data_valid signal has to
+be evaluated and propagated in the system before the handshake can be reactivated,
+this is because otherwise the handshake circuitry will be activated in a wrong state---in
+this case thinking data is not valid---and the circuit will either drop data
+words or look up.
+
+MODE 2: One step execution
+**************************
+
+ Because in async circuits it is not possible to tell the circuit to evaluate one step,
+ we have to use some tricks, this assumes dual rail and 4 phase handshake:
+
+ if we have an element chain of 5 elements:
+
+ [e1] -a-> [e2] -b-> [e3] -c-> [e4] -d-> [e5]
+
+ we cant test logic *a,b,c* and *d* at the same time but what we can do is first test *a* an *c* and than *b* and *d*
+
+ testing *a* and *c*:
+
+ we load the test vector into the data part of *e1* and *e3*, we place 0's in the data part of  *e2* and *e4*,
+ we now set *e3* and *e5* to blocked => that results in that the ack back to *e2* and *e4* cant go up and the en inside the buffer is not evaluated, this will stall the async circuit after one step.
+ we also block *e1* to have a simple deterministic result vector:
+
+ [X] -a-> [e2] ---> [X] -c-> [e4] ---> [X]
+
+ after we wait 2x the delay of the critical data path of your system, we now can read out and check the result vector for the data part.
+
+ the HS control is also tested in the same step but requires more explanation:
+
+ lets look at *e1, e2* and *e3* when we set *e1* we set the control circuit in the state of *en* off,
+ to enable the ack from *e2* to clear the data buffers and invalidate the data.
+ *e2* is set *en* to inactive because we want it to go up (directly after sc deactivation to enable the buffer transparency) and down (the moment it acknowledges make the buffers non transparent) and *in_ack* also inactive for it to be pulled up when data is processed and valid
+ *e3* we set the *in_ack* to active to simulate the last phase of the hand shake. so solely to test if we can pull down ack because in e2 this can not be tested because we need to retain the data.
+
+ in turn this gives us for the blocked controls - *e1* and *e3* (+*e5*):
+ - *block* active
+ - *in_ack* active
+ - *en* inactive
+
+ .. tip:: on the blocked controls you can disable buffer clearing with setting *en* to active, the enabling of the transparency state of the buffers is blocked by *block*.
+
+ for the "under test" controls - *e2* (+ *e4*):
+ - *block* inactive
+ - *in_ack* inactive
+ - *en* inactive
+
+the control test is distributed
+- *e1* test buffer invalidation
+- *e2* test full handshake without in_ack inactivation and without buffer clearing (we still want to read the data)
+- *e3* test in_ack inactivation
+
+Addition to the HS circuits
+***************************
+
+If you use Async-Set-Reset-Flip-Flops, you can operate the Async mode as a 'latch' while the scan chain has proper flip-flops.
+All set and reset logic has to be disabled during scan chain mode (except system reset itself).
+you need an additional Flip Flop to store/set the blocked state.
+
+the blocked state has to prohibit
+- the enabling of the transparency state of the buffers
+- the set and reset control of the *en* flip flops (except system reset)
+- the set of the "in_ack" flip flop
+
+the scan chain control enable has to:
+- disable the set and reset control of the *en* flip flops (except system reset)
+- disable the set and reset control of the *in_ack* flip flops (except system reset)
+- disable the set and reset control of the data flip flops, partly done through *en* (except system reset)
+- disable the propagation of the *in_ack* to other logic
+- disable the propagation of en to the data buffers
+
+the scan chain data has to force the output of the data buffers to be 0 (data invalid)

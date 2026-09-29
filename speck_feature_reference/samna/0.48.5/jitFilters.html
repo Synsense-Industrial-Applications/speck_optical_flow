@@ -1,0 +1,726 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JIT Filters &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Visualizer" href="gui/index.html" />
+    <link rel="prev" title="Filters" href="filters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="jitFilters.html#">JIT Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="jitFilters.html#initialisation">Initialisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jitFilters.html#defining-jit-filters">Defining JIT Filters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jitFilters.html#jitfunctionfilter">JitFunctionFilter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jitFilters.html#jitfilter">JitFilter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="jitFilters.html#c-filter-class-requirements">C++ Filter Class Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jitFilters.html#preconditions-and-limitations-of-jitfilter">Preconditions and Limitations of JitFilter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jitFilters.html#precompiled-headers">Precompiled Headers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jitFilters.html#example-jitfilter">Example JitFilter</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jitFilters.html#c-templates">C++ Templates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jitFilters.html#sources-and-sinks">Sources and Sinks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jitFilters.html#convenience-functions">Convenience Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jitFilters.html#built-in-filters">Built-in Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jitFilters.html#jit-cache">JIT Cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jitFilters.html#debugging-jit-filters">Debugging JIT Filters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="jitFilters.html#steps-to-debug-with-lldb">Steps to Debug With <code class="docutils literal notranslate"><span class="pre">lldb</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">JIT Filters</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/jitFilters.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jit-filters">
+<h1>JIT Filters<a class="headerlink" href="jitFilters.html#jit-filters" title="Link to this heading"></a></h1>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="jitFilters.html#initialisation" id="id1">Initialisation</a></p></li>
+<li><p><a class="reference internal" href="jitFilters.html#defining-jit-filters" id="id2">Defining JIT Filters</a></p>
+<ul>
+<li><p><a class="reference internal" href="jitFilters.html#jitfunctionfilter" id="id3">JitFunctionFilter</a></p></li>
+<li><p><a class="reference internal" href="jitFilters.html#jitfilter" id="id4">JitFilter</a></p></li>
+<li><p><a class="reference internal" href="jitFilters.html#c-templates" id="id5">C++ Templates</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="jitFilters.html#sources-and-sinks" id="id6">Sources and Sinks</a></p>
+<ul>
+<li><p><a class="reference internal" href="jitFilters.html#convenience-functions" id="id7">Convenience Functions</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="jitFilters.html#built-in-filters" id="id8">Built-in Filters</a></p></li>
+<li><p><a class="reference internal" href="jitFilters.html#jit-cache" id="id9">JIT Cache</a></p></li>
+<li><p><a class="reference internal" href="jitFilters.html#debugging-jit-filters" id="id10">Debugging JIT Filters</a></p>
+<ul>
+<li><p><a class="reference internal" href="jitFilters.html#steps-to-debug-with-lldb" id="id11">Steps to Debug With <code class="docutils literal notranslate"><span class="pre">lldb</span></code></a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<p>In addition to the filters that are built into <code class="docutils literal notranslate"><span class="pre">samna</span></code>, it is possible to define user specific JIT filters.</p>
+<p>These user specific JIT filters must be written in C++ and provide almost the full flexibility the language allows.
+The JIT filters are (just-in-time) compiled into the module when the filter nodes are instantiated in the graph.</p>
+<p>A distinction in terminology is made between a <strong>JIT filter</strong> and a <strong>JIT filter node</strong>.
+The former can be regarded as a template or a builder, of which the node is an instance.
+The latter is the actual node in the graph that the user can interact with and that is the one that is actually executed.</p>
+<section id="initialisation">
+<h2><a class="toc-backref" href="jitFilters.html#id1" role="doc-backlink">Initialisation</a><a class="headerlink" href="jitFilters.html#initialisation" title="Link to this heading"></a></h2>
+<p>Initialisation is handled automatically when samna module is loaded so JIT filters are ready to go immediately after <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">samna</span></code>.</p>
+</section>
+<section id="defining-jit-filters">
+<h2><a class="toc-backref" href="jitFilters.html#id2" role="doc-backlink">Defining JIT Filters</a><a class="headerlink" href="jitFilters.html#defining-jit-filters" title="Link to this heading"></a></h2>
+<p>Two types of builders are available for defining JIT filters. The <code class="docutils literal notranslate"><span class="pre">JitFilter</span></code> is the most flexible and can be used to define any filter.
+The <code class="docutils literal notranslate"><span class="pre">JitFunctionFilter</span></code> is a specialisation of the <code class="docutils literal notranslate"><span class="pre">JitFilter</span></code> that can be used to define a subset of operations.</p>
+<p>These builders are subsequently passed to the <code class="docutils literal notranslate"><span class="pre">graph.sequential</span></code> method to instantiate the concrete filter nodes.
+Because the input type for a filter node is automatically deduced, the first element in the sequence cannot be a JIT filter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a JIT filter</span>
+<span class="n">jit_filter</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">JitFilter</span><span class="p">(</span><span class="s1">&#39;FilterName&#39;</span><span class="p">,</span> <span class="n">filter_source</span><span class="p">)</span>
+<span class="c1"># Instantiate the JIT filter</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">jit_filter_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">some_node</span><span class="p">,</span> <span class="n">jit_filter</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The concrete JIT filter nodes that are created in the <code class="docutils literal notranslate"><span class="pre">sequential</span></code> call are like any other filter node and can used in the same way.</p>
+<section id="jitfunctionfilter">
+<h3><a class="toc-backref" href="jitFilters.html#id3" role="doc-backlink">JitFunctionFilter</a><a class="headerlink" href="jitFilters.html#jitfunctionfilter" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">JitFunctionFilter</span></code> is easy to use, because only the filter function must be provided,
+but it is strictly limited to <em>map</em> functions on events. Its constructor accepts two arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">(str)</span></code>: Name of the filter to be created. Can not be <code class="docutils literal notranslate"><span class="pre">filterFunction</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">(str)</span></code>: Source code for the filter function passed. Must have a function called <code class="docutils literal notranslate"><span class="pre">filterFunction</span></code>
+that takes one event and returns one event. Input and output do not have to be the same type
+and also templates can be used. The function must be pure, meaning it can have no state nor side effects.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filter_source</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    template &lt;typename Input&gt;</span>
+<span class="s1">    auto filterFunction(const Input&amp; input)</span>
+<span class="s1">    {</span>
+<span class="s1">        return std::to_string(input);</span>
+<span class="s1">    }</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">JitFunctionFilter</span><span class="p">(</span><span class="s1">&#39;FilterName&#39;</span><span class="p">,</span> <span class="n">filter_source</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="jitfilter">
+<h3><a class="toc-backref" href="jitFilters.html#id4" role="doc-backlink">JitFilter</a><a class="headerlink" href="jitFilters.html#jitfilter" title="Link to this heading"></a></h3>
+<p>Sometimes it is necessary to define a filter that is not a pure function. For example the <em>reduce</em> function needs to keep track of the accumulated state.
+Because the <code class="docutils literal notranslate"><span class="pre">JitFilter</span></code> allows the user to write the complete C++ filter class, state can then be stored in class members.</p>
+<p>Although the <code class="docutils literal notranslate"><span class="pre">JitFilter</span></code> is more flexible than the <code class="docutils literal notranslate"><span class="pre">JitFunctionFilter</span></code>, it is not as easy to use and subject to several requirements.</p>
+<section id="c-filter-class-requirements">
+<h4>C++ Filter Class Requirements<a class="headerlink" href="jitFilters.html#c-filter-class-requirements" title="Link to this heading"></a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Input</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Output</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FilterInterface</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">FilterInterface</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">apply</span><span class="p">();</span>
+<span class="k">protected</span><span class="o">:</span>
+<span class="w">    </span><span class="c1">// Non-blocking method to receive input events.</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Input</span><span class="o">&gt;</span><span class="w"> </span><span class="n">receiveInput</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Blocking method to wait for input events, if timeout &lt; 0 then wait indefinitely.</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">optional</span><span class="o">&lt;</span><span class="n">Input</span><span class="o">&gt;</span><span class="w"> </span><span class="n">receiveInputOrTimeout</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">system_clock</span><span class="o">::</span><span class="n">duration</span><span class="o">&amp;</span><span class="w"> </span><span class="n">timeout</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">forwardResult</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Output</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">forwardResultsInBulk</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Output</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">container</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The filter class must inherit from <code class="docutils literal notranslate"><span class="pre">iris::FilterInterface&lt;Input,</span> <span class="pre">Output&gt;</span></code>. The <code class="docutils literal notranslate"><span class="pre">Input</span></code> and <code class="docutils literal notranslate"><span class="pre">Output</span></code> types can be the same.
+Generally, the <code class="docutils literal notranslate"><span class="pre">Input</span></code> and <code class="docutils literal notranslate"><span class="pre">Output</span></code> types are <code class="docutils literal notranslate"><span class="pre">std::shared_ptr&lt;const</span> <span class="pre">std::vector&lt;T&gt;&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">T</span></code> is the type of the events.</p>
+<p>The filter class must be default constructible, so its constructor cannot take any arguments.
+If the class has members that must be initialised, sensible defaults should be used.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">apply</span></code> method must be overridden. This method is evaluated by the filter graph and should apply the filter function on the input events.
+Inside this method the filter can call the protected <code class="docutils literal notranslate"><span class="pre">receiveInput</span></code> and <code class="docutils literal notranslate"><span class="pre">forwardResult</span></code> methods to receive and forward input and output events.
+Note that the <code class="docutils literal notranslate"><span class="pre">apply</span></code> method is evaluated from a different thread, so proper synchronisation is required when accessing members.
+The following implementation of <code class="docutils literal notranslate"><span class="pre">apply</span></code> can be used as a starting point.
+The <code class="docutils literal notranslate"><span class="pre">JitFunctionFilter</span></code> uses a similar implementation to apply the provided filter function.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Input</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Output</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">FilterInterface</span><span class="o">&lt;</span><span class="n">Input</span><span class="p">,</span><span class="w"> </span><span class="n">Output</span><span class="o">&gt;::</span><span class="n">apply</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Input</span><span class="w"> </span><span class="n">inputValue</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Output</span><span class="o">&gt;</span><span class="w"> </span><span class="n">results</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">receiveInput</span><span class="p">(</span><span class="n">inputValue</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">results</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">predicate</span><span class="p">(</span><span class="n">inputValue</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">results</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">forwardResultsInBulk</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">results</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To use the filter in python it must be registered in the module. The following class in svejs must be specialised for the user defined filter.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">svejs</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">RegisterImplementation</span><span class="o">&lt;</span><span class="n">CustomFilter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">registerConstructors</span><span class="p">()</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">constructors</span><span class="p">(</span><span class="n">constructor</span><span class="o">&lt;&gt;</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">registerBaseClasses</span><span class="p">()</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">svejs</span><span class="o">::</span><span class="n">BaseClasses</span><span class="o">&lt;</span><span class="n">iris</span><span class="o">::</span><span class="n">NodeInterface</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">registerName</span><span class="p">()</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// TODO: Register the name of the filter here</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;CustomFilter_&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">svejs</span><span class="o">::</span><span class="n">snakeCase</span><span class="p">(</span><span class="n">svejs</span><span class="o">::</span><span class="n">registerName</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">registerMembers</span><span class="p">()</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// TODO: Register public members here</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">members</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">registerMemberFunctions</span><span class="p">()</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// TODO: Register public member functions here</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">memberFunctions</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Only the public API that needs to be accessible in python must be registered.
+The <code class="docutils literal notranslate"><span class="pre">registerMembers</span></code> function should return all the public members and the <code class="docutils literal notranslate"><span class="pre">registerMemberFunctions</span></code> function should return
+all the public member functions of the class that should be accessible from python.
+The <code class="docutils literal notranslate"><span class="pre">registerName</span></code> function should return the name of the filter class that should be used in the filter graph.
+All the namespaces provided in the registration will be turned into submodules and the names themselves converted to snake case.</p>
+</section>
+<section id="preconditions-and-limitations-of-jitfilter">
+<h4>Preconditions and Limitations of JitFilter<a class="headerlink" href="jitFilters.html#preconditions-and-limitations-of-jitfilter" title="Link to this heading"></a></h4>
+<p>The JIT compilation of filters can have a significant cost in terms of time, in order to limit this effect internally samna has to make some assumptions about the filters.</p>
+<ol class="arabic simple">
+<li><p>Members of the filter cannot have custom getters and setters in their svejs registration.</p></li>
+<li><p>Setting a member from a python dictionary is not allowed.</p></li>
+<li><p>Automatic generation of comparison operators, conversion to string operator, <cite>from_json</cite> and <cite>to_json</cite> methods is not available.</p></li>
+<li><p>It is possible to define new types to help develop JIT Filters but these types must be used only internally, they cannot be bound to python explicitly. The following snippet describes a valid and invalid use case of types introduced at JIT time.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following example is WRONG.</span>
+
+<span class="n">filter_source</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+
+<span class="s1">    struct MyType{</span>
+<span class="s1">        auto doComputation(const Input&amp; input);</span>
+<span class="s1">    };</span>
+
+<span class="s1">    template &lt;typename Input&gt;</span>
+<span class="s1">    auto filterFunction(const Input&amp; input)</span>
+<span class="s1">    {</span>
+<span class="s1">        return MyType</span><span class="si">{}</span><span class="s1">; // Cannot return a new type out of the JIT function</span>
+<span class="s1">    }</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="c1"># The following example is CORRECT.</span>
+
+<span class="n">filter_source</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+
+<span class="s1">    struct MyType{</span>
+<span class="s1">        auto doComputation(const Input&amp; input);</span>
+<span class="s1">    };</span>
+
+<span class="s1">    template &lt;typename Input&gt;</span>
+<span class="s1">    auto filterFunction(const Input&amp; input)</span>
+<span class="s1">    {</span>
+<span class="s1">        MyType helper</span><span class="si">{}</span><span class="s1">;</span>
+<span class="s1">        auto results = helper.doComputation(input);  // MyType is used only within the JIT filter.</span>
+<span class="s1">        return results;</span>
+<span class="s1">    }</span>
+<span class="s1">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="precompiled-headers">
+<h4>Precompiled Headers<a class="headerlink" href="jitFilters.html#precompiled-headers" title="Link to this heading"></a></h4>
+<p>It is not possible to add custom headers to the <code class="docutils literal notranslate"><span class="pre">JitFilter</span></code>. The available headers are precompiled by the module.
+In addition to all the event definitions in <code class="docutils literal notranslate"><span class="pre">samna</span></code>, the following headers from the C++ standard library are included.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>General utilities</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;any&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;chrono&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;cstdint&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;expected&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;functional&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;memory&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;optional&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;tuple&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;utility&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;variant&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Algorithms and math</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;algorithm&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;numeric&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;random&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Containers and iterators</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;array&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;deque&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;iterator&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;list&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;map&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;queue&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;set&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;span&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;stack&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;unordered_map&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;unordered_set&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;vector&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Strings</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;string&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;string_view&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Thread synchronization</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;atomic&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;mutex&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>IO</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;iostream&gt;</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="example-jitfilter">
+<h4>Example JitFilter<a class="headerlink" href="jitFilters.html#example-jitfilter" title="Link to this heading"></a></h4>
+<p>The code below is how to create a <code class="docutils literal notranslate"><span class="pre">JitFilter</span></code> for the <code class="docutils literal notranslate"><span class="pre">EventRescaleFilter</span></code> filter as it is implemented in samna.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filter_source</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    template&lt;typename T&gt;</span>
+<span class="s1">    class EventRescaleFilter : public iris::FilterInterface&lt;std::shared_ptr&lt;const std::vector&lt;T&gt;&gt;, std::shared_ptr&lt;const std::vector&lt;T&gt;&gt;&gt; {</span>
+<span class="s1">    public:</span>
+<span class="s1">        void setRescalingCoefficients(double widthCoeff, double heightCoeff)</span>
+<span class="s1">        {</span>
+<span class="s1">            std::lock_guard lock</span><span class="si">{coeffMutex}</span><span class="s1">;</span>
+<span class="s1">            this-&gt;widthCoeff = widthCoeff;</span>
+<span class="s1">            this-&gt;heightCoeff = heightCoeff;</span>
+<span class="s1">        }</span>
+
+<span class="s1">        void reset()</span>
+<span class="s1">        {</span>
+<span class="s1">            std::lock_guard lock</span><span class="si">{coeffMutex}</span><span class="s1">;</span>
+<span class="s1">            widthCoeff = heightCoeff = 1.0;</span>
+<span class="s1">        }</span>
+
+<span class="s1">        void apply() override</span>
+<span class="s1">        {</span>
+<span class="s1">            auto result = std::make_shared&lt;std::vector&lt;T&gt;&gt;();</span>
+
+<span class="s1">            std::lock_guard lock</span><span class="si">{coeffMutex}</span><span class="s1">;</span>
+
+<span class="s1">            while (auto events = this-&gt;receiveInput()) {</span>
+<span class="s1">                std::transform((*events)-&gt;cbegin(), (*events)-&gt;cend(), std::back_inserter(*result), [&amp;, this](auto ev) {</span>
+<span class="s1">                    ev.x /= heightCoeff;</span>
+<span class="s1">                    ev.y /= widthCoeff;</span>
+<span class="s1">                    return ev;</span>
+<span class="s1">                });</span>
+<span class="s1">            }</span>
+
+<span class="s1">            if (result-&gt;empty()) {</span>
+<span class="s1">                return;</span>
+<span class="s1">            }</span>
+
+<span class="s1">            this-&gt;forwardResult(std::move(result));</span>
+<span class="s1">        }</span>
+
+<span class="s1">    private:</span>
+<span class="s1">        std::mutex coeffMutex;</span>
+
+<span class="s1">        double widthCoeff = 1.;</span>
+<span class="s1">        double heightCoeff = 1.;</span>
+<span class="s1">    };</span>
+
+<span class="s1">    namespace svejs {</span>
+<span class="s1">    template&lt;typename T&gt;</span>
+<span class="s1">    struct RegisterImplementation&lt;EventRescaleFilter&lt;T&gt;&gt; {</span>
+
+<span class="s1">        using Type = EventRescaleFilter&lt;T&gt;;</span>
+
+<span class="s1">        static constexpr inline auto registerConstructors()</span>
+<span class="s1">        {</span>
+<span class="s1">            return constructors(constructor&lt;&gt;());</span>
+<span class="s1">        }</span>
+
+<span class="s1">        static constexpr inline auto registerMembers()</span>
+<span class="s1">        {</span>
+<span class="s1">            return members();</span>
+<span class="s1">        }</span>
+
+<span class="s1">        static constexpr inline auto registerMemberFunctions()</span>
+<span class="s1">        {</span>
+<span class="s1">            return memberFunctions(memberFunction(&quot;setRescalingCoefficients&quot;, &amp;Type::setRescalingCoefficients),</span>
+<span class="s1">                                memberFunction(&quot;reset&quot;, &amp;Type::reset));</span>
+<span class="s1">        }</span>
+
+<span class="s1">        static constexpr inline auto registerBaseClasses()</span>
+<span class="s1">        {</span>
+<span class="s1">            return svejs::BaseClasses&lt;iris::NodeInterface&gt;();</span>
+<span class="s1">        }</span>
+
+<span class="s1">        static inline auto registerName()</span>
+<span class="s1">        {</span>
+<span class="s1">            return std::string(&quot;graph::nodes::EventRescale_&quot;) + svejs::snakeCase(svejs::registerName&lt;T&gt;());</span>
+<span class="s1">        }</span>
+<span class="s1">    };</span>
+<span class="s1">    }</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">EventRescaleFilter</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">JitFilter</span><span class="p">(</span><span class="s1">&#39;EventRescaleFilter&#39;</span><span class="p">,</span> <span class="n">filter_source</span><span class="p">)</span> <span class="c1"># The first argument of JitFilter must match the name of the filter class</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="c-templates">
+<h3><a class="toc-backref" href="jitFilters.html#id5" role="doc-backlink">C++ Templates</a><a class="headerlink" href="jitFilters.html#c-templates" title="Link to this heading"></a></h3>
+<p>Although the above examples are defined using C++ templates, this is not required.
+It is possible to explicitly specify the input and output types of the filter.
+Using templates however allows the same node to be used to create filters for different event types.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">crop_filter</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">JitFunctionFilter</span><span class="p">(</span><span class="s1">&#39;CropFilter&#39;</span><span class="p">,</span> <span class="n">crop_source</span><span class="p">)</span>
+<span class="n">speck_graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="s1">&#39;Speck2fForward&#39;</span><span class="p">,</span> <span class="n">crop_filter</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sources-and-sinks">
+<h2><a class="toc-backref" href="jitFilters.html#id6" role="doc-backlink">Sources and Sinks</a><a class="headerlink" href="jitFilters.html#sources-and-sinks" title="Link to this heading"></a></h2>
+<p>For all devices the specific <code class="docutils literal notranslate"><span class="pre">BasicSourceNode</span></code> and <code class="docutils literal notranslate"><span class="pre">BasicSinkNode</span></code> are already available to the user.
+JIT sources and sinks allow the user to easily connect sources and sinks in the <code class="docutils literal notranslate"><span class="pre">sequential</span></code> method.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">JitSource</span></code> builder is used to create a source node and if used, must be the first element in the sequence.
+Because it is the first node in the sequence, the type of events cannot be inferred and must be specified.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">source_node</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">JitSource</span><span class="p">(</span><span class="n">speck2f</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">InputEvent</span><span class="p">),</span> <span class="s1">&#39;Speck2fForward&#39;</span><span class="p">])</span>
+<span class="n">source_node</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">input_events</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">JitSink</span></code> builder is used to create a sink node and if used, must be the last element in the sequence.
+Its type is automatically deduced from the previous filter node.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">sink_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="s1">&#39;Speck2fForward&#39;</span><span class="p">,</span> <span class="n">JitSink</span><span class="p">()])</span>
+<span class="n">output_events</span> <span class="o">=</span> <span class="n">sink_node</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="convenience-functions">
+<h3><a class="toc-backref" href="jitFilters.html#id7" role="doc-backlink">Convenience Functions</a><a class="headerlink" href="jitFilters.html#convenience-functions" title="Link to this heading"></a></h3>
+<p>A frequent use case is to create sources and sink nodes to interact with the devices.
+Convenience functions <code class="docutils literal notranslate"><span class="pre">source_to</span></code> and <code class="docutils literal notranslate"><span class="pre">sink_from</span></code> are provided to create these nodes without having to first create a filter graph.
+These functions use the <code class="docutils literal notranslate"><span class="pre">JitSource</span></code> and <code class="docutils literal notranslate"><span class="pre">JitSink</span></code> builders described above.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">source_node</span> <span class="o">=</span> <span class="n">source_to</span><span class="p">(</span><span class="n">device_model</span><span class="o">.</span><span class="n">get_sink_node</span><span class="p">())</span>
+<span class="n">source_node</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">input_events</span><span class="p">)</span>
+
+<span class="n">sink_node</span> <span class="o">=</span> <span class="n">sink_from</span><span class="p">(</span><span class="n">device_model</span><span class="o">.</span><span class="n">get_source_node</span><span class="p">())</span>
+<span class="n">output_events</span> <span class="o">=</span> <span class="n">sink_node</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="built-in-filters">
+<h2><a class="toc-backref" href="jitFilters.html#id8" role="doc-backlink">Built-in Filters</a><a class="headerlink" href="jitFilters.html#built-in-filters" title="Link to this heading"></a></h2>
+<p>The following filters are already contained in <code class="docutils literal notranslate"><span class="pre">samna</span></code> and available to the user as JIT filters.
+See <a class="reference internal" href="filters.html#available-filters"><span class="std std-ref">Available Filters</span></a> for a description of the filters, of which this list is a subset.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">JitEventCounterSink</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitEventCrop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitEventDecimate</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitEventRescale</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitEventToggle</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitEventTypeFilter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitMajorityReadout</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitMemberSelect</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitSpikeCollection</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitSpikeCount</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitSplitting</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitZMQReceiver</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JitZMQStreamer</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some of them need an arguments to indicate the type of output events. For example
+<code class="code docutils literal notranslate"><span class="pre">samna.graph.JitMajorityReadout(samna.ui.Event)</span></code>.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Filter</p></th>
+<th class="head"><p>Available arguments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">JitMajorityReadout</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">JitSpikeCount</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">JitDvsEventToViz</span></code></div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Event</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">JitSpikeCollection</span></code></div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="reference/speck2e/event/index.html#samna.speck2e.event.Spike" title="samna.speck2e.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2e.event.Spike</span></code></a></div>
+<div class="line"><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The advantage of using the JIT version is that the right filter is selected for the device automatically.
+For example, these 2 lines are equivalent:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">speck2f_model</span><span class="o">.</span><span class="n">get_source_node</span><span class="p">(),</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">JitSpikeCollection</span><span class="p">(</span><span class="n">samna</span><span class="o">.</span><span class="n">speck2f</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">Spike</span><span class="p">)])</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">speck2f_model</span><span class="o">.</span><span class="n">get_source_node</span><span class="p">(),</span> <span class="s1">&#39;Speck2fSpikeCollectionNode&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="jit-cache">
+<h2><a class="toc-backref" href="jitFilters.html#id9" role="doc-backlink">JIT Cache</a><a class="headerlink" href="jitFilters.html#jit-cache" title="Link to this heading"></a></h2>
+<p>In order to allow users to have a faster experience with JIT filters a caching mechanism was introduced. Code compiled
+with the JIT will be cached as object files in a hidden folder placed in the user’s home directory (<code class="docutils literal notranslate"><span class="pre">~/.samna/jit_cache</span></code>).</p>
+<p>The cache can be flushed programmatically with the <cite>clear_jit_cache</cite> function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">samna</span><span class="o">.</span><span class="n">jit</span><span class="o">.</span><span class="n">clear_jit_cache</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="debugging-jit-filters">
+<h2><a class="toc-backref" href="jitFilters.html#id10" role="doc-backlink">Debugging JIT Filters</a><a class="headerlink" href="jitFilters.html#debugging-jit-filters" title="Link to this heading"></a></h2>
+<p>It is possible to use the <code class="docutils literal notranslate"><span class="pre">lldb</span></code> debugger to debug JIT-compiled code. (<code class="docutils literal notranslate"><span class="pre">GDB</span></code> can also work but <code class="docutils literal notranslate"><span class="pre">lldb</span></code> is recommended.)</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">samna.graph.JitFilter</span></code> and <code class="docutils literal notranslate"><span class="pre">samna.graph.JitFunctionFilter</span></code> accept a third argument of type <code class="docutils literal notranslate"><span class="pre">bool</span></code>,
+which determines whether to compile the JIT filter with debug information. By default, this argument is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>,
+which compiles the filter for release mode. To enable debugging, this argument must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<section id="steps-to-debug-with-lldb">
+<h3><a class="toc-backref" href="jitFilters.html#id11" role="doc-backlink">Steps to Debug With <code class="docutils literal notranslate"><span class="pre">lldb</span></code></a><a class="headerlink" href="jitFilters.html#steps-to-debug-with-lldb" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p><strong>Enable Debug Information</strong>
+Ensure the third argument of <code class="docutils literal notranslate"><span class="pre">JitFilter</span></code> or <code class="docutils literal notranslate"><span class="pre">JitFunctionFilter</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>Start ``lldb`` with Python</strong>
+Launch <code class="docutils literal notranslate"><span class="pre">lldb</span></code> by running:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>lldb<span class="w"> </span>python
+</pre></div>
+</div>
+</li>
+<li><p><strong>Configure JIT Debugging</strong>
+Inside the <code class="docutils literal notranslate"><span class="pre">lldb</span></code> environment, enable JIT debugging with:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>settings<span class="w"> </span><span class="nb">set</span><span class="w"> </span>plugin.jit-loader.gdb.enable<span class="w"> </span>on
+</pre></div>
+</div>
+<p>This is the only setting required for debugging JIT-compiled code.</p>
+</li>
+<li><p><strong>Set Breakpoints</strong>
+You can set a breakpoint on the JIT-compiled function before running your script.
+For example <code class="docutils literal notranslate"><span class="pre">filterFunction</span></code> if you are using a <code class="docutils literal notranslate"><span class="pre">JitFunctionFilter</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>b<span class="w"> </span>filterFunction
+</pre></div>
+</div>
+</li>
+<li><p><strong>Run Your Script</strong>
+Execute your script inside <code class="docutils literal notranslate"><span class="pre">lldb</span></code> using:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>run<span class="w"> </span>YOUR_SCRIPT_NAME.py
+</pre></div>
+</div>
+<p>The debugger will pause execution when a breakpoint is hit, allowing you to inspect the state of the program.</p>
+</li>
+</ol>
+<p>This setup allows you to debug JIT-compiled code just like any other native code in <code class="docutils literal notranslate"><span class="pre">lldb</span></code>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="filters.html" class="btn btn-neutral float-left" title="Filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gui/index.html" class="btn btn-neutral float-right" title="Visualizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

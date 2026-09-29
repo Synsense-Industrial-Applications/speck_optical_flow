@@ -1,0 +1,78 @@
+#######
+Logging
+#######
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+Samna hooks into Python's native logging facility. This means one can use the full functionality
+of Python's logger, handlers, formatters, etc. Look `here <https://docs.python.org/3/library/logging.html#>`_
+for detailed documentation.
+
+The parent logger in samna is ``samna``, and modules may define their own child loggers.
+For example, the ``samna.device`` module will use the ``samna.device`` logger. For a list of all
+loggers, one can call the ``getChildren()`` method on the ``samna`` logger with Python 3.12.
+
+=================
+Default Log Level
+=================
+
+By default, samna only forwards log messages from the **INFO** level to Python's logging system.
+This means that **DEBUG** and lower-level messages are ignored unless explicitly enabled.
+
+To receive **DEBUG** messages as well, you need to call:
+
+.. code-block:: python
+
+    import samna
+    import logging
+
+    samna.debugging.set_log_level(logging.DEBUG)
+
+However, even after enabling **DEBUG** messages, whether they are actually logged or displayed still depends 
+on the logging configuration. The handlers and formatters you set up must also allow **DEBUG** messages 
+to be written to a file or displayed on the console.
+
+=======================
+Dealing with Asynchrony
+=======================
+
+Normally, the ``created`` `attribute <https://docs.python.org/3/library/logging.html#logrecord-attributes>`_
+of the ``LogRecord`` contains the time when the message was created.
+However, samna's interaction with Python's logging facility is asynchronous, meaning the log messages may arrive
+out of order in Python. The ``created`` attribute is only the time when it arrived at the Python logger;
+the message may have been created earlier. Therefore, an attribute ``logcreated`` is added to the ``LogRecord``
+with the actual log time. Just like the ``created`` attribute, it stores the nanoseconds passed since the epoch.
+
+This extra attribute can be accessed by formatters, or one could implement a filter that overrides
+the ``created`` attribute with the ``logcreated`` attribute.
+
+=======
+Example
+=======
+
+The example below shows how to set up a useful default where all messages with severity **INFO** or higher
+are logged to a file, but **WARNING** and **ERROR** messages also appear on the console. In addition,
+log messages in the file are formatted with the actual log creation time and their level.
+
+.. code-block:: python
+
+    import samna
+    import logging
+
+    logger = logging.getLogger("samna")
+
+    # Python's default is actually set to WARNING, so we have to lower it
+    logger.setLevel(logging.INFO)
+
+    formatter = logging.Formatter("%(logcreated)f %(levelname)s %(message)s")
+
+    file_handler = logging.FileHandler("samna.log")
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(logging.WARNING)
+    logger.addHandler(stream_handler)

@@ -1,0 +1,9 @@
+.. _jtag-interface:
+
+RGB Interface
+=============
+
+.. toctree::
+   :titlesonly:
+
+   rgb-overview

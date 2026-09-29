@@ -1,0 +1,92 @@
+#######################################
+Display Speck 2f ImageReconstructFilter
+#######################################
+
+An example that uses a Speck 2f (module) development kit to reconstruct the image from DVS events using 
+:class:`ImageReconstructFilter`.
+
+.. code-block:: python
+   :linenos:
+
+   import samna
+   import sys
+   import os
+   from threading import Thread
+
+   def open_speck2f_dev_kit():
+      devices = [
+         device
+         for device in samna.device.get_unopened_devices()
+         if device.device_type_name.startswith("Speck2f")
+      ]
+      assert devices, "Speck2f board not found"
+
+      return samna.device.open_device(devices[0])
+
+   def open_visualizer(width_proportion, height_proportion, receiver_endpoint):
+      # start visualizer in a isolated process which is required on mac, instead of a sub process.
+      gui_cmd = f"import samna, samnagui; samnagui.run_visualizer('{receiver_endpoint}', {width_proportion}, {height_proportion})"
+      os_cmd = f'{sys.executable} -c "{gui_cmd}"'
+      print("Visualizer start command: ", os_cmd)
+      gui_thread = Thread(target=os.system, args=(os_cmd,))
+      gui_thread.start()
+
+      return gui_thread
+
+   def build_samna_event_route(dk, graph, endpoint):
+      # Take the output of ImageReconstructFilter and stream it directly to the visualizer
+      board_source, reconstruct_filter, streamer = graph.sequential(
+         [
+            dk.get_model_source_node(),
+            "Speck2fDvsImageReconstructFilter",
+            "VizEventStreamer",
+         ],
+      )
+      # We can change the settings of the reconstruct filter based on the camera and the light conditions
+      reconstruct_filter.set_potential_limits(0, 0.3, 0)
+      reconstruct_filter.set_event_contribution(0.04)
+      reconstruct_filter.set_decay_factor(5e6)
+      reconstruct_filter.set_synchronous_decay(True)
+
+      # We can add another the dvs layer to see the single dvs events from the camera
+      graph.sequential([dk.get_model_source_node(), "Speck2fDvsToVizConverter", streamer])
+
+      streamer.set_streamer_endpoint(streamer_endpoint)
+      assert streamer.wait_for_receiver_count(1, 30000) == 1
+
+      # We need to apply the configuration we prefer to the streamer
+      source_node, streamer = graph.sequential([samna.BasicSourceNode_ui_event(), streamer])
+
+      plot1 = samna.ui.ActivityPlotConfiguration(128, 128, "DVS Layer")
+      plot1.layout = [0, 0, 0.5, 1]
+      plot2 = samna.ui.FramePlotConfiguration("Image reconstruct")
+      plot2.layout = [0.5, 0, 1, 1]
+      conf = samna.ui.VisualizerConfiguration()
+      conf.plots = [plot1, plot2]
+      source_node.write([conf])
+
+   streamer_endpoint = "tcp://0.0.0.0:40001"
+   width_proportion = 0.75
+   height_proportion = 0.75
+
+   gui_process = open_visualizer(width_proportion, height_proportion, streamer_endpoint)
+
+   dk = open_speck2f_dev_kit()
+   
+   sw = dk.get_stop_watch()
+   sw.start(True)
+
+   graph = samna.graph.EventFilterGraph()
+   build_samna_event_route(dk, graph, streamer_endpoint)
+
+   graph.start()
+
+   # Configure the device
+   config = samna.speck2f.configuration.SpeckConfiguration()
+   config.dvs_layer.monitor_enable = True
+   dk.get_model().apply_configuration(config)
+
+   # wait until visualizer window destroys.
+   gui_process.join()
+
+   graph.stop()

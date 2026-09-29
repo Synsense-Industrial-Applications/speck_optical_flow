@@ -1,0 +1,68 @@
+.. _chip-startup:
+
+Chip Startup Sequence
+=====================
+
+This section provides a short description of the typical startup sequence for
+Speck2e.
+
+A single reset signal :ref:`RB<pin-description>` is available as hardware pin.
+
+
+
+Other 4 reset signals are available internally, and must be set by issuing special
+commands through the input serial interface at chip startup.
+
+Power up
+********
+
+Procedure:
+
+- Raise VDDIO power supply to its typical value.
+- When VDDIO is stable, raise :ref:`all other power supplies<electrical-ch>` to their typical values.
+- When all Power Supplies are stable, release RB by setting it to logic '1', with a rise time similar to CLK rise time.
+
+.. wavedrom::
+
+   {signal:[
+         {name: 'VDDIO',      wave: '0u1..........' },
+         {                    node: '.A..B........'},
+         {name: 'VP',         wave: '0...u1.......' },
+         {name: 'vdd_ram',    wave: '0...u1.......' },
+         {name: 'vddd_pixel', wave: '0...u1.......' },
+         {name: 'vdda_pixel', wave: '0...u1.......' },
+
+         {                    node: '....C....D...'},
+         {name: 'RB', wave: '0........1...'},
+         {name: 'clk', wave: 'x......p.....'}
+      ],
+   edge: ['A-|->B VDDIO stable', 'C-|->D All PS stable']
+   }
+
+|
+
+.. note:: The RB signal should be raised while the main clock (IO1_CLK_I) is not running. If the clock is running, it is recommended to release RB with a rise time similar to the clock rise time.
+
+Setting Internal Reset Signals
+******************************
+
+Speck2e has 4 internal normally '1' reset signals (reset = '0'):
+
+- PRst
+- SRst
+- Prst_DVS (Used when the internal DVS sensor needs to be active)
+- SRst_DVS (Used when the internal DVS sensor needs to be active)
+
+These 4 signals must be set in a specific sequence via Input Interface register :ref:`ININT0[7:4]<reg-ININT0>`.
+
+Reset release sequence:
+
+1) Release PRst
+2) Release SRst
+3) Release PRst_DVS
+4) Release SRst_DVS
+
+The internal reset signals can also be set via special commands of the :ref:`Input Serial Interface (ISI)<input-serial-interface-encoding>`.
+In this case, the :ref:`rbits-CGUIS` bit has to be set to '1'. Please note that if all reset signals are released via register
+settings and :ref:`rbits-CGUIS` is set to '1', the internal reset signals will all go immediately to the value set by the ISI
+special commands. Please refer to section :ref:`ISI Reset Signals<isi-resets>` for more details.

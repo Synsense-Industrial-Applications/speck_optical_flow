@@ -1,0 +1,78 @@
+.. _jtag-registers:
+
+JTAG Register Access
+====================
+
+The JTAG interface can be used to read/write all registers of Speck2e.
+
+Register Write Operation
+************************
+
+A register can be read/written by first sending a *SET_ADDR* command, followed by
+streaming in 24 bits to the internal ADDR register of the JTAG interface
+in the following format:
+
+ADDR_REGISTER [23:0] breakdown:
+
++------------------------+---------+
+| Part                   | Bits    |
++------------------------+---------+
+| Unused (all '0')       | [23:10] |
++------------------------+---------+
+| Register Block ID      | [9:6]   |
++------------------------+---------+
+| Register Local Address | [5:0]   |
++------------------------+---------+
+
+
+Register block selection table:
+
++-------------------+-------------------------------------------------------------------+
+| Register Block ID | Selected Register Block                                           |
++-------------------+-------------------------------------------------------------------+
+| 0b0000            | :ref:`ININT0-10<ininterface-registers>`                           |
++-------------------+-------------------------------------------------------------------+
+| 0b0001            | :ref:`DVS0-15<dvs-registers>`, :ref:`FILTER0-5<registers-filter>` |
++-------------------+-------------------------------------------------------------------+
+| 0b0010            | :ref:`READOUT0-15<readout-registers>`                             |
++-------------------+-------------------------------------------------------------------+
+| 0b0011            | :ref:`Layer 0 CONV0-21<layer-registers>`                          |
++-------------------+-------------------------------------------------------------------+
+| 0b0100            | :ref:`Layer 1 CONV0-21<layer-registers>`                          |
++-------------------+-------------------------------------------------------------------+
+| 0b0101            | :ref:`Layer 2 CONV0-21<layer-registers>`                          |
++-------------------+-------------------------------------------------------------------+
+| 0b0110            | :ref:`Layer 3 CONV0-21<layer-registers>`                          |
++-------------------+-------------------------------------------------------------------+
+| 0b0111            | :ref:`Layer 4 CONV0-21<layer-registers>`                          |
++-------------------+-------------------------------------------------------------------+
+
+After loading the ADDR register, a stream of consequent data elements can be
+written in, after sending the *REGISTER_WRITE* command:
+
+
+.. code::
+
+   send_ir(SET_ADDR, 0x10, 8 bits)
+   send_dr(ADDR_REGISTER, 24 bits)
+   send_ir(REGISTER_WRITE, 0x12, 8 bits)
+   send_dr(data[7:0], 8 bits)  # Addr
+   send_dr(data[7:0], 8 bits)  # Addr + 1
+   ...
+   send_dr(data[7:0], 8 bits)  # Addr + n
+
+Register Read Operation
+***********************
+
+A register read is equivalent to a Register Write operation, whereas the
+selected command is *REGISTER_READ*:
+
+.. code::
+
+   send_ir(SET_ADDR, 0x10, 8 bits)
+   send_dr(ADDR_REGISTER, 24 bits)
+   send_ir(REGISTER_READ, 0x11, 8 bits)
+   send_dr(0b0000_0000, 8 bits)  # Read out register @Addr on TDO
+   send_dr(0b0000_0000, 8 bits)  # Read out register @(Addr + 1) on TDO
+   ...
+   send_dr(0b0000_0000, 8 bits)  # Read out register @(Addr + 2) on TDO

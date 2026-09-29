@@ -1,0 +1,20 @@
+#################
+samna.graph.nodes
+#################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   detail/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.graph.nodes
+   :members:
+   :show-inheritance:
+

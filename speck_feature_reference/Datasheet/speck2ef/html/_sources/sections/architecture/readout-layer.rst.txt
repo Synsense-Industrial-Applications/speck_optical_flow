@@ -1,0 +1,129 @@
+.. _readout-layer:
+
+Readout Layer (Post Processing)
+===============================
+
+The main use of the post-processing block is to calculate the moving average
+over a time window for a maximum of 15 neurons, provide the maximum average
+of the 15 neurons and compare the value of the calculated moving averages
+against a :ref:`specified threshold<rbits-TH>`. 
+
+Data Output Options
+*******************
+
+In Speck2e, the Readout layer provides output data via the Output Serial Interface
+by sending output messages in the format described :ref:`below<readout-output-modes>` (depending on the selected configuration).
+In order to receive data on the output serial interface, :ref:`ININT8:P2SSEL<rbits-P2SSEL>` has to be set to '1'.
+
+In addition, 5 pins of Speck2e are dedicated to the direct readout of the class of maximum
+activity (see :ref:`readout-interrupt`).
+
+Finally, a number of read-only registers are available in the readout layer to provide readout at any time
+of the internal current evaluated values (max class index, selected class average, max class average, threshold compare).
+See :ref:`readout-readonly-registers` for the detailed register addresses and mapping.
+
+.. _readout-avg-clk:
+
+Readout time window
+*******************
+
+The time window where the moving average is calculated
+is configurable according to the clock provided by the internal *slow clock*
+signal (see :ref:`slow-clock` and :ref:`Slow Clock Configuration<rbits-SLWCLK>`),
+and can have time windows of 1, 16 and 32 times the provided clock
+(see register bits :ref:`CH1<rbits-CH1>` and :ref:`CH1632<rbits-CH1632>`.
+The output data from the pre-processing block can be extracted by using
+different configuration modes. Moreover, some timing characteristics
+of the block and the addresing mode of the neurons are configured.
+The aforementioned will be described in the next subsections more in detail.
+
+Post Processing Block Configuration
+***********************************
+
+For the configuration settings of the Readout Layer (Post Processing),
+see :ref:`readout-config-signals`.
+
+In the case of *output_mode_sel* and *average_sel*, these signals can be provided
+either by an internal register value (respectively :ref:`AVGSEL[3:0]<rbits-AVGSEL>`
+and :ref:`OMSEL[1:0]<rbits-OMSEL>`) or by providing a specific command to the Input
+Serial Interface (see :ref:`ISI Special Commands<ii-special-commands>`).
+
+A register bit :ref:`INEN<rbits-INEN>` is used to set which origin to use ('0': ISI, '1': registers).
+
+The advantage of using the ISI as input to set output mode and average class selection is to have an on-the-fly
+change of mode without having to write registers.
+
+Adressing Modes
+***************
+
+Four different addressing modes can be selected to assign input spikes to the Readout Layer
+to the 15 available output classes. The addressing mode is selected by setting
+the register bits :ref:`rbits-ROCS`.
+
+For the configuration settings, see :ref:`Register Element ROCS[1:0]<rbits-ROCS>`.
+
+.. _readout-output-modes:
+
+Data Output Modes
+*****************
+
+The Chip internal signal *output_mode_sel[1:0]* is used to select the data output mode.
+
+There are 4 different modes where the output data are multiplexed.
+In the following table the different data output modes are described:
+
++----------------------+------------------------------------+-----------------------------+---------------------------------------+
+| output_mode_sel[1:0] | data_out[20]                       | data_out[19:16]             | data_out[15:0]                        |
++----------------------+------------------------------------+-----------------------------+---------------------------------------+
+| 00                   | data valid                         | neuron index of max average | power down (clock gating)             |
++----------------------+------------------------------------+-----------------------------+---------------------------------------+
+| 01                   | data valid                         | neuron index of max average | threshold compare output              |
++----------------------+------------------------------------+-----------------------------+---------------------------------------+
+| 10                   | data valid                         | neuron index of max average | average output of the selected neuron |
++----------------------+------------------------------------+-----------------------------+---------------------------------------+
+| 11                   | max spiking neuron above threshold | neuron index of max average | average output of max spiking neuron  |
++----------------------+------------------------------------+-----------------------------+---------------------------------------+
+
+If *output_mode_sel[1:0]* equals to '00' then the **clk_gated** signal and the **data_out[15:0]** are equal to 0.
+
+If *output_mode_sel[1:0]* equals to '01' then the **data_out[15:0]** consists of the data
+of the threshold comparison, the index of the maximum moving average neuron and the data
+valid signal. The threshold comparison data is the 16 bit value of the comparison of each
+neurons' moving average with the threshold.
+
+If *output_mode_sel[1:0]* equals to '10' then the **data_out[15:0]** consists of the moving average
+of the selected neuron, the index of the maximum moving average neuron and the data valid signal.
+The data valid signal is asserted after all the computations have finished in order to ensure
+correct sampling of the data.
+
+If *output_mode_sel[1:0]* equals to '11' then the **data_out[15:0]** consists of the maximum
+average of the 15 neurons, the index of the maximum moving average neuron and the comparison
+output between the maximum moving average and the threshold.
+
+.. _readout-neuron-selection:
+
+Output Neuron selection
+***********************
+
+The internal signal *output_mode_sel* enable the selection of one of the 15 output neurons.
+The neuron selection is used when signals *output_mode_sel[1:0]* == '10' (see previous section).
+
+Selected neuron # = average_sel[3:0]
+
+.. _readout-timing-config:
+
+Timing Configurations
+***********************
+
+For the relative registers, see :ref:`readout-config-signals`.
+
+The pulse width of reset and the positive edge of the clock in the sync counter block
+can be configured by setting the values of **conf_rst_blk[2:0]** and **conf_clk_blk[2:0]**,
+respectively. The default value of **conf_clk_blk[2:0]** for each block is **001**.
+By increasing the value from **001** to **111** the clock positive edge delay from
+the time that the **out_v** is asserted, gets decreased, and by decreasing the value
+from **001** to **000** this delay gets increased. By setting different values to this
+signal, the timing windows for the addition of spikes is increased or decreased accordingly.
+
+The default value of **conf_rst_blk[2:0]** is **111**. By decreasing this value
+from **111** to **100**, the reset pulse for the sync counter block is increased.

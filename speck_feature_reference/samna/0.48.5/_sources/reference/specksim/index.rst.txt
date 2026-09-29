@@ -1,0 +1,21 @@
+##############
+samna.specksim
+##############
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   events/index
+   nodes/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.specksim
+   :members:
+   :show-inheritance:
+

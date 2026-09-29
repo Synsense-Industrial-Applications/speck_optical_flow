@@ -1,0 +1,20 @@
+###################
+samna.testingModule
+###################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   event/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.testingModule
+   :members:
+   :show-inheritance:
+

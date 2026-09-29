@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mc3632 Read acceleration &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Xylo-Imu Power Measurement" href="xylo_imu_power_measurement.html" />
+    <link rel="prev" title="Xylo-Imu RealTime Mode With Sensor Input" href="xylo_imu_realtime_mode_with_sensor_input.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Development Kits</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#connecting-to-a-device">Connecting to a Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#common-methods-of-development-kits">Common Methods of Development Kits</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supported-development-kits">Supported Development Kits</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../speckSeries/summary.html">Speck series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapSeSeries/index.html">Dynap-SE series</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Xylo Series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#development-kits">Development Kits</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Development Kits</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Xylo Series</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Xylo-IMU Boards</a></li>
+      <li class="breadcrumb-item active">Mc3632 Read acceleration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/devkits/xyloSeries/xyloImu/mc3632_read_acceleration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mc3632-read-acceleration">
+<h1>Mc3632 Read acceleration<a class="headerlink" href="mc3632_read_acceleration.html#mc3632-read-acceleration" title="Link to this heading"></a></h1>
+<p>You can read acceleration events from MC3632 sensor directly.</p>
+<p>The data could be used for debugging manually in realtime mode as described in <a class="reference internal" href="xylo_imu_realtime_mode_with_acceleration_input.html#xylo-imu-realtime-mode-with-acceleration-input"><span class="std std-ref">Xylo-Imu RealTime Mode With Acceleration Input</span></a>.</p>
+<p>Here is an example that displays reading acceleration from MC3632, which bases on packages :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">samna</span>                 <span class="mf">0.33.1</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">samna</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">initialize_board</span><span class="p">():</span>
+    <span class="n">dk</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;XyloImuTestBoard:0&quot;</span><span class="p">)</span>
+    <span class="n">dk</span><span class="o">.</span><span class="n">get_stop_watch</span><span class="p">()</span><span class="o">.</span><span class="n">set_enable_value</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Enable timestamp of output acceleration event.</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dk</span>
+
+<span class="n">dk</span> <span class="o">=</span> <span class="n">initialize_board</span><span class="p">()</span>
+<span class="n">mc</span> <span class="o">=</span> <span class="n">dk</span><span class="o">.</span><span class="n">get_mc3632</span><span class="p">()</span>
+<span class="n">sink</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">sink_from</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">get_source_node</span><span class="p">())</span>  <span class="c1"># Initialize sink node first before setting up mc3632, or you will miss some accelerations in the beginning.</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">start_up_mc3236</span><span class="p">(</span><span class="n">mc</span><span class="p">):</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">set_auto_read_freq</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>    <span class="c1"># Read 20 times every second.</span>
+    <span class="n">mc</span><span class="o">.</span><span class="n">auto_read_enable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>    <span class="c1"># Enable automatic reading.</span>
+    <span class="k">return</span> <span class="n">mc</span>
+
+<span class="n">start_up_mc3236</span><span class="p">(</span><span class="n">mc</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">print_acceleration</span><span class="p">(</span><span class="n">accel</span><span class="p">:</span> <span class="n">samna</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">Acceleration</span><span class="p">):</span>
+    <span class="c1"># Calculate acceleration in the unit of g (earch gravity).</span>
+    <span class="c1"># When the board places normally on a platform, the printed x,y,z should be near 0,0,1. In which 1 represents the earch gravity.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">accel</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">accel</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">accel</span><span class="o">.</span><span class="n">z</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;acceleration </span><span class="si">{</span><span class="n">accel</span><span class="o">.</span><span class="n">sequence_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">accel</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">recv_count</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">acceleration_events</span> <span class="o">=</span> <span class="n">sink</span><span class="o">.</span><span class="n">get_n_events</span><span class="p">(</span><span class="n">recv_count</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>     <span class="c1"># Try to receive 100 events in 10 seconds.</span>
+<span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">acceleration_events</span><span class="p">)</span> <span class="o">==</span> <span class="n">recv_count</span><span class="p">)</span>
+
+<span class="p">[</span><span class="n">print_acceleration</span><span class="p">(</span><span class="n">accel</span><span class="p">)</span> <span class="k">for</span> <span class="n">accel</span> <span class="ow">in</span> <span class="n">acceleration_events</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Timestamp average interval: </span><span class="si">{</span><span class="p">(</span><span class="n">acceleration_events</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">acceleration_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">recv_count</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2"> microseconds.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="xylo_imu_realtime_mode_with_sensor_input.html" class="btn btn-neutral float-left" title="Xylo-Imu RealTime Mode With Sensor Input" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="xylo_imu_power_measurement.html" class="btn btn-neutral float-right" title="Xylo-Imu Power Measurement" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

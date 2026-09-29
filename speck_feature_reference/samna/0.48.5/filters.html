@@ -1,0 +1,1749 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Filters &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="JIT Filters" href="jitFilters.html" />
+    <link rel="prev" title="XyloAudio 3 Direct Output Mode" href="devkits/xyloSeries/xyloAudio3/xylo_audio_3_directoutput_mode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="filters.html#">Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#filter-nodes">Filter Nodes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#sink">Sink</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#filter">Filter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#special-nodes">Special Nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#zmq-streamers">ZMQ Streamers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#zmqstreamernode">ZMQStreamerNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#zmqreceivernode">ZMQReceiverNode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#devices-nodes">Devices Nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#eventfiltergraph">EventFilterGraph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#create-a-graph">Create a Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#creating-a-node">Creating a node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#connecting-nodes">Connecting Nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#branching-and-merging">Branching and Merging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#streaming-events">Streaming Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#filtering-events-with-predicates">Filtering Events With Predicates</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#available-filters">Available Filters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#member-select-node">Member Select Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#MemberSelect"><code class="docutils literal notranslate"><span class="pre">MemberSelect</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#background-noise-rater-node">Background Noise Rater Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#BackgroundNoiseRater"><code class="docutils literal notranslate"><span class="pre">BackgroundNoiseRater</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#forward-node">Forward Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#Forward"><code class="docutils literal notranslate"><span class="pre">Forward</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#dvs-to-viz-converter-node">Dvs To Viz Converter Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#DvsToVizConverter"><code class="docutils literal notranslate"><span class="pre">DvsToVizConverter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#spike-collection-node">Spike Collection Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#SpikeCollectionNode"><code class="docutils literal notranslate"><span class="pre">SpikeCollectionNode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#spike-count-node">Spike Count Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#SpikeCountNode"><code class="docutils literal notranslate"><span class="pre">SpikeCountNode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#majority-readout-node">Majority Readout Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#MajorityReadoutNode"><code class="docutils literal notranslate"><span class="pre">MajorityReadoutNode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#measurement-to-viz-converter-node">Measurement To Viz Converter Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#MeasurementToVizConverter"><code class="docutils literal notranslate"><span class="pre">MeasurementToVizConverter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#camera-to-chip-dvs-event-node">Camera To Chip Dvs Event Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#cameraToChipExternalDvsEvent"><code class="docutils literal notranslate"><span class="pre">cameraToChipExternalDvsEvent</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#event-type-filter-node">Event Type Filter Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#EventTypeFilter"><code class="docutils literal notranslate"><span class="pre">EventTypeFilter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#viz-event-streamer-node">Viz Event Streamer Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#VizEventStreamer"><code class="docutils literal notranslate"><span class="pre">VizEventStreamer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#viz-event-receiver-node">Viz Event Receiver Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#VizEventReceiver"><code class="docutils literal notranslate"><span class="pre">VizEventReceiver</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#event-crop-node">Event Crop Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#EventCrop"><code class="docutils literal notranslate"><span class="pre">EventCrop</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#dvs-event-decimate-node">Dvs Event Decimate Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#DvsEventDecimate"><code class="docutils literal notranslate"><span class="pre">DvsEventDecimate</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#event-rescale-node">Event Rescale Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#EventRescaleNode"><code class="docutils literal notranslate"><span class="pre">EventRescaleNode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#dvs-event-cluster-filter-node">Dvs Event Cluster Filter Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#DvsEventClusterFilterNode"><code class="docutils literal notranslate"><span class="pre">DvsEventClusterFilterNode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#dvs-event-efficient-cluster-filter-node">Dvs Event Efficient Cluster Filter Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#DvsEventEfficientClusterFilterNode"><code class="docutils literal notranslate"><span class="pre">DvsEventEfficientClusterFilterNode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#image-reconstruct-filter-node">Image Reconstruct Filter Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#ImageReconstructFilter"><code class="docutils literal notranslate"><span class="pre">ImageReconstructFilter</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#dynapse1-neuron-select-node">Dynapse1 Neuron Select Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#Dynapse1NeuronSelect"><code class="docutils literal notranslate"><span class="pre">Dynapse1NeuronSelect</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#dynapse1-neuron-trace-node">Dynapse1 Neuron Trace Node</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="filters.html#Dynapse1NeuronTrace"><code class="docutils literal notranslate"><span class="pre">Dynapse1NeuronTrace</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html#sinks">Sinks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#get_events"><code class="docutils literal notranslate"><span class="pre">get_events()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#get_events_blocking"><code class="docutils literal notranslate"><span class="pre">get_events_blocking()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#get_n_events"><code class="docutils literal notranslate"><span class="pre">get_n_events()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filters.html#clear_events"><code class="docutils literal notranslate"><span class="pre">clear_events()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Filters</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/filters.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="filters">
+<h1>Filters<a class="headerlink" href="filters.html#filters" title="Link to this heading"></a></h1>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="filters.html#filter-nodes" id="id1">Filter Nodes</a></p>
+<ul>
+<li><p><a class="reference internal" href="filters.html#source" id="id2">Source</a></p></li>
+<li><p><a class="reference internal" href="filters.html#sink" id="id3">Sink</a></p></li>
+<li><p><a class="reference internal" href="filters.html#filter" id="id4">Filter</a></p></li>
+<li><p><a class="reference internal" href="filters.html#special-nodes" id="id5">Special Nodes</a></p></li>
+<li><p><a class="reference internal" href="filters.html#devices-nodes" id="id6">Devices Nodes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="filters.html#eventfiltergraph" id="id7">EventFilterGraph</a></p>
+<ul>
+<li><p><a class="reference internal" href="filters.html#create-a-graph" id="id8">Create a Graph</a></p></li>
+<li><p><a class="reference internal" href="filters.html#creating-a-node" id="id9">Creating a node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#connecting-nodes" id="id10">Connecting Nodes</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="filters.html#examples" id="id11">Examples</a></p>
+<ul>
+<li><p><a class="reference internal" href="filters.html#streaming-events" id="id12">Streaming Events</a></p></li>
+<li><p><a class="reference internal" href="filters.html#filtering-events-with-predicates" id="id13">Filtering Events With Predicates</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="filters.html#available-filters" id="id14">Available Filters</a></p>
+<ul>
+<li><p><a class="reference internal" href="filters.html#member-select-node" id="id15">Member Select Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#background-noise-rater-node" id="id16">Background Noise Rater Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#forward-node" id="id17">Forward Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#dvs-to-viz-converter-node" id="id18">Dvs To Viz Converter Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#spike-collection-node" id="id19">Spike Collection Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#spike-count-node" id="id20">Spike Count Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#majority-readout-node" id="id21">Majority Readout Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#measurement-to-viz-converter-node" id="id22">Measurement To Viz Converter Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#camera-to-chip-dvs-event-node" id="id23">Camera To Chip Dvs Event Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#event-type-filter-node" id="id24">Event Type Filter Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#viz-event-streamer-node" id="id25">Viz Event Streamer Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#viz-event-receiver-node" id="id26">Viz Event Receiver Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#event-crop-node" id="id27">Event Crop Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#dvs-event-decimate-node" id="id28">Dvs Event Decimate Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#event-rescale-node" id="id29">Event Rescale Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#dvs-event-cluster-filter-node" id="id30">Dvs Event Cluster Filter Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#dvs-event-efficient-cluster-filter-node" id="id31">Dvs Event Efficient Cluster Filter Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#image-reconstruct-filter-node" id="id32">Image Reconstruct Filter Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#dynapse1-neuron-select-node" id="id33">Dynapse1 Neuron Select Node</a></p></li>
+<li><p><a class="reference internal" href="filters.html#dynapse1-neuron-trace-node" id="id34">Dynapse1 Neuron Trace Node</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="filters.html#sinks" id="id35">Sinks</a></p></li>
+</ul>
+</nav>
+<p>Event filter nodes are the primary way of interacting with event streams in Samna.
+They are configured from Python and run in the C++ backend; enabling high performance while
+being easy to use.</p>
+<section id="filter-nodes">
+<h2><a class="toc-backref" href="filters.html#id1" role="doc-backlink">Filter Nodes</a><a class="headerlink" href="filters.html#filter-nodes" title="Link to this heading"></a></h2>
+<p>Filter nodes come in three types</p>
+<section id="source">
+<h3><a class="toc-backref" href="filters.html#id2" role="doc-backlink">Source</a><a class="headerlink" href="filters.html#source" title="Link to this heading"></a></h3>
+<p>Source nodes can only produce events and only have an output. They are the beginning of any filter chain
+and typically attached to event producing device models. Source nodes can also be instantiated from Python
+and used to inject events into a filter chain periodically or on request.</p>
+</section>
+<section id="sink">
+<h3><a class="toc-backref" href="filters.html#id3" role="doc-backlink">Sink</a><a class="headerlink" href="filters.html#sink" title="Link to this heading"></a></h3>
+<p>Sink nodes are the opposite of source nodes. They only consume events and terminate any filter chain.
+Sink nodes are found on device models where they send all consumed events to the device.
+They can also be instantiated in Python as buffer nodes that capture all consumed events and provide them
+when polled.</p>
+</section>
+<section id="filter">
+<h3><a class="toc-backref" href="filters.html#id4" role="doc-backlink">Filter</a><a class="headerlink" href="filters.html#filter" title="Link to this heading"></a></h3>
+<p>A filter node has both an input and an output, it is effectively both a source and a sink.
+Filters work on collections of events and can perform any operation on the collection.
+Common operations include performing inference on network out, type conversion, splitting streams,
+forwarding to a network sink, and droppping events based on pattern matching.</p>
+<p>Available built-in filters are listed in <a class="reference internal" href="filters.html#available-filters"><span class="std std-ref">Available Filters</span></a>. And users can also create their own filters
+by utilizing the JIT compiler that ships with Samna, please refer to <a class="reference internal" href="jitFilters.html#jit-filters"><span class="std std-ref">JIT Filters</span></a>.</p>
+</section>
+<section id="special-nodes">
+<h3><a class="toc-backref" href="filters.html#id5" role="doc-backlink">Special Nodes</a><a class="headerlink" href="filters.html#special-nodes" title="Link to this heading"></a></h3>
+<section id="zmq-streamers">
+<h4>ZMQ Streamers<a class="headerlink" href="filters.html#zmq-streamers" title="Link to this heading"></a></h4>
+<p>ZMQ source and sink nodes can be used to transmit events streams over a network.
+These nodes are used when connecting to the GUI, but can also be used to transmit events between any two
+instances of Samna.</p>
+</section>
+<section id="zmqstreamernode">
+<h4>ZMQStreamerNode<a class="headerlink" href="filters.html#zmqstreamernode" title="Link to this heading"></a></h4>
+<p>The ZMQ sink node can be connected as any sink to a filter chain. Any events consumed by the ZMQ sink
+will be broadcast on the TCP/IP address and port configured in the sink node.</p>
+</section>
+<section id="zmqreceivernode">
+<h4>ZMQReceiverNode<a class="headerlink" href="filters.html#zmqreceivernode" title="Link to this heading"></a></h4>
+<p>The ZMQ source node can be connected as any source to a filter chain. It receives event streams on
+the TCP/IP addresses configured in the node and sources them on its output.</p>
+</section>
+</section>
+<section id="devices-nodes">
+<h3><a class="toc-backref" href="filters.html#id6" role="doc-backlink">Devices Nodes</a><a class="headerlink" href="filters.html#devices-nodes" title="Link to this heading"></a></h3>
+<p>Device models contain a source node and a sink node. Events sent to the sink node will be sent to the device
+and events produced by the device will appear in the source node.</p>
+</section>
+</section>
+<section id="eventfiltergraph">
+<h2><a class="toc-backref" href="filters.html#id7" role="doc-backlink">EventFilterGraph</a><a class="headerlink" href="filters.html#eventfiltergraph" title="Link to this heading"></a></h2>
+<p>Filters can be composed in a <a class="reference internal" href="reference/graph/index.html#samna.graph.EventFilterGraph" title="samna.graph.EventFilterGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.graph.EventFilterGraph</span></code></a> to perform more complex operations.
+The  <a class="reference internal" href="reference/graph/index.html#samna.graph.EventFilterGraph" title="samna.graph.EventFilterGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.graph.EventFilterGraph</span></code></a> is a directed acyclic graph of filter nodes.</p>
+<p>Filter graph construction is done with the high level <a class="reference internal" href="reference/graph/index.html#samna.graph.EventFilterGraph.sequential" title="samna.graph.EventFilterGraph.sequential"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samna.graph.EventFilterGraph.sequential</span></code></a> method,
+which adds all the nodes given as a list and connects them sequentially.
+The method returns a list of handles to the nodes added to the graph,
+which can be used to manipulate the nodes or for further connections.</p>
+<section id="create-a-graph">
+<h3><a class="toc-backref" href="filters.html#id8" role="doc-backlink">Create a Graph</a><a class="headerlink" href="filters.html#create-a-graph" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-a-node">
+<h3><a class="toc-backref" href="filters.html#id9" role="doc-backlink">Creating a node</a><a class="headerlink" href="filters.html#creating-a-node" title="Link to this heading"></a></h3>
+<p>Nodes can be created either inside or outside a filter graph. But for built-in <a class="reference internal" href="filters.html#available-filters"><span class="std std-ref">filters</span></a>,
+they can only be created inside a graph.</p>
+<p>To add a node in a graph</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="s2">&quot;Speck2fOutputEventTypeFilter&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>To create a node outside a graph, instantiate the node directly.
+Subsequently the node can be connected to a filter graph using the <cite>sequential</cite> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">sink</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">BasicSinkNode_speck2f_event_output_event</span><span class="p">()</span>
+<span class="linenos">2</span><span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">(),</span> <span class="n">sink</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="connecting-nodes">
+<h3><a class="toc-backref" href="filters.html#id10" role="doc-backlink">Connecting Nodes</a><a class="headerlink" href="filters.html#connecting-nodes" title="Link to this heading"></a></h3>
+<p>Nodes that are passed as a list to <cite>Grahp.sequential()</cite> are automatically connected.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">crop_node</span><span class="p">,</span> <span class="n">decimate_node</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="s2">&quot;DvsEventCrop&quot;</span><span class="p">,</span> <span class="s2">&quot;DvsEventDecimate&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<section id="branching-and-merging">
+<h4>Branching and Merging<a class="headerlink" href="filters.html#branching-and-merging" title="Link to this heading"></a></h4>
+<p>Branches are created by using a node already in the graph as the first node in a <cite>sequential</cite> call.
+Conversely merges are created by using an existing node as the last node in a <cite>sequential</cite> call.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Create first path</span>
+<span class="linenos">2</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2_1</span><span class="p">,</span> <span class="n">node3</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">board</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">(),</span>
+<span class="linenos">3</span>                                          <span class="s2">&quot;Speck2fOutputEventTypeFilter&quot;</span><span class="p">,</span>
+<span class="linenos">4</span>                                          <span class="n">samna</span><span class="o">.</span><span class="n">BasicSinkNode_speck2f_event_output_event</span><span class="p">()])</span>
+<span class="linenos">5</span><span class="c1"># Create second path</span>
+<span class="linenos">6</span><span class="n">_</span><span class="p">,</span> <span class="n">node2_2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="n">node1</span><span class="p">,</span> <span class="s2">&quot;Speck2fForward&quot;</span><span class="p">,</span> <span class="n">node3</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="examples">
+<h2><a class="toc-backref" href="filters.html#id11" role="doc-backlink">Examples</a><a class="headerlink" href="filters.html#examples" title="Link to this heading"></a></h2>
+<section id="streaming-events">
+<h3><a class="toc-backref" href="filters.html#id12" role="doc-backlink">Streaming Events</a><a class="headerlink" href="filters.html#streaming-events" title="Link to this heading"></a></h3>
+<p>One of the main features of the filtering system is the ability to stream across process and network boundaries.
+This can be achieved using the ZMQ receiver and streamer nodes. We use these nodes to connect event streams to
+the GUI for display.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># the visualizer contains a ZMQ receiver, we can open it with an endpoint</span>
+<span class="linenos">2</span><span class="n">samnagui</span><span class="o">.</span><span class="n">run_visualizer</span><span class="p">(</span><span class="s2">&quot;tcp://0.0.0.0:40000&quot;</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="c1"># Add a streamer node that streams visualization events to our graph</span>
+<span class="linenos">5</span><span class="p">[</span><span class="n">streamer_node</span><span class="p">]</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="s2">&quot;VizEventStreamer&quot;</span><span class="p">])</span>
+<span class="linenos">6</span><span class="c1"># stream on the same endpoint as the receiver is listening to</span>
+<span class="linenos">7</span><span class="n">streamer_node</span><span class="o">.</span><span class="n">set_streamer_endpoint</span><span class="p">(</span><span class="s2">&quot;tcp://0.0.0.0:40000&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now all events reaching the <cite>streamer_node</cite> will be transmitted and received by the receiving node in the GUI.</p>
+</section>
+<section id="filtering-events-with-predicates">
+<h3><a class="toc-backref" href="filters.html#id13" role="doc-backlink">Filtering Events With Predicates</a><a class="headerlink" href="filters.html#filtering-events-with-predicates" title="Link to this heading"></a></h3>
+<p>Some filters allow for setting the predicates they will use to let events through or discard them.
+One of these filters is the <cite>MemberSelect</cite> which only you filter events based on a whitelisted set
+of parameters.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">graph</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">EventFilterGraph</span><span class="p">()</span>
+<span class="linenos">2</span><span class="p">[</span><span class="nb">filter</span><span class="p">]</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">sequential</span><span class="p">([</span><span class="s2">&quot;Speck2fMemberSelect&quot;</span><span class="p">])</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="nb">filter</span><span class="o">.</span><span class="n">set_white_list</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;layer&quot;</span><span class="p">)</span> <span class="c1"># only events from layers 0,1,2 will pass through</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="available-filters">
+<h2><a class="toc-backref" href="filters.html#id14" role="doc-backlink">Available Filters</a><a class="headerlink" href="filters.html#available-filters" title="Link to this heading"></a></h2>
+<p>In addition to the available filters listed below, users can define their own filters as described in <a class="reference internal" href="jitFilters.html"><span class="doc">JIT Filters</span></a>.
+For filters that can be instantiated for different boards,
+the JIT built-in filters described <a class="reference internal" href="jitFilters.html#built-in-filters"><span class="std std-ref">here</span></a> provide a convenient alternative.</p>
+<section id="member-select-node">
+<h3><a class="toc-backref" href="filters.html#id15" role="doc-backlink">Member Select Node</a><a class="headerlink" href="filters.html#member-select-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="MemberSelect">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MemberSelect</span></span><a class="headerlink" href="filters.html#MemberSelect" title="Link to this definition"></a></dt>
+<dd><p>Creates a filter node that filters events with specific attribute values from all events.</p>
+<p>As different types of event can have the same attribute name, in order for <code class="code docutils literal notranslate"><span class="pre">MemberSelect</span></code> to filter on a single type of events, it is strongly suggested that events should be filtered by <code class="code docutils literal notranslate"><span class="pre">EventTypeFilter</span></code> first before passing them to <code class="code docutils literal notranslate"><span class="pre">MemberSelect</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">void</span> <span class="pre">set_white_list(whiteList,</span> <span class="pre">attrName)</span></span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>whiteList</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – Attribute values that are going to pass, events with other values will be discarded. Values should be of the same type of event member type, currently only two types are supported : <code class="code docutils literal notranslate"><span class="pre">int</span></code> and <code class="code docutils literal notranslate"><span class="pre">string</span></code>.</p></li>
+<li><p><strong>attrName</strong> (<em>string</em>) – The name of attribute in the event. e.g. if we are going to deal with <code class="code docutils literal notranslate"><span class="pre">layer</span></code> attribute, we can use <code class="code docutils literal notranslate"><span class="pre">&quot;layer&quot;</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Available instances for different boards:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fInputMemberSelect</span></code>: member select in Speck 2f input events, which are</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.DvsEvent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.KillSensorPixel" title="samna.speck2f.event.KillSensorPixel"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.KillSensorPixel</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ResetSensorPixel" title="samna.speck2f.event.ResetSensorPixel"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ResetSensorPixel</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.OutputModeSel" title="samna.speck2f.event.OutputModeSel"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.OutputModeSel</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.AverageSel" title="samna.speck2f.event.AverageSel"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.AverageSel</span></code></a></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.AsiRequest</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadoutRequest</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ScanChainValue</span></code></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteNeuronValue" title="samna.speck2f.event.WriteNeuronValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.WriteNeuronValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadNeuronValue" title="samna.speck2f.event.ReadNeuronValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadNeuronValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteWeightValue" title="samna.speck2f.event.WriteWeightValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.WriteWeightValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadWeightValue" title="samna.speck2f.event.ReadWeightValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadWeightValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteBiasValue" title="samna.speck2f.event.WriteBiasValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.WriteBiasValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadBiasValue" title="samna.speck2f.event.ReadBiasValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadBiasValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteRegisterValue" title="samna.speck2f.event.WriteRegisterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.WriteRegisterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadRegisterValue" title="samna.speck2f.event.ReadRegisterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadRegisterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteFilterValue" title="samna.speck2f.event.WriteFilterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.WriteFilterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadFilterValue" title="samna.speck2f.event.ReadFilterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadFilterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteSramValue" title="samna.speck2f.event.WriteSramValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.WriteSramValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadSramValue" title="samna.speck2f.event.ReadSramValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadSramValue</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fOutputMemberSelect</span></code>: member select in Speck 2f output events, which are</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.DvsEvent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.InputInterfaceEvent" title="samna.speck2f.event.InputInterfaceEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.InputInterfaceEvent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.NeuronValue" title="samna.speck2f.event.NeuronValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.NeuronValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.BiasValue" title="samna.speck2f.event.BiasValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.BiasValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WeightValue" title="samna.speck2f.event.WeightValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.WeightValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.RegisterValue" title="samna.speck2f.event.RegisterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.RegisterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadoutValue" title="samna.speck2f.event.ReadoutValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ReadoutValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.FilterValue" title="samna.speck2f.event.FilterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.FilterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.SramValue" title="samna.speck2f.event.SramValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.SramValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.FilterDvsEvent" title="samna.speck2f.event.FilterDvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.FilterDvsEvent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.FilterValueCurrent" title="samna.speck2f.event.FilterValueCurrent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.FilterValueCurrent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.FilterValuePrevious" title="samna.speck2f.event.FilterValuePrevious"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.FilterValuePrevious</span></code></a></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.ScanChainValue</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PostClusteringEventMemberFilter</span></code>: member select in <a class="reference internal" href="reference/clustering/events/index.html#samna.clustering.events.PostClusteringEvent" title="samna.clustering.events.PostClusteringEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.clustering.events.PostClusteringEvent</span></code></a></p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="background-noise-rater-node">
+<h3><a class="toc-backref" href="filters.html#id16" role="doc-backlink">Background Noise Rater Node</a><a class="headerlink" href="filters.html#background-noise-rater-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="BackgroundNoiseRater">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BackgroundNoiseRater</span></span><a class="headerlink" href="filters.html#BackgroundNoiseRater" title="Link to this definition"></a></dt>
+<dd><p>Calculate event rate of dvs events and spikes, which is :</p>
+<p><cite>dvs and spike event count</cite> / (<cite>last timestamp</cite> - <cite>first timestamp</cite>)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BackgroundNoiseRater.get_result">
+<span class="sig-name descname"><span class="pre">get_result</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#BackgroundNoiseRater.get_result" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Get accumulated event rate since setup.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BackgroundNoiseRater.get_result_per_polarity">
+<span class="sig-name descname"><span class="pre">get_result_per_polarity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#BackgroundNoiseRater.get_result_per_polarity" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Get event rate of two polarities since setup respectively.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BackgroundNoiseRater.get_raw_result">
+<span class="sig-name descname"><span class="pre">get_raw_result</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#BackgroundNoiseRater.get_raw_result" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Get event rate for each pixel, which is a two dimensional array of size (y scale, x scale).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BackgroundNoiseRater.get_raw_result_per_polarity">
+<span class="sig-name descname"><span class="pre">get_raw_result_per_polarity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#BackgroundNoiseRater.get_raw_result_per_polarity" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Get event rate for each polarity and pixel, which is a three dimensional array of size (2, y scale, x scale).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BackgroundNoiseRater.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#BackgroundNoiseRater.setup" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – The x scale to count.</p></li>
+<li><p><strong>x</strong> – The y scale to count.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Clear accumulated data and set x scale and y scale, all dvs event and spike with x coordinate within [0, x - 1] and
+y coordinate within [0, y - 1] will be taken into account.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="BackgroundNoiseRater.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#BackgroundNoiseRater.reset" title="Link to this definition"></a></dt>
+<dd><p>Setup again with previous x scale and y scale.</p>
+</dd></dl>
+
+<p>Available instances for different boards:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Speck2fBackgroundNoiseRater</span></code>: compute events rate for Speck 2f <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.DvsEvent</span></code></a></dt><dd><p>and <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="forward-node">
+<h3><a class="toc-backref" href="filters.html#id17" role="doc-backlink">Forward Node</a><a class="headerlink" href="filters.html#forward-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="Forward">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Forward</span></span><a class="headerlink" href="filters.html#Forward" title="Link to this definition"></a></dt>
+<dd><p>Simply forwards all events.</p>
+<p>Available instances for different boards:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fForward</span></code>: forward all type of Speck 2f events.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="dvs-to-viz-converter-node">
+<h3><a class="toc-backref" href="filters.html#id18" role="doc-backlink">Dvs To Viz Converter Node</a><a class="headerlink" href="filters.html#dvs-to-viz-converter-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="DvsToVizConverter">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DvsToVizConverter</span></span><a class="headerlink" href="filters.html#DvsToVizConverter" title="Link to this definition"></a></dt>
+<dd><p>A filter node that filters DVS events and Spike events from all output events and convert them to <a class="reference internal" href="reference/ui/index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.DvsEvent</span></code></a>
+that are accepted by the <a class="reference internal" href="gui/index.html#visualizer"><span class="std std-ref">Samna Visualizer</span></a>. If you wish to display DVS events on the visualizer, this node is essential.
+For instructions on how to use this node, please refer to <a class="reference internal" href="quickStart.html#displaying-events-in-the-visualizer"><span class="std std-ref">Displaying Events in the Visualizer</span></a>.</p>
+<p>Available instances for different boards:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fDvsToVizConverter</span></code>: converts events from Speck 2f <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">DvsEvent</span></code></a>
+and <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">Spike</span></code></a> to <a class="reference internal" href="reference/ui/index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.DvsEvent</span></code></a> for visualization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PostClusterEventToVizEvent</span></code>: converts events from <a class="reference internal" href="reference/clustering/events/index.html#samna.clustering.events.PostClusteringEvent" title="samna.clustering.events.PostClusteringEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.clustering.events.PostClusteringEvent</span></code></a> to <a class="reference internal" href="reference/ui/index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.DvsEvent</span></code></a> for visualization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CameraToVizConverter</span></code>: converts events from a Inivation camera or a PSEE camera to <a class="reference internal" href="reference/ui/index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.DvsEvent</span></code></a> for visualization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Dynapse1EventToVizConverter</span></code>: converts events from a Dynapse1 to <a class="reference internal" href="reference/ui/index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.DvsEvent</span></code></a> for visualization.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="spike-collection-node">
+<h3><a class="toc-backref" href="filters.html#id19" role="doc-backlink">Spike Collection Node</a><a class="headerlink" href="filters.html#spike-collection-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="SpikeCollectionNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SpikeCollectionNode</span></span><a class="headerlink" href="filters.html#SpikeCollectionNode" title="Link to this definition"></a></dt>
+<dd><p>Select spike events from the output events and categorize them into collections based on time intervals.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="SpikeCollectionNode.set_interval_milli_sec">
+<span class="sig-name descname"><span class="pre">set_interval_milli_sec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#SpikeCollectionNode.set_interval_milli_sec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>interval</strong> (<em>int</em>) – The time interval in milliseconds that we divide the spike events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpikeCollectionNode.get_interval_milli_sec">
+<span class="sig-name descname"><span class="pre">get_interval_milli_sec</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#SpikeCollectionNode.get_interval_milli_sec" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The time interval in milliseconds.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Available instances for different boards:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fSpikeCollectionNode</span></code>: collect <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a> given a time interval.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="spike-count-node">
+<h3><a class="toc-backref" href="filters.html#id20" role="doc-backlink">Spike Count Node</a><a class="headerlink" href="filters.html#spike-count-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="SpikeCountNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SpikeCountNode</span></span><a class="headerlink" href="filters.html#SpikeCountNode" title="Link to this definition"></a></dt>
+<dd><p>Counts spike events and outputs <a class="reference internal" href="reference/ui/index.html#samna.ui.SpikeCount" title="samna.ui.SpikeCount"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.SpikeCount</span></code></a> that can be visualized in the Visualizer..
+It sums spike events in each collection grouping by feature value.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="SpikeCountNode.set_feature_count">
+<span class="sig-name descname"><span class="pre">set_feature_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature_count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#SpikeCountNode.set_feature_count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>feature_count</strong> (<em>int</em>) – Feature value count. it should be set before this filter is applied. e.g. if 2 is set, then all feature value in spike events should be in [0, 1]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SpikeCountNode.get_feature_count">
+<span class="sig-name descname"><span class="pre">get_feature_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#SpikeCountNode.get_feature_count" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Feature value count.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Available instances for different boards:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fSpikeCountNode</span></code>: count the number of <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a> events grouped by feature value and outputs <a class="reference internal" href="reference/ui/index.html#samna.ui.SpikeCount" title="samna.ui.SpikeCount"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.SpikeCount</span></code></a> events.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="majority-readout-node">
+<h3><a class="toc-backref" href="filters.html#id21" role="doc-backlink">Majority Readout Node</a><a class="headerlink" href="filters.html#majority-readout-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="MajorityReadoutNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MajorityReadoutNode</span></span><a class="headerlink" href="filters.html#MajorityReadoutNode" title="Link to this definition"></a></dt>
+<dd><p>Calculate readout events from spike collections in specific way and outputs <a class="reference internal" href="reference/ui/index.html#samna.ui.Readout" title="samna.ui.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Readout</span></code></a> that can be visualized in the Visualizer..</p>
+<p>Available instances for different boards:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fMajorityReadoutNode</span></code>: calculate readout events from <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a> events and outputs <a class="reference internal" href="reference/ui/index.html#samna.ui.Readout" title="samna.ui.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Readout</span></code></a> events.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="measurement-to-viz-converter-node">
+<h3><a class="toc-backref" href="filters.html#id22" role="doc-backlink">Measurement To Viz Converter Node</a><a class="headerlink" href="filters.html#measurement-to-viz-converter-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="MeasurementToVizConverter">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MeasurementToVizConverter</span></span><a class="headerlink" href="filters.html#MeasurementToVizConverter" title="Link to this definition"></a></dt>
+<dd><p>A filter that transform power measurement events to <a class="reference internal" href="reference/ui/index.html#samna.ui.Measurement" title="samna.ui.Measurement"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Measurement</span></code></a> that can be visualized in the Visualizer.</p>
+<p>Available instances for different boards:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MeasurementToVizConverter</span></code>: transform power measurement events to <a class="reference internal" href="reference/ui/index.html#samna.ui.Measurement" title="samna.ui.Measurement"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Measurement</span></code></a> that can be visualized in the Visualizer.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="camera-to-chip-dvs-event-node">
+<h3><a class="toc-backref" href="filters.html#id23" role="doc-backlink">Camera To Chip Dvs Event Node</a><a class="headerlink" href="filters.html#camera-to-chip-dvs-event-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="cameraToChipExternalDvsEvent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cameraToChipExternalDvsEvent</span></span><a class="headerlink" href="filters.html#cameraToChipExternalDvsEvent" title="Link to this definition"></a></dt>
+<dd><p>Creates a filter node that converts from Inivation or PSEE camera DVS events to chip input events.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CameraToSpeck2fInput</span></code>: The <a class="reference internal" href="reference/camera/event/index.html#samna.camera.event.DvsEvent" title="samna.camera.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.camera.event.DvsEvent</span></code></a> are converted
+to <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.DvsEvent</span></code></a> that can be fed to the chip.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="event-type-filter-node">
+<h3><a class="toc-backref" href="filters.html#id24" role="doc-backlink">Event Type Filter Node</a><a class="headerlink" href="filters.html#event-type-filter-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="EventTypeFilter">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EventTypeFilter</span></span><a class="headerlink" href="filters.html#EventTypeFilter" title="Link to this definition"></a></dt>
+<dd><p>Pass or reject specific type of event from all types of event.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="EventTypeFilter.get_available_types">
+<span class="sig-name descname"><span class="pre">get_available_types</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#EventTypeFilter.get_available_types" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a str list which contains all available names for event types, the first one is the variant type name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EventTypeFilter.set_desired_type">
+<span class="sig-name descname"><span class="pre">set_desired_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_desired_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#EventTypeFilter.set_desired_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_desired_type</strong> (<em>str</em>) – the type name which indicates the event type to pass, only this type of events will pass the filter node.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="EventTypeFilter.get_desired_type">
+<span class="sig-name descname"><span class="pre">get_desired_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#EventTypeFilter.get_desired_type" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the desired event type name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EventTypeFilter.set_rejected_type">
+<span class="sig-name descname"><span class="pre">set_rejected_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_rejected_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#EventTypeFilter.set_rejected_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_rejected_type</strong> (<em>str</em>) – the type name which indicates the event type to reject, all other types of events will pass the filter node.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="EventTypeFilter.get_rejected_type">
+<span class="sig-name descname"><span class="pre">get_rejected_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#EventTypeFilter.get_rejected_type" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the rejected event type name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Available instances for different boards:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fInputEventTypeFilter</span></code>: can filter one type of events from all Speck 2f input events, which are</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::Spike</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::DvsEvent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.KillSensorPixel" title="samna.speck2f.event.KillSensorPixel"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::KillSensorPixel</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ResetSensorPixel" title="samna.speck2f.event.ResetSensorPixel"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ResetSensorPixel</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.OutputModeSel" title="samna.speck2f.event.OutputModeSel"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::OutputModeSel</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.AverageSel" title="samna.speck2f.event.AverageSel"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::AverageSel</span></code></a></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::AsiRequest</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ReadoutRequest</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ScanChainValue</span></code></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteNeuronValue" title="samna.speck2f.event.WriteNeuronValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::WriteNeuronValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadNeuronValue" title="samna.speck2f.event.ReadNeuronValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ReadNeuronValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteWeightValue" title="samna.speck2f.event.WriteWeightValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::WriteWeightValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadWeightValue" title="samna.speck2f.event.ReadWeightValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ReadWeightValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteBiasValue" title="samna.speck2f.event.WriteBiasValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::WriteBiasValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadBiasValue" title="samna.speck2f.event.ReadBiasValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ReadBiasValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteRegisterValue" title="samna.speck2f.event.WriteRegisterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::WriteRegisterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadRegisterValue" title="samna.speck2f.event.ReadRegisterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ReadRegisterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteFilterValue" title="samna.speck2f.event.WriteFilterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::WriteFilterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadFilterValue" title="samna.speck2f.event.ReadFilterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ReadFilterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WriteSramValue" title="samna.speck2f.event.WriteSramValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::WriteSramValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadSramValue" title="samna.speck2f.event.ReadSramValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ReadSramValue</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fOutputEventTypeFilter</span></code>: can filter one type of events from all Speck 2f output events, which are</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::Spike</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::DvsEvent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.InputInterfaceEvent" title="samna.speck2f.event.InputInterfaceEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::InputInterfaceEvent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.NeuronValue" title="samna.speck2f.event.NeuronValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::NeuronValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.BiasValue" title="samna.speck2f.event.BiasValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::BiasValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.WeightValue" title="samna.speck2f.event.WeightValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::WeightValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.RegisterValue" title="samna.speck2f.event.RegisterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::RegisterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.ReadoutValue" title="samna.speck2f.event.ReadoutValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ReadoutValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.FilterValue" title="samna.speck2f.event.FilterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::FilterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.SramValue" title="samna.speck2f.event.SramValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::SramValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.FilterDvsEvent" title="samna.speck2f.event.FilterDvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::FilterDvsEvent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.FilterValueCurrent" title="samna.speck2f.event.FilterValueCurrent"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::FilterValueCurrent</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.FilterValuePrevious" title="samna.speck2f.event.FilterValuePrevious"><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::FilterValuePrevious</span></code></a></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">speck2f::event::ScanChainValue</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">XyloImuOutputEventTypeFilter</span></code>: can filter one type of events from all Xylo IMU output events, which are</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xylo::event::Spike</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xylo::event::Readout</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xylo::event::RegisterValue</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xylo::event::MemoryValue</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xylo::event::MembranePotential</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xylo::event::SynapticCurrent</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xylo::event::HiddenSpikeCount</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xylo::event::Version</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">xylo::event::Interrupt</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mc3632OutputEventTypeFilter</span></code>: can filter one type of events from all Mc3632 output events, which are</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="reference/unifirm/modules/mc3632/index.html#samna.unifirm.modules.mc3632.RegisterValue" title="samna.unifirm.modules.mc3632.RegisterValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">unifirm::modules::mc3632::RegisterValue</span></code></a></p></li>
+<li><p><a class="reference internal" href="reference/events/index.html#samna.events.Acceleration" title="samna.events.Acceleration"><code class="xref py py-class docutils literal notranslate"><span class="pre">events::Acceleration</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ClusterOutputEventTypeFilter</span></code>: can filter one type of cluster output events, currently only one</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="reference/clustering/events/index.html#samna.clustering.events.PostClusteringEvent" title="samna.clustering.events.PostClusteringEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">clustering::events::PostClusteringEvent</span></code></a></p></li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="viz-event-streamer-node">
+<h3><a class="toc-backref" href="filters.html#id25" role="doc-backlink">Viz Event Streamer Node</a><a class="headerlink" href="filters.html#viz-event-streamer-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="VizEventStreamer">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VizEventStreamer</span></span><a class="headerlink" href="filters.html#VizEventStreamer" title="Link to this definition"></a></dt>
+<dd><p>Creates a tcp sender node that sends raw image events for visualization.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="VizEventStreamer.set_streamer_endpoint">
+<span class="sig-name descname"><span class="pre">set_streamer_endpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newEndpoint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#VizEventStreamer.set_streamer_endpoint" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p>Set the sending tcp endpoint which will be bound by the streamer.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="VizEventStreamer.get_connected_receiver_count">
+<span class="sig-name descname"><span class="pre">get_connected_receiver_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#VizEventStreamer.get_connected_receiver_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Get receiver count connected to this streamer.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="VizEventStreamer.wait_for_receiver_count">
+<span class="sig-name descname"><span class="pre">wait_for_receiver_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_milli_sec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#VizEventStreamer.wait_for_receiver_count" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Actual receivers count after wait.</p>
+</dd>
+</dl>
+<p>Wait for receivers count to be greater than or equal to a specific number</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="VizEventStreamer.is_receiver_connected">
+<span class="sig-name descname"><span class="pre">is_receiver_connected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">receiver_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#VizEventStreamer.is_receiver_connected" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Whether specific receiver is connected.</p>
+</dd>
+</dl>
+<p>Available instances for different boards:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VizEventStreamer</span></code>: Stream <a class="reference internal" href="reference/ui/index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.DvsEvent</span></code></a>, <a class="reference internal" href="reference/ui/index.html#samna.ui.SpikeCount" title="samna.ui.SpikeCount"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.SpikeCount</span></code></a>, <a class="reference internal" href="reference/ui/index.html#samna.ui.Readout" title="samna.ui.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Readout</span></code></a>,
+<a class="reference internal" href="reference/ui/index.html#samna.ui.Measurement" title="samna.ui.Measurement"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Measurement</span></code></a>, <a class="reference internal" href="reference/ui/index.html#samna.ui.ActivityPlotConfiguration" title="samna.ui.ActivityPlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.ActivityPlotConfiguration</span></code></a>, <a class="reference internal" href="reference/ui/index.html#samna.ui.ReadoutPlotConfiguration" title="samna.ui.ReadoutPlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.ReadoutPlotConfiguration</span></code></a>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.LinePlotConfiguration</span></code>, <a class="reference internal" href="reference/ui/index.html#samna.ui.FramePlotConfiguration" title="samna.ui.FramePlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.FramePlotConfiguration</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.PlotConfiguration</span></code>,
+<a class="reference internal" href="reference/events/index.html#samna.events.Frame" title="samna.events.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.events.Frame</span></code></a> events to <a class="reference internal" href="filters.html#VizEventReceiver" title="VizEventReceiver"><code class="xref py py-class docutils literal notranslate"><span class="pre">VizEventReceiver</span></code></a>.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="viz-event-receiver-node">
+<h3><a class="toc-backref" href="filters.html#id26" role="doc-backlink">Viz Event Receiver Node</a><a class="headerlink" href="filters.html#viz-event-receiver-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="VizEventReceiver">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">VizEventReceiver</span></span><a class="headerlink" href="filters.html#VizEventReceiver" title="Link to this definition"></a></dt>
+<dd><p>Creates a tcp receiver node that receives raw image events for visualization.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="VizEventReceiver.set_receiver_endpoint">
+<span class="sig-name descname"><span class="pre">set_receiver_endpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#VizEventReceiver.set_receiver_endpoint" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p>Set the receiving tcp endpoint which is used to connect streamer.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="VizEventReceiver.is_connected">
+<span class="sig-name descname"><span class="pre">is_connected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#VizEventReceiver.is_connected" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If current receiver is connected to a streamer or not.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="VizEventReceiver.wait_for_connect">
+<span class="sig-name descname"><span class="pre">wait_for_connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_milli_sec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#VizEventReceiver.wait_for_connect" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Connected or not.</p>
+</dd>
+</dl>
+<p>Wait to be connected or timeout.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="VizEventReceiver.reconnect">
+<span class="sig-name descname"><span class="pre">reconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#VizEventReceiver.reconnect" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p>Reconnect using previous endpoint.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="VizEventReceiver.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#VizEventReceiver.get_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Get id string of this receiver.</p>
+</dd>
+</dl>
+<p>Available instances for different boards:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VizEventReceiver</span></code>: Receive <a class="reference internal" href="reference/ui/index.html#samna.ui.DvsEvent" title="samna.ui.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.DvsEvent</span></code></a>, <a class="reference internal" href="reference/ui/index.html#samna.ui.SpikeCount" title="samna.ui.SpikeCount"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.SpikeCount</span></code></a>, <a class="reference internal" href="reference/ui/index.html#samna.ui.Readout" title="samna.ui.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Readout</span></code></a>,
+<a class="reference internal" href="reference/ui/index.html#samna.ui.Measurement" title="samna.ui.Measurement"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.Measurement</span></code></a>, <a class="reference internal" href="reference/ui/index.html#samna.ui.ActivityPlotConfiguration" title="samna.ui.ActivityPlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.ActivityPlotConfiguration</span></code></a>, <a class="reference internal" href="reference/ui/index.html#samna.ui.ReadoutPlotConfiguration" title="samna.ui.ReadoutPlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.ReadoutPlotConfiguration</span></code></a>,
+<code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.LinePlotConfiguration</span></code>, <a class="reference internal" href="reference/ui/index.html#samna.ui.FramePlotConfiguration" title="samna.ui.FramePlotConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.FramePlotConfiguration</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">samna.ui.PlotConfiguration</span></code>,
+<a class="reference internal" href="reference/events/index.html#samna.events.Frame" title="samna.events.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.events.Frame</span></code></a> events from <a class="reference internal" href="filters.html#VizEventStreamer" title="VizEventStreamer"><code class="xref py py-class docutils literal notranslate"><span class="pre">VizEventStreamer</span></code></a>.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="event-crop-node">
+<h3><a class="toc-backref" href="filters.html#id27" role="doc-backlink">Event Crop Node</a><a class="headerlink" href="filters.html#event-crop-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="EventCrop">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EventCrop</span></span><a class="headerlink" href="filters.html#EventCrop" title="Link to this definition"></a></dt>
+<dd><p>Creates a cropping filter for DVS type events.
+Events within the region of interested will be recentered in the output image space
+and forwarded. Events outside will be dropped.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="EventCrop.set_roi">
+<span class="sig-name descname"><span class="pre">set_roi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xtl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ytl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xbr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ybr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#EventCrop.set_roi" title="Link to this definition"></a></dt>
+<dd><p>Set the region of interest that will be cropped out of the input image space.
+The region is defined using the top left and bottom right corners of a rectangle.
+The region of interest defines the output image space which spans x coordinates [xtl, xbr]
+and y coordinates [ytl, ybr].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xtl</strong> (<em>int</em>) – Top left x coordinate of the cropping rectangle.</p></li>
+<li><p><strong>ytl</strong> (<em>int</em>) – Top left y coordinate of the cropping rectangle.</p></li>
+<li><p><strong>xbr</strong> (<em>int</em>) – Bottom right x coordinate of the cropping rectangle.</p></li>
+<li><p><strong>ybr</strong> (<em>int</em>) – Bottom right y coordinate of the cropping rectangle.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Available instances:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DvsEventCrop</span></code>: process and outputs <a class="reference internal" href="reference/camera/event/index.html#samna.camera.event.DvsEvent" title="samna.camera.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.camera.event.DvsEvent</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fDvsEventCrop</span></code>: process and outputs <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.DvsEvent</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fSpikeEventCrop</span></code>: process and outputs <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PostClusteringEventCrop</span></code>: process and outputs <a class="reference internal" href="reference/clustering/events/index.html#samna.clustering.events.PostClusteringEvent" title="samna.clustering.events.PostClusteringEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.clustering.events.PostClusteringEvent</span></code></a>.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="dvs-event-decimate-node">
+<h3><a class="toc-backref" href="filters.html#id28" role="doc-backlink">Dvs Event Decimate Node</a><a class="headerlink" href="filters.html#dvs-event-decimate-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="DvsEventDecimate">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DvsEventDecimate</span></span><a class="headerlink" href="filters.html#DvsEventDecimate" title="Link to this definition"></a></dt>
+<dd><p>Creates a decimate filter for camera DVS events.
+The decimate filter uses the decimation fraction M/L to
+drop events in the stream.</p>
+<p>A fraction of M/L will let through L out of M events.</p>
+<p>Example: Let M/L be 10/1. Then 1 out of every 10 events will be let
+through.</p>
+<p>Note: Only L=1 is currently supported.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventDecimate.set_decimation_fraction">
+<span class="sig-name descname"><span class="pre">set_decimation_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventDecimate.set_decimation_fraction" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> (<em>int</em>) – The nominator in the decimation fraction.</p></li>
+<li><p><strong>L</strong> (<em>int</em>) – The denominator in the decimation fraction.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Available instances:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DvsEventDecimate</span></code>: process and outputs <a class="reference internal" href="reference/camera/event/index.html#samna.camera.event.DvsEvent" title="samna.camera.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.camera.event.DvsEvent</span></code></a>.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="event-rescale-node">
+<h3><a class="toc-backref" href="filters.html#id29" role="doc-backlink">Event Rescale Node</a><a class="headerlink" href="filters.html#event-rescale-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="EventRescaleNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EventRescaleNode</span></span><a class="headerlink" href="filters.html#EventRescaleNode" title="Link to this definition"></a></dt>
+<dd><p>Creates a rescaling filter node for camera DVS events.</p>
+<p>The rescale node scales the input image by <code class="code docutils literal notranslate"><span class="pre">width_coeff</span></code> and <code class="code docutils literal notranslate"><span class="pre">height_coeff</span></code>, in the way of <code class="code docutils literal notranslate"><span class="pre">width</span> <span class="pre">=</span> <span class="pre">width</span> <span class="pre">/</span> <span class="pre">width_coeff</span></code> and <code class="code docutils literal notranslate"><span class="pre">height</span> <span class="pre">=</span> <span class="pre">height</span> <span class="pre">/</span> <span class="pre">height_coeff</span></code>.</p>
+<p>This filter does not perform interpolation and non integer scaling factors are therefore
+unlikely to work well as events will not be spaced evenly in the output image space.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="EventRescaleNode.set_rescaling_coefficients">
+<span class="sig-name descname"><span class="pre">set_rescaling_coefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height_coeff</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#EventRescaleNode.set_rescaling_coefficients" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width_coeff</strong> (<em>float</em>) – The coefficient to scale width.</p></li>
+<li><p><strong>height_coeff</strong> (<em>float</em>) – The coefficient to scale height.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EventRescaleNode.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#EventRescaleNode.reset" title="Link to this definition"></a></dt>
+<dd><p>Reset width and height coefficient to 1.</p>
+</dd></dl>
+
+<p>Available instances:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DvsEventRescale</span></code>: process and outputs <a class="reference internal" href="reference/camera/event/index.html#samna.camera.event.DvsEvent" title="samna.camera.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.camera.event.DvsEvent</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PostClusteringEventRescale</span></code>: process and outputs <a class="reference internal" href="reference/clustering/events/index.html#samna.clustering.events.PostClusteringEvent" title="samna.clustering.events.PostClusteringEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.clustering.events.PostClusteringEvent</span></code></a>.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="dvs-event-cluster-filter-node">
+<h3><a class="toc-backref" href="filters.html#id30" role="doc-backlink">Dvs Event Cluster Filter Node</a><a class="headerlink" href="filters.html#dvs-event-cluster-filter-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="DvsEventClusterFilterNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DvsEventClusterFilterNode</span></span><a class="headerlink" href="filters.html#DvsEventClusterFilterNode" title="Link to this definition"></a></dt>
+<dd><p>Spatial and temporal filter of events.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventClusterFilterNode.set_spatial_relation_threshold">
+<span class="sig-name descname"><span class="pre">set_spatial_relation_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventClusterFilterNode.set_spatial_relation_threshold" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>threshold</strong> (<em>int</em>) – Threshold to determine if event is spatially related to the collected events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventClusterFilterNode.set_spatial_distance_threshold">
+<span class="sig-name descname"><span class="pre">set_spatial_distance_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventClusterFilterNode.set_spatial_distance_threshold" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>threshold</strong> (<em>int</em>) – Distance that determines if two events are spatially related.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventClusterFilterNode.set_black_noise_timeconstant">
+<span class="sig-name descname"><span class="pre">set_black_noise_timeconstant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeconstant</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventClusterFilterNode.set_black_noise_timeconstant" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeconstant</strong> (<em>int</em>) – Time in us that get suppressed by black noise filter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventClusterFilterNode.set_black_noise_distance">
+<span class="sig-name descname"><span class="pre">set_black_noise_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventClusterFilterNode.set_black_noise_distance" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>distance</strong> (<em>int</em>) – Distance of events to compare to determines black noise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventClusterFilterNode.set_time_collected_events">
+<span class="sig-name descname"><span class="pre">set_time_collected_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventClusterFilterNode.set_time_collected_events" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>int</em>) – Maximum time in us events will be stored in the buffer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventClusterFilterNode.get_collected_events">
+<span class="sig-name descname"><span class="pre">get_collected_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventClusterFilterNode.get_collected_events" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The collected events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventClusterFilterNode.get_collected_events_length">
+<span class="sig-name descname"><span class="pre">get_collected_events_length</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventClusterFilterNode.get_collected_events_length" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of currently collected events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventClusterFilterNode.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventClusterFilterNode.reset" title="Link to this definition"></a></dt>
+<dd><p>Clears the collected event buffer.</p>
+</dd></dl>
+
+<p>Available instances:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DvsEventClusterFilter</span></code>: process and outputs <a class="reference internal" href="reference/camera/event/index.html#samna.camera.event.DvsEvent" title="samna.camera.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.camera.event.DvsEvent</span></code></a>.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="dvs-event-efficient-cluster-filter-node">
+<h3><a class="toc-backref" href="filters.html#id31" role="doc-backlink">Dvs Event Efficient Cluster Filter Node</a><a class="headerlink" href="filters.html#dvs-event-efficient-cluster-filter-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DvsEventEfficientClusterFilterNode</span></span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode" title="Link to this definition"></a></dt>
+<dd><p>A more efficient implementation of the <code class="code docutils literal notranslate"><span class="pre">DvsEventClusterFilterNode</span></code>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode.set_spatial_relation_threshold">
+<span class="sig-name descname"><span class="pre">set_spatial_relation_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode.set_spatial_relation_threshold" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>threshold</strong> (<em>int</em>) – Threshold to determine if event is spatially related to the collected events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode.set_spatial_distance_threshold">
+<span class="sig-name descname"><span class="pre">set_spatial_distance_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode.set_spatial_distance_threshold" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>threshold</strong> (<em>int</em>) – Distance that determines if two events are spatially related.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode.set_black_noise_timeconstant">
+<span class="sig-name descname"><span class="pre">set_black_noise_timeconstant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeconstant</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode.set_black_noise_timeconstant" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeconstant</strong> (<em>int</em>) – Time in us that get suppressed by black noise filter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode.set_number_events_to_activate_black_noise_filter">
+<span class="sig-name descname"><span class="pre">set_number_events_to_activate_black_noise_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode.set_number_events_to_activate_black_noise_filter" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – Number of events necessary to activate black noise filter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode.set_maximum_collected_events">
+<span class="sig-name descname"><span class="pre">set_maximum_collected_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode.set_maximum_collected_events" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>count</strong> (<em>int</em>) – Maximum number of events to process in the filter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode.set_time_collected_events">
+<span class="sig-name descname"><span class="pre">set_time_collected_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode.set_time_collected_events" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>int</em>) – Maximum time in us events will be stored in the buffer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode.get_collected_events">
+<span class="sig-name descname"><span class="pre">get_collected_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode.get_collected_events" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The collected events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode.get_collected_events_length">
+<span class="sig-name descname"><span class="pre">get_collected_events_length</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode.get_collected_events_length" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Number of currently collected events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DvsEventEfficientClusterFilterNode.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#DvsEventEfficientClusterFilterNode.reset" title="Link to this definition"></a></dt>
+<dd><p>Clears the collected event buffer.</p>
+</dd></dl>
+
+<p>Available instances:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DvsEventEfficientClusterFilter</span></code>: process and outputs <a class="reference internal" href="reference/camera/event/index.html#samna.camera.event.DvsEvent" title="samna.camera.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.camera.event.DvsEvent</span></code></a>.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="image-reconstruct-filter-node">
+<h3><a class="toc-backref" href="filters.html#id32" role="doc-backlink">Image Reconstruct Filter Node</a><a class="headerlink" href="filters.html#image-reconstruct-filter-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="ImageReconstructFilter">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ImageReconstructFilter</span></span><a class="headerlink" href="filters.html#ImageReconstructFilter" title="Link to this definition"></a></dt>
+<dd><p>The <cite>ImageReconstructFilter</cite> accumulates streams of events to reconstruct an image.
+The filter accepts both DVS or spike events as input and produces a <cite>samna.events.Frame</cite> event as output.
+The algorithm is an accumulator with exponential decay and is tunable with parameters.
+Events fed to the filter, must have a monotonically increasing time stamp. Out of order events are ignored.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ImageReconstructFilter.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#ImageReconstructFilter.reset" title="Link to this definition"></a></dt>
+<dd><p>Resets the internal pixel potentials and timing state of the filter.
+Parameters changed through setters are not reset to their defaults.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ImageReconstructFilter.set_filter_size">
+<span class="sig-name descname"><span class="pre">set_filter_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#ImageReconstructFilter.set_filter_size" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size_x</strong> (<em>int</em>) – Width of the filter resolution.</p></li>
+<li><p><strong>size_y</strong> (<em>int</em>) – Height of the filter resolution.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ImageReconstructFilter.set_event_contribution">
+<span class="sig-name descname"><span class="pre">set_event_contribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contribution</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#ImageReconstructFilter.set_event_contribution" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>contribution</strong> (<em>float</em>) – Contribution amount of a single event.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ImageReconstructFilter.set_decay_contribution">
+<span class="sig-name descname"><span class="pre">set_decay_contribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contribution</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#ImageReconstructFilter.set_decay_contribution" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>contribution</strong> (<em>float</em>) – Rate of decay.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ImageReconstructFilter.set_potentials">
+<span class="sig-name descname"><span class="pre">set_potentials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_potential</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_potential</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#ImageReconstructFilter.set_potentials" title="Link to this definition"></a></dt>
+<dd><p>Set the potential limits for the pixels.
+max_potential must be strictly greater than min_potential.
+Calling this method resets the internal state of the filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_potential</strong> (<em>float</em>) – Minimum potential of a pixel.</p></li>
+<li><p><strong>max_potential</strong> (<em>float</em>) – Maximum potential of a pixel.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ImageReconstructFilter.set_synchronous_decay">
+<span class="sig-name descname"><span class="pre">set_synchronous_decay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">enable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#ImageReconstructFilter.set_synchronous_decay" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>enable</strong> (<em>bool</em>) – Enable synchronous decay when generating a frame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ImageReconstructFilter.set_frame_rate">
+<span class="sig-name descname"><span class="pre">set_frame_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">limit</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#ImageReconstructFilter.set_frame_rate" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>limit</strong> (<em>int</em>) – Maximum number of frames per second to generate.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Available instances:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Speck2fDvsImageReconstructFilter</span></code>: process <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.DvsEvent" title="samna.speck2f.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.DvsEvent</span></code></a> or <a class="reference internal" href="reference/speck2f/event/index.html#samna.speck2f.event.Spike" title="samna.speck2f.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.speck2f.event.Spike</span></code></a> and
+outputs <a class="reference internal" href="reference/events/index.html#samna.events.Frame" title="samna.events.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.events.Frame</span></code></a> events.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DvsEventImageReconstructFilter</span></code>: process <a class="reference internal" href="reference/camera/event/index.html#samna.camera.event.DvsEvent" title="samna.camera.event.DvsEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.camera.event.DvsEvent</span></code></a> and outputs <a class="reference internal" href="reference/events/index.html#samna.events.Frame" title="samna.events.Frame"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.events.Frame</span></code></a> events.</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="dynapse1-neuron-select-node">
+<h3><a class="toc-backref" href="filters.html#id33" role="doc-backlink">Dynapse1 Neuron Select Node</a><a class="headerlink" href="filters.html#dynapse1-neuron-select-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="Dynapse1NeuronSelect">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Dynapse1NeuronSelect</span></span><a class="headerlink" href="filters.html#Dynapse1NeuronSelect" title="Link to this definition"></a></dt>
+<dd><p>Pass spikes of selected neurons from all received spikes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronSelect.set_neurons">
+<span class="sig-name descname"><span class="pre">set_neurons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neuron_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronSelect.set_neurons" title="Link to this definition"></a></dt>
+<dd><p>Select neurons to be monitored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>neuron_ids</strong> (<em>list</em><em>[</em><em>tuple</em><em>(</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>)</em><em>]</em>) – list of neuron ids (chip,core,neuron) of selected neurons to be monitored.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronSelect.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronSelect.reset" title="Link to this definition"></a></dt>
+<dd><p>Reset filter to pass all spikes.</p>
+</dd></dl>
+
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Dynapse1NeuronSelect</span></code></p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="dynapse1-neuron-trace-node">
+<h3><a class="toc-backref" href="filters.html#id34" role="doc-backlink">Dynapse1 Neuron Trace Node</a><a class="headerlink" href="filters.html#dynapse1-neuron-trace-node" title="Link to this heading"></a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Dynapse1NeuronTrace</span></span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace" title="Link to this definition"></a></dt>
+<dd><p>Implementation of event-driven exponentially-decaying spiking
+traces of a list of monitored neurons, which can be used to implement
+STDP-like learning algorithms or to track the instantaneous firing rates.</p>
+<p>The Dynapse1NeuronTrace node receives spikes, maintains the neuron traces of monitored neurons,
+and generates samna.dynapse1.Dynapse1Trace events whenever a trigger neuron fires. The neuron
+traces are updated as the following:</p>
+<ul class="simple">
+<li><p>When a monitored neuron fires, its trace value will be increased according to</p></li>
+<li><p>When the trigger neuron spikes, all traces of monitored neurons be decreased/decayed
+exponentially from the last update point.</p></li>
+</ul>
+<p>The monitored neurons, trigger neurons and time constants of the exponentially-decaying traces
+can be set using function set_neurons.
+Also, Dynapse1NeuronTrace has the following private attributes that affect the trace
+tracking which can be checked/configured by the get/set functions below.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.method">
+<span class="sig-name descname"><span class="pre">method</span></span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.method" title="Link to this definition"></a></dt>
+<dd><p>The way how the trace is increased when a monitor neuron spikes.
+Default value is “increase_by”.
+- “increase_by”: increase by a constant value.
+- “increase_to”: increase to a constant value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.increment">
+<span class="sig-name descname"><span class="pre">increment</span></span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.increment" title="Link to this definition"></a></dt>
+<dd><p>The constant value of trace increase. Default value is 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.value_only_at_trigger">
+<span class="sig-name descname"><span class="pre">value_only_at_trigger</span></span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.value_only_at_trigger" title="Link to this definition"></a></dt>
+<dd><p>It’s “true” by default so that the filter node only generates
+samna.dynapse1.Dynapse1Trace event with traces of all monitored neurons only when a trigger neuron fires.
+If it’s “false”, when a monitored neurons fires, a samna.dynapse1.Dynapse1Trace event with only
+trace of that neuron will be generated additionally by the filter. It can be useful when you want
+to observe the detailed trajectory of the traces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.value_before_spike">
+<span class="sig-name descname"><span class="pre">value_before_spike</span></span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.value_before_spike" title="Link to this definition"></a></dt>
+<dd><p>It’s “true” by default so that when a monitored neuron spikes,
+the trace value before the increase will be stored, otherwise the trace value after increment will
+be captured. For STDP algorithms, “true” is needed for the traces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.set_neurons">
+<span class="sig-name descname"><span class="pre">set_neurons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trace_map_neuron_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_neuron_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.set_neurons" title="Link to this definition"></a></dt>
+<dd><p>Select neurons to be monitored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trace_map_neuron_ids</strong> (<em>list</em><em>[</em><em>tuple</em><em>(</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>)</em><em>]</em>) – list of neuron ids
+(chip,core,neuron) of selected neurons to be monitored.</p></li>
+<li><p><strong>trigger_neuron_ids</strong> (<em>list</em><em>[</em><em>tuple</em><em>(</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>)</em><em>]</em>) – list of neuron ids
+(chip,core,neuron) of selected neurons that trigger trace event generation.</p></li>
+<li><p><strong>tau_list</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – list of time constants for traces of monitored neurons,
+in microsecond.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.set_trace_parameters">
+<span class="sig-name descname"><span class="pre">set_trace_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">increment</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.set_trace_parameters" title="Link to this definition"></a></dt>
+<dd><p>Change method and increment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>str</em>) – string of increase method, can be “increase_by” or “increase_to”.</p></li>
+<li><p><strong>increment</strong> (<em>float</em>) – constant value of the trace increase.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.set_tau_list">
+<span class="sig-name descname"><span class="pre">set_tau_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trace_neuron_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.set_tau_list" title="Link to this definition"></a></dt>
+<dd><p>Change trace time constants of some monitored neurons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trace_neuron_ids</strong> (<em>list</em><em>[</em><em>tuple</em><em>(</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>)</em><em>]</em>) – list of neuron ids
+(chip,core,neuron) of some monitored neurons.</p></li>
+<li><p><strong>tau_list</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – list of time constants, in microsecond.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.set_tau">
+<span class="sig-name descname"><span class="pre">set_tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tau</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.set_tau" title="Link to this definition"></a></dt>
+<dd><p>Set time constants for all neuron traces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tau</strong> (<em>int</em>) – time constant, in microsecond.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.set_value_only_at_trigger">
+<span class="sig-name descname"><span class="pre">set_value_only_at_trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_only_at_trigger</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.set_value_only_at_trigger" title="Link to this definition"></a></dt>
+<dd><p>Change value_only_at_trigger.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value_only_at_trigger</strong> (<em>bool</em>) – value_only_at_trigger.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.set_value_before_spike">
+<span class="sig-name descname"><span class="pre">set_value_before_spike</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.set_value_before_spike" title="Link to this definition"></a></dt>
+<dd><p>Change value_before_spike.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value_before_spike</strong> (<em>bool</em>) – value_before_spike.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.get_tau_list">
+<span class="sig-name descname"><span class="pre">get_tau_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trace_neuron_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.get_tau_list" title="Link to this definition"></a></dt>
+<dd><p>Get tau_list of trace_neuron_ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>trace_neuron_ids</strong> (<em>list</em><em>[</em><em>tuple</em><em>(</em><em>int</em><em>,</em><em>int</em><em>,</em><em>int</em><em>)</em><em>]</em>) – list of monitored neuron ids in trace map.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[int]: tau_list of trace_neuron_ids.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.get_method">
+<span class="sig-name descname"><span class="pre">get_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.get_method" title="Link to this definition"></a></dt>
+<dd><p>Get method of trace increase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str: method.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.get_increment">
+<span class="sig-name descname"><span class="pre">get_increment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.get_increment" title="Link to this definition"></a></dt>
+<dd><p>Get constant value of trace increase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float: increment.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.get_value_only_at_trigger">
+<span class="sig-name descname"><span class="pre">get_value_only_at_trigger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.get_value_only_at_trigger" title="Link to this definition"></a></dt>
+<dd><p>Get value_only_at_trigger.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool: value_only_at_trigger.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.get_value_before_spike">
+<span class="sig-name descname"><span class="pre">get_value_before_spike</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.get_value_before_spike" title="Link to this definition"></a></dt>
+<dd><p>Get value_before_spike.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool: value_before_spike.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.reset_traces_to_zero">
+<span class="sig-name descname"><span class="pre">reset_traces_to_zero</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.reset_traces_to_zero" title="Link to this definition"></a></dt>
+<dd><p>Reset all traces values to 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Dynapse1NeuronTrace.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#Dynapse1NeuronTrace.reset" title="Link to this definition"></a></dt>
+<dd><p>Clear out stored trace map, delete monitored neurons and trigger neurons lists.
+Reset the trace parameters (increment, method, value_only_at_trigger and
+value_before_spike) to default values.</p>
+</dd></dl>
+
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Dynapse1NeuronTrace</span></code></p></li>
+</ul>
+</dd></dl>
+
+</section>
+</section>
+<section id="sinks">
+<h2><a class="toc-backref" href="filters.html#id35" role="doc-backlink">Sinks</a><a class="headerlink" href="filters.html#sinks" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">BasicSinkNode_&lt;T&gt;</span></span></dt>
+<dd><p>This filter is defined for <code class="code docutils literal notranslate"><span class="pre">T</span></code> for each model,
+the detailed API documentation can be find in <a class="reference internal" href="reference/xyloImuBoards/index.html#module-samna.xyloImuBoards"><span class="std std-ref">Module content</span></a>.</p>
+<p>A basic sink node that captures any output event from a model.
+Events received by the sink node will accumulate until they are read or cleaned
+from the sink with one of its methods.</p>
+<p>Please be aware that if you don’t read or clean it repeatedly,
+it may <strong>consume all available memory</strong> due to the accumulation of events.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="get_events">
+<span class="sig-name descname"><span class="pre">get_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#get_events" title="Link to this definition"></a></dt>
+<dd><p>Clear the event accumulation buffer and return previously accumulated events.</p>
+<p>This method takes some time to return if the accumulated events are huge.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of output events of that model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="get_events_blocking">
+<span class="sig-name descname"><span class="pre">get_events_blocking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#get_events_blocking" title="Link to this definition"></a></dt>
+<dd><p>Clear the event accumulation buffer and return previously accumulated events.
+If there are no events available, wait for the specified timeout. If no timeout is specified, wait indefinitely.</p>
+<p>This method takes some time to return if the accumulated events are huge.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>int</em>) – The timeout in milliseconds, no timeout by default.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of events or empty list if timeout is reached.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="get_n_events">
+<span class="sig-name descname"><span class="pre">get_n_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="filters.html#get_n_events" title="Link to this definition"></a></dt>
+<dd><p>Get the specified number of events from the event accumulation buffer.
+If there are not enough events available, wait for the specified timeout. If no timeout is specified, wait indefinitely.
+If after the timeout there are still not enough events available, return all available events.</p>
+<p>This method takes some time to return if the accumulated events are huge.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – Number of events to wait for.</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – The timeout in milliseconds, no timeout by default.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list with at most <cite>n</cite> events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clear_events">
+<span class="sig-name descname"><span class="pre">clear_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="filters.html#clear_events" title="Link to this definition"></a></dt>
+<dd><p>Directly clear the event accumulation buffer without returning events.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="devkits/xyloSeries/xyloAudio3/xylo_audio_3_directoutput_mode.html" class="btn btn-neutral float-left" title="XyloAudio 3 Direct Output Mode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="jitFilters.html" class="btn btn-neutral float-right" title="JIT Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

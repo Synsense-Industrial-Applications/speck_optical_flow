@@ -1,0 +1,31 @@
+.. _config-registers:
+
+Registers
+=========
+
+This section describes the register map of Speck2e.
+
+Section :ref:`reg-ref-tables` presents a summary of all registers with their mnemonic names, addresses and default values.
+
+Section :ref:`reg-addressing`, describes the format of register addresses and how to use mnemonic address parts to access registers. 
+
+The following sections describe in details the configuration of all specific register bits.
+
+
+.. toctree::
+   :maxdepth: 2
+
+   reftables
+   addressing
+   ii
+   ii-config
+   layer
+   layer-config
+   router
+   router-config
+   dvs
+   dvs-config
+   filter
+   filter-config
+   readout
+   readout-config

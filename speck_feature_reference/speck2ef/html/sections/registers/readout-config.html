@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.14. Readout Layer Configuration Signal Description &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="8. Internal SRAM Memory" href="../memory/index.html" />
+    <link rel="prev" title="7.13. Readout Layer Register Description" href="readout.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.14. Readout Layer Configuration Signal Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-signal-description">7.14.1. Detailed Signal Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cbn-2-0-clk-blkn">7.14.1.1. CBn[2:0] (clk_blkn)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rbn-2-0-rst-blkn">7.14.1.2. RBn[2:0] (rst_blkn)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avgsel-3-0-average-sel">7.14.1.3. AVGSEL[3:0] (average_sel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#omsel-1-0-output-mode-sel">7.14.1.4. OMSEL[1:0] (output_mode_sel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#th-15-0-readout-threshold">7.14.1.5. TH[15:0] (readout_threshold)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch1-choose-1">7.14.1.6. CH1 (choose_1)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ch1632-choose-16-32">7.14.1.7. CH1632 (choose_16_32)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rocs-1-0-readout-conf-sel">7.14.1.8. ROCS[1:0] (readout_conf_sel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bypreg-bypass-reg">7.14.1.9. BYPREG (bypass_reg)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ovrth-override-threshold-max">7.14.1.10. OVRTH (override_threshold_max)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inen-reg-input-enable">7.14.1.11. INEN (reg_input_enable)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reqdly-7-0-io-interface-req-delay">7.14.1.12. REQDLY[7:0] (io_interface_req_delay)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.14. </span>Readout Layer Configuration Signal Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/readout-config.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="readout-layer-configuration-signal-description">
+<span id="readout-config-signals"></span><h1><span class="section-number">7.14. </span>Readout Layer Configuration Signal Description<a class="headerlink" href="#readout-layer-configuration-signal-description" title="Permalink to this heading"></a></h1>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Readout Layer Configuration Signal Overview</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Register Bits</p></td>
+<td><p>Register(s)</p></td>
+<td><p>Signal Name</p></td>
+<td><p>Short Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB0[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout0"><span class="std std-ref">READOUT0[2:0]</span></a></p></td>
+<td><p>clk_blk0</p></td>
+<td><p>Clock Delay Neuron 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB0[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout0"><span class="std std-ref">READOUT0[5:3]</span></a></p></td>
+<td><p>rst_blk0</p></td>
+<td><p>Reset Delay Neuron 0.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB1[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout1"><span class="std std-ref">READOUT1[0]</span></a>, <a class="reference internal" href="readout-descriptions.html#reg-readout0"><span class="std std-ref">0[7:6]</span></a></p></td>
+<td><p>clk_blk1</p></td>
+<td><p>Clock Delay Neuron 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB1[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout1"><span class="std std-ref">READOUT1[3:1]</span></a></p></td>
+<td><p>rst_blk1</p></td>
+<td><p>Reset Delay Neuron 1.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB2[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout1"><span class="std std-ref">READOUT1[6:4]</span></a></p></td>
+<td><p>clk_blk2</p></td>
+<td><p>Clock Delay Neuron 2.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB2[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout2"><span class="std std-ref">READOUT2[1:0]</span></a>, <a class="reference internal" href="readout-descriptions.html#reg-readout1"><span class="std std-ref">1[7]</span></a></p></td>
+<td><p>rst_blk2</p></td>
+<td><p>Reset Delay Neuron 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB3[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout2"><span class="std std-ref">READOUT2[4:2]</span></a></p></td>
+<td><p>clk_blk3</p></td>
+<td><p>Clock Delay Neuron 3.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB3[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout2"><span class="std std-ref">READOUT2[7:5]</span></a></p></td>
+<td><p>rst_blk3</p></td>
+<td><p>Reset Delay Neuron 3.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB4[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout3"><span class="std std-ref">READOUT3[2:0]</span></a></p></td>
+<td><p>clk_blk4</p></td>
+<td><p>Clock Delay Neuron 4.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB4[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout3"><span class="std std-ref">READOUT3[5:3]</span></a></p></td>
+<td><p>rst_blk4</p></td>
+<td><p>Reset Delay Neuron 4.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB5[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout4"><span class="std std-ref">READOUT4[0]</span></a>, <a class="reference internal" href="readout-descriptions.html#reg-readout3"><span class="std std-ref">3[7:6]</span></a></p></td>
+<td><p>clk_blk5</p></td>
+<td><p>Clock Delay Neuron 5.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB5[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout4"><span class="std std-ref">READOUT4[3:1]</span></a></p></td>
+<td><p>rst_blk5</p></td>
+<td><p>Reset Delay Neuron 5.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB6[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout4"><span class="std std-ref">READOUT4[6:4]</span></a></p></td>
+<td><p>clk_blk6</p></td>
+<td><p>Clock Delay Neuron 6.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB6[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout5"><span class="std std-ref">READOUT5[1:0]</span></a>, <a class="reference internal" href="readout-descriptions.html#reg-readout4"><span class="std std-ref">4[7]</span></a></p></td>
+<td><p>rst_blk6</p></td>
+<td><p>Reset Delay Neuron 6.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB7[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout5"><span class="std std-ref">READOUT5[4:2]</span></a></p></td>
+<td><p>clk_blk7</p></td>
+<td><p>Clock Delay Neuron 7.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB7[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout5"><span class="std std-ref">READOUT5[7:5]</span></a></p></td>
+<td><p>rst_blk7</p></td>
+<td><p>Reset Delay Neuron 7.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB8[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout6"><span class="std std-ref">READOUT6[2:0]</span></a></p></td>
+<td><p>clk_blk8</p></td>
+<td><p>Clock Delay Neuron 8.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB8[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout6"><span class="std std-ref">READOUT6[5:3]</span></a></p></td>
+<td><p>rst_blk8</p></td>
+<td><p>Reset Delay Neuron 8.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CB9[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout7"><span class="std std-ref">READOUT7[0]</span></a>, <a class="reference internal" href="readout-descriptions.html#reg-readout6"><span class="std std-ref">6[7:6]</span></a></p></td>
+<td><p>clk_blk9</p></td>
+<td><p>Clock Delay Neuron 9.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RB9[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout7"><span class="std std-ref">READOUT7[3:1]</span></a></p></td>
+<td><p>rst_blk9</p></td>
+<td><p>Reset Delay Neuron 9.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CBA[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout7"><span class="std std-ref">READOUT7[6:4]</span></a></p></td>
+<td><p>clk_blk10</p></td>
+<td><p>Clock Delay Neuron 10.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RBA[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout8"><span class="std std-ref">READOUT8[1:0]</span></a>, <a class="reference internal" href="readout-descriptions.html#reg-readout7"><span class="std std-ref">7[7]</span></a></p></td>
+<td><p>rst_blk10</p></td>
+<td><p>Reset Delay Neuron 10.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CBB[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout8"><span class="std std-ref">READOUT8[4:2]</span></a></p></td>
+<td><p>clk_blk11</p></td>
+<td><p>Clock Delay Neuron 11.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RBB[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout8"><span class="std std-ref">READOUT8[7:5]</span></a></p></td>
+<td><p>rst_blk11</p></td>
+<td><p>Reset Delay Neuron 11.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CBC[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout9"><span class="std std-ref">READOUT9[2:0]</span></a></p></td>
+<td><p>clk_blk12</p></td>
+<td><p>Clock Delay Neuron 12.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RBC[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout9"><span class="std std-ref">READOUT9[5:3]</span></a></p></td>
+<td><p>rst_blk12</p></td>
+<td><p>Reset Delay Neuron 12.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CBD[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout10"><span class="std std-ref">READOUT10[0]</span></a>, <a class="reference internal" href="readout-descriptions.html#reg-readout9"><span class="std std-ref">9[7:6]</span></a></p></td>
+<td><p>clk_blk13</p></td>
+<td><p>Clock Delay Neuron 13.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RBD[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout10"><span class="std std-ref">READOUT10[3:1]</span></a></p></td>
+<td><p>rst_blk13</p></td>
+<td><p>Reset Delay Neuron 13.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cbn"><span class="std std-ref">CBE[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout10"><span class="std std-ref">READOUT10[6:4]</span></a></p></td>
+<td><p>clk_blk14</p></td>
+<td><p>Clock Delay Neuron 14.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rbn"><span class="std std-ref">RBE[2:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout11"><span class="std std-ref">READOUT11[1:0]</span></a>, <a class="reference internal" href="readout-descriptions.html#reg-readout10"><span class="std std-ref">10[7]</span></a></p></td>
+<td><p>rst_blk14</p></td>
+<td><p>Reset Delay Neuron 14.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-avgsel"><span class="std std-ref">AVGSEL[3:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout11"><span class="std std-ref">READOUT11[5:2]</span></a></p></td>
+<td><p>average_sel</p></td>
+<td><p>Readout Layer Average Selection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-omsel"><span class="std std-ref">OMSEL[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout11"><span class="std std-ref">READOUT11[7:6]</span></a></p></td>
+<td><p>output_mode_sel</p></td>
+<td><p>Readout Layer Mode Selection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-th"><span class="std std-ref">TH[15:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout12"><span class="std std-ref">READOUT12[7:0]</span></a>, <a class="reference internal" href="readout-descriptions.html#reg-readout13"><span class="std std-ref">13[7:0]</span></a></p></td>
+<td><p>readout_threshold</p></td>
+<td><p>Readout Comparison Threshold.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-ch1"><span class="std std-ref">CH1</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout14"><span class="std std-ref">READOUT14[0]</span></a></p></td>
+<td><p>choose_1</p></td>
+<td><p>If ‘1’: time window = 1* <em>MOVING_AVERAGE_CLK</em> period (disable low-pass filtering). Overrides bit CH1632 when set to ‘1’</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-ch1632"><span class="std std-ref">CH1632</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout14"><span class="std std-ref">READOUT14[1]</span></a></p></td>
+<td><p>choose_16_32</p></td>
+<td><p>If ‘0’: time window = 16* <em>MOVING_AVERAGE_CLK</em> period, ‘1’: time window = 32* <em>MOVING_AVERAGE_CLK</em> period.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-rocs"><span class="std std-ref">ROCS[1:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout14"><span class="std std-ref">READOUT14[3:2]</span></a></p></td>
+<td><p>readout_conf_sel</p></td>
+<td><p>Readout Configuration Selector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-bypreg"><span class="std std-ref">BYPREG</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout14"><span class="std std-ref">READOUT14[4]</span></a></p></td>
+<td><p>bypass_reg</p></td>
+<td><p>Enable Bypass of Output Flip-Flop.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-ovrth"><span class="std std-ref">OVRTH</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout14"><span class="std std-ref">READOUT14[5]</span></a></p></td>
+<td><p>override_threshold_max</p></td>
+<td><p>Override Output Layer Threshold compare. Sends interrupt at each slow clk cycle.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-inen"><span class="std std-ref">INEN</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout14"><span class="std std-ref">READOUT14[6]</span></a></p></td>
+<td><p>reg_input_enable</p></td>
+<td><p>Use register configurations (‘1’) or input serial interface settings (‘0’) for average_sel and output_mode_sel.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-reqdly"><span class="std std-ref">REQDLY[7:0]</span></a></p></td>
+<td><p><a class="reference internal" href="readout-descriptions.html#reg-readout15"><span class="std std-ref">READOUT15[7:0]</span></a></p></td>
+<td><p>io_interface_req_delay</p></td>
+<td><p>Output Mux Request Delay Selector.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="detailed-signal-description">
+<h2><span class="section-number">7.14.1. </span>Detailed Signal Description<a class="headerlink" href="#detailed-signal-description" title="Permalink to this heading"></a></h2>
+<section id="cbn-2-0-clk-blkn">
+<span id="rbits-cbn"></span><h3><span class="section-number">7.14.1.1. </span>CBn[2:0] (clk_blkn)<a class="headerlink" href="#cbn-2-0-clk-blkn" title="Permalink to this heading"></a></h3>
+<p>See <a class="reference internal" href="../architecture/readout-layer.html#readout-timing-config"><span class="std std-ref">Timing Configurations</span></a>.</p>
+</section>
+<section id="rbn-2-0-rst-blkn">
+<span id="rbits-rbn"></span><h3><span class="section-number">7.14.1.2. </span>RBn[2:0] (rst_blkn)<a class="headerlink" href="#rbn-2-0-rst-blkn" title="Permalink to this heading"></a></h3>
+<p>See <a class="reference internal" href="../architecture/readout-layer.html#readout-timing-config"><span class="std std-ref">Timing Configurations</span></a>.</p>
+</section>
+<section id="avgsel-3-0-average-sel">
+<span id="rbits-avgsel"></span><h3><span class="section-number">7.14.1.3. </span>AVGSEL[3:0] (average_sel)<a class="headerlink" href="#avgsel-3-0-average-sel" title="Permalink to this heading"></a></h3>
+<p>Readout Layer Average Selection. Used when <a class="reference internal" href="#rbits-inen"><span class="std std-ref">INEN</span></a> == ‘1’. See <a class="reference internal" href="../architecture/readout-layer.html#readout-neuron-selection"><span class="std std-ref">Output Neuron selection</span></a> for more details.</p>
+</section>
+<section id="omsel-1-0-output-mode-sel">
+<span id="rbits-omsel"></span><h3><span class="section-number">7.14.1.4. </span>OMSEL[1:0] (output_mode_sel)<a class="headerlink" href="#omsel-1-0-output-mode-sel" title="Permalink to this heading"></a></h3>
+<p>Readout Layer Mode Selection. Used when <a class="reference internal" href="#rbits-inen"><span class="std std-ref">INEN</span></a> == ‘1’. See <a class="reference internal" href="../architecture/readout-layer.html#readout-output-modes"><span class="std std-ref">Data Output Modes</span></a> for more details.</p>
+</section>
+<section id="th-15-0-readout-threshold">
+<span id="rbits-th"></span><h3><span class="section-number">7.14.1.5. </span>TH[15:0] (readout_threshold)<a class="headerlink" href="#th-15-0-readout-threshold" title="Permalink to this heading"></a></h3>
+<p>Readout neurons threshold value. Defaults to 0.</p>
+<p>The moving average of the output neurons is compared to the threshold value to produce
+an output if the received number of spikes is greater than the threshold.</p>
+<p>See <a class="reference internal" href="../architecture/readout-layer.html#readout-layer"><span class="std std-ref">Readout Layer (Post Processing)</span></a> for further information on the readout layer.</p>
+</section>
+<section id="ch1-choose-1">
+<span id="rbits-ch1"></span><h3><span class="section-number">7.14.1.6. </span>CH1 (choose_1)<a class="headerlink" href="#ch1-choose-1" title="Permalink to this heading"></a></h3>
+<p>Disables readout low pass filtering.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This register overrides CH1632 when set to ‘1’.</p>
+</div>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>CH1</p></td>
+<td><p>Configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>0 (default)</p></td>
+<td><p>time window = selected by <a class="reference internal" href="#rbits-ch1632"><span class="std std-ref">CH1632</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>time window = 1 <em>MOVING_AVERAGE_CLK</em> period</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ch1632-choose-16-32">
+<span id="rbits-ch1632"></span><h3><span class="section-number">7.14.1.7. </span>CH1632 (choose_16_32)<a class="headerlink" href="#ch1632-choose-16-32" title="Permalink to this heading"></a></h3>
+<p>Selects readout moving average length (16 or 32 clock periods).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If CH1 is set, CH1632 is overridden and low pass filtering is disabled.</p>
+</div>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>CH1632</p></td>
+<td><p>Configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>0 (default)</p></td>
+<td><p>time window = 16* <em>MOVING_AVERAGE_CLK</em> period</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>time window = 32* <em>MOVING_AVERAGE_CLK</em> period</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rocs-1-0-readout-conf-sel">
+<span id="rbits-rocs"></span><h3><span class="section-number">7.14.1.8. </span>ROCS[1:0] (readout_conf_sel)<a class="headerlink" href="#rocs-1-0-readout-conf-sel" title="Permalink to this heading"></a></h3>
+<p>Readout configuration selection: addressing modes of the incoming spikes.</p>
+<p>There are 4 different addressing modes that could be selected. The valid configurations are the following:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>ROCS[1:0]</p></td>
+<td><p>Configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>00</p></td>
+<td><p>2x*2y*4f</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>4x*4y*1f</p></td>
+</tr>
+<tr class="row-even"><td><p>01</p></td>
+<td><p>2x*4y*2f</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>1x*1y*16f</p></td>
+</tr>
+</tbody>
+</table>
+<p>Where x, y and f represent, respectively, the X, Y and Feature dimensions of the events arriving at the
+Readout Layer.</p>
+</section>
+<section id="bypreg-bypass-reg">
+<span id="rbits-bypreg"></span><h3><span class="section-number">7.14.1.9. </span>BYPREG (bypass_reg)<a class="headerlink" href="#bypreg-bypass-reg" title="Permalink to this heading"></a></h3>
+<p>When enabled, the output Flip-Flop is bypassed, and the moving average values are directly pushed to the output bus <em>data2</em> without a register in between.</p>
+<p>In typical operation, BYPREG should be set to ‘0’.</p>
+</section>
+<section id="ovrth-override-threshold-max">
+<span id="rbits-ovrth"></span><h3><span class="section-number">7.14.1.10. </span>OVRTH (override_threshold_max)<a class="headerlink" href="#ovrth-override-threshold-max" title="Permalink to this heading"></a></h3>
+<p>Override Output Layer Threshold compare. Sends interrupt at each slow clock cycle.</p>
+</section>
+<section id="inen-reg-input-enable">
+<span id="rbits-inen"></span><h3><span class="section-number">7.14.1.11. </span>INEN (reg_input_enable)<a class="headerlink" href="#inen-reg-input-enable" title="Permalink to this heading"></a></h3>
+<p>Use register configurations or input serial interface settings for <em>average_sel</em> and <em>output_mode_sel</em>:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Setting</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>‘0’</p></td>
+<td><p><em>average_sel</em> and <em>output_mode_sel</em> are set by providing a special command to the Input Serial Interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘1’</p></td>
+<td><p><em>average_sel</em> and <em>output_mode_sel</em> are set by register bits <a class="reference internal" href="#rbits-avgsel"><span class="std std-ref">AVGSEL[3:0]</span></a> and  <a class="reference internal" href="#rbits-omsel"><span class="std std-ref">OMSEL[1:0]</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reqdly-7-0-io-interface-req-delay">
+<span id="rbits-reqdly"></span><h3><span class="section-number">7.14.1.12. </span>REQDLY[7:0] (io_interface_req_delay)<a class="headerlink" href="#reqdly-7-0-io-interface-req-delay" title="Permalink to this heading"></a></h3>
+<p>This register element configures the delay of the request signal to the output serializer.
+This delay is implemented in order to ensure that the request signal arrives after the data is
+valid at the output serializer.
+For example, when using direct SRAM access through the BIST interface, the request signal to the
+output serializer comes directly from the read request to the SRAM. For this reason,
+a delay is introduced to respect the data ready timing of the SRAM.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="readout.html" class="btn btn-neutral float-left" title="7.13. Readout Layer Register Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../memory/index.html" class="btn btn-neutral float-right" title="8. Internal SRAM Memory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+/* Ensure :attr: text looks like a hyper link */
+code.xref.py.py-class.docutils.literal.notranslate,
+code.xref.py.py-attr.docutils.literal.notranslate {
+    border-style: none;
+    outline-style: none;
+    background-color:transparent;
+}
+
+.xref.py.py-class.docutils.literal.notranslate .pre,
+.xref.py.py-attr.docutils.literal.notranslate .pre {
+    color: #2980B9;
+    background-color:transparent;
+    font-family: monospace;
+}

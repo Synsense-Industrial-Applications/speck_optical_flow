@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>11.6. JTAG Asynchronous I/O Operation &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="12. RGB Interface" href="../rgb-interface/index.html" />
+    <link rel="prev" title="11.5. JTAG Scan Chain Access and Operation" href="jtag-scan-chains.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">11. JTAG Interface</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="jtag-overview.html">11.1. JTAG Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-command-overview.html">11.2. JTAG Command Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-srams.html">11.3. JTAG SRAM Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-registers.html">11.4. JTAG Register Access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-scan-chains.html">11.5. JTAG Scan Chain Access and Operation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11.6. JTAG Asynchronous I/O Operation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sending-asynchronous-events-via-jtag">11.6.1. Sending Asynchronous Events via JTAG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#receiving-asynchronous-events-via-jtag">11.6.2. Receiving Asynchronous Events via JTAG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#receiving-readout-events-via-jtag">11.6.3. Receiving Readout Events via JTAG</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">11. </span>JTAG Interface</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">11.6. </span>JTAG Asynchronous I/O Operation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/jtag/jtag-async.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jtag-asynchronous-i-o-operation">
+<h1><span class="section-number">11.6. </span>JTAG Asynchronous I/O Operation<a class="headerlink" href="#jtag-asynchronous-i-o-operation" title="Permalink to this heading"></a></h1>
+<p>The Speck2e JTAG interface enables sending and receiving asynchronous events from
+the chip. The JTAG effectively provides an alternative to the Asynchronous I/O interfaces
+for AER communication for testing purposes.</p>
+<p>Due to the nature of the JTAG serial protocol, however, asynchronous events can only be sent or
+received from the chip using a polling operation. Specifically, since no <em>chip_ready</em> or <em>data_ready</em>
+signal is present, the user must provide a value and read back the internal <em>acknowledge</em> signal
+from the chip by continuously reading a specific data register of the JTAG interface.</p>
+<p>The following sections provide a detailed description of the asynchronous I/O protocol via JTAG.</p>
+<section id="sending-asynchronous-events-via-jtag">
+<h2><span class="section-number">11.6.1. </span>Sending Asynchronous Events via JTAG<a class="headerlink" href="#sending-asynchronous-events-via-jtag" title="Permalink to this heading"></a></h2>
+<p>This operation is equivalent to sending a single asynchronous event via the chip <a class="reference internal" href="../encoding/input-serial-interface.html#input-serial-interface-encoding"><span class="std std-ref">Async Input Serial Interface</span></a></p>
+<p>The Async input data bus is 32 bit wide in Speck2e.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">send_ir</span><span class="p">(</span><span class="n">ASYNC_INPUT_ACK</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>
+<span class="n">ack_state</span> <span class="o">=</span> <span class="mb">0b00</span>
+<span class="c1"># Check ACK internal state until ack is received:</span>
+<span class="k">while</span> <span class="n">ack_state</span> <span class="o">==</span> <span class="mb">0b00</span><span class="p">:</span>
+   <span class="n">ack_state</span> <span class="o">=</span> <span class="n">send_dr</span><span class="p">(</span><span class="mb">0b00</span><span class="p">,</span> <span class="mi">2</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Receive 2 bits giving the ACK status information</span>
+
+<span class="n">send_ir</span><span class="p">(</span><span class="n">ASYNC_INPUT</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>
+<span class="n">send_dr</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">31</span><span class="p">:</span><span class="mi">0</span><span class="p">],</span> <span class="mi">32</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Async input message data</span>
+</pre></div>
+</div>
+<p>If a new message has to be sent in, the operation can be immediately repeated. Otherwise, the JTAG TAP Controller can be put back into RESET state.</p>
+</section>
+<section id="receiving-asynchronous-events-via-jtag">
+<h2><span class="section-number">11.6.2. </span>Receiving Asynchronous Events via JTAG<a class="headerlink" href="#receiving-asynchronous-events-via-jtag" title="Permalink to this heading"></a></h2>
+<p>This operation is equivalent to receiving a single asynchronous event via the chip from channel <em>data1</em> (see <a class="reference internal" href="../encoding/output-serial-interface.html#output-serial-interface-encoding"><span class="std std-ref">Async Output Serial Interface</span></a>).</p>
+<p>Before reading out an asynchronous event through the JTAG interface, the following register bits have to be configured:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Bit</p></td>
+<td><p>Configure to:</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../registers/ii-config.html#rbits-p2sm"><span class="std std-ref">P2SM (p2s_mon_en)</span></a></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../registers/ii-config.html#rbits-jtgm"><span class="std std-ref">JTGM (jtag_mon_en)</span></a></p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>Operation steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">send_ir</span><span class="p">(</span><span class="n">ASYNC_OUTPUT</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="mh">0xFF_FFFF</span>
+<span class="k">while</span> <span class="n">data</span> <span class="o">==</span> <span class="mh">0xFF_FFFF</span><span class="p">:</span>
+   <span class="n">data</span> <span class="o">=</span> <span class="n">send_dr</span><span class="p">(</span><span class="mh">0x00_0000</span><span class="p">,</span> <span class="mi">24</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Receive async output message data</span>
+</pre></div>
+</div>
+<p>When the data read from the JTAG is different from 0xFF_FFFF, it can be interpreted as a valid async message.</p>
+</section>
+<section id="receiving-readout-events-via-jtag">
+<h2><span class="section-number">11.6.3. </span>Receiving Readout Events via JTAG<a class="headerlink" href="#receiving-readout-events-via-jtag" title="Permalink to this heading"></a></h2>
+<p>This operation is similar to the task of receiving asynchronous events.</p>
+<p>The only difference is that whenever the <em>READOUT</em> command is issued to the JTAG,
+the chip will send out the information of the readout layer output as a 24-bit word padded with ‘0’:
+So for a fast consecutive attempts,  might get the same data output that belongs to the same timestamp.</p>
+<p>It is suggested to check the <em>INTERRUPT</em> pin behaviour too. After <em>INTERRUPT</em> rising edge the user should assert JTAG Readout command so that at the READOUT will work after each decision is done.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><em>Readout layer data</em></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p class="centered">
+<strong><a class="reference internal" href="../architecture/readout-layer.html#readout-output-modes"><span class="std std-ref">Readout Layer Output (neuron output layer data) [20:0]</span></a></strong></p></td>
+</tr>
+</tbody>
+</table>
+<p>Operation steps:</p>
+<ul class="simple">
+<li><p>Set <a class="reference internal" href="../registers/ii-config.html#rbits-p2sm"><span class="std std-ref">P2SM (p2s_mon_en)</span></a> = 0b0</p></li>
+<li><p>Set <a class="reference internal" href="../registers/ii-config.html#rbits-jtgm"><span class="std std-ref">JTGM (jtag_mon_en)</span></a> = 0b1.</p></li>
+<li><p>Wait for the <em>INTERRUPT</em> pin raising edge.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">send_ir</span><span class="p">(</span><span class="n">READOUT</span><span class="p">,</span> <span class="mh">0x31</span><span class="p">,</span> <span class="mi">8</span> <span class="n">bits</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">send_dr</span><span class="p">(</span><span class="mh">0x00_0000</span><span class="p">,</span> <span class="mi">24</span> <span class="n">bits</span><span class="p">)</span>  <span class="c1"># Receive async readout layer data</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="jtag-scan-chains.html" class="btn btn-neutral float-left" title="11.5. JTAG Scan Chain Access and Operation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../rgb-interface/index.html" class="btn btn-neutral float-right" title="12. RGB Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

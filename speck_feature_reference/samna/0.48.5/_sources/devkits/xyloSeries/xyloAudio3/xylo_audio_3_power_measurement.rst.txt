@@ -1,0 +1,70 @@
+******************************
+XyloAudio 3 Power Measurements
+******************************
+
+The XyloAudio 3 development kit is equipped with Analog-to-Digital Converters (ADCs) for on-board power monitoring.
+The :class:`samna.boards.common.PowerMonitor` class provides an interface for both **one-shot** and
+**continuous** power measurements. In continuous mode, power consumption is sampled at a user-defined target frequency.
+Power measurement results are reported as :class:`samna.unifirm.modules.events.PowerMeasurement` events.
+
+Each power measurement event includes:
+
+- ``channel``: The power channel being measured.
+- ``value``: The power consumption in watts.
+
+The sampling period for the ADC is fixed at 1.080 ms, corresponding to a sample frequency of 925.9 Hz.
+To obtain the target frequency, the original signal is filtered with a moving average filter and then resampled,
+using linear interpolation if required.
+
+The available measurement channels are described in :class:`samna.xyloAudio3.MeasurementChannels`.
+
+Note that :attr:`samna.xyloAudio3.configuration.Debug.ram_access_enable` has a big influence on power consumption.
+Therefore it is advised to disable RAM access whenever it's not necessary.
+
+Below is an example showing how to compute the average power consumption over a 3-second period.
+The following package versions are used:
+::
+
+    - samna                 0.39.10
+
+.. code-block:: python
+
+    import samna
+
+    # Configure the board with a lower clock frequency to reduce power consumption.
+    config = samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig()
+    config.main_clock_frequency = 25_000_000
+
+    # Open the device and connect to the power monitor.
+    board = samna.device.open_device("XyloAudio3TestBoard", defaultConfig=config)
+    power_monitor = board.get_power_monitor()
+    sink_pm = samna.graph.sink_from(power_monitor.get_source_node())
+    stopwatch = board.get_stop_watch()
+
+    # Start the stopwatch to add timestamps to the power measurement events.
+    stopwatch.start()
+
+    # Start sampling power on all channels at a target frequency of 50 Hz.
+    # Due to discretization the real frequency can vary slightly from 50 Hz.
+    real_freq = power_monitor.start_auto_power_measurement(50)
+
+    # Power measurements are streamed as PowerMeasurement events.
+    # Calculate the number of samples to collect over the specified duration (3 seconds).
+    duration_in_s = 3.0
+    channels = 3
+    n_samples = int(duration_in_s * real_freq) * channels
+    events = sink_pm.get_n_events(n_samples, timeout=int(duration_in_s + 1) * 1000)
+
+    # Stop the automatic power measurement.
+    power_monitor.stop_auto_power_measurement()
+
+    # Calculate the average power consumption for each channel.
+    counts = [0, 0, 0]
+    sums = [0, 0, 0]
+    for e in events:
+        assert isinstance(e, samna.unifirm.modules.events.PowerMeasurement)
+        sums[e.channel] += e.value
+        counts[e.channel] += 1
+
+    # Compute the average power consumption in milliwatts (mW).
+    avgs = [sum/count * 1000 for sum, count in zip(sums, counts)]

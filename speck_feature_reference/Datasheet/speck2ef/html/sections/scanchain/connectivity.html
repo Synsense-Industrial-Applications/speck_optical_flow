@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>13.2. Scan Chain Connectivity &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="13.4. Scan Chain Operation Modes" href="operation-modes.html" />
+    <link rel="prev" title="13.1. Scan Chain Overview" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">13. Scan Chain</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">13.1. Scan Chain Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">13.2. Scan Chain Connectivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scan-chain-domains">13.2.1. Scan Chain Domains</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#layer-core-sub-domains">13.2.1.1. Layer Core Sub-Domains</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cell-connectivity-example">13.3. Cell connectivity example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operation-modes.html">13.4. Scan Chain Operation Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html">13.5. Scan Chain Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis.html">13.6. Scan Chain Bit Stream Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">13. </span>Scan Chain</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">13.2. </span>Scan Chain Connectivity</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/scanchain/connectivity.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scan-chain-connectivity">
+<span id="id1"></span><h1><span class="section-number">13.2. </span>Scan Chain Connectivity<a class="headerlink" href="#scan-chain-connectivity" title="Permalink to this heading"></a></h1>
+<p>As shown in the following block diagram, the scan chain is divided into a number of sub-domains.
+Each sub-domain can be individually accessed by sending the appropriate JTAG command sequence to
+activate the scan chain and select the desired sub-domain.</p>
+<p>The sub-domains are divided in order to be able to test smaller asynchronous networks
+independently due to the large size of the internal circuitry.</p>
+<p>The scan chain outputs of the various domains are then muxed together by an output mux.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only a single scan chain sub-domain can be active at any time.</p>
+</div>
+<figure class="align-default" id="id3">
+<a class="img-limit-width reference internal image-reference" href="../../_images/Speck2e_scan_chain.svg"><img alt="../../_images/Speck2e_scan_chain.svg" class="img-limit-width" height="486" src="../../_images/Speck2e_scan_chain.svg" width="954" /></a>
+<figcaption>
+<p><span class="caption-text">Speck2e Scan Chain Connectivity</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="scan-chain-domains">
+<span id="id2"></span><h2><span class="section-number">13.2.1. </span>Scan Chain Domains<a class="headerlink" href="#scan-chain-domains" title="Permalink to this heading"></a></h2>
+<p>As shown in the above block diagram, there are 13 main domains where the scan chain runs through.
+These cover all the asynchronous logic blocks included in Speck2e:</p>
+<ul class="simple">
+<li><p>Input Interface</p></li>
+<li><p>9 Layer Cores (0 to 8)</p></li>
+<li><p>DVS Post Processing Core</p></li>
+<li><p>Event Router</p></li>
+<li><p>Readout Core</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Due to the different size of SRAM memories for Kernel and Neuron for the different layers, the SC
+bitstream length changes between layers.</p>
+</div>
+<section id="layer-core-sub-domains">
+<h3><span class="section-number">13.2.1.1. </span>Layer Core Sub-Domains<a class="headerlink" href="#layer-core-sub-domains" title="Permalink to this heading"></a></h3>
+<p>Every layer core scan chain is further divided into 3 sub-domains.</p>
+<ul class="simple">
+<li><p>Convolutional Loop, Kernel Interface and Kernel SRAM</p></li>
+<li><p>Leak Generator and Leak SRAM</p></li>
+<li><p>Neuron Interface and Neuron SRAM</p></li>
+</ul>
+<p>The following table summarizes SC lengths for the various sub-domains:</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Speck2e/f scan chain domains</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Domain Name</p></td>
+<td><p>Sub-Domain</p></td>
+<td><p>SCAN_BLK_ID</p></td>
+<td><p>Speck2e/et Length [bits]</p></td>
+<td><p>Speck2f Length [bits]</p></td>
+</tr>
+<tr class="row-even"><td><p>Input Interface</p></td>
+<td><p>—</p></td>
+<td><p>0x0</p></td>
+<td><p>3525</p></td>
+<td><p>2811</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layer 0</p></td>
+<td><p>Convolution and Kernel Interface</p></td>
+<td><p>0x4</p></td>
+<td><p>10401</p></td>
+<td><p>10401</p></td>
+</tr>
+<tr class="row-even"><td><p>Layer 1</p></td>
+<td><p>Convolution and Kernel Interface</p></td>
+<td><p>0x5</p></td>
+<td><p>5367</p></td>
+<td><p>5367</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layer 2-8</p></td>
+<td><p>Convolution and Kernel Interface</p></td>
+<td><p>0x6:0xC</p></td>
+<td><p>5101</p></td>
+<td><p>5101</p></td>
+</tr>
+<tr class="row-even"><td><p>Layer 0-1</p></td>
+<td><p>Neuron Interface</p></td>
+<td><p>0xD:0xE</p></td>
+<td><p>10451</p></td>
+<td><p>10451</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layer 2</p></td>
+<td><p>Neuron Interface</p></td>
+<td><p>0xF</p></td>
+<td><p>3379</p></td>
+<td><p>3379</p></td>
+</tr>
+<tr class="row-even"><td><p>Layer 3-8</p></td>
+<td><p>Neuron Interface</p></td>
+<td><p>0x10:0x15</p></td>
+<td><p>2253</p></td>
+<td><p>2253</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layers 0-1</p></td>
+<td><p>Leak Generator</p></td>
+<td><p>0x16:17</p></td>
+<td><p>1956</p></td>
+<td><p>1956</p></td>
+</tr>
+<tr class="row-even"><td><p>Layers 2-8</p></td>
+<td><p>Leak Generator</p></td>
+<td><p>0x18:1E</p></td>
+<td><p>1825</p></td>
+<td><p>1825</p></td>
+</tr>
+<tr class="row-odd"><td><p>Readout Layer</p></td>
+<td><p>—</p></td>
+<td><p>0x1</p></td>
+<td><p>244</p></td>
+<td><p>244</p></td>
+</tr>
+<tr class="row-even"><td><p>DVS and DVS Pre-Processing Layer</p></td>
+<td><p>—</p></td>
+<td><p>0x2</p></td>
+<td><p>10758</p></td>
+<td><p>10758</p></td>
+</tr>
+<tr class="row-odd"><td><p>Router</p></td>
+<td><p>—</p></td>
+<td><p>0x3</p></td>
+<td><p>47996</p></td>
+<td><p>47996</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="cell-connectivity-example">
+<h1><span class="section-number">13.3. </span>Cell connectivity example<a class="headerlink" href="#cell-connectivity-example" title="Permalink to this heading"></a></h1>
+<figure class="align-default" id="id6">
+<img alt="../../_images/sc_cell_example_1.png" src="../../_images/sc_cell_example_1.png" />
+<figcaption>
+<p><span class="caption-text">Speck2e Example async cell</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+strict digraph  {
+I7_SC0 [cell_name=BUFFER_35bits, color=red, ctrl_bits=3, data_bits=70, label=I7_SC0, level=0];
+&quot;in_rw_a-pin&quot; [label=in_rw_a, style=filled];
+I31_SC1 [cell_name=BUFFER_35bits, color=blue, ctrl_bits=3, data_bits=70, label=I31_SC1, level=0];
+I18_SC2 [cell_name=MERGE_2_35bits, color=red, ctrl_bits=4, data_bits=70, label=I18_SC2, level=0];
+&quot;I3_SC4-I9_SC2&quot; [cell_name=COMPOSE__A33__00_A31to16_0_A15to0, color=blue, ctrl_bits=3, data_bits=70, label=I9_SC2, level=1];
+&quot;I3_SC4-I1_SC1&quot; [cell_name=SPLIT_2_NC_33bits, color=red, ctrl_bits=3, data_bits=132, label=I1_SC1, level=1];
+&quot;I3_SC4-I10_SC3&quot; [cell_name=COMPOSE__A33__A32_0000000_A31to16, color=blue, ctrl_bits=3, data_bits=48, label=I10_SC3, level=1];
+&quot;I3_SC4-I0_SC0&quot; [cell_name=Neuron_Thr_Core, color=blue, ctrl_bits=&quot;-1&quot;, data_bits=&quot;-1&quot;, label=I0_SC0, level=1];
+&quot;I3_SC4-I3_SC4&quot; [cell_name=CNT_PASS_23bits, color=red, ctrl_bits=3, data_bits=46, label=I3_SC4, level=1];
+I40_SC7 [cell_name=COMPOSE__A32__1_A21to0, color=red, ctrl_bits=3, data_bits=46, label=I40_SC7, level=0];
+I33_SC8 [cell_name=MERGE_2_23bits, color=blue, ctrl_bits=4, data_bits=46, label=I33_SC8, level=0];
+I36_SC6 [cell_name=MERGE_2_0bits, color=red, ctrl_bits=3, data_bits=1, label=I36_SC6, level=0];
+&quot;sram_drop_ack-pin&quot; [label=sram_drop_ack, style=filled];
+&quot;neuron_sram_a-pin&quot; [label=neuron_sram_a, style=filled];
+I35_SC5 [cell_name=SPLIT_0b_NC_32bits, color=blue, ctrl_bits=3, data_bits=65, label=I35_SC5, level=0];
+&quot;sram_rw_a-pin&quot; [label=sram_rw_a, style=filled];
+I41_SC3 [cell_name=SPLIT_2_MSB_32bits, color=red, ctrl_bits=3, data_bits=128, label=I41_SC3, level=0];
+&quot;sram_data_a-pin&quot; [label=sram_data_a, style=filled];
+in_sc [style=filled];
+out_sc [style=filled];
+I7_SC0 -&gt; I31_SC1  [color=&quot;black:invis:red&quot;];
+&quot;in_rw_a-pin&quot; -&gt; I7_SC0;
+I31_SC1 -&gt; I18_SC2  [color=&quot;black:invis:red&quot;];
+I18_SC2 -&gt; &quot;sram_rw_a-pin&quot;;
+I18_SC2 -&gt; I41_SC3  [color=red];
+&quot;I3_SC4-I9_SC2&quot; -&gt; I18_SC2;
+&quot;I3_SC4-I9_SC2&quot; -&gt; &quot;I3_SC4-I10_SC3&quot;  [color=red];
+&quot;I3_SC4-I1_SC1&quot; -&gt; &quot;I3_SC4-I10_SC3&quot;;
+&quot;I3_SC4-I1_SC1&quot; -&gt; &quot;I3_SC4-I9_SC2&quot;  [color=&quot;black:invis:red&quot;];
+&quot;I3_SC4-I10_SC3&quot; -&gt; &quot;I3_SC4-I3_SC4&quot;  [color=&quot;black:invis:red&quot;];
+&quot;I3_SC4-I0_SC0&quot; -&gt; &quot;I3_SC4-I1_SC1&quot;  [color=&quot;black:invis:red&quot;];
+&quot;I3_SC4-I3_SC4&quot; -&gt; I33_SC8;
+&quot;I3_SC4-I3_SC4&quot; -&gt; I35_SC5  [color=red];
+I40_SC7 -&gt; I33_SC8  [color=&quot;black:invis:red&quot;];
+I33_SC8 -&gt; &quot;neuron_sram_a-pin&quot;;
+I33_SC8 -&gt; out_sc  [color=red];
+I36_SC6 -&gt; I40_SC7  [color=red];
+&quot;sram_drop_ack-pin&quot; -&gt; I36_SC6;
+I35_SC5 -&gt; I36_SC6  [color=&quot;black:invis:red&quot;];
+I35_SC5 -&gt; I40_SC7;
+I41_SC3 -&gt; I35_SC5;
+I41_SC3 -&gt; &quot;I3_SC4-I0_SC0&quot;  [color=&quot;black:invis:red&quot;];
+&quot;sram_data_a-pin&quot; -&gt; I41_SC3;
+in_sc -&gt; I7_SC0  [color=red];
+}
+<p><em>Speck2e Example async cell connectivity graph</em></p>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="overview.html" class="btn btn-neutral float-left" title="13.1. Scan Chain Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="operation-modes.html" class="btn btn-neutral float-right" title="13.4. Scan Chain Operation Modes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

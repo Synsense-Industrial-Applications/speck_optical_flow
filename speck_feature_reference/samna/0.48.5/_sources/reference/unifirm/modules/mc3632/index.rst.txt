@@ -1,0 +1,19 @@
+############################
+samna.unifirm.modules.mc3632
+############################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm.modules.mc3632
+   :members:
+   :show-inheritance:
+

@@ -1,0 +1,168 @@
+***********************
+XyloAudio 3 Manual Mode
+***********************
+
+In Manual mode, there is no software automation, so all operations must be performed manually by the user.
+
+The typical workflow involves sending input for a single timestep to the chip and starting the processing
+with a :class:`samna.xyloAudio3.TriggerProcessing` event. You then wait for the chip to finish processing,
+which can be determined by reading the ``STAT2`` register. Once processing is complete, you can read
+the network state by sending the appropriate events. This process can be repeated for each subsequent timestep.
+
+Due to the need for manual control of every step, this mode is cumbersome for application development.
+For that purpose, Accelerated-Time mode is recommended.
+
+However, Manual mode does offer full control over the chip, allowing you to simulate Accelerated-Time mode.
+The following example demonstrates how to do this.
+
+The example uses the following packages:
+::
+
+    - samna                 0.39.6
+
+.. code-block:: python
+
+    import samna
+    import time
+
+    # Open the device and connect the source and sink nodes so we can communicate with Xylo.
+    board = samna.device.open_device("XyloAudio3TestBoard")
+    xylo = board.get_model()
+    source = samna.graph.source_to(xylo.get_sink_node())
+    sink = samna.graph.sink_from(xylo.get_source_node())
+
+
+    # Create a basic network with a simple one-to-one mapping of input to output neurons.
+    xylo_config = samna.xyloAudio3.configuration.XyloConfiguration()
+    input_count = 3
+    hidden_count = input_count
+    output_count = input_count
+    xylo_config.input.weights = [[127, 0, 0], [0, 127, 0], [0, 0, 127]] # shape(input_count, hidden_count)
+    xylo_config.hidden.weights = [[0, 0, 0], [0, 0, 0], [0, 0, 0]] # shape(hidden_count, hidden_count)
+    xylo_config.hidden.neurons = [samna.xyloAudio3.configuration.HiddenNeuron(threshold=127, v_mem_decay=1, i_syn_decay=1)] * hidden_count
+    xylo_config.readout.weights = [[127, 0, 0], [0, 127, 0], [0, 0, 127]] # shape(hidden_count, output_count)
+    xylo_config.readout.neurons = [samna.xyloAudio3.configuration.OutputNeuron(threshold=127, v_mem_decay=1, i_syn_decay=1)] * output_count
+
+    # Configure Xylo in Manual mode and to work with input spike events.
+    xylo_config.operation_mode = samna.xyloAudio3.OperationMode.Manual
+    xylo_config.input_source = samna.xyloAudio3.InputSource.SpikeEvents
+
+    # This needs to be enabled in Manual mode, so Readout event properly reads output Vmem.
+    xylo_config.debug.always_update_omp_stat = True
+
+    # This needs to be enabled so we can read the internal network state in Manual mode.
+    xylo_config.debug.ram_access_enable = True
+
+    # Send the configuration to Xylo
+    xylo.apply_configuration(xylo_config)
+
+
+
+    def evolve(input):
+        """Continue to evolve the model with the given input.
+        
+        Args:
+            input (list[list[int]]): Per timestep a list of integers to specify the number of spikes to send to that `neuron_id`.
+                                    Max number of spikes per timestep for a neuron is 15. All lists must have the same length.
+
+        Returns:
+            readouts (list[Readout]): The `Readout` events for the given timesteps.
+        """
+        
+        # In Manual mode, there is no automatic processing and readout,
+        # therefore we have to manually unroll the loop and execute each timestep.
+        readouts = []
+        for i, spike_counts in enumerate(input):
+
+            # First send the given spikes to Xylo and trigger the processing.
+            # There is no notion of time, so timestep fields can be left empty.
+            input_events_list = []
+            for neuron_id, count in enumerate(spike_counts):
+                spikes = [samna.xyloAudio3.event.Spike(neuron_id=neuron_id)] * count
+                input_events_list.extend(spikes)
+            input_events_list.append(samna.xyloAudio3.event.TriggerProcessing())
+            source.write(input_events_list)
+
+            # We need to wait until Xylo has finished processing before we can observe the network state.
+            # To do this, we poll the processing done flag in the status register.
+            processing_start_time = time.time()
+            processing_done = False
+            while not processing_done:
+                if (time.time() - processing_start_time) > 3:
+                    raise RuntimeError("Xylo processing takes unreasonably long (>3s).")
+
+                STAT2_REGISTER_ADDRESS = 0x0153
+                STAT2_PD_DONE_FLAG = 0x1
+                source.write([samna.xyloAudio3.event.ReadRegisterValue(address=STAT2_REGISTER_ADDRESS)])
+                events = sink.get_n_events(1, timeout=1000)
+                if len(events) == 1:
+                    # In Manual mode, Xylo does not send any events by itself and this script does not 
+                    # expect other responses so we do not need to check if it is the correct event
+                    processing_done = (events[0].data & STAT2_PD_DONE_FLAG) == 1
+
+            # To obtain the network state in Manual mode, we need to send events to read all necessary neuron values.
+            readout_events_list = []
+            readout_events_list.extend([samna.xyloAudio3.event.ReadMembranePotential(neuron_id=i) for i in range(hidden_count)])
+            readout_events_list.extend([samna.xyloAudio3.event.ReadSynapticCurrent(neuron_id=i) for i in range(hidden_count + output_count)])
+            readout_events_list.extend([samna.xyloAudio3.event.ReadHiddenSpikeCount(neuron_id=i) for i in range(hidden_count)])
+            readout_events_list.append(samna.xyloAudio3.event.TriggerReadout())
+            source.write(readout_events_list)
+
+            # Now we need to gather all responses to the events we sent. We don't know how many events to expect,
+            # because it depends on the output spike count, but we know that `Readout` is the last event.
+            readout_start_time = time.time()
+            events = []
+            while not events or not isinstance(events[-1], samna.xyloAudio3.event.Readout):
+                if (time.time() - readout_start_time) > 3:
+                    raise RuntimeError("Xylo readout takes unreasonably long (>3s).")
+                events.extend(sink.get_events_blocking(timeout=1000))
+
+            # Process the events to create the network state for the current timestep.
+            readout = {
+                "Neuron Vmem": [None] * hidden_count,
+                "Neuron Isyn": [None] * (hidden_count + output_count),
+                "Hidden Spike": [None] * hidden_count,
+                "Output Vmem": [None] * output_count,
+                "Output Spike": [0] * output_count,
+            }
+            for event in events:
+                if isinstance(event, samna.xyloAudio3.event.MembranePotential):
+                    readout["Neuron Vmem"][event.neuron_id] = event.value
+                if isinstance(event, samna.xyloAudio3.event.SynapticCurrent):
+                    readout["Neuron Isyn"][event.neuron_id] = event.value
+                if isinstance(event, samna.xyloAudio3.event.HiddenSpikeCount):
+                    readout["Hidden Spike"][event.neuron_id] = event.count
+                if isinstance(event, samna.xyloAudio3.event.Spike):
+                    readout["Output Spike"][event.neuron_id] += 1
+                elif isinstance(event, samna.xyloAudio3.event.Readout):
+                    readout["Output Vmem"] = event.output_v_mems
+
+            print(f"{i}: {readout}")
+            readouts.append(readout)
+
+        return readouts
+
+                    
+    # Send spikes to trigger output neuron 0
+    readouts = evolve([
+        [2, 0, 0],
+        [1, 0, 0],
+        [0, 0, 0],
+        ])
+    assert(readouts[-1]["Output Spike"] == [1, 0, 0])
+
+    # Send spikes to trigger output neuron 1
+    readouts = evolve([
+        [0, 2, 0],
+        [0, 1, 0],
+        [0, 0, 0],
+        ])
+    assert(readouts[-1]["Output Spike"] == [0, 1, 0])
+
+    # Send spikes to trigger output neuron 2
+    readouts = evolve([
+        [0, 0, 2],
+        [0, 0, 1],
+        [0, 0, 0],
+        ])
+    assert(readouts[-1]["Output Spike"] == [0, 0, 1])

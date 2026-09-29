@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.speck2eTestBoard.encoder &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="samna.speck2eTestBoard.fpgaTestSuite" href="../fpgaTestSuite/index.html" />
+    <link rel="prev" title="samna.speck2eTestBoard" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">samna.speck2eTestBoard</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../index.html#module-samna.speck2eTestBoard">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloAudio3/index.html">samna.xyloAudio3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">samna</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna.speck2eTestBoard</a></li>
+      <li class="breadcrumb-item active">samna.speck2eTestBoard.encoder</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/reference/speck2eTestBoard/encoder/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-speck2etestboard-encoder">
+<h1>samna.speck2eTestBoard.encoder<a class="headerlink" href="index.html#samna-speck2etestboard-encoder" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-samna.speck2eTestBoard.encoder">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.speck2eTestBoard.encoder" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.encoder.decode_input_interface_event">
+<span class="sig-prename descclassname"><span class="pre">samna.speck2eTestBoard.encoder.</span></span><span class="sig-name descname"><span class="pre">decode_input_interface_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.Spike" title="samna.speck2e.event.Spike"><span class="pre">samna.speck2e.event.Spike</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.DvsEvent" title="samna.speck2e.event.DvsEvent"><span class="pre">samna.speck2e.event.DvsEvent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.KillSensorPixel" title="samna.speck2e.event.KillSensorPixel"><span class="pre">samna.speck2e.event.KillSensorPixel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.ResetSensorPixel" title="samna.speck2e.event.ResetSensorPixel"><span class="pre">samna.speck2e.event.ResetSensorPixel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.OutputModeSel" title="samna.speck2e.event.OutputModeSel"><span class="pre">samna.speck2e.event.OutputModeSel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.AverageSel" title="samna.speck2e.event.AverageSel"><span class="pre">samna.speck2e.event.AverageSel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.AsiRequest</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.ReadoutRequest</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.ScanChainValue</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.WriteNeuronValue" title="samna.speck2e.event.WriteNeuronValue"><span class="pre">samna.speck2e.event.WriteNeuronValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.ReadNeuronValue" title="samna.speck2e.event.ReadNeuronValue"><span class="pre">samna.speck2e.event.ReadNeuronValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.WriteWeightValue" title="samna.speck2e.event.WriteWeightValue"><span class="pre">samna.speck2e.event.WriteWeightValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.ReadWeightValue" title="samna.speck2e.event.ReadWeightValue"><span class="pre">samna.speck2e.event.ReadWeightValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.WriteBiasValue" title="samna.speck2e.event.WriteBiasValue"><span class="pre">samna.speck2e.event.WriteBiasValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.ReadBiasValue" title="samna.speck2e.event.ReadBiasValue"><span class="pre">samna.speck2e.event.ReadBiasValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.WriteRegisterValue" title="samna.speck2e.event.WriteRegisterValue"><span class="pre">samna.speck2e.event.WriteRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.ReadRegisterValue" title="samna.speck2e.event.ReadRegisterValue"><span class="pre">samna.speck2e.event.ReadRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.WriteFilterValue" title="samna.speck2e.event.WriteFilterValue"><span class="pre">samna.speck2e.event.WriteFilterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.ReadFilterValue" title="samna.speck2e.event.ReadFilterValue"><span class="pre">samna.speck2e.event.ReadFilterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.WriteSramValue" title="samna.speck2e.event.WriteSramValue"><span class="pre">samna.speck2e.event.WriteSramValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.ReadSramValue" title="samna.speck2e.event.ReadSramValue"><span class="pre">samna.speck2e.event.ReadSramValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.IdCodeRequest</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FlashRead" title="samna.speck2e.event.FlashRead"><span class="pre">samna.speck2e.event.FlashRead</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FlashWrite" title="samna.speck2e.event.FlashWrite"><span class="pre">samna.speck2e.event.FlashWrite</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FlashErase" title="samna.speck2e.event.FlashErase"><span class="pre">samna.speck2e.event.FlashErase</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FlashSpiRaw" title="samna.speck2e.event.FlashSpiRaw"><span class="pre">samna.speck2e.event.FlashSpiRaw</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FlashWriteEnable" title="samna.speck2e.event.FlashWriteEnable"><span class="pre">samna.speck2e.event.FlashWriteEnable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FlashQueryStatus" title="samna.speck2e.event.FlashQueryStatus"><span class="pre">samna.speck2e.event.FlashQueryStatus</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.RequestSpiMon" title="samna.speck2e.event.RequestSpiMon"><span class="pre">samna.speck2e.event.RequestSpiMon</span></a></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.encoder.decode_input_interface_event" title="Link to this definition"></a></dt>
+<dd><p>Decode input interface event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rawEvent</strong> (<em>int</em>) – The input interface event.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded input interface event.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.speck2eTestBoard.encoder.decode_output_serial_interface_events">
+<span class="sig-prename descclassname"><span class="pre">samna.speck2eTestBoard.encoder.</span></span><span class="sig-name descname"><span class="pre">decode_output_serial_interface_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.Spike" title="samna.speck2e.event.Spike"><span class="pre">samna.speck2e.event.Spike</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.DvsEvent" title="samna.speck2e.event.DvsEvent"><span class="pre">samna.speck2e.event.DvsEvent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.InputInterfaceEvent" title="samna.speck2e.event.InputInterfaceEvent"><span class="pre">samna.speck2e.event.InputInterfaceEvent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.NeuronValue" title="samna.speck2e.event.NeuronValue"><span class="pre">samna.speck2e.event.NeuronValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.BiasValue" title="samna.speck2e.event.BiasValue"><span class="pre">samna.speck2e.event.BiasValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.WeightValue" title="samna.speck2e.event.WeightValue"><span class="pre">samna.speck2e.event.WeightValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.RegisterValue" title="samna.speck2e.event.RegisterValue"><span class="pre">samna.speck2e.event.RegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.ReadoutValue" title="samna.speck2e.event.ReadoutValue"><span class="pre">samna.speck2e.event.ReadoutValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FilterValue" title="samna.speck2e.event.FilterValue"><span class="pre">samna.speck2e.event.FilterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.SramValue" title="samna.speck2e.event.SramValue"><span class="pre">samna.speck2e.event.SramValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FilterDvsEvent" title="samna.speck2e.event.FilterDvsEvent"><span class="pre">samna.speck2e.event.FilterDvsEvent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FilterValueCurrent" title="samna.speck2e.event.FilterValueCurrent"><span class="pre">samna.speck2e.event.FilterValueCurrent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FilterValuePrevious" title="samna.speck2e.event.FilterValuePrevious"><span class="pre">samna.speck2e.event.FilterValuePrevious</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.ScanChainValue</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">samna.speck2e.event.IdCode</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FlashValue" title="samna.speck2e.event.FlashValue"><span class="pre">samna.speck2e.event.FlashValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FlashSpiRaw" title="samna.speck2e.event.FlashSpiRaw"><span class="pre">samna.speck2e.event.FlashSpiRaw</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.FlashStatus" title="samna.speck2e.event.FlashStatus"><span class="pre">samna.speck2e.event.FlashStatus</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.ReadoutPinValue" title="samna.speck2e.event.ReadoutPinValue"><span class="pre">samna.speck2e.event.ReadoutPinValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="../../speck2e/event/index.html#samna.speck2e.event.SpiMon" title="samna.speck2e.event.SpiMon"><span class="pre">samna.speck2e.event.SpiMon</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.speck2eTestBoard.encoder.decode_output_serial_interface_events" title="Link to this definition"></a></dt>
+<dd><p>Decode output serial interface event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rawEvent</strong> (<em>int</em>) – The output serial interface event.</p></li>
+<li><p><strong>readoutDecodingEnable</strong> (<em>bool</em>) – Is readout output decoding enabled</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded output serial interface event.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="samna.speck2eTestBoard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../fpgaTestSuite/index.html" class="btn btn-neutral float-right" title="samna.speck2eTestBoard.fpgaTestSuite" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

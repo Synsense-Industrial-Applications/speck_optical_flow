@@ -1,0 +1,18 @@
+###########
+Xylo Series
+###########
+
+The Xylo series consists of different chip variants designed for low-power sensing applications.
+These chips are provided in development kits, which include external sensors integrated with the hardware,
+allowing for versatile development in areas such as audio processing, motion detection
+and environmental monitoring.
+
+****************
+Development Kits
+****************
+
+.. toctree::
+   :maxdepth: 1
+
+   xyloImu/index
+   xyloAudio3/index

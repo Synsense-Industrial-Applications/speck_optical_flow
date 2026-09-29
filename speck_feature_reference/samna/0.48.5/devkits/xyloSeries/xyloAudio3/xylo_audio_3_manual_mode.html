@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XyloAudio 3 Manual Mode &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="XyloAudio 3 Recording Mode" href="xylo_audio_3_recording_mode.html" />
+    <link rel="prev" title="XyloAudio 3 Real-Time Mode" href="xylo_audio_3_realtime_mode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Development Kits</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#connecting-to-a-device">Connecting to a Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#common-methods-of-development-kits">Common Methods of Development Kits</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supported-development-kits">Supported Development Kits</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../speckSeries/summary.html">Speck series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapSeSeries/index.html">Dynap-SE series</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Xylo Series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#development-kits">Development Kits</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Development Kits</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Xylo Series</a></li>
+          <li class="breadcrumb-item"><a href="index.html">XyloAudio 3 Boards</a></li>
+      <li class="breadcrumb-item active">XyloAudio 3 Manual Mode</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/devkits/xyloSeries/xyloAudio3/xylo_audio_3_manual_mode.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="xyloaudio-3-manual-mode">
+<h1>XyloAudio 3 Manual Mode<a class="headerlink" href="xylo_audio_3_manual_mode.html#xyloaudio-3-manual-mode" title="Link to this heading"></a></h1>
+<p>In Manual mode, there is no software automation, so all operations must be performed manually by the user.</p>
+<p>The typical workflow involves sending input for a single timestep to the chip and starting the processing
+with a <code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.TriggerProcessing</span></code> event. You then wait for the chip to finish processing,
+which can be determined by reading the <code class="docutils literal notranslate"><span class="pre">STAT2</span></code> register. Once processing is complete, you can read
+the network state by sending the appropriate events. This process can be repeated for each subsequent timestep.</p>
+<p>Due to the need for manual control of every step, this mode is cumbersome for application development.
+For that purpose, Accelerated-Time mode is recommended.</p>
+<p>However, Manual mode does offer full control over the chip, allowing you to simulate Accelerated-Time mode.
+The following example demonstrates how to do this.</p>
+<p>The example uses the following packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">samna</span>                 <span class="mf">0.39.6</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">samna</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Open the device and connect the source and sink nodes so we can communicate with Xylo.</span>
+<span class="n">board</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;XyloAudio3TestBoard&quot;</span><span class="p">)</span>
+<span class="n">xylo</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">source_to</span><span class="p">(</span><span class="n">xylo</span><span class="o">.</span><span class="n">get_sink_node</span><span class="p">())</span>
+<span class="n">sink</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">sink_from</span><span class="p">(</span><span class="n">xylo</span><span class="o">.</span><span class="n">get_source_node</span><span class="p">())</span>
+
+
+<span class="c1"># Create a basic network with a simple one-to-one mapping of input to output neurons.</span>
+<span class="n">xylo_config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">XyloConfiguration</span><span class="p">()</span>
+<span class="n">input_count</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">hidden_count</span> <span class="o">=</span> <span class="n">input_count</span>
+<span class="n">output_count</span> <span class="o">=</span> <span class="n">input_count</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">127</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">127</span><span class="p">]]</span> <span class="c1"># shape(input_count, hidden_count)</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">hidden</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span> <span class="c1"># shape(hidden_count, hidden_count)</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">hidden</span><span class="o">.</span><span class="n">neurons</span> <span class="o">=</span> <span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">HiddenNeuron</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mi">127</span><span class="p">,</span> <span class="n">v_mem_decay</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_syn_decay</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span> <span class="o">*</span> <span class="n">hidden_count</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">readout</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">127</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">127</span><span class="p">]]</span> <span class="c1"># shape(hidden_count, output_count)</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">readout</span><span class="o">.</span><span class="n">neurons</span> <span class="o">=</span> <span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">OutputNeuron</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mi">127</span><span class="p">,</span> <span class="n">v_mem_decay</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_syn_decay</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span> <span class="o">*</span> <span class="n">output_count</span>
+
+<span class="c1"># Configure Xylo in Manual mode and to work with input spike events.</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">operation_mode</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">OperationMode</span><span class="o">.</span><span class="n">Manual</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">input_source</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">InputSource</span><span class="o">.</span><span class="n">SpikeEvents</span>
+
+<span class="c1"># This needs to be enabled in Manual mode, so Readout event properly reads output Vmem.</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">always_update_omp_stat</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># This needs to be enabled so we can read the internal network state in Manual mode.</span>
+<span class="n">xylo_config</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">ram_access_enable</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Send the configuration to Xylo</span>
+<span class="n">xylo</span><span class="o">.</span><span class="n">apply_configuration</span><span class="p">(</span><span class="n">xylo_config</span><span class="p">)</span>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">evolve</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Continue to evolve the model with the given input.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input (list[list[int]]): Per timestep a list of integers to specify the number of spikes to send to that `neuron_id`.</span>
+<span class="sd">                                Max number of spikes per timestep for a neuron is 15. All lists must have the same length.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        readouts (list[Readout]): The `Readout` events for the given timesteps.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># In Manual mode, there is no automatic processing and readout,</span>
+    <span class="c1"># therefore we have to manually unroll the loop and execute each timestep.</span>
+    <span class="n">readouts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">spike_counts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+
+        <span class="c1"># First send the given spikes to Xylo and trigger the processing.</span>
+        <span class="c1"># There is no notion of time, so timestep fields can be left empty.</span>
+        <span class="n">input_events_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">neuron_id</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spike_counts</span><span class="p">):</span>
+            <span class="n">spikes</span> <span class="o">=</span> <span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">Spike</span><span class="p">(</span><span class="n">neuron_id</span><span class="o">=</span><span class="n">neuron_id</span><span class="p">)]</span> <span class="o">*</span> <span class="n">count</span>
+            <span class="n">input_events_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">spikes</span><span class="p">)</span>
+        <span class="n">input_events_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">TriggerProcessing</span><span class="p">())</span>
+        <span class="n">source</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">input_events_list</span><span class="p">)</span>
+
+        <span class="c1"># We need to wait until Xylo has finished processing before we can observe the network state.</span>
+        <span class="c1"># To do this, we poll the processing done flag in the status register.</span>
+        <span class="n">processing_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">processing_done</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">processing_done</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">processing_start_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Xylo processing takes unreasonably long (&gt;3s).&quot;</span><span class="p">)</span>
+
+            <span class="n">STAT2_REGISTER_ADDRESS</span> <span class="o">=</span> <span class="mh">0x0153</span>
+            <span class="n">STAT2_PD_DONE_FLAG</span> <span class="o">=</span> <span class="mh">0x1</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">ReadRegisterValue</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="n">STAT2_REGISTER_ADDRESS</span><span class="p">)])</span>
+            <span class="n">events</span> <span class="o">=</span> <span class="n">sink</span><span class="o">.</span><span class="n">get_n_events</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">events</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># In Manual mode, Xylo does not send any events by itself and this script does not</span>
+                <span class="c1"># expect other responses so we do not need to check if it is the correct event</span>
+                <span class="n">processing_done</span> <span class="o">=</span> <span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">&amp;</span> <span class="n">STAT2_PD_DONE_FLAG</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+
+        <span class="c1"># To obtain the network state in Manual mode, we need to send events to read all necessary neuron values.</span>
+        <span class="n">readout_events_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">readout_events_list</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">ReadMembranePotential</span><span class="p">(</span><span class="n">neuron_id</span><span class="o">=</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">hidden_count</span><span class="p">)])</span>
+        <span class="n">readout_events_list</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">ReadSynapticCurrent</span><span class="p">(</span><span class="n">neuron_id</span><span class="o">=</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">hidden_count</span> <span class="o">+</span> <span class="n">output_count</span><span class="p">)])</span>
+        <span class="n">readout_events_list</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">ReadHiddenSpikeCount</span><span class="p">(</span><span class="n">neuron_id</span><span class="o">=</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">hidden_count</span><span class="p">)])</span>
+        <span class="n">readout_events_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">TriggerReadout</span><span class="p">())</span>
+        <span class="n">source</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">readout_events_list</span><span class="p">)</span>
+
+        <span class="c1"># Now we need to gather all responses to the events we sent. We don&#39;t know how many events to expect,</span>
+        <span class="c1"># because it depends on the output spike count, but we know that `Readout` is the last event.</span>
+        <span class="n">readout_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">events</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">Readout</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">readout_start_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Xylo readout takes unreasonably long (&gt;3s).&quot;</span><span class="p">)</span>
+            <span class="n">events</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sink</span><span class="o">.</span><span class="n">get_events_blocking</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+
+        <span class="c1"># Process the events to create the network state for the current timestep.</span>
+        <span class="n">readout</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Neuron Vmem&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">hidden_count</span><span class="p">,</span>
+            <span class="s2">&quot;Neuron Isyn&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">hidden_count</span> <span class="o">+</span> <span class="n">output_count</span><span class="p">),</span>
+            <span class="s2">&quot;Hidden Spike&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">hidden_count</span><span class="p">,</span>
+            <span class="s2">&quot;Output Vmem&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">output_count</span><span class="p">,</span>
+            <span class="s2">&quot;Output Spike&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">output_count</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">MembranePotential</span><span class="p">):</span>
+                <span class="n">readout</span><span class="p">[</span><span class="s2">&quot;Neuron Vmem&quot;</span><span class="p">][</span><span class="n">event</span><span class="o">.</span><span class="n">neuron_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">SynapticCurrent</span><span class="p">):</span>
+                <span class="n">readout</span><span class="p">[</span><span class="s2">&quot;Neuron Isyn&quot;</span><span class="p">][</span><span class="n">event</span><span class="o">.</span><span class="n">neuron_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">HiddenSpikeCount</span><span class="p">):</span>
+                <span class="n">readout</span><span class="p">[</span><span class="s2">&quot;Hidden Spike&quot;</span><span class="p">][</span><span class="n">event</span><span class="o">.</span><span class="n">neuron_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">count</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">Spike</span><span class="p">):</span>
+                <span class="n">readout</span><span class="p">[</span><span class="s2">&quot;Output Spike&quot;</span><span class="p">][</span><span class="n">event</span><span class="o">.</span><span class="n">neuron_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloAudio3</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">Readout</span><span class="p">):</span>
+                <span class="n">readout</span><span class="p">[</span><span class="s2">&quot;Output Vmem&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">output_v_mems</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">readout</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">readouts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">readout</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">readouts</span>
+
+
+<span class="c1"># Send spikes to trigger output neuron 0</span>
+<span class="n">readouts</span> <span class="o">=</span> <span class="n">evolve</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">])</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">readouts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Output Spike&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Send spikes to trigger output neuron 1</span>
+<span class="n">readouts</span> <span class="o">=</span> <span class="n">evolve</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">])</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">readouts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Output Spike&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Send spikes to trigger output neuron 2</span>
+<span class="n">readouts</span> <span class="o">=</span> <span class="n">evolve</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">])</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">readouts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Output Spike&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="xylo_audio_3_realtime_mode.html" class="btn btn-neutral float-left" title="XyloAudio 3 Real-Time Mode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="xylo_audio_3_recording_mode.html" class="btn btn-neutral float-right" title="XyloAudio 3 Recording Mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,354 @@
+.. _dvs-config-signals:
+
+DVS Configuration Signal Description
+====================================
+
+.. csv-table:: DVS Configuration Signal Overview
+
+    "Register Bits",Register(s),"Signal Name","Short Description"
+    :ref:`DMOEN<rbits-DMOEN>`,:ref:`DVS0[7]<reg-DVS0>`,DVS_Mon,"DVS Core Monitor Bus Enable."
+    :ref:`SMOEN<rbits-SMOEN>`,:ref:`DVS0[6]<reg-DVS0>`,Spike_Mon,"Spike Monitor Bus Enable."
+    :ref:`DSD2EN<rbits-DSD2EN>`,:ref:`DVS0[5]<reg-DVS0>`,Spike_Dst2,"Destination 2 Enable."
+    :ref:`DSD1EN<rbits-DSD1EN>`,:ref:`DVS0[4]<reg-DVS0>`,Spike_Dst1,"Destination 1 Enable."
+    :ref:`DMI<rbits-DMI>`,:ref:`DVS0[3]<reg-DVS0>`,diagonal_mirror_en,"Enable image transposition (diagonal mirroring): '1' = X <-> Y."
+    :ref:`IM[2:0]<rbits-IM>`,:ref:`DVS0[2:0]<reg-DVS0>`,image_mode,"Filters/merges events coming from the DVS bus."
+    :ref:`COX[6:0]<rbits-COX>`,:ref:`DVS1[7:1]<reg-DVS1>`,cut_origin_x,"ROI Min X coordinate, calculated from the image origin."
+    :ref:`COY[6:0]<rbits-COY>`,:ref:`DVS2[7:1]<reg-DVS2>`,cut_origin_y,"ROI Min Y coordinate, calculated from the image origin."
+    :ref:`CMX[6:0]<rbits-CMX>`,:ref:`DVS3[7:1]<reg-DVS3>`,cut_max_x,"ROI Max X coordinate, calculated from the image origin."
+    :ref:`CMY[6:0]<rbits-CMY>`,:ref:`DVS4[7:1]<reg-DVS4>`,cut_max_y,"ROI Max Y coordinate, calculated from the image origin."
+    :ref:`DSD2[3:0]<rbits-DSD2>`,:ref:`DVS5[7:4]<reg-DVS5>`,Spike_Dst2,"Destination 2 layer address."
+    :ref:`DSD1[3:0]<rbits-DSD1>`,:ref:`DVS5[3:0]<reg-DVS5>`,Spike_Dst1,"Destination 1 layer address."
+    :ref:`XME<rbits-XME>`,:ref:`DVS6[7]<reg-DVS6>`,x_mirror_en,"Enable mirroring of the X dimension."
+    :ref:`YME<rbits-YME>`,:ref:`DVS6[6]<reg-DVS6>`,y_mirror_en,"Enable mirroring of the Y dimension."
+    :ref:`SSX[1:0]<rbits-SSX>`,":ref:`DVS6[5:4]<reg-DVS6>`",subsamp_x,"X Dimension Pooling."
+    :ref:`SSY[1:0]<rbits-SSY>`,":ref:`DVS6[3:2]<reg-DVS6>`",subsamp_y,"Y Dimension Pooling."
+    :ref:`SPSS<rbits-SPSS>`,:ref:`DVS6[1]<reg-DVS6>`,sensor_pass,"Pass/Drop internal sensor events."
+    :ref:`SDL[7:0]<rbits-SDL>`,:ref:`DVS7[7:0]<reg-DVS7>`,sensor_dly,"Sensor configuration delay control."
+    :ref:`SP1[3:0]<rbits-SP1>`,:ref:`DVS8[7:4]<reg-DVS8>`,sensor_p1,"Current Control P1."
+    :ref:`SP0[3:0]<rbits-SP0>`,:ref:`DVS8[3:0]<reg-DVS8>`,sensor_p0,"Current Control P0."
+    :ref:`SENT<rbits-SENT>`,:ref:`DVS9[5]<reg-DVS9>`,sensor_en_test,"Sensor test mode enable bit."
+    :ref:`SP3[4:0]<rbits-SP3>`,:ref:`DVS9[4:0]<reg-DVS9>`,sensor_p3,"Current Control P3."
+    :ref:`SENS1<rbits-SENS1>`,:ref:`DVS10[7]<reg-DVS10>`,sensor_en_startup1,"Main bias startup enable."
+    :ref:`SENS2<rbits-SENS2>`,:ref:`DVS10[6]<reg-DVS10>`,sensor_en_startup2,"Main bias startup enable."
+    :ref:`SENSR<rbits-SENSR>`,:ref:`DVS10[5]<reg-DVS10>`,sensor_en_startupref,"Main bias startup reference enable."
+    :ref:`SP4[4:0]<rbits-SP4>`,:ref:`DVS10[4:0]<reg-DVS9>`,sensor_p4,"Current Control P4."
+    :ref:`SENBI1<rbits-SENBI1>`,:ref:`DVS11[7]<reg-DVS11>`,sensor_en_bias1,"Enable for main_bias1."
+    :ref:`SENBI2<rbits-SENBI2>`,:ref:`DVS11[6]<reg-DVS11>`,sensor_en_bias2,"Enable for main_bias2."
+    :ref:`SENBI3<rbits-SENBI3>`,:ref:`DVS11[5]<reg-DVS11>`,sensor_en_bias3,"Enable for main_bias3."
+    :ref:`SP5[3:0]<rbits-SP5>`,:ref:`DVS11[4:0]<reg-DVS11§>`,sensor_p5,"Current Control P5."
+    :ref:`SP7[3:0]<rbits-SP7>`,:ref:`DVS12[7:4]<reg-DVS12>`,sensor_p7,"Current Control P7."
+    :ref:`SP6[3:0]<rbits-SP6>`,:ref:`DVS12[3:0]<reg-DVS12>`,sensor_p6,"Current Control P6."
+    :ref:`SIO1[5:0]<rbits-SIO1>`,:ref:`DVS13[5:0]<reg-DVS13>`,sensor_iout1,"Sensor reference current setting for parameter 0."
+    :ref:`SIO2[5:0]<rbits-SIO2>`,:ref:`DVS14[5:0]<reg-DVS14>`,sensor_iout2,"Sensor reference current setting for parameter 1."
+    :ref:`SIO3[5:0]<rbits-SIO3>`,:ref:`DVS15[5:0]<reg-DVS15>`,sensor_iout3,"Sensor reference current setting for parameters 2, 3, 4 and 5."
+    :ref:`SPUL<rbits-SPUL>`,:ref:`DVS16[7]<reg-DVS16>`,sensor_pulse,"Pulse output enable bit"
+    :ref:`SPSL<rbits-SPSL>`,:ref:`DVS16[6]<reg-DVS16>`,sensor_sel_pulse,"Select signal for pulse output"
+    :ref:`SIO4[5:0]<rbits-SIO4>`,:ref:`DVS16[5:0]<reg-DVS16>`,sensor_iout4,"Sensor reference current setting for parameters 6."
+
+
+Detailed Signal Description
+***************************
+
+.. _rbits-DMOEN:
+
+DMOEN (DVS_Mon)
+--------------------------
+
+Enables the DVS Monitor Bus. When enabled, input messages to the dvs pre-processing block are
+forwarded on the :ref:`monitor bus<monitor-bus-encoding>` to the output serial interface *data1* input.
+
+.. note::
+    These messages are the *raw* messages coming from the internal DVS or an external sensor
+    (Ext DVS Mode) before pre-processing.
+
+.. _rbits-SMOEN:
+
+SMOEN (Spike_Mon)
+--------------------------
+
+Enables the DVS Pre-Processing Spike Monitor Bus. When enabled, output messages of the dvs pre-processing block are
+forwarded on the :ref:`monitor bus<monitor-bus-encoding>` to the output serial interface *data1* input.
+
+.. _rbits-DSD2EN:
+
+DSD2EN (Spike_Dst2)
+--------------------------
+
+Enable forwarding to Destination 2 layer (address defined in bits :ref:`rbits-DSD2`.
+
+.. _rbits-DSD1EN:
+
+DSD1EN (Spike_Dst1)
+--------------------------
+
+Enable forwarding to Destination 1 layer (address defined in bits :ref:`rbits-DSD1`.
+
+.. _rbits-DMI:
+
+DMI (diagonal_mirror_en)
+--------------------------
+
+Enables mirroring of the input events along the diagonal: when set to '1', it swaps X with Y.
+
+
+.. _rbits-IM:
+
+IM[2:0] (image_mode)
+---------------------
+
+Location: :ref:`DVS0[2:0]<reg-DVS0>`
+
+DVS event filtering. Filters/merges events coming from the DVS Bus (Sensor or External).
+
++---------+---------------------------------------------------------------------------------------------------------+
+| IM[2:0] | Configuration                                                                                           |
++---------+---------------------------------------------------------------------------------------------------------+
+| 000     | Pass Events with both polarity (to ON *and* to OFF). Merge all events marking them with Polarity = '1'. |
++---------+---------------------------------------------------------------------------------------------------------+
+| 001     | Pass only Events with OFF polarity. Mark all events with Polarity '1'.                                  |
++---------+---------------------------------------------------------------------------------------------------------+
+| 010     | Pass only Events with ON polarity. Mark all events with Polarity '1'.                                   |
++---------+---------------------------------------------------------------------------------------------------------+
+| 011     | Block *all* events.                                                                                     |
++---------+---------------------------------------------------------------------------------------------------------+
+| 1xx     | Pass *all* events and maintain the polarity information.                                                |
++---------+---------------------------------------------------------------------------------------------------------+
+
+
+.. _rbits-COX:
+
+COX[6:0] (cut_origin_x)
+-----------------------
+
+ROI Min X coordinate, calculated from the image origin.
+
+.. _rbits-SSX:
+
+SSX[1:0] (subsamp_x)
+--------------------------
+
+Select the level of Pooling in the X dimension. Values {0, 1, 2} map to a Pooling of {1, 2, 4}.
+
+.. _rbits-COY:
+
+COY[6:0] (cut_origin_y)
+-----------------------
+
+ROI Min Y coordinate, calculated from the image origin.
+
+.. _rbits-SSY:
+
+SSY[1:0] (subsamp_y)
+--------------------------
+
+Select the level of Pooling in the Y dimension. Values {0, 1, 2} map to a Pooling of {1, 2, 4}.
+
+.. _rbits-CMX:
+
+CMX[6:0] (cut_max_x)
+--------------------------
+
+ROI Max X coordinate, calculated from the image origin.
+
+.. _rbits-XME:
+
+XME (x_mirror_en)
+--------------------------
+
+Enable mirroring of the X dimension.
+
+.. _rbits-CMY:
+
+CMY[6:0] (cut_max_y)
+--------------------------
+
+ROI Max Y coordinate, calculated from the image origin.
+
+.. _rbits-YME:
+
+YME (y_mirror_en)
+--------------------------
+
+Enable mirroring of the Y dimension.
+
+.. _rbits-DSD2:
+
+DSD2[4:0] (Spike_Dst2)
+--------------------------
+
+Destination 2 layer address.
+
+.. _rbits-DSD1:
+
+DSD1[4:0] (Spike_Dst1)
+--------------------------
+
+Destination 1 layer address.
+
+.. _rbits-SDL:
+
+SDL[7:0] (sensor_dly)
+---------------------
+
+Sensor configuration valid -> ack delay control. This register controls the timing of the ack signal
+for a sensor configuration event coming from the Input Serial Interface (see :ref:`ISI Operating Modes<s2p-operating-modes>`)
+
+.. _rbits-SP1:
+
+SP1[3:0] (sensor_p1)
+--------------------------
+
+Current Control P1.
+
+.. _rbits-SP0:
+
+SP1[3:0] (sensor_p0)
+--------------------------
+
+Current Control P0.
+
+.. _rbits-SP4:
+
+SP4[4:0] (sensor_p4)
+--------------------------
+
+Current Control P4.
+
+.. _rbits-SP3:
+
+SP3[4:0] (sensor_p3)
+--------------------------
+
+Current Control P3.
+
+.. _rbits-SP5:
+
+SP5[4:0] (sensor_p5)
+--------------------------
+
+Current Control P5.
+
+.. _rbits-SPSS:
+
+SPSS (sensor_pass)
+--------------------------
+
+Pass/Drop Internal DVS Events. If disabled, the internal sensor events are dropped, i.e., not forwarded to the DVS :ref:`pre-processing block<event-pre-processing>`.
+
+This is typically used when sensor data is provided by an external source (Ext DVS Mode).
+
++------+---------------------------------------------------------+
+| SPSS | Configuration                                           |
++------+---------------------------------------------------------+
+| '0'  | Drop internal DVS events                                |
++------+---------------------------------------------------------+
+| '1'  | Forward internal DVS events to DVS pre-processing block |
++------+---------------------------------------------------------+
+
+.. _rbits-SP7:
+
+SP7[3:0] (sensor_p7)
+--------------------------
+
+Current Control P7.
+
+.. _rbits-SP6:
+
+SP6[3:0] (sensor_p6)
+--------------------
+
+Current Control P6.
+
+.. _rbits-SENS1:
+
+SENS1 (sensor_en_startup1)
+--------------------------
+
+Main bias startup enable. See :ref:`sensor-main-bias-settings` for details.
+
+.. _rbits-SENS2:
+
+SENS2 (sensor_en_startup2)
+--------------------------
+
+Main bias startup enable. See :ref:`sensor-main-bias-settings` for details.
+
+.. _rbits-SENSR:
+
+SENSR (sensor_en_startupref)
+-----------------------------
+
+Main bias startup reference voltage enable. See :ref:`sensor-main-bias-settings` for details.
+
+
+.. _rbits-SENBI1:
+
+SENBI1 (sensor_en_bias1)
+--------------------------
+
+Enable for main_bias1 (beta multiplier). See :ref:`sensor-main-bias-settings` for details.
+
+.. _rbits-SENBI2:
+
+SENBI2 (sensor_en_bias2)
+--------------------------
+
+Enable for main_bias2 (cascoded-beta multiplier). See :ref:`sensor-main-bias-settings` for details.
+
+
+.. _rbits-SENBI3:
+
+SENBI3 (sensor_en_bias3)
+--------------------------
+
+Enable for main_bias3 (temperature-compansated cascoded-beta multiplier). See :ref:`sensor-main-bias-settings` for details.
+
+
+.. _rbits-SIO1:
+
+SIO1[5:0] (sensor_iout1)
+------------------------
+
+Sensor reference current setting for parameter 0. See :ref:`sensor-settings` for details.
+
+.. _rbits-SENT:
+
+SENT (sensor_en_test)
+--------------------------
+
+Enable for Vref output.
+
+.. _rbits-SIO2:
+
+SIO2[5:0] (sensor_iout2)
+--------------------------
+
+Sensor reference current setting for parameter 1. See :ref:`sensor-settings` for details.
+
+.. _rbits-SPUL:
+
+SPUL (sensor_pulse)
+-------------------
+
+Enable for pulse output.
+
+.. _rbits-SPSL:
+
+SPSL (sensor_sel_pulse)
+-----------------------
+
+Select signal for pulse output. 1: reset pulse, 0: ignore pulse.
+
+.. _rbits-SIO3:
+
+SIO3[5:0] (sensor_iout3)
+--------------------------
+
+Sensor reference current setting for parameters 2, 3, 4 and 5. See :ref:`sensor-settings` for details.
+
+.. _rbits-SIO4:
+
+SIO4[5:0] (sensor_iout4)
+--------------------------
+
+Sensor reference current setting for parameters 6. See :ref:`sensor-settings` for details.

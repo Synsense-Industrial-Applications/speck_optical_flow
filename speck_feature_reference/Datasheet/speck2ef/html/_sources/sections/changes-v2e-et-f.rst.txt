@@ -1,0 +1,17 @@
+.. _changes-v2e-et-f:
+
+Differences between Speck2e/et/f
+================================
+
+Speck2e vs 2et
+*****************
+
+- Speck2et (2e test) includes a number of pixel versions for comparison.
+- In Speck2et, pin VBIAS is a test analog input, while it is disconnected in Speck2e/f
+
+Speck2e vs 2f
+****************
+
+- RGB IF interface is not present in Speck2f. RGB IF pins are disconnected in Speck2f.
+- The pixel version is updated in 2f compared to 2e.
+

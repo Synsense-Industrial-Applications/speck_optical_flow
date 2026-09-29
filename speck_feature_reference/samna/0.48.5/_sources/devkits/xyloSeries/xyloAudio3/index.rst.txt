@@ -1,0 +1,33 @@
+##################
+XyloAudio 3 Boards
+##################
+
+The ``XyloAudio3TestBoard`` features a XyloAudio 3 chip integrated with additional peripherals for
+enhanced functionality. It comprises an FPGA-based motherboard that manages communication via USB,
+and a daughterboard housing the XyloAudio 3 chip.
+
+The board is equipped with both analog and digital microphones.
+**Important:** when working with the microphones, the correct ones needs to be selected via a switch.
+
+Additionally, an ADC is included to enable on-board power measurements.
+
+
+**************
+API Reference:
+**************
+
+* :class:`samna.xyloAudio3.XyloAudio3TestBoard`
+
+*********
+Examples:
+*********
+
+.. toctree::
+   :maxdepth: 1
+
+   xylo_audio_3_accelerated_mode
+   xylo_audio_3_realtime_mode
+   xylo_audio_3_manual_mode
+   xylo_audio_3_recording_mode
+   xylo_audio_3_power_measurement
+   xylo_audio_3_directoutput_mode

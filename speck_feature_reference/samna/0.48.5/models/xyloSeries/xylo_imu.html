@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xylo-IMU &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="XyloAudio 3" href="xylo_audio_3.html" />
+    <link rel="prev" title="Xylo V2" href="xylo_v2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Chip Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../models.html#initializing-a-chip-model">Initializing a Chip Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models.html#configuration-management">Configuration Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models.html#event-stream-handling">Event Stream Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models.html#common-model-functions">Common Model Functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../models.html#supported-chips-series">Supported Chips &amp; Series</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../speckSeries/summary.html">Speck Series</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="summary.html">Xylo Series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="summary.html#supported-xylo-related-models">Supported Xylo Related Models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../models.html">Chip Models</a></li>
+          <li class="breadcrumb-item"><a href="summary.html">Xylo Series</a></li>
+      <li class="breadcrumb-item active">Xylo-IMU</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/models/xyloSeries/xylo_imu.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="xylo-imu">
+<h1>Xylo-IMU<a class="headerlink" href="xylo_imu.html#xylo-imu" title="Link to this heading"></a></h1>
+<nav class="contents local" id="topics">
+<p class="topic-title">Topics</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="xylo_imu.html#operation-mode" id="id1">Operation Mode:</a></p>
+<ul>
+<li><p><a class="reference internal" href="xylo_imu.html#manual-mode" id="id2">1. Manual Mode</a></p></li>
+<li><p><a class="reference internal" href="xylo_imu.html#accelerated-mode" id="id3">1. Accelerated Mode</a></p></li>
+<li><p><a class="reference internal" href="xylo_imu.html#realtime-mode" id="id4">3. RealTime Mode</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="xylo_imu.html#basic-examples" id="id5">Basic Examples:</a></p></li>
+<li><p><a class="reference internal" href="xylo_imu.html#api-reference" id="id6">Api Reference:</a></p></li>
+</ul>
+</nav>
+<p>Xylo-IMU is a full digital AI chip which consists of</p>
+<p>a dedicated IMU data acquisition (MC3632) and conversion block (IMU_IF)</p>
+<p>and a processing core (Xylo-Core) of Spiking Neural Network (SNN).</p>
+<p>If enabled IMU_IF will read external IMU via SPI master interface, convert IMU data to spike and send the spike to Xylo-Core.</p>
+<p>Xylo-Core is a highly configurable SNN processing core, which supports both reservoir and feed-forward network.</p>
+<p>Xylo-IMU supports up to 16 input neurons (IN0 ~ IN15), 128 configurable input expansion neurons (IEN0 ~ IEN127), 496 configurable recurrent neurons (RN0 ~ RN495), 128 configurable output expansion neurons (OEN0 ~ OEN127) and up to 16 output readout neurons (ON0 ~ ON15) for classification purpose.</p>
+<p>Register / RAM configuration of Xylo-IMU is done via SPI slave interface, internal event (e.g. classification done) could be sent out via interrupt.</p>
+<section id="operation-mode">
+<h2><a class="toc-backref" href="xylo_imu.html#id1" role="doc-backlink">Operation Mode:</a><a class="headerlink" href="xylo_imu.html#operation-mode" title="Link to this heading"></a></h2>
+<p>Xylo-Core can be configured to one of three operation mode:</p>
+<section id="manual-mode">
+<h3><a class="toc-backref" href="xylo_imu.html#id2" role="doc-backlink">1. Manual Mode</a><a class="headerlink" href="xylo_imu.html#manual-mode" title="Link to this heading"></a></h3>
+<p>Manual mode is debug/test mode of Xylo-IMU. Everything is expected to be done manually in this mode. The procedure is:</p>
+<ul class="simple">
+<li><p>Input <a class="reference internal" href="../../reference/xyloImu/event/index.html#samna.xyloImu.event.Spike" title="samna.xyloImu.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.Spike</span></code></a> with timestep ignored.</p></li>
+<li><p>Send <a class="reference internal" href="../../reference/xyloImu/event/index.html#samna.xyloImu.event.TriggerProcessing" title="samna.xyloImu.event.TriggerProcessing"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.TriggerProcessing</span></code></a> with timestep ignored to process current input spikes.</p></li>
+<li><p>Read/write register and memory manually.</p></li>
+</ul>
+</section>
+<section id="accelerated-mode">
+<h3><a class="toc-backref" href="xylo_imu.html#id3" role="doc-backlink">1. Accelerated Mode</a><a class="headerlink" href="xylo_imu.html#accelerated-mode" title="Link to this heading"></a></h3>
+<p>Accelerated mode bases on manual mode, and it mocks realtime mode by triggering processing and reading readout automatically. The procedure is:</p>
+<ul class="simple">
+<li><p>Input <a class="reference internal" href="../../reference/xyloImu/event/index.html#samna.xyloImu.event.Spike" title="samna.xyloImu.event.Spike"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.Spike</span></code></a> with precise and increasing timestep. When spike with latter timestep is received on FPGA, spikes of former timestep will be processed automatically.</p></li>
+<li><p>Send <a class="reference internal" href="../../reference/xyloImu/event/index.html#samna.xyloImu.event.TriggerProcessing" title="samna.xyloImu.event.TriggerProcessing"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.TriggerProcessing</span></code></a> event with target timestep to keep triggering processing by FPGA until target timestep reaches.</p></li>
+<li><p>Read/write register and memory manually to get state after processing.</p></li>
+</ul>
+<p>It has following features:</p>
+<ul class="simple">
+<li><p>Input spikes are processed automatically when spike of latter timestep is received.</p></li>
+<li><p>Processing result of each timestep is read by FPGA automatically as <a class="reference internal" href="../../reference/xyloImu/event/index.html#samna.xyloImu.event.Readout" title="samna.xyloImu.event.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.Readout</span></code></a>.</p></li>
+<li><p>It runs in a high speed comparable to realtime mode.</p></li>
+<li><p>It stops automatically when target timestep reaches.</p></li>
+<li><p>You can debug like as manual mode when it stops.</p></li>
+</ul>
+</section>
+<section id="realtime-mode">
+<h3><a class="toc-backref" href="xylo_imu.html#id4" role="doc-backlink">3. RealTime Mode</a><a class="headerlink" href="xylo_imu.html#realtime-mode" title="Link to this heading"></a></h3>
+<p>RealTime mode is a mode that chip triggers processing automatically.</p>
+<p>According to its input, there are two use cases of this mode:</p>
+<section id="with-acceleration-input">
+<h4>With Acceleration Input<a class="headerlink" href="xylo_imu.html#with-acceleration-input" title="Link to this heading"></a></h4>
+<p>You can debug with acceleration input under realtime mode. The procedure is:</p>
+<ul class="simple">
+<li><p>Input specific count of <a class="reference internal" href="../../reference/events/index.html#samna.events.Acceleration" title="samna.events.Acceleration"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.events.Acceleration</span></code></a> events.</p></li>
+<li><p>Send <a class="reference internal" href="../../reference/xyloImu/event/index.html#samna.xyloImu.event.TriggerProcessing" title="samna.xyloImu.event.TriggerProcessing"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.TriggerProcessing</span></code></a> with specific target timestep to process all input accelerations.</p></li>
+<li><p>FPGA reads <a class="reference internal" href="../../reference/xyloImu/event/index.html#samna.xyloImu.event.Readout" title="samna.xyloImu.event.Readout"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.Readout</span></code></a> of each timestep automatically while processing.</p></li>
+<li><p>FPGA stops processing automatically when target timestep is reached.</p></li>
+<li><p>User gets readouts and analyze.</p></li>
+</ul>
+</section>
+<section id="with-sensor-input">
+<h4>With Sensor Input<a class="headerlink" href="xylo_imu.html#with-sensor-input" title="Link to this heading"></a></h4>
+<p>Realtime mode with sensor input is typically used for production. The procedure is:</p>
+<ul class="simple">
+<li><p>Apply a configuration of realtime mode with input interface enabled and data source as sensor input.</p></li>
+<li><p>Send a default <a class="reference internal" href="../../reference/xyloImu/event/index.html#samna.xyloImu.event.TriggerProcessing" title="samna.xyloImu.event.TriggerProcessing"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.event.TriggerProcessing</span></code></a> to trigger processing infinitely.</p></li>
+<li><p>Keep running.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="basic-examples">
+<h2><a class="toc-backref" href="xylo_imu.html#id5" role="doc-backlink">Basic Examples:</a><a class="headerlink" href="xylo_imu.html#basic-examples" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloImu/xylo_imu_readout.html#xylo-imu-readout"><span class="std std-ref">Xylo-Imu Readout</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloImu/xylo_imu_trigger_processing.html#xylo-imu-triggerprocessing"><span class="std std-ref">Xylo-Imu TriggerProcessing</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloImu/xylo_imu_manual_mode.html#xylo-imu-manual-mode"><span class="std std-ref">Xylo-Imu Manual Mode</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloImu/xylo_imu_accelerated_mode.html#xylo-imu-accelerated-mode"><span class="std std-ref">Xylo-Imu Accelerated Mode</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloImu/xylo_imu_realtime_mode_with_acceleration_input.html#xylo-imu-realtime-mode-with-acceleration-input"><span class="std std-ref">Xylo-Imu RealTime Mode With Acceleration Input</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloImu/xylo_imu_realtime_mode_with_sensor_input.html#xylo-imu-realtime-mode-with-sensor-input"><span class="std std-ref">Xylo-Imu RealTime Mode With Sensor Input</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloImu/mc3632_read_acceleration.html#mc3632-read-acceleration"><span class="std std-ref">Mc3632 Read acceleration</span></a></p></li>
+<li><p><a class="reference internal" href="../../devkits/xyloSeries/xyloImu/xylo_imu_power_measurement.html#xylo-imu-power-measurement"><span class="std std-ref">Xylo-Imu Power Measurement</span></a></p></li>
+</ul>
+</section>
+<section id="api-reference">
+<h2><a class="toc-backref" href="xylo_imu.html#id6" role="doc-backlink">Api Reference:</a><a class="headerlink" href="xylo_imu.html#api-reference" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Model: <a class="reference internal" href="../../reference/xyloImu/index.html#samna.xyloImu.XyloModel" title="samna.xyloImu.XyloModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImu.XyloModel</span></code></a></p></li>
+<li><p>Event: <a class="reference internal" href="../../reference/xyloImu/event/index.html#samna-xyloimu-event"><span class="std std-ref">samna.xyloImu.event</span></a></p></li>
+<li><p>Configuration: <a class="reference internal" href="../../reference/xyloImu/configuration/index.html#samna-xyloimu-configuration"><span class="std std-ref">samna.xyloImu.configuration</span></a></p></li>
+<li><p>Testboard: <a class="reference internal" href="../../reference/xyloImuBoards/index.html#samna.xyloImuBoards.XyloImuTestBoard" title="samna.xyloImuBoards.XyloImuTestBoard"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloImuBoards.XyloImuTestBoard</span></code></a></p></li>
+<li><p>Mc3632: <a class="reference internal" href="../../reference/unifirm/modules/mc3632/index.html#samna.unifirm.modules.mc3632.Mc3632" title="samna.unifirm.modules.mc3632.Mc3632"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.unifirm.modules.mc3632.Mc3632</span></code></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="xylo_v2.html" class="btn btn-neutral float-left" title="Xylo V2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="xylo_audio_3.html" class="btn btn-neutral float-right" title="XyloAudio 3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

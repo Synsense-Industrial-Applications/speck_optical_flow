@@ -1,0 +1,51 @@
+.. _event-pre-processing:
+
+Event Pre-Processing Layer
+==========================
+
+The event pre-processing layer receives as input the events coming from the
+internal DVS, or from an external source through the Input Serial Interface
+(see :ref:`ISI Addressing<c-p-d-ref-tables>`).
+
+.. (see :ref:`Ext DVS Mode<ext-dvs-example>`).
+
+Depending on its register configuration, the event pre-processing Layer can
+process the input messages to provide the following operations:
+
+- Select messages and forward **on** only / **off** only / **all** messages to
+  one or two desired destinations. The polarity of the events can
+  also be merged (all events become **on** events). Register :ref:`configuration<rbits-IM>`.
+- Sum pooling 1:1, 1:2, 1:4. :ref:`X Configuration<rbits-SSX>`, :ref:`Y Configuration<rbits-SSY>`.
+- ROI selection. X range [:ref:`start<rbits-COX>`::ref:`end<rbits-CMX>`], Y range [:ref:`start<rbits-COY>`::ref:`end<rbits-CMY>`].
+- Mirroring in both :ref:`X<rbits-XME>`/:ref:`X<rbits-YME>`.
+- Rotate in 90 degree steps. This can be achieved by X/Y mirroring + :ref:`image transposition<rbits-DMI>`.
+- Two selectable destination layers. Destination 1 :ref:`enable<rbits-DSD1EN>` and :ref:`address<rbits-DSD1>`, destination 2 :ref:`enable<rbits-DSD2EN>` and :ref:`address<rbits-DSD2>`.
+
+Event Filter
+------------
+
+An :ref:`event filter<dvs-filter>` is included in the DVS Event Pre-processing Layer.
+The filter can be enabled by setting register bit :ref:`HPFE<rbits-HPFE>` to '1'.
+The filter has its own set of configuration registers (see :ref:`Filter Registers<filter-config-signals>`).
+
+Event Pre-Processing Pipeline
+-----------------------------
+
+The general processing pipeline for the pre-processing layer is as follows:
+
+.. graphviz::
+
+    digraph ppp{
+        rankdir=LR
+        node [shape=box]
+        a [shape=none label="" width=0]
+        b [label="sensor events\nmonitor sensor"]
+        c [label="on/off/\nmerge/both"]
+        d [label="pooling"]
+        e [label="ROI (cut\n+ mirror)"]
+        f [label="header append\n+ monitoring"]
+        g [label="Event\nfilter"]
+        h [shape=none label="" width=0]
+
+        a->b->c->d->e->f->g->h
+    }

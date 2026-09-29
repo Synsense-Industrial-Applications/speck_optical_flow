@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.5. Convolutional Layer &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.6. Readout Layer (Post Processing)" href="readout-layer.html" />
+    <link rel="prev" title="3.4. DVS Event Filter" href="dvs-filter.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">3. Chip Architecture</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="block-diagram.html">3.1. Top Level Block Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-overview.html">3.2. Speck2e Computational Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event-pre-processing.html">3.3. Event Pre-Processing Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-filter.html">3.4. DVS Event Filter</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.5. Convolutional Layer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#leak-bias-operation">3.5.1. Leak (Bias) operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parallel-computing-layers">3.5.2. Parallel Computing Layers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#layer-0">3.5.2.1. Layer 0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#layer-1">3.5.2.2. Layer 1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#congestion-balancer-block">3.5.3. Congestion Balancer Block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spike-decimator-block">3.5.4. Spike Decimator Block</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="readout-layer.html">3.6. Readout Layer (Post Processing)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slow-clock.html">3.7. Internal Slow Clock</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">3. </span>Chip Architecture</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.5. </span>Convolutional Layer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/architecture/convolutional-layer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="convolutional-layer">
+<span id="id1"></span><h1><span class="section-number">3.5. </span>Convolutional Layer<a class="headerlink" href="#convolutional-layer" title="Permalink to this heading"></a></h1>
+<p>In this section, we briefly describe the features of each of the 9 convolutional
+processing layers (layer cores) of Speck2e.</p>
+<p>Detailed descriptions of the <a class="reference internal" href="../memory/index.html#memory-index"><span class="std std-ref">memory availability</span></a>, <a class="reference internal" href="../registers/layer-config.html#layer-config-signals"><span class="std std-ref">configuration registers</span></a> and other features
+of the convolutional layers can be found in the remainder of this document.</p>
+<p>The general features of a convolutional layer are:</p>
+<ul class="simple">
+<li><p><strong>Max input dimension:</strong> 128x128</p></li>
+<li><p><strong>Max feature output:</strong> size 64x64</p></li>
+<li><p><strong>Max feature number:</strong> 1024</p></li>
+<li><p><strong>Weight resolution:</strong> 8 bit</p></li>
+<li><p><strong>Neuron state resolution:</strong> 16</p></li>
+<li><p><strong>Max kernel size:</strong> 16x16</p></li>
+<li><p><strong>Stride:</strong> {1,2,4,8} independent in X/Y</p></li>
+<li><p><strong>Padding:</strong> [0..7] independent in X/Y</p></li>
+<li><p><strong>Pooling:</strong> 1:1, 1:2, 1:4</p></li>
+<li><p><strong>Fanout:</strong> of 2</p></li>
+<li><p><strong>Total SRAM Size</strong> 0.98157 MB partioned between the 9 layers</p></li>
+</ul>
+<section id="leak-bias-operation">
+<span id="leak-operation"></span><h2><span class="section-number">3.5.1. </span>Leak (Bias) operation<a class="headerlink" href="#leak-bias-operation" title="Permalink to this heading"></a></h2>
+<p>Each layer includes a leak generation block, which will update all neuron values with
+provided leak values stored in a dedicated Leak SRAM.</p>
+<p>The leak circuitry is enabled in a layer by its corresponding register bit <a class="reference internal" href="../registers/layer-config.html#rbits-lken"><span class="std std-ref">LKEN</span></a>.</p>
+<p>In order to trigger the leak operation, the internal <em>slow clock</em> signal is used to provide
+a low-frequency clock of the desired frequency. The <em>slow clock</em> signal can be forwarded
+to the convolutional layers by configuring the register bits <a class="reference internal" href="../registers/ii-config.html#rbits-slwclk"><span class="std std-ref">SLWCLK[7:0]</span></a>.</p>
+<p>The leak clock signal is propagated to all layers with LKEN bit set to ‘1’.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The CLK_SLOW is internally enabled <em>only</em> when both pins <em>SCAN_HS_EN</em> and
+<em>SCAN_DATA_EN</em> are disabled.</p>
+<p>The CLK_SLOW pin is also used to trigger a DVS Filter Counter update
+(see <a class="reference internal" href="dvs-filter.html#filter-operation"><span class="std std-ref">Filter Operation</span></a>) and as Scan Chain Clock when the Scan Chain
+is enabled (see <a class="reference internal" href="../scanchain/interface.html#scan-chain-interface"><span class="std std-ref">Scan Chain Interface</span></a>)</p>
+</div>
+</section>
+<section id="parallel-computing-layers">
+<span id="parallel-computation"></span><h2><span class="section-number">3.5.2. </span>Parallel Computing Layers<a class="headerlink" href="#parallel-computing-layers" title="Permalink to this heading"></a></h2>
+<section id="layer-0">
+<h3><span class="section-number">3.5.2.1. </span>Layer 0<a class="headerlink" href="#layer-0" title="Permalink to this heading"></a></h3>
+<p>Layer 0 implements a fully symmetric 2 parallel computation paths to improve throughput with respect to layer 3.</p>
+<p>The parallelism is implemented in order to be almost fully transparent to the user, who can consider layers 0, 1 and 2 exactly
+the same in terms of interfaces and programmability.</p>
+<p>Layer 0 differs from the other (regular) layers with the following characteristics:</p>
+<ul class="simple">
+<li><p>2 parallel convolutional cores, processing 1/2 of the input spikes each (2x speed improvement)</p></li>
+<li><p>2 copies of the same kernel sram, one for each convolutional core</p></li>
+<li><p>2 neuron updates at the same time when processing adjacent neuron addresses (best performance for even size kernels), with a best case 2x speed improvement</p></li>
+</ul>
+<p>The expected performance increase in throughput is around 3.5x compared to the regular layers.</p>
+<p>Two limitations of this parallel implementation are that:</p>
+<ol class="arabic simple">
+<li><p>The order of the output spikes is not guaranteed. This issue also exists in regular layers, although with less variability.</p></li>
+<li><p>If a finite train of spikes is sent to the layer, it is not guaranteed that the last spike will be sent to the layer output. This is done to keep the implementation as simple and reliable as possible. Given issue (1), however, it is also not possible to predict what spike will be retained. When another spike is sent to the input of the layer, that should generate an output spike in the same data path, the retained spike will be ‘flushed’ out.</p></li>
+</ol>
+</section>
+<section id="layer-1">
+<h3><span class="section-number">3.5.2.2. </span>Layer 1<a class="headerlink" href="#layer-1" title="Permalink to this heading"></a></h3>
+<p>Layer 1 implements a partial parallelism in the data flow in order to improve throughput while limiting area utilization on chip.</p>
+<p>The parallelism is implemented to be fully transparent to the user.</p>
+<p>Layer 1 differs from the other (regular) layers with the following characteristics:</p>
+<ul class="simple">
+<li><p>2 kernel interfaces handling 1/2 of the kernel data each</p></li>
+<li><p>2 neuron updates at the same time when processing adjacent neuron addresses (best performance for even size kernels), with a best case 2x speed improvement</p></li>
+</ul>
+<p>The performance of this implementation still has to be characterized in the lab.</p>
+<p>Same as for layer 0, two limitations of this parallel implementation are that:</p>
+<ol class="arabic simple">
+<li><p>The order of the output spikes is not guaranteed. This issue also exists in regular layers, although with less variability.</p></li>
+<li><p>If a finite train of spikes is sent to the layer, it is not guaranteed that the last spike will be sent to the layer output. This is done to keep the implementation as simple and reliable as possible. Given issue (1), however, it is also not possible to predict what spike will be retained. When another spike is sent to the input of the layer, that should generate an output spike in the same data path, the retained spike will be ‘flushed’ out.</p></li>
+</ol>
+</section>
+</section>
+<section id="congestion-balancer-block">
+<span id="congestion-balancer"></span><h2><span class="section-number">3.5.3. </span>Congestion Balancer Block<a class="headerlink" href="#congestion-balancer-block" title="Permalink to this heading"></a></h2>
+<p>In Speck2e, each convolutional layer is equipped with a <em>congestion balancer</em> block at its data path input.</p>
+<p>The congestion balancer enables dropping of input spikes at any time when the convolutional core of the layer is busy processing previous data.
+Specifically, if a train of spikes are sent to the layer, a number of them will be accepted (via some buffering) and the convolution computation starts.
+If, for example, the kernel is very large and a new spike arrives while the layer input is busy, this new spike will be dropped. As soon as the layer is
+again available, a coming spike will be processed.</p>
+<p>This block is then able to adapt the spike input frequency to the convolution by capping it to the maximum that the layer can process.</p>
+<p>This block can be enabled via layer register <a class="reference internal" href="../registers/layer-config.html#rbits-ben"><span class="std std-ref">BEN</span></a>. When disabled, the block will let all spikes through.</p>
+</section>
+<section id="spike-decimator-block">
+<span id="decimator"></span><h2><span class="section-number">3.5.4. </span>Spike Decimator Block<a class="headerlink" href="#spike-decimator-block" title="Permalink to this heading"></a></h2>
+<p>In Speck2e, each convolutional layer is equipped with a <em>decimator</em> block at its data path output.</p>
+<p>The decimator block enables the user to reduce the spike rate at the output of a convolutional layer.</p>
+<p>This block can be enabled via layer register <a class="reference internal" href="../registers/layer-config.html#rbits-den"><span class="std std-ref">DEN</span></a>. When disabled, the block will let all spikes through.</p>
+<p>The spike rate can be reduced by setting register bits <a class="reference internal" href="../registers/layer-config.html#rbits-dint"><span class="std std-ref">DINT[2:0]</span></a>:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../registers/layer-config.html#rbits-dint"><span class="std std-ref">DINT[2:0]</span></a></p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>0b000</p></td>
+<td><p>1 spike passed every 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b001</p></td>
+<td><p>1 spike passed every 4</p></td>
+</tr>
+<tr class="row-even"><td><p>0b010</p></td>
+<td><p>1 spike passed every 8</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b011</p></td>
+<td><p>1 spike passed every 16</p></td>
+</tr>
+<tr class="row-even"><td><p>0b100</p></td>
+<td><p>1 spike passed every 32</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b101</p></td>
+<td><p>1 spike passed every 64</p></td>
+</tr>
+<tr class="row-even"><td><p>0b110</p></td>
+<td><p>1 spike passed every 128</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b111</p></td>
+<td><p>1 spike passed every 256</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dvs-filter.html" class="btn btn-neutral float-left" title="3.4. DVS Event Filter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="readout-layer.html" class="btn btn-neutral float-right" title="3.6. Readout Layer (Post Processing)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

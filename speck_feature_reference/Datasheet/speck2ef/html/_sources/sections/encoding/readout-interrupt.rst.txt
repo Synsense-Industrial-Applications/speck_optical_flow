@@ -1,0 +1,60 @@
+
+.. _readout-interrupt:
+
+Direct Readout Interrupts
+=========================
+
+The :ref:`Readout Layer<readout-layer>` of Speck2e can provide direct
+output data to 5 dedicated physical pins.
+
+These pins (INTERRUPT and READOUT1 to 4) are designed to provide a direct readout of the maximum spiking class (with or without
+activity threshold).
+
+The readout pins are updated when a :ref:`readout clock pulse<readout-avg-clk>` is issued.
+
+Pin Description
+***************
+
+INTERRUPT
+---------
+
+This pin outputs '0' until the class of max activity exceeds the threshold defined by :ref:`READOUT12,13:TH[15:0]<rbits-TH>`.
+
+Alternatively, the threshold comparison can be overridden by setting bit :ref:`READOUT14:OVRTH<rbits-OVRTH>` to '1'. In this case,
+INTERRUPT becomes '1'.
+
+The INTERRUPT pin is updated whenever a :ref:`readout clock pulse<readout-avg-clk>` is issued. During the *readout clock* pulse,
+INTERRUPT becomes '0'. When the *readout clock* goes back to '0', the INTERRUPT pin is raised again only if
+:ref:`READOUT14:OVRTH<rbits-OVRTH>` = '1' or the max class activity is again above the selected threshold.
+
+READOUT1 to 4
+-------------
+
+READOUTx pins reflect the index of the class of max activity as described in :ref:`readout-output-modes`.
+
+These pins are activated in two cases:
+
+- A class has spiked more than the set threshold during the previous *readout clock* period (INTERRUPT is also raised when this condition is met).
+- The register bit :ref:`READOUT14:OVRTH<rbits-OVRTH>` is set to '1' (override threshold).
+
+.. tip:: The 4 bits reflect the binary value of the most spiking class. As such, in an
+   application requiring only 4 classes, the CNN can be configured such that the four
+   output classes are encoded as class 1, 2, 4 and 8 when arriving at the readout layer.
+   In this condition, the 4 output pins READOUTx will each directly reflect one of the
+   classes of interest, and no decoder will be needed to interpret the chip output.
+
+Example use cases
+*****************
+
+Single class with threshold
+---------------------------
+
+In an application where a single class output is required (e.g., recognizing a single gesture using the DVS sensor),
+the user can set :ref:`OVRTH<rbits-OVRTH>` = '0', and provide a continuous slow clock to the readout layer.
+
+Whenever Speck recognizes the gesture, the single output class activity will increase over the
+selected threshold value.
+
+At this point, the INTERRUPT pin will be raised by Speck, and READOUT1 pin will go to '1'. As such,
+a simple application may just directly utilize READOUT1 to trigger an external activity, such as
+activating a relay, actuator or similar.

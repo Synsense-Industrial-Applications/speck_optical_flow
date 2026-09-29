@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.8. Router Configuration Signal Description &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.9. DVS Register Description" href="dvs.html" />
+    <link rel="prev" title="7.7. Router Register Description" href="router.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.8. Router Configuration Signal Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-signal-description">7.8.1. Detailed Signal Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lxdsty-layerx-dsty">7.8.1.1. LxDSTy (layerx_dsty)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lxdyen-lx-dsty-en">7.8.1.2. LxDyEN (lx_dsty_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lxply-lx-poolingy">7.8.1.3. LxPLy (lx_poolingy)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lxfnoy-lx-fnum-offsety">7.8.1.4. LxFNOy (lx_fnum_offsety)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lxmen-lx-mon-en">7.8.1.5. LxMEN (lx_mon_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lxmtag-lx-mon-tag">7.8.1.6. LxMTAG (lx_mon_tag)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.8. </span>Router Configuration Signal Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/router-config.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="router-configuration-signal-description">
+<span id="router-config-signals"></span><h1><span class="section-number">7.8. </span>Router Configuration Signal Description<a class="headerlink" href="#router-configuration-signal-description" title="Permalink to this heading"></a></h1>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Router Configuration Signal Overview</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Register Bits</p></td>
+<td><p>Register(s)</p></td>
+<td><p>Signal Name</p></td>
+<td><p>Short Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L0DST2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router0"><span class="std std-ref">ROUTER0[7:4]</span></a></p></td>
+<td><p>layer0_dst2</p></td>
+<td><p>Layer 0 destination 2 address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L0DST1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router0"><span class="std std-ref">ROUTER0[3:0]</span></a></p></td>
+<td><p>layer0_dst1</p></td>
+<td><p>Layer 0 destination 1 address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L1DST2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router1"><span class="std std-ref">ROUTER1[7:4]</span></a></p></td>
+<td><p>layer1_dst2</p></td>
+<td><p>Layer 1 destination 2 address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L1DST1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router1"><span class="std std-ref">ROUTER1[3:0]</span></a></p></td>
+<td><p>layer1_dst1</p></td>
+<td><p>Layer 1 destination 1 address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L2DST2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router2"><span class="std std-ref">ROUTER2[7:4]</span></a></p></td>
+<td><p>layer2_dst2</p></td>
+<td><p>Layer 2 destination 2 address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L2DST1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router2"><span class="std std-ref">ROUTER2[3:0]</span></a></p></td>
+<td><p>layer2_dst1</p></td>
+<td><p>Layer 2 destination 1 address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L3DST2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router3"><span class="std std-ref">ROUTER3[7:4]</span></a></p></td>
+<td><p>layer3_dst2</p></td>
+<td><p>Layer 3 destination 2 address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L3DST1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router3"><span class="std std-ref">ROUTER3[3:0]</span></a></p></td>
+<td><p>layer3_dst1</p></td>
+<td><p>Layer 3 destination 1 address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L4DST2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router4"><span class="std std-ref">ROUTER4[7:4]</span></a></p></td>
+<td><p>layer4_dst2</p></td>
+<td><p>Layer 4 destination 2 address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L4DST1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router4"><span class="std std-ref">ROUTER4[3:0]</span></a></p></td>
+<td><p>layer4_dst1</p></td>
+<td><p>Layer 4 destination 1 address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L5DST2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router5"><span class="std std-ref">ROUTER5[7:4]</span></a></p></td>
+<td><p>layer5_dst2</p></td>
+<td><p>Layer 5 destination 2 address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L5DST1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router5"><span class="std std-ref">ROUTER5[3:0]</span></a></p></td>
+<td><p>layer5_dst1</p></td>
+<td><p>Layer 5 destination 1 address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L6DST2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router6"><span class="std std-ref">ROUTER6[7:4]</span></a></p></td>
+<td><p>layer6_dst2</p></td>
+<td><p>Layer 6 destination 2 address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L6DST1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router6"><span class="std std-ref">ROUTER6[3:0]</span></a></p></td>
+<td><p>layer6_dst1</p></td>
+<td><p>Layer 6 destination 1 address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L7DST2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router7"><span class="std std-ref">ROUTER7[7:4]</span></a></p></td>
+<td><p>layer7_dst2</p></td>
+<td><p>Layer 7 destination 2 address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L7DST1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router7"><span class="std std-ref">ROUTER7[3:0]</span></a></p></td>
+<td><p>layer7_dst1</p></td>
+<td><p>Layer 7 destination 1 address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L8DST2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router8"><span class="std std-ref">ROUTER8[7:4]</span></a></p></td>
+<td><p>layer8_dst2</p></td>
+<td><p>Layer 8 destination 2 address.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdsty"><span class="std std-ref">L8DST1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router8"><span class="std std-ref">ROUTER8[3:0]</span></a></p></td>
+<td><p>layer8_dst1</p></td>
+<td><p>Layer 8 destination 1 address.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L3D2EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router9"><span class="std std-ref">ROUTER9[7]</span></a></p></td>
+<td><p>l3_dst2_en</p></td>
+<td><p>Layer 3 destination 2 enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L3D1EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router9"><span class="std std-ref">ROUTER9[6]</span></a></p></td>
+<td><p>l3_dst1_en</p></td>
+<td><p>Layer 3 destination 1 enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L2D2EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router9"><span class="std std-ref">ROUTER9[5]</span></a></p></td>
+<td><p>l2_dst2_en</p></td>
+<td><p>Layer 2 destination 2 enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L2D1EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router9"><span class="std std-ref">ROUTER9[4]</span></a></p></td>
+<td><p>l2_dst1_en</p></td>
+<td><p>Layer 2 destination 1 enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L1D2EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router9"><span class="std std-ref">ROUTER9[3]</span></a></p></td>
+<td><p>l1_dst2_en</p></td>
+<td><p>Layer 1 destination 2 enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L1D1EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router9"><span class="std std-ref">ROUTER9[2]</span></a></p></td>
+<td><p>l1_dst1_en</p></td>
+<td><p>Layer 1 destination 1 enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L0D2EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router9"><span class="std std-ref">ROUTER9[1]</span></a></p></td>
+<td><p>l0_dst2_en</p></td>
+<td><p>Layer 0 destination 2 enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L0D1EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router9"><span class="std std-ref">ROUTER9[0]</span></a></p></td>
+<td><p>l0_dst1_en</p></td>
+<td><p>Layer 0 destination 1 enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L7D2EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10[7]</span></a></p></td>
+<td><p>l7_dst2_en</p></td>
+<td><p>Layer 7 destination 2 enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L7D1EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10[6]</span></a></p></td>
+<td><p>l7_dst1_en</p></td>
+<td><p>Layer 7 destination 1 enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L6D2EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10[5]</span></a></p></td>
+<td><p>l6_dst2_en</p></td>
+<td><p>Layer 6 destination 2 enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L6D1EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10[4]</span></a></p></td>
+<td><p>l6_dst1_en</p></td>
+<td><p>Layer 6 destination 1 enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L5D2EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10[3]</span></a></p></td>
+<td><p>l5_dst2_en</p></td>
+<td><p>Layer 5 destination 2 enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L5D1EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10[2]</span></a></p></td>
+<td><p>l5_dst1_en</p></td>
+<td><p>Layer 5 destination 1 enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L4D2EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10[1]</span></a></p></td>
+<td><p>l4_dst2_en</p></td>
+<td><p>Layer 4 destination 2 enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L4D1EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10[0]</span></a></p></td>
+<td><p>l4_dst1_en</p></td>
+<td><p>Layer 4 destination 1 enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L8D2EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router11"><span class="std std-ref">ROUTER11[1]</span></a></p></td>
+<td><p>l8_dst2_en</p></td>
+<td><p>Layer 8 destination 2 enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxdyen"><span class="std std-ref">L8D1EN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router11"><span class="std std-ref">ROUTER11[0]</span></a></p></td>
+<td><p>l8_dst1_en</p></td>
+<td><p>Layer 8 destination 1 enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L0PL1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router12"><span class="std std-ref">ROUTER12[7:6]</span></a></p></td>
+<td><p>l0_pooling1</p></td>
+<td><p>Layer 0 pooling setting for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L0PL2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router12"><span class="std std-ref">ROUTER12[5:4]</span></a></p></td>
+<td><p>l0_pooling2</p></td>
+<td><p>Layer 0 pooling setting for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L0FNO1[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router12"><span class="std std-ref">ROUTER12[3:0]</span></a>,:ref:<cite>ROUTER13[7:2]&lt;reg-ROUTER13&gt;</cite></p></td>
+<td><p>l0_fnum_offset1</p></td>
+<td><p>Layer 0 feature number for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L0FNO2[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router13"><span class="std std-ref">ROUTER13[1:0]</span></a>,:ref:<cite>ROUTER14[7:0]&lt;reg-ROUTER14&gt;</cite></p></td>
+<td><p>l0_fnum_offset2</p></td>
+<td><p>Layer 0 feature number for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L1PL1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router15"><span class="std std-ref">ROUTER15[7:6]</span></a></p></td>
+<td><p>l1_pooling1</p></td>
+<td><p>Layer 1 pooling setting for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L1PL2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router15"><span class="std std-ref">ROUTER15[5:4]</span></a></p></td>
+<td><p>l1_pooling2</p></td>
+<td><p>Layer 1 pooling setting for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L1FNO1[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router15"><span class="std std-ref">ROUTER15[3:0]</span></a>,:ref:<cite>ROUTER16[7:2]&lt;reg-ROUTER16&gt;</cite></p></td>
+<td><p>l1_fnum_offset1</p></td>
+<td><p>Layer 1 feature number for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L1FNO2[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router16"><span class="std std-ref">ROUTER16[1:0]</span></a>,:ref:<cite>ROUTER15[7:0]&lt;reg-ROUTER15&gt;</cite></p></td>
+<td><p>l1_fnum_offset2</p></td>
+<td><p>Layer 1 feature number for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L2PL1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router18"><span class="std std-ref">ROUTER18[7:6]</span></a></p></td>
+<td><p>l2_pooling1</p></td>
+<td><p>Layer 2 pooling setting for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L2PL2</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router18"><span class="std std-ref">ROUTER18[5:4]</span></a></p></td>
+<td><p>l2_pooling2</p></td>
+<td><p>Layer 2 pooling setting for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L2FNO1[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router18"><span class="std std-ref">ROUTER18[3:0]</span></a>,:ref:<cite>ROUTER19[7:2]&lt;reg-ROUTER19&gt;</cite></p></td>
+<td><p>l2_fnum_offset1</p></td>
+<td><p>Layer 2 feature number for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L2FNO2[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router19"><span class="std std-ref">ROUTER19[1:0]</span></a>,:ref:<cite>ROUTER20[7:0]&lt;reg-ROUTER20&gt;</cite></p></td>
+<td><p>l2_fnum_offset2</p></td>
+<td><p>Layer 2 feature number for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L3PL1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router21"><span class="std std-ref">ROUTER21[7:6]</span></a></p></td>
+<td><p>l3_pooling1</p></td>
+<td><p>Layer 3 pooling setting for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L3PL3</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router21"><span class="std std-ref">ROUTER21[5:4]</span></a></p></td>
+<td><p>l3_pooling2</p></td>
+<td><p>Layer 3 pooling setting for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L3FNO1[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router21"><span class="std std-ref">ROUTER21[3:0]</span></a>,:ref:<cite>ROUTER22[7:2]&lt;reg-ROUTER22&gt;</cite></p></td>
+<td><p>l3_fnum_offset1</p></td>
+<td><p>Layer 3 feature number for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L3FNO2[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router22"><span class="std std-ref">ROUTER22[1:0]</span></a>,:ref:<cite>ROUTER23[7:0]&lt;reg-ROUTER23&gt;</cite></p></td>
+<td><p>l3_fnum_offset2</p></td>
+<td><p>Layer 3 feature number for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L4PL1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router24"><span class="std std-ref">ROUTER24[7:6]</span></a></p></td>
+<td><p>l4_pooling1</p></td>
+<td><p>Layer 4 pooling setting for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L4PL4</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router24"><span class="std std-ref">ROUTER24[5:4]</span></a></p></td>
+<td><p>l4_pooling2</p></td>
+<td><p>Layer 4 pooling setting for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L4FNO1[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router24"><span class="std std-ref">ROUTER24[3:0]</span></a>,:ref:<cite>ROUTER25[7:2]&lt;reg-ROUTER25&gt;</cite></p></td>
+<td><p>l4_fnum_offset1</p></td>
+<td><p>Layer 4 feature number for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L4FNO2[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router25"><span class="std std-ref">ROUTER25[1:0]</span></a>,:ref:<cite>ROUTER26[7:0]&lt;reg-ROUTER26&gt;</cite></p></td>
+<td><p>l4_fnum_offset2</p></td>
+<td><p>Layer 4 feature number for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L5PL1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router27"><span class="std std-ref">ROUTER27[7:6]</span></a></p></td>
+<td><p>l5_pooling1</p></td>
+<td><p>Layer 5 pooling setting for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L5PL5</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router27"><span class="std std-ref">ROUTER27[5:4]</span></a></p></td>
+<td><p>l5_pooling2</p></td>
+<td><p>Layer 5 pooling setting for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L5FNO1[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router27"><span class="std std-ref">ROUTER27[3:0]</span></a>,:ref:<cite>ROUTER28[7:2]&lt;reg-ROUTER28&gt;</cite></p></td>
+<td><p>l5_fnum_offset1</p></td>
+<td><p>Layer 5 feature number for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L5FNO2[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router28"><span class="std std-ref">ROUTER28[1:0]</span></a>,:ref:<cite>ROUTER29[7:0]&lt;reg-ROUTER29&gt;</cite></p></td>
+<td><p>l5_fnum_offset2</p></td>
+<td><p>Layer 5 feature number for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L6PL1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router30"><span class="std std-ref">ROUTER30[7:6]</span></a></p></td>
+<td><p>l6_pooling1</p></td>
+<td><p>Layer 6 pooling setting for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L6PL6</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router30"><span class="std std-ref">ROUTER30[5:4]</span></a></p></td>
+<td><p>l6_pooling2</p></td>
+<td><p>Layer 6 pooling setting for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L6FNO1[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router30"><span class="std std-ref">ROUTER30[3:0]</span></a>,:ref:<cite>ROUTER31[7:2]&lt;reg-ROUTER31&gt;</cite></p></td>
+<td><p>l6_fnum_offset1</p></td>
+<td><p>Layer 6 feature number for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L6FNO2[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router31"><span class="std std-ref">ROUTER31[1:0]</span></a>,:ref:<cite>ROUTER32[7:0]&lt;reg-ROUTER32&gt;</cite></p></td>
+<td><p>l6_fnum_offset2</p></td>
+<td><p>Layer 6 feature number for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L7PL1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router33"><span class="std std-ref">ROUTER33[7:6]</span></a></p></td>
+<td><p>l7_pooling1</p></td>
+<td><p>Layer 7 pooling setting for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L7PL7</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router33"><span class="std std-ref">ROUTER33[5:4]</span></a></p></td>
+<td><p>l7_pooling2</p></td>
+<td><p>Layer 7 pooling setting for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L7FNO1[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router33"><span class="std std-ref">ROUTER33[3:0]</span></a>,:ref:<cite>ROUTER34[7:2]&lt;reg-ROUTER34&gt;</cite></p></td>
+<td><p>l7_fnum_offset1</p></td>
+<td><p>Layer 7 feature number for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L7FNO2[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router34"><span class="std std-ref">ROUTER34[1:0]</span></a>,:ref:<cite>ROUTER35[7:0]&lt;reg-ROUTER35&gt;</cite></p></td>
+<td><p>l7_fnum_offset2</p></td>
+<td><p>Layer 7 feature number for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L8PL1</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router36"><span class="std std-ref">ROUTER36[7:6]</span></a></p></td>
+<td><p>l8_pooling1</p></td>
+<td><p>Layer 8 pooling setting for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxply"><span class="std std-ref">L8PL8</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router36"><span class="std std-ref">ROUTER36[5:4]</span></a></p></td>
+<td><p>l8_pooling2</p></td>
+<td><p>Layer 8 pooling setting for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L8FNO1[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router36"><span class="std std-ref">ROUTER36[3:0]</span></a>,:ref:<cite>ROUTER37[7:2]&lt;reg-ROUTER37&gt;</cite></p></td>
+<td><p>l8_fnum_offset1</p></td>
+<td><p>Layer 8 feature number for destination 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxfnoy"><span class="std std-ref">L8FNO2[9:0]</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router37"><span class="std std-ref">ROUTER37[1:0]</span></a>,:ref:<cite>ROUTER38[7:0]&lt;reg-ROUTER38&gt;</cite></p></td>
+<td><p>l8_fnum_offset2</p></td>
+<td><p>Layer 8 feature number for destination 2.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxmen"><span class="std std-ref">L7MEN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39[7]</span></a></p></td>
+<td><p>l7_mon_en</p></td>
+<td><p>Layer 7 monitor bus enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxmen"><span class="std std-ref">L6MEN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39[6]</span></a></p></td>
+<td><p>l6_mon_en</p></td>
+<td><p>Layer 6 monitor bus enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxmen"><span class="std std-ref">L5MEN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39[5]</span></a></p></td>
+<td><p>l5_mon_en</p></td>
+<td><p>Layer 5 monitor bus enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxmen"><span class="std std-ref">L4MEN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39[4]</span></a></p></td>
+<td><p>l4_mon_en</p></td>
+<td><p>Layer 4 monitor bus enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxmen"><span class="std std-ref">L3MEN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39[3]</span></a></p></td>
+<td><p>l3_mon_en</p></td>
+<td><p>Layer 3 monitor bus enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxmen"><span class="std std-ref">L2MEN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39[2]</span></a></p></td>
+<td><p>l2_mon_en</p></td>
+<td><p>Layer 2 monitor bus enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxmen"><span class="std std-ref">L1MEN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39[1]</span></a></p></td>
+<td><p>l1_mon_en</p></td>
+<td><p>Layer 1 monitor bus enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxmen"><span class="std std-ref">L0MEN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39[0]</span></a></p></td>
+<td><p>l0_mon_en</p></td>
+<td><p>Layer 0 monitor bus enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxmtag"><span class="std std-ref">L0MTAG</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router40"><span class="std std-ref">ROUTER40[7:4]</span></a></p></td>
+<td><p>l0_mon_tag</p></td>
+<td><p>Layer 0 monitor tag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxmen"><span class="std std-ref">L8MEN</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router40"><span class="std std-ref">ROUTER40[0]</span></a></p></td>
+<td><p>l8_mon_en</p></td>
+<td><p>Layer 8 monitor bus enable bit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxmtag"><span class="std std-ref">L2MTAG</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router41"><span class="std std-ref">ROUTER41[7:4]</span></a></p></td>
+<td><p>l2_mon_tag</p></td>
+<td><p>Layer 2 monitor tag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxmtag"><span class="std std-ref">L1MTAG</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router41"><span class="std std-ref">ROUTER41[3:0]</span></a></p></td>
+<td><p>l1_mon_tag</p></td>
+<td><p>Layer 1 monitor tag.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxmtag"><span class="std std-ref">L4MTAG</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router42"><span class="std std-ref">ROUTER42[7:4]</span></a></p></td>
+<td><p>l4_mon_tag</p></td>
+<td><p>Layer 4 monitor tag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxmtag"><span class="std std-ref">L3MTAG</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router42"><span class="std std-ref">ROUTER42[3:0]</span></a></p></td>
+<td><p>l3_mon_tag</p></td>
+<td><p>Layer 3 monitor tag.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxmtag"><span class="std std-ref">L6MTAG</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router43"><span class="std std-ref">ROUTER43[7:4]</span></a></p></td>
+<td><p>l6_mon_tag</p></td>
+<td><p>Layer 6 monitor tag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxmtag"><span class="std std-ref">L5MTAG</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router43"><span class="std std-ref">ROUTER43[3:0]</span></a></p></td>
+<td><p>l5_mon_tag</p></td>
+<td><p>Layer 5 monitor tag.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-lxmtag"><span class="std std-ref">L8MTAG</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router44"><span class="std std-ref">ROUTER44[7:4]</span></a></p></td>
+<td><p>l8_mon_tag</p></td>
+<td><p>Layer 8 monitor tag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-lxmtag"><span class="std std-ref">L7MTAG</span></a></p></td>
+<td><p><a class="reference internal" href="router-descriptions.html#reg-router44"><span class="std std-ref">ROUTER44[3:0]</span></a></p></td>
+<td><p>l7_mon_tag</p></td>
+<td><p>Layer 7 monitor tag.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="detailed-signal-description">
+<h2><span class="section-number">7.8.1. </span>Detailed Signal Description<a class="headerlink" href="#detailed-signal-description" title="Permalink to this heading"></a></h2>
+<section id="lxdsty-layerx-dsty">
+<span id="rbits-lxdsty"></span><h3><span class="section-number">7.8.1.1. </span>LxDSTy (layerx_dsty)<a class="headerlink" href="#lxdsty-layerx-dsty" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="router-descriptions.html#reg-router0"><span class="std std-ref">ROUTER0</span></a> to <a class="reference internal" href="router-descriptions.html#reg-router8"><span class="std std-ref">ROUTER8</span></a></p>
+<p>Layer x destination address for destination y, where:</p>
+<p>x = 0..8
+y = 1 or 2</p>
+<p>The address is composed of 4 bits:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Address</p></td>
+<td><p>Destination</p></td>
+</tr>
+<tr class="row-even"><td><p>0b0000:0b1000</p></td>
+<td><p>Layer 0 to 8</p></td>
+</tr>
+<tr class="row-odd"><td><p>0b1100</p></td>
+<td><p>Readout layer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lxdyen-lx-dsty-en">
+<span id="rbits-lxdyen"></span><h3><span class="section-number">7.8.1.2. </span>LxDyEN (lx_dsty_en)<a class="headerlink" href="#lxdyen-lx-dsty-en" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="router-descriptions.html#reg-router10"><span class="std std-ref">ROUTER10</span></a> to <a class="reference internal" href="router-descriptions.html#reg-router11"><span class="std std-ref">ROUTER11</span></a></p>
+<p>Layer x destination enable bit for destination y, where:</p>
+<p>x = 0..8
+y = 1 or 2</p>
+</section>
+<section id="lxply-lx-poolingy">
+<span id="rbits-lxply"></span><h3><span class="section-number">7.8.1.3. </span>LxPLy (lx_poolingy)<a class="headerlink" href="#lxply-lx-poolingy" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="router-descriptions.html#reg-router12"><span class="std std-ref">ROUTER12</span></a> to <a class="reference internal" href="router-descriptions.html#reg-router37"><span class="std std-ref">ROUTER37</span></a></p>
+<p>Layer x destination y pooling setting, where:</p>
+<p>x = 0..8
+y = 1 or 2</p>
+<p>Pooling for X and Y dimensions. Possible values are {0,1,2,3} mapping to {1,2,4,8}.</p>
+</section>
+<section id="lxfnoy-lx-fnum-offsety">
+<span id="rbits-lxfnoy"></span><h3><span class="section-number">7.8.1.4. </span>LxFNOy (lx_fnum_offsety)<a class="headerlink" href="#lxfnoy-lx-fnum-offsety" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="router-descriptions.html#reg-router12"><span class="std std-ref">ROUTER12</span></a> to <a class="reference internal" href="router-descriptions.html#reg-router36"><span class="std std-ref">ROUTER36</span></a></p>
+<p>Layer x destination y feature number offset setting, where:</p>
+<p>x = 0..8
+y = 1 or 2</p>
+<p>Destination y Feature Number Shift. Shift the feature number of features going to destination by N.
+It is important to configure this number correctly so that there is no overlap in feature space between inputs and outputs.
+When configuring take into account the feature space of each input for a layer and shift them so that
+they don’t overlap in the input of the destination layer.</p>
+</section>
+<section id="lxmen-lx-mon-en">
+<span id="rbits-lxmen"></span><h3><span class="section-number">7.8.1.5. </span>LxMEN (lx_mon_en)<a class="headerlink" href="#lxmen-lx-mon-en" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="router-descriptions.html#reg-router39"><span class="std std-ref">ROUTER39</span></a> and <a class="reference internal" href="router-descriptions.html#reg-router40"><span class="std std-ref">ROUTER40</span></a></p>
+<p>x = 0..8</p>
+<p>Layer x monitor bus enable bit. ‘1’: monitoring enabled for layer x, ‘0’: monitoring disabled for layer x.</p>
+</section>
+<section id="lxmtag-lx-mon-tag">
+<span id="rbits-lxmtag"></span><h3><span class="section-number">7.8.1.6. </span>LxMTAG (lx_mon_tag)<a class="headerlink" href="#lxmtag-lx-mon-tag" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="router-descriptions.html#reg-router40"><span class="std std-ref">ROUTER40</span></a> to <a class="reference internal" href="router-descriptions.html#reg-router44"><span class="std std-ref">ROUTER44</span></a></p>
+<p>x = 0..8</p>
+<p>Layer x monitor bus tag address. The 4 bits of the LxMTAG register are appended as MSBs to the layer output
+spike data before it is sent to the monitor bus (see <a class="reference internal" href="../encoding/monitor-bus.html#monitor-bus-encoding"><span class="std std-ref">Monitor Bus Encoding</span></a>).</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="router.html" class="btn btn-neutral float-left" title="7.7. Router Register Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dvs.html" class="btn btn-neutral float-right" title="7.9. DVS Register Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

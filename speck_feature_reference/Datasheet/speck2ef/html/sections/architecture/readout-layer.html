@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.6. Readout Layer (Post Processing) &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.7. Internal Slow Clock" href="slow-clock.html" />
+    <link rel="prev" title="3.5. Convolutional Layer" href="convolutional-layer.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">3. Chip Architecture</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="block-diagram.html">3.1. Top Level Block Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-overview.html">3.2. Speck2e Computational Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event-pre-processing.html">3.3. Event Pre-Processing Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-filter.html">3.4. DVS Event Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolutional-layer.html">3.5. Convolutional Layer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.6. Readout Layer (Post Processing)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#data-output-options">3.6.1. Data Output Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#readout-time-window">3.6.2. Readout time window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#post-processing-block-configuration">3.6.3. Post Processing Block Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adressing-modes">3.6.4. Adressing Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-output-modes">3.6.5. Data Output Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-neuron-selection">3.6.6. Output Neuron selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timing-configurations">3.6.7. Timing Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="slow-clock.html">3.7. Internal Slow Clock</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">3. </span>Chip Architecture</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.6. </span>Readout Layer (Post Processing)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/architecture/readout-layer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="readout-layer-post-processing">
+<span id="readout-layer"></span><h1><span class="section-number">3.6. </span>Readout Layer (Post Processing)<a class="headerlink" href="#readout-layer-post-processing" title="Permalink to this heading"></a></h1>
+<p>The main use of the post-processing block is to calculate the moving average
+over a time window for a maximum of 15 neurons, provide the maximum average
+of the 15 neurons and compare the value of the calculated moving averages
+against a <a class="reference internal" href="../registers/readout-config.html#rbits-th"><span class="std std-ref">specified threshold</span></a>.</p>
+<section id="data-output-options">
+<h2><span class="section-number">3.6.1. </span>Data Output Options<a class="headerlink" href="#data-output-options" title="Permalink to this heading"></a></h2>
+<p>In Speck2e, the Readout layer provides output data via the Output Serial Interface
+by sending output messages in the format described <a class="reference internal" href="#readout-output-modes"><span class="std std-ref">below</span></a> (depending on the selected configuration).
+In order to receive data on the output serial interface, <a class="reference internal" href="../registers/ii-config.html#rbits-p2ssel"><span class="std std-ref">ININT8:P2SSEL</span></a> has to be set to ‘1’.</p>
+<p>In addition, 5 pins of Speck2e are dedicated to the direct readout of the class of maximum
+activity (see <a class="reference internal" href="../encoding/readout-interrupt.html#readout-interrupt"><span class="std std-ref">Direct Readout Interrupts</span></a>).</p>
+<p>Finally, a number of read-only registers are available in the readout layer to provide readout at any time
+of the internal current evaluated values (max class index, selected class average, max class average, threshold compare).
+See <a class="reference internal" href="../registers/readout.html#readout-readonly-registers"><span class="std std-ref">Read-Only Register Description</span></a> for the detailed register addresses and mapping.</p>
+</section>
+<section id="readout-time-window">
+<span id="readout-avg-clk"></span><h2><span class="section-number">3.6.2. </span>Readout time window<a class="headerlink" href="#readout-time-window" title="Permalink to this heading"></a></h2>
+<p>The time window where the moving average is calculated
+is configurable according to the clock provided by the internal <em>slow clock</em>
+signal (see <a class="reference internal" href="slow-clock.html#slow-clock"><span class="std std-ref">Internal Slow Clock</span></a> and <a class="reference internal" href="../registers/ii-config.html#rbits-slwclk"><span class="std std-ref">Slow Clock Configuration</span></a>),
+and can have time windows of 1, 16 and 32 times the provided clock
+(see register bits <a class="reference internal" href="../registers/readout-config.html#rbits-ch1"><span class="std std-ref">CH1</span></a> and <a class="reference internal" href="../registers/readout-config.html#rbits-ch1632"><span class="std std-ref">CH1632</span></a>.
+The output data from the pre-processing block can be extracted by using
+different configuration modes. Moreover, some timing characteristics
+of the block and the addresing mode of the neurons are configured.
+The aforementioned will be described in the next subsections more in detail.</p>
+</section>
+<section id="post-processing-block-configuration">
+<h2><span class="section-number">3.6.3. </span>Post Processing Block Configuration<a class="headerlink" href="#post-processing-block-configuration" title="Permalink to this heading"></a></h2>
+<p>For the configuration settings of the Readout Layer (Post Processing),
+see <a class="reference internal" href="../registers/readout-config.html#readout-config-signals"><span class="std std-ref">Readout Layer Configuration Signal Description</span></a>.</p>
+<p>In the case of <em>output_mode_sel</em> and <em>average_sel</em>, these signals can be provided
+either by an internal register value (respectively <a class="reference internal" href="../registers/readout-config.html#rbits-avgsel"><span class="std std-ref">AVGSEL[3:0]</span></a>
+and <a class="reference internal" href="../registers/readout-config.html#rbits-omsel"><span class="std std-ref">OMSEL[1:0]</span></a>) or by providing a specific command to the Input
+Serial Interface (see <a class="reference internal" href="../encoding/input-serial-interface.html#ii-special-commands"><span class="std std-ref">ISI Special Commands</span></a>).</p>
+<p>A register bit <a class="reference internal" href="../registers/readout-config.html#rbits-inen"><span class="std std-ref">INEN</span></a> is used to set which origin to use (‘0’: ISI, ‘1’: registers).</p>
+<p>The advantage of using the ISI as input to set output mode and average class selection is to have an on-the-fly
+change of mode without having to write registers.</p>
+</section>
+<section id="adressing-modes">
+<h2><span class="section-number">3.6.4. </span>Adressing Modes<a class="headerlink" href="#adressing-modes" title="Permalink to this heading"></a></h2>
+<p>Four different addressing modes can be selected to assign input spikes to the Readout Layer
+to the 15 available output classes. The addressing mode is selected by setting
+the register bits <a class="reference internal" href="../registers/readout-config.html#rbits-rocs"><span class="std std-ref">ROCS[1:0] (readout_conf_sel)</span></a>.</p>
+<p>For the configuration settings, see <a class="reference internal" href="../registers/readout-config.html#rbits-rocs"><span class="std std-ref">Register Element ROCS[1:0]</span></a>.</p>
+</section>
+<section id="data-output-modes">
+<span id="readout-output-modes"></span><h2><span class="section-number">3.6.5. </span>Data Output Modes<a class="headerlink" href="#data-output-modes" title="Permalink to this heading"></a></h2>
+<p>The Chip internal signal <em>output_mode_sel[1:0]</em> is used to select the data output mode.</p>
+<p>There are 4 different modes where the output data are multiplexed.
+In the following table the different data output modes are described:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>output_mode_sel[1:0]</p></td>
+<td><p>data_out[20]</p></td>
+<td><p>data_out[19:16]</p></td>
+<td><p>data_out[15:0]</p></td>
+</tr>
+<tr class="row-even"><td><p>00</p></td>
+<td><p>data valid</p></td>
+<td><p>neuron index of max average</p></td>
+<td><p>power down (clock gating)</p></td>
+</tr>
+<tr class="row-odd"><td><p>01</p></td>
+<td><p>data valid</p></td>
+<td><p>neuron index of max average</p></td>
+<td><p>threshold compare output</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>data valid</p></td>
+<td><p>neuron index of max average</p></td>
+<td><p>average output of the selected neuron</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>max spiking neuron above threshold</p></td>
+<td><p>neuron index of max average</p></td>
+<td><p>average output of max spiking neuron</p></td>
+</tr>
+</tbody>
+</table>
+<p>If <em>output_mode_sel[1:0]</em> equals to ‘00’ then the <strong>clk_gated</strong> signal and the <strong>data_out[15:0]</strong> are equal to 0.</p>
+<p>If <em>output_mode_sel[1:0]</em> equals to ‘01’ then the <strong>data_out[15:0]</strong> consists of the data
+of the threshold comparison, the index of the maximum moving average neuron and the data
+valid signal. The threshold comparison data is the 16 bit value of the comparison of each
+neurons’ moving average with the threshold.</p>
+<p>If <em>output_mode_sel[1:0]</em> equals to ‘10’ then the <strong>data_out[15:0]</strong> consists of the moving average
+of the selected neuron, the index of the maximum moving average neuron and the data valid signal.
+The data valid signal is asserted after all the computations have finished in order to ensure
+correct sampling of the data.</p>
+<p>If <em>output_mode_sel[1:0]</em> equals to ‘11’ then the <strong>data_out[15:0]</strong> consists of the maximum
+average of the 15 neurons, the index of the maximum moving average neuron and the comparison
+output between the maximum moving average and the threshold.</p>
+</section>
+<section id="output-neuron-selection">
+<span id="readout-neuron-selection"></span><h2><span class="section-number">3.6.6. </span>Output Neuron selection<a class="headerlink" href="#output-neuron-selection" title="Permalink to this heading"></a></h2>
+<p>The internal signal <em>output_mode_sel</em> enable the selection of one of the 15 output neurons.
+The neuron selection is used when signals <em>output_mode_sel[1:0]</em> == ‘10’ (see previous section).</p>
+<p>Selected neuron # = average_sel[3:0]</p>
+</section>
+<section id="timing-configurations">
+<span id="readout-timing-config"></span><h2><span class="section-number">3.6.7. </span>Timing Configurations<a class="headerlink" href="#timing-configurations" title="Permalink to this heading"></a></h2>
+<p>For the relative registers, see <a class="reference internal" href="../registers/readout-config.html#readout-config-signals"><span class="std std-ref">Readout Layer Configuration Signal Description</span></a>.</p>
+<p>The pulse width of reset and the positive edge of the clock in the sync counter block
+can be configured by setting the values of <strong>conf_rst_blk[2:0]</strong> and <strong>conf_clk_blk[2:0]</strong>,
+respectively. The default value of <strong>conf_clk_blk[2:0]</strong> for each block is <strong>001</strong>.
+By increasing the value from <strong>001</strong> to <strong>111</strong> the clock positive edge delay from
+the time that the <strong>out_v</strong> is asserted, gets decreased, and by decreasing the value
+from <strong>001</strong> to <strong>000</strong> this delay gets increased. By setting different values to this
+signal, the timing windows for the addition of spikes is increased or decreased accordingly.</p>
+<p>The default value of <strong>conf_rst_blk[2:0]</strong> is <strong>111</strong>. By decreasing this value
+from <strong>111</strong> to <strong>100</strong>, the reset pulse for the sync counter block is increased.</p>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="convolutional-layer.html" class="btn btn-neutral float-left" title="3.5. Convolutional Layer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="slow-clock.html" class="btn btn-neutral float-right" title="3.7. Internal Slow Clock" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

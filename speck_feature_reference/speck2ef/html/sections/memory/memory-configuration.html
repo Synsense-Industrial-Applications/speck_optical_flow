@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8.1. Memory configuration &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="8.2. Layer Sizing Constraints" href="layer-sizing-constraints.html" />
+    <link rel="prev" title="8. Internal SRAM Memory" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">8. Internal SRAM Memory</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">8.1. Memory configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#memory-capacity-and-internal-addressing">8.1.1. Memory Capacity and Internal Addressing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#word-lengths">8.1.1.1. Word lengths</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#memory-layout">8.1.2. Memory Layout</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#neuron-memory">8.1.2.1. Neuron Memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example">8.1.2.2. Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-memory">8.1.2.3. Kernel Memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">8.1.2.4. Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#leak-memory">8.1.2.5. Leak Memory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">8.1.2.6. Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dvs-filter-memory">8.1.2.7. DVS Filter Memory</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="layer-sizing-constraints.html">8.2. Layer Sizing Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bist-access.html">8.3. Direct Memory Access Mode (BIST)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">8. </span>Internal SRAM Memory</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">8.1. </span>Memory configuration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/memory/memory-configuration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="memory-configuration">
+<span id="id1"></span><h1><span class="section-number">8.1. </span>Memory configuration<a class="headerlink" href="#memory-configuration" title="Permalink to this heading"></a></h1>
+<p>SRAM memory blocks are distributed across Speck2e in order to store Kernel/Leak/Neuron information
+of <a class="reference internal" href="../architecture/convolutional-layer.html#convolutional-layer"><span class="std std-ref">convolutional layers</span></a> as required for proper operation of the neuromorphic processor.</p>
+<p>In addition, an SRAM block is included in the <a class="reference internal" href="../architecture/dvs-filter.html#dvs-filter"><span class="std std-ref">DVS Event Filter</span></a> to store Counter information.</p>
+<section id="memory-capacity-and-internal-addressing">
+<h2><span class="section-number">8.1.1. </span>Memory Capacity and Internal Addressing<a class="headerlink" href="#memory-capacity-and-internal-addressing" title="Permalink to this heading"></a></h2>
+<p>The Speck2e processor is divided into 9 cores, each of which executes the function of a single CNN layer.
+The memory capacities of the cores are different, and restrict the implementation of larger layers
+to specific cores.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Layer Core</p></td>
+<td><p>Kernel memory entries (addr bits)</p></td>
+<td><p>Leak memory entries (addr bits)</p></td>
+<td><p>Neuron memory entries (addr bits)</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>16 Ki (14 bits)</p></td>
+<td><p>1 Ki (10 bits)</p></td>
+<td><p>64 Ki (16 bits)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>16 Ki (14 bits)</p></td>
+<td><p>1 Ki (10 bits)</p></td>
+<td><p>64 Ki (16 bits)</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>16 Ki (14 bits)</p></td>
+<td><p>1 Ki (10 bits)</p></td>
+<td><p>64 Ki (16 bits)</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>32 Ki (15 bits)</p></td>
+<td><p>1 Ki (10 bits)</p></td>
+<td><p>32 Ki (15 bits)</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>32 Ki (15 bits)</p></td>
+<td><p>1 Ki (10 bits)</p></td>
+<td><p>32 Ki (15 bits)</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>64 Ki (16 bits)</p></td>
+<td><p>1 Ki (10 bits)</p></td>
+<td><p>16 Ki (14 bits)</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>64 Ki (16 bits)</p></td>
+<td><p>1 Ki (10 bits)</p></td>
+<td><p>16 Ki (14 bits)</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>16 Ki (14 bits)</p></td>
+<td><p>1 Ki (10 bits)</p></td>
+<td><p>16 Ki (14 bits)</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>16 Ki (14 bits)</p></td>
+<td><p>1 Ki (10 bits)</p></td>
+<td><p>16 Ki (14 bits)</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>SRAM</p></td>
+<td><p>entries (addr bits)</p></td>
+</tr>
+<tr class="row-even"><td><p>DVS Filter</p></td>
+<td><p>16 ki (14 bits)</p></td>
+</tr>
+</tbody>
+</table>
+<section id="word-lengths">
+<h3><span class="section-number">8.1.1.1. </span>Word lengths<a class="headerlink" href="#word-lengths" title="Permalink to this heading"></a></h3>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Memory type</p></td>
+<td><p>Word length</p></td>
+</tr>
+<tr class="row-even"><td><p>Kernel</p></td>
+<td><p>8 bits</p></td>
+</tr>
+<tr class="row-odd"><td><p>Neuron</p></td>
+<td><p>16 bits</p></td>
+</tr>
+<tr class="row-even"><td><p>Leak</p></td>
+<td><p>16 bits</p></td>
+</tr>
+<tr class="row-odd"><td><p>Filter</p></td>
+<td><p>16 bits</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="memory-layout">
+<h2><span class="section-number">8.1.2. </span>Memory Layout<a class="headerlink" href="#memory-layout" title="Permalink to this heading"></a></h2>
+<p>All memory access is done by layer. The internal address format is dynamic and depends
+on the feature sizes and kernel dimensions of the layer being accessed.</p>
+<p>All binary expressions have the most significant bit on the left side.</p>
+<section id="neuron-memory">
+<h3><span class="section-number">8.1.2.1. </span>Neuron Memory<a class="headerlink" href="#neuron-memory" title="Permalink to this heading"></a></h3>
+<p>There are 16 bits available for adressing neuron memory per layer.
+The address format is</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>zero fill</p></td>
+<td><p>neuron y</p></td>
+<td><p>neuron x</p></td>
+<td><p>feature</p></td>
+</tr>
+</tbody>
+</table>
+<p>The bit field size is computed as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}[\text{neuron y}] &amp;= \lceil \log_2\left(f_y\right) \rceil \\
+[\text{neuron x}] &amp;= \lceil \log_2\left(f_x\right) \rceil \\
+[\text{feature}] &amp;= \lceil \log_2\left(f\right) \rceil\end{split}\]</div>
+</section>
+<section id="example">
+<h3><span class="section-number">8.1.2.2. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\(f_x=16,f_y=16,f=128\)</span></p>
+<p>The neuron address of the neuron in feature map 63 with x address 3 and y address 11 is then</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>zero fill (1 bit)</p></td>
+<td><p>neuron y (4 bits)</p></td>
+<td><p>neuron x (4 bits)</p></td>
+<td><p>feature (7 bits)</p></td>
+</tr>
+<tr class="row-even"><td><p class="centered">
+<strong>0</strong></p></td>
+<td><p class="centered">
+<strong>1011</strong></p></td>
+<td><p class="centered">
+<strong>0011</strong></p></td>
+<td><p class="centered">
+<strong>0111111</strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="kernel-memory">
+<h3><span class="section-number">8.1.2.3. </span>Kernel Memory<a class="headerlink" href="#kernel-memory" title="Permalink to this heading"></a></h3>
+<p>There are maximally 16 bits available for addressing neuron memory per layer.</p>
+<p>The address format is:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>zero fill</p></td>
+<td><p>kernel entry</p></td>
+<td><p>output feature</p></td>
+<td><p>input feature</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Kernel entries are not addressed by their x,y position. Instead they are numbered
+using row major order. The kernel entry address of a kernel element with position <span class="math notranslate nohighlight">\((x,y)\)</span> becomes
+<span class="math notranslate nohighlight">\(k_yy+x\)</span></p>
+</div>
+<p>The bit field size is computed as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}[\text{kernel entry}] &amp;= \lceil \log_2\left(k_xk_y\right) \rceil \\
+[\text{output feature}] &amp;= \lceil \log_2\left(f\right) \rceil \\
+[\text{input feature}] &amp;= \lceil \log_2\left(c\right) \rceil\end{split}\]</div>
+</section>
+<section id="id2">
+<h3><span class="section-number">8.1.2.4. </span>Example<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\(k_x=k_y=3,f=128,c=64\)</span></p>
+<p>The address for kernel element 6 in the kernel applied to input feature 28 to generate output feature 71
+is then</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>kernel entry (4 bits)</p></td>
+<td><p>output feature (7 bits)</p></td>
+<td><p>input feature (6 bits)</p></td>
+</tr>
+<tr class="row-even"><td><p class="centered">
+<strong>110</strong></p></td>
+<td><p class="centered">
+<strong>1000111</strong></p></td>
+<td><p class="centered">
+<strong>011100</strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="leak-memory">
+<h3><span class="section-number">8.1.2.5. </span>Leak Memory<a class="headerlink" href="#leak-memory" title="Permalink to this heading"></a></h3>
+<p>There are 10 bits available for addressing leak memory per layer.</p>
+<p>The address format is:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>feature</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id3">
+<h3><span class="section-number">8.1.2.6. </span>Example<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>If the layer has 5 output features (see <a class="reference internal" href="../registers/layer-config.html#rbits-ofn"><span class="std std-ref">CONV5:OFN</span></a>),
+the leak memory contains 5 entries, simply going from address 0x000 to 0x005.</p>
+</section>
+<section id="dvs-filter-memory">
+<span id="filter-sram-rw"></span><h3><span class="section-number">8.1.2.7. </span>DVS Filter Memory<a class="headerlink" href="#dvs-filter-memory" title="Permalink to this heading"></a></h3>
+<p>There are 14 bits available for addressing the DVS Filter memory.</p>
+<p>The address format is:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Y (7 bits)</p></td>
+<td><p>X (7 bits)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="8. Internal SRAM Memory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="layer-sizing-constraints.html" class="btn btn-neutral float-right" title="8.2. Layer Sizing Constraints" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

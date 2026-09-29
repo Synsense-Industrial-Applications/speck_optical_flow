@@ -1,0 +1,19 @@
+#####################
+samna.xyloA2TestBoard
+#####################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.xyloA2TestBoard
+   :members:
+   :show-inheritance:
+

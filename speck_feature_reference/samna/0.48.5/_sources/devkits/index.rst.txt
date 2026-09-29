@@ -1,0 +1,164 @@
+################
+Development Kits
+################
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+All the cameras and development kits supported by Samna can be opened via the device controller. The device controller
+provides the :code:`get_unopened_devices()` function which will return a list of :code:`DeviceInfo` objects that specify
+every supported device currently available to the system.
+
+The dev kit objects contain methods that let you access the device models of the SynSense devices present on the dev kit.
+The device models give you a way to interact with the chip and hook into the filter graph system.
+If you only want to work with models on the chip, you only need to interact with the device model.
+
+The dev kit object also includes methods to work with lower level firmware settings that may be tuned for performance
+reasons and any other peripherals present on the dev kit, such as power measurement. Not all development kits will have
+the same set of peripherals.
+
+**********************
+Connecting to a Device
+**********************
+
+Devices can be opened via the device controller as follows.
+
+.. code-block:: python
+   :linenos:
+
+   # Using the device controller we can retrieve a list of the supported devices
+   # currently connected to the system
+   devices = samna.device.get_unopened_devices()
+
+   # We can select a device based on the type of device, or serial number
+   # If we only have 1 device connected we can simply choose that one
+   if len(devices) == 0:
+       raise Exception("No devices found")
+
+   chosen_board = devices[0]
+
+   # open the board
+   board = samna.device.open_device(chosen_board)
+
+It is assumed the ``board`` is obtained in below scripts.
+
+**********************************
+Common Methods of Development Kits
+**********************************
+
+================================
+Sink and Source Node of the Chip 
+================================
+
+Samna provides consistent methods to read and write from/to the chip, 
+please check :ref:`Event Handling with Filter Graphs`.
+
+=========
+Timestamp 
+=========
+
+All development kits include an embedded high-precision stopwatch with microsecond-level resolution.
+
+.. note::
+   The enabling or disabling of the stopwatch solely determines whether the internal timestamp increments or not.
+
+- Output Events
+
+  Events that include a timestamp attribute record the precise time at which the event arrives at the FPGA.
+
+  The timestamp reflects the value of the internal stopwatch counter at the moment the event is captured. 
+  Even if the stopwatch is disabled and the timestamp is not reset, the output events will have a non-zero timestamp.
+
+- Input Events
+ 
+  The FPGA schedules and dispatches events to the chip with hardware-triggered precision. 
+  When the :class:`~samna.unifirm.timestamp.StopWatch` module is enabled, 
+  the FPGA will **ONLY** forward events that have a ``timestamp`` attribute and for which the timestamp value is less than 
+  or equal to the internal clock of the FPGA stopwatch module. 
+  Events with a timestamp greater than the internal clock of the FPGA 
+  will be blocked until the internal clock surpasses the timestamp value. 
+
+  Once an event has a timestamp larger than the internal timestamp and is blocked by the FPGA, all subsequent events will be blocked, 
+  even those with a timestamp less than or equal to the internal timestamp.
+
+  Even when the stopwatch is disabled, the FPGA will continue to block events whose timestamps are greater than the internal timestamp. 
+
+The :class:`~samna.unifirm.timestamp.StopWatch` controls the FPGA stopwatch block. Once started, 
+the internal clock of the FPGA stopwatch module starts ticking. It reset the timestamp to 0 on every call to 
+:attr:`~samna.unifirm.timestamp.StopWatch.start` with keyword ``reset=True``, which is the default value.
+
+The timestamp is stored in a ``uint32_t`` type, causing it to overflow approximately every 71.58 minutes. 
+To reset the timestamp, one can use :attr:`~samna.unifirm.timestamp.StopWatch.reset`.
+
+.. code-block:: python
+   :linenos:
+
+   # get the stop watch 
+   sw = board.get_stop_watch()
+
+   # start the stop watch
+   sw.start() 
+
+   # reset the internal clock of the FPGA stopwatch module
+   sw.reset()
+
+   # stop the stop watch
+   sw.stop()
+
+=================
+Power measurement 
+=================
+
+Samna offers a unified interface for accurately measuring the power consumption 
+of the SynSense chip with an accuracy of :math:`\pm 50\mu A`.
+The measurement is defined by the :class:`~samna.unifirm.modules.events.PowerMeasurement` event in Watt. 
+The :attr:`samna.unifirm.modules.events.PowerMeasurement.channel` attribute represents the power trace for this measurement. 
+It should be noted that this attribute varies across different development kits, 
+please refer to the specific development kit page for details.
+
+The :class:`~samna.unifirm.modules.events.PowerMeasurement` also support ``timestamp``, 
+if you want to have it, please check :ref:`Timestamp` for more details.
+
+If the desired measurement frequency is not natively supported by the power measurement circuits,
+resampling with a filter may be necessary. This should be considered when performing continuous power measurements.
+Specifically, if the measurement is active for a long time before and after the period of interest,
+the filtering can cause distortion: samples at the start of the period may appear lower than they actually are,
+and samples after the period may appear higher.
+
+.. code-block:: python
+   :linenos:
+
+   import time
+
+   # get the handle to the power monitor
+   power_monitor = board.get_power_monitor()
+   
+   # create a sink node to receive the measurement
+   sink = samna.graph.sink_from(power_monitor.get_source_node())
+   
+   # Single-shot measurement
+   power_monitor.single_shot_power_measurement()
+   time.sleep(1)
+   print("Single-shot:", sink.get_events())
+   
+   # Continuous measurement (1 Hz)
+   power_monitor.start_auto_power_measurement(1.0)
+   time.sleep(5)
+   power_monitor.stop_auto_power_measurement()
+   print("Continuous:", sink.get_events())
+
+Refer to :ref:`Power Module<samna.boards.common.power>` for API details.
+
+
+**************************
+Supported Development Kits
+**************************
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   speckSeries/summary
+   dynapSeSeries/index
+   xyloSeries/index

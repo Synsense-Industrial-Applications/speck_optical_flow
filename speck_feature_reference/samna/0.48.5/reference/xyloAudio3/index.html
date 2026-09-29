@@ -1,0 +1,546 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>samna.xyloAudio3 &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="samna.xyloAudio3.configuration" href="configuration/index.html" />
+    <link rel="prev" title="samna.xyloA2TestBoard" href="../xyloA2TestBoard/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devkits/index.html">Development Kits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change log</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">samna</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../afe2/index.html">samna.afe2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../boards/index.html">samna.boards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera/index.html">samna.camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clustering/index.html">samna.clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../debugging/index.html">samna.debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../device/index.html">samna.device</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse1/index.html">samna.dynapse1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynapse2/index.html">samna.dynapse2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../events/index.html">samna.events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../flasher/index.html">samna.flasher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../fxtree/index.html">samna.fxtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/index.html">samna.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../iris/index.html">samna.iris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jit/index.html">samna.jit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2e/index.html">samna.speck2e</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2eTestBoard/index.html">samna.speck2eTestBoard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2f/index.html">samna.speck2f</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../speck2fBoards/index.html">samna.speck2fBoards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../specksim/index.html">samna.specksim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testingModule/index.html">samna.testingModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ui/index.html">samna.ui</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../unifirm/index.html">samna.unifirm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../util/index.html">samna.util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloA2TestBoard/index.html">samna.xyloA2TestBoard</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="index.html#">samna.xyloAudio3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#module-samna.xyloAudio3">Module content</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloCore2/index.html">samna.xyloCore2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImu/index.html">samna.xyloImu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../xyloImuBoards/index.html">samna.xyloImuBoards</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#module-samna">Module content</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">samna</a></li>
+      <li class="breadcrumb-item active">samna.xyloAudio3</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/reference/xyloAudio3/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="samna-xyloaudio3">
+<h1>samna.xyloAudio3<a class="headerlink" href="index.html#samna-xyloaudio3" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="index.html#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="configuration/index.html">samna.xyloAudio3.configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event/index.html">samna.xyloAudio3.event</a></li>
+</ul>
+</div>
+</section>
+<section id="module-samna.xyloAudio3">
+<span id="module-content"></span><h2>Module content<a class="headerlink" href="index.html#module-samna.xyloAudio3" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.InputSource">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.</span></span><span class="sig-name descname"><span class="pre">InputSource</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.InputSource" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>AnalogMicrophone</p>
+<p>DigitalMicrophone</p>
+<p>SpikeEvents</p>
+<p>AdcEvents</p>
+<p>PdmEvents</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.InputSource.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.InputSource.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.MeasurementChannels">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.</span></span><span class="sig-name descname"><span class="pre">MeasurementChannels</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.MeasurementChannels" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>Io</p>
+<p>AnalogLogic</p>
+<p>DigitalLogic</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.MeasurementChannels.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.MeasurementChannels.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.OperationMode">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.</span></span><span class="sig-name descname"><span class="pre">OperationMode</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.OperationMode" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>Members:</p>
+<p>Manual</p>
+<p>AcceleratedTime</p>
+<p>RealTime</p>
+<p>Recording</p>
+<p>DirectOutput</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.OperationMode.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.OperationMode.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.PowerModule">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.</span></span><span class="sig-name descname"><span class="pre">PowerModule</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.PowerModule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The PowerModule provides access to the ADCs used for power measurements.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.PowerModule.get_analog_adc">
+<span class="sig-name descname"><span class="pre">get_analog_adc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.PowerModule" title="samna.xyloAudio3.PowerModule"><span class="pre">samna.xyloAudio3.PowerModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.unifirm.adc.ina229.Ina229</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.PowerModule.get_analog_adc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.PowerModule.get_digital_adc">
+<span class="sig-name descname"><span class="pre">get_digital_adc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.PowerModule" title="samna.xyloAudio3.PowerModule"><span class="pre">samna.xyloAudio3.PowerModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.unifirm.adc.ina229.Ina229</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.PowerModule.get_digital_adc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.PowerModule.get_io_adc">
+<span class="sig-name descname"><span class="pre">get_io_adc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.PowerModule" title="samna.xyloAudio3.PowerModule"><span class="pre">samna.xyloAudio3.PowerModule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.unifirm.adc.ina229.Ina229</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.PowerModule.get_io_adc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.</span></span><span class="sig-name descname"><span class="pre">XyloAudio3TestBoard</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_object</span></code></p>
+<p>The XyloAudio3TestBoard class provides access to all the hardware features of the XyloAudio 3 test board.</p>
+<p>This composite object aggregates different modules and interfaces available on the board, including power management,
+input/output controls, and firmware access. It also provides utility methods for debugging, board configuration,
+and interfacing with external modules.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_board_serial_number">
+<span class="sig-name descname"><span class="pre">get_board_serial_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_board_serial_number" title="Link to this definition"></a></dt>
+<dd><p>Get the serial number of the board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The serial number of the test board.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_firmware_versions">
+<span class="sig-name descname"><span class="pre">get_firmware_versions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../boards/common/index.html#samna.boards.common.FirmwareVersions" title="samna.boards.common.FirmwareVersions"><span class="pre">samna.boards.common.FirmwareVersions</span></a></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_firmware_versions" title="Link to this definition"></a></dt>
+<dd><p>Retrieve the Fxtree and Unifirm firmware versions installed on this board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the Fxtree and Unifirm firmware versions.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../boards/common/index.html#samna.boards.common.FirmwareVersions" title="samna.boards.common.FirmwareVersions"><code class="xref py py-class docutils literal notranslate"><span class="pre">FirmwareVersions</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_io_control_module">
+<span class="sig-name descname"><span class="pre">get_io_control_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../unifirm/modules/ioControl/index.html#samna.unifirm.modules.ioControl.IoControlModule" title="samna.unifirm.modules.ioControl.IoControlModule"><span class="pre">samna.unifirm.modules.ioControl.IoControlModule</span></a></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_io_control_module" title="Link to this definition"></a></dt>
+<dd><p>Get the unifirm module to control I/O pins. For debug purposes.)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_io_module">
+<span class="sig-name descname"><span class="pre">get_io_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.xyloAudio3.UnifirmModule</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_io_module" title="Link to this definition"></a></dt>
+<dd><p>Get the unifirm I/O module of the board. For debug purposes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.xyloAudio3.XyloModel</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_model" title="Link to this definition"></a></dt>
+<dd><p>Get the XyloModel on this board.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The XyloModel instance for this board.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">XyloModel</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_model_sink_node">
+<span class="sig-name descname"><span class="pre">get_model_sink_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.DeviceSinkNode_xylo_audio3_event_input_event</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_model_sink_node" title="Link to this definition"></a></dt>
+<dd><p>Get the model sink node.</p>
+<p>This is a convenience function to access the node that consumes model data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_model_source_node">
+<span class="sig-name descname"><span class="pre">get_model_source_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">samna.DeviceSourceNode_xylo_audio3_event_output_event</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_model_source_node" title="Link to this definition"></a></dt>
+<dd><p>Get the model source node.</p>
+<p>This is a convenience function to access the node that produces model data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_power_module">
+<span class="sig-name descname"><span class="pre">get_power_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="index.html#samna.xyloAudio3.PowerModule" title="samna.xyloAudio3.PowerModule"><span class="pre">samna.xyloAudio3.PowerModule</span></a></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_power_module" title="Link to this definition"></a></dt>
+<dd><p>Get the PowerModule object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A PowerModule instance to control power supply and track power consumption.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="index.html#samna.xyloAudio3.PowerModule" title="samna.xyloAudio3.PowerModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerModule</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_power_monitor">
+<span class="sig-name descname"><span class="pre">get_power_monitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../boards/common/power/index.html#samna.boards.common.power.PowerMonitor" title="samna.boards.common.power.PowerMonitor"><span class="pre">samna.boards.common.power.PowerMonitor</span></a></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_power_monitor" title="Link to this definition"></a></dt>
+<dd><p>Get the PowerMonitor object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A PowerMonitor instance to handle power measurements.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">PowerMonitor</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.get_stop_watch">
+<span class="sig-name descname"><span class="pre">get_stop_watch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../unifirm/timestamp/index.html#samna.unifirm.timestamp.StopWatch" title="samna.unifirm.timestamp.StopWatch"><span class="pre">samna.unifirm.timestamp.StopWatch</span></a></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.get_stop_watch" title="Link to this definition"></a></dt>
+<dd><p>Get the stopwatch object for event timestamping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A stopwatch for generating timestamps.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../unifirm/timestamp/index.html#samna.unifirm.timestamp.StopWatch" title="samna.unifirm.timestamp.StopWatch"><code class="xref py py-class docutils literal notranslate"><span class="pre">StopWatch</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.make_unifirm_hook">
+<span class="sig-name descname"><span class="pre">make_unifirm_hook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">unifirm::UnifirmHook</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.make_unifirm_hook" title="Link to this definition"></a></dt>
+<dd><p>Create and configure a unifirm hook instance to monitor packet traffic on the board.</p>
+<p>This function sets up a hook that taps into the unifirm module’s packet flow for debugging purposes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoard.reset_board_soft">
+<span class="sig-name descname"><span class="pre">reset_board_soft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard" title="samna.xyloAudio3.XyloAudio3TestBoard"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaultConfig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig" title="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.reset_board_soft" title="Link to this definition"></a></dt>
+<dd><p>Soft reset the FPGA and its peripherals.</p>
+<p>This function resets the FPGA and reinitializes the connected peripherals. Optionally, a custom default
+configuration can be provided to replace the standard configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>defaultConfig</strong> (<em>Optional</em><em>[</em><em>XyloAudio3DefaultConfig</em><em>]</em>) – A custom default configuration to apply after reset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.</span></span><span class="sig-name descname"><span class="pre">XyloAudio3TestBoardDefaultConfig</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultConfigBase</span></code></p>
+<p>Default configuration for XyloAudio 3 board. Used as optional argument for</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../device/index.html#samna.device.open_device" title="samna.device.open_device"><code class="xref py py-meth docutils literal notranslate"><span class="pre">samna.device.open_device()</span></code></a></p></li>
+<li><p><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoard.reset_board_soft" title="samna.xyloAudio3.XyloAudio3TestBoard.reset_board_soft"><code class="xref py py-class docutils literal notranslate"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoard.reset_board_soft</span></code></a>.</p></li>
+</ul>
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.communication_check_timeout">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">communication_check_timeout</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.communication_check_timeout" title="Link to this definition"></a></dt>
+<dd><p>Timeout for communication check in seconds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.from_json">
+<span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig" title="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.from_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.main_clock_frequency">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">main_clock_frequency</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.main_clock_frequency" title="Link to this definition"></a></dt>
+<dd><p>Main clock frequency in Hz.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.pdm_clock_frequency">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pdm_clock_frequency</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.pdm_clock_frequency" title="Link to this definition"></a></dt>
+<dd><p>PDM clock frequency in Hz.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.sadc_clock_divider">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sadc_clock_divider</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.sadc_clock_divider" title="Link to this definition"></a></dt>
+<dd><p>SADC clock divider in relation to the main clock.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.saer_clock_divider">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">saer_clock_divider</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.saer_clock_divider" title="Link to this definition"></a></dt>
+<dd><p>SAER clock divider in relation to the main clock.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.skip_communication_check">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">skip_communication_check</span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.skip_communication_check" title="Link to this definition"></a></dt>
+<dd><p>Do not check the communication to XyloAudio 3 on startup.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig" title="samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig"><span class="pre">samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.XyloAudio3TestBoardDefaultConfig.to_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.xyloAudio3.validate_configuration">
+<span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.</span></span><span class="sig-name descname"><span class="pre">validate_configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration" title="samna.xyloAudio3.configuration.XyloConfiguration"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.validate_configuration" title="Link to this definition"></a></dt>
+<dd><p>Validate the given configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">xyloAudio3.configuration.XyloConfiguration</span></code>) – The configuration to validate.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A pair of the validation result and the analysis string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.xyloAudio3.xylo_configuration_to_event">
+<span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.</span></span><span class="sig-name descname"><span class="pre">xylo_configuration_to_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration" title="samna.xyloAudio3.configuration.XyloConfiguration"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.Spike" title="samna.xyloAudio3.event.Spike"><span class="pre">samna.xyloAudio3.event.Spike</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.AfeSample" title="samna.xyloAudio3.event.AfeSample"><span class="pre">samna.xyloAudio3.event.AfeSample</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.WriteRegisterValue" title="samna.xyloAudio3.event.WriteRegisterValue"><span class="pre">samna.xyloAudio3.event.WriteRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.ReadRegisterValue" title="samna.xyloAudio3.event.ReadRegisterValue"><span class="pre">samna.xyloAudio3.event.ReadRegisterValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.WriteMemoryValue" title="samna.xyloAudio3.event.WriteMemoryValue"><span class="pre">samna.xyloAudio3.event.WriteMemoryValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.ReadMemoryValue" title="samna.xyloAudio3.event.ReadMemoryValue"><span class="pre">samna.xyloAudio3.event.ReadMemoryValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.ReadMembranePotential" title="samna.xyloAudio3.event.ReadMembranePotential"><span class="pre">samna.xyloAudio3.event.ReadMembranePotential</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.ReadSynapticCurrent" title="samna.xyloAudio3.event.ReadSynapticCurrent"><span class="pre">samna.xyloAudio3.event.ReadSynapticCurrent</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.ReadHiddenSynapticCurrent2" title="samna.xyloAudio3.event.ReadHiddenSynapticCurrent2"><span class="pre">samna.xyloAudio3.event.ReadHiddenSynapticCurrent2</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.ReadHiddenSpikeCount" title="samna.xyloAudio3.event.ReadHiddenSpikeCount"><span class="pre">samna.xyloAudio3.event.ReadHiddenSpikeCount</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.ReadDirectOutputValue" title="samna.xyloAudio3.event.ReadDirectOutputValue"><span class="pre">samna.xyloAudio3.event.ReadDirectOutputValue</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.ReadVersion" title="samna.xyloAudio3.event.ReadVersion"><span class="pre">samna.xyloAudio3.event.ReadVersion</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.TriggerProcessing" title="samna.xyloAudio3.event.TriggerProcessing"><span class="pre">samna.xyloAudio3.event.TriggerProcessing</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="event/index.html#samna.xyloAudio3.event.TriggerReadout" title="samna.xyloAudio3.event.TriggerReadout"><span class="pre">samna.xyloAudio3.event.TriggerReadout</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.xylo_configuration_to_event" title="Link to this definition"></a></dt>
+<dd><p>Get the events for the given Xylo configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">xyloAudio3.configuration.XyloConfiguration</span></code>) – The configuration to turn into events.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of events.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="samna.xyloAudio3.xylo_configuration_to_i2c_bytes">
+<span class="sig-prename descclassname"><span class="pre">samna.xyloAudio3.</span></span><span class="sig-name descname"><span class="pre">xylo_configuration_to_i2c_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration" title="samna.xyloAudio3.configuration.XyloConfiguration"><span class="pre">samna.xyloAudio3.configuration.XyloConfiguration</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="index.html#samna.xyloAudio3.xylo_configuration_to_i2c_bytes" title="Link to this definition"></a></dt>
+<dd><p>Get the I2C byte stream for the given Xylo configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<a class="reference internal" href="configuration/index.html#samna.xyloAudio3.configuration.XyloConfiguration" title="samna.xyloAudio3.configuration.XyloConfiguration"><code class="xref py py-class docutils literal notranslate"><span class="pre">XyloConfiguration</span></code></a>) – The configuration to turn into I2C byte stream.</p></li>
+<li><p><strong>taddr_bits</strong> (<em>int</em>) – value of the two variable bits in TADDR.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>byte stream to emit on I2C.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../xyloA2TestBoard/index.html" class="btn btn-neutral float-left" title="samna.xyloA2TestBoard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration/index.html" class="btn btn-neutral float-right" title="samna.xyloAudio3.configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

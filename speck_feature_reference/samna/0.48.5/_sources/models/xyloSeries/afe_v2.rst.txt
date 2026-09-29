@@ -1,0 +1,13 @@
+######
+Afe V2
+######
+
+AFE is a configurable dynamic auditory sensor which converts audio input into spikes.
+
+**************
+Api reference:
+**************
+
+* Model: :ref:`samna.afe2`
+* Event: :ref:`samna.afe2.event`
+* Configuration: :ref:`samna.afe2.configuration` 

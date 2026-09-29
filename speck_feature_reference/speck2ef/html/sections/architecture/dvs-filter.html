@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3.4. DVS Event Filter &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.5. Convolutional Layer" href="convolutional-layer.html" />
+    <link rel="prev" title="3.3. Event Pre-Processing Layer" href="event-pre-processing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">3. Chip Architecture</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="block-diagram.html">3.1. Top Level Block Diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-overview.html">3.2. Speck2e Computational Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="event-pre-processing.html">3.3. Event Pre-Processing Layer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3.4. DVS Event Filter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#filter-operation">3.4.1. Filter Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#monitor-bus">3.4.2. Monitor bus</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#monitor-output-format">3.4.2.1. Monitor Output Format</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">3.4.3. Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#filter-window-size">3.4.3.1. Filter window size</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filter-delta-threshold">3.4.3.2. Filter Delta/Threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#low-pass-mode">3.4.3.3. Low-Pass mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#sram-read-write-operations">3.4.4. SRAM Read/Write Operations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="convolutional-layer.html">3.5. Convolutional Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-layer.html">3.6. Readout Layer (Post Processing)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slow-clock.html">3.7. Internal Slow Clock</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">3. </span>Chip Architecture</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3.4. </span>DVS Event Filter</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/architecture/dvs-filter.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dvs-event-filter">
+<span id="dvs-filter"></span><h1><span class="section-number">3.4. </span>DVS Event Filter<a class="headerlink" href="#dvs-event-filter" title="Permalink to this heading"></a></h1>
+<p>The DVS Filter Block is included in the DVS pre-processing layer of
+Speck2e in order to filter events depending on neighboring pixel activity.</p>
+<p>In general, an event at position (x,y) is forwarded by the filter when
+at least one pixel in the vicinity of (x,y) has spiked in a defined time
+window before the (x,y) event.</p>
+<section id="filter-operation">
+<span id="id1"></span><h2><span class="section-number">3.4.1. </span>Filter Operation<a class="headerlink" href="#filter-operation" title="Permalink to this heading"></a></h2>
+<p>The filter can be enabled by setting register bit <a class="reference internal" href="../registers/filter-config.html#rbits-hpfe"><span class="std std-ref">HPFE</span></a> to ‘1’.</p>
+<p>Whenever a pixel event arrives at the filter, the filter stores in its SRAM
+the time stamp of the event at that location.</p>
+<p>When a new pixel event arrives at the filter at location (x0,y0), the filter
+checks the <strong>area</strong> defined by register bits <a class="reference internal" href="../registers/filter-config.html#rbits-fksx"><span class="std std-ref">FKSX[2:0]</span></a>
+and <a class="reference internal" href="../registers/filter-config.html#rbits-fksy"><span class="std std-ref">FKSY[2:0]</span></a>, i.e. (x0±FKSX,y0±FKSY) to see if any event
+was recorded in that area in a number of clock cycles defined by register
+bits <a class="reference internal" href="../registers/filter-config.html#rbits-fdel"><span class="std std-ref">FDEL[15:0]</span></a>.</p>
+<p>The time stamps are recorded using a 16-bit loop counter. Each count is triggered
+by the internal <em>slow clock</em> (see <a class="reference internal" href="slow-clock.html#slow-clock"><span class="std std-ref">Internal Slow Clock</span></a> and <a class="reference internal" href="../registers/ii-config.html#rbits-slwclk"><span class="std std-ref">Slow Clock Configuration</span></a>).
+The input clock for the filter is activated by register bit <a class="reference internal" href="../registers/filter-config.html#rbits-fcke"><span class="std std-ref">FCKE</span></a>.</p>
+</section>
+<section id="monitor-bus">
+<h2><span class="section-number">3.4.2. </span>Monitor bus<a class="headerlink" href="#monitor-bus" title="Permalink to this heading"></a></h2>
+<p>The filter has a monitor bus output, which forwards all events produced in the filter
+<em>before</em> the final counter comparison, i.e., for each input event to the filter, and a filter
+size setting FKSX=’010’, FKSY=’001’, 5*3=15 messages will be forwarded by the filter to the
+monitor bus, irrespectively if any event would be forwarded at the filter output.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the input event is near the edge of the pixel field, the filter size will be clipped
+accordingly. Therefore, less locations will be evaluated by the filter, and less
+messages will be forwarded on the monitor bus.</p>
+</div>
+<p>The monitor bus can be activated via register bit <a class="reference internal" href="../registers/filter-config.html#rbits-fmoe"><span class="std std-ref">FMOE</span></a>, and a 4-bit
+tag defined by <a class="reference internal" href="../registers/filter-config.html#rbits-fmdst"><span class="std std-ref">FMDST[3:0]</span></a> is prepended to the monitor message as
+tag/address.</p>
+<section id="monitor-output-format">
+<span id="filter-mon-format"></span><h3><span class="section-number">3.4.2.1. </span>Monitor Output Format<a class="headerlink" href="#monitor-output-format" title="Permalink to this heading"></a></h3>
+<p>Each monitor message coming from the DVS Filter is split into three parts, due to
+the monitor bus bit-width.</p>
+<p>As shown in the monitor bus <a class="reference internal" href="../encoding/monitor-bus.html#monitor-encoding-table"><span class="std std-ref">encoding table</span></a>, the three
+parts have the following format:</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">DVS Filter Monitor bus message encoding</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p>Header</p></td>
+<td colspan="16"><p class="centered">
+<strong>Data</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Bits</p></td>
+<td><p>[25:16]</p></td>
+<td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+<td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Msg #1</p></td>
+<td><p>‘1101000110’</p></td>
+<td><p>0</p></td>
+<td><p>Pol</p></td>
+<td colspan="7"><p class="centered">
+<strong>Y[6:0]</strong></p></td>
+<td colspan="7"><p class="centered">
+<strong>X[6:0]</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Msg #2</p></td>
+<td><p>‘1101000100’</p></td>
+<td colspan="16"><p class="centered">
+<strong>Current Counter Value [15:0]</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Msg #3</p></td>
+<td><p>‘1101000101’</p></td>
+<td colspan="16"><p class="centered">
+<strong>Previous (Stored in SRAM) Counter Value [15:0]</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <em>order</em> of the monitor messages (#1, #2, #3) is <strong>not guaranteed</strong> due to the asynchronous
+nature of the internal logic. Necessary precautions should be therefore taken when analyzing
+the output message sequence.</p>
+</div>
+<section id="message-1">
+<h4><span class="section-number">3.4.2.1.1. </span>Message #1<a class="headerlink" href="#message-1" title="Permalink to this heading"></a></h4>
+<p>Returns the X/Y/Polarity information for the internally generated Counter update in memory.</p>
+<p>For a SRAM Read operation via <a class="reference internal" href="../encoding/input-serial-interface.html#c-p-d-ref-tables"><span class="std std-ref">Input Interface command</span></a>, this message will
+forward the SRAM read address (Y[6:0],X[6:0]) (the Polarity bit is a <em>don’t care</em> in this case).</p>
+</section>
+<section id="message-2">
+<h4><span class="section-number">3.4.2.1.2. </span>Message #2<a class="headerlink" href="#message-2" title="Permalink to this heading"></a></h4>
+<p>Returns the current Counter value of the original event received from the <a class="reference internal" href="event-pre-processing.html#event-pre-processing"><span class="std std-ref">Event Pre-Processing Layer</span></a>.</p>
+<p>For a SRAM Read operation, this message can be disregarded as a <em>don’t care</em>.</p>
+</section>
+<section id="message-3">
+<h4><span class="section-number">3.4.2.1.3. </span>Message #3<a class="headerlink" href="#message-3" title="Permalink to this heading"></a></h4>
+<p>Returns the previous Counter value at the location X/Y (from Message #1), i.e., the counter value stored
+in the SRAM.</p>
+<p>For a SRAM Read operation, this message will contain the data read from the given location (Y[6:0],X[6:0]).</p>
+</section>
+</section>
+</section>
+<section id="configuration">
+<h2><span class="section-number">3.4.3. </span>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<section id="filter-window-size">
+<h3><span class="section-number">3.4.3.1. </span>Filter window size<a class="headerlink" href="#filter-window-size" title="Permalink to this heading"></a></h3>
+<p>The filter window size can be configured using registers <a class="reference internal" href="../registers/filter-config.html#rbits-fksx"><span class="std std-ref">FKSX[2:0]</span></a> and
+<a class="reference internal" href="../registers/filter-config.html#rbits-fksy"><span class="std std-ref">FKSY[2:0]</span></a>, respectively in the X and Y directions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The filter window goes from x0-FKSX to x0+FKSX (and same for Y). I.e., the filter size
+can go from 1x1 pixel to 15x15 pixels.</p>
+</div>
+</section>
+<section id="filter-delta-threshold">
+<h3><span class="section-number">3.4.3.2. </span>Filter Delta/Threshold<a class="headerlink" href="#filter-delta-threshold" title="Permalink to this heading"></a></h3>
+<p>The filter time delta can be configured with register bits <a class="reference internal" href="../registers/filter-config.html#rbits-fdel"><span class="std std-ref">FDEL[15:0]</span></a>.</p>
+<p>This value is used to compare the current counter value with the value of the pixels neighboring
+the current spiking pixel. If any of the neighboring pixels has a value difference withing the
+delta value, the filter emits the current spike. Otherwise, the current spike is blocked.</p>
+</section>
+<section id="low-pass-mode">
+<span id="filter-low-pass-mode"></span><h3><span class="section-number">3.4.3.3. </span>Low-Pass mode<a class="headerlink" href="#low-pass-mode" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Low-Pass filter mode is available only in Speck2f.</p>
+</div>
+<p>In this mode, the filter works as a low-pass filter. This mode can be used to filter out 50/60 Hz
+light flickering noise produced by some lights such as fluorescent or LED lights that output
+a square wave with the frequency of the mains power supply.</p>
+<p>The mode can be enabled by setting register bit <a class="reference internal" href="../registers/filter-config.html#rbits-flpf"><span class="std std-ref">FLPF</span></a>.</p>
+</section>
+</section>
+<section id="sram-read-write-operations">
+<span id="filter-sram-rw"></span><h2><span class="section-number">3.4.4. </span>SRAM Read/Write Operations<a class="headerlink" href="#sram-read-write-operations" title="Permalink to this heading"></a></h2>
+<p>Similar to the other SRAMS, the DVS Filter SRAM can be read/written directly using the internal BIST interface.
+The memory can be written either using the external SPI Slave interface or the JTAG interface.</p>
+<p>Please refer to section <a class="reference internal" href="../memory/memory-configuration.html#filter-sram-rw"><span class="std std-ref">DVS Filter Memory</span></a> for the Filter SRAM memory mapping.</p>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="event-pre-processing.html" class="btn btn-neutral float-left" title="3.3. Event Pre-Processing Layer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="convolutional-layer.html" class="btn btn-neutral float-right" title="3.5. Convolutional Layer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

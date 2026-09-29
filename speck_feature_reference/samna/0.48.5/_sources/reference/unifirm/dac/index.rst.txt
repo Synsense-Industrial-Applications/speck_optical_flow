@@ -1,0 +1,20 @@
+#################
+samna.unifirm.dac
+#################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   dac7678/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm.dac
+   :members:
+   :show-inheritance:
+

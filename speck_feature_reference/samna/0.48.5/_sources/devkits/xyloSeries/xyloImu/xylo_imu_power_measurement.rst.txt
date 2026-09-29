@@ -1,0 +1,97 @@
+**************************
+Xylo-Imu Power Measurement
+**************************
+
+Xylo-IMU supports measuring power which includes Xylo-Core, IMU_IF and excludes MC3632.
+
+One thing to note is that closing memory access can save power consumption a lot, so we measure power after closing memory access.
+
+Here is an example of power measurement in which you press enter to start measurement and press enter again to stop, it bases on packages :
+::
+
+    - samna                 0.33.1
+    - numpy                 1.24.3
+
+You are encouraged to replace the network to a decent one and shake the board while measuring.
+
+.. code-block:: python
+
+    import samna
+    import numpy as np
+    import time
+
+    def initialize_board() :
+        dk = samna.device.open_device("XyloImuTestBoard:0")
+        model = dk.get_model()
+        buf = samna.graph.sink_from(dk.get_model_source_node())
+        source = samna.graph.source_to(dk.get_model_sink_node())
+
+        power = dk.get_power_monitor()
+        power_source = power.get_source_node()
+        power_sink = samna.graph.sink_from(power_source)
+        return dk, model, buf, source, power, power_sink
+
+    dk, model, buf, source, power, power_sink = initialize_board()
+
+    def apply_configuration():
+        dk.enable_manual_input_acceleration(False)  # Use sensor input instead of manual input
+        
+        xylo_config = samna.xyloImu.configuration.XyloConfiguration()
+        xylo_config.operation_mode = samna.xyloImu.OperationMode.RealTime
+
+        input_count = 16
+        hidden_count = 128
+        output_count = 16
+        xylo_config.input.weights = [[1] * hidden_count] * input_count
+        xylo_config.hidden.weights = [[1] * hidden_count] * hidden_count
+        hidden_neurons = [samna.xyloImu.configuration.HiddenNeuron()] * hidden_count
+        xylo_config.hidden.neurons = hidden_neurons
+        output_neurons = [samna.xyloImu.configuration.OutputNeuron()] * output_count
+        xylo_config.readout.neurons = output_neurons
+        xylo_config.readout.weights = [[1] * output_count] * hidden_count
+        
+        # Preparation to run in realtime mode with input interface opened.
+        xylo_config.debug.always_update_omp_stat = True
+        xylo_config.imu_if_input_enable = True
+        xylo_config.debug.imu_if_clk_enable = True
+        xylo_config.time_resolution_wrap = 0x61a80
+        xylo_config.debug.imu_if_clock_freq_div = 0x169
+        
+        # Open and config input interface of Xylo-IMU, you could customize the parameters.
+        xylo_config.input_interface.enable = True
+        xylo_config.input_interface.estimator_k_setting = 6
+        xylo_config.input_interface.select_iaf_output = True
+        xylo_config.input_interface.update_matrix_threshold = 255
+        xylo_config.input_interface.delay_threshold = 1
+        xylo_config.input_interface.bpf_bb_values = [6] * 15
+        xylo_config.input_interface.bpf_bwf_values = [8] * 15
+        xylo_config.input_interface.bpf_baf_values = [9] * 15
+        xylo_config.input_interface.bpf_a1_values = [-64700, -64458, -64330, -64138, -63884, -63566, -63169, -62743, -62238, -61672, -61045, -60357, -59611, -58805, -57941]
+        xylo_config.input_interface.bpf_a2_values = [31935] + [31754] * 14
+        xylo_config.input_interface.scale_values = [8]*15
+        xylo_config.input_interface.iaf_threshold_values = [0x000007d0] * 15
+        
+        dk.get_model().apply_configuration(xylo_config)
+        return xylo_config, input_count, hidden_count, output_count
+    xylo_config, input_count, hidden_count, output_count = apply_configuration()
+
+    model.close_ram_access()            # You have to close memory access to save power in a long run.
+
+    source.write([samna.xyloImu.event.TriggerProcessing()])     # Command chip to trigger infinitely.
+    print("Running infinitely...")
+
+    input("Press enter to start power measurement:")
+    power_sink.get_events()                     # Clear
+    power.start_auto_power_measurement(10)      # Measure 10 times every second.
+    start_measure_time = time.time()
+    print("Measuring...")
+
+    input("Press enter to stop power measurement:")
+    power_events = power_sink.get_events()
+    power_events = [event for event in power_events if isinstance(event, samna.unifirm.modules.events.PowerMeasurement)]
+
+    io_powers = np.array([event.value for event in power_events if event.channel == 0])
+    core_powers = np.array([event.value for event in power_events if event.channel == 1])
+    assert(len(io_powers) == len(core_powers))
+    print(f"Measurement duration: {time.time() - start_measure_time}s")
+    print(f"Total measure times: {len(io_powers)}, average io power: {io_powers.mean()}, average core power: {core_powers.mean()}")

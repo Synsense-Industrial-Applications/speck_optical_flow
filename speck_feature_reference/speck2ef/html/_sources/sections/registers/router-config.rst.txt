@@ -1,0 +1,191 @@
+.. _router-config-signals:
+
+Router Configuration Signal Description
+=======================================
+
+.. csv-table:: Router Configuration Signal Overview
+
+   "Register Bits",Register(s),"Signal Name","Short Description"
+   :ref:`L0DST2<rbits-LxDSTy>`,:ref:`ROUTER0[7:4]<reg-ROUTER0>`,layer0_dst2,"Layer 0 destination 2 address."
+   :ref:`L0DST1<rbits-LxDSTy>`,:ref:`ROUTER0[3:0]<reg-ROUTER0>`,layer0_dst1,"Layer 0 destination 1 address."
+   :ref:`L1DST2<rbits-LxDSTy>`,:ref:`ROUTER1[7:4]<reg-ROUTER1>`,layer1_dst2,"Layer 1 destination 2 address."
+   :ref:`L1DST1<rbits-LxDSTy>`,:ref:`ROUTER1[3:0]<reg-ROUTER1>`,layer1_dst1,"Layer 1 destination 1 address."
+   :ref:`L2DST2<rbits-LxDSTy>`,:ref:`ROUTER2[7:4]<reg-ROUTER2>`,layer2_dst2,"Layer 2 destination 2 address."
+   :ref:`L2DST1<rbits-LxDSTy>`,:ref:`ROUTER2[3:0]<reg-ROUTER2>`,layer2_dst1,"Layer 2 destination 1 address."
+   :ref:`L3DST2<rbits-LxDSTy>`,:ref:`ROUTER3[7:4]<reg-ROUTER3>`,layer3_dst2,"Layer 3 destination 2 address."
+   :ref:`L3DST1<rbits-LxDSTy>`,:ref:`ROUTER3[3:0]<reg-ROUTER3>`,layer3_dst1,"Layer 3 destination 1 address."
+   :ref:`L4DST2<rbits-LxDSTy>`,:ref:`ROUTER4[7:4]<reg-ROUTER4>`,layer4_dst2,"Layer 4 destination 2 address."
+   :ref:`L4DST1<rbits-LxDSTy>`,:ref:`ROUTER4[3:0]<reg-ROUTER4>`,layer4_dst1,"Layer 4 destination 1 address."
+   :ref:`L5DST2<rbits-LxDSTy>`,:ref:`ROUTER5[7:4]<reg-ROUTER5>`,layer5_dst2,"Layer 5 destination 2 address."
+   :ref:`L5DST1<rbits-LxDSTy>`,:ref:`ROUTER5[3:0]<reg-ROUTER5>`,layer5_dst1,"Layer 5 destination 1 address."
+   :ref:`L6DST2<rbits-LxDSTy>`,:ref:`ROUTER6[7:4]<reg-ROUTER6>`,layer6_dst2,"Layer 6 destination 2 address."
+   :ref:`L6DST1<rbits-LxDSTy>`,:ref:`ROUTER6[3:0]<reg-ROUTER6>`,layer6_dst1,"Layer 6 destination 1 address."
+   :ref:`L7DST2<rbits-LxDSTy>`,:ref:`ROUTER7[7:4]<reg-ROUTER7>`,layer7_dst2,"Layer 7 destination 2 address."
+   :ref:`L7DST1<rbits-LxDSTy>`,:ref:`ROUTER7[3:0]<reg-ROUTER7>`,layer7_dst1,"Layer 7 destination 1 address."
+   :ref:`L8DST2<rbits-LxDSTy>`,:ref:`ROUTER8[7:4]<reg-ROUTER8>`,layer8_dst2,"Layer 8 destination 2 address."
+   :ref:`L8DST1<rbits-LxDSTy>`,:ref:`ROUTER8[3:0]<reg-ROUTER8>`,layer8_dst1,"Layer 8 destination 1 address."
+   :ref:`L3D2EN<rbits-LxDyEN>`,:ref:`ROUTER9[7]<reg-ROUTER9>`,l3_dst2_en,"Layer 3 destination 2 enable bit."
+   :ref:`L3D1EN<rbits-LxDyEN>`,:ref:`ROUTER9[6]<reg-ROUTER9>`,l3_dst1_en,"Layer 3 destination 1 enable bit."
+   :ref:`L2D2EN<rbits-LxDyEN>`,:ref:`ROUTER9[5]<reg-ROUTER9>`,l2_dst2_en,"Layer 2 destination 2 enable bit."
+   :ref:`L2D1EN<rbits-LxDyEN>`,:ref:`ROUTER9[4]<reg-ROUTER9>`,l2_dst1_en,"Layer 2 destination 1 enable bit."
+   :ref:`L1D2EN<rbits-LxDyEN>`,:ref:`ROUTER9[3]<reg-ROUTER9>`,l1_dst2_en,"Layer 1 destination 2 enable bit."
+   :ref:`L1D1EN<rbits-LxDyEN>`,:ref:`ROUTER9[2]<reg-ROUTER9>`,l1_dst1_en,"Layer 1 destination 1 enable bit."
+   :ref:`L0D2EN<rbits-LxDyEN>`,:ref:`ROUTER9[1]<reg-ROUTER9>`,l0_dst2_en,"Layer 0 destination 2 enable bit."
+   :ref:`L0D1EN<rbits-LxDyEN>`,:ref:`ROUTER9[0]<reg-ROUTER9>`,l0_dst1_en,"Layer 0 destination 1 enable bit."
+   :ref:`L7D2EN<rbits-LxDyEN>`,:ref:`ROUTER10[7]<reg-ROUTER10>`,l7_dst2_en,"Layer 7 destination 2 enable bit."
+   :ref:`L7D1EN<rbits-LxDyEN>`,:ref:`ROUTER10[6]<reg-ROUTER10>`,l7_dst1_en,"Layer 7 destination 1 enable bit."
+   :ref:`L6D2EN<rbits-LxDyEN>`,:ref:`ROUTER10[5]<reg-ROUTER10>`,l6_dst2_en,"Layer 6 destination 2 enable bit."
+   :ref:`L6D1EN<rbits-LxDyEN>`,:ref:`ROUTER10[4]<reg-ROUTER10>`,l6_dst1_en,"Layer 6 destination 1 enable bit."
+   :ref:`L5D2EN<rbits-LxDyEN>`,:ref:`ROUTER10[3]<reg-ROUTER10>`,l5_dst2_en,"Layer 5 destination 2 enable bit."
+   :ref:`L5D1EN<rbits-LxDyEN>`,:ref:`ROUTER10[2]<reg-ROUTER10>`,l5_dst1_en,"Layer 5 destination 1 enable bit."
+   :ref:`L4D2EN<rbits-LxDyEN>`,:ref:`ROUTER10[1]<reg-ROUTER10>`,l4_dst2_en,"Layer 4 destination 2 enable bit."
+   :ref:`L4D1EN<rbits-LxDyEN>`,:ref:`ROUTER10[0]<reg-ROUTER10>`,l4_dst1_en,"Layer 4 destination 1 enable bit."
+   :ref:`L8D2EN<rbits-LxDyEN>`,:ref:`ROUTER11[1]<reg-ROUTER11>`,l8_dst2_en,"Layer 8 destination 2 enable bit."
+   :ref:`L8D1EN<rbits-LxDyEN>`,:ref:`ROUTER11[0]<reg-ROUTER11>`,l8_dst1_en,"Layer 8 destination 1 enable bit."
+   :ref:`L0PL1<rbits-LxPLy>`,:ref:`ROUTER12[7:6]<reg-ROUTER12>`,l0_pooling1,"Layer 0 pooling setting for destination 1."
+   :ref:`L0PL2<rbits-LxPLy>`,:ref:`ROUTER12[5:4]<reg-ROUTER12>`,l0_pooling2,"Layer 0 pooling setting for destination 2."
+   :ref:`L0FNO1[9:0]<rbits-LxFNOy>`,":ref:`ROUTER12[3:0]<reg-ROUTER12>`,:ref:`ROUTER13[7:2]<reg-ROUTER13>`",l0_fnum_offset1,"Layer 0 feature number for destination 1."
+   :ref:`L0FNO2[9:0]<rbits-LxFNOy>`,":ref:`ROUTER13[1:0]<reg-ROUTER13>`,:ref:`ROUTER14[7:0]<reg-ROUTER14>`",l0_fnum_offset2,"Layer 0 feature number for destination 2."
+   :ref:`L1PL1<rbits-LxPLy>`,:ref:`ROUTER15[7:6]<reg-ROUTER15>`,l1_pooling1,"Layer 1 pooling setting for destination 1."
+   :ref:`L1PL2<rbits-LxPLy>`,:ref:`ROUTER15[5:4]<reg-ROUTER15>`,l1_pooling2,"Layer 1 pooling setting for destination 2."
+   :ref:`L1FNO1[9:0]<rbits-LxFNOy>`,":ref:`ROUTER15[3:0]<reg-ROUTER15>`,:ref:`ROUTER16[7:2]<reg-ROUTER16>`",l1_fnum_offset1,"Layer 1 feature number for destination 1."
+   :ref:`L1FNO2[9:0]<rbits-LxFNOy>`,":ref:`ROUTER16[1:0]<reg-ROUTER16>`,:ref:`ROUTER15[7:0]<reg-ROUTER15>`",l1_fnum_offset2,"Layer 1 feature number for destination 2."
+   :ref:`L2PL1<rbits-LxPLy>`,:ref:`ROUTER18[7:6]<reg-ROUTER18>`,l2_pooling1,"Layer 2 pooling setting for destination 1."
+   :ref:`L2PL2<rbits-LxPLy>`,:ref:`ROUTER18[5:4]<reg-ROUTER18>`,l2_pooling2,"Layer 2 pooling setting for destination 2."
+   :ref:`L2FNO1[9:0]<rbits-LxFNOy>`,":ref:`ROUTER18[3:0]<reg-ROUTER18>`,:ref:`ROUTER19[7:2]<reg-ROUTER19>`",l2_fnum_offset1,"Layer 2 feature number for destination 1."
+   :ref:`L2FNO2[9:0]<rbits-LxFNOy>`,":ref:`ROUTER19[1:0]<reg-ROUTER19>`,:ref:`ROUTER20[7:0]<reg-ROUTER20>`",l2_fnum_offset2,"Layer 2 feature number for destination 2."
+   :ref:`L3PL1<rbits-LxPLy>`,:ref:`ROUTER21[7:6]<reg-ROUTER21>`,l3_pooling1,"Layer 3 pooling setting for destination 1."
+   :ref:`L3PL3<rbits-LxPLy>`,:ref:`ROUTER21[5:4]<reg-ROUTER21>`,l3_pooling2,"Layer 3 pooling setting for destination 2."
+   :ref:`L3FNO1[9:0]<rbits-LxFNOy>`,":ref:`ROUTER21[3:0]<reg-ROUTER21>`,:ref:`ROUTER22[7:2]<reg-ROUTER22>`",l3_fnum_offset1,"Layer 3 feature number for destination 1."
+   :ref:`L3FNO2[9:0]<rbits-LxFNOy>`,":ref:`ROUTER22[1:0]<reg-ROUTER22>`,:ref:`ROUTER23[7:0]<reg-ROUTER23>`",l3_fnum_offset2,"Layer 3 feature number for destination 2."
+   :ref:`L4PL1<rbits-LxPLy>`,:ref:`ROUTER24[7:6]<reg-ROUTER24>`,l4_pooling1,"Layer 4 pooling setting for destination 1."
+   :ref:`L4PL4<rbits-LxPLy>`,:ref:`ROUTER24[5:4]<reg-ROUTER24>`,l4_pooling2,"Layer 4 pooling setting for destination 2."
+   :ref:`L4FNO1[9:0]<rbits-LxFNOy>`,":ref:`ROUTER24[3:0]<reg-ROUTER24>`,:ref:`ROUTER25[7:2]<reg-ROUTER25>`",l4_fnum_offset1,"Layer 4 feature number for destination 1."
+   :ref:`L4FNO2[9:0]<rbits-LxFNOy>`,":ref:`ROUTER25[1:0]<reg-ROUTER25>`,:ref:`ROUTER26[7:0]<reg-ROUTER26>`",l4_fnum_offset2,"Layer 4 feature number for destination 2."
+   :ref:`L5PL1<rbits-LxPLy>`,:ref:`ROUTER27[7:6]<reg-ROUTER27>`,l5_pooling1,"Layer 5 pooling setting for destination 1."
+   :ref:`L5PL5<rbits-LxPLy>`,:ref:`ROUTER27[5:4]<reg-ROUTER27>`,l5_pooling2,"Layer 5 pooling setting for destination 2."
+   :ref:`L5FNO1[9:0]<rbits-LxFNOy>`,":ref:`ROUTER27[3:0]<reg-ROUTER27>`,:ref:`ROUTER28[7:2]<reg-ROUTER28>`",l5_fnum_offset1,"Layer 5 feature number for destination 1."
+   :ref:`L5FNO2[9:0]<rbits-LxFNOy>`,":ref:`ROUTER28[1:0]<reg-ROUTER28>`,:ref:`ROUTER29[7:0]<reg-ROUTER29>`",l5_fnum_offset2,"Layer 5 feature number for destination 2."
+   :ref:`L6PL1<rbits-LxPLy>`,:ref:`ROUTER30[7:6]<reg-ROUTER30>`,l6_pooling1,"Layer 6 pooling setting for destination 1."
+   :ref:`L6PL6<rbits-LxPLy>`,:ref:`ROUTER30[5:4]<reg-ROUTER30>`,l6_pooling2,"Layer 6 pooling setting for destination 2."
+   :ref:`L6FNO1[9:0]<rbits-LxFNOy>`,":ref:`ROUTER30[3:0]<reg-ROUTER30>`,:ref:`ROUTER31[7:2]<reg-ROUTER31>`",l6_fnum_offset1,"Layer 6 feature number for destination 1."
+   :ref:`L6FNO2[9:0]<rbits-LxFNOy>`,":ref:`ROUTER31[1:0]<reg-ROUTER31>`,:ref:`ROUTER32[7:0]<reg-ROUTER32>`",l6_fnum_offset2,"Layer 6 feature number for destination 2."
+   :ref:`L7PL1<rbits-LxPLy>`,:ref:`ROUTER33[7:6]<reg-ROUTER33>`,l7_pooling1,"Layer 7 pooling setting for destination 1."
+   :ref:`L7PL7<rbits-LxPLy>`,:ref:`ROUTER33[5:4]<reg-ROUTER33>`,l7_pooling2,"Layer 7 pooling setting for destination 2."
+   :ref:`L7FNO1[9:0]<rbits-LxFNOy>`,":ref:`ROUTER33[3:0]<reg-ROUTER33>`,:ref:`ROUTER34[7:2]<reg-ROUTER34>`",l7_fnum_offset1,"Layer 7 feature number for destination 1."
+   :ref:`L7FNO2[9:0]<rbits-LxFNOy>`,":ref:`ROUTER34[1:0]<reg-ROUTER34>`,:ref:`ROUTER35[7:0]<reg-ROUTER35>`",l7_fnum_offset2,"Layer 7 feature number for destination 2."
+   :ref:`L8PL1<rbits-LxPLy>`,:ref:`ROUTER36[7:6]<reg-ROUTER36>`,l8_pooling1,"Layer 8 pooling setting for destination 1."
+   :ref:`L8PL8<rbits-LxPLy>`,:ref:`ROUTER36[5:4]<reg-ROUTER36>`,l8_pooling2,"Layer 8 pooling setting for destination 2."
+   :ref:`L8FNO1[9:0]<rbits-LxFNOy>`,":ref:`ROUTER36[3:0]<reg-ROUTER36>`,:ref:`ROUTER37[7:2]<reg-ROUTER37>`",l8_fnum_offset1,"Layer 8 feature number for destination 1."
+   :ref:`L8FNO2[9:0]<rbits-LxFNOy>`,":ref:`ROUTER37[1:0]<reg-ROUTER37>`,:ref:`ROUTER38[7:0]<reg-ROUTER38>`",l8_fnum_offset2,"Layer 8 feature number for destination 2."
+   :ref:`L7MEN<rbits-LxMEN>`,:ref:`ROUTER39[7]<reg-ROUTER39>`,l7_mon_en,"Layer 7 monitor bus enable bit."
+   :ref:`L6MEN<rbits-LxMEN>`,:ref:`ROUTER39[6]<reg-ROUTER39>`,l6_mon_en,"Layer 6 monitor bus enable bit."
+   :ref:`L5MEN<rbits-LxMEN>`,:ref:`ROUTER39[5]<reg-ROUTER39>`,l5_mon_en,"Layer 5 monitor bus enable bit."
+   :ref:`L4MEN<rbits-LxMEN>`,:ref:`ROUTER39[4]<reg-ROUTER39>`,l4_mon_en,"Layer 4 monitor bus enable bit."
+   :ref:`L3MEN<rbits-LxMEN>`,:ref:`ROUTER39[3]<reg-ROUTER39>`,l3_mon_en,"Layer 3 monitor bus enable bit."
+   :ref:`L2MEN<rbits-LxMEN>`,:ref:`ROUTER39[2]<reg-ROUTER39>`,l2_mon_en,"Layer 2 monitor bus enable bit."
+   :ref:`L1MEN<rbits-LxMEN>`,:ref:`ROUTER39[1]<reg-ROUTER39>`,l1_mon_en,"Layer 1 monitor bus enable bit."
+   :ref:`L0MEN<rbits-LxMEN>`,:ref:`ROUTER39[0]<reg-ROUTER39>`,l0_mon_en,"Layer 0 monitor bus enable bit."
+   :ref:`L0MTAG<rbits-LxMTAG>`,:ref:`ROUTER40[7:4]<reg-ROUTER40>`,l0_mon_tag,"Layer 0 monitor tag."
+   :ref:`L8MEN<rbits-LxMEN>`,:ref:`ROUTER40[0]<reg-ROUTER40>`,l8_mon_en,"Layer 8 monitor bus enable bit."
+   :ref:`L2MTAG<rbits-LxMTAG>`,:ref:`ROUTER41[7:4]<reg-ROUTER41>`,l2_mon_tag,"Layer 2 monitor tag."
+   :ref:`L1MTAG<rbits-LxMTAG>`,:ref:`ROUTER41[3:0]<reg-ROUTER41>`,l1_mon_tag,"Layer 1 monitor tag."
+   :ref:`L4MTAG<rbits-LxMTAG>`,:ref:`ROUTER42[7:4]<reg-ROUTER42>`,l4_mon_tag,"Layer 4 monitor tag."
+   :ref:`L3MTAG<rbits-LxMTAG>`,:ref:`ROUTER42[3:0]<reg-ROUTER42>`,l3_mon_tag,"Layer 3 monitor tag."
+   :ref:`L6MTAG<rbits-LxMTAG>`,:ref:`ROUTER43[7:4]<reg-ROUTER43>`,l6_mon_tag,"Layer 6 monitor tag."
+   :ref:`L5MTAG<rbits-LxMTAG>`,:ref:`ROUTER43[3:0]<reg-ROUTER43>`,l5_mon_tag,"Layer 5 monitor tag."
+   :ref:`L8MTAG<rbits-LxMTAG>`,:ref:`ROUTER44[7:4]<reg-ROUTER44>`,l8_mon_tag,"Layer 8 monitor tag."
+   :ref:`L7MTAG<rbits-LxMTAG>`,:ref:`ROUTER44[3:0]<reg-ROUTER44>`,l7_mon_tag,"Layer 7 monitor tag."
+
+Detailed Signal Description
+***************************
+
+.. _rbits-LxDSTy:
+
+LxDSTy (layerx_dsty)
+----------------------
+
+Location: :ref:`ROUTER0<reg-ROUTER0>` to :ref:`ROUTER8<reg-ROUTER8>`
+
+Layer x destination address for destination y, where:
+
+x = 0..8
+y = 1 or 2
+
+The address is composed of 4 bits:
+
++---------------+---------------+
+| Address       | Destination   |
++---------------+---------------+
+| 0b0000:0b1000 | Layer 0 to 8  |
++---------------+---------------+
+| 0b1100        | Readout layer |
++---------------+---------------+
+
+.. _rbits-LxDyEN:
+
+LxDyEN (lx_dsty_en)
+----------------------
+
+Location: :ref:`ROUTER10<reg-ROUTER10>` to :ref:`ROUTER11<reg-ROUTER11>`
+
+Layer x destination enable bit for destination y, where:
+
+x = 0..8
+y = 1 or 2
+
+.. _rbits-LxPLy:
+
+LxPLy (lx_poolingy)
+----------------------
+
+Location: :ref:`ROUTER12<reg-ROUTER12>` to :ref:`ROUTER37<reg-ROUTER37>`
+
+Layer x destination y pooling setting, where:
+
+x = 0..8
+y = 1 or 2
+
+Pooling for X and Y dimensions. Possible values are {0,1,2,3} mapping to {1,2,4,8}.
+
+.. _rbits-LxFNOy:
+
+LxFNOy (lx_fnum_offsety)
+-------------------------
+
+Location: :ref:`ROUTER12<reg-ROUTER12>` to :ref:`ROUTER36<reg-ROUTER36>`
+
+Layer x destination y feature number offset setting, where:
+
+x = 0..8
+y = 1 or 2
+
+Destination y Feature Number Shift. Shift the feature number of features going to destination by N.
+It is important to configure this number correctly so that there is no overlap in feature space between inputs and outputs.
+When configuring take into account the feature space of each input for a layer and shift them so that
+they don't overlap in the input of the destination layer.
+
+.. _rbits-LxMEN:
+
+LxMEN (lx_mon_en)
+------------------
+
+Location: :ref:`ROUTER39<reg-ROUTER39>` and :ref:`ROUTER40<reg-ROUTER40>`
+
+x = 0..8
+
+Layer x monitor bus enable bit. '1': monitoring enabled for layer x, '0': monitoring disabled for layer x.
+
+
+.. _rbits-LxMTAG:
+
+LxMTAG (lx_mon_tag)
+--------------------
+
+Location: :ref:`ROUTER40<reg-ROUTER40>` to :ref:`ROUTER44<reg-ROUTER44>`
+
+x = 0..8
+
+Layer x monitor bus tag address. The 4 bits of the LxMTAG register are appended as MSBs to the layer output
+spike data before it is sent to the monitor bus (see :ref:`monitor-bus-encoding`).
+

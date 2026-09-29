@@ -1,0 +1,15 @@
+.. _router-registers:
+
+Router Register Description
+===========================
+
+.. only:: html
+
+    Detailed Register Description
+    *****************************
+
+    .. include:: router-descriptions.rst
+
+.. only:: pdf
+
+    .. include:: router-descriptions.rst

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9.6. Output Serial Interface Encoding &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.7. Direct Readout Interrupts" href="readout-interrupt.html" />
+    <link rel="prev" title="9.5. Output Serial Interface" href="output-p2s.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../registers/index.html">7. Registers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. Encoding and Programming</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">9.1. I/O Interfaces Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-s2p.html">9.2. Input Serial Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input-serial-interface.html">9.3. Input Serial Interface Bus Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor-bus.html">9.4. Monitor Bus Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-p2s.html">9.5. Output Serial Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9.6. Output Serial Interface Encoding</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#source-1-monitor-bus">9.6.1. Source 1 (Monitor bus)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-2-readout-layer">9.6.2. Source 2 (Readout Layer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#encoding-summary">9.6.3. Encoding summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="readout-interrupt.html">9.7. Direct Readout Interrupts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">9. </span>Encoding and Programming</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">9.6. </span>Output Serial Interface Encoding</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/encoding/output-serial-interface.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="output-serial-interface-encoding">
+<span id="id1"></span><h1><span class="section-number">9.6. </span>Output Serial Interface Encoding<a class="headerlink" href="#output-serial-interface-encoding" title="Permalink to this heading"></a></h1>
+<p>As described in the <span class="xref std std-ref">output-serial-interface</span> section, the output interface receives
+data from both the Monitor bus (<em>data1</em>, channel #1) and the Output MUX (<em>data2</em>, channel #2).</p>
+<section id="source-1-monitor-bus">
+<h2><span class="section-number">9.6.1. </span>Source 1 (Monitor bus)<a class="headerlink" href="#source-1-monitor-bus" title="Permalink to this heading"></a></h2>
+<p>The encoding of the Monitor bus can be found in section: <a class="reference internal" href="monitor-bus.html#monitor-bus-encoding"><span class="std std-ref">Monitor Bus Encoding</span></a>.</p>
+</section>
+<section id="source-2-readout-layer">
+<span id="readout-to-p2s-encoding"></span><h2><span class="section-number">9.6.2. </span>Source 2 (Readout Layer)<a class="headerlink" href="#source-2-readout-layer" title="Permalink to this heading"></a></h2>
+<p>When Source 2 is selected to be sent to the output serial interface, output serializer
+outputs the state of the <a class="reference internal" href="../architecture/readout-layer.html#readout-layer"><span class="std std-ref">Readout Layer</span></a>
+For the encoding in normal operation, see <a class="reference internal" href="../architecture/readout-layer.html#readout-output-modes"><span class="std std-ref">Data Output Modes</span></a>.</p>
+</section>
+<section id="encoding-summary">
+<h2><span class="section-number">9.6.3. </span>Encoding summary<a class="headerlink" href="#encoding-summary" title="Permalink to this heading"></a></h2>
+<table class="table-small docutils align-default" id="id2">
+<caption><span class="caption-text">Speck2e Output Serial Interface Encoding</span><a class="headerlink" href="#id2" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 3%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Input CH</p></td>
+<td colspan="26"><p>Bits</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+<td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+<td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+<td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Monitor Bus</em></p></td>
+<td colspan="26"><p class="centered">
+<strong><a class="reference internal" href="monitor-bus.html#monitor-bus-encoding"><span class="std std-ref">Monitor bus [25:0]</span></a></strong></p></td>
+</tr>
+<tr class="row-even"><td><p><em>Readout Layer</em></p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td colspan="21"><p class="centered">
+<strong><a class="reference internal" href="../architecture/readout-layer.html#readout-output-modes"><span class="std std-ref">Readout Layer Output (neuron output layer data) [20:0]</span></a></strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="output-p2s.html" class="btn btn-neutral float-left" title="9.5. Output Serial Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="readout-interrupt.html" class="btn btn-neutral float-right" title="9.7. Direct Readout Interrupts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

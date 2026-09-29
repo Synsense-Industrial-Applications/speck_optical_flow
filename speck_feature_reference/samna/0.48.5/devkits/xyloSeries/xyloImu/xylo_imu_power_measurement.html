@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xylo-Imu Power Measurement &mdash; Samna 0.48.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css%3Fv=03e43079.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css%3Fv=e59714d7.css" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css%3Fv=00684a6c.css" />
+
+  
+      <script src="../../../_static/jquery.js%3Fv=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js%3Fv=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js%3Fv=bbf929c5"></script>
+      <script src="../../../_static/doctools.js%3Fv=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="XyloAudio 3 Boards" href="../xyloAudio3/index.html" />
+    <link rel="prev" title="Mc3632 Read acceleration" href="mc3632_read_acceleration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Samna
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickStart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../deviceController.html">Device Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models/models.html">Chip Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Development Kits</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#connecting-to-a-device">Connecting to a Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#common-methods-of-development-kits">Common Methods of Development Kits</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#supported-development-kits">Supported Development Kits</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../speckSeries/summary.html">Speck series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynapSeSeries/index.html">Dynap-SE series</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Xylo Series</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#development-kits">Development Kits</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../jitFilters.html">JIT Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gui/index.html">Visualizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../3rdpartyCamera.html">3rd Party Cameras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../flasher.html">Flasher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Change log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/index.html">samna</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Samna</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Development Kits</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Xylo Series</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Xylo-IMU Boards</a></li>
+      <li class="breadcrumb-item active">Xylo-Imu Power Measurement</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/devkits/xyloSeries/xyloImu/xylo_imu_power_measurement.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="xylo-imu-power-measurement">
+<h1>Xylo-Imu Power Measurement<a class="headerlink" href="xylo_imu_power_measurement.html#xylo-imu-power-measurement" title="Link to this heading"></a></h1>
+<p>Xylo-IMU supports measuring power which includes Xylo-Core, IMU_IF and excludes MC3632.</p>
+<p>One thing to note is that closing memory access can save power consumption a lot, so we measure power after closing memory access.</p>
+<p>Here is an example of power measurement in which you press enter to start measurement and press enter again to stop, it bases on packages :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">samna</span>                 <span class="mf">0.33.1</span>
+<span class="o">-</span> <span class="n">numpy</span>                 <span class="mf">1.24.3</span>
+</pre></div>
+</div>
+<p>You are encouraged to replace the network to a decent one and shake the board while measuring.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">samna</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">initialize_board</span><span class="p">()</span> <span class="p">:</span>
+    <span class="n">dk</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">open_device</span><span class="p">(</span><span class="s2">&quot;XyloImuTestBoard:0&quot;</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">dk</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">sink_from</span><span class="p">(</span><span class="n">dk</span><span class="o">.</span><span class="n">get_model_source_node</span><span class="p">())</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">source_to</span><span class="p">(</span><span class="n">dk</span><span class="o">.</span><span class="n">get_model_sink_node</span><span class="p">())</span>
+
+    <span class="n">power</span> <span class="o">=</span> <span class="n">dk</span><span class="o">.</span><span class="n">get_power_monitor</span><span class="p">()</span>
+    <span class="n">power_source</span> <span class="o">=</span> <span class="n">power</span><span class="o">.</span><span class="n">get_source_node</span><span class="p">()</span>
+    <span class="n">power_sink</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">sink_from</span><span class="p">(</span><span class="n">power_source</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dk</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">power</span><span class="p">,</span> <span class="n">power_sink</span>
+
+<span class="n">dk</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">power</span><span class="p">,</span> <span class="n">power_sink</span> <span class="o">=</span> <span class="n">initialize_board</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_configuration</span><span class="p">():</span>
+    <span class="n">dk</span><span class="o">.</span><span class="n">enable_manual_input_acceleration</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Use sensor input instead of manual input</span>
+
+    <span class="n">xylo_config</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloImu</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">XyloConfiguration</span><span class="p">()</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">operation_mode</span> <span class="o">=</span> <span class="n">samna</span><span class="o">.</span><span class="n">xyloImu</span><span class="o">.</span><span class="n">OperationMode</span><span class="o">.</span><span class="n">RealTime</span>
+
+    <span class="n">input_count</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">hidden_count</span> <span class="o">=</span> <span class="mi">128</span>
+    <span class="n">output_count</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">hidden_count</span><span class="p">]</span> <span class="o">*</span> <span class="n">input_count</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">hidden</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">hidden_count</span><span class="p">]</span> <span class="o">*</span> <span class="n">hidden_count</span>
+    <span class="n">hidden_neurons</span> <span class="o">=</span> <span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloImu</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">HiddenNeuron</span><span class="p">()]</span> <span class="o">*</span> <span class="n">hidden_count</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">hidden</span><span class="o">.</span><span class="n">neurons</span> <span class="o">=</span> <span class="n">hidden_neurons</span>
+    <span class="n">output_neurons</span> <span class="o">=</span> <span class="p">[</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloImu</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">OutputNeuron</span><span class="p">()]</span> <span class="o">*</span> <span class="n">output_count</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">readout</span><span class="o">.</span><span class="n">neurons</span> <span class="o">=</span> <span class="n">output_neurons</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">readout</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">output_count</span><span class="p">]</span> <span class="o">*</span> <span class="n">hidden_count</span>
+
+    <span class="c1"># Preparation to run in realtime mode with input interface opened.</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">always_update_omp_stat</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">imu_if_input_enable</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">imu_if_clk_enable</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">time_resolution_wrap</span> <span class="o">=</span> <span class="mh">0x61a80</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">debug</span><span class="o">.</span><span class="n">imu_if_clock_freq_div</span> <span class="o">=</span> <span class="mh">0x169</span>
+
+    <span class="c1"># Open and config input interface of Xylo-IMU, you could customize the parameters.</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">enable</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">estimator_k_setting</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">select_iaf_output</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">update_matrix_threshold</span> <span class="o">=</span> <span class="mi">255</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">delay_threshold</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">bpf_bb_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">*</span> <span class="mi">15</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">bpf_bwf_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">*</span> <span class="mi">15</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">bpf_baf_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">*</span> <span class="mi">15</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">bpf_a1_values</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">64700</span><span class="p">,</span> <span class="o">-</span><span class="mi">64458</span><span class="p">,</span> <span class="o">-</span><span class="mi">64330</span><span class="p">,</span> <span class="o">-</span><span class="mi">64138</span><span class="p">,</span> <span class="o">-</span><span class="mi">63884</span><span class="p">,</span> <span class="o">-</span><span class="mi">63566</span><span class="p">,</span> <span class="o">-</span><span class="mi">63169</span><span class="p">,</span> <span class="o">-</span><span class="mi">62743</span><span class="p">,</span> <span class="o">-</span><span class="mi">62238</span><span class="p">,</span> <span class="o">-</span><span class="mi">61672</span><span class="p">,</span> <span class="o">-</span><span class="mi">61045</span><span class="p">,</span> <span class="o">-</span><span class="mi">60357</span><span class="p">,</span> <span class="o">-</span><span class="mi">59611</span><span class="p">,</span> <span class="o">-</span><span class="mi">58805</span><span class="p">,</span> <span class="o">-</span><span class="mi">57941</span><span class="p">]</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">bpf_a2_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">31935</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">31754</span><span class="p">]</span> <span class="o">*</span> <span class="mi">14</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">scale_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">*</span><span class="mi">15</span>
+    <span class="n">xylo_config</span><span class="o">.</span><span class="n">input_interface</span><span class="o">.</span><span class="n">iaf_threshold_values</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x000007d0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">15</span>
+
+    <span class="n">dk</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span><span class="o">.</span><span class="n">apply_configuration</span><span class="p">(</span><span class="n">xylo_config</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xylo_config</span><span class="p">,</span> <span class="n">input_count</span><span class="p">,</span> <span class="n">hidden_count</span><span class="p">,</span> <span class="n">output_count</span>
+<span class="n">xylo_config</span><span class="p">,</span> <span class="n">input_count</span><span class="p">,</span> <span class="n">hidden_count</span><span class="p">,</span> <span class="n">output_count</span> <span class="o">=</span> <span class="n">apply_configuration</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">close_ram_access</span><span class="p">()</span>            <span class="c1"># You have to close memory access to save power in a long run.</span>
+
+<span class="n">source</span><span class="o">.</span><span class="n">write</span><span class="p">([</span><span class="n">samna</span><span class="o">.</span><span class="n">xyloImu</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">TriggerProcessing</span><span class="p">()])</span>     <span class="c1"># Command chip to trigger infinitely.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running infinitely...&quot;</span><span class="p">)</span>
+
+<span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Press enter to start power measurement:&quot;</span><span class="p">)</span>
+<span class="n">power_sink</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>                     <span class="c1"># Clear</span>
+<span class="n">power</span><span class="o">.</span><span class="n">start_auto_power_measurement</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>      <span class="c1"># Measure 10 times every second.</span>
+<span class="n">start_measure_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Measuring...&quot;</span><span class="p">)</span>
+
+<span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Press enter to stop power measurement:&quot;</span><span class="p">)</span>
+<span class="n">power_events</span> <span class="o">=</span> <span class="n">power_sink</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+<span class="n">power_events</span> <span class="o">=</span> <span class="p">[</span><span class="n">event</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">power_events</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">samna</span><span class="o">.</span><span class="n">unifirm</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">PowerMeasurement</span><span class="p">)]</span>
+
+<span class="n">io_powers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">event</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">power_events</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">channel</span> <span class="o">==</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">core_powers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">event</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">power_events</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">channel</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+<span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">io_powers</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">core_powers</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Measurement duration: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_measure_time</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total measure times: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">io_powers</span><span class="p">)</span><span class="si">}</span><span class="s2">, average io power: </span><span class="si">{</span><span class="n">io_powers</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">}</span><span class="s2">, average core power: </span><span class="si">{</span><span class="n">core_powers</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mc3632_read_acceleration.html" class="btn btn-neutral float-left" title="Mc3632 Read acceleration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../xyloAudio3/index.html" class="btn btn-neutral float-right" title="XyloAudio 3 Boards" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book">Samna</span>
+      v: 0.48.5
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt id="versions">versions</dt>
+      </dl>
+      <script>
+        // A workaround on a sphinx_rtd_theme bug
+        // https://github.com/readthedocs/sphinx_rtd_theme/issues/1624
+        function setCurrentVersion() {
+          const docName = document.querySelector('a.icon.icon-home');
+          var div = document.createElement("div");
+          div.className = 'version';
+          div.textContent = "0.48.5";
+          docName.after(div);
+        }
+        
+
+        // Parse versions.json to generate version selection.
+        function addVersions(ver_list, id_elem) {
+          for (const ver of ver_list) {
+            var a = document.createElement("a");
+            a.href = "/samna/" + ver + '/index.html';
+            a.innerText = ver;
+
+            var dd = document.createElement("dd");
+
+            if (ver === "0.48.5") {
+              var strong = document.createElement("strong");
+              strong.appendChild(a);
+
+              dd.appendChild(strong);
+            }
+            else {
+              dd.appendChild(a);
+            }
+
+            document.getElementById(id_elem).appendChild(dd);
+          }
+        }
+
+        setCurrentVersion();
+
+        Promise.all([
+          fetch("/samna/versions.json")
+          .then(response => response.json())
+        ]).then(values => {
+          addVersions(values[0]["versions"], "versions");
+        });
+
+      </script>
+    </div>
+  </div>
+
+ <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

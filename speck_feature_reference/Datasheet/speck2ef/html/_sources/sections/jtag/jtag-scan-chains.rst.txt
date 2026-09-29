@@ -1,0 +1,48 @@
+.. _jtag-scan-chains:
+
+JTAG Scan Chain Access and Operation
+====================================
+
+The following describes the sequence of commands required to activate and set/read one
+of the internal Speck2e scan chains.
+
+For a detailed description of the Scan Chain system and timing diagrams, refer to section :ref:`scanchain-overview`.
+
+Scan Chain Domains
+******************
+
+The scan chains are internally divided into domains. This is to limit the scan chain length,
+and to allow individual debugging of the various internal blocks independently.
+
+The following table provides the list of internal scan chain domains.
+The corresponding **5-bit** index values must be provided through the JTAG interface
+after the *SCAN_BLK_SEL* command.
+
+The length in bits of each scan chain is also provided for reference.
+
+.. csv-table:: Speck2e/f scan chain domains
+   :class: table-small
+   :file: ../../tables/scan_chain_domains.csv
+
+
+Scan Chain Activation
+*********************
+
+The selected scan chain can be activated by issuing the following command
+sequence through JTAG:
+
+.. code::
+
+   # Activate scan chain
+   send_ir(0x09, 8 bits)  # Command: SCAN_BLK_SEL
+   send_dr(block_id[4:0], 5 bits)
+   send_ir(0x0D, 8 bits)  # Command: SCAN_DEN_ON
+   send_ir(0x0B, 8 bits)  # Command: SCAN_HSEN_ON
+   send_ir(0x08, 8 bits)  # Command: SCAN_SHIFT
+
+   # Send (and read out) scan chain data bit stream
+   send_dr(*scan chain data*, n bits)
+
+   # Deactivate scan chain
+   send_ir(0x0C, 8 bits)  # Command: SCAN_DEN_OFF
+   send_ir(0x0A, 8 bits)  # Command: SCAN_HSEN_OFF

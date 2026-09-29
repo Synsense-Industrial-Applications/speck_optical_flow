@@ -1,0 +1,150 @@
+.. _dvs-filter:
+
+DVS Event Filter
+================
+
+The DVS Filter Block is included in the DVS pre-processing layer of
+Speck2e in order to filter events depending on neighboring pixel activity.
+
+In general, an event at position (x,y) is forwarded by the filter when
+at least one pixel in the vicinity of (x,y) has spiked in a defined time
+window before the (x,y) event.
+
+.. _filter-operation:
+
+Filter Operation
+****************
+
+The filter can be enabled by setting register bit :ref:`HPFE<rbits-HPFE>` to '1'.
+
+Whenever a pixel event arrives at the filter, the filter stores in its SRAM
+the time stamp of the event at that location.
+
+When a new pixel event arrives at the filter at location (x0,y0), the filter
+checks the **area** defined by register bits :ref:`FKSX[2:0]<rbits-FKSX>`
+and :ref:`FKSY[2:0]<rbits-FKSY>`, i.e. (x0±FKSX,y0±FKSY) to see if any event
+was recorded in that area in a number of clock cycles defined by register
+bits :ref:`FDEL[15:0]<rbits-FDEL>`.
+
+The time stamps are recorded using a 16-bit loop counter. Each count is triggered
+by the internal *slow clock* (see :ref:`slow-clock` and :ref:`Slow Clock Configuration<rbits-SLWCLK>`).
+The input clock for the filter is activated by register bit :ref:`FCKE<rbits-FCKE>`.
+
+Monitor bus
+***********
+
+The filter has a monitor bus output, which forwards all events produced in the filter
+*before* the final counter comparison, i.e., for each input event to the filter, and a filter
+size setting FKSX='010', FKSY='001', 5*3=15 messages will be forwarded by the filter to the
+monitor bus, irrespectively if any event would be forwarded at the filter output.
+
+.. note::
+    If the input event is near the edge of the pixel field, the filter size will be clipped
+    accordingly. Therefore, less locations will be evaluated by the filter, and less
+    messages will be forwarded on the monitor bus.
+
+The monitor bus can be activated via register bit :ref:`FMOE<rbits-FMOE>`, and a 4-bit
+tag defined by :ref:`FMDST[3:0]<rbits-FMDST>` is prepended to the monitor message as
+tag/address.
+
+.. _filter-mon-format:
+
+Monitor Output Format
+---------------------
+
+Each monitor message coming from the DVS Filter is split into three parts, due to
+the monitor bus bit-width.
+
+As shown in the monitor bus :ref:`encoding table<monitor-encoding-table>`, the three
+parts have the following format:
+
+
+.. table:: DVS Filter Monitor bus message encoding
+
+    +--------+---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    |        | Header        |     .. centered:: Data                                                                        |
+    +--------+---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | Bits   | [25:16]       | 15  | 14  | 13  | 12  | 11  | 10  | 9   | 8   | 7   | 6   | 5   | 4   | 3   | 2   | 1   | 0   |
+    +--------+---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | Msg #1 | '1101000110'  | 0   | Pol |    .. centered:: Y[6:0]                 |    .. centered:: X[6:0]                 |
+    +--------+---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | Msg #2 | '1101000100'  |     .. centered:: Current Counter Value [15:0]                                                |
+    +--------+---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+    | Msg #3 | '1101000101'  |     .. centered:: Previous (Stored in SRAM) Counter Value [15:0]                              |
+    +--------+---------------+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+
+
+.. warning::
+    The *order* of the monitor messages (#1, #2, #3) is **not guaranteed** due to the asynchronous
+    nature of the internal logic. Necessary precautions should be therefore taken when analyzing
+    the output message sequence.
+
+Message #1
+^^^^^^^^^^
+
+Returns the X/Y/Polarity information for the internally generated Counter update in memory.
+
+For a SRAM Read operation via :ref:`Input Interface command<c-p-d-ref-tables>`, this message will
+forward the SRAM read address (Y[6:0],X[6:0]) (the Polarity bit is a *don't care* in this case).
+
+Message #2
+^^^^^^^^^^
+
+Returns the current Counter value of the original event received from the :ref:`event-pre-processing`.
+
+For a SRAM Read operation, this message can be disregarded as a *don't care*.
+
+Message #3
+^^^^^^^^^^
+
+Returns the previous Counter value at the location X/Y (from Message #1), i.e., the counter value stored
+in the SRAM.
+
+For a SRAM Read operation, this message will contain the data read from the given location (Y[6:0],X[6:0]).
+
+
+Configuration
+*************
+
+Filter window size
+------------------
+
+The filter window size can be configured using registers :ref:`FKSX[2:0]<rbits-FKSX>` and
+:ref:`FKSY[2:0]<rbits-FKSY>`, respectively in the X and Y directions.
+
+.. note::
+    The filter window goes from x0-FKSX to x0+FKSX (and same for Y). I.e., the filter size
+    can go from 1x1 pixel to 15x15 pixels.
+
+
+Filter Delta/Threshold
+----------------------
+
+The filter time delta can be configured with register bits :ref:`FDEL[15:0]<rbits-FDEL>`.
+
+This value is used to compare the current counter value with the value of the pixels neighboring
+the current spiking pixel. If any of the neighboring pixels has a value difference withing the
+delta value, the filter emits the current spike. Otherwise, the current spike is blocked.
+
+.. _filter-low-pass-mode:
+
+Low-Pass mode
+-------------
+
+.. note:: Low-Pass filter mode is available only in Speck2f.
+
+In this mode, the filter works as a low-pass filter. This mode can be used to filter out 50/60 Hz
+light flickering noise produced by some lights such as fluorescent or LED lights that output
+a square wave with the frequency of the mains power supply.
+
+The mode can be enabled by setting register bit :ref:`FLPF<rbits-FLPF>`.
+
+.. _filter-sram-rw:
+
+SRAM Read/Write Operations
+**************************
+
+Similar to the other SRAMS, the DVS Filter SRAM can be read/written directly using the internal BIST interface.
+The memory can be written either using the external SPI Slave interface or the JTAG interface.
+
+Please refer to section :ref:`filter-sram-rw` for the Filter SRAM memory mapping.

@@ -1,0 +1,35 @@
+###############
+Xylo-IMU Boards
+###############
+
+The ``XyloImuTestBoard`` is built around the Xylo-IMU chip, complemented by various peripherals to extend
+its functionality. The board includes an FPGA-based motherboard that facilitates communication over USB,
+and a daughterboard that houses the Xylo-IMU chip.
+
+Integrated on the daughterboard is an MC3632 accelerometer, which can be accessed independently of the Xylo chip
+for additional sensing capabilities.
+
+The board also features an ADC, enabling on-board power measurement for more comprehensive performance monitoring.
+
+
+**************
+Api reference:
+**************
+
+* :ref:`samna.xyloImuBoards`
+
+*********
+Examples:
+*********
+
+.. toctree::
+   :maxdepth: 1
+
+   xylo_imu_readout
+   xylo_imu_trigger_processing
+   xylo_imu_manual_mode
+   xylo_imu_accelerated_mode
+   xylo_imu_realtime_mode_with_acceleration_input
+   xylo_imu_realtime_mode_with_sensor_input
+   mc3632_read_acceleration
+   xylo_imu_power_measurement

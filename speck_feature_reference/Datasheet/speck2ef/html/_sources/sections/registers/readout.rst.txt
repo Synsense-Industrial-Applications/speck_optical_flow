@@ -1,0 +1,26 @@
+.. _readout-registers:
+
+Readout Layer Register Description
+==================================
+
+.. only:: html
+
+    Detailed Register Description
+    *****************************
+    
+    .. include:: readout-descriptions.rst
+
+    .. _readout-readonly-registers:
+
+    Read-Only Register Description
+    ******************************
+
+    .. include:: readout-readonly-descriptions.rst
+    
+.. only:: pdf
+    
+    .. include:: readout-descriptions.rst
+
+    **Read-Only Registers**
+    
+    .. include:: readout-readonly-descriptions.rst

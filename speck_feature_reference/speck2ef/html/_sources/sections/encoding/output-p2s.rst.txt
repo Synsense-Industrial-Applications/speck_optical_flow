@@ -1,0 +1,115 @@
+.. _output-serial-interface-protocol:
+
+Output Serial Interface
+=======================
+
+The output serial interface enables the readout of the state of Speck2e through a custom serial protocol.
+In this section, the operation and configuration of the output interface is described.
+
+For the output data encoding, refer to section :ref:`output-interface-encoding`.
+
+.. _output_p2s_block:
+
+Block Diagram
+*************
+
+The following block diagram shows the output interface, including the two internal inputs `data1` and `data2`.
+Input `data1` receives asynchronous messages from all the active Monitor buses across the chip.
+Input `data2` receives messages from the  :ref:`Readout Layer<readout-layer>`.
+
+.. only:: html
+
+    .. figure:: ../../figures/output_p2s_block.svg
+        :scale: 120%
+
+        Output Serial Interface
+
+.. only:: pdf
+
+    .. figure:: ../../figures/output_p2s_block.pdf
+        :scale: 120%
+
+        Output Serial Interface
+
+
+Register Settings
+*****************
+
+Input bus selection
+-------------------
+
+Register bits :ref:`ININT8:P2SSEL<rbits-P2SSEL>` select the input bus (data1 or data2) that will be forwarded to
+the chip output.
+
++------------------------------------+------------------------------+
+| :ref:`ININT8:P2SSEL<rbits-P2SSEL>` | Action                       |
++------------------------------------+------------------------------+
+| 0 (default)                        | data1 active (Monitor Bus)   |
++------------------------------------+------------------------------+
+| 1                                  | data2 active (Readout Layer) |
++------------------------------------+------------------------------+
+
+Double speed output
+*******************
+
+The output serializer provides two data pins `OUT1` and `OUT2`. In normal operation, only pin `OUT1` is enabled.
+Register :ref:`ININT8:P2S2CH<rbits-P2S2CH>` can be set to '1' to enable both output serial data pins. In this configuration, two messages can be read out
+from the chip in *parallel*, i.e., `OUT1` will output 26 bits of message 1 and `OUT2` will output at the same time, and with
+the same timing, message 2.
+
+.. note::
+    The dual output mode is not available when *data2*, i.e. readout layer data output is enabled.
+    If the dual output mode is enabled while *data2* output is enabled, pin `OUT2` will be set to '0'.
+
++------------------------------------+------------------------------------+
+| :ref:`ININT8:P2S2CH<rbits-P2S2CH>` | Action                             |
++------------------------------------+------------------------------------+
+| 0 (default)                        | Single output pin enabled (OUT1)   |
++------------------------------------+------------------------------------+
+| 1                                  | Dual parallel output pins (OUT1/2) |
++------------------------------------+------------------------------------+
+
+Reduced output word length
+**************************
+
+The output serializer can be configured to send only the LSB 17 bits to the output pins `OUT1` (and `OUT2` when enabled).
+The configuration is via register bit :ref:`ININT8:P2SDL<rbits-P2SDL>`.
+
++------------------------------------+---------------------------+
+| :ref:`ININT8:P2SDL<rbits-P2SDL>`   | Action                    |
++------------------------------------+---------------------------+
+| 0 (default)                        | 26-bit output word length |
++------------------------------------+---------------------------+
+| 1                                  | 17-bit output word length |
++------------------------------------+---------------------------+
+
+
+Timing Diagrams
+***************
+
+.. note::
+
+    The data at the output serial interface is valid at the **falling** "edge" of the clock.
+
+
+The timing diagram for the communication is as follows.
+
+.. wavedrom::
+
+    { "signal": [
+        { "name": "CLK",  "wave":       "p.....|....." },
+        { "name": "data1[25:0]","wave": "x3....|....x", "data": ["data           "] },
+        { "name": "req1", "wave":       "0.1...|...0.", "node": "..r.......s"},
+        { "name": "ack1", "wave":       "0.....|..1.0", "node": ".........a.b"},
+        { "name": "P2S_DVALID", "wave": "0..1..|..0..", "node": "...d"},
+        { "name": "P2S_OUT1", "wave":   "x..34=|56.0." , "data": ["d[25]","d[24]","","d[1]","d[0]"]}
+    ],
+    "edge": ["r~>d", "a~>s", "s~>b" ],
+    "head":{ "text":"Output Serial Interface Timing Diagram For 1 Output Channel and Input data1.", "tick":0 }
+    }
+
+
+.. note::
+
+    When the data2 parallel input is selected via the register :ref:`ININT8:P2SSEL<rbits-P2SSEL>`,
+    the operation is the same as for data1 input. Bits <25:21> are filled with '1' in this case.

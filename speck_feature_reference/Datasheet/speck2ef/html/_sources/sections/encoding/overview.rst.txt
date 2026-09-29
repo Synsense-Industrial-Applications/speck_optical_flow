@@ -1,0 +1,53 @@
+.. _input-interfaces-overview:
+
+I/O Interfaces Overview
+=======================
+
+Speck2e is equipped with four distinct input interfaces:
+
+- SPI Slave interface
+- SPI Master interface
+- JTAG
+- Asynchronous Serial Interface
+
+SPI Slave
+*********
+
+The :ref:`spi-slave-interface` interface can be used to program the internal Register and SRAM
+memories.
+
+SPI Master
+**********
+
+The :ref:`spi-master-interface` interface must be connected to a standard SPI Flash external memory
+and can automatically download the Flash contents to the internal SRAMs and Registers.
+
+JTAG Interface
+**************
+
+The :ref:`jtag-interface` provides access to all internal features of the chip, including:
+
+- SRAM/Register memories
+- Asynchronous input events
+- Asynchronous output events
+- Internal scan chains
+
+Asynchronous Input Serial Interface
+***********************************
+
+The Asynchronous Input Serial Interface enables fast input of Asynchronous events
+as well as configuration settings for the internal DVS Sensor.
+
+Section :ref:`input-serial-interface-protocol` provides a description of the custom physical communication protocol of the interface.
+
+In Section :ref:`input-serial-interface-encoding` the message encoding for the interface is provided.
+
+Asynchronous Output Serial Interface
+************************************
+
+The Asynchronous Output Serial Interface enables readout of Asynchronous events from the internal monitor bus, well as readout layer status information.
+
+Section :ref:`output-serial-interface-protocol` provides a description of the custom physical communication protocol of the interface.
+
+In Section :ref:`output-serial-interface-encoding` the message encoding for the interface is provided.
+

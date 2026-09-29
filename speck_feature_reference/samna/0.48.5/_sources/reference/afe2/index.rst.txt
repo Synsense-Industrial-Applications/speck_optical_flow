@@ -1,0 +1,21 @@
+##########
+samna.afe2
+##########
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   configuration/index
+   event/index
+
+
+Module content
+--------------
+
+.. automodule:: samna.afe2
+   :members:
+   :show-inheritance:
+

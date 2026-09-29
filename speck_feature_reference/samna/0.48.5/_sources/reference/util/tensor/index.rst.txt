@@ -1,0 +1,19 @@
+#################
+samna.util.tensor
+#################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.util.tensor
+   :members:
+   :show-inheritance:
+

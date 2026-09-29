@@ -1,0 +1,19 @@
+############################
+samna.unifirm.modules.events
+############################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm.modules.events
+   :members:
+   :show-inheritance:
+

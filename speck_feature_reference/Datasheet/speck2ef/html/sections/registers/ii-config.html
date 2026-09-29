@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.4. Input Interface Configuration Signal Description &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.5. Convolutional Layer Register Description" href="layer.html" />
+    <link rel="prev" title="7.3. Input Interface Register Description" href="ii.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.4. Input Interface Configuration Signal Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-signal-description">7.4.1. Detailed Signal Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pr-prst">7.4.1.1. PR (PRst)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sr-srst">7.4.1.2. SR (SRst)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prdvs-prst-dvs">7.4.1.3. PRDVS (PRst_DVS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#srdvs-srst-dvs">7.4.1.4. SRDVS (SRst_DVS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cguce-cgu-clk-enable">7.4.1.5. CGUCE (cgu_clk_enable)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cguis-cgu-ii-sel">7.4.1.6. CGUIS (cgu_ii_sel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cguove-cgu-overwrite-ext-mem-ok">7.4.1.7. CGUOVE (cgu_overwrite_ext_mem_ok)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#blen-23-0-burst-len">7.4.1.8. BLEN[23:0] (burst_len)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baddr-23-0-burst-addr">7.4.1.9. BADDR[23:0] (burst_addr)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iosel-6-0-iosel">7.4.1.10. IOSEL[6:0] (iosel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#p2ssel-p2s-input-sel">7.4.1.11. P2SSEL (p2s_input_sel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#p2s2ch-p2s-two-ch-sel">7.4.1.12. P2S2CH (p2s_two_ch_sel)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#p2sdl-p2s-data-len">7.4.1.13. P2SDL (p2s_data_len)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aercm-aerc-mon-en">7.4.1.14. AERCM (aerc_mon_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#p2sm-p2s-mon-en">7.4.1.15. P2SM (p2s_mon_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jtgm-jtag-mon-en">7.4.1.16. JTGM (jtag_mon_en)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spibrg-iospi-bridge-modepe">7.4.1.17. SPIBRG (iospi_bridge_modepe)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iope-5-0-iope">7.4.1.18. IOPE[5:0] (iope)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slwclk-7-0-slow-clock">7.4.1.19. SLWCLK[7:0] (slow_clock)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs.html">7.9. DVS Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.4. </span>Input Interface Configuration Signal Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/ii-config.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="input-interface-configuration-signal-description">
+<span id="ii-config-signals"></span><h1><span class="section-number">7.4. </span>Input Interface Configuration Signal Description<a class="headerlink" href="#input-interface-configuration-signal-description" title="Permalink to this heading"></a></h1>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Input Interface Configuration Signal Overview</span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td><p>Register Bits</p></td>
+<td><p>Register(s)</p></td>
+<td><p>Signal Name</p></td>
+<td><p>Short Description</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-pr"><span class="std std-ref">PR</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[7]</span></a></p></td>
+<td><p>PRst</p></td>
+<td><p>Main Logic PRst</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-sr"><span class="std std-ref">SR</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[6]</span></a></p></td>
+<td><p>SRst</p></td>
+<td><p>Main Logic SRst</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-prdvs"><span class="std std-ref">PRDVS</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[5]</span></a></p></td>
+<td><p>PRst_DVS</p></td>
+<td><p>Internal DVS PRst</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-srdvs"><span class="std std-ref">SRDVS</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[4]</span></a></p></td>
+<td><p>SRst_DVS</p></td>
+<td><p>Internal DVS SRst</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cguce"><span class="std std-ref">CGUCE</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[2]</span></a></p></td>
+<td><p>cgu_clk_enable</p></td>
+<td><p>Force spi master and slave clk enable</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-cguis"><span class="std std-ref">CGUIS</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[1]</span></a></p></td>
+<td><p>cgu_ii_sel</p></td>
+<td><p>Select origin of Reset signals: ‘0’: registers, ‘1’: s2p interface</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-cguove"><span class="std std-ref">CGUOVE</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[0]</span></a></p></td>
+<td><p>cgu_overwrite_ext_mem_ok</p></td>
+<td><p>Enable chip config from SPI slave after external Flash loaded. ‘0’ (default) = disabled</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-blen"><span class="std std-ref">BLEN[23:0]</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint1"><span class="std std-ref">ININT1[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint2"><span class="std std-ref">2[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint3"><span class="std std-ref">3[7:0]</span></a></p></td>
+<td><p>burst_len</p></td>
+<td><p>SPI Slave input burst length</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-baddr"><span class="std std-ref">BADDR[23:0]</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint4"><span class="std std-ref">ININT4[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint5"><span class="std std-ref">5[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint6"><span class="std std-ref">6[7:0]</span></a></p></td>
+<td><p>burst_addr</p></td>
+<td><p>SPI Slave input burst starting target address</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-iosel"><span class="std std-ref">IOSEL[6:0]</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint7"><span class="std std-ref">ININT7[6:0]</span></a></p></td>
+<td><p>iosel</p></td>
+<td><p>I/O ring configuration selector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-aercm"><span class="std std-ref">AERCM</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[6]</span></a></p></td>
+<td><p>aerc_mon_en</p></td>
+<td><p>Input Interface Monitor enable</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-p2sm"><span class="std std-ref">P2SM</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[5]</span></a></p></td>
+<td><p>p2s_mon_en</p></td>
+<td><p>General monitor bus enable via P2S output interface.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-jtgm"><span class="std std-ref">JTGM</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[4]</span></a></p></td>
+<td><p>jtag_mon_en</p></td>
+<td><p>Enable forwarding of monitor bus to JTAG interface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-p2ssel"><span class="std std-ref">P2SSEL</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[2]</span></a></p></td>
+<td><p>p2s_input_sel</p></td>
+<td><p>Output P2S input selector (‘0’: monitor bus, ‘1’: readout layer output)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-p2s2ch"><span class="std std-ref">P2S2CH</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[1]</span></a></p></td>
+<td><p>p2s_two_ch_sel</p></td>
+<td><p>Output P2S dual channel: ‘0’: disabled, ‘1’: enabled.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-p2sdl"><span class="std std-ref">P2SDL</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[0]</span></a></p></td>
+<td><p>p2s_data_len</p></td>
+<td><p>Output P2S data word length.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-spibrg"><span class="std std-ref">SPIBRG</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint9"><span class="std std-ref">ININT9[6]</span></a></p></td>
+<td><p>spi_bridge_mode</p></td>
+<td><p>SPI bridge mode enable bit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rbits-iope"><span class="std std-ref">IOPE[5:0]</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint9"><span class="std std-ref">ININT9[5:0]</span></a></p></td>
+<td><p>iope</p></td>
+<td><p>I/O ring pull-up/pull-down enable.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rbits-slwclk"><span class="std std-ref">SLWCLK[7:0]</span></a></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint10"><span class="std std-ref">ININT10[7:0]</span></a></p></td>
+<td><p>slow_clock</p></td>
+<td><p>Slow Clock configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RM</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint11"><span class="std std-ref">ININT11[0]</span></a></p></td>
+<td><p>rgb_mode</p></td>
+<td><p>RGB camera input decoder forwarded to internal bus.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RIFEN</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint11"><span class="std std-ref">ININT11[1]</span></a></p></td>
+<td><p>rgb_if_en</p></td>
+<td><p>RGB camera input decoder enable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RAWT</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint11"><span class="std std-ref">ININT11[2]</span></a></p></td>
+<td><p>rgb_awt</p></td>
+<td><p>RGB decoder SRAM configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RFSEL</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint11"><span class="std std-ref">ININT11[3]</span></a></p></td>
+<td><p>rgb_form_sel</p></td>
+<td><p>RGB decoder format selection: ‘0’: RGB565, ‘1’: YUYV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RDST[3:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint11"><span class="std std-ref">ININT11[7:4]</span></a></p></td>
+<td><p>rgb_dest</p></td>
+<td><p>RGB decoder target layer address.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RCHSEL[1:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint12"><span class="std std-ref">ININT12[1:0]</span></a></p></td>
+<td><p>rgb_ch_sel</p></td>
+<td><p>RGB camera channel select signal: ‘0’: R, ‘1’: G, ‘2’: B.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RFRDP[3:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint12"><span class="std std-ref">ININT12[5:2]</span></a></p></td>
+<td><p>rgb_frame_drop</p></td>
+<td><p>RGB number of gap frames between interframe difference.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RTSEL[1:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint12"><span class="std std-ref">ININT12[7:6]</span></a></p></td>
+<td><p>rgb_tsel</p></td>
+<td><p>RGB camera input decoder SRAM TSEL configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RINID[15:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint14"><span class="std std-ref">ININT14[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint13"><span class="std std-ref">ININT13[7:0]</span></a></p></td>
+<td><p>rgb_ini_data</p></td>
+<td><p>RGB camera input initial data for LFSR.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RLDG3[2:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint15"><span class="std std-ref">ININT15[2:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg3</p></td>
+<td><p>RGB decoder mask for 3 degree LFSR.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RLDG4[3:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint15"><span class="std std-ref">ININT15[6:3]</span></a></p></td>
+<td><p>rgb_lfsr_deg4</p></td>
+<td><p>RGB decoder mask for 4 degree LFSR.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RMEN</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint15"><span class="std std-ref">ININT15[7]</span></a></p></td>
+<td><p>rgb_mon_en</p></td>
+<td><p>RGB decoder monitor enable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RLDG6[5:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint16"><span class="std std-ref">ININT16[5:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg6</p></td>
+<td><p>RGB decoder mask for 6 degree LFSR.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RMLSB</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint16"><span class="std std-ref">ININT16[6]</span></a></p></td>
+<td><p>rgb_mon_31to0</p></td>
+<td><p>RGB decoder 32 LSB monitor data to JTAG.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RMMSB</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint16"><span class="std std-ref">ININT16[7]</span></a></p></td>
+<td><p>rgb_mon_63to32</p></td>
+<td><p>RGB decoder 32 MSB monitor data to JTAG.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RLDG7[6:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint17"><span class="std std-ref">ININT17[6:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg7</p></td>
+<td><p>RGB decoder mask for 7 degree LFSR.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RSZSL</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint17"><span class="std std-ref">ININT17[7]</span></a></p></td>
+<td><p>rgb_size_sel</p></td>
+<td><p>RGB decoder resize to ‘0’: 64x64, ‘1’: 128x128.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RLDG8[7:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint18"><span class="std std-ref">ININT18[7:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg8</p></td>
+<td><p>RGB decoder mask for 8 degree LFSR.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RLDG9[4:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint19"><span class="std std-ref">ININT19[4:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg9</p></td>
+<td><p>RGB decoder mask for 9 degree LFSR.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RLDG10[9:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint20"><span class="std std-ref">ININT20[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint19"><span class="std std-ref">ININT19[7:6]</span></a></p></td>
+<td><p>rgb_lfsr_deg10</p></td>
+<td><p>RGB decoder mask for 10 degree LFSR.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RLDG11[10:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint22"><span class="std std-ref">ININT22[2:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint21"><span class="std std-ref">ININT21[7:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg11</p></td>
+<td><p>RGB decoder mask for 11 degree LFSR.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RLDG5[4:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint22"><span class="std std-ref">ININT22[7:3]</span></a></p></td>
+<td><p>rgb_lfsr_deg5</p></td>
+<td><p>RGB decoder mask for 5 degree LFSR.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RLDG12[11:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint24"><span class="std std-ref">ININT24[3:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint23"><span class="std std-ref">ININT23[7:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg12</p></td>
+<td><p>RGB decoder mask for 12 degree LFSR.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RTHR[3:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint24"><span class="std std-ref">ININT24[7:4]</span></a></p></td>
+<td><p>rgb_spk_thr</p></td>
+<td><p>RGB decoder threshold for event output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RLDG13[12:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint26"><span class="std std-ref">ININT26[4:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint25"><span class="std std-ref">ININT25[7:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg13</p></td>
+<td><p>RGB decoder mask for 13 degree LFSR.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RLDG14[13:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint28"><span class="std std-ref">ININT28[5:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint27"><span class="std std-ref">ININT27[7:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg14</p></td>
+<td><p>RGB decoder mask for 14 degree LFSR.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RCKDLY[1:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint28"><span class="std std-ref">ININT28[7:6]</span></a></p></td>
+<td><p>rgb_clk_dly</p></td>
+<td><p>RGB decoder cam_pclock delay in increments of 1.2ns.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RLDG15[14:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint30"><span class="std std-ref">ININT30[6:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint29"><span class="std std-ref">ININT29[7:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg15</p></td>
+<td><p>RGB decoder mask for 15 degree LFSR.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="xref std std-ref">RLDG16[15:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint32"><span class="std std-ref">ININT32[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint31"><span class="std std-ref">ININT31[7:0]</span></a></p></td>
+<td><p>rgb_lfsr_deg16</p></td>
+<td><p>RGB decoder mask for 16 degree LFSR.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="xref std std-ref">RNMAX[7:0]</span></p></td>
+<td><p><a class="reference internal" href="ii-descriptions.html#reg-inint33"><span class="std std-ref">ININT33[7:0]</span></a></p></td>
+<td><p>rgb_nom_max</p></td>
+<td><p>RGB decoder max value for normalization.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="detailed-signal-description">
+<h2><span class="section-number">7.4.1. </span>Detailed Signal Description<a class="headerlink" href="#detailed-signal-description" title="Permalink to this heading"></a></h2>
+<section id="pr-prst">
+<span id="rbits-pr"></span><h3><span class="section-number">7.4.1.1. </span>PR (PRst)<a class="headerlink" href="#pr-prst" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[7]</span></a></p>
+<p>Main Logic PRst. This signal is forwarded to the internal logic only when <a class="reference internal" href="#rbits-cguis"><span class="std std-ref">CGUIS</span></a> = ‘0’.</p>
+</section>
+<section id="sr-srst">
+<span id="rbits-sr"></span><h3><span class="section-number">7.4.1.2. </span>SR (SRst)<a class="headerlink" href="#sr-srst" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[6]</span></a></p>
+<p>Main Logic SRst. This signal is forwarded to the internal logic only when <a class="reference internal" href="#rbits-cguis"><span class="std std-ref">CGUIS</span></a> = ‘0’.</p>
+</section>
+<section id="prdvs-prst-dvs">
+<span id="rbits-prdvs"></span><h3><span class="section-number">7.4.1.3. </span>PRDVS (PRst_DVS)<a class="headerlink" href="#prdvs-prst-dvs" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[5]</span></a></p>
+<p>Internal DVS PRst. This signal is forwarded to the internal logic only when <a class="reference internal" href="#rbits-cguis"><span class="std std-ref">CGUIS</span></a> = ‘0’.</p>
+</section>
+<section id="srdvs-srst-dvs">
+<span id="rbits-srdvs"></span><h3><span class="section-number">7.4.1.4. </span>SRDVS (SRst_DVS)<a class="headerlink" href="#srdvs-srst-dvs" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[4]</span></a></p>
+<p>Internal DVS SRst. This signal is forwarded to the internal logic only when <a class="reference internal" href="#rbits-cguis"><span class="std std-ref">CGUIS</span></a> = ‘0’.</p>
+</section>
+<section id="cguce-cgu-clk-enable">
+<span id="rbits-cguce"></span><h3><span class="section-number">7.4.1.5. </span>CGUCE (cgu_clk_enable)<a class="headerlink" href="#cguce-cgu-clk-enable" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[2]</span></a></p>
+<p>Force spi master and slave clk enable.</p>
+</section>
+<section id="cguis-cgu-ii-sel">
+<span id="rbits-cguis"></span><h3><span class="section-number">7.4.1.6. </span>CGUIS (cgu_ii_sel)<a class="headerlink" href="#cguis-cgu-ii-sel" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[1]</span></a></p>
+<p>Select origin of Reset signals (PRst, SRst, PRst_DVS, SRst_DVS):</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Setting</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>‘0’</p></td>
+<td><p>Internal reset signals are set by the corresponding register settings (<a class="reference internal" href="#rbits-pr"><span class="std std-ref">PR</span></a>, <a class="reference internal" href="#rbits-sr"><span class="std std-ref">SR</span></a>, <a class="reference internal" href="#rbits-prdvs"><span class="std std-ref">PRDVS</span></a>, <a class="reference internal" href="#rbits-srdvs"><span class="std std-ref">SRDVS</span></a>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘1’</p></td>
+<td><p>Internal reset signals are set by the <a class="reference internal" href="../encoding/input-serial-interface.html#input-serial-interface-encoding"><span class="std std-ref">Input Serial Interface</span></a> (see <a class="reference internal" href="../encoding/input-serial-interface.html#isi-resets"><span class="std std-ref">ISI Reset Signals</span></a>).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cguove-cgu-overwrite-ext-mem-ok">
+<span id="rbits-cguove"></span><h3><span class="section-number">7.4.1.7. </span>CGUOVE (cgu_overwrite_ext_mem_ok)<a class="headerlink" href="#cguove-cgu-overwrite-ext-mem-ok" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint0"><span class="std std-ref">ININT0[0]</span></a></p>
+<p>Enable chip config from SPI slave after external Flash loaded. ‘0’ (default) = disabled.</p>
+</section>
+<section id="blen-23-0-burst-len">
+<span id="rbits-blen"></span><h3><span class="section-number">7.4.1.8. </span>BLEN[23:0] (burst_len)<a class="headerlink" href="#blen-23-0-burst-len" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint1"><span class="std std-ref">ININT1[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint2"><span class="std std-ref">2[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint3"><span class="std std-ref">3[7:0]</span></a></p>
+<p>SPI Slave input burst length.</p>
+</section>
+<section id="baddr-23-0-burst-addr">
+<span id="rbits-baddr"></span><h3><span class="section-number">7.4.1.9. </span>BADDR[23:0] (burst_addr)<a class="headerlink" href="#baddr-23-0-burst-addr" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint4"><span class="std std-ref">ININT4[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint5"><span class="std std-ref">5[7:0]</span></a>, <a class="reference internal" href="ii-descriptions.html#reg-inint6"><span class="std std-ref">6[7:0]</span></a></p>
+<p>SPI Slave input burst starting target address.</p>
+</section>
+<section id="iosel-6-0-iosel">
+<span id="rbits-iosel"></span><h3><span class="section-number">7.4.1.10. </span>IOSEL[6:0] (iosel)<a class="headerlink" href="#iosel-6-0-iosel" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint7"><span class="std std-ref">ININT7[6:0]</span></a></p>
+<p>I/O ring configuration selector. See section <a class="reference internal" href="../pinout.html#gpio-configuration"><span class="std std-ref">GPIO Pin Configuration</span></a> for the configuration details.</p>
+</section>
+<section id="p2ssel-p2s-input-sel">
+<span id="rbits-p2ssel"></span><h3><span class="section-number">7.4.1.11. </span>P2SSEL (p2s_input_sel)<a class="headerlink" href="#p2ssel-p2s-input-sel" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[2]</span></a></p>
+<p>Output P2S input selector (‘0’: monitor bus, ‘1’: readout layer output).</p>
+</section>
+<section id="p2s2ch-p2s-two-ch-sel">
+<span id="rbits-p2s2ch"></span><h3><span class="section-number">7.4.1.12. </span>P2S2CH (p2s_two_ch_sel)<a class="headerlink" href="#p2s2ch-p2s-two-ch-sel" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[1]</span></a></p>
+<p>Output P2S dual channel: ‘0’: disabled, ‘1’: enabled.</p>
+</section>
+<section id="p2sdl-p2s-data-len">
+<span id="rbits-p2sdl"></span><h3><span class="section-number">7.4.1.13. </span>P2SDL (p2s_data_len)<a class="headerlink" href="#p2sdl-p2s-data-len" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[0]</span></a></p>
+<p>Output P2S data word length selector. When ‘0’: a full data word of 26 bits is clocked at the <cite>OUT1</cite> (and <cite>OUT2</cite>, when enabled).
+When ‘1’: only the LSB 17 bits are sent to the output (for faster throughput, when the MSBs are obvious by configuration).</p>
+</section>
+<section id="aercm-aerc-mon-en">
+<span id="rbits-aercm"></span><h3><span class="section-number">7.4.1.14. </span>AERCM (aerc_mon_en)<a class="headerlink" href="#aercm-aerc-mon-en" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[6]</span></a></p>
+<p>Input Interface Monitor enable.</p>
+</section>
+<section id="p2sm-p2s-mon-en">
+<span id="rbits-p2sm"></span><h3><span class="section-number">7.4.1.15. </span>P2SM (p2s_mon_en)<a class="headerlink" href="#p2sm-p2s-mon-en" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[5]</span></a></p>
+<p>General monitor bus enable via P2S output interface..</p>
+</section>
+<section id="jtgm-jtag-mon-en">
+<span id="rbits-jtgm"></span><h3><span class="section-number">7.4.1.16. </span>JTGM (jtag_mon_en)<a class="headerlink" href="#jtgm-jtag-mon-en" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint8"><span class="std std-ref">ININT8[4]</span></a></p>
+<p>Enable forwarding of monitor bus to JTAG interface..</p>
+</section>
+<section id="spibrg-iospi-bridge-modepe">
+<span id="rbits-spibrg"></span><h3><span class="section-number">7.4.1.17. </span>SPIBRG (iospi_bridge_modepe)<a class="headerlink" href="#spibrg-iospi-bridge-modepe" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint9"><span class="std std-ref">ININT9[6]</span></a></p>
+<p>SPI Bridge mode enable bit. When enabled, the SPI Slave interface of the chip is directly connected to the
+SPI Master interface. This mode enables direct Write or Read of an SPI external Flash memory connected to the
+SPI Master interface of the chip. When enabled, the SPI Slave interface pins do not control any more the internal
+memory interfaces of the chip, i.e. SPI cannot be used any more to read/write SRAMs and registers.</p>
+</section>
+<section id="iope-5-0-iope">
+<span id="rbits-iope"></span><h3><span class="section-number">7.4.1.18. </span>IOPE[5:0] (iope)<a class="headerlink" href="#iope-5-0-iope" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint9"><span class="std std-ref">ININT9[5:0]</span></a></p>
+<p>I/O ring pull-down enable bits.
+The pull-down settings are summarized in the following table. When an IOPE bit is set, the pull-down resistors are enabled
+for the corresponding chip pins:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>IOPE bit</p></td>
+<td><p>Pin group</p></td>
+<td><p>Pull-down enabled for pins</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Mode sel</p></td>
+<td><p>IO26_MODE_SEL_I</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>S2P</p></td>
+<td><p>IO15_S2P_DREADY_I, IO16_S2P_DATA_I</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>GPIO 11-14</p></td>
+<td><p>GPIO12_SPI_S_MOSI_IO, GPIO13_SPI_S_CLK_IO, GPIO14_SPI_S_SS_N_IO</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>GPIO 7-10</p></td>
+<td><p>GPIO7_SPI_M_MISO_IO, GPIO8_SPI_M_MOSI_IO, GPIO9_SPI_M_CLK_IO, GPIO10_SPI_M_SS_N_IO</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Fixed inputs</p></td>
+<td><p>IO1_CLK_I, I02_RB_I, IO3_TCK_I, IO4_TDI_I, IO5_TMS_I</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>RGB Interface</p></td>
+<td><p>IO40_RGB_PCLK_I, IO29_RGB_HREF_I, IO28_RGB_VSYNC_I, IO31_RGB_INT_CLK_I, IO32_RGB_D2_I, IO33_RGB_D3_I, IO34_RGB_D4_I, IO35_RGB_D5_I, IO36_RGB_D6_I, IO37_RGB_D7_I, IO38_RGB_D8_I, IO39_RGB_D9_I</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the case of GPIO pins, the pull-down resistors are active only when the pin is set to <em>Input</em>.</p>
+</div>
+</section>
+<section id="slwclk-7-0-slow-clock">
+<span id="rbits-slwclk"></span><h3><span class="section-number">7.4.1.19. </span>SLWCLK[7:0] (slow_clock)<a class="headerlink" href="#slwclk-7-0-slow-clock" title="Permalink to this heading"></a></h3>
+<p>Location: <a class="reference internal" href="ii-descriptions.html#reg-inint10"><span class="std std-ref">ININT10[7:0]</span></a></p>
+<p>Configuration register for the <em>SLOW_CLK</em> pin. For a description of the slow clock use and generation
+in Speck2e, see <a class="reference internal" href="../architecture/slow-clock.html#slow-clock"><span class="std std-ref">Internal Slow Clock</span></a>.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Bit</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>SLWCLK[0]</p></td>
+<td><p>Forward <em>SLOW_CLK</em> to readout block</p></td>
+</tr>
+<tr class="row-odd"><td><p>SLWCLK[1]</p></td>
+<td><p>Forward internally generated slow clock to readout block</p></td>
+</tr>
+<tr class="row-even"><td><p>SLWCLK[2]</p></td>
+<td><p>Forward <em>SLOW_CLK</em> to convolutional layers’ leak generator</p></td>
+</tr>
+<tr class="row-odd"><td><p>SLWCLK[3]</p></td>
+<td><p>Forward internally generated slow clock to convolutional layers’ leak generator</p></td>
+</tr>
+<tr class="row-even"><td><p>SLWCLK[4]</p></td>
+<td><p>Forward <em>SLOW_CLK</em> to DVS filter</p></td>
+</tr>
+<tr class="row-odd"><td><p>SLWCLK[5]</p></td>
+<td><p>Forward internally generated slow clock to DVS filter</p></td>
+</tr>
+<tr class="row-even"><td><p>SLWCLK[6:7]</p></td>
+<td><p>Configure clk divider for internal slow clock generation</p></td>
+</tr>
+</tbody>
+</table>
+<p>Internal slow clock divider configuration (SLWCLK[6:7]):</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Configuration</p></td>
+<td><p>Description</p></td>
+</tr>
+<tr class="row-even"><td><p>00</p></td>
+<td><p>14-bit division</p></td>
+</tr>
+<tr class="row-odd"><td><p>01</p></td>
+<td><p>15-bit division</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>16-bit division</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>17-bit division</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ii.html" class="btn btn-neutral float-left" title="7.3. Input Interface Register Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="layer.html" class="btn btn-neutral float-right" title="7.5. Convolutional Layer Register Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

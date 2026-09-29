@@ -1,0 +1,193 @@
+###########
+XyloAudio 3
+###########
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+XyloAudio 3 is a fully digital AI chip based on Spiking Neural Network (SNN) and Reservoir Computing technology.
+It includes a frontend with support for analog and digital microphones and is designed for audio applications,
+such as ambient sound detection.
+
+
+Input Sources
+=============
+
+XyloAudio 3 receives input primarily through a microphone connected to the audio frontend.
+The frontend supports both analog and digital (PDM) microphones, and the active microphone is selected by setting the 
+:attr:`samna.xyloAudio3.configuration.XyloConfiguration.input_source` attribute to either 
+``samna.xyloAudio3.InputSource.AnalogMicrophone`` or ``samna.xyloAudio3.InputSource.DigitalMicrophone``.
+
+It is also possible to simulate microphone input by sending them as :class:`samna.xyloAudio3.event.AfeSample`
+events in software.
+To simulate analog microphone input, set the input source to ``samna.xyloAudio3.InputSource.AdcEvents`` and
+send the 10-bits ADC values as an ``AfeSample`` event.
+For digital microphone input simulation, set the input source to ``samna.xyloAudio3.InputSource.PdmEvents`` and
+send 16 bits of the PDM 1-bit signal per ``AfeSample`` event.
+
+To bypass the audio frontend or work directly with the SNN core, :class:`samna.xyloAudio3.event.Spike` events
+can be sent directly to the chip. To do this, set the input source to ``samna.xyloAudio3.InputSource.SpikeEvents``.
+
+
+Operation Modes
+===============
+
+XyloAudio 3 can be configured to operate in one of four modes, each supporting a different use case.
+The operation mode is selected with :attr:`samna.xyloAudio3.configuration.XyloConfiguration.operation_mode`.
+
+In general the user starts in Accelerated-Time mode to develop and debug their application.
+Once the user is satisfied with the state of the model, the Real-Time or Direct Output mode is used
+to deploy the model.
+
+--------------------------------------------------------------------------
+Accelerated-Time Mode (``samna.xyloAudio3.OperationMode.AcceleratedTime``)
+--------------------------------------------------------------------------
+
+Accelerated-Time mode introduces software support to automate event processing and network state monitoring,
+while still guaranteeing users full control over the timing of input events.
+
+In this mode the user can simply specify a list of timed input events, i.e. with ``timestep`` filled correctly,
+and the system automatically processes each timestep and does a readout after each timestep.
+In addition, the system can automatically add detailed network state of specific neurons by specifying the,
+``monitor_neuron_v_mem``, ``monitor_neuron_i_syn`` and ``monitor_neuron_spike`` fields in
+:attr:`samna.xyloAudio3.configuration.XyloConfiguration.debug`.
+
+These automatic monitoring capabilities and guaranteed reproducibility make Accelerated-Time the recommended mode
+for application development or benchmarking.
+
+Typical operation looks as follows.
+
+* Configure the network neurons for which state monitoring should be enabled.
+* Send all input events to be processed in order. The ``timestep`` field should be monotonically increasing,
+  if the ``timestep`` field contains a timestep smaller than the current one, it is treated as the current one.
+* Send :class:`samna.xyloAudio3.event.TriggerProcessing` with the last ``timestep`` to process the last events.
+  Normally an increase in `timestep` value automatically starts processing the previous timestep,
+  but because the system can not tell when the last event arrives, it requires an extra event to indicate that
+  the last timestep is ready to process.
+* Collect all :class:`samna.xyloAudio3.event.Spike` and :class:`samna.xyloAudio3.event.Readout` events.
+
+There is exactly one ``Readout`` event per timestep, so when the last is received, the chip has finished processing.
+When the chip is not processing, the user still has full access to the registers and memories.
+
+------------------------------------------------------------
+Real-Time Mode (``samna.xyloAudio3.OperationMode.RealTime``)
+------------------------------------------------------------
+
+In Real-Time mode the chip is continually processing input without any intervention from the software 
+according to its internal timestep counter. The length of a timestep is controlled by
+:attr:`samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap`.
+The user must ensure that the length of the timestep is large enough to completely process the given network.
+Whenever a timestep is finished the software produces a :class:`samna.xyloAudio3.event.Readout` event.
+Unlike Accelerated-Time mode, network state monitoring is not available in this mode.
+
+Interaction with the chip, and therefore precise control, is not possible in this mode.
+This also means that input must be supplied from a microphone connected to the audio frontend
+and it is not possible to send software input events.
+
+**The lack of precise control makes this mode not suited for development.**
+
+Typical operation looks as follows.
+
+* Configure the chip for Real-Time mode with the appropriate microphone input.
+* Send a :class:`samna.xyloAudio3.event.TriggerProcessing` event to trigger continuous processing.
+* The system will keep running indefinitely.
+
+--------------------------------------------------------------------
+Direct Output Mode (``samna.xyloAudio3.OperationMode.DirectOutput``)
+--------------------------------------------------------------------
+
+The chip also supports directly outputting a classification result on its three output pins,
+which is known as Direct Output mode. The output pins have the following encoding: 
+
+* 0: default state (none of ON0 ~ ON6 fires)
+* 1: at least ON0 fired
+* 2: ON0 did not fire, at least ON1 fired
+* 3: ON0 ~ ON1 did not fire, at least ON2 fired
+* 4: ON0 ~ ON2 did not fire, at least ON3 fired
+* 5: ON0 ~ ON3 did not fire, at least ON4 fired
+* 6: ON0 ~ ON4 did not fire, at least ON5 fired
+* 7: ON0 ~ ON5 did not fire, at least ON6 fired
+
+In Direct Output mode the chip is continually processing input without any intervention from the software 
+according to its internal timestep counter. The length of a timestep is controlled by
+:attr:`samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap`.
+The user must ensure that the length of the timestep is large enough to completely process the given network.
+The value of the output pins is held for the time controlled by
+:attr:`samna.xyloAudio3.configuration.XyloConfiguration.output_counter_wrap`.
+
+Whenever the state of the output pins changes, the software produces a :class:`samna.xyloAudio3.DirectOutputValue`
+event. This reports the ``value`` of the pins and the ``timestep`` at which the event was generated.
+If :attr:`samna.xyloAudio3.configuration.DebugConfig.use_timestamps` is enabled, the events will contain
+microsecond-precision timestamps instead of timesteps.
+
+Unlike Accelerated-Time mode, network state monitoring is not available in this mode.
+
+Interaction with the chip, and therefore precise control, is not possible in this mode.
+This also means that input must be supplied from a microphone connected to the audio frontend
+and it is not possible to send software input events.
+
+**The lack of precise control makes this mode not suited for development.**
+
+Typical operation looks as follows.
+
+* Configure the chip for Direct Output mode with the appropriate microphone input.
+* Send a :class:`samna.xyloAudio3.event.TriggerProcessing` event to trigger continuous processing.
+* The system will keep running indefinitely.
+
+-------------------------------------------------------
+Manual Mode (``samna.xyloAudio3.OperationMode.Manual``)
+-------------------------------------------------------
+
+In Manual mode the user has full control over the chip with minimal software support.
+This means that the user must perform all operations manually, i.e. the user must actively poll the chip's state.
+Furthermore there is no notion of time in this mode, so the ``timestep`` fields in events are ignored.
+
+This complete control makes it the possible to debug and test the XyloAudio 3 chip.
+
+Typical operation looks as follows.
+
+* Send input events to be processed in a single time step, e.g. :class:`samna.xyloAudio3.event.Spike`.
+* Send a :class:`samna.xyloAudio3.event.TriggerProcessing` event to process the input from the previous step.
+* Poll the status register and wait for the chip to finish processing.
+* Read registers and memory to obtain the readout and network states.
+
+To read memory, :attr:`samna.xyloAudio3.configuration.Debug.ram_access_enable` must be enabled first.
+Note that accessing memory while the chip is processing a timestep can lead to errors or unpredictable results.
+Therefore, it is crucial to wait for the chip to finish processing before reading the state.
+
+-------------------------------------------------------------
+Recording Mode (``samna.xyloAudio3.OperationMode.Recording``)
+-------------------------------------------------------------
+
+Recording mode allows the readout of :class:`samna.xyloAudio3.event.Spike` events generated by the filter bank
+in the audio frontend. The ``neuron_id`` indicates which of the sixteen channels produced the spike, corresponding
+to one of the sixteen input neurons of the chip. The ``timestep`` field shows when the spike was produced, measured
+in timesteps based on the :class:`samna.xyloAudio3.configuration.XyloConfiguration.time_resolution_wrap` setting.
+If :attr:`samna.xyloAudio3.configuration.DebugConfig.use_timestamps` is enabled, the events will contain
+microsecond-precision timestamps instead of timesteps.
+
+Recording mode supports capturing output from both the analog and digital microphones in the frontend.
+For the digital microphone, software input events of type :class:`samna.xyloAudio3.event.AfeSample` can also be recorded.
+
+Note that the SNN core is not accessible in Recording mode. If processing is required, the user has to first record
+the audio frontend output spikes and subsequently send them to the chip in Accelerated-Time mode.
+
+==============
+Basic Examples
+==============
+
+* :ref:`XyloAudio 3 Accelerated-Time Mode`
+* :ref:`XyloAudio 3 Real-Time Mode`
+* :ref:`XyloAudio 3 Manual Mode`
+* :ref:`XyloAudio 3 Recording Mode`
+* :ref:`XyloAudio 3 Direct Output Mode`
+* :ref:`XyloAudio 3 Power Measurements`
+
+=============
+API Reference
+=============
+
+* Model: :class:`samna.xyloAudio3.XyloModel`
+* Event: :ref:`samna.xyloAudio3.event`
+* Configuration: :ref:`samna.xyloAudio3.configuration`

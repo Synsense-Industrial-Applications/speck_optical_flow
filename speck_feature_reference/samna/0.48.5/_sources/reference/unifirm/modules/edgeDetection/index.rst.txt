@@ -1,0 +1,19 @@
+###################################
+samna.unifirm.modules.edgeDetection
+###################################
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+Module content
+--------------
+
+.. automodule:: samna.unifirm.modules.edgeDetection
+   :members:
+   :show-inheritance:
+

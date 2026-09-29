@@ -1,0 +1,50 @@
+************************
+Mc3632 Read acceleration
+************************
+
+You can read acceleration events from MC3632 sensor directly.
+
+The data could be used for debugging manually in realtime mode as described in :ref:`Xylo-Imu RealTime Mode With Acceleration Input`.
+
+Here is an example that displays reading acceleration from MC3632, which bases on packages :
+::
+
+    - samna                 0.33.1
+
+.. code-block:: python
+
+    import samna
+    import time
+
+    def initialize_board():
+        dk = samna.device.open_device("XyloImuTestBoard:0")
+        dk.get_stop_watch().set_enable_value(True)  # Enable timestamp of output acceleration event.
+        time.sleep(0.1)
+        return dk
+        
+    dk = initialize_board()
+    mc = dk.get_mc3632()
+    sink = samna.graph.sink_from(mc.get_source_node())  # Initialize sink node first before setting up mc3632, or you will miss some accelerations in the beginning.
+
+    def start_up_mc3236(mc):
+        mc.setup()            
+        mc.set_auto_read_freq(20)    # Read 20 times every second.
+        mc.auto_read_enable(True)    # Enable automatic reading.
+        return mc
+
+    start_up_mc3236(mc)
+
+    def print_acceleration(accel: samna.events.Acceleration):
+        # Calculate acceleration in the unit of g (earch gravity).
+        # When the board places normally on a platform, the printed x,y,z should be near 0,0,1. In which 1 represents the earch gravity.
+        x = accel.x * 4 / (1 << 14)
+        y = accel.y * 4 / (1 << 14)
+        z = accel.z * 4 / (1 << 14)
+        print(f"acceleration {accel.sequence_id}: {x}, {y}, {z}, {accel.timestamp}")
+
+    recv_count = 100
+    acceleration_events = sink.get_n_events(recv_count, 10000)     # Try to receive 100 events in 10 seconds.
+    assert(len(acceleration_events) == recv_count)
+
+    [print_acceleration(accel) for accel in acceleration_events]
+    print(f"Timestamp average interval: {(acceleration_events[-1].timestamp - acceleration_events[0].timestamp) / (recv_count - 1)} microseconds.")

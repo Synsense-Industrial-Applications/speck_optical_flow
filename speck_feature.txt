@@ -1,0 +1,170 @@
+================================================================================
+Speck2f 硬件特性笔记
+================================================================================
+用途：记录 Speck2f（samna / speck2f 工具链）中「代码里没有显式写出、但实际生效」
+      的硬件行为与隐含约束。这些特性往往决定了参数为什么必须成组出现。
+维护：本文件持续增补。新增条目请沿用文件末尾的模板，并尽量补上代码位置与验证方式。
+      未经验证的内容一律放到「待确认」，避免把推测当成结论。
+
+--------------------------------------------------------------------------------
+[001] bias 依赖慢时钟才生效（即文档中的 leak/bias processing）
+--------------------------------------------------------------------------------
+来源：口述 2026-09-21；2026-09-28 解答待确认项（口述 + samna 0.48.6 文档核实）
+
+结论
+    1. bias 只有启用慢时钟（dk_io.set_slow_clk(True)）之后才会生效；
+       未启用慢时钟时 bias 完全失效 —— 不存在「改挂到其它时钟」的可能，
+       因为 Speck 的网络与 DVS 本身没有时钟、「主时钟」并不存在
+       （时钟与读出细节见 [003]）。
+    2. bias 是「每周期生效」的周期性累加：每个慢时钟周期（每 1/rate 秒）
+       将膜电位加上一次 bias 的数值，而不是一次性叠加的偏置。
+    3. leak 与 bias 是同一机制（文档原名 leak/bias processing）：
+       bias 值就是每个周期加进膜电位的量，负值即表现为「漏电」式下漂 ——
+       「leak 由 bias 引起」的说法成立，更准确地说：leak 就是这次累加本身
+       （2026-09-28 经 samna 0.48.6 官方文档核实）。
+
+机制
+    慢时钟启用后，硬件按 rate 决定的速度周期性工作：每 1/rate 秒执行一个周期，
+    每个周期将该层神经元的膜电位加上 bias 的数值 ——「每周期生效」。
+    单位时间内生效次数 = rate（rate 越大，单位时间累加的 bias 总量越大）。
+    未启用慢时钟时没有任何周期信号驱动累加，故 bias 完全失效。
+    . leak/bias 是同一处理块（文档名 leak/bias processing；本层开关 = leak_enable），
+      负 bias ⇒ 漏电式下漂；文档给出下限约束：leak 不能把膜电位压到 threshold_low
+      以下（原文 "…cannot be surpassed by leak"，本仓库 threshold_low=-1）。
+    . 复位与累加是串行过程（口述 2026-09-28）：越阈发射复位与 bias 生效不会同时
+      出现、互不冲突；本仓库 return_to_zero=True ⇒ 越阈后膜电位归零
+      （文档 "neurons … will return to 0 when firing"）。
+
+代码位置
+    dk_io.set_slow_clk_rate(<rate>)      # 指定慢时钟速率
+    dk_io.set_slow_clk(True)             # 启用慢时钟（bias 生效的前提）
+    create_layer(..., bias=<值>)         # 设定该层要累加的数值
+        config.cnn_layers[layer].biases         = ones(feature_count) * bias
+        config.cnn_layers[layer].leak_enable    = leak_enable
+        config.cnn_layers[layer].return_to_zero = True（本仓库全部层）
+    文档佐证（samna 0.48.6 公开文档，samna.speck2f.configuration.CnnLayerConfig）：
+        leak_enable:   "Enable leak/bias processing for this layer"
+        threshold_low: "minimum value of the neuron membrane potential which
+                        cannot be surpassed by leak"
+        return_to_zero: "neurons in this layer will return to 0 when firing"
+        leak_internal_slow_clk_enable: 用内部慢时钟替代外部 SLOW_CLK（需先开 leak_enable）
+    链接：https://synsense-sys-int.gitlab.io/samna/0.48.6/reference/speck2f/configuration/index.html
+
+相关实例（本仓库）
+    optical_flow_diag_split_onoff_seq3_conv.py      rate=32,   layer_0_0 / layer_0_1 的 bias=-2
+    optical_flow_diag_split_onoff_seq3_k2_conv.py   rate=32,   layer_0_0 / layer_0_1 的 bias=-2
+    optical_flow_axis_recurrent_4dir.py             rate=1000, 仅启用慢时钟，未使用 bias
+    algorithm_Demo/Demo_SNN.py                                 layer_0_0 / layer_0_1 同配置
+    algorithm_Demo/optical_flow_split_d_on_off_3_k_conv.py     同上（早期版本）
+    —— 本仓库中 leak_enable=True 与 bias=-2 总是成对出现（同一机制的两个参数）。
+
+待确认
+    （2026-09-28 已结清：
+      ① leak 与 bias 为同一机制（leak/bias processing），不存在「两个作用互相
+         抵消」的问题；bias 为负即为下漂，下漂下限为 threshold_low。
+      ② 越阈复位与 bias 生效串行发生、不会同时出现；本仓库 return_to_zero=True。）
+
+--------------------------------------------------------------------------------
+[002] 卷积对 in_feature 分段顺序计入：高位段先算；越阈发射后，晚到的负权重无法撤销
+--------------------------------------------------------------------------------
+来源：口述 2026-09-28
+
+结论
+    1. 卷积 (out_feature, in_feature, x, y) 对 in_feature 维度的计算不是「同时求和」，
+       而是按段先后计入：先计算 in_feature 的高位段，再计算低位段。
+       以 in_feature = 0~7 为例，高半区（4~7）的贡献先到，低半区（0~3）后到。
+    2. 「理论上同时到达」在物理上不成立：真实世界不存在严格同时的事件。
+       用组合逻辑电路实现的 Speck SNN 同样如此 —— 逻辑上同时产生的事件，
+       实际到达目标层仍有先后，且先后顺序由硬件结构决定（确定性、可复现），
+       不是随机抖动。
+    3. 神经元在累加过程中越阈即发射：若先到的一段贡献（如 feature4 的权重）已使
+       神经元发射脉冲，后到的贡献即使是负权重（如 feature0 为负），也无法
+       撤销/阻碍这次发射。
+    => 判决语义不是「∑ w_i·s_i 一次性过阈值」，而是「按 in_feature 顺序逐步累加的
+       部分和，任一时刻越阈即发射」：先到的正贡献可以「抢跑」锁定一次脉冲，
+       晚到的负贡献失去抑制机会（只能影响之后的状态）。
+
+机制（口述原例，2026-09-28）
+    用 destinations 把 layer_a 的输出复制成两份（分别对应 layer_b 的 in_feature
+    0~3 与 4~7）后连入 layer_b：layer_a 的同一个 feature 会同时出现在 layer_b 的
+    in_feature i（低半区）与 in_feature i+4（高半区）。
+    理论上 in_feature0 与 in_feature4 同时到达；实际上高半区先被计算，
+    feature4 的权重影响先到来。若 feature4 的贡献已使神经元越阈发射，
+    之后 feature0 的负权重也拦不住这次脉冲。
+
+代码位置
+    create_layer(..., destinations_0=..., destinations_1=...,
+                 feature_shift_0=..., feature_shift_1=...)
+    config.cnn_layers[layer].destinations[n].layer / .enable / .feature_shift
+    说明：destination 的第二路可用 feature_shift 把同一路输出平移到目标层的
+    另一段 in_feature，从而构造「同源 spike 进入不同 in_feature」的场景。
+
+相关实例（本仓库）
+    optical_flow_diag_split_onoff_seq3.py（onoff 家族各文件同构）
+        layer_1_0：destinations_0=layer_2_0, destinations_1=layer_2_0, feature_shift_1=4
+        layer_1_1：destinations_0=layer_2_1, destinations_1=layer_2_1, feature_shift_0=4
+        layer_2_x 的 input_shape_feature=8：layer_1_x 的 4 个输出既直接进入
+        in_feature 0~3，又经 feature_shift=4 复制进入 4~7 —— 即口述原例的结构。
+    同类复制型连线：optical_flow_axis_split_x.py 的 layer_1_0 → layer_2_0
+    （两个 destination 同目标，feature_shift_1=2，区段 0~1 / 2~3）等。
+
+待确认
+    - 「高位段先」的精确顺序与粒度：是否严格按 2 的幂分段（先 bit2 段）？
+      与 in_feature 总数（4/8/16）、SRAM 分组配置是否相关？
+    - 判决是否确为「任意部分和越阈立即发射」？是否存在按段/按组判决的边界？
+    - 对称情形：负贡献先到、正贡献后到，表现为「延迟发射」还是「不发射」？
+    - 本条目为口述结论 + 代码结构佐证，未做针对性硬件实测；与实测冲突时以实测为准。
+
+--------------------------------------------------------------------------------
+[003] 网络与 DVS 无时钟；IO 时钟只负责读出；读出事件顺序的可信度
+--------------------------------------------------------------------------------
+来源：口述 2026-09-28（解答 [001] 待确认项时补充）
+
+结论
+    1. Speck 上的网络与 DVS 本身没有时钟 —— 不存在「主时钟」。
+       器件上唯一的时钟是 IO 时钟，它与 slow_clk 无关。
+    2. IO 时钟只负责「把网络的输出送给上位机」（读出）这一件事，
+       不参与网络计算（网络是时钟无关的组合逻辑，见 [002]）。
+    3. 上位机经 IO 读取事件数据时按行随机读取，读出的事件顺序可能跟实际
+       发生顺序有所偏差。
+       判据：只要没有出现超带宽现象（典型伪影：横条纹），读出的事件顺序
+       就是值得信赖的。
+
+用途（重要）
+    . 分析记录数据（recordings 的事件流、复盘 demo 现象）前，先检查有无
+      横条纹等带宽溢出伪影：
+        - 无：读出顺序可信，可据此分析事件先后（如 [002] 的时序效应）；
+        - 有：读出顺序不可信，该段数据不能用于顺序/时序分析。
+    . 本条目只约束「观测到的顺序」；硬件内部真实的先后机制不受影响。
+
+代码位置
+    对应 API（本仓库用法）：io_module.set_in_out_interface_clk_rate(<hz>)
+    已设置的实例：
+        algorithm_Demo/Demo_record.py      RECORDER_INTERFACE_CLOCK_HZ = 25_000_000（25 MHz）
+        algorithm_Demo/Demo_algorithm.py   1_000_000（1 MHz）
+        algorithm_Demo/DS_Demo.py          1_000_000（1 MHz）
+    被注释的实例（网络脚本，未生效）：
+        optical_flow_diag_split_onoff_seq3_conv.py / _seq3_k2_conv.py
+        algorithm_Demo/optical_flow_split_d_on_off_3_k_conv.py
+        # dk_io.set_in_out_interface_clk_rate(500000)
+    注意：slow_clk 的 API（set_slow_clk_rate / set_slow_clk）与 IO 时钟相互独立。
+
+相关实例（本仓库）
+    记录 / 回放工具：algorithm_Demo/Demo_record.py（记录）、
+    algorithm_Demo/offline_tools/event_stream_player.py（按时间戳回放 Layer-4 CSV）。
+
+待确认
+    - 「按行随机读取」的确切机制（行扫描顺序由什么决定）？
+    - 除横条纹外，超带宽现象是否还有其它可辨识的伪影形态？
+    - 接口时钟速率与事件率、超带宽阈值之间的定量关系，以及溢出时应如何处置。
+
+================================================================================
+[模板] 新增条目
+================================================================================
+[编号] 一句话结论
+来源：      口述 / 实测 / 文档 / 推测
+结论：
+机制：
+代码位置：
+相关实例：
+待确认：

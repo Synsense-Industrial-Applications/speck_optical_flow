@@ -1,0 +1,321 @@
+###########
+Quick Start
+###########
+
+This guide provides step-by-step instructions for managing devices, configuring settings, and handling event streams using Samna. 
+
+.. contents:: Topics
+   :local:
+   :depth: 2
+
+*************
+Prerequisites
+*************
+
+- Ensure devices are connected via **USB 3.0-compatible USB-C cables**.
+
+******************
+Manipulate Devices
+******************
+
+For detailed description please check :ref:`Device controller`.
+
+================
+Discover Devices
+================
+
+All SynSense devices can be discovered by the following methods:
+
+.. code-block:: python
+   :linenos:
+
+   # Get all supported devices that are currently connected to the machine.
+   devices = samna.device.get_all_devices() 
+
+   # Get all devices that have been opened in this process.
+   devices = samna.device.get_opened_devices() 
+
+   # Get all supported devices that are currently connected to the machine and are not in use by any process.
+   devices = samna.device.get_unopened_devices()
+
+============
+Open Devices
+============
+
+-----------------------
+Open by Device Instance
+-----------------------
+
+Use this if you want to dynamically detect and open devices:
+
+.. code-block:: python
+   :linenos:
+
+   # List all connected unopened devices
+   devices = samna.device.get_unopened_devices()  
+   
+   # Open the first detected device
+   if devices:
+       my_device = samna.device.open_device(devices[0])
+
+-------------------
+Open by Device Name
+-------------------
+
+Use this to explicitly open a specific device type (e.g., Speck2f Dev Kit):
+
+.. code-block:: python
+   :linenos:
+
+   # Open the first Speck2f Dev Kit
+   board = samna.device.open_device("Speck2fDevKit:0")  
+
+.. note::
+   - Device names follow the format ``"<DeviceType>:<Index>"`` (e.g., ``"DvXplorer:0"``).
+   - For a list of supported devices, refer to :ref:`Supported devices`.
+
+-----------------------------------------------
+Select a Device from Multiple Connected Devices
+-----------------------------------------------
+
+If multiple devices are connected, filter by type using their ``device_type_name`` attribute:
+
+.. code-block:: python
+   :linenos:
+
+   devices = samna.device.get_unopened_devices()
+
+   for dev in devices:
+       if dev.device_type_name == "DvXplorer":
+           my_dvxplorer = samna.device.open_device(dev)
+       elif dev.device_type_name == "Speck2fDevKit":
+           my_dev_kit = samna.device.open_device(dev)
+
+******************
+Configuring a Chip
+******************
+
+To configure a chip:
+
+1. **Create a configuration object** with desired settings.
+2. **Apply the configuration** to the chip's model.
+
+In Samna, one chip only has one type of configuration object. 
+For example, ``Speck2fDevKit``, ``Speck2fModuleDevKit``, ``Speck2fLcc84LoulanBoard``,
+``Speck2fCharacterizationBoard``, ``Speck2fCharQiuciBoard`` and ``Speck2fModuleLoulanBoard`` share 
+one type of configuration object: :ref:`samna.speck2f.configuration.SpeckConfiguration<samna.speck2f.configuration>`.
+
+Example for Speck2f series:
+
+.. code-block:: python
+   :linenos:
+
+   # Create a default configuration
+   config = samna.speck2f.configuration.SpeckConfiguration()
+
+   # modify configuration 
+
+   # Apply to the chip model
+   model = board.get_model()  # Assuming board is the opened chip
+   model.apply_configuration(config)
+
+To ensure the proper configuration of the chip, 
+such as enabling any output from it, 
+please refer to the dedicated page of the specific chip model for detailed instructions:
+
+- :ref:`How to configure Speck 2f chip <configure_speck_2f>`
+
+*********************************
+Event Handling with Filter Graphs
+*********************************
+
+Samna uses **event filter graphs** to process and route events between devices, filters, and sinks.
+Each :class:`samna.graph.EventFilterGraph` has it's own processing thread.
+
+==============
+Create a Graph
+==============
+
+.. code-block:: python
+
+   graph = samna.graph.EventFilterGraph()
+
+==================================
+Receiving Events from a Chip model
+==================================
+
+Connect the chip model's source node to a sink node to collect events. 
+For the available methods of the sink node, please check :ref:`Sinks`.
+
+-------------------
+With a Filter Graph
+-------------------
+
+You have to manually create a sink node, then you have the ability to add filters
+between the model source and the sink to process the events. For all the available 
+filters, please check :ref:`Filters`.
+
+Here we take Speck2f as an example.
+
+.. code-block:: python
+   :linenos:
+
+   graph = samna.graph.EventFilterGraph()
+
+   _, sink = graph.sequential([board.get_model_source_node(), samna.BasicSinkNode_speck2f_event_output_event()])
+
+   graph.start()
+   
+   # Read events
+   events = sink.get_events()  # Returns a list of events
+
+   graph.stop()
+
+----------------------
+Without a Filter Graph
+----------------------
+
+In this way there is no graph constructed, so you can't add filters between the 
+model source and the sink node to process the events.
+
+.. code-block:: python
+   :linenos:
+
+   # assumes 'board' is an opened device
+   sink = samna.graph.sink_from(board.get_model_source_node())
+
+   # Read events
+   events = sink.get_events()  # Returns a list of events
+
+========================
+Sending Events to a Chip
+========================
+
+Use a source node to send events to the chip's sink node:
+
+-------------------
+With a Filter Graph
+-------------------
+
+You have to manually create a source node, then you have the ability to add filters
+between the source and the model sink to process the events. For all the available 
+filters, please check :ref:`Filters`.
+
+Here we take Speck2f as an example.
+
+.. code-block:: python
+   :linenos:
+
+   graph = samna.graph.EventFilterGraph()
+
+   # manually create a sink node for Speck2f series
+   source, _ = graph.sequential([samna.BasicSourceNode_speck2f_event_input_event(), board.get_model_sink_node()])
+
+   graph.start()
+
+   # Write events
+   source.write([event1, event2])
+
+----------------------
+Without a Filter Graph
+----------------------
+
+In this way there is no graph constructed, so you can't add filters between the 
+source and the model sink node to process the events.
+
+.. code-block:: python
+   :linenos:
+
+   source = samna.graph.source_to(board.get_model().get_sink_node())
+   
+   # Write events
+   source.write([event1, event2])
+
+===========
+Add filters
+===========
+
+Samna provides many built-in filters to process events on the fly,
+for all built-in filters, please check :ref:`Filters`. Different filters have different methods that users can set.
+Each chip has it's own set of filters it can use, please make sure you are using the correct filter for the chip.
+
+If the built-in filters can't meet your needs, you can even write your own filter in C++ with the JIT comes with Samna, 
+please check :ref:`JIT Filters` for more details.
+
+To use a filter, you have to create a graph first.
+
+.. code-block:: python
+   :linenos:
+
+   graph = samna.graph.EventFilterGraph()
+
+   _, event_type_filter, _ = graph.sequential([board.get_model_source_node(), "Speck2fOutputEventTypeFilter", sink])
+
+   # Here we use Speck2fOutputEventTypeFilter to let only speck2f::event::RegisterValue event can reach the sink.
+   event_type_filter.set_desired_type("speck2f::event::RegisterValue")
+
+   graph.start()
+
+*************
+Visualization
+*************
+
+========================
+Launching the Visualizer
+========================
+
+Run the visualizer from the terminal:
+
+.. code-block:: bash
+
+   samnagui -W 0.75 -H 0.75 "tcp://0.0.0.0:40000"
+
+Or programmatically:
+
+.. code-block:: python
+
+   # samnagui must be imported after samna
+   import samna, samnagui
+
+   samnagui.run_visualizer(
+      "tcp://0.0.0.0:40000",  # Endpoint
+      0.75,                    # Window width scale
+      0.75                     # Window height scale
+   )
+
+===================================
+Displaying Events in the Visualizer
+===================================
+
+1. **Stream visualizer configure events** to the visualizer via a ``VizEventStreamer``:
+
+   .. code-block:: python
+
+      graph = samna.graph.EventFilterGraph()
+      config_source, streamer = graph.sequential([samna.BasicSourceNode_ui_event(), "VizEventStreamer"])
+      streamer.set_streamer_endpoint("tcp://0.0.0.0:40000")  # Match visualizer port
+
+      if streamer.wait_for_receiver_count() == 0:
+        raise Exception(f'connecting to visualizer fails')
+
+2. **Create an activity plot** for DVS events:
+
+   .. code-block:: python
+
+      config_source.write([
+          samna.ui.VisualizerConfiguration(
+              plots=[samna.ui.ActivityPlotConfiguration(128, 128, "DVS Activity")]
+          )
+      ])
+
+   You can find all supported visualizer configurations in :ref:`this page<samna.ui>`.
+
+3. **Stream visualizable events** to the visualizer via a ``VizEventStreamer``:
+
+   Convert chip-specific events to visualization events using a node like ``Speck2fDvsToVizConverter``.
+   You can find this converter filter for different chips in :ref:`Available Filters`.
+
+   .. code-block:: python
+
+      board = samna.device.open_device("Speck2fDevKit:0")
+      _, _, streamer = graph.sequential([board.get_model_source_node(), "Speck2fDvsToVizConverter", "VizEventStreamer"])

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7.9. DVS Register Description &mdash; Speck2e 1.02 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/tabs.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.10. DVS Configuration Signal Description" href="dvs-config.html" />
+    <link rel="prev" title="7.8. Router Configuration Signal Description" href="router-config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Speck2e
+              <img src="../../_static/speck_preview2_tumb.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">1. Device Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chip-startup.html">2. Chip Startup Sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">3. Chip Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pinout.html">4. Pinout Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dvs-sensor/index.html">5. Internal DVS Sensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../electrical-characteristics.html">6. Electrical Characteristics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Registers</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="reftables.html">7.1. Configuration Register Reference Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="addressing.html">7.2. Register Addressing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii.html">7.3. Input Interface Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ii-config.html">7.4. Input Interface Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer.html">7.5. Convolutional Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="layer-config.html">7.6. Convolutional Layer Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router.html">7.7. Router Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="router-config.html">7.8. Router Configuration Signal Description</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7.9. DVS Register Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-register-description">7.9.1. Detailed Register Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs0">7.9.1.1. Register: DVS0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs1">7.9.1.2. Register: DVS1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs2">7.9.1.3. Register: DVS2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs3">7.9.1.4. Register: DVS3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs4">7.9.1.5. Register: DVS4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs5">7.9.1.6. Register: DVS5</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs6">7.9.1.7. Register: DVS6</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs7">7.9.1.8. Register: DVS7</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs8">7.9.1.9. Register: DVS8</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs9">7.9.1.10. Register: DVS9</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs10">7.9.1.11. Register: DVS10</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs11">7.9.1.12. Register: DVS11</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs12">7.9.1.13. Register: DVS12</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs13">7.9.1.14. Register: DVS13</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs14">7.9.1.15. Register: DVS14</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs15">7.9.1.16. Register: DVS15</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#register-dvs16">7.9.1.17. Register: DVS16</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dvs-config.html">7.10. DVS Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter.html">7.11. DVS Filter Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filter-config.html">7.12. DVS Filter Configuration Signal Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout.html">7.13. Readout Layer Register Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readout-config.html">7.14. Readout Layer Configuration Signal Description</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/index.html">8. Internal SRAM Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../encoding/index.html">9. Encoding and Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spi/index.html">10. SPI Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../jtag/index.html">11. JTAG Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rgb-interface/index.html">12. RGB Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scanchain/index.html">13. Scan Chain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../abbreviations.html">14. Abbreviations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../change-history.html">15. Change History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-tracker.html">16. Known Speck2e/et/f Bugs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Speck2e</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html"><span class="section-number">7. </span>Registers</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7.9. </span>DVS Register Description</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/sections/registers/dvs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dvs-register-description">
+<span id="dvs-registers"></span><h1><span class="section-number">7.9. </span>DVS Register Description<a class="headerlink" href="#dvs-register-description" title="Permalink to this heading"></a></h1>
+<section id="detailed-register-description">
+<h2><span class="section-number">7.9.1. </span>Detailed Register Description<a class="headerlink" href="#detailed-register-description" title="Permalink to this heading"></a></h2>
+<section id="register-dvs0">
+<span id="reg-dvs0"></span><h3><span class="section-number">7.9.1.1. </span>Register: DVS0<a class="headerlink" href="#register-dvs0" title="Permalink to this heading"></a></h3>
+<p>Address: 0x100</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-dmoen"><span class="std std-ref">DVS_Mon</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-smoen"><span class="std std-ref">Spike_Mon</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-dsd2en"><span class="std std-ref">Spike_Dst2</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-dsd1en"><span class="std std-ref">Spike_Dst1</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-dmi"><span class="std std-ref">diagonal_mirror_en</span></a></p></td>
+<td colspan="3"><p><a class="reference internal" href="dvs-config.html#rbits-im"><span class="std std-ref">image_mode</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>DMOEN</p></td>
+<td><p>SMOEN</p></td>
+<td><p>DSD2EN</p></td>
+<td><p>DSD1EN</p></td>
+<td><p>DMI</p></td>
+<td><p>IM2</p></td>
+<td><p>IM1</p></td>
+<td><p>IM0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs1">
+<span id="reg-dvs1"></span><h3><span class="section-number">7.9.1.2. </span>Register: DVS1<a class="headerlink" href="#register-dvs1" title="Permalink to this heading"></a></h3>
+<p>Address: 0x101</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="7"><p><a class="reference internal" href="dvs-config.html#rbits-cox"><span class="std std-ref">cut_origin_x</span></a></p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>COX6</p></td>
+<td><p>COX5</p></td>
+<td><p>COX4</p></td>
+<td><p>COX3</p></td>
+<td><p>COX2</p></td>
+<td><p>COX1</p></td>
+<td><p>COX0</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs2">
+<span id="reg-dvs2"></span><h3><span class="section-number">7.9.1.3. </span>Register: DVS2<a class="headerlink" href="#register-dvs2" title="Permalink to this heading"></a></h3>
+<p>Address: 0x102</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="7"><p><a class="reference internal" href="dvs-config.html#rbits-coy"><span class="std std-ref">cut_origin_y</span></a></p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>COY6</p></td>
+<td><p>COY5</p></td>
+<td><p>COY4</p></td>
+<td><p>COY3</p></td>
+<td><p>COY2</p></td>
+<td><p>COY1</p></td>
+<td><p>COY0</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs3">
+<span id="reg-dvs3"></span><h3><span class="section-number">7.9.1.4. </span>Register: DVS3<a class="headerlink" href="#register-dvs3" title="Permalink to this heading"></a></h3>
+<p>Address: 0x103</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="7"><p><a class="reference internal" href="dvs-config.html#rbits-cmx"><span class="std std-ref">cut_max_x</span></a></p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>CMX6</p></td>
+<td><p>CMX5</p></td>
+<td><p>CMX4</p></td>
+<td><p>CMX3</p></td>
+<td><p>CMX2</p></td>
+<td><p>CMX1</p></td>
+<td><p>CMX0</p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs4">
+<span id="reg-dvs4"></span><h3><span class="section-number">7.9.1.5. </span>Register: DVS4<a class="headerlink" href="#register-dvs4" title="Permalink to this heading"></a></h3>
+<p>Address: 0x104</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="7"><p><a class="reference internal" href="dvs-config.html#rbits-cmy"><span class="std std-ref">cut_max_y</span></a></p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>CMY6</p></td>
+<td><p>CMY5</p></td>
+<td><p>CMY4</p></td>
+<td><p>CMY3</p></td>
+<td><p>CMY2</p></td>
+<td><p>CMY1</p></td>
+<td><p>CMY0</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs5">
+<span id="reg-dvs5"></span><h3><span class="section-number">7.9.1.6. </span>Register: DVS5<a class="headerlink" href="#register-dvs5" title="Permalink to this heading"></a></h3>
+<p>Address: 0x105</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="dvs-config.html#rbits-dsd2"><span class="std std-ref">Spike_Dst2</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="dvs-config.html#rbits-dsd1"><span class="std std-ref">Spike_Dst1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>DSD23</p></td>
+<td><p>DSD22</p></td>
+<td><p>DSD21</p></td>
+<td><p>DSD20</p></td>
+<td><p>DSD13</p></td>
+<td><p>DSD12</p></td>
+<td><p>DSD11</p></td>
+<td><p>DSD10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs6">
+<span id="reg-dvs6"></span><h3><span class="section-number">7.9.1.7. </span>Register: DVS6<a class="headerlink" href="#register-dvs6" title="Permalink to this heading"></a></h3>
+<p>Address: 0x106</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-xme"><span class="std std-ref">x_mirror_en</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-yme"><span class="std std-ref">y_mirror_en</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="dvs-config.html#rbits-ssy"><span class="std std-ref">subsamp_y</span></a></p></td>
+<td colspan="2"><p><a class="reference internal" href="dvs-config.html#rbits-ssx"><span class="std std-ref">subsamp_x</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-spss"><span class="std std-ref">sensor_pass</span></a></p></td>
+<td><p>NA</p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>XME</p></td>
+<td><p>YME</p></td>
+<td><p>SSY1</p></td>
+<td><p>SSY0</p></td>
+<td><p>SSX1</p></td>
+<td><p>SSX0</p></td>
+<td><p>SPSS</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs7">
+<span id="reg-dvs7"></span><h3><span class="section-number">7.9.1.8. </span>Register: DVS7<a class="headerlink" href="#register-dvs7" title="Permalink to this heading"></a></h3>
+<p>Address: 0x107</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="8"><p><a class="reference internal" href="dvs-config.html#rbits-sdl"><span class="std std-ref">sensor_dly</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SDL7</p></td>
+<td><p>SDL6</p></td>
+<td><p>SDL5</p></td>
+<td><p>SDL</p></td>
+<td><p>SDL3</p></td>
+<td><p>SDL2</p></td>
+<td><p>SDL1</p></td>
+<td><p>SDL0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs8">
+<span id="reg-dvs8"></span><h3><span class="section-number">7.9.1.9. </span>Register: DVS8<a class="headerlink" href="#register-dvs8" title="Permalink to this heading"></a></h3>
+<p>Address: 0x108</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="dvs-config.html#rbits-sp1"><span class="std std-ref">sensor_p1</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="dvs-config.html#rbits-sp0"><span class="std std-ref">sensor_p0</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SP13</p></td>
+<td><p>SP12</p></td>
+<td><p>SP11</p></td>
+<td><p>SP10</p></td>
+<td><p>SP03</p></td>
+<td><p>SP02</p></td>
+<td><p>SP01</p></td>
+<td><p>SP00</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs9">
+<span id="reg-dvs9"></span><h3><span class="section-number">7.9.1.10. </span>Register: DVS9<a class="headerlink" href="#register-dvs9" title="Permalink to this heading"></a></h3>
+<p>Address: 0x109</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-sent"><span class="std std-ref">sensor_en_test</span></a></p></td>
+<td colspan="5"><p><a class="reference internal" href="dvs-config.html#rbits-sp3"><span class="std std-ref">sensor_p3</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SENT</p></td>
+<td><p>SP34</p></td>
+<td><p>SP33</p></td>
+<td><p>SP32</p></td>
+<td><p>SP31</p></td>
+<td><p>SP30</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs10">
+<span id="reg-dvs10"></span><h3><span class="section-number">7.9.1.11. </span>Register: DVS10<a class="headerlink" href="#register-dvs10" title="Permalink to this heading"></a></h3>
+<p>Address: 0x10A</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-sens1"><span class="std std-ref">sensor_en_startup1</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-sens2"><span class="std std-ref">sensor_en_startup2</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-sensr"><span class="std std-ref">sensor_en_startupref</span></a></p></td>
+<td colspan="5"><p><a class="reference internal" href="dvs-config.html#rbits-sp4"><span class="std std-ref">sensor_p4</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SENS1</p></td>
+<td><p>SENS2</p></td>
+<td><p>SENSR</p></td>
+<td><p>SP44</p></td>
+<td><p>SP43</p></td>
+<td><p>SP42</p></td>
+<td><p>SP41</p></td>
+<td><p>SP40</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs11">
+<span id="reg-dvs11"></span><h3><span class="section-number">7.9.1.12. </span>Register: DVS11<a class="headerlink" href="#register-dvs11" title="Permalink to this heading"></a></h3>
+<p>Address: 0x10B</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-senbi1"><span class="std std-ref">sensor_en_bias1</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-senbi2"><span class="std std-ref">sensor_en_bias2</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-senbi3"><span class="std std-ref">sensor_en_bias3</span></a></p></td>
+<td colspan="5"><p><a class="reference internal" href="dvs-config.html#rbits-sp5"><span class="std std-ref">sensor_p5</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SENBI1</p></td>
+<td><p>SENBI2</p></td>
+<td><p>SENBI3</p></td>
+<td><p>SP54</p></td>
+<td><p>SP53</p></td>
+<td><p>SP52</p></td>
+<td><p>SP51</p></td>
+<td><p>SP50</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs12">
+<span id="reg-dvs12"></span><h3><span class="section-number">7.9.1.13. </span>Register: DVS12<a class="headerlink" href="#register-dvs12" title="Permalink to this heading"></a></h3>
+<p>Address: 0x10C</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td colspan="4"><p><a class="reference internal" href="dvs-config.html#rbits-sp7"><span class="std std-ref">sensor_p7</span></a></p></td>
+<td colspan="4"><p><a class="reference internal" href="dvs-config.html#rbits-sp6"><span class="std std-ref">sensor_p6</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SP73</p></td>
+<td><p>SP72</p></td>
+<td><p>SP71</p></td>
+<td><p>SP70</p></td>
+<td><p>SP63</p></td>
+<td><p>SP62</p></td>
+<td><p>SP61</p></td>
+<td><p>SP60</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs13">
+<span id="reg-dvs13"></span><h3><span class="section-number">7.9.1.14. </span>Register: DVS13<a class="headerlink" href="#register-dvs13" title="Permalink to this heading"></a></h3>
+<p>Address: 0x10D</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td colspan="6"><p><a class="reference internal" href="dvs-config.html#rbits-sio1"><span class="std std-ref">sensor_iout1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SIO15</p></td>
+<td><p>SIO14</p></td>
+<td><p>SIO13</p></td>
+<td><p>SIO12</p></td>
+<td><p>SIO11</p></td>
+<td><p>SIO10</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs14">
+<span id="reg-dvs14"></span><h3><span class="section-number">7.9.1.15. </span>Register: DVS14<a class="headerlink" href="#register-dvs14" title="Permalink to this heading"></a></h3>
+<p>Address: 0x10E</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td colspan="6"><p><a class="reference internal" href="dvs-config.html#rbits-sio2"><span class="std std-ref">sensor_iout2</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SIO25</p></td>
+<td><p>SIO24</p></td>
+<td><p>SIO23</p></td>
+<td><p>SIO22</p></td>
+<td><p>SIO21</p></td>
+<td><p>SIO20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs15">
+<span id="reg-dvs15"></span><h3><span class="section-number">7.9.1.16. </span>Register: DVS15<a class="headerlink" href="#register-dvs15" title="Permalink to this heading"></a></h3>
+<p>Address: 0x10F</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p>NA</p></td>
+<td><p>NA</p></td>
+<td colspan="6"><p><a class="reference internal" href="dvs-config.html#rbits-sio3"><span class="std std-ref">sensor_iout3</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>SIO35</p></td>
+<td><p>SIO34</p></td>
+<td><p>SIO33</p></td>
+<td><p>SIO32</p></td>
+<td><p>SIO31</p></td>
+<td><p>SIO30</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="register-dvs16">
+<span id="reg-dvs16"></span><h3><span class="section-number">7.9.1.17. </span>Register: DVS16<a class="headerlink" href="#register-dvs16" title="Permalink to this heading"></a></h3>
+<p>Address: 0x110</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Sig. Name</p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-spul"><span class="std std-ref">sensor_pulse</span></a></p></td>
+<td><p><a class="reference internal" href="dvs-config.html#rbits-spsl"><span class="std std-ref">sensor_sel_pulse</span></a></p></td>
+<td colspan="6"><p><a class="reference internal" href="dvs-config.html#rbits-sio4"><span class="std std-ref">sensor_iout4</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Bit Name</p></td>
+<td><p>SPUL</p></td>
+<td><p>SPSL</p></td>
+<td><p>SIO45</p></td>
+<td><p>SIO44</p></td>
+<td><p>SIO43</p></td>
+<td><p>SIO42</p></td>
+<td><p>SIO41</p></td>
+<td><p>SIO40</p></td>
+</tr>
+<tr class="row-odd"><td><p>Reset Val</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="router-config.html" class="btn btn-neutral float-left" title="7.8. Router Configuration Signal Description" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dvs-config.html" class="btn btn-neutral float-right" title="7.10. DVS Configuration Signal Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2023, SynSense AG.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
